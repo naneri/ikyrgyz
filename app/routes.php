@@ -11,7 +11,18 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', 'LoginController@getLogin');
+
+Route::get('login', 'LoginController@getLogin');
+Route::post('login', 'LoginController@postLogin');
+
+Route::group(array('before' => 'auth'),function(){
+	Route::get('main/index','MainController@index');
+	Route::get('blog/create', 'BlogController@create');
+	Route::post('blog/store', 'BlogController@store');
+	Route::get('blog/all','BlogController@getAll');
+	Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+	Route::get('topic/create', 'TopicController@create');
+	Route::post('topic/store', 'TopicController@store');
+	Route::get('people', 'PeopleController@index');
 });
