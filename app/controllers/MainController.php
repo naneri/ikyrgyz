@@ -18,9 +18,23 @@ class MainController extends BaseController {
 	public function index(){
 		
 
-		$blogs = User::find(1)->blogs;
+		//$topics = User::find(1)->blogs()->join('Topics', 'blogs.id', '=', 'topics.blog_id');
 
-		return View::make('index', array('blogs' => $blogs));
+		$topics = User::with(['blogs.topics' => function ($q) use (&$topics) {
+		  	$topics = $q->get()->unique();
+		}])->find(Auth::user()->id);
+
+		$userId = Auth::user()->id;
+
+		$topics2 = Topic::join('blogs', 'topics.blog_id', '=', 'blogs.id')
+	     ->join('blog_subscriptions as us', function ($j) use ($userId) {
+	        $j->on('us.blog_id', '=', 'blogs.id')
+	          ->where('us.user_id', '=', $userId);
+	      })->get(['topics.*']);
+
+
+		//echo "<pre>"; print_r($topics); echo "</pre>";exit;
+		return View::make('index', array('topics' => $topics2));
 	}
 
 }

@@ -1,7 +1,7 @@
 <p>Say ok</p>
 
-@foreach($blogs as $blog)
+@foreach($topics as $topic)
 
-{{$blog->title}}
+	{{$topic->title}} <br>
 
 @endforeach

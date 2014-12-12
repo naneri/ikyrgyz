@@ -20,6 +20,11 @@ class BlogsSubscriptionsTableSeeder extends Seeder{
 				'blog_id' => 2,
 				'user_id' => 2
 			),
+			array(
+				'id' => 2,
+				'blog_id' => 3,
+				'user_id' => 1
+			),
 		);
 
 		// inserts the data

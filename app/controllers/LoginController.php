@@ -35,7 +35,7 @@ class LoginController extends BaseController {
             ));
         }
         
-        return Redirect::to('blog/create');
+        return Redirect::to('main/index');
     }
     
 

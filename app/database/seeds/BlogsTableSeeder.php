@@ -22,6 +22,24 @@ class BlogsTableSeeder extends Seeder{
 				'title' => 'Vtoroi blog',
 				'description' => 'zaasdasdjhkqwe',
 			),
+			array(
+				'id' => 3,
+				'user_id' => 2,
+				'title' => 'Tretii blog',
+				'description' => 'Tretii blog',
+			),
+			array(
+				'id' => 4,
+				'user_id' => 1,
+				'title' => '4etvertii blog',
+				'description' => 'etvertii blog',
+			),
+			array(
+				'id' => 5,
+				'user_id' => 2,
+				'title' => '5iatii blog',
+				'description' => '5iatii blog',
+			),
 		);
 
 		// inserts the data
