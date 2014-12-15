@@ -7,8 +7,8 @@ class ProfileController extends BaseController {
 		return View::make('profile.show', array('user' => $user));
 	}
 
-	public function getEdit($id){
-		$user = User::find($id);
+	public function getEdit(){
+		$user = User::find(Auth::id());
 		return View::make('profile.edit', array('user' => $user));
 	}
 }

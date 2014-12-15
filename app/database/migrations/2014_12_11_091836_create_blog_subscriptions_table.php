@@ -14,7 +14,6 @@ class CreateBlogSubscriptionsTable extends Migration {
 	{
 		Schema::create('blog_subscriptions', function(Blueprint $table)
 		{
-			$table->increments('id');
 			$table->integer('blog_id')->unsigned();
 			$table->foreign('blog_id')->references('id')->on('blogs');
 			$table->integer('user_id')->unsigned();

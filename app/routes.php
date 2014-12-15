@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', 'LoginController@getLogin');
+Route::get('/', 'AuthController@getLogin');
 
-Route::get('login', 'LoginController@getLogin');
-Route::post('login', 'LoginController@postLogin');
+Route::get('login', 'AuthController@getLogin');
+Route::post('login', 'AuthController@postLogin');
 
 Route::group(array('before' => 'auth'),function(){
 	Route::get('main/index','MainController@index');
@@ -22,7 +22,9 @@ Route::group(array('before' => 'auth'),function(){
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');
 	Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::get('topic/create', 'TopicController@create');
 	Route::post('topic/store', 'TopicController@store');
 	Route::get('people', 'PeopleController@index');
+	Route::get('logout', 'AuthController@logout');
 });

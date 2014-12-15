@@ -1,7 +1,15 @@
-<p>Say ok</p>
 
-@foreach($topics as $topic)
+@extends('misc.layout')
 
-	{{$topic->title}} <br>
 
-@endforeach
+@section('content')
+@include('misc.createnav')
+	<div class="container">
+		@foreach($topics as $topic)
+
+		{{$topic->title}} <br>
+
+		@endforeach
+	</div>
+
+@stop
