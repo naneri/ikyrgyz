@@ -35,16 +35,29 @@ class TopicController extends BaseController {
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
-            return Redirect::to('topic/create')->withErrors($validator);
-        }
+                    return Redirect::to('topic/create')->withErrors($validator);
+                }
+                
+                $topic = new Topic;
+                $topic->title = Input::get('title');
+                $topic->content = Input::get('content');
+                $topic->blog_id = 1;
+                $topic->user_id = Auth::user()->id;
+                $topic->topic_type_id = Input::get('topic_type_id');
+                $topic->save();
 
-        $topic = new Topic;
-        $topic->title = Input::get('title');
-        $topic->blog_id = 1;
-        $topic->user_id = Auth::user()->id;
-        $topic->save();
-
-        return Redirect::to('main/index');
+                $tags = array();
+                foreach (explode(', ', Input::get('tags')) as $tag_name) {
+                    if ($tag = Tag::where('name', '=', $tag_name)->first()) {
+                        $tag_id = $tag->id;
+                    } else {
+                        $tag_id = DB::table('tags')->insertGetId(array('name' => $tag_name));
+                    }
+                    $tags[] = $tag_id;            
+                }
+                $topic->tags()->sync($tags);
+                
+                return Redirect::to('main/index');
 	}
 
 

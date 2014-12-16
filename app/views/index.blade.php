@@ -7,7 +7,8 @@
 	<div class="container">
 		@foreach($topics as $topic)
 
-		{{$topic->title}} <br>
+		<b>{{$topic->title}}</b> <br>
+                {{$topic->content}}<br><br>
 
 		@endforeach
 	</div>

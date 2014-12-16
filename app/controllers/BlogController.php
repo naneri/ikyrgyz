@@ -20,20 +20,21 @@ class BlogController extends BaseController {
 	}
 
 	public function store(){
-		$rules = array('title' => 'required', 'description' => 'required');
+		$rules = array('title' => 'required', 'description' => 'required', 'blog_type_id' => 'required');
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
-            return Redirect::to('blog/create')->withErrors($validator);
-        }
+                    return Redirect::to('blog/create')->withErrors($validator);
+                }
 
-        $blog = new Blog;
-        $blog->title = Input::get('title');
-        $blog->description = Input::get('description');
-        $blog->user_id = Auth::user()->id;
-        $blog->save();
+                $blog = new Blog;
+                $blog->title = Input::get('title');
+                $blog->description = Input::get('description');
+                $blog->blog_type_id = Input::get('blog_type_id');
+                $blog->user_id = Auth::user()->id;
+                $blog->save();
 
-        return Redirect::to('blog/all');
+                return Redirect::to('blog/all');
 	}
 
 	public function getAll(){

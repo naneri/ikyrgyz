@@ -26,6 +26,15 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="description" name="description" type="text" value="">
                                 </div>
+                                <?php
+                                $blogTypes = array(0 => 'Choose blog type');
+                                foreach (BlogType::get(array('id', 'type')) as $blogType) {
+                                    $blogTypes[$blogType->id] = $blogType->type;
+                                }
+                                ?>
+                                <div class="form-group">
+                                    {{ Form::select('blog_type_id', $blogTypes, null, array('class' => 'form-control')) }}
+                                </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 {{Form::submit('Go!')}}
                             </fieldset>

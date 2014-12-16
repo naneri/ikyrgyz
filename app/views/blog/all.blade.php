@@ -5,7 +5,7 @@
 		    @foreach($blogs as $blog)
 		        {{$blog->title}} <br>
 		    @endforeach
-		</div>
 
-		{{$blogs->links()}}
+                    {{$blogs->links()}}
+		</div>
 @stop

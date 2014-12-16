@@ -11,4 +11,9 @@ class Topic extends Eloquent {
 		          ->where('us.user_id', '=', $userId);
 		      })->get(['topics.*']);
 	}
+        
+        public function tags() {
+            return $this->belongsToMany('Tag');
+        }
+
 }

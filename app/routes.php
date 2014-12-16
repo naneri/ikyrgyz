@@ -27,4 +27,5 @@ Route::group(array('before' => 'auth'),function(){
 	Route::post('topic/store', 'TopicController@store');
 	Route::get('people', 'PeopleController@index');
 	Route::get('logout', 'AuthController@logout');
+        Route::resource('tags', 'TagsController');
 });
