@@ -18,7 +18,7 @@ class CreateBlogsTable extends Migration {
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('title', 200)->unique();
 			$table->string('description')->nullable();
-			$table->integer('rating')->default(0);
+			$table->float('rating')->default(0);
 			$table->integer('count_vote')->default(0);
 			$table->integer('count_user')->default(0);
 			$table->string('avatar')->nullable();
