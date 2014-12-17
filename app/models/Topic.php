@@ -4,12 +4,16 @@ class Topic extends Eloquent {
 	
 	protected $fillable = [];
 	
-	static function getSubscribedTopics($userId) {
-		return Topic::join('blogs', 'topics.blog_id', '=', 'blogs.id')
-		     ->join('blog_subscriptions as us', function ($j) use ($userId) {
-		        $j->on('us.blog_id', '=', 'blogs.id')
-		          ->where('us.user_id', '=', $userId);
-		      })->get(['topics.*']);
+	static function getSubscribedTopics($userId, $rating, $offset) {
+		return 	Topic::where('topics.rating', '>', $rating)
+				->join('blogs', 'topics.blog_id', '=', 'blogs.id')
+				->join('blog_subscriptions as us', function ($j) use ($userId){
+		          	$j->on('us.blog_id', '=', 'blogs.id')
+		            ->where('us.user_id', '=', $userId);
+		        })
+				->take(Config::get('topic.topics_per_page'))
+				->offset($offset)
+				->get(['topics.*']);
 	}
         
         public function tags() {

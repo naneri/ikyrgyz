@@ -16,8 +16,10 @@ class MainController extends BaseController {
 	*/
 
 	public function index(){
-                $rating = Config::get('topic.index_good_topic_rating');
-		$topics = Topic::getSubscribedTopics(Auth::user()->id);
+
+		$offset = 5; // топиков на страницу
+        $rating = Config::get('topic.index_good_topic_rating');
+		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
 		return View::make('index', array('topics' => $topics));
 	}
 
