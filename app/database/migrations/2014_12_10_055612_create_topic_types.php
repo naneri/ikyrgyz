@@ -15,7 +15,7 @@ class CreateTopicTypes extends Migration {
 		Schema::create('topic_types', function(Blueprint $table)
 		{
                     $table->increments('id');
-                    $table->string('type')->unique();
+                    $table->string('name')->unique();
                     $table->timestamps();
                 });
     }

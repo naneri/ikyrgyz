@@ -24,8 +24,9 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::get('topic/create', 'TopicController@create');
-	Route::post('topic/store', 'TopicController@store');
-	Route::get('people', 'PeopleController@index');
+        Route::post('topic/store', 'TopicController@store');
+        Route::post('upload', array('uses' => 'TopicController@uploadImage'));
+        Route::get('people', 'PeopleController@index');
 	Route::get('logout', 'AuthController@logout');
         Route::resource('tags', 'TagsController');
 });

@@ -14,35 +14,35 @@ class TopicTypesTableSeeder extends Seeder {
             $users = array(
                 array(
                     'id' => '1',
-                    'type' => 'text'
+                    'name' => 'text'
                 ),
                 array(
                     'id' => '2',
-                    'type' => 'photo'
+                    'name' => 'image'
                 ),
                 array(
                     'id' => '3',
-                    'type' => 'audio'
+                    'name' => 'audio'
                 ),
                 array(
                     'id' => '4',
-                    'type' => 'video'
+                    'name' => 'video'
                 ),
                 array(
                     'id' => '5',
-                    'type' => 'music'
+                    'name' => 'music'
                 ),
                 array(
                     'id' => '6',
-                    'type' => 'link'
+                    'name' => 'link'
                 ),
                 array(
                     'id' => '7',
-                    'type' => 'polling'
+                    'name' => 'polling'
                 ),
                 array(
                     'id' => '8',
-                    'type' => 'event'
+                    'name' => 'event'
                 )
             );
 

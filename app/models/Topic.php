@@ -15,5 +15,12 @@ class Topic extends Eloquent {
         public function tags() {
             return $this->belongsToMany('Tag');
         }
-
+        
+        public function images() {
+            return $this->hasMany('TopicImage');
+        }
+        
+        public function type(){
+            return $this->belongsTo('TopicType', 'type_id');
+        }
 }

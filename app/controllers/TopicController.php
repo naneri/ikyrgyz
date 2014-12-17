@@ -43,23 +43,52 @@ class TopicController extends BaseController {
                 $topic->content = Input::get('content');
                 $topic->blog_id = 1;
                 $topic->user_id = Auth::user()->id;
-                $topic->topic_type_id = Input::get('topic_type_id');
+                $topic->type_id = TopicType::where('name', '=', Input::get('topic_type'))->first()->id;
                 $topic->save();
+                $topic_id = $topic->id;
 
                 $tags = array();
                 foreach (explode(', ', Input::get('tags')) as $tag_name) {
                     if ($tag = Tag::where('name', '=', $tag_name)->first()) {
                         $tag_id = $tag->id;
-                    } else {
+                        $tags[] = $tag_id;
+                    } elseif(trim($tag_name)!='') {
                         $tag_id = DB::table('tags')->insertGetId(array('name' => $tag_name));
-                    }
-                    $tags[] = $tag_id;            
+                        $tags[] = $tag_id;
+                    }      
                 }
                 $topic->tags()->sync($tags);
                 
+                switch(Input::get('topic_type')){
+                    case "text":
+                        break;
+                    case "image":
+                        $images = Input::get('topic_images');
+                        $this->storeTopicImages($topic_id, $images);
+                        break;
+                    case "video":
+                        break;
+                    case "music":
+                        break;
+                    case "link":
+                        break;
+                    case "polling":
+                        break;
+                    case "events":
+                        break;
+                }
+                
                 return Redirect::to('main/index');
 	}
-
+        
+        private function storeTopicImages($topic_id, $images){
+            foreach ($images as $image){
+                TopicImage::create(array(
+                    'topic_id' => $topic_id,
+                    'url' => $image
+                ));
+            }
+        }
 
 	/**
 	 * Display the specified resource.
@@ -108,5 +137,24 @@ class TopicController extends BaseController {
 		//
 	}
 
+	public function uploadImage() {
+            $rules = array('file' => 'required|image');
+
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return Response::json(array('message' => $validator->messages()->first('file')));
+            }
+
+            $dir = '/images' . date('/Y/m/d/');
+
+            do {
+                $filename = str_random(30) . '.jpg';
+            } while (File::exists(public_path() . $dir . $filename));
+
+            Input::file('file')->move(public_path() . $dir, $filename);
+
+            return Response::json(array('filelink' => $dir . $filename));
+        }
 
 }

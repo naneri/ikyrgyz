@@ -29,16 +29,35 @@
                                     <textarea class="form-control" placeholder="description" name="content" type="text" value="" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::text('tags', null, array('class' => 'form-control', 'id' => 'tags')) }}
+                                    {{ Form::text('tags', null, array('class' => 'form-control', 'id' => 'tags', 'placeholder' => 'tags')) }}
                                 </div>
-                                <?php
-                                $topicTypes = array(0 => 'Choose topic type');
-                                foreach (TopicType::get(array('id', 'type')) as $topicType) {
-                                    $topicTypes[$topicType->id] = $topicType->type;
-                                }
-                                ?>
                                 <div class="form-group">
-                                    {{ Form::select('topic_type_id', $topicTypes, null, array('class' => 'form-control')) }}
+                                    {{ Form::hidden('topic_type', 'text') }}
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs nav-justified" id="topic_types">
+                                        <li class="active"><a href="#text" data-toggle="tab" data-topic-type="text">Text</a></li>
+                                        <li><a href="#image" data-toggle="tab" data-topic-type="image">Image</a></li>
+                                        <li><a href="#video" data-toggle="tab" data-topic-type="video">Video</a></li>
+                                        <li><a href="#audio" data-toggle="tab" data-topic-type="audio">Audio</a></li>
+                                        <li><a href="#link" data-toggle="tab" data-topic-type="link">Link</a></li>
+                                        <li><a href="#polling" data-toggle="tab" data-topic-type="polling">Polling</a></li>
+                                        <li><a href="#event" data-toggle="tab" data-topic-type="event">Event</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content" style="padding-top:15px;">
+                                        <div class="tab-pane" id="text">...</div>
+                                        <div class="tab-pane" id="image">
+                                            <input type="file" class="form-control" id="file" multiple />
+                                            <img src="{{Input::old('image')}}" id="thumb" style="max-width:300px; max-height: 200px; display:block; ">
+                                            <div class="error"></div>
+                                        </div>
+                                        <div class="tab-pane" id="video">...</div>
+                                        <div class="tab-pane" id="audio">...</div>
+                                        <div class="tab-pane" id="link">...</div>
+                                        <div class="tab-pane" id="polling">...</div>
+                                        <div class="tab-pane" id="event">...</div>
+                                    </div>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 {{Form::submit('Go!')}}
