@@ -40,7 +40,7 @@ class TopicController extends BaseController {
                 
                 $topic = new Topic;
                 $topic->title = Input::get('title');
-                $topic->content = Input::get('content');
+                $topic->description = Input::get('description');
                 $topic->blog_id = 1;
                 $topic->user_id = Auth::user()->id;
                 $topic->type_id = TopicType::where('name', '=', Input::get('topic_type'))->first()->id;
@@ -67,6 +67,7 @@ class TopicController extends BaseController {
                         $this->storeTopicImages($topic_id, $images);
                         break;
                     case "video":
+                        $this->storeTopicVideo($topic_id, Input::get('video_url'), Input::get('video_embed_code'));
                         break;
                     case "music":
                         break;
@@ -89,7 +90,14 @@ class TopicController extends BaseController {
                 ));
             }
         }
-
+        
+        private function storeTopicVideo($topic_id, $video_url, $video_embed_code){
+            TopicVideo::create(array(
+                'topic_id' => $topic_id,
+                'url' => $video_url,
+                'embed_code' => $video_embed_code
+            ));
+        }
 	/**
 	 * Display the specified resource.
 	 *

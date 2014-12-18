@@ -19,7 +19,7 @@ class CreateTopicsTable extends Migration {
 			$table->integer('user_id')->unsigned();
                         $table->integer('type_id')->unsigned();
                         $table->string('title', 100);
-                        $table->string('content');
+                        $table->string('description');
                         $table->integer('admin_banned')->default(0);
 			$table->integer('draft')->default(0);
                         $table->float('rating')->default(0);

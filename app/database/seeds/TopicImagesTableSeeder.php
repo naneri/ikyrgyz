@@ -7,14 +7,26 @@ class TopicImagesTableSeeder extends Seeder {
 
 	public function run()
 	{
-		$faker = Faker::create();
+                //deletes all info
+                DB::table('topic_images')->delete();
 
-		foreach(range(1, 10) as $index)
-		{
-			TopicImage::create([
+                $images = array(
+                    array(
+                        'id' => 1,
+                        'topic_id' => 7,
+                        'url' => '/images/2014/12/18/SbUqdKds0zPBP9igxepYaFWaMb4cHF.jpg',
+                        'title' => 'nature'
+                    ),
+                    array(
+                        'id' => 2,
+                        'topic_id' => 7,
+                        'url' => '/images/2014/12/18/JRsZ7LHyc1ame1GkUVmn7l38JSh3VV.jpg',
+                        'title' => 'nature'
+                    ),
+                );
 
-			]);
-		}
-	}
+                // inserts the data
+                DB::table('topic_images')->insert($images);
+        }
 
 }

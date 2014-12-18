@@ -23,4 +23,8 @@ class Topic extends Eloquent {
         public function type(){
             return $this->belongsTo('TopicType', 'type_id');
         }
+        
+        public function video(){
+            return $this->hasOne('TopicVideo');
+        }
 }

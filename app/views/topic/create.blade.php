@@ -26,7 +26,7 @@
                                     <input class="form-control" placeholder="title" name="title" type="text" autofocus="">
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="description" name="content" type="text" value="" rows="3"></textarea>
+                                    <textarea class="form-control" placeholder="description" name="description" type="text" value="" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     {{ Form::text('tags', null, array('class' => 'form-control', 'id' => 'tags', 'placeholder' => 'tags')) }}
@@ -52,7 +52,13 @@
                                             <img src="{{Input::old('image')}}" id="thumb" style="max-width:300px; max-height: 200px; display:block; ">
                                             <div class="error"></div>
                                         </div>
-                                        <div class="tab-pane" id="video">...</div>
+                                        <div class="tab-pane" id="video">
+                                            <input type="text" class="form-control" id="video_input" placeholder="embed code or url video"/>
+                                            <input type='hidden' name='video_url' />
+                                            <input type='hidden' name='video_embed_code' />
+                                            <div class='video_preview'>
+                                            </div>
+                                        </div>
                                         <div class="tab-pane" id="audio">...</div>
                                         <div class="tab-pane" id="link">...</div>
                                         <div class="tab-pane" id="polling">...</div>

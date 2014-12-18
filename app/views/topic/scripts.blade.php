@@ -108,5 +108,18 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+        
+        $('#video_input').bind('input propertychange', function(){
+                var url = $(this).val();
+                var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+                if (videoid != null) {
+                     var iframe = '<iframe width="420" height="345" frameborder="0" allowfullscreen src="'+'http://www.youtube.com/embed/' + videoid[1]+'"></iframe>';
+                     $('.video_preview').html(iframe);
+                     $('input[name="video_embed_code"]').val(iframe);
+                     $('input[name="video_url"]').val(url);
+                } else {
+                    console.log("The youtube url is not valid.");
+                }
+        });
 });
 </script>
