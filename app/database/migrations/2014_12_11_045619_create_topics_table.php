@@ -17,13 +17,13 @@ class CreateTopicsTable extends Migration {
 			$table->increments('id');
 			$table->integer('blog_id')->unsigned();
 			$table->integer('user_id')->unsigned();
-                        $table->integer('type_id')->unsigned();
-                        $table->string('title', 100);
-                        $table->string('description');
-                        $table->integer('admin_banned')->default(0);
+            $table->integer('type_id')->unsigned();
+            $table->string('title', 100);
+            $table->string('description');
+            $table->integer('admin_banned')->default(0);
 			$table->integer('draft')->default(0);
-                        $table->float('rating')->default(0);
-                        $table->integer('vote_up')->default(0);
+            $table->float('rating')->default(0);
+            $table->integer('vote_up')->default(0);
 			$table->integer('vote_down')->default(0);
 			$table->integer('count_read')->default(0);
 			$table->integer('count_comment')->default(0);
@@ -32,11 +32,11 @@ class CreateTopicsTable extends Migration {
 		});
                 
 		Schema::table('topics', function(Blueprint $table) {
-                    $table->foreign('user_id')->references('id')->on('users');
-                    $table->foreign('blog_id')->references('id')->on('blogs');
-                    $table->foreign('type_id')->references('id')->on('topic_types');
-                });
-        }
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('blog_id')->references('id')->on('blogs');
+            $table->foreign('type_id')->references('id')->on('topic_types');
+        });
+    }
 
 
 	/**
