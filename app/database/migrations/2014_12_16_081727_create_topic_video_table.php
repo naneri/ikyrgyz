@@ -16,8 +16,8 @@ class CreateTopicVideoTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('topic_id')->unsigned();
-                        $table->foreign('topic_id')->references('id')->on('topics');
-                        $table->string('url');
+            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->string('url');
 			$table->string('embed_code');
 			$table->timestamps();
 		});

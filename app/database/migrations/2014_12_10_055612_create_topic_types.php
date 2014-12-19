@@ -14,10 +14,10 @@ class CreateTopicTypes extends Migration {
 	{
 		Schema::create('topic_types', function(Blueprint $table)
 		{
-                    $table->increments('id');
-                    $table->string('name')->unique();
-                    $table->timestamps();
-                });
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->timestamps();
+        });
     }
 
 

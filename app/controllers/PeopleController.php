@@ -28,13 +28,26 @@ class PeopleController extends BaseController{
 			return Redirect::back()->with('message', "you can't be friend of yourself");
 		}
 
-		if(!Friend::becomeFriends(Auth::id(), $id)){
+		if(!Friend::requestFriend(Auth::id(), $id)){
 			return Redirect::back()->with('message', "some troubles :(");
 		}
 		
-		return Redirect::back()->with('message', 'you are friends now');
+		return Redirect::back()->with('message', 'your request have been sent');
 
 	}
 
+	public function submitFriend($id){
+
+	
+		if(Auth::id() === $id){
+			return Redirect::back()->with('message', "you can't be friend of yourself");
+		}
+
+		if(!Friend::submitFriend(Auth::id(), $id)){
+			return Redirect::back()->with('message', "some troubles :(");
+		}
+		
+		return Redirect::back()->with('message', 'you are now friends');
+	}
 
 }

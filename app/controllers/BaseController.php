@@ -15,4 +15,11 @@ class BaseController extends Controller {
 		}
 	}
 
+	public function __construct(){
+		if(Auth::check()){
+			$friend_requests = Friend::getFriendRequests(Auth::id());
+			View::share('friend_requests', $friend_requests);
+		}
+	}
+
 }

@@ -11,4 +11,10 @@ class ProfileController extends BaseController {
 		$user = User::find(Auth::id());
 		return View::make('profile.edit', array('user' => $user));
 	}
+
+	public function friends(){
+		$friends = Friend::friendsList(Auth::id());
+		dd($friends);
+		return View::make('profile.friends', array('friends' => $friends));
+	}
 }

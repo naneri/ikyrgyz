@@ -15,11 +15,11 @@ class CreateTopicImagesTable extends Migration {
 		Schema::create('topic_images', function(Blueprint $table)
 		{
 			$table->increments('id');
-                        $table->integer('topic_id')->unsigned();
-                        $table->foreign('topic_id')->references('id')->on('topics');
-                        $table->string('url');
-                        $table->string('title');
-                        $table->timestamps();
+            $table->integer('topic_id')->unsigned();
+            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->string('url');
+            $table->string('title');
+            $table->timestamps();
 		});
 	}
 

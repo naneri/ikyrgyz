@@ -16,8 +16,8 @@ class CreateTopicAudioTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('topic_id')->unsigned();
-                        $table->foreign('topic_id')->references('id')->on('topics');
-                        $table->integer('album_id');
+            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->integer('album_id');
 			$table->string('audio_url');
 			$table->string('audio_title');
 			$table->timestamps();
