@@ -31,5 +31,17 @@ class Topic extends Eloquent {
         public function video() {
             return $this->hasOne('TopicVideo');
         }
-
+        
+        public function user(){
+            return $this->belongsTo('User');
+        }
+        
+        public function comments(){
+            return $this->hasMany('TopicComment');
+        }
+        
+        public function blog(){
+            return $this->belongsTo('Blog');
+        }
+        
 }

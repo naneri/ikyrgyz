@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder {
 		 $this->call('TopicVideoTableSeeder');
 		 $this->call('MessagesTableSeeder');
 		 $this->call('FriendTableSeeder');
+                 $this->call('TopicCommentsTableSeeder');
 	}
 
 }

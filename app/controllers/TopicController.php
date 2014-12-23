@@ -2,7 +2,7 @@
 
 class TopicController extends BaseController {
 
-	/**
+       /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
@@ -106,7 +106,8 @@ class TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+                $topic = Topic::findOrFail($id);
+                return View::make('topic.show', array('topic' => $topic));
 	}
 
 
