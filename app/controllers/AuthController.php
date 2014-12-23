@@ -47,4 +47,20 @@ class AuthController extends BaseController {
         return Redirect::to('/');
     }
 
+    public function getRegister(){
+        if(Auth::check()){
+            return Redirect::to('main/index');
+        }
+        return View::make('register');
+    }
+
+
+    public function postRegister(){
+        $user = new User;
+        $user->email    = Input::get('email');
+        $user->password = Hash::make(Input::get('password'));
+        $user->save();
+        return Redirect::to('/');
+    }
+
 }

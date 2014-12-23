@@ -15,6 +15,9 @@ Route::get('/', 'AuthController@getLogin');
 
 Route::get('login', 'AuthController@getLogin');
 Route::post('login', 'AuthController@postLogin');
+Route::get('register', 'AuthController@getRegister');
+Route::post('register', 'AuthController@postRegister');
+
 
 Route::group(array('before' => 'auth'),function(){
 	Route::get('main/index','MainController@index');
@@ -23,6 +26,7 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('blog/all','BlogController@getAll');
 	Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
+	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
 	Route::get('topic/create', 'TopicController@create');
     Route::post('topic/store', 'TopicController@store');
@@ -32,4 +36,5 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('logout', 'AuthController@logout');
     Route::resource('tags', 'TagsController');
     Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
+
 });

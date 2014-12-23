@@ -32,7 +32,7 @@
 		                @if($friend_requests)
 							<ul class="dropdown-menu" role="menu">
 		                  		@foreach($friend_requests as $request)
-		                  			<li>{{link_to('people/submitFriend/'.$request->user_two, 'submit friend')}}</li>
+		                  			<li>{{link_to('people/submitFriend/'.$request->user_two, $request->email)}}</li>
 		                  		@endforeach
 		                	</ul>
 		                @endif

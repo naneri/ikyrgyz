@@ -12,9 +12,13 @@ class ProfileController extends BaseController {
 		return View::make('profile.edit', array('user' => $user));
 	}
 
+	public function postEdit(){
+		$user = User::find(Auth::id());
+		
+	}
+
 	public function friends(){
 		$friends = Friend::friendsList(Auth::id());
-		dd($friends);
 		return View::make('profile.friends', array('friends' => $friends));
 	}
 }

@@ -100,6 +100,7 @@ class Friend extends Eloquent{
 	 */
 	static function getFriendRequests($userId, $limit = 3){
 		return Friend::where('user_one', '=', $userId)
+		->join('users', 'user_two', '=', 'users.id')
 		->where('status', '=', Config::get('social.friend_status.friends_got_request'))
 		->take($limit)
 		->get();
@@ -107,8 +108,9 @@ class Friend extends Eloquent{
 
 	static function friendsList($id){
 		return Friend::where('user_one', '=', $id)
+				->join('users', 'user_two', '=', 'users.id')
 				->where('status', '=', Config::get('social.friend_status.friends'))
-				->user();
+				->get();
 
 	}
 
