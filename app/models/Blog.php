@@ -3,7 +3,7 @@
 Class Blog extends Eloquent{
 
 	public function topics()
-    {
-        return $this->hasMany('Topic');
-    }
+        {
+            return $this->hasMany('Topic');
+        }
 }
