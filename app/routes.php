@@ -30,6 +30,7 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/friends', 'ProfileController@friends');
         Route::get('topic/show/{id}.html', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
+        Route::post('topic/update', 'TopicController@update');
         Route::post('topic/store', 'TopicController@store');
         Route::post('upload', array('uses' => 'TopicController@uploadImage'));
         Route::get('people', 'PeopleController@index');

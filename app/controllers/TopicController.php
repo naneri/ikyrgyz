@@ -1,7 +1,14 @@
 <?php
 
 class TopicController extends BaseController {
-
+    
+        private $user;
+        
+        function __construct() {
+            parent::__construct();
+            $this->user = Auth::user();
+        }
+    
        /**
 	 * Display a listing of the resource.
 	 *
@@ -38,11 +45,11 @@ class TopicController extends BaseController {
                     return Redirect::to('topic/create')->withErrors($validator);
                 }
                 
-                $topic = new Topic;
+                $topic = Topic::find(Input::get('topic_id'));
                 $topic->title = Input::get('title');
                 $topic->description = Input::get('description');
                 $topic->blog_id = 1;
-                $topic->user_id = Auth::user()->id;
+                $topic->user_id = $this->user->id;
                 $topic->type_id = TopicType::where('name', '=', Input::get('topic_type'))->first()->id;
                 $topic->save();
                 $topic_id = $topic->id;
@@ -129,10 +136,51 @@ class TopicController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
-	}
+            $rules = array();
+            
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return Response::json(array('message' => $validator->messages()));
+            }
+            
+            $result = array();
+            $topicId = null;
+            
+            if(!Input::has('topic_id')){
+                $topicId = DB::table('topics')
+                    ->insertGetId(
+                    array(
+                        'type_id' => TopicType::where('name', '=', 'draft')->first()->id,
+                        'user_id' => $this->user->id,
+                        'blog_id' => Blog::where('user_id', '=', $this->user->id)->first()->id)
+                    );
+                $result['topic_id'] = $topicId;
+            } else {
+                $topicId = Input::get('topic_id');
+            }
+            
+            $topic = Topic::find($topicId);
+            $topic->title = Input::get('title');
+            $topic->description = Input::get('description');
+            $topic->save();
+            
+            $tags = array();
+            foreach (explode(', ', Input::get('tags')) as $tag_name) {
+                if ($tag = Tag::where('name', '=', $tag_name)->first()) {
+                    $tag_id = $tag->id;
+                    $tags[] = $tag_id;
+                } elseif (trim($tag_name) != '') {
+                    $tag_id = DB::table('tags')->insertGetId(array('name' => $tag_name));
+                    $tags[] = $tag_id;
+                }
+            }
+            $topic->tags()->sync($tags);
+            
+            return Response::json($result);
+    }
 
 
 	/**

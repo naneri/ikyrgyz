@@ -19,17 +19,16 @@
                         <h3 class="panel-title">Create Topic</h3>
                     </div>
                     <div class="panel-body">
-                    	{{Form::open(array('url' => 'topic/store'))}}
-                        
+                    	{{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form'))}}
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="title" name="title" type="text" autofocus="">
+                                    <input class="form-control sync-input" placeholder="title" name="title" type="text" autofocus="">
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="description" name="description" type="text" value="" rows="3"></textarea>
+                                    <textarea class="form-control sync-input" placeholder="description" name="description" type="text" value="" rows="15"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::text('tags', null, array('class' => 'form-control', 'id' => 'tags', 'placeholder' => 'tags')) }}
+                                    {{ Form::text('tags', null, array('class' => 'form-control sync-input', 'id' => 'tags', 'placeholder' => 'tags')) }}
                                 </div>
                                 <div class="form-group">
                                     {{ Form::hidden('topic_type', 'text') }}
