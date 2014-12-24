@@ -1,5 +1,73 @@
+<script src="/js/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){ 
+    
+        tinymce.init({
+                    selector: "textarea",
+                    language: 'ru',
+                    menubar: false,
+                    statusbar: false,
+                    plugins: [
+                            "advlist autolink lists link image charmap print preview anchor",
+                            "  code ",
+                            "insertdatetime media table contextmenu paste youtube"
+                            ],
+                    image_advtab: true,
+                    toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube | preview code",
+                    setup : function(ed){
+                                    ed.on('keyup', function(e) {
+                                        //console.log('the content ' + ed.getContent());
+                                        setUpdateTimeout();
+                                    });
+                                }
+                });
+        
+        $('.sync-input').change(function(){
+            //setUpdateTimeout();
+        });
+        
+        $('.sync-input').keyup(function(){
+            setUpdateTimeout(); 
+        });
+        
+        var timer = null;
+        
+        function setUpdateTimeout(){
+            if (timer) {
+                clearTimeout(timer); //cancel the previous timer.
+                timer = null;
+            }
+            timer = setTimeout(updateForm, 3000);
+        }
+        
+        function updateForm(){
+            
+            var data = {    title: $('.sync-input[name="title"]').val(),
+                            description: tinyMCE.activeEditor.getContent(),
+                            tags: $('.sync-input[name="tags"]').val(),
+                            token: $('[name="_token"]').val()
+                        };
+            
+            if($('input[name="topic_id"]').length){
+                data['topic_id'] = $('input[name="topic_id"]').val();
+            }
+            
+            $.ajax({
+                url: '/topic/update',
+                data: data,
+                dataType: 'json',
+                type: 'POST',
+                success: function(result){
+                    if(result['topic_id']){
+                        var input = $('<input type="hidden" name="topic_id" value="'+result.topic_id+'">');
+                        $('#create-topic-form').append(input);
+                    }
+                },
+                error: function(result) {
+                }
+            });
+        }
+        
 	$('#topic_types a').click(function(e) {
             e.preventDefault();
             $('input[name="topic_type"').val($(this).attr('data-topic-type'));

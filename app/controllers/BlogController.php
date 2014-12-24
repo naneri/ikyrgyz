@@ -38,7 +38,7 @@ class BlogController extends BaseController {
 	}
 
 	public function getAll(){
-		$blogs = Blog::paginate('2');
+		$blogs = Blog::paginate('3');
 		return View::make('blog.all',array('blogs' => $blogs));
 	}
 
