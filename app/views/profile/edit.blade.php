@@ -17,6 +17,9 @@
 						<div class="form-group">
 							<input class="form-control" placeholder="Password" name="password" type="password" value="">
 						</div>
+						<div class="form-group">
+							<input class="form-control" placeholder="about" name="about" value="">
+						</div>
 						{{Form::file('image')}} <br>
 						{{Form::submit('Go!')}}
 					</fieldset>

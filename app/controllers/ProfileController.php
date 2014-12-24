@@ -14,7 +14,9 @@ class ProfileController extends BaseController {
 
 	public function postEdit(){
 		$user = User::find(Auth::id());
-		
+		$file = Input::file('image');
+
+		echo "<pre>"; print_r($user->description); echo "</pre>";exit;
 	}
 
 	public function friends(){
