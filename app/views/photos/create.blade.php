@@ -1,0 +1,1 @@
+C:\xampp2\htdocs\newkyrgyz\app/views/photos/create.blade.php

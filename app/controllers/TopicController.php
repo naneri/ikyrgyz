@@ -54,17 +54,7 @@ class TopicController extends BaseController {
                 $topic->save();
                 $topic_id = $topic->id;
 
-                $tags = array();
-                foreach (explode(', ', Input::get('tags')) as $tag_name) {
-                    if ($tag = Tag::where('name', '=', $tag_name)->first()) {
-                        $tag_id = $tag->id;
-                        $tags[] = $tag_id;
-                    } elseif(trim($tag_name)!='') {
-                        $tag_id = DB::table('tags')->insertGetId(array('name' => $tag_name));
-                        $tags[] = $tag_id;
-                    }      
-                }
-                $topic->tags()->sync($tags);
+                $this->syncTopicTags($topic, Input::get('tags'));                        
                 
                 switch(Input::get('topic_type')){
                     case "text":
@@ -114,6 +104,7 @@ class TopicController extends BaseController {
 	public function show($id)
 	{
                 $topic = Topic::findOrFail($id);
+                $topic->increment('count_read');
                 return View::make('topic.show', array('topic' => $topic));
 	}
 
@@ -167,8 +158,15 @@ class TopicController extends BaseController {
             $topic->description = Input::get('description');
             $topic->save();
             
+            $this->syncTopicTags($topic, Input::get('tags'));
+            
+            return Response::json($result);
+        }
+        
+        private function syncTopicTags($topic, $tagsStr){
             $tags = array();
-            foreach (explode(', ', Input::get('tags')) as $tag_name) {
+            foreach (explode(',', $tagsStr) as $tag_name) {
+                $tag_name = trim($tag_name);
                 if ($tag = Tag::where('name', '=', $tag_name)->first()) {
                     $tag_id = $tag->id;
                     $tags[] = $tag_id;
@@ -178,10 +176,7 @@ class TopicController extends BaseController {
                 }
             }
             $topic->tags()->sync($tags);
-            
-            return Response::json($result);
-    }
-
+        }
 
 	/**
 	 * Remove the specified resource from storage.

@@ -38,4 +38,5 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('logout', 'AuthController@logout');
         Route::resource('tags', 'TagsController');
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
+        Route::resource('photos', 'PhotosController');
 });
