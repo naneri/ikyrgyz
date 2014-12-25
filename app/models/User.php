@@ -43,4 +43,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         public function audios() {
             return $this->hasMany('Audio');
         }
+	public function description()
+    {
+        return $this->hasOne('User_Description', 'user_id', 'id');
+    }
+
+    public function setDescriptionArrayAttribute($values){
+    	$this->description->update($values);
+    }
+
 }

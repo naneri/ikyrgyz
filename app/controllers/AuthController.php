@@ -60,6 +60,9 @@ class AuthController extends BaseController {
         $user->email    = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
         $user->save();
+        $description = new User_Description;
+        $description->user_id = $user->id;
+        $description->save();
         return Redirect::to('/');
     }
 
