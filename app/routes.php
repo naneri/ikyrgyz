@@ -28,14 +28,17 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
-    Route::get('topic/show/{id}.html', 'TopicController@show');
+    Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
-        Route::post('topic/update', 'TopicController@update');
-        Route::post('topic/store', 'TopicController@store');
-        Route::post('upload', array('uses' => 'TopicController@uploadImage'));
-        Route::get('people', 'PeopleController@index');
-        Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
+    Route::post('topic/update', 'TopicController@update');
+    Route::post('topic/store', 'TopicController@store');
+    Route::post('upload', array('uses' => 'TopicController@uploadImage'));
+    Route::get('people', 'PeopleController@index');
+    Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
+    Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
 	Route::get('logout', 'AuthController@logout');
-        Route::resource('tags', 'TagsController');
-        Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
-        Route::resource('photos', 'PhotosController');
+    Route::resource('tags', 'TagsController');
+    Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
+    Route::resource('photos', 'PhotosController');
+
+});

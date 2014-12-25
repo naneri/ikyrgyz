@@ -8,6 +8,7 @@
 					<li><a href="{{URL::to('blog/create')}}">Blog</a></li>
 				</ul>
 			</li>
+			<li><a href="{{URL::to('blog/all')}}">Blogs</a></li>
 		</ul>
 	</nav>
 	

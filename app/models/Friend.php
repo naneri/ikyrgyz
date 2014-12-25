@@ -66,7 +66,9 @@ class Friend extends Eloquent{
 	 * 
 	 * @return [type]           [description]
 	 */
-	static function submitFriend($firstId,$secondId){
+	static function submitFriend($firstId,$secondId){{
+
+	}
 
 		if(Friend::where('user_one', '=', $firstId)
 			->where('user_two', '=', $secondId)
@@ -106,12 +108,35 @@ class Friend extends Eloquent{
 		->get();
 	}
 
+	/**
+	 * [friendsList description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
 	static function friendsList($id){
 		return Friend::where('user_one', '=', $id)
 				->join('users', 'user_two', '=', 'users.id')
 				->where('status', '=', Config::get('social.friend_status.friends'))
 				->get();
 
+	}
+
+	static function removeFriend($firstId,$secondId){
+		if(!Friend::where('user_one', '=', $firstId)){
+			return false;
+		}
+
+		// change the user friend status
+		Friend::where('user_two', '=', $firstId)
+			->where('user_one', '=', $secondId)
+			->update(array('status' => Config::get('social.friend_status.no_relation')));
+
+		//change the second user friend status
+		Friend::where('user_two', '=', $secondId)
+			->where('user_one', '=', $firstId)
+			->update(array('status' => Config::get('social.friend_status.no_relation')));
+
+		return true;
 	}
 
 

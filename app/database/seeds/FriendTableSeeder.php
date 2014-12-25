@@ -19,6 +19,16 @@ class FriendTableSeeder extends Seeder {
 				'user_to' => 1,
 				'status' => Config::get('social.friend_status.friends'),
 			),
+			array(
+				'user_from' => 1,
+				'user_to' => 4,
+				'status' => Config::get('social.friend_status.friends'),
+			),
+			array(
+				'user_from' => 4,
+				'user_to' => 1,
+				'status' => Config::get('social.friend_status.friends'),
+			),
 		);
 	}
 

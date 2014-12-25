@@ -28,7 +28,7 @@
 		                </ul>
 		            </li>
 					<li class="dropdown">
-		                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Друзья <span class="caret"></span></a>
+		                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Запросы в друзья<span class="caret"></span></a>
 		                @if($friend_requests)
 							<ul class="dropdown-menu" role="menu">
 		                  		@foreach($friend_requests as $request)
