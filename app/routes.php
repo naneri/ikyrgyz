@@ -28,7 +28,7 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
-    Route::get('topic/show/{id}.html', 'TopicController@show');
+        Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
         Route::post('topic/update', 'TopicController@update');
         Route::post('topic/store', 'TopicController@store');

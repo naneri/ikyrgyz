@@ -12,7 +12,7 @@
                     views - {{$topic->count_read}}<br>
                     comments - {{$topic->comments->count()}}<br>
                     rating - {{$topic->rating}}<br>
-                    <b>{{HTML::link('topic/show/'.$topic->id.'.html', $topic->title, array('id' => 'profile_link'))}}</b> <br>
+                    <b>{{HTML::link('topic/show/'.$topic->id, $topic->title, array('id' => 'profile_link'))}}</b> <br>
                     {{$topic->description}}<br>
                     @if ($topic->photoAlbums->count() > 0)
                         @foreach($topic->photoAlbums as $photoAlbum)
