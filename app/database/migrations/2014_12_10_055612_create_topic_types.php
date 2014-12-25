@@ -28,7 +28,8 @@ class CreateTopicTypes extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('topic_types');
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+            Schema::drop('topic_types');
 	}
 
 }

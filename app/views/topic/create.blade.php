@@ -25,47 +25,61 @@
                                     <input class="form-control sync-input" placeholder="title" name="title" type="text" autofocus="">
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control sync-input" placeholder="description" name="description" type="text" value="" rows="15"></textarea>
+                                    <textarea class="form-control sync-input" placeholder="description" name="description" type="text" rows="15"></textarea>
+                                    Relate to: <a class='btn-link rel-photo'>Photo</a> | <a class="btn-link rel-audio">Audio</a>
+                                    <div class="photo-box" style="display:none;">
+                                        <div class="user-photo-albums">
+                                            My photo albums:
+                                            @foreach($user->photoAlbums as $photoAlbum)
+                                                <div class="checkbox">
+                                                    <label>
+                                                        {{Form::checkbox('photo_albums[]', $photoAlbum->id, null, array('class' => 'sync-input'))}}{{$photoAlbum->name}}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="user-photos">
+                                            My photos:
+                                            @foreach($user->photos as $photo)
+                                                <div class="checkbox">
+                                                    <label>
+                                                        {{Form::checkbox('photos[]', $photo->id, null, array('class' => 'sync-input'))}}<img src='{{$photo->url}}' />
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="audio-box" style="display:none;">
+                                        <div class="user-audio-albums">
+                                            My music albums:
+                                            @foreach($user->audioAlbums as $audioAlbum)
+                                            <div class="checkbox">
+                                                <label>
+                                                    {{Form::checkbox('audio_albums[]', $audioAlbum->id, null, array('class' => 'sync-input'))}}{{$audioAlbum->name}}
+                                                </label>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="user-audio">
+                                            My music:
+                                            @foreach($user->audios as $audio)
+                                            <div class="checkbox">
+                                                <label>
+                                                    {{Form::checkbox('audio[]', $audio->id, null, array('class' => 'sync-input'))}}{{$audio->name}}
+                                                </label>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     {{ Form::text('tags', null, array('class' => 'form-control sync-input', 'id' => 'tags', 'placeholder' => 'tags')) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::hidden('topic_type', 'text') }}
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs nav-justified" id="topic_types">
-                                        <li class="active"><a href="#text" data-toggle="tab" data-topic-type="text">Text</a></li>
-                                        <li><a href="#image" data-toggle="tab" data-topic-type="image">Image</a></li>
-                                        <li><a href="#video" data-toggle="tab" data-topic-type="video">Video</a></li>
-                                        <li><a href="#audio" data-toggle="tab" data-topic-type="audio">Audio</a></li>
-                                        <li><a href="#link" data-toggle="tab" data-topic-type="link">Link</a></li>
-                                        <li><a href="#polling" data-toggle="tab" data-topic-type="polling">Polling</a></li>
-                                        <li><a href="#event" data-toggle="tab" data-topic-type="event">Event</a></li>
-                                    </ul>
-
-                                    <!-- Tab panes -->
-                                    <div class="tab-content" style="padding-top:15px;">
-                                        <div class="tab-pane" id="text">...</div>
-                                        <div class="tab-pane" id="image">
-                                            <input type="file" class="form-control" id="file" multiple />
-                                            <img src="{{Input::old('image')}}" id="thumb" style="max-width:300px; max-height: 200px; display:block; ">
-                                            <div class="error"></div>
-                                        </div>
-                                        <div class="tab-pane" id="video">
-                                            <input type="text" class="form-control" id="video_input" placeholder="embed code or url video"/>
-                                            <input type='hidden' name='video_url' />
-                                            <input type='hidden' name='video_embed_code' />
-                                            <div class='video_preview'>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="audio">...</div>
-                                        <div class="tab-pane" id="link">...</div>
-                                        <div class="tab-pane" id="polling">...</div>
-                                        <div class="tab-pane" id="event">...</div>
-                                    </div>
+                                    {{ Form::hidden('topic_type', 'topic') }}
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                {{Form::submit('Go!')}}
+                                {{Form::submit('Publish', array('class' => 'btn btn-default'))}}
                             </fieldset>
                        	{{Form::close()}}
                     </div>
