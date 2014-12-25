@@ -14,38 +14,18 @@ class TopicTypesTableSeeder extends Seeder {
             $users = array(
                 array(
                     'id' => '1',
-                    'name' => 'text'
+                    'name' => 'topic'
                 ),
                 array(
                     'id' => '2',
-                    'name' => 'image'
-                ),
-                array(
-                    'id' => '3',
-                    'name' => 'audio'
-                ),
-                array(
-                    'id' => '4',
-                    'name' => 'video'
-                ),
-                array(
-                    'id' => '5',
-                    'name' => 'music'
-                ),
-                array(
-                    'id' => '6',
-                    'name' => 'link'
-                ),
-                array(
-                    'id' => '7',
                     'name' => 'polling'
                 ),
                 array(
-                    'id' => '8',
+                    'id' => '3',
                     'name' => 'event'
                 ),
                 array(
-                    'id' => '9',
+                    'id' => '4',
                     'name' => 'draft'
                 )
             );

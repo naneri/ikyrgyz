@@ -44,4 +44,20 @@ class Topic extends Eloquent {
             return $this->belongsTo('Blog');
         }
         
+        public function photoAlbums(){
+            return $this->belongsToMany('PhotoAlbum');
+        }
+        
+        public function photos(){
+            return $this->belongsToMany('Photo');
+        }
+        
+        public function audioAlbums(){
+            return $this->belongsToMany('AudioAlbum');
+        }
+        
+        public function audio(){
+            return $this->belongsToMany('Audio');
+        }
+        
 }

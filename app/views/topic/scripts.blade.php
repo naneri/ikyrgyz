@@ -1,7 +1,15 @@
 <script src="/js/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){ 
-    
+        
+        $('.rel-photo').click(function(){
+            $('.photo-box').css('display','block');
+        });
+        
+        $('.rel-audio').click(function() {
+            $('.audio-box').css('display', 'block');
+        });
+        
         tinymce.init({
                     selector: "textarea",
                     language: 'ru',
@@ -22,8 +30,8 @@ $(document).ready(function(){
                                 }
                 });
         
-        $('.sync-input').change(function(){
-            //setUpdateTimeout();
+        $('.sync-input[type="checkbox"]').change(function(){
+            setUpdateTimeout();
         });
         
         $('.sync-input').keyup(function(){
@@ -41,16 +49,8 @@ $(document).ready(function(){
         }
         
         function updateForm(){
-            
-            var data = {    title: $('.sync-input[name="title"]').val(),
-                            description: tinyMCE.activeEditor.getContent(),
-                            tags: $('.sync-input[name="tags"]').val(),
-                            token: $('[name="_token"]').val()
-                        };
-            
-            if($('input[name="topic_id"]').length){
-                data['topic_id'] = $('input[name="topic_id"]').val();
-            }
+                        
+            data = $('#create-topic-form').serialize();
             
             $.ajax({
                 url: '/topic/update',
@@ -58,7 +58,7 @@ $(document).ready(function(){
                 dataType: 'json',
                 type: 'POST',
                 success: function(result){
-                    if(result['topic_id']){
+                    if(result['topic_id'] && !$('input[name="topic_id"]').length){
                         var input = $('<input type="hidden" name="topic_id" value="'+result.topic_id+'">');
                         $('#create-topic-form').append(input);
                     }

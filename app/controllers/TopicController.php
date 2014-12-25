@@ -3,6 +3,7 @@
 class TopicController extends BaseController {
     
         private $user;
+        private $topic;
         
         function __construct() {
             parent::__construct();
@@ -27,7 +28,7 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('topic.create');
+		return View::make('topic.create', array('user' => $this->user));
 	}
 
 
@@ -38,14 +39,17 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
-		$rules = array('title' => 'required');
+		$rules = array();
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
                     return Redirect::to('topic/create')->withErrors($validator);
                 }
                 
-                $topic = Topic::find(Input::get('topic_id'));
+                $topicId = $this->getTopicId();
+                
+                $topic = Topic::find($topicId);
+                $this->topic = $topic;
                 $topic->title = Input::get('title');
                 $topic->description = Input::get('description');
                 $topic->blog_id = 1;
@@ -54,47 +58,47 @@ class TopicController extends BaseController {
                 $topic->save();
                 $topic_id = $topic->id;
 
-                $this->syncTopicTags($topic, Input::get('tags'));                        
-                
-                switch(Input::get('topic_type')){
-                    case "text":
-                        break;
-                    case "image":
-                        $images = Input::get('topic_images');
-                        $this->storeTopicImages($topic_id, $images);
-                        break;
-                    case "video":
-                        $this->storeTopicVideo($topic_id, Input::get('video_url'), Input::get('video_embed_code'));
-                        break;
-                    case "music":
-                        break;
-                    case "link":
-                        break;
-                    case "polling":
-                        break;
-                    case "events":
-                        break;
-                }
-                
+                $this->syncTopicTags($topic, Input::get('tags'));
+                $this->syncTopicRelations();
+
                 return Redirect::to('main/index');
 	}
         
-        private function storeTopicImages($topic_id, $images){
-            foreach ($images as $image){
-                TopicImage::create(array(
-                    'topic_id' => $topic_id,
-                    'url' => $image
-                ));
+        private function getTopicId(){
+            $topicId = null;
+            if (!Input::has('topic_id')) {
+                $topicId = DB::table('topics')
+                    ->insertGetId(
+                    array(
+                        'type_id' => TopicType::where('name', '=', 'draft')->first()->id,
+                        'user_id' => $this->user->id,
+                        'blog_id' => Blog::where('user_id', '=', $this->user->id)->first()->id)
+                );
+            } else {
+                $topicId = Input::get('topic_id');
+            }
+            return $topicId;
+        }
+        
+        private function syncTopicRelations(){
+            
+            if (Input::has('photo_albums')){
+                $this->topic->photoAlbums()->sync(Input::get('photo_albums'));
+            }
+            
+            if (Input::has('photos')){
+                $this->topic->photos()->sync(Input::get('photos'));
+            }
+            
+            if (Input::has('audio_albums')){
+                $this->topic->audioAlbums()->sync(Input::get('audio_albums'));
+            }
+            
+            if (Input::has('audio')){
+                $this->topic->audio()->sync(Input::get('audio'));
             }
         }
         
-        private function storeTopicVideo($topic_id, $video_url, $video_embed_code){
-            TopicVideo::create(array(
-                'topic_id' => $topic_id,
-                'url' => $video_url,
-                'embed_code' => $video_embed_code
-            ));
-        }
 	/**
 	 * Display the specified resource.
 	 *
@@ -138,27 +142,18 @@ class TopicController extends BaseController {
             }
             
             $result = array();
-            $topicId = null;
             
-            if(!Input::has('topic_id')){
-                $topicId = DB::table('topics')
-                    ->insertGetId(
-                    array(
-                        'type_id' => TopicType::where('name', '=', 'draft')->first()->id,
-                        'user_id' => $this->user->id,
-                        'blog_id' => Blog::where('user_id', '=', $this->user->id)->first()->id)
-                    );
-                $result['topic_id'] = $topicId;
-            } else {
-                $topicId = Input::get('topic_id');
-            }
-            
+            $topicId = $this->getTopicId();
+            $result['topic_id'] = $topicId;
+                        
             $topic = Topic::find($topicId);
+            $this->topic = $topic;
             $topic->title = Input::get('title');
             $topic->description = Input::get('description');
             $topic->save();
             
             $this->syncTopicTags($topic, Input::get('tags'));
+            $this->syncTopicRelations();
             
             return Response::json($result);
         }
@@ -177,7 +172,7 @@ class TopicController extends BaseController {
             }
             $topic->tags()->sync($tags);
         }
-
+        
 	/**
 	 * Remove the specified resource from storage.
 	 *

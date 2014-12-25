@@ -39,3 +39,4 @@ Route::group(array('before' => 'auth'),function(){
         Route::resource('tags', 'TagsController');
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
         Route::resource('photos', 'PhotosController');
+});

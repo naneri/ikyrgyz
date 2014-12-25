@@ -14,13 +14,25 @@
                     rating - {{$topic->rating}}<br>
                     <b>{{HTML::link('topic/show/'.$topic->id.'.html', $topic->title, array('id' => 'profile_link'))}}</b> <br>
                     {{$topic->description}}<br>
-                    @if ($topic->type->name == 'image')
-                        @foreach($topic->images as $image)
-                            <img src='{{$image->url}}' alt='{{$image->title}}'/>
+                    @if ($topic->photoAlbums->count() > 0)
+                        @foreach($topic->photoAlbums as $photoAlbum)
+                            {{$photoAlbum->name}}<br>
                         @endforeach
-                        <br>
-                    @elseif ($topic->type->name == 'video')
-                        {{$topic->video->embed_code}}<br>
+                    @endif
+                    @if ($topic->photos->count() > 0)
+                        @foreach($topic->photos as $photo)
+                            <img src="{{$photo->url}}" /><br>
+                        @endforeach
+                    @endif
+                    @if ($topic->audioAlbums->count() > 0)
+                        @foreach($topic->audioAlbums as $audioAlbum)
+                            {{$audioAlbum->name}}<br>
+                        @endforeach
+                    @endif
+                    @if ($topic->audio->count() > 0)
+                        @foreach($topic->audio as $audio)
+                            {{$audio->name}}<br>
+                        @endforeach
                     @endif
                     blog title - {{$topic->blog->title}}<br>
                     blog topics count - {{$topic->blog->topics->count()}}<br><br>

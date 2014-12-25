@@ -18,6 +18,21 @@ class PhotoAlbumsTableSeeder extends Seeder {
                             'name' => 'Мой фотоальбом',
                             'user_id' => 1
                         ),
+                        array(
+                            'id' => '2',
+                            'name' => 'my album',
+                            'user_id' => 1
+                        ),
+                        array(
+                            'id' => '3',
+                            'name' => 'third album',
+                            'user_id' => 1
+                        ),
+                        array(
+                            'id' => '4',
+                            'name' => 'fourth album',
+                            'user_id' => 1
+                        ),
                 );
                 
                 DB::table('photo_albums')->insert($photoAlbums);
