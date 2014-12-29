@@ -42,12 +42,10 @@ class BlogController extends BaseController {
 		return View::make('blog.all',array('blogs' => $blogs));
 	}
 
-	public function getShow($id){
-		$topics = Topic::where('blog_id', '=', $id)->paginate('2');
-		return View::make('blog.show',array('topics' => $topics));
-	}
-
-	public function subscribe(){
+	public function show($id){
+		$blog = Blog::findOrFail($id);
+                $blogTopics = $blog->topics;
+                return View::make('blog.show', array('blog' => $blog, 'topics' => $blogTopics));
 	}
 
 }

@@ -23,8 +23,8 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('main/index','MainController@index');
 	Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
-    Route::get('blog/all','BlogController@getAll');
-	Route::get('blog/show/{id}','BlogController@getShow')->where('id', '[0-9]+');
+	Route::get('blog/all','BlogController@getAll');
+        Route::get('blog/show/{id}', 'BlogController@show');
 	Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
