@@ -36,7 +36,6 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
-        Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
         
         Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
@@ -47,11 +46,16 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('people', 'PeopleController@index');
         Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
         Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
+        Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
         
-	Route::get('logout', 'AuthController@logout');
+        Route::post('message/send/{id}', 'MessageController@sendMessage');
+        Route::get('message/all', 'MessageController@getAll');
+        Route::get('message/show/{id}', 'MessageController@show');
+        
         Route::resource('tags', 'TagsController');
         Route::resource('photos', 'PhotosController');
-
+        
+	Route::get('logout', 'AuthController@logout');
 });
 
 Route::filter('blog_edit_permission', function($route){
@@ -59,10 +63,4 @@ Route::filter('blog_edit_permission', function($route){
     if(!$blog->isAdminCurrentUser()){
         return Redirect::intended('/')->withMessage('You don\'t have enough permissions to do that.');
     } 
-    Route::resource('tags', 'TagsController');
-    Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
-    Route::resource('photos', 'PhotosController');
-    Route::post('message/send/{id}','MessageController@sendMessage');
-    Route::get('message/all', 'MessageController@getAll');
-    Route::get('message/show/{id}', 'MessageController@show');
 });
