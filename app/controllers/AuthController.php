@@ -56,6 +56,14 @@ class AuthController extends BaseController {
 
 
     public function postRegister(){
+        $rules = User::$rules;
+        
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        
         $user = new User;
         $user->email    = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
@@ -63,7 +71,7 @@ class AuthController extends BaseController {
         $description = new User_Description;
         $description->user_id = $user->id;
         $description->save();
-        return Redirect::to('/');
+        return Redirect::to('/main/index');
     }
 
 }

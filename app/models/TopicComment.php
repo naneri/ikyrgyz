@@ -4,7 +4,7 @@ class TopicComment extends \Eloquent {
 
 	// Add your validation rules here
 	public static $rules = [
-		// 'title' => 'required'
+            'text' => 'required'
 	];
 
 	// Don't forget to fill this array

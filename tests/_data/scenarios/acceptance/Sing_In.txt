@@ -1,0 +1,7 @@
+I WANT TO LOG IN AS REGULAR USER
+
+I am on page '/login'
+I fill field 'email'," 'naneri@mail.ru'
+I fill field 'password'," '104430'
+I click 'Go!'
+I see 'I-Kyrgyz'

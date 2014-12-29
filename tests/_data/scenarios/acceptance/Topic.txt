@@ -1,0 +1,11 @@
+I WANT TO SEE MAIN PAGE AFTER LOG IN
+
+I am on page '/login'
+I fill field 'email'," 'naneri@mail.ru'
+I fill field 'password'," '104430'
+I click 'Go!'
+I see 'I-Kyrgyz'
+I am on page '/topic/create'
+I fill field 'title'," 'some title'
+I click 'Publish'
+I see 'some title'

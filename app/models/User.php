@@ -4,6 +4,7 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
@@ -15,8 +16,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
+        
+        
+	// Add your validation rules here
+        public static $rules = [
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|alpha_num|between:4,50'
+        ];
 
-	/**
+        /**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
