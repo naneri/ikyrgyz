@@ -3,7 +3,7 @@
 @section('content')
 		<div class="container">
 		    @foreach($blogs as $blog)
-		        {{$blog->title}} <br>
+		        {{HTML::link('blog/show/'.$blog->id, $blog->title)}} <br>
 		    @endforeach
 
                     {{$blogs->links()}}

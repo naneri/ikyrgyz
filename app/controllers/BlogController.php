@@ -42,8 +42,10 @@ class BlogController extends BaseController {
 		return View::make('blog.all',array('blogs' => $blogs));
 	}
 
-	public function getShow(){
-		
+	public function show($id){
+		$blog = Blog::findOrFail($id);
+                $blogTopics = $blog->topics;
+                return View::make('blog.show', array('blog' => $blog, 'topics' => $blogTopics));
 	}
 
 }
