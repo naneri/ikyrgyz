@@ -47,6 +47,11 @@ class AuthController extends BaseController {
         return Redirect::to('/');
     }
 
+    /**
+     * Страница регистрации пользователя
+     * 
+     * @return [type] [description]
+     */
     public function getRegister(){
         if(Auth::check()){
             return Redirect::to('main/index');
@@ -54,7 +59,10 @@ class AuthController extends BaseController {
         return View::make('register');
     }
 
-
+    /**
+     * Обработка post запроса с данными 
+     * @return [type] [description]
+     */
     public function postRegister(){
         $rules = User::$rules;
         

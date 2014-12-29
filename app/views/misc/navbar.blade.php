@@ -13,19 +13,25 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="#">first</a></li>
-					<li><a href="#">asd</a></li>
 					<li class="dropdown">
 		                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
 		                <ul class="dropdown-menu" role="menu">
 		                  <li><a href="{{URL::to('profile/edit')}}">Edit Profile</a></li>
 		                  <li><a href="{{URL::to('profile/friends')}}">Друзья</a></li>
-		                  <li><a href="#">aaa</a></li>
+		                  <li><a href="{{URL::to('message/all')}}">Личные сообщения</a></li>
 		                  <li class="divider"></li>
 		                  <li class="dropdown-header">Nav header</li>
 		                  <li><a href="#">aaa</a></li>
 		                  <li><a href="#">aa</a></li>
 		                </ul>
+		            </li>
+		             <li class="dropdown">
+		            	<a href="" class="dropdown-toggle" data-toggle='dropdown'>Новые Сообщения<span class="caret"></span></a>
+		            	<ul class="dropdown-menu">
+		            		@foreach($new_messages as $message)
+		            		<li><a href="{{URL::to('message/show/'.$message->id)}}">{{$message->email}} | {{$message->text}}</a></li>
+		            		@endforeach
+		            	</ul>
 		            </li>
 					<li class="dropdown">
 		                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Запросы в друзья<span class="caret"></span></a>
@@ -37,6 +43,7 @@
 		                	</ul>
 		                @endif
 		            </li>
+
 		            <li><a href="{{URL::to('people')}}">{{trans('network.search_friends')}}</a></li>
 		            <li><a href="{{URL::to('logout')}}">{{trans('network.logout')}}</a></li>
 				</ul>

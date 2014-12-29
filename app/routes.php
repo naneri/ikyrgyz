@@ -23,7 +23,8 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('main/index','MainController@index');
 	Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
-	Route::get('blog/all','BlogController@getAll');
+    Route::get('blog/all','BlogController@getAll');
+	Route::get('blog/show/{id}','BlogController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
@@ -40,5 +41,7 @@ Route::group(array('before' => 'auth'),function(){
     Route::resource('tags', 'TagsController');
     Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
     Route::resource('photos', 'PhotosController');
-
+    Route::post('message/send/{id}','MessageController@sendMessage');
+    Route::get('message/all', 'MessageController@getAll');
+    Route::get('message/show/{id}', 'MessageController@show');
 });
