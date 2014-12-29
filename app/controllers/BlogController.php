@@ -20,7 +20,7 @@ class BlogController extends BaseController {
 	}
 
 	public function store(){
-		$rules = array('title' => 'required', 'description' => 'required', 'blog_type_id' => 'required');
+		$rules = Blog::$rules;
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
@@ -31,6 +31,7 @@ class BlogController extends BaseController {
                 $blog->title = Input::get('title');
                 $blog->description = Input::get('description');
                 $blog->blog_type_id = Input::get('blog_type_id');
+                
                 $blog->user_id = Auth::user()->id;
                 $blog->save();
 
@@ -47,5 +48,24 @@ class BlogController extends BaseController {
                 $blogTopics = $blog->topics;
                 return View::make('blog.show', array('blog' => $blog, 'topics' => $blogTopics));
 	}
+        
+        public function getEdit($id){
+            $blog = Blog::findOrFail($id);
+            return View::make('blog.edit', array('blog' => $blog));
+        }
+        
+        public function postEdit($id){
+		$rules = Blog::$rules;
+                $validator = Validator::make(Input::all(), $rules);
+
+                if ($validator->fails()) {
+                    return Redirect::to('form')->withInput();
+                }
+                
+                $blog = Blog::findOrFail($id);
+                $blog->update(Input::except('_token'));
+                
+                return Redirect::to('blog/show/'.$blog->id);
+        }
 
 }

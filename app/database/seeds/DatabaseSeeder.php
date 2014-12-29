@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder {
                 $this->call('AudioTableSeeder');
                 $this->call('PhotoAlbumTopicTableSeeder');
                 $this->call('PhotoTopicTableSeeder');
-        }
+                $this->call('RolesTableSeeder');
+    }
 
 }
