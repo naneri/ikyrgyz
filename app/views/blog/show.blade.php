@@ -1,6 +1,5 @@
 @extends('misc.layout')
 
-
 @section('content')
 @include('misc.createnav')
 <div class="container">

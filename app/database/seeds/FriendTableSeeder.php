@@ -10,26 +10,28 @@ class FriendTableSeeder extends Seeder {
 
 		$friends = array(
 			array(
-				'user_from' => 1,
-				'user_to' => 3,
+				'user_one' => 1,
+				'user_two' => 3,
 				'status' => Config::get('social.friend_status.friends'),
 			),
 			array(
-				'user_from' => 3,
-				'user_to' => 1,
+				'user_one' => 3,
+				'user_two' => 1,
 				'status' => Config::get('social.friend_status.friends'),
 			),
 			array(
-				'user_from' => 1,
-				'user_to' => 4,
+				'user_one' => 1,
+				'user_two' => 4,
 				'status' => Config::get('social.friend_status.friends'),
 			),
 			array(
-				'user_from' => 4,
-				'user_to' => 1,
+				'user_one' => 4,
+				'user_two' => 1,
 				'status' => Config::get('social.friend_status.friends'),
 			),
 		);
+
+		DB::table('friends')->insert($friends);
 	}
 
 }

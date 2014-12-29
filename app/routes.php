@@ -59,4 +59,10 @@ Route::filter('blog_edit_permission', function($route){
     if(!$blog->isAdminCurrentUser()){
         return Redirect::intended('/')->withMessage('You don\'t have enough permissions to do that.');
     } 
+    Route::resource('tags', 'TagsController');
+    Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
+    Route::resource('photos', 'PhotosController');
+    Route::post('message/send/{id}','MessageController@sendMessage');
+    Route::get('message/all', 'MessageController@getAll');
+    Route::get('message/show/{id}', 'MessageController@show');
 });
