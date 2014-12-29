@@ -24,7 +24,7 @@ class PeopleController extends BaseController{
 	 */
 	public function requestFriend($id){
 
-		if(Auth::id() === $id){
+		if(Auth::id() == $id){
 			return Redirect::back()->with('message', "you can't be friend of yourself");
 		}
 
@@ -36,6 +36,12 @@ class PeopleController extends BaseController{
 
 	}
 
+	/**
+	 * Подтверждение добавления в друзья
+	 * @param  integer $id id пользователя
+	 * 
+	 * @return [type]     [description]
+	 */
 	public function submitFriend($id){
 
 	
@@ -48,6 +54,27 @@ class PeopleController extends BaseController{
 		}
 		
 		return Redirect::back()->with('message', 'you are now friends');
+	}
+
+	/**
+	 * Удаление из друзей
+	 * 
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function removeFriend($id){
+
+		$current_user = Auth::id();
+
+		if($current_user === $id){
+			return Redirect::back()->with('message', "you can't unfriend yourself");
+		}
+
+		if(!Friend::removeFriend($current_user, $id)){
+			return Redirect::back()->with('message', 'some troubles');
+		}
+
+		return Redirect::back()->with('message', 'you have removed a friend');
 	}
 
 }

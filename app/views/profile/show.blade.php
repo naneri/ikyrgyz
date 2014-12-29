@@ -3,6 +3,30 @@
 @section('content')
 
 
-	{{{$user->email}}} <br>
-	<a href="{{URL::to('people/friendRequest/'. $user->id)}}">Стать друзьями</a>
+	<div class="container">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			{{{$user->email}}} <br>
+				@if(Auth::id() != $user->id)
+					<a href="{{URL::to('people/friendRequest/'. $user->id)}}">Стать друзьями</a>
+				
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Send message</h3>
+					</div>
+					<div class="panel-body">
+					{{Form::open(array('url' => 'message/send'.$user->id))}}
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="text" name="text">
+							</div>
+						</fieldset>
+					{{Form::submit('Go!')}}
+					{{Form::close()}}
+					</div>
+				</div>	
+				@endif
+		</div>
+		<div class="col-md-4"></div>
+	</div>
 @stop
