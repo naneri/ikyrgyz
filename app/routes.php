@@ -30,8 +30,14 @@ Route::group(array('before' => 'auth'),function(){
         Route::group(array('before' => 'blog_edit_permission'), function(){
             Route::get('blog/edit/{id}', 'BlogController@getEdit');
             Route::post('blog/edit/{id}', 'BlogController@postEdit');
+            Route::get('blog/edit/{id}/users', 'BlogController@getEditUsers');
+            Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
         });
-        
+        Route::get('blog/{id}/read', 'BlogController@readBlog');
+        Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
+        Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
+        Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
+
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
@@ -61,6 +67,6 @@ Route::group(array('before' => 'auth'),function(){
 Route::filter('blog_edit_permission', function($route){
     $blog = Blog::findOrFail($route->parameter('id'));
     if(!$blog->isAdminCurrentUser()){
-        return Redirect::intended('/')->withMessage('You don\'t have enough permissions to do that.');
+        return View::make('error.permission', array('error' => 'You don\'t have enough permissions to do that.'));
     } 
 });

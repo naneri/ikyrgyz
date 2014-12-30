@@ -12,16 +12,19 @@ class BlogsSubscriptionsTableSeeder extends Seeder{
 		$BlogsSubscriptions = array(
 			array(
 				'blog_id' => 1,
-				'user_id' => 1
+				'user_id' => 1,
+                                'status_id' => 1
 			),
 			array(
 				'blog_id' => 2,
-				'user_id' => 2
-			),
+				'user_id' => 2,
+                                'status_id' => 1
+                        ),
 			array(
 				'blog_id' => 3,
-				'user_id' => 1
-			),
+				'user_id' => 1,
+                                'status_id' => 1
+                        ),
 		);
 
 		// inserts the data

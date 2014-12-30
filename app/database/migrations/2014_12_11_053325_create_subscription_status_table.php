@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateBlogTypesTable extends Migration {
+class CreateSubscriptionStatusTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateBlogTypesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('blog_types', function(Blueprint $table)
+		Schema::create('subscription_statuses', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 50);
+                        $table->string('name', 50);
 			$table->timestamps();
 		});
 	}
@@ -28,7 +28,7 @@ class CreateBlogTypesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('blog_types');
+		Schema::drop('subscription_statuses');
 	}
 
 }

@@ -33,7 +33,7 @@
                                 }
                                 ?>
                                 <div class="form-group">
-                                    {{ Form::select('blog_type_id', $blogTypes, null, array('class' => 'form-control')) }}
+                                    {{ Form::select('type_id', $blogTypes, null, array('class' => 'form-control')) }}
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 {{Form::submit('Go!')}}

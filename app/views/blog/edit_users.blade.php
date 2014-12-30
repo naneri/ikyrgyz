@@ -14,26 +14,15 @@
 			<div class="col-md-4">
 				<div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Edit Blog</h3>
+                        <h3 class="panel-title">Edit Blog users</h3>
                     </div>
                     <div class="panel-body">
-                    	{{Form::open(array('url' => 'blog/edit/'.$blog->id))}}
+                    	{{Form::open(array('url' => 'blog/edit/'.$blog->id.'/users'))}}
                         
                             <fieldset>
+                                
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="title" name="title" type="text" autofocus="" value="{{$blog->title}}">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="description" name="description" type="text" value="{{$blog->description}}">
-                                </div>
-                                <?php
-                                $blogTypes = array();
-                                foreach (BlogType::get(array('id', 'type')) as $blogType) {
-                                    $blogTypes[$blogType->id] = $blogType->type;
-                                }
-                                ?>
-                                <div class="form-group">
-                                    {{ Form::select('type_id', $blogTypes, $blog->type_id, array('class' => 'form-control')) }}
+                                    <?php $blogUsers = $blog->getBlogUsers();?>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 {{Form::submit('Go!')}}
