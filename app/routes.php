@@ -57,7 +57,14 @@ Route::group(array('before' => 'auth'),function(){
         Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
-        
+
+        Route::get('custom/history', 'CustomController@showHistory');
+        Route::get('custom/customs', 'CustomController@showCustoms');
+        Route::get('custom/culture', 'CustomController@showCulture');
+        Route::get('custom/help', 'CustomController@showHelp');
+        Route::get('custom/problem', 'CustomController@showProblem');
+        Route::get('custom/action_history', 'CustomController@showActionHistory');
+
         Route::resource('tags', 'TagsController');
         Route::resource('photos', 'PhotosController');
         
