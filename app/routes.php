@@ -43,8 +43,10 @@ Route::group(array('before' => 'auth'),function(){
         
         Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
-        Route::get('topic/edit/{id}', 'TopicController@getEdit');
-        Route::post('topic/edit/{id}', 'TopicController@postEdit');
+        Route::group(array('before' => 'topic_edit_permission'), function(){
+            Route::get('topic/edit/{id}', 'TopicController@getEdit');
+            Route::post('topic/edit/{id}', 'TopicController@postEdit');
+        });
         Route::post('topic/update', 'TopicController@update');
         Route::post('topic/store', 'TopicController@store');
         Route::post('upload', array('uses' => 'TopicController@uploadImage'));
@@ -73,7 +75,14 @@ Route::group(array('before' => 'auth'),function(){
 
 Route::filter('blog_edit_permission', function($route){
     $blog = Blog::findOrFail($route->parameter('id'));
-    if(!$blog->isAdminCurrentUser()){
+    if(!$blog->canEdit()){
         return View::make('error.permission', array('error' => 'You don\'t have enough permissions to do that.'));
     } 
+});
+
+Route::filter('topic_edit_permission', function($route) {
+    $topic = Topic::findOrFail($route->parameter('id'));
+    if (!$topic->canEdit()) {
+        return View::make('error.permission', array('error' => 'You don\'t have enough permissions to do that.'));
+    }
 });

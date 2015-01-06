@@ -20,15 +20,15 @@ Class Blog extends Eloquent{
         }
         
         public function isAdminCurrentUser(){
-            $admin_role = Role::whereName('admin')->first()->id;
+            $adminRoleId = Role::whereName('admin')->first()->id;
             $userId = Auth::user()->id;
-            return $this->checkRole($userId, $admin_role);
+            return $this->checkRole($userId, $adminRoleId) || Auth::user()->is_admin;
         }
         
         public function isModeratorCurrentUser(){
-            $moderator_role = Role::whereName('moderator')->first()->id;
+            $moderatorRoleId = Role::whereName('moderator')->first()->id;
             $userId = Auth::user()->id;
-            return $this->checkRole($userId, $moderator_role) || $this->isAdmin($userId);
+            return $this->checkRole($userId, $moderatorRoleId) || $this->isAdminCurrentUser();
         }
         
         private function checkRole($userId, $roleId){
@@ -37,6 +37,16 @@ Class Blog extends Eloquent{
                 ->where('blog_id', $this->id)
                 ->where('user_id', $userId)
                 ->exists();
+        }
+        
+        public function canEdit(){
+            $canEdit = null;
+            if($this->type->name == 'personal'){
+                $canEdit = ($this->user_id == Auth::user()->id);
+            } else {
+                $canEdit = $this->isAdminCurrentUser();
+            }
+            return $canEdit;
         }
         
         public function getBlogUsers(){
