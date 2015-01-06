@@ -39,11 +39,11 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
-		$rules = array();
+		$rules = Topic::$rules;
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
-                    return Redirect::to('topic/create')->withErrors($validator);
+                    return Redirect::back()->withErrors($validator);
                 }
                 
                 $topicId = $this->getTopicId();
@@ -119,13 +119,51 @@ class TopicController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function getEdit($id)
 	{
-		//
-	}
+            $topic = Topic::findOrFail($id);
+            
+            if(!$topic->canEdit()){
+                return View::make('error.permission', array('error' => 'permission denied'));
+            }
+            
+            return View::make('topic.edit', array('user' => $this->user, 'topic' => $topic));
+        }
 
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param  int  $id
+         * @return Response
+         */
+        public function postEdit($id) {
+            
+            $rules = Topic::$rules;
+            
+            $validator = Validator::make(Input::all(), $rules);
 
-	/**
+            if ($validator->fails()) {
+                return Redirect::back()->withErrors($validator);
+            }
+
+            $topic = Topic::findOrFail($id);
+            
+            if (!$topic->canEdit()) {
+                return View::make('error.permission', array('error' => 'permission denied'));
+            }
+            
+            $this->topic = $topic;
+            $topic->title = Input::get('title');
+            $topic->description = Input::get('description');
+            $topic->save();
+
+            $this->syncTopicTags($topic, Input::get('tags'));
+            $this->syncTopicRelations();
+
+            return Redirect::to('topic/show/'.$id);
+        }
+
+        /**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
@@ -133,14 +171,6 @@ class TopicController extends BaseController {
 	 */
 	public function update()
 	{
-            $rules = array();
-            
-            $validator = Validator::make(Input::all(), $rules);
-
-            if ($validator->fails()) {
-                return Response::json(array('message' => $validator->messages()));
-            }
-            
             $result = array();
             
             $topicId = $this->getTopicId();

@@ -45,6 +45,8 @@ Route::group(array('before' => 'auth'),function(){
         
         Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
+        Route::get('topic/edit/{id}', 'TopicController@getEdit');
+        Route::post('topic/edit/{id}', 'TopicController@postEdit');
         Route::post('topic/update', 'TopicController@update');
         Route::post('topic/store', 'TopicController@store');
         Route::post('upload', array('uses' => 'TopicController@uploadImage'));
