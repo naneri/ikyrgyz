@@ -36,8 +36,8 @@ class MessageController extends BaseController{
 	 * @return [type]     [description]
 	 */
 	public function show($id){
-		$message = Message::find($id)->join('users', 'messages.sender_id', '=', 'users.id')->get();
+		$message = Message::where('messages.id', '=', $id)->join('users', 'messages.sender_id', '=', 'users.id')->get();
 		Message::setWatched($id);
-		return View::make('message.show', array('message' => $message));
+		return View::make('message.show', array('message' => $message[0]));
 	}
 }

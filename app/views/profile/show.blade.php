@@ -24,7 +24,9 @@
 					{{Form::submit('Go!')}}
 					{{Form::close()}}
 					</div>
-				</div>	
+				</div>
+				@else
+					<b>Это вы</b>	
 				@endif
 		</div>
 		<div class="col-md-4"></div>

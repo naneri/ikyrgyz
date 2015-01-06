@@ -8,7 +8,7 @@
 			<h2>Новые сообщения</h2><br>
 			@foreach($messages as $message)
 				{{$message->email}} | 
-				{{$message->text}}
+				<a href="{{URL::to('message/show/' . $message->id)}}">{{$message->text}}</a>
 				<br>
 			@endforeach
 		</div>
