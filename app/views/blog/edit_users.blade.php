@@ -10,27 +10,41 @@
 			    </div>
 			    @endforeach
 			</div>
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Edit Blog users</h3>
-                    </div>
-                    <div class="panel-body">
-                    	{{Form::open(array('url' => 'blog/edit/'.$blog->id.'/users'))}}
-                        
-                            <fieldset>
-                                
-                                <div class="form-group">
-                                    <?php $blogUsers = $blog->getBlogUsers();?>
+			<div class="col-md-8 col-md-offset-2">
+                            <div class="login-panel panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Edit Blog users</h3>
                                 </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                {{Form::submit('Go!')}}
-                            </fieldset>
-                       	{{Form::close()}}
-                    </div>
-                </div>
+                                <div class="panel-body">
+                                    {{Form::open(array('url' => 'blog/edit/'.$blog->id.'/users'))}}
+
+                                        <fieldset>
+                                            <table class="table">
+                                                <thead>
+                                                    <th>user</th>
+                                                    <th>admin</th>
+                                                    <th>moderator</th>
+                                                    <th>reader</th>
+                                                    <th>banned</th>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($blog->getBlogUsers() as $blogUser)
+                                                    <tr>
+                                                        <td>{{$blogUser->email}}</td>
+                                                        <td>{{Form::radio($blogUser->id, 'admin', $blog->isAdmin($blogUser->id))}}</td>
+                                                        <td>{{Form::radio($blogUser->id, 'moderator', $blog->isModerator($blogUser->id))}}</td>
+                                                        <td>{{Form::radio($blogUser->id, 'reader', $blog->isReader($blogUser->id))}}</td>
+                                                        <td>{{Form::radio($blogUser->id, 'banned')}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            <!-- Change this to a button or input when using this as a form -->
+                                            {{Form::submit('Go!')}}
+                                        </fieldset>
+                                    {{Form::close()}}
+                                </div>
+                            </div>
 			</div>
-			<div class="col-md-4"></div>
 		</div>
 @stop

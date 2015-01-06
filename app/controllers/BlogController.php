@@ -55,17 +55,17 @@ class BlogController extends BaseController {
         }
         
         public function postEdit($id){
-		$rules = Blog::$rules;
-                $validator = Validator::make(Input::all(), $rules);
+            $rules = Blog::$rules;
+            $validator = Validator::make(Input::all(), $rules);
 
-                if ($validator->fails()) {
-                    return Redirect::to('form')->withInput();
-                }
-                
-                $blog = Blog::findOrFail($id);
-                $blog->update(Input::except('_token'));
-                
-                return Redirect::to('blog/show/'.$blog->id);
+            if ($validator->fails()) {
+                return Redirect::to('form')->withInput();
+            }
+
+            $blog = Blog::findOrFail($id);
+            $blog->update(Input::except('_token'));
+
+            return Redirect::to('blog/show/'.$blog->id);
         }
         
         public function getEditUsers($id){
@@ -74,28 +74,38 @@ class BlogController extends BaseController {
         }
         
         public function postEditUsers($id){
+            $blog = Blog::findOrFail($id);
+            $users = Input::except('_token');
             
+            foreach($users as $userId=>$role){
+                $roleId = Role::whereName($role)->first()->id;
+                $blogRole = BlogRole::where('blog_id', $blog->id)
+                        ->where('user_id', $userId);
+                $blogRole->update(array('role_id' => $roleId));
+            }
+            
+            return View::make('blog.edit_users', array('blog' => $blog));
         }
         
         public function readBlog($id){
             $blog = Blog::findOrFail($id);
             
-            if($blog->isHaveRelationWithUser()){
+            if($blog->isUserHaveRole()){
                 return Redirect::back()->withMessage('You are already blog follower');
             }
             
-            $subscriptionStatus = null;
-            if($blog->type->name == 'close'){
-                $subscriptionStatus = SubscriptionStatus::whereName('request')->first();
+            $roleId = null;
+            if($blog->type->name == 'open'){
+                $roleId = Role::whereName('reader')->pluck('id');
             } else {
-                $subscriptionStatus = SubscriptionStatus::whereName('read')->first();
+                $roleId = Role::whereName('request')->pluck('id');
             }
             
-            $blogSubscription = new BlogSubscription();
-            $blogSubscription->blog_id = $blog->id;
-            $blogSubscription->user_id = Auth::user()->id;
-            $blogSubscription->status_id = $subscriptionStatus->id;
-            $blogSubscription->save();
+            $blogRole = new BlogRole();
+            $blogRole->blog_id = $blog->id;
+            $blogRole->user_id = Auth::user()->id;
+            $blogRole->role_id = $roleId;
+            $blogRole->save();
             
             return Redirect::back();
         }
@@ -103,14 +113,14 @@ class BlogController extends BaseController {
         public function rejectBlog($id){
             $blog = Blog::findOrFail($id);
 
-            if (!$blog->isHaveRelationWithUser()) {
+            if (!$blog->isUserHaveRole()) {
                 return Redirect::back()->withMessage('You are not blog follower');
             }
 
-            $subscriptionStatus = SubscriptionStatus::whereName('reject')->first();
+            $roleId = Role::whereName('reject')->pluck('id');
 
-            $blogSubscription = BlogSubscription::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
-            $blogSubscription->update(array('status_id' => $subscriptionStatus->id));
+            $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+            $blogRole->update(array('role_id' => $roleId));
 
             return Redirect::back();
         }
@@ -119,14 +129,14 @@ class BlogController extends BaseController {
         public function acceptInviteBlog($id) {
             $blog = Blog::findOrFail($id);
 
-            if (!$blog->isHaveRelationWithUser()) {
+            if (!$blog->isUserHaveRole()) {
                 return Redirect::back()->withMessage('You are not invited');
             }
 
-            $subscriptionStatus = SubscriptionStatus::whereName('read')->first();
+            $roleId = Role::whereName('reader')->pluck('id');
 
-            $blogSubscription = BlogSubscription::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
-            $blogSubscription->update(array('status_id' => $subscriptionStatus->id));
+            $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+            $blogRole->update(array('role_id' => $roleId));
 
             return Redirect::back();
         }
@@ -134,20 +144,23 @@ class BlogController extends BaseController {
         public function refollowBlog($id){
             $blog = Blog::findOrFail($id);
 
-            if (!$blog->isHaveRelationWithUser()) {
+            if (!$blog->isUserHaveRole()) {
                 return Redirect::back()->withMessage('You are not blog follower');
             }
 
-            $subscriptionStatus = null;
-            if ($blog->type->name == 'close') {
-                $subscriptionStatus = SubscriptionStatus::whereName('request')->first();
+            $roleId = null;
+            if ($blog->type->name == 'open') {
+                $roleId = Role::whereName('reader')->pluck('id');
             } else {
-                $subscriptionStatus = SubscriptionStatus::whereName('read')->first();
+                $roleId = Role::whereName('request')->pluck('id');
             }
-            
-            $blogSubscription = BlogSubscription::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
-            $blogSubscription->update(array('status_id' => $subscriptionStatus->id));
 
+            $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+            $blogRole->blog_id = $blog->id;
+            $blogRole->user_id = Auth::user()->id;
+            $blogRole->role_id = $roleId;
+            $blogRole->save();
+        
             return Redirect::back();
         }
 

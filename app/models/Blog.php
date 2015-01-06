@@ -40,28 +40,66 @@ Class Blog extends Eloquent{
         }
         
         public function getBlogUsers(){
-            return DB::table('users')
-                    ->join('blog_role', 'users.id', '=', 'blog_role.user_id')
+            return User::join('blog_role', 'users.id', '=', 'blog_role.user_id')
                     ->join('roles', 'roles.id', '=', 'blog_role.role_id')
                     ->where('blog_role.blog_id', $this->id)
+                    ->select('users.*')
                     ->get();                    
         }
         
-        public function isHaveRelationWithUser(){
-            return DB::table('blog_subscriptions')
-                    /*->join('subscription_statuses', 'blog_subscriptions.status_id', '=', 'subscription_statuses.id')
-                    ->where('')*/
+        public function isUserHaveRole(){
+            return BlogRole::where('blog_role.blog_id', $this->id)
                     ->where('user_id', Auth::user()->id)
-                    ->where('blog_id', $this->id)
                     ->exists();
         }
         
-        public function getUserStatus(){
-            $status_id = BlogSubscription::where('blog_id', $this->id)->where('user_id', Auth::user()->id)->pluck('status_id');
-            return SubscriptionStatus::whereId($status_id)->pluck('name');
+        public function getUserRole(){
+            return BlogRole::join('roles', 'roles.id', '=', 'blog_role.role_id')
+                    ->where('blog_role.blog_id', $this->id)
+                    ->where('user_id', Auth::user()->id)
+                    ->pluck('name');
         }
         
-        public function getBlogSubscription(){
-            return BlogSubscription::where('blog_id', $this->id)->where('user_id', Auth::user()->id)->get();
+        public function getAdmins(){
+            return $this->getUsersWithRole('admin');
         }
+        
+        public function getModerators(){
+            return $this->getUsersWithRole('moderator');
+        }
+
+        public function getReaders(){
+            return $this->getUsersWithRole('reader');
+        }
+        
+        private function getUsersWithRole($roleName){
+            if(Role::whereName($roleName)->exists()){
+                return User::join('blog_role', 'users.id', '=', 'blog_role.user_id')
+                            ->join('roles', 'roles.id', '=', 'blog_role.role_id')
+                            ->where('blog_role.blog_id', $this->id)
+                            ->where('roles.name', $roleName)
+                            ->get();
+            }
+        }
+        
+        public function isAdmin($userId){
+            $adminRoleId = Role::whereName('admin')->first()->id;
+            return $this->checkRole($userId, $adminRoleId);
+        }
+        
+        public function isModerator($userId) {
+            $moderatorRoleId = Role::whereName('moderator')->first()->id;
+            return $this->checkRole($userId, $moderatorRoleId);
+        }
+
+        public function isReader($userId) {
+            $readerRoleId = Role::whereName('reader')->first()->id;
+            return $this->checkRole($userId, $readerRoleId);
+        }
+        
+        public function isBanned($userId){
+            $bannedRoleId = Role::whereName('banned')->first()->id;
+            return $this->checkRole($userId, $bannedRoleId);
+        }
+
 }

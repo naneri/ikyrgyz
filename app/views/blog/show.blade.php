@@ -4,27 +4,59 @@
 @include('misc.createnav')
 <div class="container">
     <h3>{{$blog->title}}</h3>
-    <p>{{$blog->description}}</p>
-    type - {{$blog->type->name}}<br>
-    @if(!$blog->isHaveRelationWithUser())
-        [{{HTML::link('/blog/'.$blog->id.'/read', 'read')}}]
+    type - {{$blog->type->name}}
+    @if(!$blog->isUserHaveRole())
+        [{{HTML::link('/blog/'.$blog->id.'/read', 'читать')}}]
     @else
-        <?php $userStatus = $blog->getUserStatus();?>
-        @if($userStatus == 'read')
-            [{{HTML::link('/blog/'.$blog->id.'/reject', 'reject')}}]
-        @elseif($userStatus == 'invite')
-            [{{HTML::link('/blog/'.$blog->id.'/accept', 'accept invite')}}]
-        @elseif($userStatus == 'request')
-            [request][{{HTML::link('/blog/'.$blog->id.'/reject', 'reject')}}]
-        @elseif($userStatus == 'reject')
-            [{{HTML::link('/blog/'.$blog->id.'/refollow', 'refollow')}}]        
+        <?php $userRole = $blog->getUserRole(); ?>
+        @if($userRole == 'reader')
+            [{{HTML::link('/blog/'.$blog->id.'/reject', 'не читать')}}]
+        @elseif($userRole == 'invite')
+            [{{HTML::link('/blog/'.$blog->id.'/accept', 'принять приглашение')}}]
+        @elseif($userRole == 'request')
+            [request][{{HTML::link('/blog/'.$blog->id.'/reject', 'отменить запрос')}}]
+        @elseif($userRole == 'reject')
+            [{{HTML::link('/blog/'.$blog->id.'/refollow', 'читать')}}]        
         @endif
-        
+
         @if($blog->isAdminCurrentUser())
-            {{HTML::link('blog/edit/'.$blog->id, '[edit]')}}
+            {{HTML::link('blog/edit/'.$blog->id, '[редактировать]')}}
         @endif
     @endif
-    
-    @include('topic.build', array('topics' => $topics))
+    <br>
+    <div role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">About</a></li>
+            <li role="presentation"><a href="#admins" aria-controls="profile" role="tab" data-toggle="tab">Administrators</a></li>
+            <li role="presentation"><a href="#moderators" aria-controls="messages" role="tab" data-toggle="tab">Moderators</a></li>
+            <li role="presentation"><a href="#readers" aria-controls="settings" role="tab" data-toggle="tab">Readers</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="about">
+                {{$blog->description}}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="admins">
+                @foreach($blog->getAdmins() as $blogAdmin)
+                    {{$blogAdmin->email}},
+                @endforeach
+            </div>
+            <div role="tabpanel" class="tab-pane" id="moderators">
+                @foreach($blog->getModerators() as $blogModerator)
+                    {{$blogModerator->email}},
+                @endforeach</div>
+            <div role="tabpanel" class="tab-pane" id="readers">
+                @foreach($blog->getReaders() as $blogReader)
+                    {{$blogReader->email}},
+                @endforeach
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+    @include('topic.build', array('topics' => $topics, 'blogInfo' => false))
 </div>
 @stop

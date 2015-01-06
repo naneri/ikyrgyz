@@ -7,27 +7,35 @@
     rating - {{$topic->rating}}<br>
     <b>{{HTML::link('topic/show/'.$topic->id, $topic->title, array('id' => 'profile_link'))}}</b> <br>
     {{$topic->description}}<br>
+    
     @if ($topic->photoAlbums->count() > 0)
-    @foreach($topic->photoAlbums as $photoAlbum)
-    {{$photoAlbum->name}}<br>
-    @endforeach
+        @foreach($topic->photoAlbums as $photoAlbum)
+        {{$photoAlbum->name}}<br>
+        @endforeach
     @endif
+    
     @if ($topic->photos->count() > 0)
-    @foreach($topic->photos as $photo)
-    <img src="{{$photo->url}}" /><br>
-    @endforeach
+        @foreach($topic->photos as $photo)
+        <img src="{{$photo->url}}" /><br>
+        @endforeach
     @endif
+    
     @if ($topic->audioAlbums->count() > 0)
-    @foreach($topic->audioAlbums as $audioAlbum)
-    {{$audioAlbum->name}}<br>
-    @endforeach
+        @foreach($topic->audioAlbums as $audioAlbum)
+        {{$audioAlbum->name}}<br>
+        @endforeach
     @endif
+    
     @if ($topic->audio->count() > 0)
-    @foreach($topic->audio as $audio)
-    {{$audio->name}}<br>
-    @endforeach
+        @foreach($topic->audio as $audio)
+        {{$audio->name}}<br>
+        @endforeach
     @endif
-    blog title - {{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title)}}<br>
-    blog topics count - {{$topic->blog->topics->count()}}<br><br>
+    
+    @if($blogInfo)
+        blog title - {{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title)}}<br>
+        blog topics count - {{$topic->blog->topics->count()}}<br>
+    @endif
+    <br>
 </div>
 @endforeach
