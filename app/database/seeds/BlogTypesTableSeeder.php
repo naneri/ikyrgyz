@@ -14,15 +14,15 @@ class BlogTypesTableSeeder extends Seeder {
             $users = array(
                 array(
                     'id' => '1',
-                    'type' => 'personal'
+                    'name' => 'personal'
                 ),
                 array(
                     'id' => '2',
-                    'type' => 'open'
+                    'name' => 'open'
                 ),
                 array(
                     'id' => '3',
-                    'type' => 'close'
+                    'name' => 'close'
                 )
                 
             );

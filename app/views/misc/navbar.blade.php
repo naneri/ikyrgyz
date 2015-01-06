@@ -28,14 +28,16 @@
 		             <li class="dropdown">
 		            	<a href="" class="dropdown-toggle" data-toggle='dropdown'>Новые Сообщения<span class="caret"></span></a>
 		            	<ul class="dropdown-menu">
+                                    @if(isset($new_messages))
 		            		@foreach($new_messages as $message)
 		            		<li><a href="{{URL::to('message/show/'.$message->id)}}">{{$message->email}} | {{$message->text}}</a></li>
 		            		@endforeach
+                                    @endif
 		            	</ul>
 		            </li>
 					<li class="dropdown">
 		                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Запросы в друзья<span class="caret"></span></a>
-		                @if($friend_requests)
+		                @if(isset($friend_requests))
 							<ul class="dropdown-menu" role="menu">
 		                  		@foreach($friend_requests as $request)
 		                  			<li>{{link_to('people/submitFriend/'.$request->user_two, $request->email)}}</li>

@@ -30,7 +30,7 @@ class BlogController extends BaseController {
                 $blog = new Blog;
                 $blog->title = Input::get('title');
                 $blog->description = Input::get('description');
-                $blog->blog_type_id = Input::get('blog_type_id');
+                $blog->type_id = Input::get('type_id');
                 
                 $blog->user_id = Auth::user()->id;
                 $blog->save();
@@ -55,17 +55,113 @@ class BlogController extends BaseController {
         }
         
         public function postEdit($id){
-		$rules = Blog::$rules;
-                $validator = Validator::make(Input::all(), $rules);
+            $rules = Blog::$rules;
+            $validator = Validator::make(Input::all(), $rules);
 
-                if ($validator->fails()) {
-                    return Redirect::to('form')->withInput();
-                }
-                
-                $blog = Blog::findOrFail($id);
-                $blog->update(Input::except('_token'));
-                
-                return Redirect::to('blog/show/'.$blog->id);
+            if ($validator->fails()) {
+                return Redirect::to('form')->withInput();
+            }
+
+            $blog = Blog::findOrFail($id);
+            $blog->update(Input::except('_token'));
+
+            return Redirect::to('blog/show/'.$blog->id);
+        }
+        
+        public function getEditUsers($id){
+            $blog = Blog::findOrFail($id);
+            return View::make('blog.edit_users', array('blog' => $blog));
+        }
+        
+        public function postEditUsers($id){
+            $blog = Blog::findOrFail($id);
+            $users = Input::except('_token');
+            
+            foreach($users as $userId=>$role){
+                $roleId = Role::whereName($role)->first()->id;
+                $blogRole = BlogRole::where('blog_id', $blog->id)
+                        ->where('user_id', $userId);
+                $blogRole->update(array('role_id' => $roleId));
+            }
+            
+            return View::make('blog.edit_users', array('blog' => $blog));
+        }
+        
+        public function readBlog($id){
+            $blog = Blog::findOrFail($id);
+            
+            if($blog->isUserHaveRole()){
+                return Redirect::back()->withMessage('You are already blog follower');
+            }
+            
+            $roleId = null;
+            if($blog->type->name == 'open'){
+                $roleId = Role::whereName('reader')->pluck('id');
+            } else {
+                $roleId = Role::whereName('request')->pluck('id');
+            }
+            
+            $blogRole = new BlogRole();
+            $blogRole->blog_id = $blog->id;
+            $blogRole->user_id = Auth::user()->id;
+            $blogRole->role_id = $roleId;
+            $blogRole->save();
+            
+            return Redirect::back();
+        }
+        
+        public function rejectBlog($id){
+            $blog = Blog::findOrFail($id);
+
+            if (!$blog->isUserHaveRole()) {
+                return Redirect::back()->withMessage('You are not blog follower');
+            }
+
+            $roleId = Role::whereName('reject')->pluck('id');
+
+            $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+            $blogRole->update(array('role_id' => $roleId));
+
+            return Redirect::back();
+        }
+        
+        
+        public function acceptInviteBlog($id) {
+            $blog = Blog::findOrFail($id);
+
+            if (!$blog->isUserHaveRole()) {
+                return Redirect::back()->withMessage('You are not invited');
+            }
+
+            $roleId = Role::whereName('reader')->pluck('id');
+
+            $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+            $blogRole->update(array('role_id' => $roleId));
+
+            return Redirect::back();
+        }
+
+        public function refollowBlog($id){
+            $blog = Blog::findOrFail($id);
+
+            if (!$blog->isUserHaveRole()) {
+                return Redirect::back()->withMessage('You are not blog follower');
+            }
+
+            $roleId = null;
+            if ($blog->type->name == 'open') {
+                $roleId = Role::whereName('reader')->pluck('id');
+            } else {
+                $roleId = Role::whereName('request')->pluck('id');
+            }
+
+            $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+            $blogRole->blog_id = $blog->id;
+            $blogRole->user_id = Auth::user()->id;
+            $blogRole->role_id = $roleId;
+            $blogRole->save();
+        
+            return Redirect::back();
         }
 
 }

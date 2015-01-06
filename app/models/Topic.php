@@ -3,6 +3,8 @@
 class Topic extends Eloquent {
 	
 	protected $fillable = [];
+        
+        public static $rules = array();
 	
 	static function getSubscribedTopics($userId, $rating, $offset) {
 		return 	Topic::all();/*where('topics.rating', '>', $rating)
@@ -18,6 +20,14 @@ class Topic extends Eloquent {
         
         public function tags() {
             return $this->belongsToMany('Tag');
+        }
+        
+        public function tagsToString(){
+            $stringTags = '';
+            foreach($this->tags as $tag){
+                $stringTags .= $tag->name.', ';
+            }
+            return $stringTags;
         }
         
         public function images() {
@@ -60,4 +70,7 @@ class Topic extends Eloquent {
             return $this->belongsToMany('Audio');
         }
         
+        public function canEdit(){
+            return $this->blog->isAdminCurrentUser();
+        }
 }
