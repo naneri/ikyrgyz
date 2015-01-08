@@ -19,9 +19,10 @@
             [{{HTML::link('/blog/'.$blog->id.'/refollow', 'читать')}}]        
         @endif
 
-        @if($blog->isAdminCurrentUser())
-            {{HTML::link('blog/edit/'.$blog->id, '[редактировать]')}}
-        @endif
+    @endif
+    
+    @if($blog->canEdit())
+        [{{HTML::link('blog/edit/'.$blog->id, 'редактировать')}}]
     @endif
     <br>
     <div role="tabpanel">

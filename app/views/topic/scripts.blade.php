@@ -15,13 +15,14 @@ $(document).ready(function(){
                     language: 'ru',
                     menubar: false,
                     statusbar: false,
+                    subfolder:"{{$user->id}}",
                     plugins: [
                             "advlist autolink lists link image charmap print preview anchor",
-                            "  code ",
+                            "code filemanager",
                             "insertdatetime media table contextmenu paste youtube"
                             ],
                     image_advtab: true,
-                    toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube | preview code",
+                    toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube media | preview code",
                     setup : function(ed){
                                     ed.on('keyup', function(e) {
                                         //console.log('the content ' + ed.getContent());
