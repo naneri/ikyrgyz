@@ -16,6 +16,7 @@
 			<div class="col-md-8">
 				<div class="login-panel panel panel-default">
                     <div class="panel-heading">
+                        {{HTML::link('topic/drafts', 'Drafts ('.$user->drafts()->count().')')}}<br>
                         <h3 class="panel-title">Create Topic</h3>
                     </div>
                     <div class="panel-body">

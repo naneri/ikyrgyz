@@ -234,4 +234,8 @@ class TopicController extends BaseController {
             return Response::json(array('filelink' => $dir . $filename));
         }
 
+        public function drafts(){
+            $topics = Auth::user()->drafts();
+            return View::make('index', array('topics' => $topics));
+        }
 }

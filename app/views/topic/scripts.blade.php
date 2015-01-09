@@ -22,6 +22,8 @@ $(document).ready(function(){
                             "insertdatetime media table contextmenu paste youtube"
                             ],
                     image_advtab: true,
+                    relative_urls: false,
+                    remove_script_host: true,
                     toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube media | preview code",
                     setup : function(ed){
                                     ed.on('keyup', function(e) {
@@ -50,7 +52,8 @@ $(document).ready(function(){
         }
         
         function updateForm(){
-                        
+            
+            tinyMCE.triggerSave();
             data = $('#create-topic-form').serialize();
             
             $.ajax({

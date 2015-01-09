@@ -49,6 +49,7 @@ Route::group(array('before' => 'auth'),function(){
         });
         Route::post('topic/update', 'TopicController@update');
         Route::post('topic/store', 'TopicController@store');
+        Route::get('topic/drafts', 'TopicController@drafts');
         Route::post('upload', array('uses' => 'TopicController@uploadImage'));
         
         Route::get('people', 'PeopleController@index');

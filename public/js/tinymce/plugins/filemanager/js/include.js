@@ -129,7 +129,7 @@ function apply_none(file,type_file,external){
 function apply_img(file,type_file,external){
     if ($('#popup').val()==1) var window_parent=window.opener; else var window_parent=window.parent;
     var path = $('#cur_dir').val();
-    var base_url = $('#base_url').val();
+    var base_url = '';//$('#base_url').val();
     var track = $('#track').val();
     if (external=="") {
 	var target = window_parent.document.getElementsByClassName('mce-img_'+track);
