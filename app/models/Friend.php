@@ -139,5 +139,19 @@ class Friend extends Eloquent{
 		return true;
 	}
 
-
+	/**
+	 * Выясняет являются ли пользователи друзьями
+	 * 
+	 * @param  [type] $firstId  [description]
+	 * @param  [type] $secondId [description]
+	 * @return [type]           [description]
+	 */
+	static function checkIfFriend($firstId,$secondId){
+		$x = Friend::where('user_one', '=', $firstId)->where('user_two', '=', $secondId)->first();
+		if(isset($x->status) && ($x->status == Config::get('social.friend_status.friends'))){
+			return True;
+		}
+       		return False;
+	}
+	
 }

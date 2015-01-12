@@ -8,7 +8,9 @@
 		<div class="col-md-4">
 			{{{$user->email}}} <br>
 				@if(Auth::id() != $user->id)
-					<a href="{{URL::to('people/friendRequest/'. $user->id)}}">Стать друзьями</a>
+					@if($friend_status != True)
+						<a href="{{URL::to('people/friendRequest/'. $user->id)}}">Стать друзьями</a>
+					@endif
 				
 				<div class="login-panel panel panel-default">
 					<div class="panel-heading">

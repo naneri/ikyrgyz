@@ -10,7 +10,12 @@ class ProfileController extends BaseController {
 	 */
 	public function getShow($id){
 		$user = User::find($id);
-		return View::make('profile.show', array('user' => $user));
+		$friend_status = False;
+		if(Friend::checkIfFriend($id, Auth::id())){
+			$friend_status = True;
+		}
+
+		return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status));
 	}
 
 	/**

@@ -71,14 +71,18 @@ class AuthController extends BaseController {
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        
+        $code = str_random(60);
         $user = new User;
         $user->email    = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
-        $user->save();
-        $description = new User_Description;
-        $description->user_id = $user->id;
-        $description->save();
+        $user->activation_code = $code;
+        if($user->save()){
+            $description = new User_Description;
+            $description->user_id = $user->id;
+            $description->save();
+            
+        }
+        
         return Redirect::to('/main/index');
     }
 
