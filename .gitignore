@@ -8,3 +8,6 @@ Thumbs.db
 vendor/*
 
 tests/_output/*
+
+
+app/public/images/user/*
