@@ -15,14 +15,25 @@ class TopicCommentsController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for creating a new topiccomment
+	 * Show the form for adding a new topiccomment
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function postAdd()
 	{
-		return View::make('topiccomments.create');
-	}
+                $result = array();
+                
+		$validator = Validator::make($data = Input::all(), TopicComment::$rules);
+
+                if ($validator->fails()) {
+                    $result['error'] = $validator;
+                } else {
+                    $data['user_id'] = Auth::user()->id;
+                    $comment = Topiccomment::create($data);
+                    $result['comment'] = View::make('comments.show', array('comments' => array($comment), 'parent_id' => $data['parent_id']))->render();
+                }
+                return Response::json($result);
+        }
 
 	/**
 	 * Store a newly created topiccomment in storage.

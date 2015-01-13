@@ -52,6 +52,8 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('topic/drafts', 'TopicController@drafts');
         Route::post('upload', array('uses' => 'TopicController@uploadImage'));
         
+        Route::post('topic/comment/add', ['uses' => 'TopicCommentsController@postAdd']);
+
         Route::get('people', 'PeopleController@index');
         Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
         Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
