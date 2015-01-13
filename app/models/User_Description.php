@@ -2,6 +2,8 @@
 
 class User_Description extends Eloquent{
 
+	protected $connection = 'mysql_users';
+	
 	protected $table = 'user_description';
 
 	public $timestamps = false;

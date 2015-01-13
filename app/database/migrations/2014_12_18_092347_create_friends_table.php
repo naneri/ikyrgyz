@@ -12,7 +12,7 @@ class CreateFriendsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('friends', function(Blueprint $table)
+		Schema::connection('mysql_users')->create('friends', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('user_one')->unsigned();

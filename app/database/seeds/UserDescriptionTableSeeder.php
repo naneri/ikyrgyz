@@ -6,7 +6,7 @@ class UserDescriptionTableSeeder extends Seeder {
 
 	public function run()
 	{
-		DB::table('user_description')->delete();
+		DB::connection('mysql_users')->table('user_description')->delete();
 
 		$descriptions = array(
 			array('id' => 1),
@@ -15,7 +15,7 @@ class UserDescriptionTableSeeder extends Seeder {
 			array('id' => 4),
 			);
 
-		DB::table('user_description')->insert($descriptions);
+		User_Description::insert($descriptions);
 	}
 
 }

@@ -15,11 +15,10 @@ class CreateAudioTable extends Migration {
 		Schema::create('audio', function(Blueprint $table)
 		{
 			$table->increments('id');
-                        $table->integer('album_id')->unsigned();
-                        $table->foreign('album_id')->references('id')->on('photo_albums');
-                        $table->integer('user_id')->unsigned();
-                        $table->foreign('user_id')->references('id')->on('users');
-                        $table->string('name');
+            $table->integer('album_id')->unsigned();
+            $table->foreign('album_id')->references('id')->on('photo_albums');
+            $table->integer('user_id');
+            $table->string('name');
 			$table->string('url');
 			$table->integer('views');
 			$table->float('rating');

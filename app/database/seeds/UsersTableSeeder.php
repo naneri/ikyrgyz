@@ -6,7 +6,7 @@ class UsersTableSeeder extends Seeder{
 	public function run(){
 
 		//deletes all info
-		DB::table('users')->delete();
+		DB::connection('mysql_users')->table('users')->delete();
 
 		// the data
 		$users = array(
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder{
 		);
 
 		// inserts the data
-		DB::table('users')->insert($users);
+		User::insert($users);
 		
 	}
 

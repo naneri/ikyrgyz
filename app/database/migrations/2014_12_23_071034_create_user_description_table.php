@@ -12,7 +12,7 @@ class CreateUserDescriptionTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_description', function(Blueprint $table)
+		Schema::connection('mysql_users')->create('user_description', function(Blueprint $table)
 		{
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');

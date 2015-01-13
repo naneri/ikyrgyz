@@ -17,12 +17,12 @@ class CreateTopicCommentsTable extends Migration {
 			$table->increments('id');
 			$table->string('text');
 			$table->integer('topic_id')->unsigned();
-                        $table->foreign('topic_id')->references('id')->on('topics');
+            $table->foreign('topic_id')->references('id')->on('topics');
 			$table->integer('parent_id');
-                        $table->float('rating');
-                        $table->integer('vote_up');
-                        $table->integer('vote_down');
-                        $table->timestamps();
+            $table->float('rating');
+            $table->integer('vote_up');
+            $table->integer('vote_down');
+            $table->timestamps();
 		});
 	}
 

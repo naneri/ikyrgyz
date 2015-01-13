@@ -16,12 +16,11 @@ class CreatePhotosTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('album_id')->unsigned();
-                        $table->foreign('album_id')->references('id')->on('photo_albums');
-                        $table->integer('user_id')->unsigned();
-                        $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('album_id')->references('id')->on('photo_albums');
+            $table->integer('user_id');
 			$table->string('name');
 			$table->string('url');
-                        $table->integer('views');
+            $table->integer('views');
 			$table->float('rating');
 			$table->integer('vote_up');
 			$table->integer('vote_down');

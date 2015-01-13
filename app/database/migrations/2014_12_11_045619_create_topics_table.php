@@ -16,7 +16,7 @@ class CreateTopicsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('blog_id')->unsigned();
-			$table->integer('user_id')->unsigned();
+			$table->integer('user_id');
             $table->integer('type_id')->unsigned();
             $table->string('title', 100);
             $table->text('description');
@@ -32,7 +32,6 @@ class CreateTopicsTable extends Migration {
 		});
                 
 		Schema::table('topics', function(Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('blog_id')->references('id')->on('blogs');
             $table->foreign('type_id')->references('id')->on('topic_types');
         });

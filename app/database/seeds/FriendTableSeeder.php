@@ -6,7 +6,7 @@ class FriendTableSeeder extends Seeder {
 
 	public function run()
 	{
-		DB::table('friends')->delete();
+		DB::connection('mysql_users')->table('friends')->delete();
 
 		$friends = array(
 			array(
@@ -31,7 +31,7 @@ class FriendTableSeeder extends Seeder {
 			),
 		);
 
-		DB::table('friends')->insert($friends);
+		Friend::insert($friends);
 	}
 
 }

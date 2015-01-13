@@ -12,7 +12,7 @@ class AddActivationToUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('users', function(Blueprint $table)
+		Schema::connection('mysql_users')->table('users', function(Blueprint $table)
 		{
 			$table->string('activation_code', 255);
 			$table->integer('activated')->default(0);

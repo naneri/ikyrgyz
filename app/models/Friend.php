@@ -2,6 +2,8 @@
 
 class Friend extends Eloquent{
 
+	protected $connection = 'mysql_users';
+	
 	protected $table = 'friends';
 	public $timestamps = false;
 

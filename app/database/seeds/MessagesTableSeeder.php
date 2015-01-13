@@ -4,7 +4,7 @@ class MessagesTableSeeder extends Seeder {
 
 	public function run()
 	{
-		DB::table('messages')->delete();
+		DB::connection('mysql_users')->table('messages')->delete();
 	}
 
 }

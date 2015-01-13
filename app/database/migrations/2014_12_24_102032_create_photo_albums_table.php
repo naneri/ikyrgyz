@@ -15,14 +15,13 @@ class CreatePhotoAlbumsTable extends Migration {
 		Schema::create('photo_albums', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id')->unsigned();
-                        $table->foreign('user_id')->references('id')->on('users');
+			$table->integer('user_id');
 			$table->string('name');
 			$table->string('cover');
 			$table->integer('views');
-                        $table->float('rating');
-                        $table->integer('vote_up');
-                        $table->integer('vote_down');
+            $table->float('rating');
+            $table->integer('vote_up');
+            $table->integer('vote_down');
 			$table->timestamps();
 		});
 	}
