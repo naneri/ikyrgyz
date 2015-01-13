@@ -141,4 +141,17 @@ class TopicCommentsController extends \BaseController {
                 return Response::json($result);
        }
 
+	/**
+        * Restore the specified topiccomment from storage.
+        *
+        * @param  int  $id
+        * @return Response
+        */
+        public function showComments() {
+            $topic = Topic::findOrFail(Input::get('topic_id'));
+            $result = array();
+            $result['comments'] = View::make('comments.build', array('topic' => $topic, 'parent_id' => 0))->render();
+            return Response::json($result);
+        }
+
 }

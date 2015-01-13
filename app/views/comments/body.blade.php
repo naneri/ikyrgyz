@@ -8,7 +8,7 @@
     @endif
 @else
     {{$comment->text}}<br>
-    <a href="#" class="comment_reply" onclick="comment.addForm({{$comment->id}});return false;">Reply</a>
+    <a href="#" class="comment_reply" onclick="comment.addForm({{$comment->id}}, {{$comment->topic->id}});return false;">Reply</a>
     @if($comment->canDelete())
         <a href="#" class="comment_delete" onclick="comment.delete({{$comment->id}});return false;">Delete</a>
     @endif

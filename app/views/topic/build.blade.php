@@ -1,9 +1,9 @@
 @foreach($topics as $topic)
-<div class="item">
+<div class="item" id="topic_{{$topic->id}}">
     user email - {{$topic->user->email}}<br>
     created at - {{$topic->created_at}}<br>
     views - {{$topic->count_read}}<br>
-    comments - {{$topic->comments->count()}}<br>
+    <a href="#" onclick="comment.show({{$topic->id}});return false;">comments - {{$topic->comments->count()}}</a><br>
     rating - {{$topic->rating}}<br>
     <b>{{HTML::link('topic/show/'.$topic->id, $topic->title, array('id' => 'profile_link'))}}</b> <br>
     {{$topic->description}}<br>
@@ -37,5 +37,10 @@
         blog topics count - {{$topic->blog->topics->count()}}<br>
     @endif
     <br>
+    <div class="comments" id="topic_comments_{{$topic->id}}"></div>
+    <br>
+    <br>
 </div>
 @endforeach
+
+@include('comments.scripts')

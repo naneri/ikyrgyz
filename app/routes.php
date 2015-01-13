@@ -52,6 +52,7 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('topic/drafts', 'TopicController@drafts');
         Route::post('upload', array('uses' => 'TopicController@uploadImage'));
         
+        Route::post('topic/comments/show', ['uses' => 'TopicCommentsController@showComments']);
         Route::post('topic/comment/add', ['uses' => 'TopicCommentsController@postAdd']);
         Route::post('topic/comment/delete', ['uses' => 'TopicCommentsController@postDelete']);
         Route::post('topic/comment/restore', ['uses' => 'TopicCommentsController@postRestore']);
