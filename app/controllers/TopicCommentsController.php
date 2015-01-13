@@ -30,7 +30,7 @@ class TopicCommentsController extends \BaseController {
                 } else {
                     $data['user_id'] = Auth::user()->id;
                     $comment = Topiccomment::create($data);
-                    $result['comment'] = View::make('comments.show', array('comments' => array($comment), 'parent_id' => $data['parent_id']))->render();
+                    $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
                 }
                 return Response::json($result);
         }
@@ -108,11 +108,37 @@ class TopicCommentsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function postDelete()
 	{
-		Topiccomment::destroy($id);
-
-		return Redirect::route('topiccomments.index');
+                $result = array();
+                $comment = TopicComment::find(Input::get('comment_id'));
+                if($comment->canDelete()){
+                    $comment->trash = true;
+                    $comment->save();
+                    $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                } else {
+                    $result['error'] = "error permission!";
+                }
+                return Response::json($result);
 	}
+
+	/**
+        * Restore the specified topiccomment from storage.
+        *
+        * @param  int  $id
+        * @return Response
+        */
+       public function postRestore() {
+                $result = array();
+                $comment = TopicComment::find(Input::get('comment_id'));
+                if ($comment->canRestore()) {
+                    $comment->trash = false;
+                    $comment->save();
+                    $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                } else {
+                    $result['error'] = "error permission!";
+                }
+                return Response::json($result);
+       }
 
 }

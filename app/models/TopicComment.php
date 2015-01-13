@@ -32,4 +32,15 @@ class TopicComment extends \Eloquent {
         public function isAuthor(){
             return Auth::user()->id == $this->user->id;
         }
+        
+        public function canView(){
+            return
+                !$this->trash ||
+                Auth::user()->id == $this->user->id ||
+                $this->topic->blog->isModeratorCurrentUser();
+        }
+        
+        public function canRestore(){
+            return $this->canDelete();
+        }
 }

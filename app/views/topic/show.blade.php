@@ -10,11 +10,10 @@
             {{HTML::link('topic/edit/'.$topic->id, '[Редактировать]')}}
         @endif
         @include('topic.build', array('topics' => array($topic), 'blogInfo' => true))
-
-        <a href="#" onclick="comment.addForm(0)">Add comment</a>
-        <div class="comment_body" id="comment_body_0"></div>
-        @include('comments.show', array('comments' => $topic->comments, 'parent_id' => 0))
-        @include('comments.scripts')
+        <div class="comments" id="comments">
+            @include('comments.build', array('comments' => $topic->comments, 'parent_id' => 0, 'with_child' => true))
+            @include('comments.scripts')
+        </div>
     </div>
 
 @stop
