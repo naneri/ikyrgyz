@@ -16,7 +16,7 @@ class CreateTopicCommentsTable extends Migration {
             $table->string('text');
             $table->integer('topic_id')->unsigned();
             $table->foreign('topic_id')->references('id')->on('topics');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id');
             $table->integer('parent_id');
             $table->boolean('trash');
             $table->float('rating');

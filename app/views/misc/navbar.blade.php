@@ -46,7 +46,13 @@
 		                @endif
 		            </li>
 
-		            <li><a href="{{URL::to('people')}}">{{trans('network.search_friends')}}</a></li>
+		            
+
+		            
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{{URL::to('people')}}">{{trans('network.search_friends')}}</a></li>
 
 		            <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Энциклопедия<span class="caret"></span></a>
@@ -65,8 +71,7 @@
                             <li><a href="{{URL::to('custom/action_history')}}">История действий</a></li>
                         </ul>
                     </li>
-
-		            <li><a href="{{URL::to('logout')}}">{{trans('network.logout')}}</a></li>
+					<li><a href="{{URL::to('logout')}}">{{trans('network.logout')}}</a></li>
 				</ul>
 			</div>
 		</div>
