@@ -64,18 +64,31 @@ class AuthController extends BaseController {
      * @return [type] [description]
      */
     public function postRegister(){
-        $rules = User::$rules;
-        
-        $validator = Validator::make(Input::all(), $rules);
 
+        // вытаскиваем правила для валидации
+        $rules = User::$rules;
+
+        // указываем валидатору какую БД использовать 
+        $verifier = App::make('validation.presence');
+        $verifier->setConnection('mysql_users');
+        $validator = Validator::make(Input::all(), $rules);
+        $validator->setPresenceVerifier($verifier);
+
+        // проводим валидацию
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
+
+        // генерируем код для активации пользователя
         $code = str_random(60);
+
+        // создаём нового юзера и сохраняем данные
         $user = new User;
         $user->email    = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
         $user->activation_code = $code;
+
+        // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
         if($user->save()){
             $description = new User_Description;
             $description->user_id = $user->id;
@@ -84,6 +97,14 @@ class AuthController extends BaseController {
         }
         
         return Redirect::to('/main/index');
+    }
+
+
+    public function getActivate($code){
+        if(User::activate($code)){
+            return Redirect::to('/login');
+        }
+        return Redirect::route('404');
     }
 
 }

@@ -17,7 +17,7 @@ Route::get('login', 'AuthController@getLogin');
 Route::post('login', 'AuthController@postLogin');
 Route::get('register', 'AuthController@getRegister');
 Route::post('register', 'AuthController@postRegister');
-
+Route::get('activate/{code}', 'AuthController@getActivate');
 
 Route::group(array('before' => 'auth'),function(){    
 	Route::get('main/index','MainController@index');        
@@ -77,6 +77,10 @@ Route::group(array('before' => 'auth'),function(){
         Route::resource('photos', 'PhotosController');
         
 	Route::get('logout', 'AuthController@logout');
+
+    if(Request::ajax()){
+        Route::post('changeUserRating', 'RatingController@changeUserRating');
+    }
 });
 
 Route::filter('blog_edit_permission', function($route){

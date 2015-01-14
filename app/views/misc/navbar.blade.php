@@ -77,10 +77,10 @@
 		</div>
 	</nav>
 
-	<div class="container">
-		<div class="col-md-12">
-			{{Session::get('message')}}<br>
-		</div>
-	</div>
-
 @endif
+
+<div class="container">
+	<div class="col-md-12">
+		{{Session::get('message')}}<br>
+	</div>
+</div>
