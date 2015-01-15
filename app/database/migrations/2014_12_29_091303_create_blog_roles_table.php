@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateBlogRoleTable extends Migration {
+class CreateBlogRolesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,15 @@ class CreateBlogRoleTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('blog_role', function(Blueprint $table)
+		Schema::create('blog_roles', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('blog_id')->unsigned();
 			$table->foreign('blog_id')->references('id')->on('blogs');
 			$table->integer('role_id')->unsigned();
 			$table->foreign('role_id')->references('id')->on('roles');
-            $table->integer('user_id');
-            $table->timestamps();
+                        $table->integer('user_id');
+                        $table->timestamps();
 		});
 	}
 
@@ -32,7 +32,7 @@ class CreateBlogRoleTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('blog_role');
+		Schema::drop('blog_roles');
 	}
 
 }

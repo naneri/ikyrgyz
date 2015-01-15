@@ -12,5 +12,5 @@
     <div class="add_comment" id="comment_0">
         <a href="#" onclick="comment.addForm(0, {{$topic->id}})">Add comment</a>
         <div class="comment_body" id="comment_body_0"></div>
-    </div>
+    </div><br>
 @endif

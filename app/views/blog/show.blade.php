@@ -32,7 +32,7 @@
             <li role="presentation" class="active"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">About</a></li>
             <li role="presentation"><a href="#admins" aria-controls="profile" role="tab" data-toggle="tab">Administrators</a></li>
             <li role="presentation"><a href="#moderators" aria-controls="messages" role="tab" data-toggle="tab">Moderators</a></li>
-            <li role="presentation"><a href="#readers" aria-controls="settings" role="tab" data-toggle="tab">Readers</a></li>
+            <li role="presentation"><a href="#readers" aria-controls="readers" role="tab" data-toggle="tab">Readers</a></li>
         </ul>
 
         <!-- Tab panes -->

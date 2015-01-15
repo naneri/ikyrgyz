@@ -5,7 +5,7 @@
     views - {{$topic->count_read}}<br>
     <a href="#" onclick="comment.show({{$topic->id}});return false;">comments - {{$topic->comments->count()}}</a><br>
     rating - {{$topic->rating}}<br>
-    <b>{{HTML::link('topic/show/'.$topic->id, $topic->title, array('id' => 'profile_link'))}}</b> <br>
+    <b>{{$topic->title}}</b> <br>
     {{$topic->description}}<br>
     
     @if ($topic->photoAlbums->count() > 0)
@@ -37,7 +37,7 @@
         blog topics count - {{$topic->blog->topics->count()}}<br>
     @endif
     <br>
-    <div class="comments" id="topic_comments_{{$topic->id}}"></div>
+    {{HTML::link('topic/show/'.$topic->id, 'Подробнее', array('id' => 'profile_link'))}}
     <br>
     <br>
 </div>
