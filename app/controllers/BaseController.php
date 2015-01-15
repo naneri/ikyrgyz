@@ -26,7 +26,9 @@ class BaseController extends Controller {
 			$new_messages = Message::where('receiver_id', '=', Auth::id())->where('watched', '=', 0)->join('users', 'messages.sender_id', '=', 'users.id')->get();
 			View::share('new_messages', $new_messages);
 
-			
+			$user_data = User::where('id', '=', Auth::id());
+
+
 		}
 
 

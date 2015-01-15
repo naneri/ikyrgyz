@@ -29,7 +29,8 @@ $env = $app->detectEnvironment(array(
 	'local' => array('homestead'),
     'beks'  => array('beks'),
     'kana'  => array('kana'),
-    'respect' => array('respect'),
+    'respect' => array('respect'), 
+    'team1' => array('team1'), //devzone hosting
 ));
 
 /*

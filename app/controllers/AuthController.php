@@ -93,13 +93,24 @@ class AuthController extends BaseController {
             $description = new User_Description;
             $description->user_id = $user->id;
             $description->save();
-            
+
+
+           Mail::send('emails.activate', array('user' => $user), function($message)
+            {
+                $message->to(Input::get('email'))->subject('Welcome!');
+            });
         }
         
         return Redirect::to('/main/index');
     }
 
 
+    /**
+     * Активируем учётную запись пользователя
+     * 
+     * @param  [type] $code [description]
+     * @return [type]       [description]
+     */
     public function getActivate($code){
         if(User::activate($code)){
             return Redirect::to('/login');
