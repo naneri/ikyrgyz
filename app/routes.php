@@ -58,6 +58,7 @@ Route::group(array('before' => 'auth'),function(){
         Route::post('topic/comment/restore', ['uses' => 'TopicCommentsController@postRestore']);
         
         Route::post('vote/comment', ['uses' => 'VoteController@postVoteComment']);
+        Route::post('vote/topic', ['uses' => 'VoteController@postVoteTopic']);
 
         Route::get('people', 'PeopleController@index');
         Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');

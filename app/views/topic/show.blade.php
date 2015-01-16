@@ -13,7 +13,10 @@
             created at - {{$topic->created_at}}<br>
             views - {{$topic->count_read}}<br>
             <a href="#" onclick="comment.show({{$topic->id}});return false;">comments - {{$topic->comments->count()}}</a><br>
-            rating - {{$topic->rating}}<br>
+            rating - 
+            <a href="#" class="comment_vote_up" onclick="topic.vote({{$topic->id}}, 1);return false;">UP</a>
+            <span class="rating">{{$topic->rating}}</span>
+            <a href="#" class="comment_vote_down" onclick="topic.vote({{$topic->id}}, -1);return false;">DOWN</a><br>
             <b>{{$topic->title}}</b> <br>
             {{$topic->description}}<br>
 
@@ -54,3 +57,5 @@
     </div>
 
 @stop
+
+@include('topic.scripts-ajax')
