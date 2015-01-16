@@ -73,7 +73,7 @@
                 });
             },
             show: function(topicId){
-                var $commentsBox = $('#topic_comments_' + topicId);
+                var $topicBox = $('#topic_' + topicId);
                 if($topicBox.find('#comments').length) {
                     comment.scroll(topicId);
                 } else {
@@ -97,6 +97,22 @@
                 $('html, body').animate({
                     scrollTop: parseInt($('#topic_' + topicId).find('#comments').offset().top - 100)
                 }, 1000);
+            },
+            vote: function(commentId, value){
+                $commentBox = $('#comment_body_'+commentId);
+                $.ajax({
+                    method: "POST",
+                    url: "{{$base_config['base_url']}}/vote/comment",
+                    data: {
+                        'comment_id': commentId,
+                        'value': value
+                    },
+                    success: function($result) {
+                        if (!$result['error'] && $result['rating']) {
+                            $commentBox.find('.rating').html($result.rating);
+                        }
+                    }
+                });
             }
         };
 </script>

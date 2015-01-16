@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->integer('is_admin')->nullable();
 			$table->float('rating')->default(0);
+                        $table->float('skill')->default(0);
 			$table->rememberToken();
 			$table->timestamps();
 		});

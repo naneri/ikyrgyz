@@ -56,6 +56,8 @@ Route::group(array('before' => 'auth'),function(){
         Route::post('topic/comment/add', ['uses' => 'TopicCommentsController@postAdd']);
         Route::post('topic/comment/delete', ['uses' => 'TopicCommentsController@postDelete']);
         Route::post('topic/comment/restore', ['uses' => 'TopicCommentsController@postRestore']);
+        
+        Route::post('vote/comment', ['uses' => 'VoteController@postVoteComment']);
 
         Route::get('people', 'PeopleController@index');
         Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
