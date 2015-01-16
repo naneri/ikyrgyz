@@ -14,8 +14,7 @@ Class Blog extends Eloquent{
             return $this->belongsTo('BlogType');
         }
         
-        public function topics()
-        {
+        public function topics(){
             return $this->hasMany('Topic');
         }
         
@@ -32,7 +31,7 @@ Class Blog extends Eloquent{
         }
         
         private function checkRole($userId, $roleId){
-            return DB::table('blog_role')
+            return DB::table('blog_roles')
                 ->where('role_id', $roleId)
                 ->where('blog_id', $this->id)
                 ->where('user_id', $userId)
@@ -49,29 +48,20 @@ Class Blog extends Eloquent{
             return $canEdit;
         }
         
-        public function getBlogUsers(){
-            return User::join('blog_role', 'users.id', '=', 'blog_role.user_id')
-                    ->join('roles', 'roles.id', '=', 'blog_role.role_id')
-                    ->where('blog_role.blog_id', $this->id)
-                    ->select('users.*')
-                    ->get();                    
-        }
-        
         public function isUserHaveRole(){
-            return BlogRole::where('blog_role.blog_id', $this->id)
+            return BlogRole::where('blog_roles.blog_id', $this->id)
                     ->where('user_id', Auth::user()->id)
                     ->exists();
         }
         
-        public function getUserRole(){
-            return BlogRole::join('roles', 'roles.id', '=', 'blog_role.role_id')
-                    ->where('blog_role.blog_id', $this->id)
-                    ->where('user_id', Auth::user()->id)
-                    ->pluck('name');
+        public function getCreator(){
+            return User::whereId($this->user_id)->first();
         }
         
         public function getAdmins(){
-            return $this->getUsersWithRole('admin');
+            $admins = $this->getUsersWithRole('admin');
+            $admins[] = $this->getCreator();
+            return $admins;
         }
         
         public function getModerators(){
@@ -83,13 +73,14 @@ Class Blog extends Eloquent{
         }
         
         private function getUsersWithRole($roleName){
-            if(Role::whereName($roleName)->exists()){
-                return User::join('blog_role', 'users.id', '=', 'blog_role.user_id')
-                            ->join('roles', 'roles.id', '=', 'blog_role.role_id')
-                            ->where('blog_role.blog_id', $this->id)
-                            ->where('roles.name', $roleName)
-                            ->get();
-            }
+            $users = array();
+            $userIds = BlogRole::join('roles', 'roles.id', '=', 'blog_roles.role_id')
+                    ->where('blog_roles.blog_id', $this->id)
+                    ->where('roles.name', $roleName)
+                    ->lists('blog_roles.user_id');
+            if(count($userIds)>0)
+                $users = User::whereIn('id', $userIds)->get();
+            return $users;
         }
         
         public function isAdmin($userId){

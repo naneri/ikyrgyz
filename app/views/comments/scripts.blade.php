@@ -74,21 +74,29 @@
             },
             show: function(topicId){
                 var $commentsBox = $('#topic_comments_' + topicId);
-                $.ajax({
-                    method: "POST",
-                    url: "{{$base_config['base_url']}}/topic/comments/show",
-                    data: {
-                        'topic_id': topicId
-                    },
-                    success: function($result) {
-                        if (!$result['error'] && $result['comments']) {
-                            $commentsBox.html($result.comments);
-                            $('html, body').animate({
-                                scrollTop: parseInt($("#topic_comments_" + topicId).offset().top - 100)
-                            }, 1000);
+                if($topicBox.find('#comments').length) {
+                    comment.scroll(topicId);
+                } else {
+                    $.ajax({
+                        method: "POST",
+                        url: "{{$base_config['base_url']}}/topic/comments/show",
+                        data: {
+                            'topic_id': topicId
+                        },
+                        success: function($result) {
+                            if (!$result['error'] && $result['comments']) {
+                                var commentsBox = '<div class= "comments" id = "comments">' + $result.comments + '</div>';
+                                $topicBox.append(commentsBox);
+                                comment.scroll(topicId);
+                            }
                         }
-                    }
-                });
+                    });
+                }
+            },
+            scroll: function(topicId) {
+                $('html, body').animate({
+                    scrollTop: parseInt($('#topic_' + topicId).find('#comments').offset().top - 100)
+                }, 1000);
             }
         };
 </script>
