@@ -29,6 +29,9 @@ class BaseController extends Controller {
 			$user_data = User::where('id', '=', Auth::id());
 
 
+			$base_config = array('base_url' => URL::to('/'));
+			View::share('base_config', $base_config);
+
 		}
 
 

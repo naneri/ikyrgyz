@@ -4,7 +4,7 @@
                 var $commentBody = $('#comment_body_' + commentId);
                 $.ajax({
                     method:"POST",
-                    url:"/topic/comment/delete",
+                    url:"{{$base_config['base_url']}}/topic/comment/delete",
                     data: {
                         'comment_id': commentId
                     },
@@ -38,7 +38,7 @@
                 var $commentBody = $('#topic_'+topicId+' #comment_body_' + commentId);
                 $.ajax({
                     method: "POST",
-                    url: "/topic/comment/add",
+                    url: "{{$base_config['base_url']}}/topic/comment/add",
                     data: {
                         'text': $commentBody.find('.comment_text').val(),
                         'parent_id': commentId,
@@ -61,7 +61,7 @@
                 var $commentBody = $('#comment_body_' + commentId);
                 $.ajax({
                     method: "POST",
-                    url: "/topic/comment/restore",
+                    url: "{{$base_config['base_url']}}/topic/comment/restore",
                     data: {
                         'comment_id': commentId
                     },
@@ -76,7 +76,7 @@
                 var $commentsBox = $('#topic_comments_' + topicId);
                 $.ajax({
                     method: "POST",
-                    url: "/topic/comments/show",
+                    url: "{{$base_config['base_url']}}/topic/comments/show",
                     data: {
                         'topic_id': topicId
                     },
