@@ -19,9 +19,9 @@ class CreatePhotoAlbumsTable extends Migration {
 			$table->string('name');
 			$table->string('cover');
 			$table->integer('views');
-            $table->float('rating');
-            $table->integer('vote_up');
-            $table->integer('vote_down');
+                        $table->float('rating', 9, 3)->default(0);
+                        $table->integer('vote_up');
+                        $table->integer('vote_down');
 			$table->timestamps();
 		});
 	}

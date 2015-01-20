@@ -14,26 +14,26 @@ class CreateTopicsTable extends Migration {
 	{
 		Schema::create('topics', function(Blueprint $table)
 		{
-			$table->increments('id');
-			$table->integer('blog_id')->unsigned();
-			$table->integer('user_id');
-            $table->integer('type_id')->unsigned();
-            $table->string('title', 100);
-            $table->text('description');
-            $table->integer('admin_banned')->default(0);
-			$table->integer('draft')->default(0);
-            $table->float('rating')->default(0);
-            $table->integer('vote_up')->default(0);
-			$table->integer('vote_down')->default(0);
-			$table->integer('count_read')->default(0);
-			$table->integer('count_comment')->default(0);
-			$table->integer('count_favorite')->default(0);
-			$table->timestamps();
+                    $table->increments('id');
+                    $table->integer('blog_id')->unsigned();
+                    $table->integer('user_id');
+                    $table->integer('type_id')->unsigned();
+                    $table->string('title', 100);
+                    $table->text('description');
+                    $table->integer('admin_banned')->default(0);
+                    $table->integer('draft')->default(0);
+                    $table->float('rating', 9, 3)->default(0);
+                    $table->integer('vote_up')->default(0);
+                    $table->integer('vote_down')->default(0);
+                    $table->integer('count_read')->default(0);
+                    $table->integer('count_comment')->default(0);
+                    $table->integer('count_favorite')->default(0);
+                    $table->timestamps();
 		});
                 
 		Schema::table('topics', function(Blueprint $table) {
-            $table->foreign('blog_id')->references('id')->on('blogs');
-            $table->foreign('type_id')->references('id')->on('topic_types');
+                $table->foreign('blog_id')->references('id')->on('blogs');
+                $table->foreign('type_id')->references('id')->on('topic_types');
         });
     }
 

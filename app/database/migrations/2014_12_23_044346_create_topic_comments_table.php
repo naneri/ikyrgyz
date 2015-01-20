@@ -19,7 +19,7 @@ class CreateTopicCommentsTable extends Migration {
             $table->integer('user_id');
             $table->integer('parent_id');
             $table->boolean('trash');
-            $table->float('rating')->default(0);
+            $table->float('rating', 9, 3)->default(0);
             $table->integer('vote_up');
             $table->integer('vote_down');
             $table->timestamps();

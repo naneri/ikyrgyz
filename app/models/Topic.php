@@ -73,4 +73,28 @@ class Topic extends Eloquent {
         public function canEdit(){
             return $this->blog->isAdminCurrentUser();
         }
+        
+        public function vote($iValue){
+            /**
+             * Устанавливаем рейтинг топика
+             */
+            $skill = Auth::user()->skill;
+            $iDeltaRating = $iValue;
+            if ($skill >= 100 and $skill < 250) {
+                $iDeltaRating = $iValue * 2;
+            } elseif ($skill >= 250 and $skill < 400) {
+                $iDeltaRating = $iValue * 3;
+            } elseif ($skill >= 400) {
+                $iDeltaRating = $iValue * 4;
+            }
+            $this->rating += $iDeltaRating;
+
+            if ($iValue == 1) {
+                $this->increment('vote_up');
+            } elseif ($iValue == -1) {
+                $this->increment('vote_down');
+            }
+            
+            return $iDeltaRating;
+        }
 }

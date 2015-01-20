@@ -43,4 +43,14 @@ class TopicComment extends \Eloquent {
         public function canRestore(){
             return $this->canDelete();
         }
+        
+        public function vote($iValue){
+            $this->rating += $iValue;
+            if ($iValue == 1) {
+                $this->increment('vote_up');
+            } elseif ($iValue == -1) {
+                $this->increment('vote_down');
+            }
+            return $iValue;
+        }
 }
