@@ -14,9 +14,9 @@
             views - {{$topic->count_read}}<br>
             <a href="#" onclick="comment.show({{$topic->id}});return false;">comments - {{$topic->comments->count()}}</a><br>
             rating - 
-            <a href="#" class="comment_vote_up" onclick="topic.vote({{$topic->id}}, 1);return false;">UP</a>
+            <a href="#" class="comment_vote_up" onclick="vote.topic({{$topic->id}}, 1);return false;">UP</a>
             <span class="rating">{{$topic->rating}}</span>
-            <a href="#" class="comment_vote_down" onclick="topic.vote({{$topic->id}}, -1);return false;">DOWN</a><br>
+            <a href="#" class="comment_vote_down" onclick="vote.topic({{$topic->id}}, -1);return false;">DOWN</a><br>
             <b>{{$topic->title}}</b> <br>
             {{$topic->description}}<br>
 

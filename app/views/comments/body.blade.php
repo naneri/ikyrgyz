@@ -8,9 +8,9 @@
     @endif
 @else
     {{$comment->text}}
-    <a href="#" class="comment_vote_up" onclick="comment.vote({{$comment->id}}, 1);return false;">UP</a>
+    <a href="#" class="comment_vote_up" onclick="vote.comment({{$comment->id}}, 1);return false;">UP</a>
     <span class="rating">{{$comment->rating}}</span>
-    <a href="#" class="comment_vote_down" onclick="comment.vote({{$comment->id}}, -1);return false;">DOWN</a><br>
+    <a href="#" class="comment_vote_down" onclick="vote.comment({{$comment->id}}, -1);return false;">DOWN</a><br>
     <a href="#" class="comment_reply" onclick="comment.addForm({{$comment->id}}, {{$comment->topic->id}});return false;">Reply</a>
     @if($comment->canDelete())
         <a href="#" class="comment_delete" onclick="comment.delete({{$comment->id}});return false;">Delete</a>
