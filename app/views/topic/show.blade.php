@@ -15,7 +15,7 @@
             <a href="#" onclick="comment.show({{$topic->id}});return false;">comments - {{$topic->comments->count()}}</a><br>
             rating - 
             <a href="#" class="comment_vote_up" onclick="vote.topic({{$topic->id}}, 1);return false;">UP</a>
-            <span class="rating">{{$topic->rating}}</span>
+            <span class="rating" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
             <a href="#" class="comment_vote_down" onclick="vote.topic({{$topic->id}}, -1);return false;">DOWN</a><br>
             <b>{{$topic->title}}</b> <br>
             {{$topic->description}}<br>
@@ -57,5 +57,3 @@
     </div>
 
 @stop
-
-@include('topic.scripts-ajax')

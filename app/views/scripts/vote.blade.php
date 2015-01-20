@@ -1,65 +1,66 @@
 <script>
+    var voteUrl = "{{$base_config['base_url']}}/vote/";
     var vote = {
         topic: function(topicId, value) {
-            $topicBox = $('#topic_' + topicId);
+            $rating = $('#rating_topic_' + topicId);
             $.ajax({
                 method: "POST",
-                url: "{{$base_config['base_url']}}/vote/topic",
+                url: voteUrl+"topic",
                 data: {
                     'topic_id': topicId,
                     'value': value
                 },
                 success: function($result) {
                     if (!$result['error'] && $result['rating']) {
-                        $topicBox.find('.rating').html($result.rating);
+                        $rating.html($result.rating);
                     }
                 }
             });
         },
         comment: function(commentId, value){
-            $commentBox = $('#comment_body_' + commentId);
+            $rating = $('#rating_comment_' + commentId);
             $.ajax({
                 method: "POST",
-                url: "{{$base_config['base_url']}}/vote/comment",
+                url: voteUrl+"comment",
                 data: {
                     'comment_id': commentId,
                     'value': value
                 },
                 success: function($result) {
                     if (!$result['error'] && $result['rating']) {
-                        $commentBox.find('.rating').html($result.rating);
+                        $rating.html($result.rating);
                     }
                 }
             });
         },
         blog: function(blogId, value) {
-            $blogBox = $('#blog_' + blogId);
+            $rating = $('#rating_blog_' + blogId);
             $.ajax({
                 method: "POST",
-                url: "{{$base_config['base_url']}}/vote/blog",
+                url: voteUrl+"blog",
                 data: {
                     'blog_id': blogId,
                     'value': value
                 },
                 success: function($result) {
                     if (!$result['error'] && $result['rating']) {
-                        $blogBox.find('.rating').html($result.rating);
+                        $rating.html($result.rating);
                     }
                 }
             });
         },
         user: function(userId, value) {
-            $userBox = $('#user_' + userId);
+            $rating = $('#rating_user_' + userId);
             $.ajax({
                 method: "POST",
-                url: "{{$base_config['base_url']}}/vote/user",
+                url: voteUrl+"user",
                 data: {
                     'user_id': userId,
                     'value': value
                 },
                 success: function($result) {
                     if (!$result['error'] && $result['rating']) {
-                        $userBox.find('.rating').html($result.rating);
+                        $rating.html($result.rating);
                     }
                 }
             });

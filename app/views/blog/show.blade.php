@@ -6,7 +6,7 @@
     <h3>{{$blog->title}}</h3><br>
     rating - 
     <a href="#" class="blog_vote_up" onclick="vote.blog({{$blog->id}}, 1);return false;">UP</a>
-    <span class="rating">{{$blog->rating}}</span>
+    <span class="rating" id="rating_blog_{{$blog->id}}">{{$blog->rating}}</span>
     <a href="#" class="blog_vote_down" onclick="vote.blog({{$blog->id}}, -1);return false;">DOWN</a><br>
     type - {{$blog->type->name}}
     @if(!$blog->isUserHaveRole())

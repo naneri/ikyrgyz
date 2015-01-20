@@ -9,7 +9,7 @@
 @else
     {{$comment->text}}
     <a href="#" class="comment_vote_up" onclick="vote.comment({{$comment->id}}, 1);return false;">UP</a>
-    <span class="rating">{{$comment->rating}}</span>
+    <span class="rating" id="rating_comment_{{$comment->id}}">{{$comment->rating}}</span>
     <a href="#" class="comment_vote_down" onclick="vote.comment({{$comment->id}}, -1);return false;">DOWN</a><br>
     <a href="#" class="comment_reply" onclick="comment.addForm({{$comment->id}}, {{$comment->topic->id}});return false;">Reply</a>
     @if($comment->canDelete())
