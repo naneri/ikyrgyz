@@ -30,12 +30,11 @@ class BaseController extends Controller {
 			$user_data = User::with('description')->find(Auth::id());
 			View::share('user_data', $user_data);
 
-			// отправляет в шаблон базовый УРЛ сайта
-			$base_config = array('base_url' => URL::to('/'));
-			View::share('base_config', $base_config);
-
 		}
-
+		
+		// отправляет в шаблон базовый УРЛ сайта
+		$base_config = array('base_url' => URL::to('/'));
+		View::share('base_config', $base_config);
 
 
 	}

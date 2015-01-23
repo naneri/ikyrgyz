@@ -11,3 +11,4 @@ tests/_output/*
 
 
 app/public/images/user/*
+/nbproject/private/
