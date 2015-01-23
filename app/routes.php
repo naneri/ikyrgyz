@@ -60,6 +60,8 @@ Route::group(array('before' => 'auth'),function(){
         
         Route::post('vote/comment', ['uses' => 'VoteController@postVoteComment']);
         Route::post('vote/topic', ['uses' => 'VoteController@postVoteTopic']);
+        Route::post('vote/blog', ['uses' => 'VoteController@postVoteBlog']);
+        Route::post('vote/user', ['uses' => 'VoteController@postVoteUser']);
 
         Route::get('people', 'PeopleController@index');
         Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');

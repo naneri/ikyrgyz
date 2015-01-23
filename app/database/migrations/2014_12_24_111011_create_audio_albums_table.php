@@ -17,9 +17,9 @@ class CreateAudioAlbumsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id');
 			$table->string('name');
-            $table->string('cover');
+                        $table->string('cover');
 			$table->integer('views');
-			$table->float('rating');
+			$table->float('rating', 9, 3)->default(0);
 			$table->integer('vote_up');
 			$table->integer('vote_down');
 			$table->timestamps();

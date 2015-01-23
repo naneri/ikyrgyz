@@ -22,10 +22,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         
         
 	// Add your validation rules here
-    public static $rules = [
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|alpha_num|between:4,50'
-    ];
+        public static $rules = [
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|alpha_num|between:4,50'
+        ];
 
         /**
 	 * The attributes excluded from the model's JSON form.
@@ -75,33 +75,63 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->get();
     }
 
-    /**
-     * Активируем учётку пользователя
-     * 
-     * @param  [type] $code [description]
-     * @return [type]       [description]
-     */
-    public static function activate($code){
+        /**
+         * Активируем учётку пользователя
+         * 
+         * @param  [type] $code [description]
+         * @return [type]       [description]
+         */
+        public static function activate($code){
 
-        // gets the user with activation code
-        $user = User::where('activation_code', '=', $code)->first();
+            // gets the user with activation code
+            $user = User::where('activation_code', '=', $code)->first();
 
-        // if no user has been found returns False statement
-        if(!$user){
-            return False;
-        }
+            // if no user has been found returns False statement
+            if(!$user){
+                return False;
+            }
 
-        // checks if user has already been activated
-        if($user->activated === 1){
-            Session::flash('message', 'Your account has already been activated!'); 
+            // checks if user has already been activated
+            if($user->activated === 1){
+                Session::flash('message', 'Your account has already been activated!'); 
+                return True;
+            }
+
+            //  if no, then activates the user
+            $user->activated = 1;
+            $user->save();
+            Session::flash('message', 'Your account has been activated successfully! You can now log in'); 
             return True;
         }
-
-        //  if no, then activates the user
-        $user->activated = 1;
-        $user->save();
-        Session::flash('message', 'Your account has been activated successfully! You can now log in'); 
-        return True;
-    }
+    
+        public function vote($iValue){
+            /**
+             * Начисляем силу и рейтинг юзеру, используя логарифмическое распределение
+             */
+            $skill = Auth::user()->skill;
+            $iMinSize = 0.42;
+            $iMaxSize = 3.2;
+            $iSizeRange = $iMaxSize - $iMinSize;
+            $iMinCount = log(0 + 1);
+            $iMaxCount = log(500 + 1);
+            $iCountRange = $iMaxCount - $iMinCount;
+            if ($iCountRange == 0) {
+                $iCountRange = 1;
+            }
+            if ($skill > 50 and $skill < 200) {
+                $skill_new = $skill / 40;
+            } elseif ($skill >= 200) {
+                $skill_new = $skill / 2;
+            } else {
+                $skill_new = $skill / 70;
+            }
+            $iDelta = $iMinSize + (log($skill_new + 1) - $iMinCount) * ($iSizeRange / $iCountRange);
+            /**
+             * Определяем новый рейтинг
+             */
+            $iNewRating = $iValue * $iDelta;
+            $this->rating += $iNewRating;
+            return $iNewRating;
+        }
 
 }

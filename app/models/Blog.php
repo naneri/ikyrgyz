@@ -103,4 +103,34 @@ Class Blog extends Eloquent{
             return $this->checkRole($userId, $bannedRoleId);
         }
 
+        public function vote($iValue) {
+            /**
+             * Устанавливаем рейтинг блога, используя логарифмическое распределение
+             */
+            $skill = Auth::user()->skill;
+            $iMinSize = 1.13;
+            $iMaxSize = 15;
+            $iSizeRange = $iMaxSize - $iMinSize;
+            $iMinCount = log(0 + 1);
+            $iMaxCount = log(500 + 1);
+            $iCountRange = $iMaxCount - $iMinCount;
+            if ($iCountRange == 0) {
+                $iCountRange = 1;
+            }
+            if ($skill > 50 and $skill < 200) {
+                $skill_new = $skill / 20;
+            } elseif ($skill >= 200) {
+                $skill_new = $skill / 10;
+            } else {
+                $skill_new = $skill / 50;
+            }
+            $iDelta = $iMinSize + (log($skill_new + 1) - $iMinCount) * ($iSizeRange / $iCountRange);
+            /**
+             * Сохраняем рейтинг
+             */
+            $iNewRating = $iValue * $iDelta;
+            $this->rating += $iNewRating;
+            return $iNewRating;
+        }
+
 }
