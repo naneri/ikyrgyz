@@ -12,6 +12,17 @@ class User_Description extends Eloquent{
 
 	public $timestamps = false;
 
+	// обновление дополнительных данных пользователя.
+	static function update_data($data){
+		if(Input::file('image')){
+			$data['user_profile_avatar'] = User_Description::saveAvatar();
+		}
+		$description = User_Description::where('user_id', Auth::id())->update($data);
+
+		return True;
+	}
+
+	// сохранение аватарки пользователя.
 	static function saveAvatar(){
 		$file = Input::file('image');
 		$destinationPath = 'images/user/' . Auth::id();
@@ -22,6 +33,12 @@ class User_Description extends Eloquent{
 		$fileName = time() . rand(1,100) .'.' . $extension;
 		$file->move($destinationPath, $fileName);
 		$avapath = URL::to('/') . '/' . $destinationPath .'/'. $fileName;
-		$description = User_Description::where('user_id', Auth::id())->update(array('user_profile_avatar' => $avapath));
+		return $avapath;
 	}
+
+	public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
 }

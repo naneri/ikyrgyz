@@ -26,9 +26,11 @@ class BaseController extends Controller {
 			$new_messages = Message::where('receiver_id', '=', Auth::id())->where('watched', '=', 0)->join('users', 'messages.sender_id', '=', 'users.id')->get();
 			View::share('new_messages', $new_messages);
 
-			$user_data = User::where('id', '=', Auth::id());
+			// Отправляет в шаблон данные о пользователе
+			$user_data = User::with('description')->find(Auth::id());
+			View::share('user_data', $user_data);
 
-
+			// отправляет в шаблон базовый УРЛ сайта
 			$base_config = array('base_url' => URL::to('/'));
 			View::share('base_config', $base_config);
 

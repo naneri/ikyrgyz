@@ -5,7 +5,13 @@
         <div class="b-header__menu"><a href="#">&#9776;</a></div>
         <div class="b-header__navigation">
           <ul class="menu dropit">
-            <li class="dropit-trigger dropit-open"><a href="#"><img src="{{URL::to('/img')}}/content/user-name.png" alt=""/><span>Имя пользователя</span></a>
+            <li class="dropit-trigger dropit-open"><a href="#">
+              @if($user_data['description']->user_profile_avatar)
+                <img style="height:40px;width:40px" src="{{$user_data['description']->user_profile_avatar}}" alt=""/>
+              @else
+                <img src="{{URL::to('/img')}}/content/user-name.png" alt=""/>
+              @endif
+              <span>Имя пользователя</span></a>
               <ul class="dropit-submenu dropdown dropdown-margin">
                 <li><a href="{{URL::to('profile/edit')}}">Изменить профиль</a></li>
                 <li><a href="{{URL::to('message/all')}}">Личные сообщения(1877)</a></li>
