@@ -15,11 +15,11 @@ class MainController extends BaseController {
 	|
 	*/
 
-	public function index(){
+	public function index($id = 0){
 		$offset = 2; // с какого начинать просмотр
         $rating = Config::get('topic.index_good_topic_rating');
 		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
-		return View::make('index', array('topics' => $topics));
+		return View::make('main.index', array('topics' => $topics));
 	}
 
 }

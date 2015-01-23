@@ -18,8 +18,8 @@ class CreateVotesTable extends Migration {
 			$table->integer('target_id');
 			$table->string('target_type');
 			$table->integer('user_id');
-                        $table->integer('value');
-                        $table->float('rating');
+            $table->integer('value');
+            $table->float('rating');
 			$table->timestamps();
 		});
 	}

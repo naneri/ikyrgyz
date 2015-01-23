@@ -24,7 +24,7 @@ class ProfileController extends BaseController {
 	 * @return [type] [description]
 	 */
 	public function getEdit(){
-		$user = User::find(Auth::id());
+		$user = User::with('description')->find(Auth::id());
 		return View::make('profile.edit', array('user' => $user));
 	}
 
@@ -36,7 +36,8 @@ class ProfileController extends BaseController {
 	public function postEdit(){
 		$user = User::find(Auth::id());
 		$file = Input::file('image');
-		$result = User_Description::saveAvatar();
+		$description_data = array('first_name' => Input::get('first_name'), 'last_name' => Input::get('last_name'), 'user_profile_about' => Input::get('about'));
+		User_Description::update_data($description_data);
 		return Redirect::back();
 	}
 

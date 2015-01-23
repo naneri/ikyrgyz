@@ -16,7 +16,7 @@
     
     @if ($topic->photos->count() > 0)
         @foreach($topic->photos as $photo)
-        <img src="{{$photo->url}}" /><br>
+        <img src="{{URL::to('/')}}{{$photo->url}}" /><br>
         @endforeach
     @endif
     
