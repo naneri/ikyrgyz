@@ -6,7 +6,7 @@
         <div class="b-header__navigation">
           <ul class="menu dropit">
             <li class="dropit-trigger dropit-open"><a href="#">
-              @if($user_data['description']->user_profile_avatar)
+              @if(isset($user_data['description']->user_profile_avatar))
                 <img style="height:40px;width:40px" src="{{$user_data['description']->user_profile_avatar}}" alt=""/>
               @else
                 <img src="{{URL::to('/img')}}/content/user-name.png" alt=""/>

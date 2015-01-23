@@ -31,7 +31,7 @@ class BaseController extends Controller {
 			View::share('user_data', $user_data);
 
 		}
-		
+
 		// отправляет в шаблон базовый УРЛ сайта
 		$base_config = array('base_url' => URL::to('/'));
 		View::share('base_config', $base_config);

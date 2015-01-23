@@ -2,6 +2,6 @@
 
 return array(
 
-	'url' => 'http://devzone51.com/social',
+	'url' => 'http://devzone51.com/social/public',
 	
 	);
