@@ -26,15 +26,26 @@ class BlogController extends BaseController {
 		if($validator->fails()){
                     return Redirect::to('blog/create')->withErrors($validator);
                 }
-
+                
                 $blog = new Blog;
                 $blog->title = Input::get('title');
                 $blog->description = Input::get('description');
                 $blog->type_id = Input::get('type_id');
-                
                 $blog->user_id = Auth::user()->id;
+                
+                if(Input::hasFile('avatar')){
+                    $dir = '/images' . date('/Y/m/d/');
+                    do {
+                        $filename = str_random(30) . '.jpg';
+                    } while (File::exists(public_path() . $dir . $filename));
+
+                    Input::file('avatar')->move(public_path() . $dir, $filename);
+                    $blog->image = $dir.$filename;
+                }
+                
                 $blog->save();
 
+            
                 return Redirect::to('blog/all');
 	}
 

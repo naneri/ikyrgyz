@@ -49,9 +49,9 @@ Class Blog extends Eloquent{
         }
         
         public function isUserHaveRole(){
-            return BlogRole::where('blog_roles.blog_id', $this->id)
+            return BlogRole::where('blog_id', $this->id)
                     ->where('user_id', Auth::user()->id)
-                    ->exists();
+                    ->exists() || Auth::user()->id == $this->user_id;
         }
         
         public function getCreator(){
@@ -131,6 +131,13 @@ Class Blog extends Eloquent{
             $iNewRating = $iValue * $iDelta;
             $this->rating += $iNewRating;
             return $iNewRating;
+        }
+
+        public function getUserRole() {
+            return BlogRole::join('roles', 'roles.id', '=', 'blog_roles.role_id')
+                ->where('blog_roles.blog_id', $this->id)
+                ->where('user_id', Auth::user()->id)
+                ->pluck('name');
         }
 
 }

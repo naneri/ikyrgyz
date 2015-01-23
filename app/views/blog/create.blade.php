@@ -17,7 +17,7 @@
                         <h3 class="panel-title">Create Blog</h3>
                     </div>
                     <div class="panel-body">
-                    	{{Form::open(array('url' => 'blog/store'))}}
+                        {{Form::open(array('url' => 'blog/store', 'files' => true))}}
                         
                             <fieldset>
                                 <div class="form-group">
@@ -28,12 +28,15 @@
                                 </div>
                                 <?php
                                 $blogTypes = array(0 => 'Choose blog type');
-                                foreach (BlogType::get(array('id', 'type')) as $blogType) {
-                                    $blogTypes[$blogType->id] = $blogType->type;
+                                foreach (BlogType::get(array('id', 'name')) as $blogType) {
+                                    $blogTypes[$blogType->id] = $blogType->name;
                                 }
                                 ?>
                                 <div class="form-group">
                                     {{ Form::select('type_id', $blogTypes, null, array('class' => 'form-control')) }}
+                                </div>
+                                <div class="form-group">
+                                    {{Form::file('avatar')}}
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 {{Form::submit('Go!')}}

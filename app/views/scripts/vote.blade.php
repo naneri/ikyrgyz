@@ -1,3 +1,4 @@
+@if(isset($base_config))
 <script>
     var voteUrl = "{{$base_config['base_url']}}/vote/";
     var vote = {
@@ -67,3 +68,4 @@
         }
     }
 </script>
+@endif

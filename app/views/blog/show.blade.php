@@ -3,6 +3,7 @@
 @section('content')
 @include('misc.createnav')
 <div class="container" id="blog_{{$blog->id}}">
+    <img src="{{$blog->image}}" />
     <h3>{{$blog->title}}</h3><br>
     rating - 
     <a href="#" class="blog_vote_up" onclick="vote.blog({{$blog->id}}, 1);return false;">UP</a>
@@ -10,6 +11,7 @@
     <a href="#" class="blog_vote_down" onclick="vote.blog({{$blog->id}}, -1);return false;">DOWN</a><br>
     type - {{$blog->type->name}}
     @if(!$blog->isUserHaveRole())
+    {{$blog->id}} - {{Auth::user()->id}}
         [{{HTML::link('/blog/'.$blog->id.'/read', 'читать')}}]
     @else
         <?php $userRole = $blog->getUserRole(); ?>
