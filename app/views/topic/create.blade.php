@@ -22,6 +22,14 @@
                     <div class="panel-body">
                     	{{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form'))}}
                             <fieldset>
+                                <?php
+                                    $canPublishBlogs = array(0 => 'Choose blog');
+                                    foreach (Auth::user()->canPublishBlogs() as $blog) {
+                                        $canPublishBlogs[$blog->id] = $blog->title;
+                                    }  ?>
+                                <div class="form-group">
+                                    {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'form-control')) }}
+                                </div>
                                 <div class="form-group">
                                     <input class="form-control sync-input" placeholder="title" name="title" type="text" autofocus="">
                                 </div>

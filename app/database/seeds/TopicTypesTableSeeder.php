@@ -23,10 +23,6 @@ class TopicTypesTableSeeder extends Seeder {
                 array(
                     'id' => '3',
                     'name' => 'event'
-                ),
-                array(
-                    'id' => '4',
-                    'name' => 'draft'
                 )
             );
 

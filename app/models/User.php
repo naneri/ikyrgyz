@@ -69,9 +69,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function drafts(){
-        return Topic::join('topic_types', 'topics.type_id', '=', 'topic_types.id')
-                ->where('topic_types.name', 'draft')
-                ->select('topics.*')
+        return Topic::where('draft', 1)
+                ->where('user_id', $this->id)
                 ->get();
     }
 
@@ -132,6 +131,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             $iNewRating = $iValue * $iDelta;
             $this->rating += $iNewRating;
             return $iNewRating;
+        }
+        
+        public function canPublishBlogs(){
+            $blogs = Blog::leftjoin('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
+                    ->leftjoin('roles', 'blog_roles.role_id', '=', 'roles.id')
+                    ->where('blogs.user_id', $this->id)
+                    ->orWhereIn('roles.name', array('admin', 'moderator','reader'))
+                    ->select('blogs.*')
+                    ->get();
+            return $blogs;
         }
 
 }

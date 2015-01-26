@@ -32,7 +32,7 @@ $(document).ready(function(){
                                     });
                                 }
                 });
-        
+                
         $('.sync-input[type="checkbox"]').change(function(){
             setUpdateTimeout();
         });

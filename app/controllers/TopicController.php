@@ -52,9 +52,10 @@ class TopicController extends BaseController {
                 $this->topic = $topic;
                 $topic->title = Input::get('title');
                 $topic->description = Input::get('description');
-                $topic->blog_id = 1;
+                $topic->blog_id = Input::get('blog_id');
                 $topic->user_id = $this->user->id;
-                $topic->type_id = TopicType::where('name', '=', Input::get('topic_type'))->first()->id;
+                $topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
+                $topic->draft = 0;
                 $topic->save();
                 $topic_id = $topic->id;
 
@@ -70,9 +71,10 @@ class TopicController extends BaseController {
                 $topicId = DB::table('topics')
                     ->insertGetId(
                     array(
-                        'type_id' => TopicType::where('name', '=', 'draft')->first()->id,
+                        'type_id' => TopicType::where('name', Input::get('topic_type'))->first()->id,
                         'user_id' => $this->user->id,
-                        'blog_id' => Blog::where('user_id', '=', $this->user->id)->first()->id)
+                        'blog_id' => Blog::where('user_id', $this->user->id)->first()->id,
+                        'draft' => 1)
                 );
             } else {
                 $topicId = Input::get('topic_id');
@@ -155,6 +157,7 @@ class TopicController extends BaseController {
             $this->topic = $topic;
             $topic->title = Input::get('title');
             $topic->description = Input::get('description');
+            $topic->blog_id = Input::get('blog_id');
             $topic->save();
 
             $this->syncTopicTags($topic, Input::get('tags'));
@@ -180,6 +183,7 @@ class TopicController extends BaseController {
             $this->topic = $topic;
             $topic->title = Input::get('title');
             $topic->description = Input::get('description');
+            $topic->blog_id = Input::get('blog_id');
             $topic->save();
             
             $this->syncTopicTags($topic, Input::get('tags'));
@@ -236,6 +240,6 @@ class TopicController extends BaseController {
 
         public function drafts(){
             $topics = Auth::user()->drafts();
-            return View::make('index', array('topics' => $topics));
+            return View::make('main.index', array('topics' => $topics));
         }
 }

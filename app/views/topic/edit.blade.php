@@ -21,6 +21,15 @@
                     <div class="panel-body">
                     	{{Form::open(array('url' => 'topic/edit/'.$topic->id, 'id' => 'update-topic-form'))}}
                             <fieldset>
+                                <?php
+                                $canPublishBlogs = array();
+                                foreach (Auth::user()->canPublishBlogs() as $blog) {
+                                    $canPublishBlogs[$blog->id] = $blog->title;
+                                }
+                                ?>
+                                <div class="form-group">
+                                    {{ Form::select('blog_id', $canPublishBlogs, $topic->blog_id, array('class' => 'form-control')) }}
+                                </div>
                                 <div class="form-group">
                                     <input class="form-control sync-input" placeholder="title" name="title" type="text" autofocus="" value="{{$topic->title}}">
                                 </div>
