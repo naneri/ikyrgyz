@@ -23,7 +23,7 @@
                     	{{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form'))}}
                             <fieldset>
                                 <?php
-                                    $canPublishBlogs = array(0 => 'Choose blog');
+                                    $canPublishBlogs = array(0 => 'Мой персональный блог');
                                     foreach (Auth::user()->canPublishBlogs() as $blog) {
                                         $canPublishBlogs[$blog->id] = $blog->title;
                                     }  ?>

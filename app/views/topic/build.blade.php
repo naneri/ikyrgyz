@@ -33,7 +33,7 @@
     @endif
     
     @if($blogInfo)
-        blog title - {{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title)}}<br>
+        blog title - {{HTML::link($topic->blog->getUrl(), $topic->blog->title)}}<br>
         blog topics count - {{$topic->blog->topics->count()}}<br>
     @endif
     <br>

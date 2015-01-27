@@ -136,11 +136,39 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         public function canPublishBlogs(){
             $blogs = Blog::leftjoin('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
                     ->leftjoin('roles', 'blog_roles.role_id', '=', 'roles.id')
-                    ->where('blogs.user_id', $this->id)
-                    ->orWhereIn('roles.name', array('admin', 'moderator','reader'))
+                    ->join('blog_types', 'blog_types.id','=','blogs.type_id')
+                    ->whereIn('roles.name', array('admin', 'moderator','reader'))
+                    ->orWhere('blogs.user_id', $this->id)
+                    ->where('blog_types.name','!=','personal')
                     ->select('blogs.*')
                     ->get();
             return $blogs;
+        }
+        
+        public function isHavePersonalBlog(){
+            return Blog::join('blog_types', 'blog_types.id','=','blogs.type_id')
+                    ->where('blog_types.name', 'personal')
+                    ->where('blogs.user_id', $this->id)
+                    ->exists();
+        }
+
+        public function createPersonalBlog() {
+            if (!$this->isHavePersonalBlog()) {
+                Blog::create(array(
+                    'user_id' => $this->id,
+                    'type_id' => BlogType::whereName('personal')->first()->id,
+                    'title' => 'Блог им. ' . $this->email,
+                    'description' => 'Это ваш персональный блог.'
+                ));
+            }
+        }
+        
+        public function getPersonalBlog(){
+            return Blog::join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                ->where('blog_types.name', 'personal')
+                ->where('blogs.user_id', $this->id)
+                ->select('blogs.*')
+                ->first();
         }
 
 }

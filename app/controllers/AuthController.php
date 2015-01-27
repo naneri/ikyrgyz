@@ -93,9 +93,10 @@ class AuthController extends BaseController {
             $description = new User_Description;
             $description->user_id = $user->id;
             $description->save();
+            
+            $user->createPersonalBlog();
 
-
-           Mail::send('emails.activate', array('user' => $user), function($message)
+            Mail::send('emails.activate', array('user' => $user), function($message)
             {
                 $message->to(Input::get('email'))->subject('Welcome!');
             });
@@ -103,7 +104,7 @@ class AuthController extends BaseController {
         
         return Redirect::to('/main/index');
     }
-
+    
 
     /**
      * Активируем учётную запись пользователя
