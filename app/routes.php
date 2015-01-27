@@ -36,6 +36,8 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
         Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
         Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
+        
+        Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');

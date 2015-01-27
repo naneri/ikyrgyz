@@ -56,10 +56,18 @@ class BlogController extends BaseController {
 
 	public function show($id){
 		$blog = Blog::findOrFail($id);
-                $blogTopics = $blog->topics;
-                return View::make('blog.show', array('blog' => $blog, 'topics' => $blogTopics));
+                return View::make('blog.show', array('blog' => $blog));
 	}
         
+	public function showPersonal() {
+            $blog = Blog::join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                    ->where('blogs.user_id', Auth::user()->id)
+                    ->where('blog_types.name', 'personal')
+                    ->select('blogs.*')
+                    ->first();
+            return View::make('blog.show', array('blog' => $blog));
+        }
+
         public function getEdit($id){
             $blog = Blog::findOrFail($id);
             return View::make('blog.edit', array('blog' => $blog));

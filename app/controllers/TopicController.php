@@ -28,6 +28,9 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
+                if(!$this->user->isHavePersonalBlog()){
+                    $this->user->createPersonalBlog();
+                }
 		return View::make('topic.create', array('user' => $this->user));
 	}
 
@@ -47,12 +50,13 @@ class TopicController extends BaseController {
                 }
                 
                 $topicId = $this->getTopicId();
+                $blogId = $this->getBlogId();
                 
                 $topic = Topic::find($topicId);
                 $this->topic = $topic;
                 $topic->title = Input::get('title');
                 $topic->description = Input::get('description');
-                $topic->blog_id = Input::get('blog_id');
+                $topic->blog_id = $blogId;
                 $topic->user_id = $this->user->id;
                 $topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
                 $topic->draft = 0;
@@ -80,6 +84,10 @@ class TopicController extends BaseController {
                 $topicId = Input::get('topic_id');
             }
             return $topicId;
+        }
+        
+        private function getBlogId(){
+            return (Input::get('blog_id') == '0') ? Auth::user()->getPersonalBlog()->id : Input::get('blog_id');
         }
         
         private function syncTopicRelations(){
@@ -177,13 +185,15 @@ class TopicController extends BaseController {
             $result = array();
             
             $topicId = $this->getTopicId();
+            $blogId = $this->getBlogId();
+            
             $result['topic_id'] = $topicId;
                         
             $topic = Topic::find($topicId);
             $this->topic = $topic;
             $topic->title = Input::get('title');
             $topic->description = Input::get('description');
-            $topic->blog_id = Input::get('blog_id');
+            $topic->blog_id = $blogId;
             $topic->save();
             
             $this->syncTopicTags($topic, Input::get('tags'));

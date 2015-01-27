@@ -8,7 +8,11 @@ Class Blog extends Eloquent{
             'type_id' => 'required'
         );
         
-        protected $fillable = ['title', 'description', 'type_id'];
+        protected $fillable = ['title', 'description', 'type_id', 'user_id'];
+        
+        public function author(){
+            return $this->belongsTo('User', 'user_id');
+        }
         
         public function type(){
             return $this->belongsTo('BlogType');
@@ -138,6 +142,16 @@ Class Blog extends Eloquent{
                 ->where('blog_roles.blog_id', $this->id)
                 ->where('user_id', Auth::user()->id)
                 ->pluck('name');
+        }
+        
+        public function getUrl(){
+            $url = '';
+            if($this->type->name == 'personal'){
+                $url = URL::to('profile').'/'.$this->author->email.'/created/topics';
+            } else {
+                $url = URL::to('blog').'/show/'.$this->id;
+            }
+            return $url;
         }
 
 }
