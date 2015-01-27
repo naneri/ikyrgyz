@@ -1,4 +1,6 @@
+
 @foreach($topics as $topic)
+
 <div class="item" id="topic_{{$topic->id}}">
     user email - {{$topic->user->email}}<br>
     created at - {{$topic->created_at}}<br>
@@ -32,7 +34,7 @@
         @endforeach
     @endif
     
-    @if($blogInfo)
+    @if(isset($blogInfo))
         blog title - {{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title)}}<br>
         blog topics count - {{$topic->blog->topics->count()}}<br>
     @endif

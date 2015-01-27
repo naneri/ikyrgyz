@@ -16,10 +16,18 @@ class MainController extends BaseController {
 	*/
 
 	public function index($id = 0){
-		$offset = 2; // с какого начинать просмотр
+        $rating = Config::get('topic.index_good_topic_rating');
+		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
+
+		//echo "<pre>"; print_r($topics); echo "</pre>";exit;
+		return View::make('main.index', array('topics' => $topics));
+	}
+
+	public function ajaxTopics($page = 0){
+		$offset = $page; // с какого начинать просмотр
         $rating = Config::get('topic.index_good_topic_rating');
 		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
-		return View::make('main.index', array('topics' => $topics));
+		return View::make('topic.build', array('topics' => $topics));
 	}
 
 }

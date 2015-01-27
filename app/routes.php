@@ -21,7 +21,7 @@ Route::get('activate/{code}', 'AuthController@getActivate');
 
 Route::group(array('before' => 'auth'),function(){    
     Route::get('main/index','MainController@index'); 
-	Route::get('main/index/','MainController@index');        
+	Route::get('main/ajaxTopics/{page}','MainController@ajaxTopics');        
 	Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');

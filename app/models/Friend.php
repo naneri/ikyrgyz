@@ -68,9 +68,7 @@ class Friend extends Eloquent{
 	 * 
 	 * @return [type]           [description]
 	 */
-	static function submitFriend($firstId,$secondId){{
-
-	}
+	static function submitFriend($firstId,$secondId){
 
 		if(Friend::where('user_one', '=', $firstId)
 			->where('user_two', '=', $secondId)

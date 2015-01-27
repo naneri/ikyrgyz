@@ -6,14 +6,16 @@ class Topic extends Eloquent {
         
         public static $rules = array();
 	
-	static function getSubscribedTopics($userId, $rating, $offset) {
-		return 	Topic::all();/*where('topics.rating', '>', $rating)
+	static function getSubscribedTopics($userId, $rating, $offset = 0) {
+
+        $topic_number = Config::get('topic.topics_per_page');
+		return 	Topic::skip($offset*$topic_number)->take($topic_number)->get();/*where('topics.rating', '>', $rating)
 				->join('blogs', 'topics.blog_id', '=', 'blogs.id')
 				->join('blog_subscriptions as us', function ($j) use ($userId){
 		          	$j->on('us.blog_id', '=', 'blogs.id')
 		            ->where('us.user_id', '=', $userId);
 		        })
-				->take(Config::get('topic.topics_per_page'))
+				->take($topic_number)
 				->offset($offset)
 				->get(['topics.*']);*/
 	}
