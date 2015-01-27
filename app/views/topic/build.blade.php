@@ -42,6 +42,7 @@
     <br>
     <br>
 </div>
+<hr>
 @endforeach
 
 @include('comments.scripts')
