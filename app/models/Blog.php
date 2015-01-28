@@ -132,7 +132,7 @@ Class Blog extends Eloquent{
             /**
              * Сохраняем рейтинг
              */
-            $iNewRating = $iValue * $iDelta;
+            $iNewRating = round($iValue * $iDelta, 3);
             $this->rating += $iNewRating;
             return $iNewRating;
         }

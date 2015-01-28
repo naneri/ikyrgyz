@@ -128,18 +128,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             /**
              * Определяем новый рейтинг
              */
-            $iNewRating = $iValue * $iDelta;
+            $iNewRating = round($iValue * $iDelta, 3);
             $this->rating += $iNewRating;
             return $iNewRating;
         }
         
         public function canPublishBlogs(){
-            $blogs = Blog::leftjoin('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
+            $blogs = Blog::join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                    ->leftjoin('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
                     ->leftjoin('roles', 'blog_roles.role_id', '=', 'roles.id')
-                    ->join('blog_types', 'blog_types.id','=','blogs.type_id')
-                    ->whereIn('roles.name', array('admin', 'moderator','reader'))
-                    ->orWhere('blogs.user_id', $this->id)
-                    ->where('blog_types.name','!=','personal')
+                    ->where('blog_types.name', '!=', 'personal')
+                    ->where(function($query){
+                        $query->where('blogs.user_id', $this->id)
+                            ->orWhere(function($query){
+                                $query->whereIn('roles.name', array('admin', 'moderator', 'reader'))
+                                    ->where('blog_roles.user_id', $this->id);
+                        });
+                    })
                     ->select('blogs.*')
                     ->get();
             return $blogs;

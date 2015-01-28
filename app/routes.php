@@ -22,7 +22,7 @@ Route::get('activate/{code}', 'AuthController@getActivate');
 Route::group(array('before' => 'auth'),function(){    
     Route::get('main/index','MainController@index'); 
 	Route::get('main/ajaxTopics/{page}','MainController@ajaxTopics');        
-	Route::get('blog/create', 'BlogController@create');
+        Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');
         Route::get('blog/show/{id}', 'BlogController@show');
@@ -54,16 +54,6 @@ Route::group(array('before' => 'auth'),function(){
         Route::post('topic/store', 'TopicController@store');
         Route::get('topic/drafts', 'TopicController@drafts');
         Route::post('upload', array('uses' => 'TopicController@uploadImage'));
-        
-        Route::post('topic/comments/show', ['uses' => 'TopicCommentsController@showComments']);
-        Route::post('topic/comment/add', ['uses' => 'TopicCommentsController@postAdd']);
-        Route::post('topic/comment/delete', ['uses' => 'TopicCommentsController@postDelete']);
-        Route::post('topic/comment/restore', ['uses' => 'TopicCommentsController@postRestore']);
-        
-        Route::post('vote/comment', ['uses' => 'VoteController@postVoteComment']);
-        Route::post('vote/topic', ['uses' => 'VoteController@postVoteTopic']);
-        Route::post('vote/blog', ['uses' => 'VoteController@postVoteBlog']);
-        Route::post('vote/user', ['uses' => 'VoteController@postVoteUser']);
 
         Route::get('people', 'PeopleController@index');
         Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
@@ -86,9 +76,17 @@ Route::group(array('before' => 'auth'),function(){
         
 	Route::get('logout', 'AuthController@logout');
 
-    if(Request::ajax()){
-        Route::post('changeUserRating', 'RatingController@changeUserRating');
-    }
+        if(Request::ajax()){
+            Route::post('topic/comments/show', 'TopicCommentsController@showComments');
+            Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
+            Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
+            Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
+            
+            Route::post('vote/comment', 'VoteController@postVoteComment');
+            Route::post('vote/topic', 'VoteController@postVoteTopic');
+            Route::post('vote/blog', 'VoteController@postVoteBlog');
+            Route::post('vote/user', 'VoteController@postVoteUser');
+        }
 });
 
 Route::filter('blog_edit_permission', function($route){

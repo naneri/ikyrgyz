@@ -5,21 +5,21 @@ class Topic extends Eloquent {
 	protected $fillable = [];
         
         public static $rules = array();
-	
-	static function getSubscribedTopics($userId, $rating, $offset = 0) {
 
-        $topic_number = Config::get('topic.topics_per_page');
+        static function getSubscribedTopics($userId, $rating, $offset = 0) {
+
+            $topic_number = Config::get('topic.topics_per_page');
 		return 	Topic::skip($offset*$topic_number)->take($topic_number)->get();/*where('topics.rating', '>', $rating)
-				->join('blogs', 'topics.blog_id', '=', 'blogs.id')
-				->join('blog_subscriptions as us', function ($j) use ($userId){
-		          	$j->on('us.blog_id', '=', 'blogs.id')
-		            ->where('us.user_id', '=', $userId);
-		        })
-				->take($topic_number)
-				->offset($offset)
+              ->join('blogs', 'topics.blog_id', '=', 'blogs.id')
+              ->join('blog_subscriptions as us', function ($j) use ($userId){
+              $j->on('us.blog_id', '=', 'blogs.id')
+              ->where('us.user_id', '=', $userId);
+              })
+              ->take($topic_number)
+              ->offset($offset)
 				->get(['topics.*']);*/
-	}
-        
+        }
+
         public function tags() {
             return $this->belongsToMany('Tag');
         }
@@ -89,6 +89,7 @@ class Topic extends Eloquent {
             } elseif ($skill >= 400) {
                 $iDeltaRating = $iValue * 4;
             }
+            $iDeltaRating = round($iDeltaRating, 3);
             $this->rating += $iDeltaRating;
 
             if ($iValue == 1) {

@@ -59,9 +59,10 @@ class BlogController extends BaseController {
                 return View::make('blog.show', array('blog' => $blog));
 	}
         
-	public function showPersonal() {
+	public function showPersonal($email) {
+            $userId = User::whereEmail($email)->pluck('id');
             $blog = Blog::join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
-                    ->where('blogs.user_id', Auth::user()->id)
+                    ->where('blogs.user_id', $userId)
                     ->where('blog_types.name', 'personal')
                     ->select('blogs.*')
                     ->first();

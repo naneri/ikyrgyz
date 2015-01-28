@@ -48,10 +48,10 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'author cannot vote his comment'));
             }
 
-            $iVoteRatingValue = $oComment->vote($iValue);
+            $oComment->vote($iValue);
             $oComment->save();
             
-            $this->createVote('comment', $oComment->id, $iValue, $iVoteRatingValue);
+            $this->createVote('comment', $oComment->id, $iValue, $oComment->rating);
             $this->setSkillCommentAuthor($oComment->user_id, $iValue);
             
             return Response::json(array('rating' => $oComment->rating));
@@ -81,10 +81,10 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'You cannot vote this topic!'));
             }
             
-            $iVoteRatingValue = $oTopic->vote($iValue);
+            $oTopic->vote($iValue);
             $oTopic->save();
             
-            $this->createVote('topic', $oTopic->id, $iValue, $iVoteRatingValue);
+            $this->createVote('topic', $oTopic->id, $iValue, $oTopic->rating);
             $this->setSkillTopicAuthor($oTopic->user_id, $iValue);
             
             return Response::json(array('rating' => $oTopic->rating));
@@ -114,10 +114,10 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'You cannot vote this topic!'));
             }
 
-            $iVoteRatingValue = $oBlog->vote($iValue);
+            $oBlog->vote($iValue);
             $oBlog->save();
 
-            $this->createVote('blog', $oBlog->id, $iValue, $iVoteRatingValue);
+            $this->createVote('blog', $oBlog->id, $iValue, $oBlog->rating);
 
             return Response::json(array('rating' => $oBlog->rating));
         }
@@ -143,10 +143,10 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'You cannot vote this topic!'));
             }
 
-            $iVoteRatingValue = $oUser->vote($iValue);
+            $oUser->vote($iValue);
             $oUser->save();
 
-            $this->createVote('user', $oUser->id, $iValue, $iVoteRatingValue);
+            $this->createVote('user', $oUser->id, $iValue, $oUser->rating);
             $this->setSkillUser($oUser->id, $iValue);
 
             return Response::json(array('rating' => $oUser->rating));
