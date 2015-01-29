@@ -27,8 +27,7 @@
                                     <input class="form-control" placeholder="description" name="description" type="text" value="">
                                 </div>
                                 <?php
-                                $blogTypes = array(0 => 'Choose blog type');
-                                foreach (BlogType::get(array('id', 'name')) as $blogType) {
+                                foreach (BlogType::where('name', '!=', 'personal')->get(array('id', 'name')) as $blogType) {
                                     $blogTypes[$blogType->id] = $blogType->name;
                                 }
                                 ?>

@@ -22,7 +22,7 @@
                     	{{Form::open(array('url' => 'topic/edit/'.$topic->id, 'id' => 'update-topic-form'))}}
                             <fieldset>
                                 <?php
-                                $canPublishBlogs = array();
+                                $canPublishBlogs = array(0 => 'Мой персональный блог');
                                 foreach (Auth::user()->canPublishBlogs() as $blog) {
                                     $canPublishBlogs[$blog->id] = $blog->title;
                                 }
