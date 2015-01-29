@@ -448,6 +448,7 @@ ul.sub-menu-setting {
 }
 .b-section-wall__inner {
   padding-bottom: 20px;
+
 }
 .b-section-wall__left {
   float: left;
@@ -669,6 +670,11 @@ ul.share-dropdown li {
 }
 .b-section-wall__video li:last-child {
   margin: 0;
+}
+.b-section-wall {
+  max-width:1000px;
+  width: 100%;
+  margin: 0 auto;
 }
 .b-section-wall__video a {
   text-decoration: none;
