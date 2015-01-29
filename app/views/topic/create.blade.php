@@ -20,7 +20,7 @@
                         <h3 class="panel-title">Create Topic</h3>
                     </div>
                     <div class="panel-body">
-                    	{{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form'))}}
+                    	{{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form', 'class' => 'sync-form'))}}
                             <fieldset>
                                 <?php
                                     $canPublishBlogs = array(0 => 'Мой персональный блог');

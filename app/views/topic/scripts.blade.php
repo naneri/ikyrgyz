@@ -54,7 +54,7 @@ $(document).ready(function(){
         function updateForm(){
             
             tinyMCE.triggerSave();
-            data = $('#create-topic-form').serialize();
+            data = $('form.sync-form').serialize();
             
             $.ajax({
                 url: "{{asset('/topic/update')}}",
