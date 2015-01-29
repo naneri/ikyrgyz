@@ -61,12 +61,11 @@ class TopicController extends BaseController {
                 $topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
                 $topic->draft = 0;
                 $topic->save();
-                $topic_id = $topic->id;
 
                 $this->syncTopicTags($topic, Input::get('tags'));
                 $this->syncTopicRelations();
 
-                return Redirect::to('main/index');
+                return Redirect::to('topic/show/'.$topic->id);
 	}
         
         private function getTopicId(){
@@ -157,7 +156,8 @@ class TopicController extends BaseController {
             }
 
             $topic = Topic::findOrFail($id);
-            
+            $blogId = $this->getBlogId();
+
             if (!$topic->canEdit()) {
                 return View::make('error.permission', array('error' => 'permission denied'));
             }
@@ -165,7 +165,7 @@ class TopicController extends BaseController {
             $this->topic = $topic;
             $topic->title = Input::get('title');
             $topic->description = Input::get('description');
-            $topic->blog_id = Input::get('blog_id');
+            $topic->blog_id = $blogId;
             $topic->save();
 
             $this->syncTopicTags($topic, Input::get('tags'));
