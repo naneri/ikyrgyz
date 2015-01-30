@@ -53,7 +53,7 @@ class TopicController extends BaseController {
                 $this->topic = $this->getTopic();
                 $this->publishTopic(false);
 
-                return Redirect::to('topic/show/'.$topic->id);
+                return Redirect::to('topic/show/'.$this->topic->id);
 	}
         
         private function getTopic(){
@@ -156,7 +156,7 @@ class TopicController extends BaseController {
             $this->topic = $this->getTopic();
             $this->publishTopic(false);
             
-            return Redirect::to('topic/show/'.$id);
+            return Redirect::to('topic/show/'.$this->topic->id);
         }
 
         /**
