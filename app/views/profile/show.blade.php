@@ -55,7 +55,7 @@
             </ul>
           </div>
         </div>
-        <div class="b-section-wall">
+       <div class="b-section-wall">
           <div class="b-section-wall__left">
             <div class="b-section-wall__inner">
               <div class="b-section-wall__top"><a href="#"><img src="{{ asset('img/content/user-name.png') }}" alt=""/></a>

@@ -1,4 +1,3 @@
-
 @extends('misc.layout')
 
 

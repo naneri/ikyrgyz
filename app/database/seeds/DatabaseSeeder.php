@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder {
                 $this->call('PhotoAlbumTopicTableSeeder');
                 $this->call('PhotoTopicTableSeeder');
                 $this->call('RolesTableSeeder');
+                $this->call('UserDescriptionTableSeeder');
     }
 
 }
