@@ -31,6 +31,7 @@ $env = $app->detectEnvironment(array(
     'kana'  => array('kana'),
     'respect' => array('respect'), 
     'team1' => array('team1'), //devzone hosting
+   'damir' => array('XTREME-BBH2NSTU'), //devzone hosting
 ));
 
 /*

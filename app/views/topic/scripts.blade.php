@@ -1,4 +1,4 @@
-<script src="/js/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script src="{{asset('/js/tinymce/tinymce.min.js')}}" type="text/javascript"></script>
 <script>
 $(document).ready(function(){ 
         
@@ -54,17 +54,16 @@ $(document).ready(function(){
         function updateForm(){
             
             tinyMCE.triggerSave();
-            data = $('#create-topic-form').serialize();
+            data = $('form.sync-form').serialize();
             
             $.ajax({
-                url: '/topic/update',
+                url: "{{asset('/topic/update')}}",
                 data: data,
                 dataType: 'json',
                 type: 'POST',
                 success: function(result){
-                    if(result['topic_id'] && !$('input[name="topic_id"]').length){
-                        var input = $('<input type="hidden" name="topic_id" value="'+result.topic_id+'">');
-                        $('#create-topic-form').append(input);
+                    if(result['topic_id'] && $('input[name="topic_id"]').val() != result.topic_id){
+                        $('input[name="topic_id"]').val(result.topic_id);
                     }
                 },
                 error: function(result) {
@@ -143,7 +142,7 @@ $(document).ready(function(){
 	})
 	.autocomplete({
 		source: function( request, response ) {
-			$.getJSON( "/tags", {
+			$.getJSON( "{{asset('/tags')}}", {
 					term: extractLast( request.term ),
 				}, 
 				function( data ) {
@@ -180,18 +179,5 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-        
-        $('#video_input').bind('input propertychange', function(){
-                var url = $(this).val();
-                var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
-                if (videoid != null) {
-                     var iframe = '<iframe width="420" height="345" frameborder="0" allowfullscreen src="'+'http://www.youtube.com/embed/' + videoid[1]+'"></iframe>';
-                     $('.video_preview').html(iframe);
-                     $('input[name="video_embed_code"]').val(iframe);
-                     $('input[name="video_url"]').val(url);
-                } else {
-                    console.log("The youtube url is not valid.");
-                }
-        });
 });
 </script>

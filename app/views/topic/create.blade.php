@@ -20,7 +20,7 @@
                         <h3 class="panel-title">Create Topic</h3>
                     </div>
                     <div class="panel-body">
-                    	{{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form'))}}
+                    	{{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form', 'class' => 'sync-form'))}}
                             <fieldset>
                                 <?php
                                     $canPublishBlogs = array(0 => 'Мой персональный блог');
@@ -84,9 +84,8 @@
                                 <div class="form-group">
                                     {{ Form::text('tags', null, array('class' => 'form-control sync-input', 'id' => 'tags', 'placeholder' => 'tags')) }}
                                 </div>
-                                <div class="form-group">
-                                    {{ Form::hidden('topic_type', 'topic') }}
-                                </div>
+                                {{ Form::hidden('topic_type', 'topic') }}
+                                {{ Form::hidden('topic_id') }}
                                 <!-- Change this to a button or input when using this as a form -->
                                 {{Form::submit('Publish', array('class' => 'btn btn-default'))}}
                             </fieldset>

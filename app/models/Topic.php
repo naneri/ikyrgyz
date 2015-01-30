@@ -73,7 +73,7 @@ class Topic extends Eloquent {
         }
         
         public function canEdit(){
-            return $this->blog->isAdminCurrentUser();
+            return $this->blog->isAdminCurrentUser() || $this->user_id == Auth::user()->id;
         }
         
         public function vote($iValue){

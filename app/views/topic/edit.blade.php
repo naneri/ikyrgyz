@@ -19,10 +19,10 @@
                         <h3 class="panel-title">Edit Topic</h3>
                     </div>
                     <div class="panel-body">
-                    	{{Form::open(array('url' => 'topic/edit/'.$topic->id, 'id' => 'update-topic-form'))}}
+                        {{Form::open(array('url' => 'topic/edit/'.$topic->id, 'id' => 'edit-topic-form', 'class' => 'sync-form'))}}
                             <fieldset>
                                 <?php
-                                $canPublishBlogs = array();
+                                $canPublishBlogs = array(0 => 'Мой персональный блог');
                                 foreach (Auth::user()->canPublishBlogs() as $blog) {
                                     $canPublishBlogs[$blog->id] = $blog->title;
                                 }
