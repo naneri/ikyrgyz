@@ -62,9 +62,8 @@ $(document).ready(function(){
                 dataType: 'json',
                 type: 'POST',
                 success: function(result){
-                    if(result['topic_id'] && !$('input[name="topic_id"]').length){
-                        var input = $('<input type="hidden" name="topic_id" value="'+result.topic_id+'">');
-                        $('#create-topic-form').append(input);
+                    if(result['topic_id'] && $('input[name="topic_id"]').val() != result.topic_id){
+                        $('input[name="topic_id"]').val(result.topic_id);
                     }
                 },
                 error: function(result) {

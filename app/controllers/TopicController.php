@@ -4,6 +4,7 @@ class TopicController extends BaseController {
     
         private $user;
         private $topic;
+        private $errors;
         
         function __construct() {
             parent::__construct();
@@ -49,40 +50,37 @@ class TopicController extends BaseController {
                     return Redirect::back()->withErrors($validator);
                 }
                 
-                $topicId = $this->getTopicId();
-                $blogId = $this->getBlogId();
-                
-                $topic = Topic::find($topicId);
-                $this->topic = $topic;
-                $topic->title = Input::get('title');
-                $topic->description = Input::get('description');
-                $topic->blog_id = $blogId;
-                $topic->user_id = $this->user->id;
-                $topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
-                $topic->draft = 0;
-                $topic->save();
-
-                $this->syncTopicTags($topic, Input::get('tags'));
-                $this->syncTopicRelations();
+                $this->topic = $this->getTopic();
+                $this->publishTopic(false);
 
                 return Redirect::to('topic/show/'.$topic->id);
 	}
         
+        private function getTopic(){
+            $topic = Topic::find($this->getTopicId());
+            while(!$topic || !$topic->canEdit()){
+                $topic = $this->createNewTopic();
+            }
+            return $topic;
+        }
+        
         private function getTopicId(){
             $topicId = null;
             if (!Input::has('topic_id')) {
-                $topicId = DB::table('topics')
-                    ->insertGetId(
-                    array(
-                        'type_id' => TopicType::where('name', Input::get('topic_type'))->first()->id,
-                        'user_id' => $this->user->id,
-                        'blog_id' => Blog::where('user_id', $this->user->id)->first()->id,
-                        'draft' => 1)
-                );
+                $topicId = $this->createNewTopic()->id;
             } else {
                 $topicId = Input::get('topic_id');
             }
             return $topicId;
+        }
+        
+        private function createNewTopic(){
+            $topic = new Topic();
+            $topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
+            $topic->user_id = Auth::user()->id;
+            $topic->blog_id = $this->getBlogId();
+            $topic->save();
+            return $topic;
         }
         
         private function getBlogId(){
@@ -155,22 +153,9 @@ class TopicController extends BaseController {
                 return Redirect::back()->withErrors($validator);
             }
 
-            $topic = Topic::findOrFail($id);
-            $blogId = $this->getBlogId();
-
-            if (!$topic->canEdit()) {
-                return View::make('error.permission', array('error' => 'permission denied'));
-            }
+            $this->topic = $this->getTopic();
+            $this->publishTopic(false);
             
-            $this->topic = $topic;
-            $topic->title = Input::get('title');
-            $topic->description = Input::get('description');
-            $topic->blog_id = $blogId;
-            $topic->save();
-
-            $this->syncTopicTags($topic, Input::get('tags'));
-            $this->syncTopicRelations();
-
             return Redirect::to('topic/show/'.$id);
         }
 
@@ -181,28 +166,19 @@ class TopicController extends BaseController {
 	 * @return Response
 	 */
 	public function update()
-	{
-            $result = array();
-            
-            $topicId = $this->getTopicId();
-            $blogId = $this->getBlogId();
-            
-            $result['topic_id'] = $topicId;
-                        
-            $topic = Topic::find($topicId);
-            $this->topic = $topic;
-            $topic->title = Input::get('title');
-            $topic->description = Input::get('description');
-            $topic->blog_id = $blogId;
-            $topic->save();
-            
-            $this->syncTopicTags($topic, Input::get('tags'));
+	{            
+            $this->topic = $this->getTopic();
+            $this->publishTopic(true);
+
+            $this->syncTopicTags(Input::get('tags'));
             $this->syncTopicRelations();
+            
+            $result['topic_id'] = $this->topic->id;
             
             return Response::json($result);
         }
         
-        private function syncTopicTags($topic, $tagsStr){
+        private function syncTopicTags($tagsStr){
             $tags = array();
             foreach (explode(',', $tagsStr) as $tag_name) {
                 $tag_name = trim($tag_name);
@@ -214,7 +190,7 @@ class TopicController extends BaseController {
                     $tags[] = $tag_id;
                 }
             }
-            $topic->tags()->sync($tags);
+            $this->topic->tags()->sync($tags);
         }
         
 	/**
@@ -251,5 +227,24 @@ class TopicController extends BaseController {
         public function drafts(){
             $topics = Auth::user()->drafts();
             return View::make('main.index', array('topics' => $topics));
+        }
+        
+        private function publishTopic($isDraft){
+            $blogId = $this->getBlogId();
+
+            if (!$this->topic->canEdit()) {
+                return View::make('error.permission', array('error' => 'permission denied'));
+            }
+
+            $this->topic->title = Input::get('title');
+            $this->topic->description = Input::get('description');
+            $this->topic->blog_id = $blogId;
+            $this->topic->user_id = $this->user->id;
+            $this->topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
+            $this->topic->draft = $isDraft;
+            $this->topic->save();
+
+            $this->syncTopicTags(Input::get('tags'));
+            $this->syncTopicRelations();
         }
 }
