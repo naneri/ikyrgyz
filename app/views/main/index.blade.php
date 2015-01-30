@@ -4,7 +4,7 @@
 
 @section('content')
 	@include('misc.createnav')
-	<div class="container all_topics">
+	<div class="">
 	    @include('topic.build', array('topics' => $topics, 'blogInfo' => true))
 	</div>
 @stop
