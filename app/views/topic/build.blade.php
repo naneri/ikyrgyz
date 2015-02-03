@@ -1,8 +1,7 @@
- <div class="b-section-wall">
-          <div class="b-section-wall__left">
+
             @foreach($topics as $topic)
             <div class="b-section-wall__inner">
-              <div class="b-section-wall__top"><a href="#"><img src="{{ asset('img/content/user-name.png') }}" alt=""/></a>
+              <div class="b-section-wall__top"><a href="#"><img src="{{ $topic->user->description->user_profile_avatar}}" alt=""/></a>
                 <p class="title">{{$topic->title}}</p>
                 <p class="date">{{$topic->created_at}}</p>
                 <p class="last"> <span class="vis">19 </span><span class="msg">34</span></p>
@@ -17,7 +16,7 @@
                 @endforeach
             @endif
               <div class="b-section-wall__bottom"><img src="{{ asset('img/content/user-name.png') }}" alt=""/>
-                <p class="title">Красота кыргызского народа</p>
+                <p class="title">{{$topic->blog->title}}</p>
                 <p class="topic">31 топик</p>
                 <div class="clear"></div>
                 <div class="btn-wrapper"><a href="{{ URL::to('topic/show/'.$topic->id) }}" class="about">Подробнее</a>
@@ -38,11 +37,7 @@
               </div>
             </div>
             @endforeach
-          </div>
           
-          </div>
-          <div class="clear"></div>
-        </div>
 <!--
 @foreach($topics as $topic)
 
@@ -90,4 +85,3 @@
 <hr>
 @endforeach
 -->
-@include('comments.scripts')

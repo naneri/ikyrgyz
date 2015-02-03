@@ -187,37 +187,37 @@ class VoteController extends \BaseController {
         }
 
 	public function setSkillTopicAuthor($topicAuthorId, $iValue) {
-            $skill = Auth::user()->skill;
-            /**
-             * Начисляем силу и рейтинг автору топика, используя логарифмическое распределение
-             */
-            $iMinSize = 0.1;
-            $iMaxSize = 8;
-            $iSizeRange = $iMaxSize - $iMinSize;
-            $iMinCount = log(0 + 1);
-            $iMaxCount = log(500 + 1);
-            $iCountRange = $iMaxCount - $iMinCount;
-            if ($iCountRange == 0) {
-                $iCountRange = 1;
-            }
-            if ($skill > 50 and $skill < 200) {
-                $skill_new = $skill / 70;
-            } elseif ($skill >= 200) {
-                $skill_new = $skill / 10;
-            } else {
-                $skill_new = $skill / 100;
-            }
-            $iDelta = $iMinSize + (log($skill_new + 1) - $iMinCount) * ($iSizeRange / $iCountRange);
-            /**
-             * Сохраняем силу и рейтинг
-             */
-            $oUserTopic = User::find($topicAuthorId);
-            if($oUserTopic){
-                $iSkillNew = $oUserTopic->skill + $iValue * $iDelta;
-                $iSkillNew = ($iSkillNew < 0) ? 0 : $iSkillNew;
-                $oUserTopic->skill = $iSkillNew;
-                $oUserTopic->rating = $oUserTopic->rating + $iValue * $iDelta / 2.73;
-                $oUserTopic->save();
-            }
+        $skill = Auth::user()->skill;
+        /**
+         * Начисляем силу и рейтинг автору топика, используя логарифмическое распределение
+         */
+        $iMinSize = 0.1;
+        $iMaxSize = 8;
+        $iSizeRange = $iMaxSize - $iMinSize;
+        $iMinCount = log(0 + 1);
+        $iMaxCount = log(500 + 1);
+        $iCountRange = $iMaxCount - $iMinCount;
+        if ($iCountRange == 0) {
+            $iCountRange = 1;
         }
+        if ($skill > 50 and $skill < 200) {
+            $skill_new = $skill / 70;
+        } elseif ($skill >= 200) {
+            $skill_new = $skill / 10;
+        } else {
+            $skill_new = $skill / 100;
+        }
+        $iDelta = $iMinSize + (log($skill_new + 1) - $iMinCount) * ($iSizeRange / $iCountRange);
+        /**
+         * Сохраняем силу и рейтинг
+         */
+        $oUserTopic = User::find($topicAuthorId);
+        if($oUserTopic){
+            $iSkillNew = $oUserTopic->skill + $iValue * $iDelta;
+            $iSkillNew = ($iSkillNew < 0) ? 0 : $iSkillNew;
+            $oUserTopic->skill = $iSkillNew;
+            $oUserTopic->rating = $oUserTopic->rating + $iValue * $iDelta / 2.73;
+            $oUserTopic->save();
+        }
+    }
 }

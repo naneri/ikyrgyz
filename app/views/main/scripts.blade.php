@@ -5,11 +5,10 @@ var page = 1;
 	$(window).scroll(function() {
 	   if($(window).scrollTop() + $(window).height() == $(document).height()) {
 	       	$.get(base_url + '/main/ajaxTopics/' + page, function(data){
-	       		$('.all_topics').append(data);
+	       		$('.b-section-wall__inner').last().append(data);
 	       		page += 1;
 	       	});
 	   }
 	});
 
 </script>
-

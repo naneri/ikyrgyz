@@ -17,7 +17,10 @@
 	  </div>
 	  <div class="b-content-nav__social">
 	    <div class="b-content-nav-social">
-	      <div class="b-content-nav-social__item"><a href="#" class="item1"></a><span class="item1">19</span><a href="#" class="item2"></a><span class="item2">19</span><a href="#" class="item3"></a></div>
+	      <div class="b-content-nav-social__item">
+	      	<a href="#" class="item1"></a><span class="item1">19</span>
+	      	<a href="{{ URL::to('blog/all') }}" class="item2"></a><span class="item2">19</span>
+	      	<a href="#" class="item3"></a></div>
 	    </div>
 	  </div>
 	  <div class="b-content-nav__media">
