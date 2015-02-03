@@ -675,6 +675,7 @@ ul.share-dropdown li {
   max-width:1000px;
   width: 100%;
   margin: 0 auto;
+  padding-top: 30px;
 }
 .b-section-wall__video a {
   text-decoration: none;

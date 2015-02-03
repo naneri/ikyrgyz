@@ -2,13 +2,11 @@
 
 class TopicController extends BaseController {
     
-        private $user;
         private $topic;
         private $errors;
         
         function __construct() {
             parent::__construct();
-            $this->user = Auth::user();
         }
     
        /**
@@ -29,10 +27,10 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-                if(!$this->user->isHavePersonalBlog()){
-                    $this->user->createPersonalBlog();
+                if(!Auth::user()->isHavePersonalBlog()){
+                    Auth::user()->createPersonalBlog();
                 }
-		return View::make('topic.create', array('user' => $this->user));
+		return View::make('topic.create');
 	}
 
 
@@ -134,7 +132,7 @@ class TopicController extends BaseController {
                 return View::make('error.permission', array('error' => 'permission denied'));
             }
             
-            return View::make('topic.edit', array('user' => $this->user, 'topic' => $topic));
+            return View::make('topic.edit', array('user' => Auth::user(), 'topic' => $topic));
         }
 
         /**
@@ -239,7 +237,7 @@ class TopicController extends BaseController {
             $this->topic->title = Input::get('title');
             $this->topic->description = Input::get('description');
             $this->topic->blog_id = $blogId;
-            $this->topic->user_id = $this->user->id;
+            $this->topic->user_id = Auth::user()->id;
             $this->topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
             $this->topic->draft = $isDraft;
             $this->topic->save();

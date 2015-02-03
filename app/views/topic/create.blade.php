@@ -16,7 +16,7 @@
 			<div class="col-md-8">
 				<div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        {{HTML::link('topic/drafts', 'Drafts ('.$user->drafts()->count().')')}}<br>
+                        {{HTML::link('topic/drafts', 'Drafts ('.Auth::user()->drafts()->count().')')}}<br>
                         <h3 class="panel-title">Create Topic</h3>
                     </div>
                     <div class="panel-body">
@@ -39,7 +39,7 @@
                                     <div class="photo-box" style="display:none;">
                                         <div class="user-photo-albums">
                                             My photo albums:
-                                            @foreach($user->photoAlbums as $photoAlbum)
+                                            @foreach(Auth::user()->photoAlbums as $photoAlbum)
                                                 <div class="checkbox">
                                                     <label>
                                                         {{Form::checkbox('photo_albums[]', $photoAlbum->id, null, array('class' => 'sync-input'))}}{{$photoAlbum->name}}
@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="user-photos">
                                             My photos:
-                                            @foreach($user->photos as $photo)
+                                            @foreach(Auth::user()->photos as $photo)
                                                 <div class="checkbox">
                                                     <label>
                                                         {{Form::checkbox('photos[]', $photo->id, null, array('class' => 'sync-input'))}}<img src='{{$photo->url}}' />
@@ -61,7 +61,7 @@
                                     <div class="audio-box" style="display:none;">
                                         <div class="user-audio-albums">
                                             My music albums:
-                                            @foreach($user->audioAlbums as $audioAlbum)
+                                            @foreach(Auth::user()->audioAlbums as $audioAlbum)
                                             <div class="checkbox">
                                                 <label>
                                                     {{Form::checkbox('audio_albums[]', $audioAlbum->id, null, array('class' => 'sync-input'))}}{{$audioAlbum->name}}
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="user-audio">
                                             My music:
-                                            @foreach($user->audios as $audio)
+                                            @foreach(Auth::user()->audios as $audio)
                                             <div class="checkbox">
                                                 <label>
                                                     {{Form::checkbox('audio[]', $audio->id, null, array('class' => 'sync-input'))}}{{$audio->name}}
