@@ -27,7 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local' => array('homestead'),
-    'beks'  => array('beks'),
+    'Beks'  => array('Beks'),
     'kana'  => array('kana'),
     'respect' => array('respect'), 
     'team1' => array('team1'), //devzone hosting
