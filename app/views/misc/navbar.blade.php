@@ -15,7 +15,7 @@
           <li><a href="#"><img src="{{ asset('img/4.png') }}" alt="user"/><span class="counter">25</span></a></li>
           <li><a href="#"><img src="{{ asset('img/5.png') }}" alt="count"/><span class="counter">25</span></a></li>
           <li><a href="#"><img src="{{ asset('img/6.png') }}" alt="count"/><span class="counter">25</span></a></li>
-          <li><a href="{{URL::to('people')}}"> <img src="{{ asset('img/7.png') }}" alt="search"/><span>Поиск друзей</span></a></li>
+          <li><a href="{{URL::to('search/people')}}"> <img src="{{ asset('img/7.png') }}" alt="search"/><span>Поиск друзей</span></a></li>
           <li class="dropdown"><a href="#"><img src="{{ asset('img/8.png') }}" alt="book"/><span>Энциклопедия</span></a>
             <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
               <li><a href="#">История</a></li>
