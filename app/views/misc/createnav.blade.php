@@ -1,4 +1,75 @@
-<div class="b-content-nav">
+<div class="b-menu-topic">
+      <div class="container b-menu-topic__inner">
+        <ul class="nav nav-justified">
+          <li>
+            <div class="b-menu-topic__create">
+              <ul class="nav">
+                <li class="dropdown"><a href="#" class="create">Создать</a>
+                  <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                    <li><a href="#"> <span class="create item1"></span><span class="title">Топик</span></a></li>
+                    <li><a href="#"> <span class="create item2"></span><span class="title">Блог</span></a></li>
+                    <li><a href="#"> <span class="create item3"></span><span class="title">Черновики</span></a></li>
+                    <li><a href="#"> <span class="create item4"></span><span class="title">Ссылка</span></a></li>
+                    <li><a href="#"> <span class="create item5"></span><span class="title">Фото альбом</span></a></li>
+                    <li><a href="#"> <span class="create item6"></span><span class="title">Опрос</span></a></li>
+                    <li><a href="#"> <span class="create item7"></span><span class="title">Событие</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="b-menu-topic-list__item">
+              <div class="b-menu-topic__likes"><a href="#" class="item1"><span class="item1">19</span><a href="#" class="item2"></a><span class="item2">19</span><a href="#" class="item3"></a></a></div>
+              <div class="b-menu-topic__social">
+                <ul class="nav">
+                  <li class="dropdown"><a href="" class="media"> </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"> <span class="media item1"></span><span class="title">Видео</span></a></li>
+                      <li><a href="#"> <span class="media item2"></span><span class="title">Фото альбомы</span></a></li>
+                      <li><a href="#"> <span class="media item3"></span><span class="title">Музыка</span></a></li>
+                      <li><a href="#"> <span class="media item4"></span><span class="title">Ссылки</span></a></li>
+                      <li><a href="#"> <span class="media item5"></span><span class="title">Опросы</span></a></li>
+                      <li><a href="#"> <span class="media item6"></span><span class="title">События</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="b-menu-topic__format">
+              <ul class="nav">
+                <li class="dropdown"><a href="" class="item"></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" class="icon item1"> </a></li>
+                    <li><a href="#" class="icon item2"> </a></li>
+                    <li><a href="#" class="icon item3"> </a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="b-menu-topic__online">
+              <ul class="nav">
+                <li class="dropdown"><a href=""><img src="img/31.png" alt=""/></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#"></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="b-menu-topic__search">
+              <input type="text"/>
+              <input type="submit"/>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <!-- <div class="b-content-nav">
 	<div class="b-content-nav__inner">
 	  <div class="b-content-nav__create">
 	    <ul class="create-dropdown"> 
@@ -72,9 +143,7 @@
 	  </div>
 	</div>
 </div>
-
-
-
+-->
 	<!--	<ul style="margin:30px; padding:30px; list-style-type: none;">
 			<li>Create</li>
 			<li><a href="{{URL::to('topic/create')}}">Topic</a></li>

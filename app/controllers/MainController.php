@@ -16,6 +16,7 @@ class MainController extends BaseController {
 	*/
 
 	public function index($id = 0){
+		Log::info('This is some useful information.');
         $rating = Config::get('topic.index_good_topic_rating');
 		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
 		//echo "<pre>"; print_r($topics); echo "</pre>";exit;

@@ -15,7 +15,7 @@ $(document).ready(function(){
                     language: 'ru',
                     menubar: false,
                     statusbar: false,
-                    subfolder:"{{$user->id}}",
+                    subfolder:"{{Auth::user()->id}}",
                     plugins: [
                             "advlist autolink lists link image charmap print preview anchor",
                             "code filemanager",

@@ -1,5 +1,51 @@
 @if(Auth::check())
-		<div class="b-header">
+<div class="b-header">
+    <div class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav nav-justified">
+          <li><a href="#"> <img src="{{ asset('img/2.png') }}" alt="logo"/><span>I-kyrgyz</span></a></li>
+          <li class="dropdown"><a href="#"><img src="{{ asset('img/3.png') }}" alt="user"/><span>Имя пользователя</span></a>
+            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+              <li><a href="#">Изменить профиль</a></li>
+              <li><a href="#">Личные сообщения (1877)</a></li>
+              <li><a href="#">Друзья</a></li>
+              <li><a href="#">Группы</a></li>
+            </ul>
+          </li>
+          <li><a href="#"><img src="{{ asset('img/4.png') }}" alt="user"/><span class="counter">25</span></a></li>
+          <li><a href="#"><img src="{{ asset('img/5.png') }}" alt="count"/><span class="counter">25</span></a></li>
+          <li><a href="#"><img src="{{ asset('img/6.png') }}" alt="count"/><span class="counter">25</span></a></li>
+          <li><a href="{{URL::to('people')}}"> <img src="{{ asset('img/7.png') }}" alt="search"/><span>Поиск друзей</span></a></li>
+          <li class="dropdown"><a href="#"><img src="{{ asset('img/8.png') }}" alt="book"/><span>Энциклопедия</span></a>
+            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+              <li><a href="#">История</a></li>
+              <li><a href="#">Обычаи</a></li>
+              <li><a href="#">Культура</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href=""><img src="{{ asset('img/9.png') }}" alt="help"/></a>
+            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+              <li><a href="#">Помощь</a></li>
+              <li><a href="#">Сообщить о проблеме</a></li>
+              <li><a href="#">История действии</a></li>
+            </ul>
+          </li>
+          <li><a href="#"><img src="{{ asset('img/10.png') }}" alt="language"/></a></li>
+          <li><a href="#"><img src="{{ asset('img/11.png') }}" alt="closebtn"/></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+@endif
+
+
+<div class="container">
+  <div class="col-md-12">
+    {{Session::get('message')}}<br>
+  </div>
+</div>
+
+<!--  <div class="b-header">
         <div class="b-header__inner">
           <div class="b-header__logo"><a href="{{ URL::to('main/index') }}"><img src="{{ asset('img/content/logo__image.png') }}" alt=""/><span>I-KYRGYZ</span></a></div>
           <div class="b-header__menu"><a href="#">&#9776;</a></div>
@@ -54,14 +100,7 @@
           <div class="clear"></div>
         </div>
       </div>
-
-@endif
-
-<div class="container">
-	<div class="col-md-12">
-		{{Session::get('message')}}<br>
-	</div>
-</div>
+--> 
 
 
 <!--<div class="b-header">
