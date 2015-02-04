@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="b-section-wall">
-        <div class="b-section-wall__left">
+    <div class="col-lg-5">
             {{Form::open()}}
                 Место поиска:<br>
                 Выборка места проживания по заполненному
@@ -21,13 +20,10 @@
                 <hr>
                 Возраст<br>
                 От {{Form::text('age-from')}} До {{Form::text('age-to')}}<br>
-
-                {{Form::submit('Поиск')}}
             {{Form::close()}}
-        </div>
-        <div class="b-section-wall__inner" id="users-list">
-            @include('search.build.users', compact($users))
-        </div>
+    </div>
+    <div class="col-lg-7" id="users-list">
+        @include('search.build.users', compact($users))
     </div>
 </div>
 @stop

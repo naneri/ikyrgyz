@@ -20,14 +20,14 @@ class SearchController extends \BaseController {
         
         public function postSearchPeople(){
             $where = "WHERE 1=1 ";
-           
+            
             if(Input::has('age-from')){
-                $dateFrom = date((date('Y') - Input::get('age-from') - 1) . '-m-d');
-                $where .= " AND `user_description`.`birthday` < '$dateFrom' ";
+                $dateFrom = date((date('Y') - Input::get('age-from')) . '-m-d');
+                $where .= " AND `user_description`.`birthday` <= '$dateFrom' ";
             }
             if (Input::has('age-to')) {
-                $dateTo = date((date('Y') - Input::get('age-to')) . '-m-d');
-                $where .= " AND `user_description`.`birthday` > '$dateTo' ";
+                $dateTo = date((date('Y') - Input::get('age-to') - 1) . '-m-d');
+                $where .= " AND `user_description`.`birthday` >= '$dateTo' ";
             }
             if(Input::has('gender') && Input::get('gender') != 'other'){
                 $gender = Input::get('gender');

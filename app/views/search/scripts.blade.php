@@ -1,25 +1,25 @@
 <script>
 $(document).ready(function(){ 
         
-        $('input[type="checkbox"]').change(function(){
-            setUpdateTimeout();
+        $('input').change(function(){
+            setSearchTimeout();
         });
         
         $('input').keyup(function(){
-            setUpdateTimeout(); 
+            setSearchTimeout(); 
         });
         
         var timer = null;
         
-        function setUpdateTimeout(){
+        function setSearchTimeout(){
             if (timer) {
                 clearTimeout(timer); //cancel the previous timer.
                 timer = null;
             }
-            timer = setTimeout(updateForm, 1000);
+            timer = setTimeout(searchPeople, 1000);
         }
         
-        function updateForm(){
+        function searchPeople(){
             
             data = $('form').serialize();
             
@@ -29,14 +29,13 @@ $(document).ready(function(){
                 dataType: 'json',
                 type: 'POST',
                 success: function(result){
-                    if(result['users'] && !result['errors']){
+                    if(!result['errors']){
                         $('#users-list').html(result.users);
                     }
                 },
                 error: function(result) {
                 }
             });
-        }
-        
+        }        
 });
 </script>
