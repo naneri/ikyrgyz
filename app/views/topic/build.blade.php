@@ -1,6 +1,7 @@
 
 
-@foreach($topics as $topic)
+<div class="masonry">
+  @foreach($topics as $topic)
 
 <div class="b-user-wall">
   <div class="b-user-wall__inner">
@@ -46,6 +47,8 @@
 </div>
 
 @endforeach
+
+</div>
 
             <!-- 
 
