@@ -1,41 +1,41 @@
 
 
-            @foreach($topics as $topic)
+@foreach($topics as $topic)
 
-            <div class="col-lg-6">
-      <div class="b-wall-top">
-        <p class="top-inner"><a href=""><img src="img/20.png" alt="" class="pull-left"/></a><span class="wall-top-name">Бурана</span><span class="wall-top-date">17 июня 2014, 12:51</span></p>
-        <div class="top-count"><img src="img/22.png" alt=""/><span>19</span><img src="img/23.png" alt=""/><span>34</span></div>
-      </div>
-      <div class="b-wall-image"><a href="#"><img src="img/21.png" alt=""/></a></div>
-      <div class="b-wall-bot">
-        <p class="bot-inner"><a href="" class="bot-image"><img src="img/20.png" alt="" class="pull-left"/></a><span class="bot-name-title">Красота Кыргызского народа</span><span class="bot-count-title">31 топик</span>
-          <div class="clear"></div>
-        </p>
-        <ul class="nav nav-pills">
-          <li><a href="" class="about">Подробнее</a></li>
-          <li class="dropdown share-list-dropdown"><a href="" class="share">Поделиться</a>
-            <ul class="dropdown-menu">
-              <li><a href=""></a></li>
-              <li><a href=""></a></li>
-              <li><a href=""></a></li>
-              <li><a href=""></a></li>
-              <li><a href=""></a></li>
-            </ul>
-          </li>
-          <li class="btn-list"><a href="" class="btn"></a></li>
-          <li class="btn-list"><a href="" class="btn"></a></li>
-          <li>+99</li>
+<div class="col-lg-6">
+  <div class="b-wall-top">
+  <p class="top-inner"><a href=""><img src="img/20.png" alt="" class="pull-left"/></a><span class="wall-top-name">Бурана</span><span class="wall-top-date">17 июня 2014, 12:51</span></p>
+  <div class="top-count"><img src="img/22.png" alt=""/><span>19</span><img src="img/23.png" alt=""/><span>34</span></div>
+  </div>
+  <div class="b-wall-image"><a href="#"><img src="img/21.png" alt=""/></a></div>
+  <div class="b-wall-bot">
+  <p class="bot-inner"><a href="" class="bot-image"><img src="img/20.png" alt="" class="pull-left"/></a><span class="bot-name-title">Красота Кыргызского народа</span><span class="bot-count-title">31 топик</span>
+  <div class="clear"></div>
+  </p>
+    <ul class="nav nav-pills">
+      <li><a href="" class="about">Подробнее</a></li>
+      <li class="dropdown share-list-dropdown"><a href="" class="share">Поделиться</a>
+        <ul class="dropdown-menu">
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
         </ul>
-      </div>
-    </div>
-           
-            @endforeach
+        </li>
+      <li class="btn-list"><a href="" class="btn"></a></li>
+      <li class="btn-list"><a href="" class="btn"></a></li>
+      <li>+99</li>
+    </ul>
+  </div>
+</div>
+
+@endforeach
 
             <!-- 
 
  <div class="b-section-wall__inner">
-              <div class="b-section-wall__top"><a href="#"><img src="{{ $topic->user->description->user_profile_avatar}}" alt=""/></a>
+              <div class="b-section-wall__top"><a href="#"><img src="{{ $topic->user->description->user_profile_avatar or ''}}" alt=""/></a>
                 <p class="title">{{$topic->title}}</p>
                 <p class="date">{{$topic->created_at}}</p>
                 <p class="last"> <span class="vis">19 </span><span class="msg">34</span></p>
