@@ -2,8 +2,9 @@
 
 
 @section('content')
-    @include('misc.createnav')
-            <div class="container b-main-topic-wrapper all_topics">
+
+            <div class="b-content">
+            	@include('misc.createnav')
                 @include('topic.build', array('topics' => $topics, 'blogInfo' => true))
             </div>
     @include('main.scripts')

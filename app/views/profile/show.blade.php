@@ -3,145 +3,144 @@
 @section('content')
 
 
-<div class="container">
+<div class="b-content">
 {{{$user->email}}} <br>
 @if(Auth::id() != $user->id)
 	@if($friend_status != True)
 		<a href="{{URL::to('people/friendRequest/'. $user->id)}}">Стать друзьями</a>
 	@endif
-					 <div class="b-profile">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 b-profile__image"><a href="#"><img src="img/12.png" alt="user"/></a><a href="#">
-            <p>Загрузить фото</p></a></div>
-        <div class="col-lg-6 b-profile__name">
-          <p><span class="rait">Рейтинг</span><span class="num">+0.00</span></p>
-          <p class="profile-name">Ярослав Александрович Маркин</p>
-          <p class="date">10 декабря 1990</p>
-        </div>
-        <div class="col-lg-3">
-          <div class="b-icons-top">
-            <ul class="nav nav-tabs">
-              <li><a href="#"></a></li>
-              <li><a href="#"></a></li>
-              <li><a href="#"></a></li>
-              <li><a href="#"></a></li>
-              <li><a href="#"></a></li>
-              <li><a href="#"></a></li>
-              <li><a href="#"></a></li>
-            </ul>
-          </div>
-          <div class="b-btns">
-            <ul class="nav nav">
-              <li class="btn">
-                <p>Отправить сообщения</p>
-              </li>
-              <li class="btn">
-                <p>Поиск друзей</p>
-              </li>
-              <li class="btn">
-                <p> Системные сообщения</p>
-              </li>
-              <li class="btn">
-                <p> Случайный профиль</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="b-wall-nav">
-    <div class="container">
-      <ul class="nav nav-pills">
-        <li><a href="#">Лента</a></li>
-        <li><a href="#">Публикации</a></li>
-        <li><a href="#">Друзья</a></li>
-        <li><a href="#">Избранное</a></li>
-        <li class="pull-right"> <a href="#">Настройки</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="b-wall-content">
-    <div class="container">
-      <div class="col-lg-6">
-        <div class="b-wall-top">
-          <p class="top-inner"><a href=""><img src="img/20.png" alt="" class="pull-left"/></a><span class="wall-top-name">Бурана</span><span class="wall-top-date">17 июня 2014, 12:51</span></p>
-          <div class="top-count"><img src="img/22.png" alt=""/><span>19</span><img src="img/23.png" alt=""/><span>34</span></div>
-        </div>
-        <div class="b-wall-image">
-          <div class="row"><a href="#"><img src="img/21.png" alt=""/></a></div>
-        </div>
-        <div class="b-wall-bot">
-          <p class="bot-inner"><a href="" class="bot-image"><img src="img/20.png" alt="" class="pull-left"/></a><span class="bot-name-title">Красота Кыргызского народа</span><span class="bot-count-title">31 топик</span>
-            <div class="clear"></div>
-          </p>
-          <ul class="nav nav-pills">
-            <li><a href="" class="about">Подробнее</a></li>
-            <li class="dropdown share-list-dropdown"><a href="" class="share">Поделиться</a>
-              <ul class="dropdown-menu">
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+					<div class="b-user-profile">
+            <div class="b-user-profile__left"><a href="" class="user-image"><img style="width:40px" src="{{ asset($user->description->user_profile_avatar) }}" alt=""/></a>
+              <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
+            </div>
+            <div class="b-user-profile__middle">
+              <p class="user-raiting">Рейтинг<span class="num">+0.00</span></p>
+              <p class="user-name">Ярослав Александрович </br>Маркин</p>
+              <p class="user-date">10 декабря 1990</p>
+            </div>
+            <div class="b-user-profile__right">
+              <div class="b-user-profile-link"><a href="#" class="b-user-profile-link__create">Создать</a></div>
+              <ul class="b-user-profile-links">
+                <li class="b-user-profile-links__list"><a href="#"></a></li>
+                <li class="b-user-profile-links__list"><a href="#"></a></li>
+                <li class="b-user-profile-links__list"><a href="#"></a></li>
+                <li class="b-user-profile-links__list"><a href="#"></a></li>
+                <li class="b-user-profile-links__list"><a href="#"></a></li>
+                <li class="b-user-profile-links__list"><a href="#"></a></li>
+                <li class="b-user-profile-links__list"><a href="#"></a></li>
+                <div class="clear"></div>
               </ul>
-            </li>
-            <li class="btn-list"><a href="" class="btn"></a></li>
-            <li class="btn-list"><a href="" class="btn"></a></li>
-            <li>+99</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-5 col-lg-offset-1 b-media__right">
-        <div class="row">
-          <div class="b-main-block-wrapper">
-            <p class="video-title"><span class="title">Мое видео</span>
-              <button class="btn buttons-all">Все</button>
-            </p>
-            <ul class="nav nav-pills b-media-video">
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
+              <ul class="b-user-profile-buttons">
+                <li class="b-user-profile-buttons__list"><a href="#">Отравить сообщение<span class="msg-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="#">Поиск друзей<span class="search-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="#">Системные сообщения<span class="system-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="#">Случайный профиль<span class="random-image"></span></a></li>
+              </ul>
+            </div>
+            <div class="clear"></div>
+          </div>
+    <div class="b-user-navigation">
+            <ul class="b-user-navigation-list">
+              <li class="b-user-navigation-list__list"><a href="#">Лента</a></li>
+              <li class="b-user-navigation-list__list"><a href="#">Публикации</a><span>999</span></li>
+              <li class="b-user-navigation-list__list"><a href="#">Друзья</a><span>999</span></li>
+              <li class="b-user-navigation-list__list"><a href="#">Избранное</a></li><a href="#" class="b-user-navigation-list__setting">Настройки</a>
+              <div class="clear"></div>
             </ul>
           </div>
-        </div>
-        <div class="row">
-          <div class="b-main-block-wrapper">
-            <p class="video-title"><span class="title">Мое видео</span>
-              <button class="btn buttons-all">Все</button>
-            </p>
-            <ul class="nav nav-pills b-media-video">
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-            </ul>
+          <div class="b-section-wrapper">
+            <div class="b-user-wall">
+              <div class="b-user-wall__inner">
+                <div class="b-user-wall-header">
+                  <div class="b-user-wall-header__image"><a href=""><img src="img/48.png" alt=""/></a></div>
+                  <p class="b-user-wall-header__title">Бурана</p>
+                  <p class="b-user-wall-header__date">17 июня 2014, 12:53
+                    <div class="clear"></div>
+                  </p>
+                  <p class="b-user-wall-header__vision"><img src="img/22.png" alt=""/><span>19</span><img src="img/23.png" alt=""/><span>34</span></p>
+                </div>
+                <div class="b-user-wall-image"><a href=""><img src="img/21.png" alt=""/></a></div>
+                <div class="b-user-wall-footer">
+                  <div class="b-user-wall-footer__image"><a href=""><img src="img/40.png" alt=""/></a></div>
+                  <p class="b-user-wall-footer__title">Красота Кыргызского народа</p>
+                  <p class="b-user-wall-footer__number">31 топик
+                    <div class="clear"></div>
+                  </p>
+                  <div class="b-user-wall-footer__btn"><a href="" class="about-btn btn">Подробнее</a>
+                    <ul class="b-user-wall-footer-list">
+                      <li><a href="" class="share-btn btn">Поделиться</a>
+                        <ul class="b-user-wall-footer-dropdown">
+                          <li><a href="">Facebook</a></li>
+                          <li><a href="">Google+</a></li>
+                          <li><a href="">Twitter</a></li>
+                          <li><a href="">Мой мир</a></li>
+                          <li><a href="">В контакте</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <input type="submit" class="btn btn-minus"/>
+                    <input type="submit" class="btn btn-plus"/><span class="likes">+99</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="b-user-media">
+              <div class="b-user-media__video">
+                <div class="b-user-media-video-top">
+                  <p class="b-user-media-video-top__title">Мое видео</p>
+                  <div class="b-user-media-video-top__btn">
+                    <input type="submit" value="Все" class="btn btn-all"/>
+                  </div>
+                </div>
+                <ul class="b-user-media-video-gallery">
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <div class="clear"></div>
+                </ul>
+              </div>
+              <div class="b-user-media__photo">
+                <div class="b-user-media-video-top">
+                  <p class="b-user-media-video-top__title">Мое видео</p>
+                  <div class="b-user-media-video-top__btn">
+                    <input type="submit" value="Все" class="btn btn-all"/>
+                  </div>
+                </div>
+                <ul class="b-user-media-video-gallery">
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <div class="clear"></div>
+                </ul>
+              </div>
+              <div class="b-user-media__music">
+                <div class="b-user-media-video-top">
+                  <p class="b-user-media-video-top__title">Мое видео</p>
+                  <div class="b-user-media-video-top__btn">
+                    <input type="submit" value="Все" class="btn btn-all"/>
+                  </div>
+                </div>
+                <ul class="b-user-media-video-gallery">
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                  <div class="clear"></div>
+                </ul>
+              </div>
+            </div>
+            <div class="clear"></div>
           </div>
-        </div>
-        <div class="row">
-          <div class="b-main-block-wrapper">
-            <p class="video-title"><span class="title">Мое видео</span>
-              <button class="btn buttons-all">Все</button>
-            </p>
-            <ul class="nav nav-pills b-media-video">
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-              <li><a href=""><img src="img/19.png" alt=""/></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
+  
 				@else
 					<b>Это вы</b>	
 				@endif

@@ -1,41 +1,71 @@
 @if(Auth::check())
 <div class="b-header">
-    <div class="navbar navbar-default">
-      <div class="container-fluid">
-        <ul class="nav nav-justified">
-          <li><a href="#"> <img src="{{ asset('img/2.png') }}" alt="logo"/><span>I-kyrgyz</span></a></li>
-          <li class="dropdown"><a href="#"><img src="{{ asset('img/3.png') }}" alt="user"/><span>Имя пользователя</span></a>
-            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-              <li><a href="#">Изменить профиль</a></li>
-              <li><a href="#">Личные сообщения (1877)</a></li>
-              <li><a href="#">Друзья</a></li>
-              <li><a href="#">Группы</a></li>
-            </ul>
-          </li>
-          <li><a href="#"><img src="{{ asset('img/4.png') }}" alt="user"/><span class="counter">25</span></a></li>
-          <li><a href="#"><img src="{{ asset('img/5.png') }}" alt="count"/><span class="counter">25</span></a></li>
-          <li><a href="#"><img src="{{ asset('img/6.png') }}" alt="count"/><span class="counter">25</span></a></li>
-          <li><a href="{{URL::to('search/people')}}"> <img src="{{ asset('img/7.png') }}" alt="search"/><span>Поиск друзей</span></a></li>
-          <li class="dropdown"><a href="#"><img src="{{ asset('img/8.png') }}" alt="book"/><span>Энциклопедия</span></a>
-            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-              <li><a href="#">История</a></li>
-              <li><a href="#">Обычаи</a></li>
-              <li><a href="#">Культура</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href=""><img src="{{ asset('img/9.png') }}" alt="help"/></a>
-            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-              <li><a href="#">Помощь</a></li>
-              <li><a href="#">Сообщить о проблеме</a></li>
-              <li><a href="#">История действии</a></li>
-            </ul>
-          </li>
-          <li><a href="#"><img src="{{ asset('img/10.png') }}" alt="language"/></a></li>
-          <li><a href="#"><img src="{{ asset('img/11.png') }}" alt="closebtn"/></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+          <div class="b-header__inner">
+            <div class="b-header-nav">
+              <ul>
+                <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
+                <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/38.png') }}" alt="user"/><span class="user-name">Имя пользователя</span></a>
+                  <ul class="b-header-nav-dropdown">
+                    <li><a href="{{ URL::to('profile/edit') }}">Изменить профиль</a></li>
+                    <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>
+                    <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
+                    <li><a href="#">Группы</a></li>
+                  </ul>
+                </li>
+                <li class="b-header-nav__list">
+                  <a href="#" class="counter-block">
+                    <img src="{{ asset('img/4.png') }}" alt="msg"/>
+                    <span class="counter">25</span>
+                  </a>
+                  <a href="#" class="counter-block">
+                    <img src="{{ asset('img/5.png') }}" alt="msg"/>
+                    <span class="counter">25</span>
+                  </a>
+                  <a href="#" class="counter-block">
+                    <img src="{{ asset('img/6.png') }}" alt="msg"/>
+                    <span class="counter">25</span>
+                  </a>
+                </li>
+                <li class="b-header-nav__list">
+                  <a href="{{ URL::to('search/people') }}">
+                    <img src="{{ asset('img/7.png') }}" alt="search"/>
+                    <span class="search-friend">Поиск друзей</span>
+                  </a>
+                </li>
+                <li class="b-header-nav__list">
+                  <a href="#">
+                    <img src="{{ asset('img/8.png') }}" alt="search"/>
+                    <span class="search-friend">Энциклопедия</span>
+                  </a>
+                  <ul class="b-header-nav-dropdown">
+                    <li><a href="">История</a></li>
+                    <li><a href="">Обычаи</a></li>
+                    <li><a href="">Культура </a></li>
+                  </ul>
+                </li>
+                <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/39.png') }}" alt="search"/></a>
+                  <ul class="b-header-nav-dropdown">
+                    <li><a href="#">Выбор языка</a>
+                      <ul class="b-header-sub-menu">
+                        <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Английский</span></a></li>
+                        <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский</span></a></li>
+                        <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский  </span></a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Помощь</a>
+                      <ul class="b-header-sub-menu">
+                        <li><a href="">Сообщить о проблеме</a></li>
+                        <li><a href="">История действии</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="{{ URL::to('logout') }}">выход</a></li>
+                  </ul>
+                </li>
+                <div class="clear"></div>
+              </ul>
+            </div>
+          </div>
+        </div>
 @endif
 
 

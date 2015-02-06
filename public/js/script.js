@@ -13,7 +13,7 @@ $(function(){
  // });
 
 $(function() {
-	$('.b-header__navigation li').hover(function(){
+	$('.b-header-nav li').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
 		$(this).children('ul').stop(false, true).fadeOut(500);
@@ -62,7 +62,7 @@ $(function() {
 });
 
 $(function() {
-	$('.friends-dropdown li').hover(function(){
+	$('.b-user-wall-footer-list li ').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
 		$(this).children('ul').stop(false, true).fadeOut(500);
@@ -70,7 +70,32 @@ $(function() {
 	});
 });
 
+$(function() {
+	$('ul.b-topic-navigation-list li  ').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
 
+	});
+});
+
+$(function() {
+	$('.b-topic-navigation__middle li  ').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
+
+$(function() {
+	$('.b-topic-navigation-format li  ').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
 
 
 
