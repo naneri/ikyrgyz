@@ -2,13 +2,20 @@
 
 @section('content')
 <div class="container">
-    <div class="col-lg-5">
-            {{Form::open()}}
+    {{Form::open()}}
+        <div class="col-lg-5">
                 Место поиска:<br>
                 Выборка места проживания по заполненному
                 профилю пользователя<br>
                 Например: Бишкек, Кырзыгстан<br>
-                Страна: {{Form::select('country')}}<br>
+                <?php
+                    $countries = array();
+                    foreach(DB::connection('mysql_users')->table('user_description')->distinct('country')->get(array('country'))
+                            as $country){
+                        $countries[$country->country] = $country->country;
+                    }
+                ?>
+                Страна: {{Form::select('country', $countries)}}<br>
                 Город: {{Form::select('city')}}<br>
                 <hr>
                 Учебные заведения:<br>
@@ -20,11 +27,16 @@
                 <hr>
                 Возраст<br>
                 От {{Form::text('age-from')}} До {{Form::text('age-to')}}<br>
-            {{Form::close()}}
-    </div>
-    <div class="col-lg-7" id="users-list">
-        @include('search.build.users', compact($users))
-    </div>
+        </div>
+        <div class="col-lg-7" id="users-list">
+            <div class="col-lg-7 search-text">
+                {{Form::text('search-text')}}
+                {{Form::submit('Поиск', array('onclick' => 'return false;', 'id' => 'btn-search'))}}
+            </div>
+            <div class="col-lg-7" id="search-result">
+            </div>
+        </div>
+    {{Form::close()}}
 </div>
 @stop
 
