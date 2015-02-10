@@ -11,4 +11,5 @@ tests/_output/*
 
 
 app/public/images/user/*
+app/config/devzone51/*
 /nbproject/private/
