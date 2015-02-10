@@ -22,7 +22,7 @@
       @endif
     </a></div>
     <div class="b-user-wall-footer">
-      <div class="b-user-wall-footer__image"><a href=""><img src="img/48.png" alt=""/></a></div>
+      <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset('img/48.png') }}" alt=""/></a></div>
       <p class="b-user-wall-footer__title">{{$topic->blog->title}}</p>
       <p class="b-user-wall-footer__number">31 топик
         <div class="clear"></div>

@@ -9,7 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('jquery/jquery-ui.js') }}">		</script>
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('js/isotope.min.js') }}"></script>
     <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
   </head>
   <body>

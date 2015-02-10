@@ -7,18 +7,16 @@ class Topic extends Eloquent {
         public static $rules = array();
 
         static function getSubscribedTopics($userId, $rating, $offset = 0) {
-
-        $topic_number = Config::get('topic.topics_per_page');
-
-		return 	Topic::with('blog', 'user', 'user.description')->skip($offset*$topic_number)->take($topic_number)->orderBy('topics.id', 'DESC')->get();/*where('topics.rating', '>', $rating)
-              ->join('blogs', 'topics.blog_id', '=', 'blogs.id')
-              ->join('blog_subscriptions as us', function ($j) use ($userId){
-              $j->on('us.blog_id', '=', 'blogs.id')
-              ->where('us.user_id', '=', $userId);
-              })
-              ->take($topic_number)
-              ->offset($offset)
-				->get(['topics.*']);*/
+            $topic_number = Config::get('topic.topics_per_page');
+    		return 	Topic::with('blog', 'user', 'user.description')->skip($offset*$topic_number)->take($topic_number)->orderBy('topics.id', 'DESC')->get();/*where('topics.rating', '>', $rating)
+                  ->join('blogs', 'topics.blog_id', '=', 'blogs.id')
+                  ->join('blog_subscriptions as us', function ($j) use ($userId){
+                  $j->on('us.blog_id', '=', 'blogs.id')
+                  ->where('us.user_id', '=', $userId);
+                  })
+                  ->take($topic_number)
+                  ->offset($offset)
+    				->get(['topics.*']);*/
         }
 
         public function tags() {

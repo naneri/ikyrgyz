@@ -24,15 +24,17 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-
-	'local' => array('homestead'),
-    'Beks'  => array('Beks'),
-    'kana'  => array('kana'),
-    'respect' => array('respect'), 
-    'team1' => array('team1'), //devzone hosting
-   'damir' => array('XTREME-BBH2NSTU'), //devzone hosting
-));
+$env = $app->detectEnvironment(
+    array(
+        'local' => array('homestead'),
+        'Beks'  => array('Beks'),
+        'kana'  => array('kana'),
+        'respect' => array('respect'), 
+        'team1' => array('team1'), //devzone hosting
+       'damir' => array('XTREME-BBH2NSTU'), //devzone hosting
+       'kyrgyz' => array('http://i-kyrgyz.com/', 'http://i-kyrgyz.com/')
+    )
+);
 
 /*
 |--------------------------------------------------------------------------
