@@ -1,5 +1,7 @@
 <script>
 $(document).ready(function(){ 
+    
+        startSearch();
         
         $('input').change(function(){
             setSearchTimeout();
@@ -16,26 +18,30 @@ $(document).ready(function(){
                 clearTimeout(timer); //cancel the previous timer.
                 timer = null;
             }
-            timer = setTimeout(searchPeople, 1000);
+            timer = setTimeout(startSearch, 1000);
         }
         
-        function searchPeople(){
+        function startSearch(){
             
             data = $('form').serialize();
             
             $.ajax({
-                url: "{{asset('/search/people')}}",
+                url: window.location,//"{{asset('/search/people')}}",
                 data: data,
                 dataType: 'json',
                 type: 'POST',
                 success: function(result){
                     if(!result['errors']){
-                        $('#users-list').html(result.users);
+                        $('#search-result').html(result.entries);
                     }
                 },
                 error: function(result) {
                 }
             });
         }        
+
+        $('#btn-search').click(function() {
+            startSearch();
+        });
 });
 </script>

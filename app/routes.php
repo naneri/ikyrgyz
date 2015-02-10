@@ -73,6 +73,8 @@ Route::group(array('before' => 'auth'),function(){
         
         Route::get('search/people', 'SearchController@searchPeople');
         Route::post('search/people', 'SearchController@postSearchPeople');
+        Route::get('search/content', 'SearchController@searchContent');
+        Route::post('search/content', 'SearchController@postSearchContent');
 
         Route::resource('tags', 'TagsController');
         Route::resource('photos', 'PhotosController');

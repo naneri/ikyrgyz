@@ -46,7 +46,11 @@ class Topic extends Eloquent {
         public function user(){
             return $this->belongsTo('User');
         }
-        
+
+        public function author() {
+            return $this->belongsTo('User', 'user_id');
+        }
+
         public function comments(){
             return $this->hasMany('TopicComment');
         }

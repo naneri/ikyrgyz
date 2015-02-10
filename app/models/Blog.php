@@ -10,6 +10,10 @@ Class Blog extends Eloquent{
         
         protected $fillable = ['title', 'description', 'type_id', 'user_id'];
         
+        public function user() {
+            return $this->belongsTo('User', 'user_id');
+        }
+
         public function author(){
             return $this->belongsTo('User', 'user_id');
         }
