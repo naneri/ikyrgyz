@@ -103,4 +103,5 @@ return array(
 
 	'attributes' => array(),
 
+    "recaptcha" => 'The :attribute field is not correct.',
 );

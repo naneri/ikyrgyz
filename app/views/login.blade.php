@@ -89,12 +89,8 @@
                                                     <div class="form-group">
                                                         <input class="form-control pass-check" placeholder="Повторите пароль" name="" type="password" value="">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <img style="margin-top: 5px" src="http://devzone51.com/kyrgyz/engine/lib/external/kcaptcha/index.php?PHPSESSID=ebma3hhaavomg1j29d0bntke27"
-                                                             onclick="this.src='http://devzone51.com/kyrgyz/engine/lib/external/kcaptcha/index.php?PHPSESSID=ebma3hhaavomg1j29d0bntke27&n='+Math.random();"
-                                                             class="captcha-image" />
-                                                        <input type="text" name="captcha" id="captcha" value="" maxlength="3" class="input-text style-1 input-width-100 js-ajax-validate" placeholder="Введите код с картинки"/>
-                                                        <small class="validate-error-hide validate-error-field-captcha"></small></p>
+                                                    <div class="form-group" style="margin-left: -15px">
+                                                        {{Form::captcha(array('theme' => 'red'))}}
                                                     </div>
                                                     <div class="all-alerts">
                                                         @foreach ($errors->all() as $error)
