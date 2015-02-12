@@ -8,7 +8,7 @@
             <div>{{$entry->created_at}}</div>
             <div>{{$entry->author->email}}</div>
             <div>Топик</div>
-        @else
+        @elseif($entry->is_topic == 0)
             <?php $entry = Blog::find($entry->id); ?>
             <img src="" style="float:left;width:100px;height:100px;" />
             <div>{{HTML::link('blog/show/'.$entry->id, $entry->title)}}</div>
@@ -28,7 +28,8 @@
                     @elseif($userRole == 'reject')
                     [{{HTML::link('/blog/'.$entry->id.'/refollow', 'читать')}}]        
                     @endif
-                @endif</div>
+                @endif
+            </div>
         @endif
     </div>
     @endforeach
