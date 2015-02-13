@@ -63,8 +63,10 @@ class SearchController extends \BaseController {
         }
         
         public function postSearchContent(){
+            $search = Input::get('search-text');
+            $stemmer = new SimpleStemmer();
             $content = $this->getContent();
-            $result['entries'] = View::make('search.build.content', array('content' => $content))->render();
+            $result['entries'] = View::make('search.build.content', array('content' => $content))->render();//$stemmer->getArrayStemmedWords($search);
             return $result;
         }
         
@@ -73,34 +75,80 @@ class SearchController extends \BaseController {
             $topicsWhere = " WHERE `topics`.`draft` = 0 ";
             $blogs = array();
             $topics = array();
+            $blogsAdditionalColumns = ' , 0 as `is_topic` ';
+            $topicsAdditionalColumns = ' , 1 as `is_topic` ';
+            $isRelevantRight = false;
 
             if (Input::has('search-text')) {
-                $blogsWhere .= " AND (`blogs`.`title` LIKE '%" . Input::get('search-text') . "%' OR `blogs`.`description` LIKE '%" . Input::get('search-text') . "%')";
-                $topicsWhere .= " AND (`topics`.`title` LIKE '%" . Input::get('search-text') . "%' OR `topics`.`description` LIKE '%" . Input::get('search-text') . "%')";
+                $searchText = Input::get('search-text');
+                if(Input::get('sort') == 'relevant'){
+                    $relevant = "MATCH (`title`,`description`) AGAINST ('$searchText' IN BOOLEAN MODE)";
+                    $topicsAdditionalColumns .= ", $relevant as `relevant` ";
+                    $blogsAdditionalColumns .= ", $relevant as `relevant` ";
+                    $blogsWhere .= " AND " . $relevant;
+                    $topicsWhere .= " AND " . $relevant;
+                    $isRelevantRight = true;
+                } else {
+                    $blogsWhere .= " AND (`blogs`.`title` LIKE '%" . Input::get('search-text') . "%' OR `blogs`.`description` LIKE '%" . Input::get('search-text') . "%')";
+                    $topicsWhere .= " AND (`topics`.`title` LIKE '%" . Input::get('search-text') . "%' OR `topics`.`description` LIKE '%" . Input::get('search-text') . "%')";
+                }
             }
 
             if (in_array(Input::get('filter'), array('any', 'blog'))) {
-                $blogs = DB::select("select `blogs`.*, 0 as `is_topic` "
-                                . "from `blogs` "
+                $blogs = DB::select(" select `blogs`.* "
+                                . $blogsAdditionalColumns
+                                . " from `blogs` "
                                 . $blogsWhere);
             }
             if (in_array(Input::get('filter'), array('any', 'topic'))) {
-                $topics = DB::select("select `topics`.*, 1 as `is_topic` "
+                $topics = DB::select("select `topics`.* "
+                                . $topicsAdditionalColumns
                                 . "from `topics` "
                                 . $topicsWhere);
             }
+            
+//            dd(DB::getQueryLog());
 
             $content = array_merge($blogs, $topics);
-            usort($content, function($a, $b) {
-                if (Input::get('sort') == 'date') {
+            if (Input::get('sort') == 'date') {
+                usort($content, function($a, $b) {
                     return strtotime($a->created_at) - strtotime($b->created_at);
-                } elseif (Input::get('sort') == 'rating') {
+                });
+            } elseif (Input::get('sort') == 'rating') {
+                usort($content, function($a, $b) {
                     return $a->rating - $b->rating;
-                }
-                return strtotime($a->created_at) - strtotime($b->created_at);
-            });
+                });
+            } elseif (Input::get('sort') == 'relevant' && $isRelevantRight){
+                usort($content, function($a, $b) {
+                    return $a->relevant - $b->relevant;
+                });
+            } else {
+                usort($content, function($a, $b) {
+                    return strtotime($a->created_at) - strtotime($b->created_at);
+                });
+            }
             $content = array_reverse($content);
             return $content;
         }
 
+}
+
+class SimpleStemmer{
+    
+    var $okonchaniya = "/(ый|ой|ая|ое|ые|ому|а|о|у|ы|у|ю|ёй|ём|ом|ем|е|ого|ему|и|ство|ых|ох|ия|ий|ь|я|он|ют|ат)$/i";
+
+    public function stemWord($word){
+        $stemedWord = preg_replace($this->okonchaniya, '', $word);
+        return $stemedWord;
+    }
+    
+    public function getArrayStemmedWords($words){
+        $stemedWords = array();
+        preg_match_all('/([a-zA-Zа-яА-Я]+)/u', $words, $wordsArray);
+        for ($i = 0; $i < count($wordsArray[1]); $i++){
+            $stemedWords[] = $this->stemWord($wordsArray[1][$i]);
+        }
+        return $stemedWords;
+    }
+    
 }

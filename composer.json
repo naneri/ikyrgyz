@@ -9,7 +9,8 @@
 		"way/generators": "~2.0",
 		"fzaninotto/faker": "1.5.*@dev",
 		"artdarek/oauth-4-laravel": "dev-master",
-		"barryvdh/laravel-debugbar": "1.8"
+		"barryvdh/laravel-debugbar": "1.8",
+        "greggilbert/recaptcha": "1.1.5"
 	},
         "require-dev": {
             "codeception/codeception": "*",

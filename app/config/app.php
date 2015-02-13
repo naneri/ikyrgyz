@@ -124,6 +124,7 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+        'Greggilbert\Recaptcha\RecaptchaServiceProvider'
 
 	),
 
@@ -193,7 +194,6 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
-
 	),
 
 );
