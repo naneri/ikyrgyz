@@ -18,10 +18,6 @@ Class Blog extends Eloquent{
             return $this->belongsTo('User', 'user_id');
         }
         
-        public function type(){
-            return $this->belongsTo('BlogType');
-        }
-        
         public function topics(){
             return $this->hasMany('Topic');
         }

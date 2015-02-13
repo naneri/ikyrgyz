@@ -8,4 +8,5 @@ return array(
 	'friend_status.friends' 				=> 4,
 	
 	'user_site'								=> URL::to('/'),
+
 	);
