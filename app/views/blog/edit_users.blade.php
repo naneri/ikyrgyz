@@ -28,6 +28,10 @@
                                                     <th>banned</th>
                                                 </thead>
                                                 <tbody>
+                                                    <tr>
+                                                        <td>{{$blog->getCreator()->email}}</td>
+                                                        <td colspan="4">Blog author</td>
+                                                    </tr>
                                                     @foreach($blog->getBlogUsers() as $blogUser)
                                                     <tr>
                                                         <td>{{$blogUser->email}}</td>

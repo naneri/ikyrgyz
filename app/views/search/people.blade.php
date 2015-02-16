@@ -4,6 +4,11 @@
 <div class="container">
     {{Form::open()}}
         <div class="col-lg-5">
+            {{HTML::link('#', 'Люди')}}
+            {{HTML::link('search/content', 'Контент')}}
+            {{HTML::link('#', 'Группы')}}
+            {{HTML::link('#', 'Медиа')}}
+            <br>
                 Место поиска:<br>
                 Выборка места проживания по заполненному
                 профилю пользователя<br>

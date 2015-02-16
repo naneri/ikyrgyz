@@ -4,6 +4,11 @@
 <div class="container">
     {{Form::open()}}
         <div class="col-lg-5">
+            {{HTML::link('search/people', 'Люди')}}
+            {{HTML::link('#', 'Контент')}}
+            {{HTML::link('#', 'Группы')}}
+            {{HTML::link('#', 'Медиа')}}
+            <br>
                     Сортировка:<br>
                     {{Form::radio('sort', 'rating', null)}}По рейтингу<br>
                     {{Form::radio('sort', 'relevant', null)}}По релевантности<br>

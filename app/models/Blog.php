@@ -154,4 +154,10 @@ Class Blog extends Eloquent{
             return $url;
         }
 
+        public function getBlogUsers(){
+            $userIds = BlogRole::join('roles', 'roles.id', '=', 'blog_roles.role_id')
+                            ->where('blog_roles.blog_id', $this->id)
+                            ->get(array('user_id'))->toArray();
+            return User::whereIn('id', $userIds)->get();
+        }
 }
