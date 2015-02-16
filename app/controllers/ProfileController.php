@@ -50,4 +50,28 @@ class ProfileController extends BaseController {
 		$friends = Friend::friendsList(Auth::id());
 		return View::make('profile.friends', array('friends' => $friends));
 	}
+        
+        public function getEditMain(){
+            $user = User::with('description')->find(Auth::id());
+            $access = array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне');
+            
+            $countries = array('0' => 'Страна');
+            foreach(Country::all() as $country){
+                $countries[$country->id] = $country->name;
+            }
+            
+            $cities = array('0' => 'Город');
+            foreach (City::all() as $city) {
+                $cities[$city->id] = $city->name;
+            }
+            
+            return View::make('profile.edit.main', array('user' => $user, 'access' => $access, 'countries' => $countries, 'cities' => $cities));
+        }
+        
+        public function postEditMain(){
+		$description_data = Input::except(array('_token', 'day', 'month', 'year', 'image'));
+                $description_data['birthday'] = Input::get('year').'-'.Input::get('month').'-'.Input::get('day');
+                User_Description::update_data($description_data);
+                return Redirect::back();
+        }
 }

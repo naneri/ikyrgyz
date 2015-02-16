@@ -43,7 +43,14 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
-        
+        Route::get('profile/edit/main', 'ProfileController@getEditMain');
+        Route::post('profile/edit/main', 'ProfileController@postEditMain');
+        Route::get('profile/edit/study', 'ProfileController@getEditStudy');
+        Route::get('profile/edit/work', 'ProfileController@getEditWork');
+        Route::get('profile/edit/contact', 'ProfileController@getEditContact');
+        Route::get('profile/edit/family', 'ProfileController@getEditFamily');
+        Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
+
         Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
         Route::group(array('before' => 'topic_edit_permission'), function(){
