@@ -1,8 +1,11 @@
 <?php
 
 class ProfileController extends BaseController {
+    
+        
+        var $access = array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне');
 
-	/**
+        /**
 	 * Страница с профилем пользователя
 	 * 
 	 * @param  [type] $id [description]
@@ -52,20 +55,8 @@ class ProfileController extends BaseController {
 	}
         
         public function getEditMain(){
-            $user = User::with('description')->find(Auth::id());
-            $access = array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне');
-            
-            $countries = array('0' => 'Страна');
-            foreach(Country::all() as $country){
-                $countries[$country->id] = $country->name;
-            }
-            
-            $cities = array('0' => 'Город');
-            foreach (City::all() as $city) {
-                $cities[$city->id] = $city->name;
-            }
-            
-            return View::make('profile.edit.main', array('user' => $user, 'access' => $access, 'countries' => $countries, 'cities' => $cities));
+            $user = User::with('description')->find(Auth::id());       
+            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access));
         }
         
         public function postEditMain(){

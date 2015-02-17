@@ -13,15 +13,8 @@
                 Выборка места проживания по заполненному
                 профилю пользователя<br>
                 Например: Бишкек, Кырзыгстан<br>
-                <?php
-                    $countries = array();
-                    foreach(DB::connection('mysql_users')->table('user_description')->distinct('country')->get(array('country'))
-                            as $country){
-                        $countries[$country->country] = $country->country;
-                    }
-                ?>
-                Страна: {{Form::select('country', $countries)}}<br>
-                Город: {{Form::select('city')}}<br>
+                Страна: {{Form::select('country', Country::getAllForView())}}<br>
+                Город: {{Form::select('city', City::getAllForView())}}<br>
                 <hr>
                 Учебные заведения:<br>
                 <hr>

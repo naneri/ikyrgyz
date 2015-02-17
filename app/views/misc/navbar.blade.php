@@ -6,7 +6,7 @@
                 <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
                 <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/38.png') }}" alt="user"/><span class="user-name">Имя пользователя</span></a>
                   <ul class="b-header-nav-dropdown">
-                    <li><a href="{{ URL::to('profile/edit') }}">Изменить профиль</a></li>
+                    <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
                     <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>
                     <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
                     <li><a href="#">Группы</a></li>
