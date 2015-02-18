@@ -2,171 +2,66 @@
 
 @section('content')
 
-    @include('misc.createnav')
-    <div class="b-add-topic">
-    <div class="container">
-      <form id="" method="" action="">
-        <p class="title">Создать топик<span class="close-topic btn pull-right"></span></p>
-        <div class="b-wrapper">
-          <input value="Введите название" type="text" class="topic-add-name"/><a href="#" class="pull-right"><span>Черновики 999</span></a>
-          <div class="topic-select-blog">
-            <select name="">
-              <option value="">Выберете блог</option>
-              <option value=""></option>
-              <option value=""></option>
-            </select><span class="btn skin-topic-btn">Обложка топика</span>
-          </div>
-          <div class="topic-textarea">
-            <textarea name=""></textarea>
-          </div>
-          <div class="topic-footer-row">
-            <div class="row">
-              <div class="col-lg-8">
-                <input value="Теги" class="tag-item"/>
+    <div class="b-content">
+          <div class="b-topic-create-modal">
+            <div class="b-topic-create-modal__inner">
+              <div class="b-topic-create-modal__title">Создать топик
+                <button class="btn-close"></button>
               </div>
-              <div class="col-lg-4">
-                <button data-toggle="modal" data-target="myModal" type="button" class="topic-adding-gallery btn">Добавить галлерию</button>
-                <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">Добавить фотогаллерю
-                        <button type="button" data-dismiss="modal" area-label="close" class="close"><span aria-hidden="true">&times;</span></button>
-                      </div>
-                      <div class="modal-gallery__inner">
-                        <div class="modal-gallery__top">
-                          <input type="text" value="Поиск по названию" class="modal-label-item"/>
-                          <input type="submit" class="modal-search-btn"/>
-                          <input type="submit" class="modal-close-btn"/>
-                          <select name="" class="modal-select-item">
-                            <option value="">Сортировка</option>
-                          </select>
-                        </div>
-                        <div class="modal-gallery__photo">
-                          <ul>
-                            <li>
-                              <div class="modal-title-skin">Обложка</div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Доступ</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая          </div>
-                              <div class="clear"></div>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="modal-gallery__btn pull-right">
-                          <input type="submit" value="Отмена" class="modal-gallery__btn1"/>
-                          <input type="submit" value="Добавить" class="modal-gallery__btn2"/>
-                        </div>
-                      </div>
+              <div class="b-topic-create-modal__content">
+                <div class="b-topic-create-modal-content">
+                  {{Form::open(array('url' => 'topic/store'))}}
+                    <div class="b-topic-create-modal-content__item">
+                      <input name="title" type="text" value="Введите название" class="input-default add-name"/><a href="" class="draft">Черновики <span>999</span></a>
                     </div>
-                  </div>
-                </div>
-                <button data-toggle="modal" data-target="myModal" type="button" class="topic-adding-gallery btn">Добавить музыку</button>
-                <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">Добавить фотогаллерю
-                        <button type="button" data-dismiss="modal" area-label="close" class="close"><span aria-hidden="true">&times;</span></button>
-                      </div>
-                      <div class="modal-gallery__inner">
-                        <div class="modal-gallery__top">
-                          <input type="text" value="Поиск по названию" class="modal-label-item"/>
-                          <input type="submit" class="modal-search-btn"/>
-                          <input type="submit" class="modal-close-btn"/>
-                          <select name="" class="modal-select-item">
-                            <option value="">Сортировка</option>
-                          </select>
-                        </div>
-                        <div class="modal-gallery__photo">
-                          <ul>
-                            <li>
-                              <div class="modal-title-skin">Обложка</div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Доступ</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая</div>
-                            </li>
-                            <li>
-                              <div class="modal-title-skin"><a href="#"><img src="img/28.png" alt=""/></a></div>
-                              <div class="modal-title-photo">Название фотогалери</div>
-                              <div class="modal-title-access">Открытая          </div>
-                              <div class="clear"></div>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="modal-gallery__btn pull-right">
-                          <input type="submit" value="Отмена" class="modal-gallery__btn1"/>
-                          <input type="submit" value="Добавить" class="modal-gallery__btn2"/>
-                        </div>
-                      </div>
+                    <div class="b-topic-create-modal-content__item">
+                      {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default')) }}
                     </div>
-                  </div>
+                    <div class="b-topic-create-modal-content__item">
+                      {{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default')) }}
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
+                      <textarea name="description" cols="30" rows="10" class="input-default textarea-topic"></textarea>
+                    </div>
+                    <div class="b-topic-create-modal-content__item"><span class="change-skin-title">Изображение топика</span><a href="#" class="input-default change-skin">Добавить</a>
+                      <div class="b-topic-create__skin">
+                        <div class="b-topic-create-skin">
+                          <div class="b-topic-create-skin__title">Добавить изображение топика</div>
+                          <div class="b-topic-create-skin__content">
+                            <div class="b-topic-create-skin-content">
+                              <form id="" method="" action="">
+                                <div class="b-topic-create-skin-content-wrapper">
+                                  <div class="b-topic-create-skin-content__item">
+                                    <input type="file" placeholder="Выбрать файла" class="jq-file__name input-default input pc-input"/>
+                                  </div>
+                                  <div class="b-topic-create-skin-content__item">
+                                    <input type="file" placeholder="Ссылка" class="jq-file__name input-default it-input"/>
+                                  </div>
+                                </div>
+                                <div class="b-topic-create-skin-content__item">
+                                  <div class="b-topic-create-skin-content-buttons">
+                                    <input type="submit" value="Отмена" class="input-default"/>
+                                    <input type="submit" value="Добавить" class="input-default"/>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="b-topic-create-modal-content__btns">
+                        <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>
+                        <input type="submit" value="Препросмотр" class="btn btn-preview input-default"/>
+                        <input type="submit" value="Опубликовать" class="btn btn-submit input-default"/>
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                   {{Form::close()}}
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="topic-footer-row2 pull-right">
-            <div class="row">
-              <input type="submit" value="Отмена" class="btn topic-cancel"/>
-              <input type="submit" value="Предпосмотр" class="btn topic-preview"/>
-              <input type="submit" value="Опубликовать" class="btn topic-submit"/>
             </div>
           </div>
         </div>
-      </form>
-    </div>
-  </div>
 		
 @stop
 
@@ -194,11 +89,6 @@
                     <div class="panel-body">
                         {{Form::open(array('url' => 'topic/store', 'id' => 'create-topic-form', 'class' => 'sync-form'))}}
                             <fieldset>
-                                <?php
-                                    $canPublishBlogs = array(0 => 'Мой персональный блог');
-                                    foreach (Auth::user()->canPublishBlogs() as $blog) {
-                                        $canPublishBlogs[$blog->id] = $blog->title;
-                                    }  ?>
                                 <div class="form-group">
                                     {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'form-control')) }}
                                 </div>

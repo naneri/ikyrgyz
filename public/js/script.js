@@ -99,3 +99,147 @@ $(function() {
 
 
 
+// $(function(){
+	
+// 	$('.b-topic-create-modal').dialog({
+// 		modal: true,	
+// 		autoOpen: false,
+// 		dialogClass:"myClass"			         
+// 	 });
+// 	$('#opener').click(function(){
+// 		$('.b-topic-create-modal').dialog('open');
+// 	});
+// });
+
+// $(document).ready(function(){	 
+//     $(".ui-dialog").addClass(".b-topic-create-modal__inner");
+//  	$('.ui-dialog-title').addClass('.b-topic-create-modal__title');
+//  	$('.b-topic-create-modal__header button').addClass('.ul-button');
+ 	
+   
+// });
+
+
+
+$(function(){
+	$('.b-topic-create__gallery').hide();
+		$('.input-default.add-gallery-btn').click(function(){
+
+
+			$('.b-topic-create__gallery').modal({
+				opacity: 80,
+				overlayCss: {backgroundColor: "#000"}
+
+
+			});
+
+		});
+
+});
+
+
+$(function(){
+	$('.b-topic-create__music').hide();
+		$('.input-default.add-music-btn').click(function(){
+
+
+			$('.b-topic-create__music').modal({
+				opacity: 80,
+				overlayCss: {backgroundColor: "#000"}
+
+
+			});
+
+		});
+
+});
+
+$(function(){
+	$('.b-topic-create__skin').hide();
+		$('a.input-default.change-skin').click(function(){
+
+
+			$('.b-topic-create__skin').modal({
+				opacity: 80,
+				overlayCss: {backgroundColor: "#000"}
+
+
+			});
+
+		});
+
+});
+
+
+
+
+$(function(){
+    /* Hide form input values on focus*/ 
+    $('input:text').each(function(){
+        var txtval = $(this).val();
+        $(this).focus(function(){
+            if($(this).val() == txtval){
+                $(this).val('')
+            }
+        });
+        $(this).blur(function(){
+            if($(this).val() == ""){
+                $(this).val(txtval);
+            }
+        });
+    });
+});
+
+
+$(function(){
+    /* Hide form input values on focus*/ 
+    $('textarea').each(function(){
+        var txtval = $(this).val();
+        $(this).focus(function(){
+            if($(this).val() == txtval){
+                $(this).val('')
+            }
+        });
+        $(this).blur(function(){
+            if($(this).val() == ""){
+                $(this).val(txtval);
+            }
+        });
+    });
+});
+
+
+
+
+(function($) {  
+$(function() {  
+  
+  $('input.pc-input').styler({
+  	filePlaceholder: 'Файл с компьютера',
+  	fileBrowse: 'Выбрать файл'
+  });  
+  
+});  
+})(jQuery);
+
+(function($) {  
+$(function() {  
+  
+  $('input.it-input').styler({
+  	filePlaceholder: 'Файл из интернета',
+  	fileBrowse: 'Ссылка'
+  	
+  });  
+  
+});  
+})(jQuery);
+
+
+
+// (function($) {  
+// $(function() {  
+  
+// $('select').styler();  
+  
+// })  
+// })(jQuery);

@@ -27,10 +27,23 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-                if(!Auth::user()->isHavePersonalBlog()){
-                    Auth::user()->createPersonalBlog();
-                }
-		return View::make('topic.create');
+        if(!Auth::user()->isHavePersonalBlog()){
+            Auth::user()->createPersonalBlog();
+        }
+
+        $canPublishBlogs = array(0 => 'Мой персональный блог');
+        foreach (Auth::user()->canPublishBlogs() as $blog) {
+            $canPublishBlogs[$blog->id] = $blog->title;
+        } 
+
+        $topicType_list = TopicType::all();
+        foreach($topicType_list as $Type){
+            $type_list[$Type->id] = $Type->name; 
+        }
+		return View::make('topic.create', array(
+                'canPublishBlogs' => $canPublishBlogs,
+                'type_list' => $type_list,
+            ));
 	}
 
 
@@ -74,7 +87,7 @@ class TopicController extends BaseController {
         
         private function createNewTopic(){
             $topic = new Topic();
-            $topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
+            $topic->type_id = Input::get('topic_type');
             $topic->user_id = Auth::user()->id;
             $topic->blog_id = $this->getBlogId();
             $topic->save();
@@ -238,7 +251,7 @@ class TopicController extends BaseController {
             $this->topic->description = Input::get('description');
             $this->topic->blog_id = $blogId;
             $this->topic->user_id = Auth::user()->id;
-            $this->topic->type_id = TopicType::where('name', Input::get('topic_type'))->first()->id;
+            $this->topic->type_id = Input::get('topic_type');
             $this->topic->draft = $isDraft;
             $this->topic->save();
 
