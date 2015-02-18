@@ -16,31 +16,52 @@
                     <h3 class="panel-title">Образование</h3>
                 </div>
                 <div class="panel-body">
-                    {{Form::open(array('url' => 'profile/edit/study'))}}
+                    
                         <fieldset>
                             Средняя школа
-                            <div class="form-group">
-                                {{Form::select('birthday_access', $access)}}
+                            <div class="form-group" id="school">
+                                <div id="school_items" class="items">
+                                    @include('profile.edit.build.schools', array('schools' => $user->schools))
+                                </div>
+                                <div class="form" style="display: none;">
+                                    {{Form::open(array('url' => 'profile/edit/study/school', 'id' => 'add_school'))}}
+                                        Школа:<br>
+                                        {{Form::text('school_name')}}<br>
+                                        Годы обучения:<br>
+                                        с {{Form::text('year_begin')}}
+                                        по {{Form::text('year_end')}}<br>
+                                        {{Form::select('school_access', $access)}}<br>
+                                        {{Form::reset('Очистить')}}
+                                        <a href="#" onclick="school.save()">Сохранить</a>
+                                    {{Form::close()}}
+                                </div>
+                                <a onclick="school.addForm()" style="cursor: pointer;">Добавить школу</a>
                             </div>
-                            <div class="form-group">
-                                Пол:
-                                {{Form::radio('gender', 'male', $user['description']->gender == 'male')}}Мужской
-                                {{Form::radio('gender', 'female', $user['description']->gender == 'female')}}Женский
-                                {{Form::select('gender_access', $access, $user['description']->gender_access)}}
+                            <br>
+                            <br>
+                            ВУЗ:
+                            <div class="form-group" id="university">
+                                <div id="university_items" class="items">
+                                    @include('profile.edit.build.universities', array('universities' => $user->universities))
+                                </div>
+                                <div class="form" style="display: none;">
+                                    {{Form::open(array('url' => 'profile/edit/study/university', 'id' => 'add_university'))}}
+                                    ВУЗ:<br>
+                                    {{Form::text('university_name')}}<br>
+                                    Годы обучения:<br>
+                                    с {{Form::text('year_begin')}}
+                                    по {{Form::text('year_end')}}<br>
+                                    Специальность:<br>
+                                    {{Form::text('speciality')}}<br>
+                                    Примечания:<br>
+                                    {{Form::textarea('description')}}<br>
+                                    {{Form::select('university_access', $access)}}<br>
+                                    {{Form::reset('Очистить')}}
+                                    <a href="#" onclick="university.save()">Сохранить</a>
+                                    {{Form::close()}}
+                                </div>
+                                <a onclick="university.addForm()" style="cursor: pointer;">Добавить университет</a>
                             </div>
-                            <div class="form-group">
-                                Вы проживаете:
-                                {{Form::select('liveplace_city_id', City::getAllForView(), $user['description']->liveplace_city_id)}}
-                                {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id)}}
-                                {{Form::select('liveplace_access', $access, $user['description']->liveplace_access)}}
-                            </div>
-                            <div class="form-group">
-                                Ваша родина:
-                                {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id)}}
-                                {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id)}}
-                                {{Form::select('birthplace_access', $access, $user['description']->birthplace_access)}}
-                            </div>
-
                             {{Form::submit('Go!')}}
                         </fieldset>
                     {{Form::close()}}
@@ -50,5 +71,94 @@
 	<div class="col-md-4"></div>
 
 </div>
+@stop
 
+@section('scripts')
+<script>
+    var school = {
+        save: function(){
+            var $form = $('#school form');
+            var data = $form.serialize();
+            $.ajax({
+                url: $form.attr('action'),
+                method: 'POST',
+                data: data,
+                success: function(result){
+                    $('#school .items').html(result);
+                },
+                error: function(){
+                    alert('error');
+                }
+            });
+        },
+        edit: function(schoolId){
+            var $school = $('#school_'+schoolId);
+            var $form = $('#school form');
+            $form.find('input[name="school_name"]').val($school.find('.school-name').text());
+            $form.find('input[name="year_begin"]').val($school.find('.year-begin').text());
+            $form.find('input[name="year_end"]').val($school.find('.year-end').text());
+            var $schoolAccess = $school.find('select option:selected');
+            $form.find('select option').each(function(){
+                if($(this).val() == $schoolAccess.val()){
+                    $(this).prop('selected', true);
+                }
+            });
+            $form.append('<input type="hidden" name="school_id" value="'+schoolId+'">');
+            school.showForm();
+        },
+        showForm: function(){
+            $('#school .form').show();
+        },
+        addForm:function(){
+            var $form = $('#school .form');
+            $form.find('input[type="reset"]').click();
+            $form.find('input[name="school_id"]').remove();
+            $form.show();
+        }
+    };
+    var university = {
+        save: function(){
+            var $item = $('#university');
+            var $form = $('#university form');
+            var data = $form.serialize();
+            $.ajax({
+                url: $form.attr('action'),
+                method: 'POST',
+                data: data,
+                success: function(result){
+                    $('#university .items').html(result);
+                },
+                error: function(){
+                    alert('error');
+                }
+            });
+        },
+        edit: function(universityId){
+            var $school = $('#university_'+universityId)
+            var $form = $('#university form');
+            $form.find('input[name="university_name"]').val($school.find('.university-name').text());
+            $form.find('input[name="year_begin"]').val($school.find('.year-begin').text());
+            $form.find('input[name="year_end"]').val($school.find('.year-end').text());
+            $form.find('input[name="speciality"]').val($school.find('.speciality').text());
+            $form.find('textarea[name="description"]').val($school.find('.description').text());
+            var $univerAccess = $school.find('select option:selected');
+            $form.find('select option').each(function(){
+                if($(this).val() == $univerAccess.val()){
+                    $(this).prop('selected', true);
+                }
+            });
+            $form.append('<input type="hidden" name="university_id" value="'+universityId+'">');
+            university.showForm();
+        },
+        showForm: function(){
+            $('#university .form').show();
+        },
+        addForm:function(){
+            var $form = $('#university .form');
+            $form.find('input[type="reset"]').click();
+            $form.find('input[name="university_id"]').remove();
+            $form.show();
+        }
+    };
+</script>
 @stop
