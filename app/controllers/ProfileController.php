@@ -68,8 +68,7 @@ class ProfileController extends BaseController {
         }
         
         public function getEditStudy(){
-            $user = User::with('description')->find(Auth::id());
-            return View::make('profile.edit.study', array('user' => $user, 'access' => $this->access));
+            return View::make('profile.edit.study', array('access' => $this->access));
         }
         
         public function postStudySchool(){
@@ -85,8 +84,11 @@ class ProfileController extends BaseController {
             
             $school = null;
             if(Input::has('school_id')){
-                $school = ProfileItem::find(Input::get('school_id'));
-            }
+                $school = ProfileItem::where('id', Input::get('school_id'))
+                            ->where('type', 'school')
+                            ->where('user_id', Auth::id())
+                            ->first();
+        }
             if(!$school){
                 $school = new ProfileItem();
                 $school->user_id = Auth::id();
@@ -107,7 +109,7 @@ class ProfileController extends BaseController {
                     'university_name' => 'required|min:3',
                     'year_begin' => 'date_format:Y',
                     'year_end' => 'date_format:Y',
-                    'specitality' => 'alpha_num');
+                    'specitality' => '');
             $validator = Validator::make(Input::all(), $rules);
 
             if ($validator->fails()) {
@@ -116,22 +118,66 @@ class ProfileController extends BaseController {
 
             $university = null;
             if (Input::has('university_id')) {
-                $university = ProfileItem::find(Input::get('university_id'));
-            }
+                $university = ProfileItem::where('id', Input::get('university_id'))
+                                ->where('type', 'university')
+                                ->where('user_id', Auth::id())
+                                ->first();
+        }
             if (!$university) {
                 $university = new ProfileItem();
                 $university->user_id = Auth::id();
                 $university->type = 'university';
             }
             $university->name = Input::get('university_name');
-            $university->date_begin = date_create(Input::get('year_begin') . '-00-00');
-            $university->date_end = date_create(Input::get('year_end') . '-00-00');
+            $university->date_begin = Input::get('year_begin') . '-00-00';
+            $university->date_end = Input::get('year_end') . '-00-00';
             $university->meta_1 = Input::get('speciality');
             $university->description = Input::get('description');
             $university->access = Input::get('university_access');
             $university->save();
 
             $result = View::make('profile.edit.build.universities', array('universities' => Auth::user()->universities, 'access' => $this->access))->render();
+            return Response::json($result);
+        }
+
+        public function getEditJob() {
+            $user = User::with('description')->find(Auth::id());
+            return View::make('profile.edit.job', array('user' => $user, 'access' => $this->access));
+        }
+
+        public function postJob() {
+            $rules = array(
+                'company_name' => 'required|min:3',
+                'year_begin' => 'date_format:Y',
+                'year_end' => 'date_format:Y',
+                'job_title' => '');
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return array('errors' => $validator->messages()->toJson());
+            }
+
+            $job = null;
+            if (Input::has('job_id')) {
+                $job = ProfileItem::where('id', Input::get('job_id'))
+                        ->where('type', 'job')
+                        ->where('user_id', Auth::id())
+                        ->first();
+            }
+            if (!$job) {
+                $job = new ProfileItem();
+                $job->user_id = Auth::id();
+                $job->type = 'job';
+            }
+            $job->name = Input::get('company_name');
+            $job->date_begin = Input::get('year_begin') . '-00-00';
+            $job->date_end = Input::get('year_end') . '-00-00';
+            $job->meta_1 = Input::get('job_title');
+            $job->description = Input::get('description');
+            $job->access = Input::get('job_access');
+            $job->save();
+
+            $result = View::make('profile.edit.build.jobs', array('jobs' => Auth::user()->jobs, 'access' => $this->access))->render();
             return Response::json($result);
         }
 

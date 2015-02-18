@@ -48,7 +48,8 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('profile/edit/study', 'ProfileController@getEditStudy');
         Route::post('profile/edit/study/school', 'ProfileController@postStudySchool');
         Route::post('profile/edit/study/university', 'ProfileController@postStudyUniversity');
-        Route::get('profile/edit/work', 'ProfileController@getEditWork');
+        Route::get('profile/edit/job', 'ProfileController@getEditJob');
+        Route::post('profile/edit/job', 'ProfileController@postJob');
         Route::get('profile/edit/contact', 'ProfileController@getEditContact');
         Route::get('profile/edit/family', 'ProfileController@getEditFamily');
         Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
