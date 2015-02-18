@@ -5,7 +5,7 @@
     <div class="col-md-4">
         {{HTML::link('profile/edit/main', 'Основная')}}
         {{HTML::link('profile/edit/study', 'Образование')}}
-        {{HTML::link('profile/edit/work', 'Работа')}}
+        {{HTML::link('profile/edit/job', 'Работа')}}
         {{HTML::link('profile/edit/contact', 'Контакты')}}
         {{HTML::link('profile/edit/family', 'Семья')}}
         {{HTML::link('profile/edit/additional', 'Дополнительно')}}
@@ -21,7 +21,7 @@
                             Средняя школа
                             <div class="form-group" id="school">
                                 <div id="school_items" class="items">
-                                    @include('profile.edit.build.schools', array('schools' => $user->schools))
+                                    @include('profile.edit.build.schools', array('schools' => Auth::user()->schools))
                                 </div>
                                 <div class="form" style="display: none;">
                                     {{Form::open(array('url' => 'profile/edit/study/school', 'id' => 'add_school'))}}
@@ -42,7 +42,7 @@
                             ВУЗ:
                             <div class="form-group" id="university">
                                 <div id="university_items" class="items">
-                                    @include('profile.edit.build.universities', array('universities' => $user->universities))
+                                    @include('profile.edit.build.universities', array('universities' => Auth::user()->universities))
                                 </div>
                                 <div class="form" style="display: none;">
                                     {{Form::open(array('url' => 'profile/edit/study/university', 'id' => 'add_university'))}}
@@ -84,7 +84,9 @@
                 method: 'POST',
                 data: data,
                 success: function(result){
-                    $('#school .items').html(result);
+                    if(!result.errors){
+                        $('#school .items').html(result);
+                    }
                 },
                 error: function(){
                     alert('error');
@@ -126,7 +128,9 @@
                 method: 'POST',
                 data: data,
                 success: function(result){
-                    $('#university .items').html(result);
+                    if(!result.errors){
+                        $('#university .items').html(result);
+                    }
                 },
                 error: function(){
                     alert('error');

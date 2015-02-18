@@ -5,7 +5,7 @@
     <div class="col-md-4">
         {{HTML::link('profile/edit/main', 'Основная')}}
         {{HTML::link('profile/edit/study', 'Образование')}}
-        {{HTML::link('profile/edit/work', 'Работа')}}
+        {{HTML::link('profile/edit/job', 'Работа')}}
         {{HTML::link('profile/edit/contact', 'Контакты')}}
         {{HTML::link('profile/edit/family', 'Семья')}}
         {{HTML::link('profile/edit/additional', 'Дополнительно')}}

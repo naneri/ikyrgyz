@@ -189,4 +189,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return $this->hasMany('ProfileItem')->where('type', 'university');
         }
 
+        public function jobs() {
+            return $this->hasMany('ProfileItem')->where('type', 'job    ');
+        }
+
 }
