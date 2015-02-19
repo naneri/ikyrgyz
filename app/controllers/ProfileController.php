@@ -4,7 +4,9 @@ class ProfileController extends BaseController {
     
         
         var $access = array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне');
-        var $profile_item_types = array('school', 'university', 'company', 'contact');
+        var $profileItemTypes = array('school', 'university', 'company', 'contact');
+        var $familyMemberRelatives = array('NULL' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
+        var $maritalStatuses = array('NULL' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
 
     /**
 	 * Страница с профилем пользователя
@@ -191,7 +193,7 @@ class ProfileController extends BaseController {
             if ($validator->fails()) {
                 return array('errors' => $validator->messages()->toJson());
             }
-
+            
             $contact = null;
             if (Input::has('contact_id')) {
                 $contact = ProfileItem::where('id', Input::get('contact_id'))
@@ -209,7 +211,58 @@ class ProfileController extends BaseController {
             $contact->access = Input::get('contact_access');
             $contact->save();
             
-            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts->where('name', Input::get('contact_type')), 'access' => $this->access))->render();
+            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', Input::get('contact_type')), 'access' => $this->access))->render();
+            return Response::json($result);
+        }
+
+        public function getEditFamily() {
+            $user = User::with('description')->find(Auth::id());
+            return View::make('profile.edit.family', array('access' => $this->access, 'relatives' => $this->familyMemberRelatives, 'maritalStatuses' => $this->maritalStatuses, 'user' => $user));
+        }
+
+        public function postFamilyMembers() {
+            $rules = array('family_member_name' => 'required|min:3');
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return array('errors' => $validator->messages()->toJson());
+            }
+            
+            if(!array_key_exists(Input::get('family_member_relative'), $this->familyMemberRelatives)){
+                return array('errors' => 'error relative');
+            }
+            
+            $member = null;
+            if (Input::has('member_id')) {
+                $member = ProfileItem::where('id', Input::get('member_id'))
+                        ->where('type', 'family')
+                        ->where('user_id', Auth::id())
+                        ->first();
+            }
+            if (!$member) {
+                $member = new ProfileItem();
+                $member->user_id = Auth::id();
+                $member->type = 'family';
+            }
+            $member->name = Input::get('family_member_relative');
+            $member->meta_1 = Input::get('family_member_name');
+            $member->access = Input::get('family_member_access');
+            $member->save();
+
+            $result = View::make('profile.edit.build.family', array('members' => Auth::user()->familyMembers, 'access' => $this->access, 'relatives' => $this->familyMemberRelatives))->render();
+            return Response::json($result);
+        }
+
+        public function postMaritalStatus() {
+
+            if (!array_key_exists(Input::get('marital_status'), $this->maritalStatuses)) {
+                return array('errors' => 'error marital status');
+            }
+
+            $description_data = array('marital_status' => Input::get('marital_status'));
+            User_Description::update_data($description_data);
+
+            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', Input::get('contact_type')), 'access' => $this->access))->render();
             return Response::json($result);
         }
 

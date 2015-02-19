@@ -53,6 +53,8 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('profile/edit/contact', 'ProfileController@getEditContact');
         Route::post('profile/edit/contact', 'ProfileController@postContact');
         Route::get('profile/edit/family', 'ProfileController@getEditFamily');
+        Route::post('profile/edit/family/members', 'ProfileController@postFamilyMembers');
+        Route::post('profile/edit/maritalStatus', 'ProfileController@postMaritalStatus');
         Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
 
         Route::get('topic/show/{id}', 'TopicController@show');
