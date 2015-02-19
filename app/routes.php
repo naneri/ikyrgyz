@@ -51,6 +51,7 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('profile/edit/job', 'ProfileController@getEditJob');
         Route::post('profile/edit/job', 'ProfileController@postJob');
         Route::get('profile/edit/contact', 'ProfileController@getEditContact');
+        Route::post('profile/edit/contact', 'ProfileController@postContact');
         Route::get('profile/edit/family', 'ProfileController@getEditFamily');
         Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
 

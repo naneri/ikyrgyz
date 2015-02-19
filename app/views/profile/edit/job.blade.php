@@ -40,9 +40,7 @@
                                 </div>
                                 <a onclick="job.addForm()" style="cursor: pointer;">Добавить место работы</a>
                             </div>
-                            {{Form::submit('Go!')}}
                         </fieldset>
-                    {{Form::close()}}
                 </div>
             </div>
 	</div>

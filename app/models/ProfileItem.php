@@ -7,4 +7,8 @@ class ProfileItem extends \Eloquent {
         public function users(){
             return $this->belongsTo('User');
         }
+        
+        public function phones(){
+            
+        }
 }

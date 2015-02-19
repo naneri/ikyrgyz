@@ -62,9 +62,7 @@
                                 </div>
                                 <a onclick="university.addForm()" style="cursor: pointer;">Добавить университет</a>
                             </div>
-                            {{Form::submit('Go!')}}
                         </fieldset>
-                    {{Form::close()}}
                 </div>
             </div>
 	</div>

@@ -141,8 +141,7 @@ class ProfileController extends BaseController {
         }
 
         public function getEditJob() {
-            $user = User::with('description')->find(Auth::id());
-            return View::make('profile.edit.job', array('user' => $user, 'access' => $this->access));
+            return View::make('profile.edit.job', array('access' => $this->access));
         }
 
         public function postJob() {
@@ -178,6 +177,39 @@ class ProfileController extends BaseController {
             $job->save();
 
             $result = View::make('profile.edit.build.jobs', array('jobs' => Auth::user()->jobs, 'access' => $this->access))->render();
+            return Response::json($result);
+        }
+
+        public function getEditContact() {
+            return View::make('profile.edit.contact', array('access' => $this->access));
+        }
+
+        public function postContact() {
+            $rules = array('value' => 'required|min:3');
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return array('errors' => $validator->messages()->toJson());
+            }
+
+            $contact = null;
+            if (Input::has('contact_id')) {
+                $contact = ProfileItem::where('id', Input::get('contact_id'))
+                        ->where('type', 'contact')
+                        ->where('user_id', Auth::id())
+                        ->first();
+            }
+            if (!$contact) {
+                $contact = new ProfileItem();
+                $contact->user_id = Auth::id();
+                $contact->type = 'contact';
+            }
+            $contact->name = Input::get('contact_type');
+            $contact->meta_1 = Input::get('value');
+            $contact->access = Input::get('contact_access');
+            $contact->save();
+            
+            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts->where('name', Input::get('contact_type')), 'access' => $this->access))->render();
             return Response::json($result);
         }
 
