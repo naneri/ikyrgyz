@@ -254,7 +254,6 @@ class ProfileController extends BaseController {
         }
 
         public function postMaritalStatus() {
-
             if (!array_key_exists(Input::get('marital_status'), $this->maritalStatuses)) {
                 return array('errors' => 'error marital status');
             }
@@ -262,7 +261,53 @@ class ProfileController extends BaseController {
             $description_data = array('marital_status' => Input::get('marital_status'));
             User_Description::update_data($description_data);
 
-            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', Input::get('contact_type')), 'access' => $this->access))->render();
+            $result = array('success');
+            return Response::json($result);
+        }
+
+        public function getEditAdditional() {
+            $user = User::with('description')->find(Auth::id());
+            return View::make('profile.edit.additional', array('access' => $this->access, 'user' => $user));
+        }
+
+        public function postAboutMe() {
+            $description_data = array('about_me' => Input::get('about_me'));
+            User_Description::update_data($description_data);
+
+            $result = array('success');
+            return Response::json($result);
+        }
+
+        public function postAdditional() {
+            $rules = array('value' => 'required|min:3');
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return array('errors' => $validator->messages()->toJson());
+            }
+            
+            if(!in_array(Input::get('additional_type'), array('passion', 'nickname'))){
+                 return array('errors' => 'error additional type');
+            }
+
+            $additional = null;
+            if (Input::has('additional_id')) {
+                $additional = ProfileItem::where('id', Input::get('additional_id'))
+                        ->where('type', 'additional')
+                        ->where('user_id', Auth::id())
+                        ->first();
+            }
+            if (!$additional) {
+                $additional = new ProfileItem();
+                $additional->user_id = Auth::id();
+                $additional->type = 'additional';
+            }
+            $additional->name = Input::get('additional_type');
+            $additional->meta_1 = Input::get('value');
+            $additional->access = Input::get('additional_access');
+            $additional->save();
+
+            $result = View::make('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('name', Input::get('additional_type'))->get(), 'access' => $this->access))->render();
             return Response::json($result);
         }
 
