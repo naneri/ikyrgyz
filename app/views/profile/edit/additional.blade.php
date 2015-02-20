@@ -21,7 +21,7 @@
                             Увлечения:
                             <div class="form-group" id="passion">
                                 <div class="items">
-                                    @include('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('name', 'passion')->get()))
+                                    @include('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('subtype', 'passion')->get()))
                                 </div>
                                 <div class="form" style="display: none;">
                                     {{Form::open(array('url' => 'profile/edit/additional'))}}
@@ -49,7 +49,7 @@
                             Другие имена, прозвища:
                             <div class="form-group" id="nickname">
                                 <div class="items">
-                                    @include('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('name', 'nickname')->get()))
+                                    @include('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('subtype', 'nickname')->get()))
                                 </div>
                                 <div class="form" style="display: none;">
                                     {{Form::open(array('url' => 'profile/edit/additional'))}}

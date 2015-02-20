@@ -21,7 +21,7 @@
                         <div class="form-group" id="phone">
                             Телефоны:<br>
                             <div id="phone_items" class="items">
-                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', 'phone')->get()))
+                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('subtype', 'phone')->get()))
                             </div>
 
                             <div class="form" style="display: none;">
@@ -41,7 +41,7 @@
                         <div class="form-group" id="email">
                             Emails:<br>
                             <div id="email_items" class="items">
-                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', 'email')->get()))
+                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('subtype', 'email')->get()))
                             </div>
                             <div class="form" style="display: none;">
                                 {{Form::open(array('url' => 'profile/edit/contact'))}}
@@ -60,7 +60,7 @@
                         <div class="form-group" id="address">
                             Address:<br>
                             <div id="address_items" class="items">
-                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', 'address')->get()))
+                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('subtype', 'address')->get()))
                             </div>
                             <div class="form" style="display: none;">
                                 {{Form::open(array('url' => 'profile/edit/contact'))}}
@@ -79,7 +79,7 @@
                         <div class="form-group" id="messenger">
                             Messengers:<br>
                             <div id="messeger_items" class="items">
-                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', 'messenger')->get()))
+                                @include('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('subtype', 'messenger')->get()))
                             </div>
                             <div class="form" style="display: none;">
                                 {{Form::open(array('url' => 'profile/edit/contact'))}}
