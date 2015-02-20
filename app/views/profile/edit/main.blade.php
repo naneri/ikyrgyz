@@ -28,7 +28,7 @@
                                 <input class="form-control" placeholder="day" name="day" value="{{date("d",strtotime($user['description']->birthday))}}">
                                 <input class="form-control" placeholder="month" name="month" value="{{date("m",strtotime($user['description']->birthday))}}">
                                 <input class="form-control" placeholder="year" name="year" value="{{date("Y",strtotime($user['description']->birthday))}}">
-                                {{Form::select('birthday_access', $access)}}
+                                {{Form::select('birthday_access', $access, $user['description']->birthday_access)}}
                             </div>
                             <div class="form-group">
                                 Пол:

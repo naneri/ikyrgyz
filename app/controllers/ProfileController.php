@@ -106,7 +106,7 @@ class ProfileController extends BaseController {
             $school->value = Input::get('school_name');
             $school->date_begin = Input::get('year_begin').'-00-00';
             $school->date_end = Input::get('year_end').'-00-00';
-            $school->access = Input::get('school_access');
+            $school->access = $this->validateAccess(Input::get('school_access'));
             $school->save();
             
             $result = View::make('profile.edit.build.schools', array('schools' => Auth::user()->schools, 'access' => $this->access))->render();
@@ -131,7 +131,7 @@ class ProfileController extends BaseController {
             $university->date_end = Input::get('year_end') . '-00-00';
             $university->meta_1 = Input::get('speciality');
             $university->description = Input::get('description');
-            $university->access = Input::get('university_access');
+            $university->access = $this->validateAccess(Input::get('university_access'));
             $university->save();
 
             $result = View::make('profile.edit.build.universities', array('universities' => Auth::user()->universities, 'access' => $this->access))->render();
@@ -160,7 +160,7 @@ class ProfileController extends BaseController {
             $job->date_end = Input::get('year_end') . '-00-00';
             $job->meta_1 = Input::get('job_title');
             $job->description = Input::get('description');
-            $job->access = Input::get('job_access');
+            $job->access = $this->validateAccess(Input::get('job_access'));
             $job->save();
 
             $result = View::make('profile.edit.build.jobs', array('jobs' => Auth::user()->jobs, 'access' => $this->access))->render();
@@ -185,7 +185,7 @@ class ProfileController extends BaseController {
             
             $contact = $this->getProfileItem('contact', Input::get('contact_type'), Input::get('contact_id'));
             $contact->value = Input::get('value');
-            $contact->access = Input::get('contact_access');
+            $contact->access = $this->validateAccess(Input::get('contact_access'));
             $contact->save();
             
             $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', Input::get('contact_type'))->get(), 'access' => $this->access))->render();
@@ -211,7 +211,7 @@ class ProfileController extends BaseController {
             
             $member = $this->getProfileItem('family', Input::get('family_member_relative'), Input::get('member_id'));
             $member->value = Input::get('family_member_name');
-            $member->access = Input::get('family_member_access');
+            $member->access = $this->validateAccess(Input::get('family_member_access'));
             $member->save();
 
             $result = View::make('profile.edit.build.family', array('members' => Auth::user()->familyMembers, 'access' => $this->access, 'relatives' => $this->familyMemberRelatives))->render();
@@ -257,11 +257,69 @@ class ProfileController extends BaseController {
 
             $additional = $this->getProfileItem('additional', Input::get('additional_type'), Input::get('additional_id'));
             $additional->value = Input::get('value');
-            $additional->access = Input::get('additional_access');
+            $additional->access = $this->validateAccess(Input::get('additional_access'));
             $additional->save();
 
             $result = View::make('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('name', Input::get('additional_type'))->get(), 'access' => $this->access))->render();
             return Response::json($result);
+        }
+        
+        public function getEditAccess() {
+            $user = User::with('description')->find(Auth::id());
+            return View::make('profile.edit.access', array('access' => $this->access, 'user' => $user));
+        }
+
+        public function postAccess() {
+            $rules = array();
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return array('errors' => $validator->messages()->toJson());
+            }
+            
+            $userDescriptionData = Input::only(
+                    'names_access',
+                    'gender_access',
+                    'birthday_access',
+                    'liveplace_access',
+                    'birthplace_access',
+                    'about_me_access', 
+                    'marital_status_access'
+                    );
+            User_Description::where('user_id', Auth::id())->update($userDescriptionData);
+            
+            $subtypesAccess = Input::only(
+                    'school_access',
+                    'university_access',
+                    'job_access',
+                    'phone_access',
+                    'email_access',
+                    'address_access',
+                    'messenger_access',
+                    'passion_access',
+                    'nickname_access');
+            foreach($subtypesAccess as $subtypeAccess =>$value){
+                $typeName = explode('_', $subtypeAccess)[0];
+                if(array_key_exists($value, $this->access)){
+                    Auth::user()->profileItems()->where('subtype', $typeName)->update(array('access' => $value));
+                }
+            }
+            
+            if (array_key_exists(Input::get('family_access'), $this->access)) {
+                Auth::user()->profileItems()->where('type', 'family')->update(array('access' => Input::get('family_access')));
+            }
+            
+            return Redirect::back();
+        }
+        
+        private function validateAccess($access){
+            $correctAccess = null;
+            if(array_key_exists($access, $this->access)){
+                $correctAccess = $access;
+            } else {
+                $correctAccess = 'me';
+            }
+            return $correctAccess;
         }
 
 }

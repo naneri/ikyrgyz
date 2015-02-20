@@ -58,6 +58,8 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
         Route::post('profile/edit/aboutMe', 'ProfileController@postAboutMe');
         Route::post('profile/edit/additional', 'ProfileController@postAdditional');
+        Route::get('profile/edit/access', 'ProfileController@getEditAccess');
+        Route::post('profile/edit/access', 'ProfileController@postAccess');
 
         Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
