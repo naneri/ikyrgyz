@@ -9,6 +9,7 @@
         {{HTML::link('profile/edit/contact', 'Контакты')}}
         {{HTML::link('profile/edit/family', 'Семья')}}
         {{HTML::link('profile/edit/additional', 'Дополнительно')}}
+        {{HTML::link('profile/edit/access', 'Настройка публичности')}}
     </div>
 	<div class="col-md-4">
             <div class="login-panel panel panel-default">
@@ -128,7 +129,7 @@
         edit: function(additionalType, additionalId){
             var $member = $('#additional_'+additionalId);
             var $form = $('#'+additionalType+' form');
-            $form.find('input[name="value"]').val($member.find('.additional-name').text());
+            $form.find('input[name="value"]').val($member.find('.additional-value').text());
             var $additionalAccess = $member.find('select option:selected');
             $form.find('select option').each(function(){
                 if($(this).val() == $additionalAccess.val()){

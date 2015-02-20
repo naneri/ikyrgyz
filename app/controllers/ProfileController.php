@@ -3,7 +3,7 @@
 class ProfileController extends BaseController {
     
         
-        var $access = array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне');
+        var $access = array('me' => 'Только мне', 'friend' => 'Друзьям', 'all' => 'Всем');
         var $profileItemTypes = array('school', 'university', 'company', 'contact');
         var $familyMemberRelatives = array('NULL' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
         var $maritalStatuses = array('NULL' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
@@ -56,7 +56,25 @@ class ProfileController extends BaseController {
 		$friends = Friend::friendsList(Auth::id());
 		return View::make('profile.friends', array('friends' => $friends));
 	}
-        
+
+        private function getProfileItem($profileItemType, $profileItemSubType, $profileItemId) {
+            $profileItem = null;
+            if ($profileItemId) {
+                $profileItem = ProfileItem::where('id', $profileItemId)
+                        ->where('type', $profileItemType)
+                        ->where('subtype', $profileItemSubType)
+                        ->where('user_id', Auth::id())
+                        ->first();
+            }
+            if (!$profileItem) {
+                $profileItem = new ProfileItem();
+                $profileItem->user_id = Auth::id();
+                $profileItem->type = $profileItemType;
+                $profileItem->subtype = $profileItemSubType;
+            }
+            return $profileItem;
+        }
+
         public function getEditMain(){
             $user = User::with('description')->find(Auth::id());       
             return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access));
@@ -84,19 +102,8 @@ class ProfileController extends BaseController {
                 return array('errors' => $validator->messages()->toJson());
             }
             
-            $school = null;
-            if(Input::has('school_id')){
-                $school = ProfileItem::where('id', Input::get('school_id'))
-                            ->where('type', 'school')
-                            ->where('user_id', Auth::id())
-                            ->first();
-        }
-            if(!$school){
-                $school = new ProfileItem();
-                $school->user_id = Auth::id();
-                $school->type = 'school';
-            }
-            $school->name = Input::get('school_name');
+            $school = $this->getProfileItem('study', 'school', Input::get('school_id'));
+            $school->value = Input::get('school_name');
             $school->date_begin = Input::get('year_begin').'-00-00';
             $school->date_end = Input::get('year_end').'-00-00';
             $school->access = Input::get('school_access');
@@ -118,19 +125,8 @@ class ProfileController extends BaseController {
                 return array('errors' => $validator->messages()->toJson());
             }
 
-            $university = null;
-            if (Input::has('university_id')) {
-                $university = ProfileItem::where('id', Input::get('university_id'))
-                                ->where('type', 'university')
-                                ->where('user_id', Auth::id())
-                                ->first();
-        }
-            if (!$university) {
-                $university = new ProfileItem();
-                $university->user_id = Auth::id();
-                $university->type = 'university';
-            }
-            $university->name = Input::get('university_name');
+            $university = $this->getProfileItem('study', 'university', Input::get('university_id'));
+            $university->value = Input::get('university_name');
             $university->date_begin = Input::get('year_begin') . '-00-00';
             $university->date_end = Input::get('year_end') . '-00-00';
             $university->meta_1 = Input::get('speciality');
@@ -158,19 +154,8 @@ class ProfileController extends BaseController {
                 return array('errors' => $validator->messages()->toJson());
             }
 
-            $job = null;
-            if (Input::has('job_id')) {
-                $job = ProfileItem::where('id', Input::get('job_id'))
-                        ->where('type', 'job')
-                        ->where('user_id', Auth::id())
-                        ->first();
-            }
-            if (!$job) {
-                $job = new ProfileItem();
-                $job->user_id = Auth::id();
-                $job->type = 'job';
-            }
-            $job->name = Input::get('company_name');
+            $job = $this->getProfileItem('experience', 'job', Input::get('job_id'));
+            $job->value = Input::get('company_name');
             $job->date_begin = Input::get('year_begin') . '-00-00';
             $job->date_end = Input::get('year_end') . '-00-00';
             $job->meta_1 = Input::get('job_title');
@@ -194,24 +179,16 @@ class ProfileController extends BaseController {
                 return array('errors' => $validator->messages()->toJson());
             }
             
-            $contact = null;
-            if (Input::has('contact_id')) {
-                $contact = ProfileItem::where('id', Input::get('contact_id'))
-                        ->where('type', 'contact')
-                        ->where('user_id', Auth::id())
-                        ->first();
+            if(!in_array(Input::get('contact_type'), array('phone', 'email', 'address', 'messenger'))){
+                return array('errors' => 'contact type error!');
             }
-            if (!$contact) {
-                $contact = new ProfileItem();
-                $contact->user_id = Auth::id();
-                $contact->type = 'contact';
-            }
-            $contact->name = Input::get('contact_type');
-            $contact->meta_1 = Input::get('value');
+            
+            $contact = $this->getProfileItem('contact', Input::get('contact_type'), Input::get('contact_id'));
+            $contact->value = Input::get('value');
             $contact->access = Input::get('contact_access');
             $contact->save();
             
-            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', Input::get('contact_type')), 'access' => $this->access))->render();
+            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', Input::get('contact_type'))->get(), 'access' => $this->access))->render();
             return Response::json($result);
         }
 
@@ -232,20 +209,8 @@ class ProfileController extends BaseController {
                 return array('errors' => 'error relative');
             }
             
-            $member = null;
-            if (Input::has('member_id')) {
-                $member = ProfileItem::where('id', Input::get('member_id'))
-                        ->where('type', 'family')
-                        ->where('user_id', Auth::id())
-                        ->first();
-            }
-            if (!$member) {
-                $member = new ProfileItem();
-                $member->user_id = Auth::id();
-                $member->type = 'family';
-            }
-            $member->name = Input::get('family_member_relative');
-            $member->meta_1 = Input::get('family_member_name');
+            $member = $this->getProfileItem('family', Input::get('family_member_relative'), Input::get('member_id'));
+            $member->value = Input::get('family_member_name');
             $member->access = Input::get('family_member_access');
             $member->save();
 
@@ -290,20 +255,8 @@ class ProfileController extends BaseController {
                  return array('errors' => 'error additional type');
             }
 
-            $additional = null;
-            if (Input::has('additional_id')) {
-                $additional = ProfileItem::where('id', Input::get('additional_id'))
-                        ->where('type', 'additional')
-                        ->where('user_id', Auth::id())
-                        ->first();
-            }
-            if (!$additional) {
-                $additional = new ProfileItem();
-                $additional->user_id = Auth::id();
-                $additional->type = 'additional';
-            }
-            $additional->name = Input::get('additional_type');
-            $additional->meta_1 = Input::get('value');
+            $additional = $this->getProfileItem('additional', Input::get('additional_type'), Input::get('additional_id'));
+            $additional->value = Input::get('value');
             $additional->access = Input::get('additional_access');
             $additional->save();
 

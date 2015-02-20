@@ -9,6 +9,7 @@
         {{HTML::link('profile/edit/contact', 'Контакты')}}
         {{HTML::link('profile/edit/family', 'Семья')}}
         {{HTML::link('profile/edit/additional', 'Дополнительно')}}
+        {{HTML::link('profile/edit/access', 'Настройка публичности')}}
     </div>
 	<div class="col-md-4">
             <div class="login-panel panel panel-default">

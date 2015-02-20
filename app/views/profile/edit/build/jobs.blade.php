@@ -1,6 +1,6 @@
 @foreach($jobs as $job)
 <div id="job_{{$job->id}}">
-    <h3 style="font-weight: bold;"><span class="company-name">{{$job->name}}</span></h3> 
+    <h3 style="font-weight: bold;"><span class="company-name">{{$job->value}}</span></h3> 
     с <span class="year-begin">{{strtok($job->date_begin,'-')}}</span> 
     по <span class="year-end">{{strtok($job->date_end,'-')}}</span><br>
     {{Form::select('access_job_'.$job->id, $access, $job->access)}}<br>
