@@ -77,7 +77,7 @@ class ProfileController extends BaseController {
 
         public function getEditMain(){
             $user = User::with('description')->find(Auth::id());       
-            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access));
+            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'formBody' => 'profile.edit.main'));
         }
         
         public function postEditMain(){
@@ -188,7 +188,7 @@ class ProfileController extends BaseController {
             $contact->access = $this->validateAccess(Input::get('contact_access'));
             $contact->save();
             
-            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('name', Input::get('contact_type'))->get(), 'access' => $this->access))->render();
+            $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('subtype', Input::get('contact_type'))->get(), 'access' => $this->access))->render();
             return Response::json($result);
         }
 
@@ -260,7 +260,7 @@ class ProfileController extends BaseController {
             $additional->access = $this->validateAccess(Input::get('additional_access'));
             $additional->save();
 
-            $result = View::make('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('name', Input::get('additional_type'))->get(), 'access' => $this->access))->render();
+            $result = View::make('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('subtype', Input::get('additional_type'))->get(), 'access' => $this->access))->render();
             return Response::json($result);
         }
         

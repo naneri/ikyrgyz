@@ -1,75 +1,60 @@
 @extends('misc.layout')
-@section('content')
+@extends('profile.edit.layout')
+@section('form')
+    <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Образование</h3>
+        </div>
+        <div class="panel-body">
 
-<div class="container">
-    <div class="col-md-4">
-        {{HTML::link('profile/edit/main', 'Основная')}}
-        {{HTML::link('profile/edit/study', 'Образование')}}
-        {{HTML::link('profile/edit/job', 'Работа')}}
-        {{HTML::link('profile/edit/contact', 'Контакты')}}
-        {{HTML::link('profile/edit/family', 'Семья')}}
-        {{HTML::link('profile/edit/additional', 'Дополнительно')}}
-        {{HTML::link('profile/edit/access', 'Настройка публичности')}}
+                <fieldset>
+                    Средняя школа
+                    <div class="form-group" id="school">
+                        <div id="school_items" class="items">
+                            @include('profile.edit.build.schools', array('schools' => Auth::user()->schools))
+                        </div>
+                        <div class="form" style="display: none;">
+                            {{Form::open(array('url' => 'profile/edit/study/school', 'id' => 'add_school'))}}
+                                Школа:<br>
+                                {{Form::text('school_name')}}<br>
+                                Годы обучения:<br>
+                                с {{Form::text('year_begin')}}
+                                по {{Form::text('year_end')}}<br>
+                                {{Form::select('school_access', $access)}}<br>
+                                {{Form::reset('Очистить')}}
+                                <a href="#" onclick="school.save()">Сохранить</a>
+                            {{Form::close()}}
+                        </div>
+                        <a onclick="school.addForm()" style="cursor: pointer;">Добавить школу</a>
+                    </div>
+                    <br>
+                    <br>
+                    ВУЗ:
+                    <div class="form-group" id="university">
+                        <div id="university_items" class="items">
+                            @include('profile.edit.build.universities', array('universities' => Auth::user()->universities))
+                        </div>
+                        <div class="form" style="display: none;">
+                            {{Form::open(array('url' => 'profile/edit/study/university', 'id' => 'add_university'))}}
+                            ВУЗ:<br>
+                            {{Form::text('university_name')}}<br>
+                            Годы обучения:<br>
+                            с {{Form::text('year_begin')}}
+                            по {{Form::text('year_end')}}<br>
+                            Специальность:<br>
+                            {{Form::text('speciality')}}<br>
+                            Примечания:<br>
+                            {{Form::textarea('description')}}<br>
+                            {{Form::select('university_access', $access)}}<br>
+                            {{Form::reset('Очистить')}}
+                            <a href="#" onclick="university.save()">Сохранить</a>
+                            {{Form::close()}}
+                        </div>
+                        <a onclick="university.addForm()" style="cursor: pointer;">Добавить университет</a>
+                    </div>
+                </fieldset>
+        </div>
     </div>
-	<div class="col-md-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Образование</h3>
-                </div>
-                <div class="panel-body">
-                    
-                        <fieldset>
-                            Средняя школа
-                            <div class="form-group" id="school">
-                                <div id="school_items" class="items">
-                                    @include('profile.edit.build.schools', array('schools' => Auth::user()->schools))
-                                </div>
-                                <div class="form" style="display: none;">
-                                    {{Form::open(array('url' => 'profile/edit/study/school', 'id' => 'add_school'))}}
-                                        Школа:<br>
-                                        {{Form::text('school_name')}}<br>
-                                        Годы обучения:<br>
-                                        с {{Form::text('year_begin')}}
-                                        по {{Form::text('year_end')}}<br>
-                                        {{Form::select('school_access', $access)}}<br>
-                                        {{Form::reset('Очистить')}}
-                                        <a href="#" onclick="school.save()">Сохранить</a>
-                                    {{Form::close()}}
-                                </div>
-                                <a onclick="school.addForm()" style="cursor: pointer;">Добавить школу</a>
-                            </div>
-                            <br>
-                            <br>
-                            ВУЗ:
-                            <div class="form-group" id="university">
-                                <div id="university_items" class="items">
-                                    @include('profile.edit.build.universities', array('universities' => Auth::user()->universities))
-                                </div>
-                                <div class="form" style="display: none;">
-                                    {{Form::open(array('url' => 'profile/edit/study/university', 'id' => 'add_university'))}}
-                                    ВУЗ:<br>
-                                    {{Form::text('university_name')}}<br>
-                                    Годы обучения:<br>
-                                    с {{Form::text('year_begin')}}
-                                    по {{Form::text('year_end')}}<br>
-                                    Специальность:<br>
-                                    {{Form::text('speciality')}}<br>
-                                    Примечания:<br>
-                                    {{Form::textarea('description')}}<br>
-                                    {{Form::select('university_access', $access)}}<br>
-                                    {{Form::reset('Очистить')}}
-                                    <a href="#" onclick="university.save()">Сохранить</a>
-                                    {{Form::close()}}
-                                </div>
-                                <a onclick="university.addForm()" style="cursor: pointer;">Добавить университет</a>
-                            </div>
-                        </fieldset>
-                </div>
-            </div>
-	</div>
-	<div class="col-md-4"></div>
-
-</div>
 @stop
 
 @section('scripts')
@@ -98,9 +83,9 @@
             $form.find('input[name="school_name"]').val($school.find('.school-name').text());
             $form.find('input[name="year_begin"]').val($school.find('.year-begin').text());
             $form.find('input[name="year_end"]').val($school.find('.year-end').text());
-            var $schoolAccess = $school.find('select option:selected');
+            var $schoolAccess = $school.find('input[name="access"]').val();
             $form.find('select option').each(function(){
-                if($(this).val() == $schoolAccess.val()){
+                if($(this).val() == $schoolAccess){
                     $(this).prop('selected', true);
                 }
             });
