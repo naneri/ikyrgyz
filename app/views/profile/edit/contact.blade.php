@@ -119,10 +119,10 @@
             });
             $form.append('<input type="hidden" name="contact_id" value="'+contactId+'">');
             $form.find('input[name="contact_type"]').val(contactType);
-            contact.showForm();
+            contact.showForm(contactType);
         },
-        showForm: function(){
-            $('#contact .form').show();
+        showForm: function(contactType){
+            $('#'+contactType+' .form').show();
         },
         addForm:function(contactType){
             var $form = $('#'+contactType+' form');

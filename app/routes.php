@@ -43,6 +43,8 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
+        Route::get('profile/edit/account', 'ProfileController@getEditAccount');
+        Route::post('profile/edit/account', 'ProfileController@postEditAccount');
         Route::get('profile/edit/main', 'ProfileController@getEditMain');
         Route::post('profile/edit/main', 'ProfileController@postEditMain');
         Route::get('profile/edit/study', 'ProfileController@getEditStudy');

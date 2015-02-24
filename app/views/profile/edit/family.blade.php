@@ -82,7 +82,7 @@
             var $form = $('#family form');
             $form.find('input[name="family_member_name"]').val($member.find('.member-name').text());
             var $memberAccess = $member.find('input[name="access"]').val();
-            var $memberRelative = $member.find('select[name="member_relative"] option:selected').val();
+            var $memberRelative = $member.find('input[name="relative"]').val();
             $form.find('select option').each(function(){
                 if($(this).val() == $memberAccess){
                     $(this).prop('selected', true);
