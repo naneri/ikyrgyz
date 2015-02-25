@@ -35,7 +35,7 @@ class AuthController extends BaseController {
             ));
         }
         
-        return Redirect::to('main/index');
+        return Redirect::intended();
     }
     
 

@@ -24,7 +24,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	// Add your validation rules here
         public static $rules = [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|alpha_num|between:4,50',
+            'password' => 'required|alpha_num|between:6,50',
             'recaptcha_response_field' => 'required|recaptcha',
         ];
 

@@ -5,8 +5,9 @@ class ProfileController extends BaseController {
         
         var $access = array('me' => 'Только мне', 'friend' => 'Друзьям', 'all' => 'Всем');
         var $profileItemTypes = array('school', 'university', 'company', 'contact');
-        var $familyMemberRelatives = array('NULL' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
-        var $maritalStatuses = array('NULL' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
+        var $familyMemberRelatives = array('' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
+        var $maritalStatuses = array('' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
+        var $month =  array("0" => "Месяц", "1" => "Январь", "2" => "Февраль", "3" => "Март", "4" => "Апрель", "5" => "Май", "6" => "Июнь", "7" => "Июль", "8" => "Август", "9" => "Сентябрь", "10" => "Октябрь", "11" => "Ноябрь", "12" => "Декабрь");
 
     /**
 	 * Страница с профилем пользователя
@@ -75,14 +76,42 @@ class ProfileController extends BaseController {
             return $profileItem;
         }
 
+        public function getEditAccount() {
+            $user = User::with('description')->find(Auth::id());
+            return View::make('profile.edit.account', array('user' => $user, 'access' => $this->access));
+        }
+
+        public function postEditAccount() {
+            $rules = array(
+                'login' => 'alpha_num|between:3,50',
+                'new_password' => 'string|between:6,50|confirmed',
+                'new_password_confirmation' => 'string|between:6,50');
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return Redirect::back()->withErrors($validator);
+            }
+            $user = Auth::user();
+            $user->name = Input::get('login');
+            if(Input::has('password')){
+                if(Hash::check(Input::get('password'), $user->password)){
+                    $user->password = Hash::make(Input::get('new_password'));
+                } else {
+                    return Redirect::back()->withErrors(array('Invalid current password!'));
+                }
+            }
+            $user->save();
+            return Redirect::back();
+        }
+
         public function getEditMain(){
             $user = User::with('description')->find(Auth::id());       
-            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'formBody' => 'profile.edit.main'));
+            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'month' => $this->month));
         }
         
         public function postEditMain(){
             $description_data = Input::except(array('_token', 'day', 'month', 'year', 'image'));
-            $description_data['birthday'] = Input::get('year').'-'.Input::get('month').'-'.Input::get('day');
+            $description_data['birthday'] = ((Input::has('year'))?Input::get('year'):'0000').'-'.(Input::has('month')?Input::get('month'):'00').'-'.(Input::has('day')?Input::get('day'):'00');
             User_Description::update_data($description_data);
             return Redirect::back();
         }

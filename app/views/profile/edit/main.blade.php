@@ -1,21 +1,35 @@
 @extends('misc.layout')
 @extends('profile.edit.layout')
 @section('form')
+<div class="login-panel panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Edit</h3>
+        <h3 class="panel-title">Основная информация</h3>
     </div>
     <div class="panel-body">
         {{Form::open(array('url' => 'profile/edit/main', 'files'=> true))}}
             <fieldset>
                 <div class="form-group">
-                        <input class="form-control" placeholder="first name" name="first_name" value="{{$user['description']->first_name}}">
-                        <input class="form-control" placeholder="last name" name="last_name" value="{{$user['description']->last_name}}">
+                    <input type="text" class="form-control" placeholder="first name" name="first_name" value="{{$user['description']->first_name}}">
+                    <input type="text" class="form-control" placeholder="last name" name="last_name" value="{{$user['description']->last_name}}">
                 </div>
                 <div class="form-group">
+                    <?php
+                    $birthday = explode('-', $user['description']->birthday);
+                    $days = ['0' => 'День'];
+                    for ($day = 1; $day < 32; $day++) {
+                        $days[$day] = $day;
+                    }
+                    $startYear = (int) date('Y');
+                    $endYear = (int) date('Y') - 100;
+                    $years = ['0' => 'Год'];
+                    for ($year = $startYear; $year > $endYear; $year--) {
+                        $years[$year] = $year;
+                    };
+                    ?>
                     Дата рождения:
-                    <input class="form-control" placeholder="day" name="day" value="{{date("d",strtotime($user['description']->birthday))}}">
-                    <input class="form-control" placeholder="month" name="month" value="{{date("m",strtotime($user['description']->birthday))}}">
-                    <input class="form-control" placeholder="year" name="year" value="{{date("Y",strtotime($user['description']->birthday))}}">
+                    {{Form::select('day', $days, $birthday[2], array('class' => 'form-control'))}}
+                    {{Form::select('month', $month, $birthday[1], array('class' => 'form-control'))}}
+                    {{Form::select('year', $years, $birthday[0], ['class' => 'form-control'])}}
                     {{Form::select('birthday_access', $access, $user['description']->birthday_access)}}
                 </div>
                 <div class="form-group">
@@ -45,4 +59,5 @@
             </fieldset>
         {{Form::close()}}
     </div>
+</div>
 @stop
