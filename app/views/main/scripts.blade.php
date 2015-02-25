@@ -1,6 +1,6 @@
 <script>
 $(document).ready(function(){
-
+	
 	var base_url = "{{$base_config['base_url']}}";
 	var page = 1;
 		
@@ -13,8 +13,9 @@ $(document).ready(function(){
 		   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
 		   		$.get(base_url + '/main/ajaxTopics/' + page, function(data){
 			   		var elements = $(data).find(".b-user-wall");
-			   		console.log(elements);
+			   		console.log('donwloaded elements');
 			   		$container.append( elements ).masonry( 'appended', elements );
+			   		elements = null;
 			   		page += 1;
 		   		});
 		   }

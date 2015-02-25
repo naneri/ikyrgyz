@@ -32,7 +32,6 @@ $env = $app->detectEnvironment(
         'respect' => array('respect'), 
         'devzone51' => array('team1'), //devzone hosting
        'damir' => array('XTREME-BBH2NSTU'), //devzone hosting
-       'kyrgyz' => array('http://i-kyrgyz.com/', 'http://i-kyrgyz.com/')
     )
 );
 
