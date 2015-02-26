@@ -10,7 +10,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
     protected $connection = 'mysql_users';
-	
+
     use UserTrait, RemindableTrait;
     
 	/**
@@ -59,6 +59,29 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function description()
     {
         return $this->hasOne('User_Description', 'user_id', 'id');
+    }
+    
+    public function messagesInbox(){
+        return $this->hasMany('Message', 'receiver_id', 'id')->where('draft', '0');
+    }
+
+    public function messagesOutbox() {
+        return $this->hasMany('Message', 'sender_id', 'id')->where('draft', '0');
+    }
+
+    public function messagesTrashed() {
+        return $this->hasMany('Message', 'receiver_id', 'id')->onlyTrashed();
+    }
+    
+    public function messagesDraft(){
+        return $this->hasMany('Message', 'receiver_id', 'id')->where('draft', '1');
+    }
+    
+    public function friends(){
+        return User::join('friends', 'friends.user_one', '=', 'users.id')
+                ->where('friends.status', Config::get('social.friend_status.friends'))
+                ->where('friends.user_two', Auth::id())
+                ->get();
     }
 
     public function setDescriptionArrayAttribute($values){
