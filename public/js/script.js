@@ -99,26 +99,6 @@ $(function() {
 
 
 
-// $(function(){
-	
-// 	$('.b-topic-create-modal').dialog({
-// 		modal: true,	
-// 		autoOpen: false,
-// 		dialogClass:"myClass"			         
-// 	 });
-// 	$('#opener').click(function(){
-// 		$('.b-topic-create-modal').dialog('open');
-// 	});
-// });
-
-// $(document).ready(function(){	 
-//     $(".ui-dialog").addClass(".b-topic-create-modal__inner");
-//  	$('.ui-dialog-title').addClass('.b-topic-create-modal__title');
-//  	$('.b-topic-create-modal__header button').addClass('.ul-button');
- 	
-   
-// });
-
 
 
 $(function(){
@@ -211,35 +191,3 @@ $(function(){
 
 
 
-(function($) {  
-$(function() {  
-  
-  $('input.pc-input').styler({
-  	filePlaceholder: 'Файл с компьютера',
-  	fileBrowse: 'Выбрать файл'
-  });  
-  
-});  
-})(jQuery);
-
-(function($) {  
-$(function() {  
-  
-  $('input.it-input').styler({
-  	filePlaceholder: 'Файл из интернета',
-  	fileBrowse: 'Ссылка'
-  	
-  });  
-  
-});  
-})(jQuery);
-
-
-
-// (function($) {  
-// $(function() {  
-  
-// $('select').styler();  
-  
-// })  
-// })(jQuery);
