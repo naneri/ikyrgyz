@@ -82,6 +82,13 @@ Route::group(array('before' => 'auth'),function(){
         Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
+        Route::get('messages/inbox', 'MessageController@inbox');
+        Route::get('messages/outbox', 'MessageController@outbox');
+        Route::get('messages/draft', 'MessageController@draft');
+        Route::get('messages/trash', 'MessageController@trash');
+        Route::get('messages/new', 'MessageController@newMessage');
+        Route::post('messages/new', 'MessageController@postNewMessage');
+        Route::post('messages/action', 'MessageController@postAction');
 
         Route::get('custom/history', 'CustomController@showHistory');
         Route::get('custom/customs', 'CustomController@showCustoms');
