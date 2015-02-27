@@ -32,6 +32,7 @@
                       <textarea name="description" cols="30" rows="10" class="textarea-blog input-default">Описание блога</textarea>
                     </div>
                     <div class="b-blog-create-modal-content__item">
+                      <input type="file" name="avatar">
                       <input type="text" value="Тэги" class="input-tag input-default"/>
                       <div class="button-group">
                         <input type="submit" value="Отмена" class="btn-cancel input-default"/>

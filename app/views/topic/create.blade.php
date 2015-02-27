@@ -10,7 +10,7 @@
               </div>
               <div class="b-topic-create-modal__content">
                 <div class="b-topic-create-modal-content">
-                  {{Form::open(array('url' => 'topic/store'))}}
+                  {{Form::open(array('url' => 'topic/store', 'files' => true))}}
                     <div class="b-topic-create-modal-content__item">
                       <input name="title" type="text" value="Введите название" class="input-default add-name"/><a href="" class="draft">Черновики <span>999</span></a>
                     </div>
@@ -23,37 +23,13 @@
                     <div class="b-topic-create-modal-content__item">
                       <textarea name="description" cols="30" rows="10" class="input-default textarea-topic"></textarea>
                     </div>
-                    <div class="b-topic-create-modal-content__item"><span class="change-skin-title">Изображение топика</span><a href="#" class="input-default change-skin">Добавить</a>
-                      <div class="b-topic-create__skin">
-                        <div class="b-topic-create-skin">
-                          <div class="b-topic-create-skin__title">Добавить изображение топика</div>
-                          <div class="b-topic-create-skin__content">
-                            <div class="b-topic-create-skin-content">
-                              <form id="" method="" action="">
-                                <div class="b-topic-create-skin-content-wrapper">
-                                  <div class="b-topic-create-skin-content__item">
-                                    <input type="file" placeholder="Выбрать файла" class="jq-file__name input-default input pc-input"/>
-                                  </div>
-                                  <div class="b-topic-create-skin-content__item">
-                                    <input type="file" placeholder="Ссылка" class="jq-file__name input-default it-input"/>
-                                  </div>
-                                </div>
-                                <div class="b-topic-create-skin-content__item">
-                                  <div class="b-topic-create-skin-content-buttons">
-                                    <input type="submit" value="Отмена" class="input-default"/>
-                                    <input type="submit" value="Добавить" class="input-default"/>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
+                    <div class="b-topic-create-modal-content__item">
+                        <input type="file" name="photo" multiple>
+                          <div class="b-topic-create-modal-content__btns">
+                            <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>
+                            <input type="submit" value="Препросмотр" class="btn btn-preview input-default"/>
+                            <input type="submit" value="Опубликовать" class="btn btn-submit input-default"/>
                           </div>
-                        </div>
-                      </div>
-                      <div class="b-topic-create-modal-content__btns">
-                        <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>
-                        <input type="submit" value="Препросмотр" class="btn btn-preview input-default"/>
-                        <input type="submit" value="Опубликовать" class="btn btn-submit input-default"/>
-                      </div>
                       <div class="clear"></div>
                     </div>
                    {{Form::close()}}

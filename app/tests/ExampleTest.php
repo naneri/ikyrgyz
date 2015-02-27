@@ -7,10 +7,21 @@ class ExampleTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testBasicExample()
+	public function testIndexPage()
 	{
-		$crawler = $this->client->request('GET', '/');
+		$crawler = $this->call('GET', '/');
 		$this->assertTrue($this->client->getResponse()->isOk());
 	}
 
+	public function testIndexPageAfterAuth(){
+		$this->be(User::find(1));
+		$crawler = $this->call('GET', '/');
+		$this->assertRedirectedTo('main/index');
+	}
+
+	public function testMainPage(){
+		$this->be(User::find(1));
+		$crawler = $this->call('GET', 'main/index');
+		$this->assertViewHas(['topics']);
+	}
 }

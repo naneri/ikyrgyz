@@ -30,7 +30,7 @@ class BlogController extends BaseController {
                 $blog->user_id = Auth::user()->id;
                 
                 if(Input::hasFile('avatar')){
-                    $dir = '/images' . date('/Y/m/d/');
+                    $dir = '/images/blog' . date('/Y/m/d/');
                     do {
                         $filename = str_random(30) . '.jpg';
                     } while (File::exists(public_path() . $dir . $filename));
