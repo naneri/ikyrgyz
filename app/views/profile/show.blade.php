@@ -4,15 +4,22 @@
 
 
 <div class="b-content">
-{{{$user->email}}} <br>
+
 @if(Auth::id() != $user->id)
 	@if($friend_status != True)
-		<a href="{{URL::to('people/friendRequest/'. $user->id)}}">Стать друзьями</a>
+		
 	@endif
 					<div class="b-user-profile">
-            <div class="b-user-profile__left"><a href="" class="user-image"><img style="width:40px" src="{{ asset($user->description->user_profile_avatar) }}" alt=""/></a>
+          @if(isset($user->description->user_profile_avatar))
+            <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt=""/></a>
               <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
             </div>
+          @else
+            <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
+              <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
+            </div>
+          @endif
+            
             <div class="b-user-profile__middle">
               <p class="user-raiting">Рейтинг<span class="num">+0.00</span></p>
               <p class="user-name">Ярослав Александрович </br>Маркин</p>
