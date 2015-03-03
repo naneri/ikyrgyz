@@ -19,9 +19,9 @@ Route::get('register', 'AuthController@getRegister');
 Route::post('register', 'AuthController@postRegister');
 Route::get('activate/{code}', 'AuthController@getActivate');
 
-Route::group(array('before' => 'auth'),function(){    
-    Route::get('main/index','MainController@index'); 
-	Route::get('main/ajaxTopics/{page}','MainController@ajaxTopics');        
+Route::group(array('before' => 'auth'),function(){
+    Route::get('main/index','MainController@index');
+	Route::get('main/ajaxTopics/{page}','MainController@ajaxTopics');
         Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');
@@ -36,7 +36,17 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
         Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
         Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
-        
+
+        Route::get('group', 'GroupController@index');
+        Route::get('group/show/{id}', 'GroupController@show');
+        Route::get('group/create', 'GroupController@getCreate');
+        Route::post('group/create', 'GroupController@postCreate');
+        //Route::group(array('before' => 'group_edit_permission'), function(){
+            //Route::get('group/edit/{id}', 'GroupController@getEdit');
+          //  Route::post('group/edit/{id}', 'GroupController@postEdit');
+        //});
+        //Route::post('group/update', 'GroupController@update');
+
         Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
@@ -66,7 +76,7 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
         Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
-        
+
         Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
@@ -77,7 +87,7 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('custom/help', 'CustomController@showHelp');
         Route::get('custom/problem', 'CustomController@showProblem');
         Route::get('custom/action_history', 'CustomController@showActionHistory');
-        
+
         Route::get('search/people', 'SearchController@searchPeople');
         Route::post('search/people', 'SearchController@postSearchPeople');
         Route::get('search/content', 'SearchController@searchContent');
@@ -85,7 +95,7 @@ Route::group(array('before' => 'auth'),function(){
 
         Route::resource('tags', 'TagsController');
         Route::resource('photos', 'PhotosController');
-        
+
 	Route::get('logout', 'AuthController@logout');
 
         if(Request::ajax()){
@@ -93,7 +103,7 @@ Route::group(array('before' => 'auth'),function(){
             Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
             Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
             Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
-            
+
             Route::post('vote/comment', 'VoteController@postVoteComment');
             Route::post('vote/topic', 'VoteController@postVoteTopic');
             Route::post('vote/blog', 'VoteController@postVoteBlog');
@@ -105,7 +115,7 @@ Route::filter('blog_edit_permission', function($route){
     $blog = Blog::findOrFail($route->parameter('id'));
     if(!$blog->canEdit()){
         return View::make('error.permission', array('error' => 'You don\'t have enough permissions to do that.'));
-    } 
+    }
 });
 
 Route::filter('topic_edit_permission', function($route) {
