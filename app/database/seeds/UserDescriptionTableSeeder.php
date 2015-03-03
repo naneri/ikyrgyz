@@ -9,10 +9,10 @@ class UserDescriptionTableSeeder extends Seeder {
 		DB::connection('mysql_users')->table('user_description')->delete();
 
 		$descriptions = array(
-			array('id' => 1),
-			array('id' => 2),
-			array('id' => 3),
-			array('id' => 4),
+			array('user_id' => 1),
+			array('user_id' => 2),
+			array('user_id' => 3),
+			array('user_id' => 4),
 			);
 
 		User_Description::insert($descriptions);

@@ -8,15 +8,19 @@ class Topic extends Eloquent {
 
         static function getSubscribedTopics($userId, $rating, $offset = 0) {
             $topic_number = Config::get('topic.topics_per_page');
-    		return 	Topic::with('blog', 'user', 'user.description')->skip($offset*$topic_number)->take($topic_number)->orderBy('topics.id', 'DESC')->get();/*where('topics.rating', '>', $rating)
-                  ->join('blogs', 'topics.blog_id', '=', 'blogs.id')
-                  ->join('blog_subscriptions as us', function ($j) use ($userId){
-                  $j->on('us.blog_id', '=', 'blogs.id')
-                  ->where('us.user_id', '=', $userId);
-                  })
-                  ->take($topic_number)
-                  ->offset($offset)
-    				->get(['topics.*']);*/
+    		return 	Topic::with('blog', 'user', 'user.description')
+                ->skip($offset*$topic_number)
+                ->take($topic_number)
+                ->orderBy('topics.id', 'DESC')
+                ->get();/*where('topics.rating', '>', $rating)
+                      ->join('blogs', 'topics.blog_id', '=', 'blogs.id')
+                      ->join('blog_subscriptions as us', function ($j) use ($userId){
+                      $j->on('us.blog_id', '=', 'blogs.id')
+                      ->where('us.user_id', '=', $userId);
+                      })
+                      ->take($topic_number)
+                      ->offset($offset)
+        				->get(['topics.*']);*/
         }
 
         public function tags() {
@@ -29,10 +33,6 @@ class Topic extends Eloquent {
                 $stringTags .= $tag->name.', ';
             }
             return $stringTags;
-        }
-        
-        public function images() {
-            return $this->hasMany('TopicImage');
         }
         
         public function type(){

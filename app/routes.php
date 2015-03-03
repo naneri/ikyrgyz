@@ -53,13 +53,25 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
+        Route::get('profile/edit/account', 'ProfileController@getEditAccount');
+        Route::post('profile/edit/account', 'ProfileController@postEditAccount');
         Route::get('profile/edit/main', 'ProfileController@getEditMain');
         Route::post('profile/edit/main', 'ProfileController@postEditMain');
         Route::get('profile/edit/study', 'ProfileController@getEditStudy');
-        Route::get('profile/edit/work', 'ProfileController@getEditWork');
+        Route::post('profile/edit/study/school', 'ProfileController@postStudySchool');
+        Route::post('profile/edit/study/university', 'ProfileController@postStudyUniversity');
+        Route::get('profile/edit/job', 'ProfileController@getEditJob');
+        Route::post('profile/edit/job', 'ProfileController@postJob');
         Route::get('profile/edit/contact', 'ProfileController@getEditContact');
+        Route::post('profile/edit/contact', 'ProfileController@postContact');
         Route::get('profile/edit/family', 'ProfileController@getEditFamily');
+        Route::post('profile/edit/family/members', 'ProfileController@postFamilyMembers');
+        Route::post('profile/edit/maritalStatus', 'ProfileController@postMaritalStatus');
         Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
+        Route::post('profile/edit/aboutMe', 'ProfileController@postAboutMe');
+        Route::post('profile/edit/additional', 'ProfileController@postAdditional');
+        Route::get('profile/edit/access', 'ProfileController@getEditAccess');
+        Route::post('profile/edit/access', 'ProfileController@postAccess');
 
         Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
@@ -80,6 +92,13 @@ Route::group(array('before' => 'auth'),function(){
         Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
+        Route::get('messages/inbox', 'MessageController@inbox');
+        Route::get('messages/outbox', 'MessageController@outbox');
+        Route::get('messages/draft', 'MessageController@draft');
+        Route::get('messages/trash', 'MessageController@trash');
+        Route::get('messages/new', 'MessageController@newMessage');
+        Route::post('messages/new', 'MessageController@postNewMessage');
+        Route::post('messages/action', 'MessageController@postAction');
 
         Route::get('custom/history', 'CustomController@showHistory');
         Route::get('custom/customs', 'CustomController@showCustoms');

@@ -2,21 +2,17 @@
 
 class BlogController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+    function __construct() {
+        parent::__construct();
+    }
 
 	public function create(){
-		return View::make('blog.create');
+        $blog_types = BlogType::all();
+        foreach($blog_types as $Type){
+            $type_list[$Type->id] = $Type->name; 
+        }
+        
+		return View::make('blog.create', array('type_list' => $type_list));
 	}
 
 	public function store(){
@@ -34,7 +30,7 @@ class BlogController extends BaseController {
                 $blog->user_id = Auth::user()->id;
                 
                 if(Input::hasFile('avatar')){
-                    $dir = '/images' . date('/Y/m/d/');
+                    $dir = '/images/blog' . date('/Y/m/d/');
                     do {
                         $filename = str_random(30) . '.jpg';
                     } while (File::exists(public_path() . $dir . $filename));

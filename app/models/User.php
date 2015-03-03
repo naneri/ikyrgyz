@@ -10,7 +10,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
     protected $connection = 'mysql_users';
-	
+
     use UserTrait, RemindableTrait;
     
 	/**
@@ -24,7 +24,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	// Add your validation rules here
         public static $rules = [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|alpha_num|between:4,50',
+            'password' => 'required|alpha_num|between:6,50',
             'recaptcha_response_field' => 'required|recaptcha',
         ];
 
@@ -59,6 +59,29 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function description()
     {
         return $this->hasOne('User_Description', 'user_id', 'id');
+    }
+    
+    public function messagesInbox(){
+        return $this->hasMany('Message', 'receiver_id', 'id')->where('draft', '0');
+    }
+
+    public function messagesOutbox() {
+        return $this->hasMany('Message', 'sender_id', 'id')->where('draft', '0');
+    }
+
+    public function messagesTrashed() {
+        return $this->hasMany('Message', 'receiver_id', 'id')->onlyTrashed();
+    }
+    
+    public function messagesDraft(){
+        return $this->hasMany('Message', 'receiver_id', 'id')->where('draft', '1');
+    }
+    
+    public function friends(){
+        return User::join('friends', 'friends.user_one', '=', 'users.id')
+                ->where('friends.status', Config::get('social.friend_status.friends'))
+                ->where('friends.user_two', Auth::id())
+                ->get();
     }
 
     public function setDescriptionArrayAttribute($values){
@@ -175,6 +198,34 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->where('blogs.user_id', $this->id)
                 ->select('blogs.*')
                 ->first();
+        }
+        
+        public function profileItems(){
+            return $this->hasMany('ProfileItem');
+        }
+        
+        public function schools(){
+            return $this->hasMany('ProfileItem')->where('type', 'study')->where('subtype', 'school');
+        }
+        
+        public function universities() {
+            return $this->hasMany('ProfileItem')->where('type', 'study')->where('subtype', 'university');
+        }
+
+        public function jobs() {
+            return $this->hasMany('ProfileItem')->where('type', 'experience')->where('subtype', 'job');
+        }
+        
+        public function contacts(){
+            return $this->hasMany('ProfileItem')->where('type', 'contact');
+        }
+        
+        public function familyMembers(){
+            return $this->hasMany('ProfileItem')->where('type', 'family');
+        }
+        
+        public function additionals(){
+            return $this->hasMany('ProfileItem')->where('type', 'additional');
         }
 
 }

@@ -21,10 +21,11 @@ class BaseController extends Controller {
 			// Отправляет в шаблон все запросы о добавлении в друзья
 			$friend_requests = Friend::getFriendRequests(Auth::id());
 			View::share('friend_requests', $friend_requests);
-
+			
 			// Отправляет в шаблон все новые сообщения
 			$new_messages = Message::where('receiver_id', '=', Auth::id())->where('watched', '=', 0)->join('users', 'messages.sender_id', '=', 'users.id')->get();
 			View::share('new_messages', $new_messages);
+
 
 			// Отправляет в шаблон данные о пользователе
 			$user_data = User::with('description')->find(Auth::id());

@@ -6,7 +6,7 @@
                 <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
                 <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/38.png') }}" alt="user"/><span class="user-name">Имя пользователя</span></a>
                   <ul class="b-header-nav-dropdown">
-                    <li><a href="{{ URL::to('profile/edit') }}">Изменить профиль</a></li>
+                    <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
                     <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>
                     <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
                     <li><a href="#">Группы</a></li>
@@ -14,27 +14,37 @@
                 </li>
                 <li class="b-header-nav__list">
                   <a href="#" class="counter-block">
-                    <img src="{{ asset('img/4.png') }}" alt="msg"/>
-                    <span class="counter">25</span>
+                    @if(count($new_messages))
+                      <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
+                      <span class="counter">{{count($new_messages)}}</span>
+                    @else
+                      <img src="{{ asset('img/navbar/mail_inact.png') }}" alt="msg"/>
+                      <span style="opacity:0" class="counter">{{count($new_messages)}}</span>
+                    @endif
                   </a>
                   <a href="#" class="counter-block">
-                    <img src="{{ asset('img/5.png') }}" alt="msg"/>
-                    <span class="counter">25</span>
+                    @if(count($friend_requests))
+                      <img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
+                      <span class="counter">{{count($friend_requests)}}</span>
+                    @else
+                      <img src="{{ asset('img/navbar/f_req_inact.png') }}" alt="msg"/>
+                      <span style="opacity:0" class="counter">{{count($friend_requests)}}</span>
+                    @endif
                   </a>
                   <a href="#" class="counter-block">
-                    <img src="{{ asset('img/6.png') }}" alt="msg"/>
-                    <span class="counter">25</span>
+                    <img src="{{ asset('img/navbar/setting_inact.png') }}" alt="msg"/>
+                    <span style="opacity:0" class="counter">25</span>
                   </a>
                 </li>
                 <li class="b-header-nav__list">
                   <a href="{{ URL::to('search/people') }}">
-                    <img src="{{ asset('img/7.png') }}" alt="search"/>
+                    <img src="{{ asset('img/navbar/friend_search.png') }}" alt="search"/>
                     <span class="search-friend">Поиск друзей</span>
                   </a>
                 </li>
                 <li class="b-header-nav__list">
                   <a href="#">
-                    <img src="{{ asset('img/8.png') }}" alt="search"/>
+                    <img src="{{ asset('img/navbar/encyclopedia.png') }}" alt="search"/>
                     <span class="search-friend">Энциклопедия</span>
                   </a>
                   <ul class="b-header-nav-dropdown">

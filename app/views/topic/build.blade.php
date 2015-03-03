@@ -16,18 +16,15 @@
             <img src="{{ asset('img/23.png') }}" alt=""/><span>34</span>
           </p>
         </div>
-        <div class="b-user-wall-image"><a href="">
-          @if ($topic->photos->count() > 0)
-            <img src="{{asset($topic->photos[0]->url)}}" alt=""/>
-          @endif
-        </a></div>
+        <div class="b-user-wall-image">
+        </div>
         <div class="b-user-wall-footer">
           <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset('img/48.png') }}" alt=""/></a></div>
           <p class="b-user-wall-footer__title">{{$topic->blog->title}}</p>
           <p class="b-user-wall-footer__number">31 топик
             <div class="clear"></div>
           </p>
-          <div class="b-user-wall-footer__btn"><a href="" class="about-btn btn">Подробнее</a>
+          <div class="b-user-wall-footer__btn"><a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">Подробнее</a>
             <ul class="b-user-wall-footer-list">
               <li><a href="" class="share-btn btn">Поделиться</a>
                 <ul class="b-user-wall-footer-dropdown">

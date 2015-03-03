@@ -31,9 +31,9 @@
               </div>
               <div class="b-topic-navigation__middle">
                 <ul>
-                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/33.png') }}" alt=""/><span>19</span></li>
-                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/41.png') }}" alt=""/><span>19</span></li>
-                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/34.png') }}" alt=""/><span>19</span></li>
+                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/33.png') }}" alt=""/><span style="opacity:0">19</span></li>
+                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/41.png') }}" alt=""/><span style="opacity:0">19</span></li>
+                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/34.png') }}" alt=""/><span style="opacity:0">19</span></li>
                   <li class="b-topic-navigation-item__item"><a href="" class="icon-image"><img src="{{ asset('img/35.png') }}" alt=""/></a>
                     <ul class="b-topic-navigation-icons-list b-topic-navigation-icons-dropdown">
                       <li class="b-topic-navigation-icons-list__list b-topic-navigation-icons-list__list-padding"><a href="">Видео</a></li>
@@ -48,28 +48,28 @@
               </div>
               <div class="b-topic-navigation__right">
                 <ul class="b-topic-navigation-format">
-                  <li class="b-topic-navigation-format__list"><a href="#" class="format-icon"><img src="{{ asset('img/42.png') }}" alt=""/></a>
+           <!--       <li class="b-topic-navigation-format__list"><a href="#" class="format-icon"><img src="{{ asset('img/42.png') }}" alt=""/></a>
                     <ul class="b-topic-navigation-format-dropdown">
                       <li><a href=""><img src="{{ asset('img/44.png') }}" alt=""/></a></li>
                       <li><a href=""><img src="{{ asset('img/45.png') }}" alt=""/></a></li>
                       <li><a href=""><img src="{{ asset('img/46.png') }}" alt=""/></a></li>
                     </ul>
-                  </li>
-                  <li class="b-topic-navigation-format__list"><a href="" class="format-icon"><img src="{{ asset('img/37.png') }}" alt=""/><span>11</span></a>
-                    <ul class="b-topic-navigation-online-dropdown">
+                  </li> -->
+                  <li class="b-topic-navigation-format__list"><a href="" class="format-icon"><img src="{{ asset('img/37.png') }}" alt=""/><span style="opacity:0">11</span></a>
+                    <ul style="opacity:0" class="b-topic-navigation-online-dropdown">
                       <li>
-                      	<a href="">
-                      		<span>Фамилия Имя Отчество</span>
-                      		<img src="{{ asset('img/47.png') }}" alt=""/>
-                      	</a>
-                      	<a href="">
-                      		<span>Фамилия Имя Отчество</span>
-                      		<img src="{{ asset('img/47.png') }}" alt=""/>
-                      	</a>
-                      	<a href="">
-                      		<span>Фамилия Имя Отчество</span>
-                      		<img src="{{ asset('img/47.png') }}" alt=""/>
-                      	</a>
+                        <a href="">
+                          <span>Фамилия Имя Отчество</span>
+                          <img src="{{ asset('img/47.png') }}" alt=""/>
+                        </a>
+                        <a href="">
+                          <span>Фамилия Имя Отчество</span>
+                          <img src="{{ asset('img/47.png') }}" alt=""/>
+                        </a>
+                        <a href="">
+                          <span>Фамилия Имя Отчество</span>
+                          <img src="{{ asset('img/47.png') }}" alt=""/>
+                        </a>
                       </li>
                     </ul>
                   </li>

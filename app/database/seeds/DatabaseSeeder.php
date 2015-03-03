@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder {
                 $this->call('RolesTableSeeder');
                 $this->call('UserDescriptionTableSeeder');
                 $this->call('CitiesTableSeeder');
-                $this->call('CountriesTableSeeder');
+                $this->call('CountryTableSeeder');
     }
 
 }
