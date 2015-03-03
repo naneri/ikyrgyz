@@ -24,8 +24,29 @@ class ProfileController extends BaseController {
 
 		return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status));
 	}
+        
+        public function getProfileFill(){
+            $user = User::with('description')->find(Auth::id());
+            return View::make('profile.fill', array('user' => $user, 'access' => $this->access, 'month' => $this->month));
+        }
 
-	/**
+        public function postProfileFill() {
+            $rules = array(
+                'first_name' => 'required',
+                'gender' => 'required',
+                'liveplace_country_id' => 'required');
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return Redirect::back()->withInput()->withErrors($validator);
+            }
+            $description_data = Input::except(array('_token', 'day', 'month', 'year', 'image'));
+            $description_data['birthday'] = ((Input::has('year')) ? Input::get('year') : '0000') . '-' . (Input::has('month') ? Input::get('month') : '00') . '-' . (Input::has('day') ? Input::get('day') : '00');
+            User_Description::update_data($description_data);
+            return Redirect::to('main/index');
+        }
+
+        /**
 	 * Страница редактирования профиля
 	 * 
 	 * @return [type] [description]
@@ -110,6 +131,15 @@ class ProfileController extends BaseController {
         }
         
         public function postEditMain(){
+            $rules = array(
+                'first_name' => 'required',
+                'gender' => 'required',
+                'liveplace_country_id' => 'required');
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return Redirect::back()->withInput()->withErrors($validator);
+            }
             $description_data = Input::except(array('_token', 'day', 'month', 'year', 'image'));
             $description_data['birthday'] = ((Input::has('year'))?Input::get('year'):'0000').'-'.(Input::has('month')?Input::get('month'):'00').'-'.(Input::has('day')?Input::get('day'):'00');
             User_Description::update_data($description_data);

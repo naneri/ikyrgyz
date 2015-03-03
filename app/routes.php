@@ -49,6 +49,8 @@ Route::group(array('before' => 'auth'),function(){
 
         Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
+        Route::get('profile/fill', 'ProfileController@getProfileFill');
+        Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
@@ -92,9 +94,12 @@ Route::group(array('before' => 'auth'),function(){
         Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
-        Route::get('messages/inbox', 'MessageController@inbox');
+        Route::get('messages/inbox/{filter}', 'MessageController@inbox');
         Route::get('messages/outbox', 'MessageController@outbox');
+        Route::get('messages/contacts', 'MessageController@contacts');
         Route::get('messages/draft', 'MessageController@draft');
+        Route::get('messages/blacklist', 'MessageController@blacklist');
+        Route::post('messages/blacklist', 'MessageController@postBlacklist');
         Route::get('messages/trash', 'MessageController@trash');
         Route::get('messages/new', 'MessageController@newMessage');
         Route::post('messages/new', 'MessageController@postNewMessage');

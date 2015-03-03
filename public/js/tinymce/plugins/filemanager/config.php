@@ -16,9 +16,9 @@ $root = rtrim($_SERVER['DOCUMENT_ROOT'],'/'); // don't touch this configuration
 //   |    |   |    |-   |- filemanager
 //   |    |   |    |-   |-      |- thumbs <- folder of thumbs [must have the write permission]
 
-$base_url="http://localhost:8000"; //url base of site if you want only relative url leave empty
-$upload_dir = '/uploads/'; // path from base_url to upload base dir
-$current_path = '..\..\..\..\uploads\\'; // relative path from filemanager folder to upload files folder
+$base_url="http://localhost/newkyrgyz"; //url base of site if you want only relative url leave empty
+$upload_dir = '/newkyrgyz/public/uploads/'; // path from base_url to upload base dir
+$current_path = '../../../../uploads/'; // relative path from filemanager folder to upload files folder
 
 $MaxSizeUpload=100; //Mb
 

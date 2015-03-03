@@ -41,8 +41,19 @@ class MessageController extends BaseController{
 		return View::make('message.show', array('message' => $message[0]));
 	}
         
-        public function inbox(){
-            $messages = '';//Message::where('receiver_id', '=', Auth::id())->join('users', 'messages.sender_id', '=', 'users.id')->join('user_description', 'user_description.user_id', '=', 'users.id')->paginate(5);
+        public function inbox($filter){
+            $messages = array();
+            switch($filter){
+                case 'friend':
+                    $messages = Auth::user()->messagesInbox;
+                    break;
+                case 'group':
+                    break;
+                case 'event':
+                    break;
+                default:
+                    $messages = Auth::user()->messagesInbox;                    
+            }
             return View::make('message.inbox', array('messages' => $messages));
         }
         
@@ -94,8 +105,44 @@ class MessageController extends BaseController{
             return View::make('message.trash');
         }
 
+        public function contacts() {
+            return View::make('message.contacts');
+        }
+
         public function draft() {
             return View::make('message.draft');
+        }
+
+        public function blacklist() {
+            return View::make('message.blacklist');
+        }
+        
+        public function postBlacklist() {
+            $result = array();
+            $rules = array(
+                'user_id' => 'required|exists:users,id'
+                );
+
+            $validator = Validator::make(Input::all(), $rules);
+
+            $verifier = App::make('validation.presence');
+            $verifier->setConnection('mysql_users');
+            $validator->setPresenceVerifier($verifier);
+
+            if ($validator->fails()) {
+                $result['error'] = $validator->messages();
+                return Response::json($result);
+            }
+            
+            if(!in_array(Input::get('action'), array('out', 'in'))){
+                $result['error'] = 'error action';
+                return Response::json($result);
+            }
+            
+            Friend::fromBan(Input::get('user_id'));
+            
+            $result['users'] = View::make('message.build.users', array('users' => Auth::user()->blacklistUsers()))->render();
+            return Response::json($result);
         }
 
         private function saveMessageAttachments($messageId) {
@@ -120,7 +167,7 @@ class MessageController extends BaseController{
         }
         
         public function postAction(){
-            if(!in_array(Input::get('action'), array('set_watch', 'set_notwatch', 'blacklist', 'delete', 'restore'))){
+            if(!in_array(Input::get('action'), array('set_watch', 'set_notwatch', 'blacklist', 'delete', 'restore', 'force_delete'))){
                 $result['error'] = 'error action!';
                 return Response::json($result);
             }
@@ -130,12 +177,16 @@ class MessageController extends BaseController{
                 Message::whereIn('id', $messageIds)->update(['watched' => '1']);
             }elseif($action == 'set_notwatch'){
                 Message::whereIn('id', $messageIds)->update(['watched' => '0']);
-            }elseif($action == 'blaclist'){
-                
+            }elseif($action == 'blacklist'){
+                foreach(Message::whereIn('id', $messageIds)->get() as $message){
+                    Friend::toBan($message->sender_id);
+                }
             }elseif($action == 'delete'){
                 Message::whereIn('id', $messageIds)->delete();
             }elseif($action == 'restore'){
                 Message::whereIn('id', $messageIds)->restore();
+            }elseif($action == 'force_delete'){
+                Message::whereIn('id', $messageIds)->forceDelete();
             }
             
             $renderMessages = null;
