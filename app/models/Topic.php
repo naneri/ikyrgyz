@@ -9,7 +9,6 @@ class Topic extends Eloquent {
         static function getSubscribedTopics($userId, $rating, $offset = 0) {
             $topic_number = Config::get('topic.topics_per_page');
     		return 	Topic::with('blog', 'user', 'user.description')
-                ->with('images')
                 ->skip($offset*$topic_number)
                 ->take($topic_number)
                 ->orderBy('topics.id', 'DESC')
@@ -34,10 +33,6 @@ class Topic extends Eloquent {
                 $stringTags .= $tag->name.', ';
             }
             return $stringTags;
-        }
-        
-        public function images() {
-            return $this->hasMany('TopicImage');
         }
         
         public function type(){

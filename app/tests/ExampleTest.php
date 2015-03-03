@@ -2,6 +2,7 @@
 
 class ExampleTest extends TestCase {
 
+
 	/**
 	 * A basic functional test example.
 	 *
@@ -20,8 +21,9 @@ class ExampleTest extends TestCase {
 	}
 
 	public function testMainPage(){
+		parent::setUp();
 		$this->be(User::find(1));
 		$crawler = $this->call('GET', 'main/index');
-		$this->assertViewHas(['topics']);
+		$this->assertViewHas(['topics', 'base_config']);
 	}
 }

@@ -16,11 +16,8 @@
             <img src="{{ asset('img/23.png') }}" alt=""/><span>34</span>
           </p>
         </div>
-        <div class="b-user-wall-image"><a href="">
-          @if ($topic->images()->count() > 0)
-            <img src="{{asset($topic->images[0]->url)}}" alt=""/>
-          @endif
-        </a></div>
+        <div class="b-user-wall-image">
+        </div>
         <div class="b-user-wall-footer">
           <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset('img/48.png') }}" alt=""/></a></div>
           <p class="b-user-wall-footer__title">{{$topic->blog->title}}</p>
