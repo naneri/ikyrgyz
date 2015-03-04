@@ -6,10 +6,6 @@
     <div class="panel-heading">
         {{Form::checkbox('check-all')}}
         {{Form::select('action', array('' => 'Выберите действие', 'delete' => 'Удалить'))}}
-        {{HTML::link('messages/inbox/friend', 'Друзья')}}
-        {{HTML::link('messages/inbox/group', 'Группы')}}
-        {{HTML::link('messages/inbox/event', 'События')}}
-        {{HTML::link('messages/inbox/all', 'Все')}}
         {{Form::hidden('page', 'draft')}}
     </div>
     <div class="panel-body" id="messages">

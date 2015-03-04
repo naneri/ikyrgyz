@@ -12,7 +12,11 @@ class Message extends Eloquent{
 		return $this->belongsTo('User', 'sender_id');
 	}
 
-	static function setWatched($id){
+        public function receiver() {
+            return $this->belongsTo('User', 'receiver_id');
+        }
+
+        static function setWatched($id){
 		$message = Message::find($id);
 		if($message->watched === 0){
 			$message->watched = 1;
@@ -27,5 +31,9 @@ class Message extends Eloquent{
         public function scopeWithoutBanned($query){
             $bannedUserIds = Auth::user()->getBannedUserIds();
             return $query->whereNotIn('sender_id', $bannedUserIds);
+        }
+        
+        public function attachments(){
+            return $this->hasMany('MessageAttachment');
         }
 }

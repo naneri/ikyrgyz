@@ -6,7 +6,7 @@
         <h4></h4>
         {{HTML::link('messages/new', 'Новое сообщение')}}
         {{HTML::link('messages/contacts', 'Контакты')}}
-        {{HTML::link('messages/inbox', 'Входящие')}}
+        {{HTML::link('messages/inbox/all', 'Входящие')}}
         {{HTML::link('messages/outbox', 'Исходящие')}}
         {{HTML::link('messages/draft', 'Черновики')}}
         {{HTML::link('messages/blacklist', 'Черный список')}}
@@ -27,7 +27,7 @@
 </style>
 <script>
     $('select[name="action"]').change(function(){
-        if($('input[name="messages[]"]:checked').length){
+        if($('input[name="messages[]"]:checked').length && confirm("Вы действительно хотите выполнить действие?")){
             var $form = $('form[name="messages"]');
             var data = $form.serialize();
             $.ajax({

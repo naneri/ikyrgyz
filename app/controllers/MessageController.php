@@ -36,9 +36,11 @@ class MessageController extends BaseController{
 	 * @return [type]     [description]
 	 */
 	public function show($id){
-		$message = Message::where('messages.id', '=', $id)->join('users', 'messages.sender_id', '=', 'users.id')->get();
-		Message::setWatched($id);
-		return View::make('message.show', array('message' => $message[0]));
+		$message = Message::find($id);
+		if($message->receiver_id == Auth::id()){
+                    Message::setWatched($id);
+                }
+		return View::make('message.show', array('message' => $message));
 	}
         
         public function inbox($filter){
@@ -58,45 +60,66 @@ class MessageController extends BaseController{
         }
         
         public function newMessage(){
-            return View::make('message.new');
+            $receiver = Input::get('receiver');
+            return View::make('message.new', array('receiver' => $receiver));
         }
 
         public function postNewMessage() {
             $rules = array(
-                'title' => 'required|alpha_num',
+                'receiver' => 'required',
+                'title' => 'required|string',
                 'text' => 'required|string',
                 'is_draft' => 'required');
-            if(!boolval(Input::get('is_draft'))){
-                $rules['receiver'] = 'required|email|exists:users,email';
-            }
             
             $validator = Validator::make(Input::all(), $rules);
-            
-            $verifier = App::make('validation.presence');
-            $verifier->setConnection('mysql_users');
-            $validator->setPresenceVerifier($verifier);
-            
+                        
             if ($validator->fails()) {
-                return Redirect::back()->withErrors($validator);
+                return Redirect::back()->withInput()->withErrors($validator);
             }
             
-            $id = (boolval(Input::get('is_draft')))?Auth::id():User::whereEmail(Input::get('receiver'))->first()->id;
+            $names = explode(' ', trim(Input::get('receiver')));
+            
+            $receiver = User::join('user_description as ud', 'ud.user_id', '=', 'users.id')
+                    ->where('ud.first_name', 'like', $names[0])
+                    ->where('ud.last_name', 'like', (count($names)>1)?$names[1]:'%')
+                    ->select('users.*')
+                    ->first();
+                           
+            if (!$receiver) {
+                return Redirect::back()->withInput()->withErrors(array('receiver' => 'Cannot find user'));
+            }
+            if(!Auth::user()->canSendMessage($receiver->id)){
+                return Redirect::back()->withInput()->withErrors(array('receiver' => 'You can send message only friends'));
+            }
             
             $message = new Message;
             $message->sender_id = Auth::id();
-            $message->receiver_id = $id;
+            $message->receiver_id = $receiver->id;
             $message->title = Input::get('title');
             $message->text = Input::get('text');
-            $message->from = 'user';
+            $message->from = 'friend';
             $message->draft = Input::get('is_draft');
             $message->save();
             
             if(Input::hasFile('attachments')){
                 $this->saveMessageAttachments($message->id);
             }
-            return View::make('message.new');
+            return Redirect::to('message/show/'.$message->id);
         }
-        
+
+        public function sendMessageDraft($id) {
+            $message = Message::find($id);
+            
+            if($message->draft != 1 || $message->sender_id != Auth::id()){
+                return Redirect::back()->withErrors(array('message', 'You cannot send this message'));
+            }
+            
+            $message->draft = 0;
+            $message->save();
+
+            return Redirect::back()->with('message', 'message sent successfully');
+        }
+
         public function outbox(){
             return View::make('message.outbox');
         }
@@ -141,7 +164,7 @@ class MessageController extends BaseController{
             
             Friend::fromBan(Input::get('user_id'));
             
-            $result['users'] = View::make('message.build.users', array('users' => Auth::user()->blacklistUsers()))->render();
+            $result['users'] = View::make('message.build.users', array('users' => Auth::user()->bannedUsers()))->render();
             return Response::json($result);
         }
 
@@ -186,7 +209,7 @@ class MessageController extends BaseController{
             }elseif($action == 'restore'){
                 Message::whereIn('id', $messageIds)->restore();
             }elseif($action == 'force_delete'){
-                Message::whereIn('id', $messageIds)->forceDelete();
+                Message::withTrashed()->whereIn('id', $messageIds)->forceDelete();
             }
             
             $renderMessages = null;
@@ -201,7 +224,7 @@ class MessageController extends BaseController{
                     $renderMessages = Auth::user()->messagesDraft;
                     break;
                 case 'trash':
-                    $renderMessages = Auth::user()->messagesTrashed;
+                    $renderMessages = Auth::user()->messagesTrashed();
                     break;
             }
             
