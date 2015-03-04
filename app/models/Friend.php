@@ -10,6 +10,18 @@ class Friend extends Eloquent{
 	public function user(){
 		return $this->belongsTo('User', 'id', 'user_two');
 	}
+        
+        static function toBan($userId){
+            if(!Friend::where('user_one', Auth::id())->where('user_two', $userId)->exists()){
+                Friend::insert(array(
+                    array('user_one' => Auth::id(), 'user_two' => $userId, 'status' => Config::get('social.friend_status.banned')),
+                    array('user_one' => $userId, 'user_two' => Auth::id(), 'status' => Config::get('social.friend_status.in_ban'))
+                ));
+            }else{
+                Friend::where('user_one', Auth::id())->where('user_two', $userId)->update(['status' => Config::get('social.friend_status.banned')]);
+                Friend::where('user_one', $userId)->where('user_two', Auth::id())->update(['status' => Config::get('social.friend_status.in_ban')]);
+            }
+        }
 
 	
 	/**

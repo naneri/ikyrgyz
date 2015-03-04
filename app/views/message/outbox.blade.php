@@ -12,7 +12,7 @@
         {{HTML::link('messages/inbox/all', 'Все')}}
         {{Form::hidden('page', 'outbox')}}
     </div>
-    <div class="panel-body">
+    <div class="panel-body" id="messages">
         @include('message.build.messages', array('messages' => Auth::user()->messagesOutbox))
     </div>
     {{Form::close()}}

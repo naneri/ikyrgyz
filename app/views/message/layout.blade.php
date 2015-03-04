@@ -1,13 +1,15 @@
 @section('content')
 {{HTML::style('css/bootstrap.css')}}
+{{HTML::script('js/bootstrap.js')}}
 <div class="b-content">
     <div class="col-md-4 messages-nav">
         <h4></h4>
         {{HTML::link('messages/new', 'Новое сообщение')}}
-        {{HTML::link('', 'Контакты')}}
+        {{HTML::link('messages/contacts', 'Контакты')}}
         {{HTML::link('messages/inbox', 'Входящие')}}
         {{HTML::link('messages/outbox', 'Исходящие')}}
         {{HTML::link('messages/draft', 'Черновики')}}
+        {{HTML::link('messages/blacklist', 'Черный список')}}
         {{HTML::link('messages/trash', 'Удаленные')}}
     </div>
     <div class="col-md-8">

@@ -4,16 +4,16 @@
             <div class="b-header-nav">
               <ul>
                 <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
-                <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/38.png') }}" alt="user"/><span class="user-name">Имя пользователя</span></a>
+                <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/38.png') }}" alt="user"/><span class="user-name">{{$user_data['description']->first_name.' '.$user_data['description']->last_name}}</span></a>
                   <ul class="b-header-nav-dropdown">
                     <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
-                    <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>
+                    <li><a href="{{ URL::to('messages/inbox/all') }}">Личные сообщения</a></li>
                     <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
                     <!--<li><a href="{{ URL::to('group/create')  }}">Группы</a></li>-->
                   </ul>
                 </li>
                 <li class="b-header-nav__list">
-                  <a href="#" class="counter-block">
+                  <a href="{{ URL::to('messages/inbox/all') }}" class="counter-block">
                     @if(count($new_messages))
                       <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($new_messages)}}</span>

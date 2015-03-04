@@ -23,4 +23,9 @@ class Message extends Eloquent{
         public static function inbox(){
             return Message::where('receiver_id', Auth::id())->get();
         }
+        
+        public function scopeWithoutBanned($query){
+            $bannedUserIds = Auth::user()->getBannedUserIds();
+            return $query->whereNotIn('sender_id', $bannedUserIds);
+        }
 }
