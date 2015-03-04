@@ -6,10 +6,10 @@
     <div class="panel-heading">
         {{Form::checkbox('check-all')}}
         {{Form::select('action', array('' => 'Выберите действие', 'restore' => 'Восстановить', 'force_delete' => 'Удалить без возможности восстановления'))}}
-        {{HTML::link('messages/inbox/friend', 'Друзья')}}
+        <!--{{HTML::link('messages/inbox/friend', 'Друзья')}}
         {{HTML::link('messages/inbox/group', 'Группы')}}
         {{HTML::link('messages/inbox/event', 'События')}}
-        {{HTML::link('messages/inbox/all', 'Все')}}
+        {{HTML::link('messages/inbox/all', 'Все')}}-->
         {{Form::hidden('page', 'trash')}}
     </div>
     <div class="panel-body" id="messages">
