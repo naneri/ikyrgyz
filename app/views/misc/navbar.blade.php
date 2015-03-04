@@ -10,7 +10,7 @@
                   @else
                     <img src="{{ asset('img/38.png') }}" alt="user"/>
                   @endif
-                  <span class="user-name">{{$user_data['description']->first_name.' '.$user_data['description']->last_name}}</span></a>
+                  <span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span></a>
                   <ul class="b-header-nav-dropdown">
                     <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
                     <li><a href="{{ URL::to('messages/inbox/all') }}">Личные сообщения</a></li>
@@ -20,7 +20,7 @@
                 </li>
                 <li class="b-header-nav__list">
                   <a href="{{ URL::to('messages/inbox/all') }}" class="counter-block">
-                    @if(count($new_messages))
+                    @if(count(@$new_messages))
                       <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($new_messages)}}</span>
                     @else
@@ -29,7 +29,7 @@
                     @endif
                   </a>
                   <a href="#" class="counter-block">
-                    @if(count($friend_requests))
+                    @if(count(@$friend_requests))
                       <img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($friend_requests)}}</span>
                     @else
