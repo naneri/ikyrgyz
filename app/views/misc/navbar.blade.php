@@ -10,16 +10,16 @@
                   @else
                     <img src="{{ asset('img/38.png') }}" alt="user"/>
                   @endif
-                  <span class="user-name">Имя пользователя</span></a>
+                  <span class="user-name">{{$user_data['description']->first_name.' '.$user_data['description']->last_name}}</span></a>
                   <ul class="b-header-nav-dropdown">
                     <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
-                    <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>
+                    <li><a href="{{ URL::to('messages/inbox/all') }}">Личные сообщения</a></li>
                     <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
-                    <li><a href="#">Группы</a></li>
+                    <!--<li><a href="{{ URL::to('group/create')  }}">Группы</a></li>-->
                   </ul>
                 </li>
                 <li class="b-header-nav__list">
-                  <a href="#" class="counter-block">
+                  <a href="{{ URL::to('messages/inbox/all') }}" class="counter-block">
                     @if(count($new_messages))
                       <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($new_messages)}}</span>
@@ -68,13 +68,15 @@
                         <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский  </span></a></li>
                       </ul>
                     </li>
+                    <!--
                     <li><a href="#">Помощь</a>
                       <ul class="b-header-sub-menu">
                         <li><a href="">Сообщить о проблеме</a></li>
                         <li><a href="">История действии</a></li>
                       </ul>
                     </li>
-                    <li><a href="{{ URL::to('logout') }}">выход</a></li>
+                    -->
+                    <li><a href="{{ URL::to('logout') }}">Выход</a></li>
                   </ul>
                 </li>
                 <div class="clear"></div>

@@ -124,8 +124,8 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
-        'Greggilbert\Recaptcha\RecaptchaServiceProvider'
-
+        'Greggilbert\Recaptcha\RecaptchaServiceProvider',
+        'Thujohn\Share\ShareServiceProvider',
 	),
 
 	/*
@@ -194,6 +194,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+        'Share' => 'Thujohn\Share\ShareFacade',
 	),
 
 );

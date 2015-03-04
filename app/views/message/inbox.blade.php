@@ -6,14 +6,14 @@
     <div class="panel-heading">
         {{Form::checkbox('check-all')}}
         {{Form::select('action', array('' => 'Выберите действие', 'set_watch' => 'Прочитанное', 'set_notwatch' => 'Непрочитанное', 'blacklist' => 'Черный список', 'delete' => 'Удалить'))}}
-        {{HTML::link('messages/inbox/friend', 'Друзья')}}
+        <!--{{HTML::link('messages/inbox/friend', 'Друзья')}}
         {{HTML::link('messages/inbox/group', 'Группы')}}
         {{HTML::link('messages/inbox/event', 'События')}}
-        {{HTML::link('messages/inbox/all', 'Все')}}
+        {{HTML::link('messages/inbox/all', 'Все')}}-->
         {{Form::hidden('page', 'inbox')}}
     </div>
     <div class="panel-body" id="messages">
-        @include('message.build.messages', array('messages' => Auth::user()->messagesInbox))
+        @include('message.build.messages', array('messages' => $messages))
     </div>
     {{Form::close()}}
 </div>

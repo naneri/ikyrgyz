@@ -32,11 +32,11 @@
             <ul class="b-user-wall-footer-list">
               <li><a href="" class="share-btn btn">Поделиться</a>
                 <ul class="b-user-wall-footer-dropdown">
-                  <li><a href="">Facebook</a></li>
-                  <li><a href="">Google+</a></li>
-                  <li><a href="">Twitter</a></li>
-                  <li><a href="">Мой мир</a></li>
-                  <li><a href="">В контакте</a></li>
+                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook()  }}">Facebook</a></li>
+                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus()  }}">Google+</a></li>
+                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->twitter()  }}">Twitter</a></li>
+                  <li><a href="http://connect.mail.ru/share?share_url={{ URL::to('topic/show/'. $topic->id) }}&title={{ $topic->description }}">Мой мир</a></li>
+                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->vk()  }}">В контакте</a></li>
                 </ul>
               </li>
             </ul>

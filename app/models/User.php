@@ -61,8 +61,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasOne('User_Description', 'user_id', 'id');
     }
     
+    public function getBannedUserIds(){
+        return User::join('friends', 'friends.user_two', '=', 'users.id')
+                ->where('friends.status', Config::get('social.friend_status.banned'))
+                ->where('friends.user_one', Auth::id())
+                ->lists('friends.user_two');
+    }
+    
     public function messagesInbox(){
-        return $this->hasMany('Message', 'receiver_id', 'id')->where('draft', '0');
+        $bannedIds = $this->getBannedUserIds();
+        return $this->hasMany('Message', 'receiver_id', 'id')->where('draft', '0')->whereNotIn('sender_id', $bannedIds);
     }
 
     public function messagesOutbox() {
@@ -70,13 +78,29 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function messagesTrashed() {
-        return $this->hasMany('Message', 'receiver_id', 'id')->onlyTrashed();
+        return 
+        Message::where(function($query){
+            $query->where('sender_id', $this->id)
+                    ->orWhere('receiver_id', $this->id);
+        })->where('deleted_at', 'is not', 'null')->get();
     }
     
     public function messagesDraft(){
-        return $this->hasMany('Message', 'receiver_id', 'id')->where('draft', '1');
+        return $this->hasMany('Message', 'sender_id', 'id')->where('draft', '1');
     }
     
+    public function bannedUsers() {
+        return User::join('friends', 'friends.user_two', '=', 'users.id')
+                        ->where('friends.status', Config::get('social.friend_status.banned'))
+                        ->where('friends.user_one', Auth::id())
+                        ->select('users.*')
+                        ->get();
+    }
+
+    public function messagesOf($userId) {
+        return $this->hasMany('Message', 'receiver_id', 'id')->where('sender_id', $userId);
+    }
+
     public function friends(){
         return User::join('friends', 'friends.user_one', '=', 'users.id')
                 ->where('friends.status', Config::get('social.friend_status.friends'))
