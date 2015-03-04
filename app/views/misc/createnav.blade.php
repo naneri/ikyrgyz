@@ -3,7 +3,7 @@
               <div class="b-topic-navigation__create">
                 <ul class="b-topic-navigation-list">
                   <li><a href="#" class="b-topic-navigation__item">Создать</a>
-                    <ul class="b-topic-navigation-create b-topic-navigation-create-dropdown">
+                    <ul class="b-topic-navigation-create b-topic-navigation-create-dropdown" style="height: 160px !important">
                       <li class="b-topic-navigation-create__list">
                       	<a href="{{ URL::to('topic/create') }}">Топик</a>
                       </li>
@@ -16,6 +16,7 @@
                       <li class="b-topic-navigation-create__list">
                       	<a href="#">Ссылка</a>
                       </li>
+                      <!--
                       <li class="b-topic-navigation-create__list">
                       	<a href="#">Фото альбом</a>
                       </li>
@@ -25,6 +26,7 @@
                       <li class="b-topic-navigation-create__list">
                       	<a href="#">Событие</a>
                       </li>
+                      -->
                     </ul>
                   </li>
                 </ul>
@@ -34,6 +36,7 @@
                   <li class="b-topic-navigation-item__item"><img src="{{ asset('img/33.png') }}" alt=""/><span style="opacity:0">19</span></li>
                   <li class="b-topic-navigation-item__item"><img src="{{ asset('img/41.png') }}" alt=""/><span style="opacity:0">19</span></li>
                   <li class="b-topic-navigation-item__item"><img src="{{ asset('img/34.png') }}" alt=""/><span style="opacity:0">19</span></li>
+                  <!--
                   <li class="b-topic-navigation-item__item"><a href="" class="icon-image"><img src="{{ asset('img/35.png') }}" alt=""/></a>
                     <ul class="b-topic-navigation-icons-list b-topic-navigation-icons-dropdown">
                       <li class="b-topic-navigation-icons-list__list b-topic-navigation-icons-list__list-padding"><a href="">Видео</a></li>
@@ -44,6 +47,7 @@
                       <li class="b-topic-navigation-icons-list__list"><a href="">События</a></li>
                     </ul>
                   </li>
+                  -->
                 </ul>
               </div>
               <div class="b-topic-navigation__right">
@@ -55,7 +59,8 @@
                       <li><a href=""><img src="{{ asset('img/46.png') }}" alt=""/></a></li>
                     </ul>
                   </li> -->
-                  <li class="b-topic-navigation-format__list"><a href="" class="format-icon"><img src="{{ asset('img/37.png') }}" alt=""/><span style="opacity:0">11</span></a>
+
+                  <li class="b-topic-navigation-format__list"><!-- <a href="" class="format-icon"><img src="{{ asset('img/37.png') }}" alt=""/><span style="opacity:0">11</span>  --></a>
                     <ul style="opacity:0" class="b-topic-navigation-online-dropdown">
                       <li>
                         <a href="">

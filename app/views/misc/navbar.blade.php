@@ -9,7 +9,7 @@
                     <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
                     <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>
                     <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
-                    <li><a href="#">Группы</a></li>
+                    <!--<li><a href="{{ URL::to('group/create')  }}">Группы</a></li>-->
                   </ul>
                 </li>
                 <li class="b-header-nav__list">
@@ -62,13 +62,15 @@
                         <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский  </span></a></li>
                       </ul>
                     </li>
+                    <!--
                     <li><a href="#">Помощь</a>
                       <ul class="b-header-sub-menu">
                         <li><a href="">Сообщить о проблеме</a></li>
                         <li><a href="">История действии</a></li>
                       </ul>
                     </li>
-                    <li><a href="{{ URL::to('logout') }}">выход</a></li>
+                    -->
+                    <li><a href="{{ URL::to('logout') }}">Выход</a></li>
                   </ul>
                 </li>
                 <div class="clear"></div>
