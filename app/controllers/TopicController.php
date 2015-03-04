@@ -89,14 +89,12 @@ class TopicController extends BaseController {
         $topic->type_id = Input::get('topic_type');
         $topic->user_id = Auth::user()->id;
         $topic->blog_id = $this->getBlogId();
-        $topic->save();
         if(Input::hasFile('photo')){
-            $image = new TopicImage;
             $new_name = str_random(15) . '.' . Input::file('photo')->getClientOriginalExtension();
             Input::file('photo')->move('images/' . $topic->blog_id . '/' . $topic->id,  $new_name);
-            $image->url = 'images/' . $topic->blog_id . '/' . $topic->id . '/'. $new_name;
-            $image = $topic->images()->save($image);
+            $topic->image_url = URL::to('/') .'/images/' . $topic->blog_id . '/' . $topic->id . '/'. $new_name;
         }
+        $topic->save();
         return $topic;
     }
     
@@ -131,9 +129,11 @@ class TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-                $topic = Topic::findOrFail($id);
-                $topic->increment('count_read');
-                return View::make('topic.show', array('topic' => $topic));
+        $topic = Topic::findOrFail($id);
+        $creator = User::findOrFail($topic->user_id)->with('description')->get()[0];
+        $topic->increment('count_read');
+
+        return View::make('topic.show', compact('topic', 'creator'));
 	}
 
 

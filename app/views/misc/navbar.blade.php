@@ -4,7 +4,13 @@
             <div class="b-header-nav">
               <ul>
                 <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
-                <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/38.png') }}" alt="user"/><span class="user-name">Имя пользователя</span></a>
+                <li class="b-header-nav__list"><a href="#">
+                  @if($user_data->description->user_profile_avatar)
+                    <img style="width:40px" src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
+                  @else
+                    <img src="{{ asset('img/38.png') }}" alt="user"/>
+                  @endif
+                  <span class="user-name">Имя пользователя</span></a>
                   <ul class="b-header-nav-dropdown">
                     <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
                     <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>

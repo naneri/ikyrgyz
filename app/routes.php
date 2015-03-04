@@ -25,99 +25,100 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');
-        Route::get('blog/show/{id}', 'BlogController@show');
-        Route::group(array('before' => 'blog_edit_permission'), function(){
-            Route::get('blog/edit/{id}', 'BlogController@getEdit');
-            Route::post('blog/edit/{id}', 'BlogController@postEdit');
-            Route::get('blog/edit/{id}/users', 'BlogController@getEditUsers');
-            Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
-        });
-        Route::get('blog/{id}/read', 'BlogController@readBlog');
-        Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
-        Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
-        Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
-        
-        Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
+    Route::get('blog/show/{id}', 'BlogController@show');
+    Route::group(array('before' => 'blog_edit_permission'), function(){
+        Route::get('blog/edit/{id}', 'BlogController@getEdit');
+        Route::post('blog/edit/{id}', 'BlogController@postEdit');
+        Route::get('blog/edit/{id}/users', 'BlogController@getEditUsers');
+        Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
+    });
+    Route::get('blog/{id}/read', 'BlogController@readBlog');
+    Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
+    Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
+    Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
+    
+    Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
-        Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+    Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
-        Route::get('profile/edit/account', 'ProfileController@getEditAccount');
-        Route::post('profile/edit/account', 'ProfileController@postEditAccount');
-        Route::get('profile/edit/main', 'ProfileController@getEditMain');
-        Route::post('profile/edit/main', 'ProfileController@postEditMain');
-        Route::get('profile/edit/study', 'ProfileController@getEditStudy');
-        Route::post('profile/edit/study/school', 'ProfileController@postStudySchool');
-        Route::post('profile/edit/study/university', 'ProfileController@postStudyUniversity');
-        Route::get('profile/edit/job', 'ProfileController@getEditJob');
-        Route::post('profile/edit/job', 'ProfileController@postJob');
-        Route::get('profile/edit/contact', 'ProfileController@getEditContact');
-        Route::post('profile/edit/contact', 'ProfileController@postContact');
-        Route::get('profile/edit/family', 'ProfileController@getEditFamily');
-        Route::post('profile/edit/family/members', 'ProfileController@postFamilyMembers');
-        Route::post('profile/edit/maritalStatus', 'ProfileController@postMaritalStatus');
-        Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
-        Route::post('profile/edit/aboutMe', 'ProfileController@postAboutMe');
-        Route::post('profile/edit/additional', 'ProfileController@postAdditional');
-        Route::get('profile/edit/access', 'ProfileController@getEditAccess');
-        Route::post('profile/edit/access', 'ProfileController@postAccess');
+    Route::get('profile/edit/account', 'ProfileController@getEditAccount');
+    Route::post('profile/edit/account', 'ProfileController@postEditAccount');
+    Route::get('profile/edit/main', 'ProfileController@getEditMain');
+    Route::post('profile/edit/main', 'ProfileController@postEditMain');
+    Route::get('profile/edit/study', 'ProfileController@getEditStudy');
+    Route::post('profile/edit/study/school', 'ProfileController@postStudySchool');
+    Route::post('profile/edit/study/university', 'ProfileController@postStudyUniversity');
+    Route::get('profile/edit/job', 'ProfileController@getEditJob');
+    Route::post('profile/edit/job', 'ProfileController@postJob');
+    Route::get('profile/edit/contact', 'ProfileController@getEditContact');
+    Route::post('profile/edit/contact', 'ProfileController@postContact');
+    Route::get('profile/edit/family', 'ProfileController@getEditFamily');
+    Route::post('profile/edit/family/members', 'ProfileController@postFamilyMembers');
+    Route::post('profile/edit/maritalStatus', 'ProfileController@postMaritalStatus');
+    Route::get('profile/edit/additional', 'ProfileController@getEditAdditional');
+    Route::post('profile/edit/aboutMe', 'ProfileController@postAboutMe');
+    Route::post('profile/edit/additional', 'ProfileController@postAdditional');
+    Route::get('profile/edit/access', 'ProfileController@getEditAccess');
+    Route::post('profile/edit/access', 'ProfileController@postAccess');
 
-        Route::get('topic/show/{id}', 'TopicController@show');
+    Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
         Route::group(array('before' => 'topic_edit_permission'), function(){
             Route::get('topic/edit/{id}', 'TopicController@getEdit');
             Route::post('topic/edit/{id}', 'TopicController@postEdit');
         });
-        Route::post('topic/update', 'TopicController@update');
-        Route::post('topic/store', 'TopicController@store');
-        Route::get('topic/drafts', 'TopicController@drafts');
-        Route::post('upload', array('uses' => 'TopicController@uploadImage'));
+    Route::post('topic/update', 'TopicController@update');
+    Route::post('topic/store', 'TopicController@store');
+    Route::get('topic/drafts', 'TopicController@drafts');
+    Route::post('upload', array('uses' => 'TopicController@uploadImage'));
 
-        Route::get('people', 'PeopleController@index');
-        Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
-        Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
-        Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
-        
-        Route::post('message/send/{id}', 'MessageController@sendMessage');
-        Route::get('message/all', 'MessageController@getAll');
-        Route::get('message/show/{id}', 'MessageController@show');
-        Route::get('messages/inbox', 'MessageController@inbox');
-        Route::get('messages/outbox', 'MessageController@outbox');
-        Route::get('messages/draft', 'MessageController@draft');
-        Route::get('messages/trash', 'MessageController@trash');
-        Route::get('messages/new', 'MessageController@newMessage');
-        Route::post('messages/new', 'MessageController@postNewMessage');
-        Route::post('messages/action', 'MessageController@postAction');
+    Route::get('people', 'PeopleController@index');
+    Route::get('people/friendRequest/{id}', 'PeopleController@requestFriend');
+    Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
+    Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
+    
+    Route::post('message/send/{id}', 'MessageController@sendMessage');
+    Route::get('message/all', 'MessageController@getAll');
+    Route::get('message/show/{id}', 'MessageController@show');
+    Route::get('messages/inbox', 'MessageController@inbox');
+    Route::get('messages/outbox', 'MessageController@outbox');
+    Route::get('messages/draft', 'MessageController@draft');
+    Route::get('messages/trash', 'MessageController@trash');
+    Route::get('messages/new', 'MessageController@newMessage');
+    Route::post('messages/new', 'MessageController@postNewMessage');
+    Route::post('messages/action', 'MessageController@postAction');
 
-        Route::get('custom/history', 'CustomController@showHistory');
-        Route::get('custom/customs', 'CustomController@showCustoms');
-        Route::get('custom/culture', 'CustomController@showCulture');
-        Route::get('custom/help', 'CustomController@showHelp');
-        Route::get('custom/problem', 'CustomController@showProblem');
-        Route::get('custom/action_history', 'CustomController@showActionHistory');
-        
-        Route::get('search/people', 'SearchController@searchPeople');
-        Route::post('search/people', 'SearchController@postSearchPeople');
-        Route::get('search/content', 'SearchController@searchContent');
-        Route::post('search/content', 'SearchController@postSearchContent');
+    Route::get('custom/history', 'CustomController@showHistory');
+    Route::get('custom/customs', 'CustomController@showCustoms');
+    Route::get('custom/culture', 'CustomController@showCulture');
+    Route::get('custom/help', 'CustomController@showHelp');
+    Route::get('custom/problem', 'CustomController@showProblem');
+    Route::get('custom/action_history', 'CustomController@showActionHistory');
+    
+    Route::get('search/people', 'SearchController@searchPeople');
+    Route::post('search/people', 'SearchController@postSearchPeople');
+    Route::get('search/content', 'SearchController@searchContent');
+    Route::post('search/content', 'SearchController@postSearchContent');
 
-        Route::resource('tags', 'TagsController');
-        Route::resource('photos', 'PhotosController');
+    Route::resource('tags', 'TagsController');
+    Route::resource('photos', 'PhotosController');
         
 	Route::get('logout', 'AuthController@logout');
 
-        if(Request::ajax()){
-            Route::post('topic/comments/show', 'TopicCommentsController@showComments');
-            Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
-            Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
-            Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
-            
-            Route::post('vote/comment', 'VoteController@postVoteComment');
-            Route::post('vote/topic', 'VoteController@postVoteTopic');
-            Route::post('vote/blog', 'VoteController@postVoteBlog');
-            Route::post('vote/user', 'VoteController@postVoteUser');
-        }
+    Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
+    if(Request::ajax()){
+        Route::post('topic/comment/show', 'TopicCommentsController@showComments');
+        
+        Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
+        Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
+        
+        Route::post('vote/comment', 'VoteController@postVoteComment');
+        Route::post('vote/topic', 'VoteController@postVoteTopic');
+        Route::post('vote/blog', 'VoteController@postVoteBlog');
+        Route::post('vote/user', 'VoteController@postVoteUser');
+    }
 });
 
 Route::filter('blog_edit_permission', function($route){
