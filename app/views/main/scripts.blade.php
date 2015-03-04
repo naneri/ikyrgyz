@@ -6,10 +6,13 @@
 	$(document).ready(function(){
 		$( function() {
 
-		  	var $container = $('.masonry').masonry({
-		    	columnWidth: 490,
-		    	'gutter': 10
-		  	});
+		  	var $container = $('.masonry');
+		  	setTimeout(function(){
+			  		$container.masonry({
+			    	columnWidth: 490,
+			    	'gutter': 10
+		  		});
+		  	}, 100);
 
 		  	$(window).scroll(function() {
 			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {

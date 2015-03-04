@@ -27,24 +27,29 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-        if(!Auth::user()->isHavePersonalBlog()){
-            Auth::user()->createPersonalBlog();
-        }
+            if(!Auth::user()->isHavePersonalBlog()){
+                Auth::user()->createPersonalBlog();
+            }
 
-        $canPublishBlogs = array(0 => 'Мой персональный блог');
-        foreach (Auth::user()->canPublishBlogs() as $blog) {
-            $canPublishBlogs[$blog->id] = $blog->title;
-        } 
-
-        $topicType_list = TopicType::all();
-        foreach($topicType_list as $Type){
-            $type_list[$Type->id] = $Type->name; 
-        }
-		return View::make('topic.create', array(
-                'canPublishBlogs' => $canPublishBlogs,
-                'type_list' => $type_list,
-            ));
+            return View::make('topic.create', array('canPublishBlogs' => $this->getCanPublishBlogsForView(),'type_list' => $this->getTopicTypesForView()));
 	}
+        
+        private function getCanPublishBlogsForView(){
+            $canPublishBlogs = array(0 => 'Мой персональный блог');
+            foreach (Auth::user()->canPublishBlogs() as $blog) {
+                $canPublishBlogs[$blog->id] = $blog->title;
+            }
+            return $canPublishBlogs;
+        }
+        
+        private function getTopicTypesForView(){
+            $topicType_list = TopicType::all();
+            $forView = array();
+            foreach ($topicType_list as $Type) {
+                $forView[$Type->id] = $Type->name;
+            }
+            return $forView;
+        }
 
 
 	/**
@@ -54,16 +59,19 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
+                $blogIds = Auth::user()->canPublishBlogs()->lists('id');
+                $blogIdsRegex = implode(',', $blogIds);
 		$rules = Topic::$rules;
+                $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }
-        $this->topic = $this->getTopic();
-        $this->publishTopic(false);
+                    return Redirect::back()->withErrors($validator);
+                }
+                $this->topic = $this->getTopic();
+                $this->publishTopic(false);
 
-        return Redirect::to('topic/show/'.$this->topic->id);
+                return Redirect::to('topic/show/'.$this->topic->id);
 	}
         
     private function getTopic(){
@@ -89,14 +97,12 @@ class TopicController extends BaseController {
         $topic->type_id = Input::get('topic_type');
         $topic->user_id = Auth::user()->id;
         $topic->blog_id = $this->getBlogId();
-        $topic->save();
         if(Input::hasFile('photo')){
-            $image = new TopicImage;
             $new_name = str_random(15) . '.' . Input::file('photo')->getClientOriginalExtension();
             Input::file('photo')->move('images/' . $topic->blog_id . '/' . $topic->id,  $new_name);
-            $image->url = 'images/' . $topic->blog_id . '/' . $topic->id . '/'. $new_name;
-            $image = $topic->images()->save($image);
+            $topic->image_url = URL::to('/') .'/images/' . $topic->blog_id . '/' . $topic->id . '/'. $new_name;
         }
+        $topic->save();
         return $topic;
     }
     
@@ -131,9 +137,11 @@ class TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-                $topic = Topic::findOrFail($id);
-                $topic->increment('count_read');
-                return View::make('topic.show', array('topic' => $topic));
+        $topic = Topic::findOrFail($id);
+        $creator = User::findOrFail($topic->user_id)->with('description')->get()[0];
+        $topic->increment('count_read');
+
+        return View::make('topic.show', compact('topic', 'creator'));
 	}
 
 
@@ -151,7 +159,7 @@ class TopicController extends BaseController {
             return View::make('error.permission', array('error' => 'permission denied'));
         }
         
-        return View::make('topic.edit', array('user' => Auth::user(), 'topic' => $topic));
+        return View::make('topic.edit', array('user' => Auth::user(), 'topic' => $topic,'canPublishBlogs' => $this->getCanPublishBlogsForView(), 'type_list' => $this->getTopicTypesForView()));
     }
 
     /**

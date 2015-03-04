@@ -35,7 +35,7 @@ class AuthController extends BaseController {
             ));
         }
         
-        if(Auth::user()->description->first_name == '' || Auth::user()->description->gender == '' || Auth::user()->description->liveplace_country_id == ''){
+        if(@Auth::user()->description->first_name == '' || @Auth::user()->description->gender == '' || @Auth::user()->description->liveplace_country_id == ''){
             return Redirect::to('profile/fill');
         }
         

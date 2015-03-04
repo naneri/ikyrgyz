@@ -25,7 +25,7 @@
                         {{Form::open(array('files'=> true))}}
                             <fieldset>
                                 <div class="all-alerts">
-                                    @foreach ($errors->all() as $error)
+                                    @foreach (@$errors->all() as $error)
                                     <div class="alert alert-warning alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                         {{$error}}
@@ -78,7 +78,7 @@
                                 </div>
 
                                 {{Form::file('image')}} <br>
-                                @if($user->description->user_profile_avatar)
+                                @if(@$user->description->user_profile_avatar)
                                         <img src="{{$user->description->user_profile_avatar}}" alt=""><br>
                                 @endif	
                                 {{Form::submit('Go!')}}

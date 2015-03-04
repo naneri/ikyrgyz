@@ -21,19 +21,24 @@ class TopicCommentsController extends \BaseController {
 	 */
 	public function postAdd()
 	{
-                $result = array();
+        $result = array();
                 
 		$validator = Validator::make($data = Input::all(), TopicComment::$rules);
 
-                if ($validator->fails()) {
-                    $result['error'] = $validator;
-                } else {
-                    $data['user_id'] = Auth::user()->id;
-                    $comment = Topiccomment::create($data);
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
-                }
-                return Response::json($result);
+        if ($validator->fails()) {
+            $result['error'] = $validator;
+        } else {
+            $data['user_id'] = Auth::user()->id;
+            $comment = Topiccomment::create($data);
+            $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
         }
+        
+        if(Request::ajax()){
+        	return Response::json($result);
+        }
+
+        return Redirect::back();
+    }
 
 	/**
 	 * Store a newly created topiccomment in storage.

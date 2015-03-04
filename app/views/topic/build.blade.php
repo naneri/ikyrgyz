@@ -11,12 +11,16 @@
           <p class="b-user-wall-header__date">{{$topic->created_at}}
             <div class="clear"></div>
           </p>
-          <p class="b-user-wall-header__vision">
+          <!--<p class="b-user-wall-header__vision">
             <img src="{{ asset('img/22.png') }}" alt=""/><span>19</span>
             <img src="{{ asset('img/23.png') }}" alt=""/><span>34</span>
-          </p>
+          </p> -->
         </div>
         <div class="b-user-wall-image">
+          @if(isset($topic->image_url))
+            <a href=""><img src="{{$topic->image_url}}" alt=""></a>
+          @endif
+          {{substr(strip_tags($topic->description), 0 ,200) }}
         </div>
         <div class="b-user-wall-footer">
           <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset('img/48.png') }}" alt=""/></a></div>
@@ -36,7 +40,7 @@
                 </ul>
               </li>
             </ul>
-            <input type="submit" class="btn btn-minus"/>
+            <input type="submit" onclick="return vote.topic({{$topic->id}},2);" class="btn btn-minus"/>
             <input type="submit" class="btn btn-plus"/><span class="likes">+99</span>
           </div>
         </div>

@@ -1,7 +1,11 @@
 <script src="{{asset('/js/tinymce/tinymce.min.js')}}" type="text/javascript"></script>
 <script>
 $(document).ready(function(){ 
-        
+        $(".btn-cancel").click(function (e) {
+            e.preventDefault();
+            window.history.back()
+          });
+          
         $('.rel-photo').click(function(){
             $('.photo-box').css('display','block');
         });
