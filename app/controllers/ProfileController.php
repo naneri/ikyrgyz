@@ -381,4 +381,12 @@ class ProfileController extends BaseController {
             return $correctAccess;
         }
 
+        public function getRandom(){
+            $users = DB::connection('mysql_users')->statement("SELECT * FROM `users` WHERE id >= (SELECT FLOOR( MAX(id) * RAND()) FROM `users` ) ORDER BY id LIMIT 1;");
+            echo "<pre>"; print_r($users); echo "</pre>";exit;
+        }
+
+
+
+
 }

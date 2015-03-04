@@ -19,7 +19,8 @@ Route::get('register', 'AuthController@getRegister');
 Route::post('register', 'AuthController@postRegister');
 Route::get('activate/{code}', 'AuthController@getActivate');
 
-Route::group(array('before' => 'auth'),function(){
+
+Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index','MainController@index');
 	Route::get('main/ajaxTopics/{page}','MainController@ajaxTopics');
         Route::get('blog/create', 'BlogController@create');
@@ -52,6 +53,7 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+        Route::get('profile/random', 'ProfileController@getRandom');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');

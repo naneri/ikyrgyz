@@ -3,7 +3,7 @@
         <div style="width:100%; height: 110px;">
             <img src="{{asset($user->user_profile_avatar)}}" style="float:left;width:100px;height:100px;"/> 
             <div>{{$user->first_name}} {{$user->last_name}} {{$user->email}}</div>
-            <div>{{date_diff(date_create($user->birthday), date_create('today'))->y;}}, {{$user->country}}</div>
+            <div>{{date_diff(date_create(@$user->birthday), date_create('today'))->y;}}, {{@$user->country}}</div>
             <div>
                 [{{HTML::link('profile/'.$user->id, 'Посмотреть профиль')}}]
                 [{{HTML::link('', 'Написать ЛС')}}]
