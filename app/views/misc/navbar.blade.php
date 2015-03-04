@@ -5,7 +5,7 @@
               <ul>
                 <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
                 <li class="b-header-nav__list"><a href="#">
-                  @if($user_data->description->user_profile_avatar)
+                  @if(isset($user_data->description->user_profile_avatar))
                     <img style="width:40px" src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
                   @else
                     <img src="{{ asset('img/38.png') }}" alt="user"/>
