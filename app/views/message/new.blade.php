@@ -17,7 +17,7 @@
         <fieldset>
         {{Form::open(array('files' => true))}}
             <div class="form-group">
-                {{Form::text('receiver', 'Кому', array('class' => 'form-control'))}}{{HTML::link('#', 'Контакты', array('id' => 'contacts'))}}<br>
+                {{Form::text('receiver', ($receiver!='')?$receiver:'Кому', array('class' => 'form-control'))}}{{HTML::link('#', 'Контакты', array('id' => 'contacts'))}}<br>
                 <div id="contacts-list" style="display: none;">
                     @foreach(Auth::user()->friends() as $friend)
                         <a onclick="addReceiver('{{$friend->first_name.' '.$friend->last_name}}')">{{$friend->first_name.' '.$friend->last_name}}</a><br>

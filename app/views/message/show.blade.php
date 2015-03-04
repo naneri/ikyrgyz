@@ -8,7 +8,19 @@
     </div>
     <div class="panel-body">
         <b>Тема: {{$message->title}}</b><br>
-        Сообщение: {{$message->text}}
+        Сообщение: {{$message->text}}<br>
+        @if($message->attachments->count() > 0)
+            <p><br>
+                Прикрепленные файлы:<br>
+                @foreach($message->attachments as $attachment)
+                    {{HTML::link(asset($attachment->path), $attachment->name, array('target' => '_blank'))}}<br>
+                @endforeach
+            </p>
+        @endif
+        @if($message->draft && $message->sender_id == Auth::id())
+            <br>
+            {{HTML::link('message/send/'.$message->id, 'Отправить')}}
+        @endif
     </div>
 </div>
 @stop

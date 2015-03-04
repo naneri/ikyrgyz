@@ -106,6 +106,8 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('messages/new', 'MessageController@newMessage');
         Route::post('messages/new', 'MessageController@postNewMessage');
         Route::post('messages/action', 'MessageController@postAction');
+        Route::get('message/send/{id}', 'MessageController@sendMessageDraft');
+        Route::get('message/edit/{id}', 'MessageController@editMessage');
 
         Route::get('custom/history', 'CustomController@showHistory');
         Route::get('custom/customs', 'CustomController@showCustoms');

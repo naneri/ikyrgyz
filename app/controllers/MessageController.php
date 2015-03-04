@@ -60,7 +60,8 @@ class MessageController extends BaseController{
         }
         
         public function newMessage(){
-            return View::make('message.new');
+            $receiver = Input::get('receiver');
+            return View::make('message.new', array('receiver' => $receiver));
         }
 
         public function postNewMessage() {
@@ -105,7 +106,20 @@ class MessageController extends BaseController{
             }
             return Redirect::to('message/show/'.$message->id);
         }
-        
+
+        public function sendMessageDraft($id) {
+            $message = Message::find($id);
+            
+            if($message->draft != 1 || $message->sender_id != Auth::id()){
+                return Redirect::back()->withErrors(array('message', 'You cannot send this message'));
+            }
+            
+            $message->draft = 0;
+            $message->save();
+
+            return Redirect::back()->with('message', 'message sent successfully');
+        }
+
         public function outbox(){
             return View::make('message.outbox');
         }
