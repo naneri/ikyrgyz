@@ -9,19 +9,28 @@
                 <button class="btn-close"></button>
               </div>
               <div class="b-topic-create-modal__content">
-                <div class="b-topic-create-modal-content">
-                  {{Form::open(array('url' => 'topic/store', 'files' => true))}}
+                  <div class="b-topic-create-modal-content">
+                      <div class="all-alerts">
+                          @foreach ($errors->all() as $error)
+                          <div class="alert alert-warning alert-dismissible" role="alert">
+                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                              {{$error}}
+                          </div>
+                          @endforeach
+                      </div>
+                  {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
                     <div class="b-topic-create-modal-content__item">
-                      <input name="title" type="text" value="Введите название" class="input-default add-name"/><a href="" class="draft">Черновики <span>999</span></a>
+                        {{Form::text('title', 'Введите название', array('class' => 'input-default add-name sync-input'))}}
+                        <a href="{{asset('topic/drafts')}}" class="draft">Черновики <span>{{Auth::user()->drafts()->count()}}</span></a>
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                      {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default')) }}
+                        {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default sync-input')) }}
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                      {{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default')) }}
+                        {{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default sync-input')) }}
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                      <textarea name="description" cols="30" rows="10" class="input-default textarea-topic"></textarea>
+                        <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
                     </div>
                     <div class="b-topic-create-modal-content__item">
                         <input type="file" name="photo" multiple>
@@ -32,6 +41,7 @@
                           </div>
                       <div class="clear"></div>
                     </div>
+                    {{ Form::hidden('topic_id') }}
                    {{Form::close()}}
                 </div>
               </div>
