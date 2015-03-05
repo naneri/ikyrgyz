@@ -1,11 +1,12 @@
 <div class="panel-group" id="accordion">
+    @if($users->count() > 0)
     @foreach($users as $user)
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$user->id}}">
-                    <img src='{{asset($user->description->user_profile_avatar)}}' style='width:50px;height:50px;'>
-                    {{$user->description->first_name}}
+                    <img src='{{asset($user->avatar())}}' style='width:50px;height:50px;'>
+                    {{$user->getNames()}}
                 </a>
                 <a data-toggle="collapse" href="#" onclick="unblockUser({{$user->id}})" style="float:right;">
                     X
@@ -19,4 +20,7 @@
         </div>
     </div>
     @endforeach
+    @else
+        Пользователей по данному запросу не найдено
+    @endif
 </div>

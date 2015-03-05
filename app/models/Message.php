@@ -36,4 +36,8 @@ class Message extends Eloquent{
         public function attachments(){
             return $this->hasMany('MessageAttachment');
         }
+        
+        public function canEdit(){
+            return $this->sender_id == Auth::id() && $this->draft == 1;
+        }
 }

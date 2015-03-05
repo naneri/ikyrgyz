@@ -3,7 +3,7 @@
 @section('form')
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>Друзья</h4>
+        <h4>Контакты</h4>
         {{Form::hidden('page', 'contact')}}
     </div>
     <div class="panel-body" id="messages">
