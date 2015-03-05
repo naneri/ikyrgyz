@@ -3,7 +3,7 @@
           <div class="b-header__inner">
             <div class="b-header-nav">
               <ul>
-                <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
+                <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">{{Config::get('app.network_name')}}</span></a></li>
                 <li class="b-header-nav__list"><a href="#">
                   @if(isset($user_data->description->user_profile_avatar))
                     <img style="width:40px" src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>

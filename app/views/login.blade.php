@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8"/>
-		<title>I-kyrgyz		</title>
+		<title>{{Config::get('app.network_name')}}</title>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="{{URL::to('css/bootstrap.css')}}">
 		<link rel="stylesheet" href="{{URL::to('css/login.css')}}">
