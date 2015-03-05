@@ -19,7 +19,10 @@
         @endif
         @if($message->draft && $message->sender_id == Auth::id())
             <br>
-            {{HTML::link('message/send/'.$message->id, 'Отправить')}}
+            Сообщение еще находится в черновиках.<br>
+            {{HTML::link('message/send/'.$message->id, 'Отправить')}} |
+            {{HTML::link('message/edit/'.$message->id, 'Редактировать')}} |
+            {{HTML::link('message/delete/'.$message->id, 'Удалить')}}
         @endif
     </div>
 </div>

@@ -91,8 +91,16 @@ class MessageController extends BaseController{
             if(!Auth::user()->canSendMessage($receiver->id)){
                 return Redirect::back()->withInput()->withErrors(array('receiver' => 'You can send message only friends'));
             }
+            $message = null;
+            if(Input::has('message_id')){
+                $message = Message::find(Input::get('message_id'));
+                if(!$message->canEdit()){
+                    $message = new Message;
+                }
+            }else{
+                $message = new Message;
+            }
             
-            $message = new Message;
             $message->sender_id = Auth::id();
             $message->receiver_id = $receiver->id;
             $message->title = Input::get('title');
@@ -231,5 +239,15 @@ class MessageController extends BaseController{
             $result['messages'] = View::make('message.build.messages', array('messages' => $renderMessages))->render();            
             return Response::json($result);
         }
+        
+        public function deleteMessage($id){
+            $message = Message::find($id);
+            $message->delete();
+            return Redirect::to('messages/trash');
+        }
 
+        public function editMessage($id) {
+            $message = Message::find($id);
+            return View::make('message.edit', array('message' => $message));
+        }
 }

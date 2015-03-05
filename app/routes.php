@@ -106,8 +106,11 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('messages/new', 'MessageController@newMessage');
         Route::post('messages/new', 'MessageController@postNewMessage');
         Route::post('messages/action', 'MessageController@postAction');
-        Route::get('message/send/{id}', 'MessageController@sendMessageDraft');
-        Route::get('message/edit/{id}', 'MessageController@editMessage');
+        Route::group(array('before' => 'message_edit_permission'), function(){
+            Route::get('message/send/{id}', 'MessageController@sendMessageDraft');
+            Route::get('message/edit/{id}', 'MessageController@editMessage');
+            Route::get('message/delete/{id}', 'MessageController@deleteMessage');
+        });
 
         Route::get('custom/history', 'CustomController@showHistory');
         Route::get('custom/customs', 'CustomController@showCustoms');
@@ -152,5 +155,12 @@ Route::filter('topic_edit_permission', function($route) {
     $topic = Topic::findOrFail($route->parameter('id'));
     if (!$topic->canEdit()) {
         return View::make('error.permission', array('error' => 'You don\'t have enough permissions to do that.'));
+    }
+});
+
+Route::filter('message_edit_permission', function($route) {
+    $message = Message::findOrFail($route->parameter('id'));
+    if (!$message->canEdit()) {
+        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
     }
 });

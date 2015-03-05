@@ -109,6 +109,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->get();
     }
     
+    public function getNames(){
+        return $this->description->first_name.' '.$this->description->last_name;
+    }
+    
+    public function avatar(){
+        return $this->description->user_profile_avatar;
+    }
+    
     public function canSendMessage($userId){
         return Friend::getFriendStatus(Auth::id(), $userId) == Config::get('social.friend_status.friends');
     }
