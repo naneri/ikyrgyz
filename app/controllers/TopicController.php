@@ -139,7 +139,8 @@ class TopicController extends BaseController {
 	{
         $topic = Topic::findOrFail($id);
         $blog = Blog::findOrFail($topic->blog_id);
-        $creator = User::findOrFail($topic->user_id)->with('description')->get()[0];
+        $creator = User::findOrFail($topic->user_id);
+        $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
         $topic->increment('count_read');
 
         return View::make('topic.show', compact('topic', 'creator', 'blog'));
