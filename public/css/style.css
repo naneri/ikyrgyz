@@ -103,6 +103,31 @@ body {
 .b-header-nav-dropdown > li a {
   font-size: 13px;
 }
+.b-header-nav-dropdown > li .btn {
+  border: 1px solid #d5d5d5;
+  background-image: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+  background-image: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+  background-image: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+  background-image: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+  background-image: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+  color: #999;
+  margin: 5px;
+  display: inline-block;
+  padding: 0 5px;
+  font: 13px 'PT Sans Caption';
+}
+
+.b-header-nav-dropdown > li span {
+  color: #fff;
+  font: 15px 'PT Sans Caption';
+  white-space: nowrap;
+}
+.b-header-nav-dropdown > li img {
+  width: 51px;
+  height: 51px;
+  overflow: hidden;
+}
+
 .b-header-sub-menu {
   display: none;
   position: absolute;
@@ -910,19 +935,23 @@ Topic
   position: absolute;
 }
 .b-topic-navigation-format__list .buttons-wrapper {
-  width: 140px;
+  width: 139px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #dbdbdb;
   height: 28px;
   position: relative;
-
 }
 .b-topic-navigation-format__list .format-type {
   display: inline-block;
   border: 0;
-  width: 111px;
+  width: 117px;
   height: 25px;
+
+}
+.b-topic-navigation-format__list .format-type:focus {
+
+  border: none;
 }
 .b-topic-navigation-format__list .format-submit {
   width: 22px;
@@ -936,9 +965,9 @@ Topic
   border-top-right-radius: 3px;
   border-bot-right-radius: 3px;
   cursor: pointer;
-  overflow: hidden;
   position: absolute;
-  right: 0;
+  right:0;
+  overflow: hidden;
 }
 .b-topic-navigation-online-dropdown {
   display: none;
