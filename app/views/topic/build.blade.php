@@ -23,9 +23,17 @@
           {{substr(strip_tags($topic->description), 0 ,200) }}
         </div>
         <div class="b-user-wall-footer">
-          <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset('img/48.png') }}" alt=""/></a></div>
-          <p class="b-user-wall-footer__title">{{$topic->blog->title}}</p>
-          <p class="b-user-wall-footer__number">31 топик
+            <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" alt=""/></a></div>
+          <p class="b-user-wall-footer__title">{{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title, array('class' => 'b-user-wall-footer__title'))}}</p>
+          <?php $blogTopicsCount = $topic->blog->topics->count(); ?>
+          <p class="b-user-wall-footer__number">{{$blogTopicsCount}}
+                @if($blogTopicsCount == 1)
+                    топик
+                @elseif($blogTopicsCount > 1 && $blogTopicsCount < 5)
+                    топика
+                @else
+                    топиков
+                @endif
             <div class="clear"></div>
           </p>
           <div class="b-user-wall-footer__btn"><a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">Подробнее</a>
@@ -35,13 +43,13 @@
                   <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook()  }}">Facebook</a></li>
                   <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus()  }}">Google+</a></li>
                   <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->twitter()  }}">Twitter</a></li>
-                  <li><a href="http://connect.mail.ru/share?share_url={{ URL::to('topic/show/'. $topic->id) }}&title={{ $topic->description }}">Мой мир</a></li>
+                  <li><a href="{{ 'http://connect.mail.ru/share?share_url='.URL::to("topic/show/". $topic->id).'&title='.htmlspecialchars($topic->description)}}">Мой мир</a></li>
                   <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->vk()  }}">В контакте</a></li>
                 </ul>
               </li>
             </ul>
-            <input type="submit" onclick="return vote.topic({{$topic->id}},2);" class="btn btn-minus"/>
-            <input type="submit" class="btn btn-plus"/><span class="likes">+99</span>
+            <input type="submit" onclick="return vote.topic({{$topic->id}},-1);" class="btn btn-minus"/>
+            <input type="submit" onclick="return vote.topic({{$topic->id}},1);" class="btn btn-plus"/><span class="likes" id="rating_topic_{{$topic->id}}">{{round($topic->rating,2)}}</span>
           </div>
         </div>
       </div>
