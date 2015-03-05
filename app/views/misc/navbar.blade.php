@@ -23,20 +23,40 @@
                     @if(count(@$new_messages))
                       <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($new_messages)}}</span>
+                      <ul class="b-header-nav-dropdown">
+                        <li><a href="#">Изменить профиль</a></li>
+                        <li><a href="#">Личные сообщения(1877)</a></li>
+                        <li><a href="#">Друзья</a></li>
+                        <li><a href="#">Группы  </a></li>
+                      </ul>
                     @else
                       <img src="{{ asset('img/navbar/mail_inact.png') }}" alt="msg"/>
                       <span style="opacity:0" class="counter">{{count($new_messages)}}</span>
                     @endif
                   </a>
-                  <a href="#" class="counter-block">
+                </li>
+                <li class="b-header-nav__list">  
+                  
                     @if(count(@$friend_requests))
+                    <a href="#" class="counter-block">
                       <img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($friend_requests)}}</span>
+                      </a> 
+                      <ul class="b-header-nav-dropdown">
+                        @foreach($friend_requests as $request)
+                          <li>{{$request->first_name . ' ' . $request->last_name . 'отправил вам приглашение в друзья'}}<a href="{{ URL::to('people/submitFriend'). '/' . $request->id }}">Принять</a> | <a href="{{ URL::to('people/removeFriend'). '/' . $request->id }}">Отклонить</a></li>
+                        @endforeach
+                      </ul>  
+                     
                     @else
+                    <a href="#" class="counter-block">
                       <img src="{{ asset('img/navbar/f_req_inact.png') }}" alt="msg"/>
                       <span style="opacity:0" class="counter">{{count($friend_requests)}}</span>
+                       </a>
                     @endif
-                  </a>
+                  
+                 </li> 
+                 <li class="b-header-nav__list"> 
                   <a href="#" class="counter-block">
                     <img src="{{ asset('img/navbar/setting_inact.png') }}" alt="msg"/>
                     <span style="opacity:0" class="counter">25</span>

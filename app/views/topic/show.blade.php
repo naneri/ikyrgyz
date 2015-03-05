@@ -64,7 +64,7 @@
                   <div class="b-profile-about-tags__user">
                     <div class="b-profile-about-tags-user">
                       <div class="b-profile-about-tags-user__left"><span class="b-profile-about-tags-user__name">Блог</span><img src="{{ asset('img/48.png') }}" alt="" class="b-profile-about-tags-user__image"/>
-                        <p class="b-profile-about-tags-user__title">{{$topic->blog->title}}</p>
+                        <p class="b-profile-about-tags-user__title">{{$blog->title}}</p>
                         <div class="b-profile-about-tags-user__buttons">
                           <button class="btn-default btn-view">Просмотреть</button>
                           <button class="btn-default btn-follow">Подписаться</button><span class="count-topic">999 топиков</span><span class="count-followers">57 подписчиков</span>
@@ -190,8 +190,8 @@
                 @endforeach
             @endif
 
-            blog title - {{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title)}}<br>
-            blog topics count - {{$topic->blog->topics->count()}}<br>
+            blog title - {{HTML::link('blog/show/'.$blog->id, $blog->title)}}<br>
+            blog topics count - {{$blog->topics->count()}}<br>
             <br>
             <div class="comments" id="comments">
                 @include('comments.build', array('topic' => $topic))
