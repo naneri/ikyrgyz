@@ -5,7 +5,7 @@
 		<title>I-kyrgyz		</title>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="{{URL::to('css/bootstrap.css')}}">
-        <link rel="stylesheet" href="{{URL::to('css/login.css')}}">
+		<link rel="stylesheet" href="{{URL::to('css/login.css')}}">
 		<script src="{{URL::to('js/library/jquery.min.js')}}"></script>
 		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		@include('scripts.vote')
@@ -36,7 +36,7 @@
                                                     <div class="form-group">
                                                         <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                                     </div>
-                                                    <div class="checkbox">
+                                                    <div class="checkbox" style="margin-left: 20px">
                                                         <input name="remember" type="checkbox" value="Remember Me">Запомнить меня
                                                     </div>
                                                     <div class="all-alerts">
@@ -67,12 +67,15 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <div class="registration-form">
+
+                                <!--
                                 <span class="registration-span1">Войти через</span>
                                 <div class="social-networks">
                                     <a href="#"><img src="{{URL::to('img/login/vk.png')}}"/></a>
-                                    <a href="#"><img src="{{URL::to('img/login/f.png')}}"/></a>
+                                    <a href="{{ URL::to('login/fb')  }}"><img src="{{URL::to('img/login/f.png')}}"/></a>
                                     <a href="#"><img src="{{URL::to('img/login/g.png')}}"/></a>
                                 </div>
+                                -->
 
                                 <span class="registration-span2">Регистрация</span>
                                 <div class="form-area">
