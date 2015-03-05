@@ -15,6 +15,7 @@ Route::get('/', 'AuthController@getLogin');
 
 Route::get('login', 'AuthController@getLogin');
 Route::post('login', 'AuthController@postLogin');
+Route::get('login/fb', 'AuthController@loginWithFacebook');
 Route::get('register', 'AuthController@getRegister');
 Route::post('register', 'AuthController@postRegister');
 Route::get('activate/{code}', 'AuthController@getActivate');

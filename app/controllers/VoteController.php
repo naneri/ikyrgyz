@@ -29,11 +29,11 @@ class VoteController extends \BaseController {
             $iValue = Input::get('value');
             
             if(!$oComment){
-                return Response::json(array('error' => 'comment not exists'));
+                return Response::json(array('error' => 'Комментарий не найден'));
             }
             
             if(!in_array($iValue, array('1', '-1')) ){
-                return Response::json(array('error' => 'vote value error'));
+                return Response::json(array('error' => 'Ошибка в значении'));
             }
             
             $voteExists = Vote::where('target_type', 'comment')
@@ -41,11 +41,11 @@ class VoteController extends \BaseController {
                     ->where('target_id', $oComment->id)
                     ->exists();
             if($voteExists){
-                return Response::json(array('error' => 'you already vote this comment'));
+                return Response::json(array('error' => 'Вы уже голосовали за этот комментарий'));
             }
             
             if($oComment->user_id == Auth::user()->id){
-                return Response::json(array('error' => 'author cannot vote his comment'));
+                return Response::json(array('error' => 'Автор не может проголосовать за свой комментарий'));
             }
 
             $oComment->vote($iValue);
@@ -54,7 +54,7 @@ class VoteController extends \BaseController {
             $this->createVote('comment', $oComment->id, $iValue, $oComment->rating);
             $this->setSkillCommentAuthor($oComment->user_id, $iValue);
             
-            return Response::json(array('rating' => $oComment->rating));
+            return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oComment->rating,2)));
         }
         
         public function postVoteTopic(){
@@ -62,11 +62,11 @@ class VoteController extends \BaseController {
             $iValue = Input::get('value');
             
             if (!$oTopic) {
-                return Response::json(array('error' => 'topic not exists'));
+                return Response::json(array('error' => 'Топик не найден'));
             }
 
             if (!in_array($iValue, array('1', '-1'))) {
-                return Response::json(array('error' => 'Error!'));
+                return Response::json(array('error' => 'Ошибка значения'));
             }
 
             $voteExists = Vote::where('target_type', 'topic')
@@ -74,11 +74,11 @@ class VoteController extends \BaseController {
                     ->where('target_id', $oTopic->id)
                     ->exists();
             if ($voteExists) {
-                return Response::json(array('error' => 'You already vote this topic!'));
+                return Response::json(array('error' => 'Вы уже голосовали за этот топик'));
             }
 
             if ($oTopic->user_id == Auth::user()->id) {
-                return Response::json(array('error' => 'You cannot vote this topic!'));
+                return Response::json(array('error' => 'Автор не может проголосовать за свой топик'));
             }
             
             $oTopic->vote($iValue);
@@ -87,7 +87,7 @@ class VoteController extends \BaseController {
             $this->createVote('topic', $oTopic->id, $iValue, $oTopic->rating);
             $this->setSkillTopicAuthor($oTopic->user_id, $iValue);
             
-            return Response::json(array('rating' => $oTopic->rating));
+            return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oTopic->rating,2)));
         }
         
         public function postVoteBlog(){
@@ -95,11 +95,11 @@ class VoteController extends \BaseController {
             $iValue = Input::get('value');
 
             if (!$oBlog) {
-                return Response::json(array('error' => 'blog not exists'));
+                return Response::json(array('error' => 'Блог не найден'));
             }
 
             if (!in_array($iValue, array('1', '-1'))) {
-                return Response::json(array('error' => 'Error!'));
+                return Response::json(array('error' => 'Ошибка значения'));
             }
 
             $voteExists = Vote::where('target_type', 'blog')
@@ -107,11 +107,11 @@ class VoteController extends \BaseController {
                     ->where('target_id', $oBlog->id)
                     ->exists();
             if ($voteExists) {
-                return Response::json(array('error' => 'You already vote this blog!'));
+                return Response::json(array('error' => 'Вы уже голосовали за этот блог'));
             }
 
             if ($oBlog->user_id == Auth::user()->id) {
-                return Response::json(array('error' => 'You cannot vote this topic!'));
+                return Response::json(array('error' => 'Автор не может проголосовать за свой блог'));
             }
 
             $oBlog->vote($iValue);
@@ -119,15 +119,18 @@ class VoteController extends \BaseController {
 
             $this->createVote('blog', $oBlog->id, $iValue, $oBlog->rating);
 
-            return Response::json(array('rating' => $oBlog->rating));
+            return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oBlog->rating,2)));
         }
         
         public function postVoteUser(){
-            $oUser = User::findOrFail(Input::get('user_id'));
+            $oUser = User::find(Input::get('user_id'));
             $iValue = Input::get('value');
 
+            if (!$oUser) {
+                return Response::json(array('error' => 'Пользователь не найден'));
+            }
             if (!in_array($iValue, array('1', '-1'))) {
-                return Response::json(array('error' => 'Error!'));
+                return Response::json(array('error' => 'Ошибка значения'));
             }
 
             $voteExists = Vote::where('target_type', 'user')
@@ -136,11 +139,11 @@ class VoteController extends \BaseController {
                     ->exists();
 
             if ($voteExists) {
-                return Response::json(array('error' => 'You already vote this blog!'));
+                return Response::json(array('error' => 'Вы уже голосовали за этого пользователя'));
             }
 
             if ($oUser->id == Auth::user()->id) {
-                return Response::json(array('error' => 'You cannot vote this topic!'));
+                return Response::json(array('error' => 'Автор не может проголосовать за свой профиль'));
             }
 
             $oUser->vote($iValue);
@@ -149,7 +152,7 @@ class VoteController extends \BaseController {
             $this->createVote('user', $oUser->id, $iValue, $oUser->rating);
             $this->setSkillUser($oUser->id, $iValue);
 
-            return Response::json(array('rating' => $oUser->rating));
+            return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oUser->rating,2)));
         }
 
         private function setSkillCommentAuthor($commentAuthorId, $voteValue) {

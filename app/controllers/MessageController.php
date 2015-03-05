@@ -36,7 +36,7 @@ class MessageController extends BaseController{
 	 * @return [type]     [description]
 	 */
 	public function show($id){
-		$message = Message::find($id);
+		$message = Message::withTrashed()->find($id);
 		if($message->receiver_id == Auth::id()){
                     Message::setWatched($id);
                 }
@@ -86,10 +86,10 @@ class MessageController extends BaseController{
                     ->first();
                            
             if (!$receiver) {
-                return Redirect::back()->withInput()->withErrors(array('receiver' => 'Cannot find user'));
+                return Redirect::back()->withInput()->withErrors(array('receiver' => 'Пользователь не найден'));
             }
             if(!Auth::user()->canSendMessage($receiver->id)){
-                return Redirect::back()->withInput()->withErrors(array('receiver' => 'You can send message only friends'));
+                return Redirect::back()->withInput()->withErrors(array('receiver' => 'Вы можете отправлять сообщения только друзьям'));
             }
             $message = null;
             if(Input::has('message_id')){
@@ -119,13 +119,13 @@ class MessageController extends BaseController{
             $message = Message::find($id);
             
             if($message->draft != 1 || $message->sender_id != Auth::id()){
-                return Redirect::back()->withErrors(array('message', 'You cannot send this message'));
+                return Redirect::back()->withErrors(array('message', 'Вы не можете отправить данное сообщение'));
             }
             
             $message->draft = 0;
             $message->save();
 
-            return Redirect::back()->with('message', 'message sent successfully');
+            return Redirect::back()->with('message', 'Сообщение успешно отправлена');
         }
 
         public function outbox(){

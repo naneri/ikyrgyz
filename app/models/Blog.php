@@ -22,6 +22,10 @@ Class Blog extends Eloquent{
             return $this->hasMany('Topic');
         }
         
+        public function type(){
+            return $this->belongsTo('BlogType');
+        }
+        
         public function isAdminCurrentUser(){
             $adminRoleId = Role::whereName('admin')->first()->id;
             $userId = Auth::user()->id;

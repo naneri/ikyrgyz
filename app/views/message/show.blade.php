@@ -2,9 +2,10 @@
 @extends('message.layout')
 @section('form')
 <div class="panel panel-default">
+    @if($message->sender_id == Auth::id() || $message->receiver_id == Auth::id())
     <div class="panel-heading">
-        <h4>Отправитель: {{$message->sender->description->first_name.' '.$message->sender->description->last_name}}</h4>
-        <h5>Получатель: {{$message->receiver->description->first_name.' '.$message->receiver->description->last_name}}</h5>
+        <h4>Отправитель: {{$message->sender->getNames()}}</h4>
+        <h5>Получатель: {{$message->receiver->getNames()}}</h5>
     </div>
     <div class="panel-body">
         <b>Тема: {{$message->title}}</b><br>
@@ -25,5 +26,10 @@
             {{HTML::link('message/delete/'.$message->id, 'Удалить')}}
         @endif
     </div>
+    @else
+        <div class="panel-body">
+            Вы не имеете доступа к данному сообщению
+        </div>
+    @endif
 </div>
 @stop

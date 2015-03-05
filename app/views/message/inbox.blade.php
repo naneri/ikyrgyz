@@ -1,6 +1,7 @@
 @extends('misc.layout')
 @extends('message.layout')
 @section('form')
+{{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4>Входящие</h4>
@@ -12,10 +13,9 @@
         {{HTML::link('messages/inbox/all', 'Все')}}-->
         {{Form::hidden('page', 'inbox')}}
     </div>
-    {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
     <div class="panel-body" id="messages">
         @include('message.build.messages', array('messages' => $messages))
     </div>
-    {{Form::close()}}
 </div>
+{{Form::close()}}
 @stop
