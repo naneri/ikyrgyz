@@ -910,11 +910,13 @@ Topic
   position: absolute;
 }
 .b-topic-navigation-format__list .buttons-wrapper {
-  width: 139px;
+  width: 140px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #dbdbdb;
   height: 28px;
+  position: relative;
+
 }
 .b-topic-navigation-format__list .format-type {
   display: inline-block;
@@ -934,6 +936,9 @@ Topic
   border-top-right-radius: 3px;
   border-bot-right-radius: 3px;
   cursor: pointer;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
 }
 .b-topic-navigation-online-dropdown {
   display: none;
