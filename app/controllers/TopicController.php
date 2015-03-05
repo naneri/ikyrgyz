@@ -225,9 +225,10 @@ class TopicController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function delete($id)
 	{
-		//
+		Topic::findOrFail($id)->delete();
+        return Redirect::to('/');
 	}
 
 	public function uploadImage() {

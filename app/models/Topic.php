@@ -103,4 +103,10 @@ class Topic extends Eloquent {
             
             return $iDeltaRating;
         }
+
+        public function delete(){
+            $this->video()->delete();
+            $this->comments()->delete();
+            return parent::delete();
+        }
 }
