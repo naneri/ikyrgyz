@@ -59,19 +59,19 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
-                $blogIds = Auth::user()->canPublishBlogs()->lists('id');
-                $blogIdsRegex = implode(',', $blogIds);
+        $blogIds = Auth::user()->canPublishBlogs()->lists('id');
+        $blogIdsRegex = implode(',', $blogIds);
 		$rules = Topic::$rules;
-                $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
+        $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
-                    return Redirect::back()->withErrors($validator);
-                }
-                $this->topic = $this->getTopic();
-                $this->publishTopic(false);
+            return Redirect::back()->withErrors($validator);
+        }
+        $this->topic = $this->getTopic();
+        $this->publishTopic(false);
 
-                return Redirect::to('topic/show/'.$this->topic->id);
+        return Redirect::to('topic/show/'.$this->topic->id);
 	}
         
     private function getTopic(){

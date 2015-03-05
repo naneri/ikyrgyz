@@ -22,7 +22,7 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <div class="login-form">
-                                <span class="login-span1">Кыргызская Социальная Сеть</span>
+                                <span class="login-span1">{{ trans('nation.'.Config::get('app.nation_name').'_adjective') }} Социальная Сеть</span>
                                 <span class="login-span2">ПРИСОЕДИНЯЙСЯ</span>
                                 <span class="login-span3">Авторизация</span>
                                 <div class="form-area">

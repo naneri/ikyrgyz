@@ -25,9 +25,9 @@
                     <div class="b-topic-create-modal-content__item">
                         {{ Form::select('blog_id', $canPublishBlogs, $topic->blog_id, array('class' => 'choose-blog input-default sync-input')) }}
                     </div>
-                    <div class="b-topic-create-modal-content__item">
+                   <!-- <div class="b-topic-create-modal-content__item">
                         {{ Form::select('topic_type', $type_list, $topic->type_id, array('class' => 'choose-blog input-default sync-input')) }}
-                    </div>
+                    </div> -->
                     <div class="b-topic-create-modal-content__item">
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input">{{$topic->description}}</textarea>
                     </div>
