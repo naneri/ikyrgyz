@@ -1,13 +1,13 @@
 @extends('misc.layout')
 @extends('message.layout')
 @section('form')
+{{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4>Контакты</h4>
         {{Form::hidden('page', 'contact')}}
     </div>
     <div class="panel-body" id="messages">
-        {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
         <div class="tab-content">
             <div class="tab-pane active" id="friends">
                 @foreach(Friend::friendsList(Auth::id()) as $friend)
@@ -22,7 +22,7 @@
                 
             </div>
         </div>
-        {{Form::close()}}
     </div>
 </div>
+{{Form::close()}}
 @stop
