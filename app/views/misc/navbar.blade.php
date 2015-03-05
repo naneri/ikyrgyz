@@ -44,7 +44,8 @@
                       </a> 
                       <ul class="b-header-nav-dropdown">
                         @foreach($friend_requests as $request)
-                          <li>{{$request->first_name . ' ' . $request->last_name . 'отправил вам приглашение в друзья'}}<a href="{{ URL::to('people/submitFriend'). '/' . $request->id }}">Принять</a> | <a href="{{ URL::to('people/removeFriend'). '/' . $request->id }}">Отклонить</a></li>
+                          <li><img src="http://lorempixel.com/400/200/" alt="">
+                          <span>{{$request->first_name . ' ' . $request->last_name }}<br/>отправил вам сообщения</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $request->id }}" class="btn">Принять</a>  <a href="{{ URL::to('people/removeFriend'). '/' . $request->id }}" class="btn">Отклонить</a></li>
                         @endforeach
                       </ul>  
                      
