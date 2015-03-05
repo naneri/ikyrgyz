@@ -1,9 +1,10 @@
 @extends('misc.layout')
 @extends('message.layout')
 @section('form')
+{{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
 <div class="panel panel-default">
-    {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
     <div class="panel-heading">
+        <h4>Входящие</h4>
         {{Form::checkbox('check-all')}}
         {{Form::select('action', array('' => 'Выберите действие', 'set_watch' => 'Прочитанное', 'set_notwatch' => 'Непрочитанное', 'blacklist' => 'Черный список', 'delete' => 'Удалить'))}}
         <!--{{HTML::link('messages/inbox/friend', 'Друзья')}}
@@ -15,6 +16,6 @@
     <div class="panel-body" id="messages">
         @include('message.build.messages', array('messages' => $messages))
     </div>
-    {{Form::close()}}
 </div>
+{{Form::close()}}
 @stop

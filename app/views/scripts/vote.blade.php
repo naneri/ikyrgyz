@@ -1,7 +1,16 @@
 @if(isset($base_config))
+{{HTML::script('js/notify.js')}}
 <script>
     var voteUrl = "{{$base_config['base_url']}}/vote/";
     var vote = {
+        notify: function($result){
+            if (!$result['error'] && $result['rating']) {
+                $rating.html($result.rating);
+                $.notify($result.success, 'success');
+            } else if($result.error) {
+                $.notify($result.error, 'error');
+            }            
+        },
         topic: function(topicId, value) {
             $rating = $('#rating_topic_' + topicId);
             $.ajax({
@@ -12,9 +21,7 @@
                     'value': value
                 },
                 success: function($result) {
-                    if (!$result['error'] && $result['rating']) {
-                        $rating.html($result.rating);
-                    }
+                    vote.notify($result);
                 }
             });
         },
@@ -28,9 +35,7 @@
                     'value': value
                 },
                 success: function($result) {
-                    if (!$result['error'] && $result['rating']) {
-                        $rating.html($result.rating);
-                    }
+                    vote.notify($result);
                 }
             });
         },
@@ -44,9 +49,7 @@
                     'value': value
                 },
                 success: function($result) {
-                    if (!$result['error'] && $result['rating']) {
-                        $rating.html($result.rating);
-                    }
+                    vote.notify($result);
                 }
             });
         },
@@ -60,9 +63,7 @@
                     'value': value
                 },
                 success: function($result) {
-                    if (!$result['error'] && $result['rating']) {
-                        $rating.html($result.rating);
-                    }
+                    vote.notify($result);
                 }
             });
         }

@@ -22,6 +22,14 @@ class Friend extends Eloquent{
                 Friend::where('user_one', $userId)->where('user_two', Auth::id())->update(['status' => Config::get('social.friend_status.in_ban')]);
             }
         }
+        
+        static function fromBan($userId){
+            if (Friend::where('user_one', Auth::id())->where('user_two', $userId)->where('status', Config::get('social.friend_status.banned'))->exists()
+                    && Friend::where('user_one', $userId)->where('user_two', Auth::id())->where('status', Config::get('social.friend_status.in_ban'))->exists()) {
+                Friend::where('user_one', Auth::id())->where('user_two', $userId)->update(['status' => Config::get('social.friend_status.friends')]);
+                Friend::where('user_one', $userId)->where('user_two', Auth::id())->update(['status' => Config::get('social.friend_status.friends')]);
+            }
+        }
 
 	
 	/**
@@ -128,10 +136,21 @@ class Friend extends Eloquent{
 	static function friendsList($id){
 		return Friend::where('user_one', '=', $id)
 				->join('users', 'user_two', '=', 'users.id')
+                                ->join('user_description', 'user_description.user_id', '=', 'users.id')
 				->where('status', '=', Config::get('social.friend_status.friends'))
 				->get();
 
 	}
+        
+        static function getFriendStatus($userOneId, $userTwoId){
+            $friendRelation = Friend::where('user_one', $userOneId)
+                            ->where('user_two', $userTwoId)
+                            ->first();
+            if($friendRelation){
+                return $friendRelation->status;
+            }
+            return false;
+        }
 
 	static function removeFriend($firstId,$secondId){
 		if(!Friend::where('user_one', '=', $firstId)){

@@ -205,7 +205,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        {{Form::submit('Go!')}}
+                        {{Form::submit('Сохранить')}}
                     </div>
                 </fieldset>
             {{Form::close()}}

@@ -1,16 +1,17 @@
 @extends('misc.layout')
 @extends('message.layout')
 @section('form')
+{{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
 <div class="panel panel-default">
-    {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
     <div class="panel-heading">
+        <h4>Черный список</h4>
         {{Form::hidden('page', 'blacklist')}}
     </div>
     <div class="panel-body" id="users">
         @include('message.build.users', array('users' => Auth::user()->bannedUsers()))
     </div>
-    {{Form::close()}}
 </div>
+{{Form::close()}}
 <script>
 function unblockUser(userId){
     $.ajax({

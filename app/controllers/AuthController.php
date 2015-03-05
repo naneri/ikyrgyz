@@ -102,6 +102,7 @@ class AuthController extends BaseController {
 
             Mail::send('emails.activate', array('user' => $user), function($message)
             {
+                $message->from('noreply@niamiko.com');
                 $message->to(Input::get('email'))->subject('Welcome!');
             });
         }

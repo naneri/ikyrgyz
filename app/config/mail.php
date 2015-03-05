@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'log',
+	'driver' => 'smtp',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'localhost',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'null@devzone51.com', 'name' => null),
+	'from' => array('address' => 'noreply@niamiko.com', 'name' => null),
 
 	/*
 	|--------------------------------------------------------------------------

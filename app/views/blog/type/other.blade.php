@@ -1,8 +1,9 @@
+<div class="panel panel-default" style="padding: 0 50px 40px;">
 <img src="{{$blog->image}}" />
 <h3>{{$blog->title}}</h3><br>
 rating - 
 <a href="#" class="blog_vote_up" onclick="vote.blog({{$blog->id}}, 1); return false;">UP</a>
-<span class="rating" id="rating_blog_{{$blog->id}}">{{$blog->rating}}</span>
+<span class="rating" id="rating_blog_{{$blog->id}}">{{round($blog->rating,2)}}</span>
 <a href="#" class="blog_vote_down" onclick="vote.blog({{$blog->id}}, - 1); return false;">DOWN</a><br>
 type - {{$blog->type->name}}
 @if(!$blog->isUserHaveRole())
@@ -55,6 +56,7 @@ type - {{$blog->type->name}}
         </div>
     </div>
 
+</div>
 </div>
 <br><br>
 @if(($blog->type->name == 'close' && $blog->getUserRole() == 'reader') || $blog->type->name == 'open')

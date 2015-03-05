@@ -82,7 +82,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         Message::where(function($query){
             $query->where('sender_id', $this->id)
                     ->orWhere('receiver_id', $this->id);
-        })->where('deleted_at', 'is not', 'null')->get();
+        })->onlyTrashed()->get();
     }
     
     public function messagesDraft(){
@@ -103,9 +103,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function friends(){
         return User::join('friends', 'friends.user_one', '=', 'users.id')
+                ->join('user_description', 'user_description.user_id', '=', 'users.id')
                 ->where('friends.status', Config::get('social.friend_status.friends'))
                 ->where('friends.user_two', Auth::id())
                 ->get();
+    }
+    
+    public function getNames(){
+        return $this->description->first_name.' '.$this->description->last_name;
+    }
+    
+    public function avatar(){
+        return $this->description->user_profile_avatar;
+    }
+    
+    public function canSendMessage($userId){
+        return Friend::getFriendStatus(Auth::id(), $userId) == Config::get('social.friend_status.friends');
     }
 
     public function setDescriptionArrayAttribute($values){
@@ -210,7 +223,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 Blog::create(array(
                     'user_id' => $this->id,
                     'type_id' => Config::get('blog.blogType.personal'),
-                    'title' => 'Блог им. ' . $this->email,
+                    'title' => 'Блог им. ' . $this->first_name,
                     'description' => 'Это ваш персональный блог.'
                 ));
             }

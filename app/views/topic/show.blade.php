@@ -11,8 +11,10 @@
                 <div class="b-profile-about-title">
                   <p class="b-profile-about-title__title">{{$topic->title}}</p>
                   <div class="b-profile-about-title__right"><span class="date">{{$topic->created_at}}</span>
-                    <input type="submit" value="Редактировать" class="btn-edit button-default"/>
-                    <input type="submit" value="Удалить" class="btn-delete button-default"/>
+                    @if($creator->id === $user_data->id)
+                      <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="Редактировать" class="btn-edit button-default"/></a>
+                      <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="Удалить" class="btn-delete button-default"/></a>
+                    @endif
                     <!--<img src="{{ asset('img/22.png') }}" alt="vision"/>
                     <span class="count">19</span>
                     <img src="{{ asset('img/23.png') }}" alt="vision"/>
@@ -29,12 +31,14 @@
                         <img src="{{ asset('img/48.png') }}" alt="" class="b-profile-about-profile__image"/>
                     @endif
                 </a>
-                  <p class="b-profile-about-profile__name">Ярослав Александрович Маркин</p>
-                  <div class="b-profile-about-profile__buttons">                                    
-                    <input type="submit" value="Профиль" class="input-default btn-profile"/>
-                    <a href="{{ URL::to('people/friendRequest/'. $creator->id)}}">
-                        <input type="submit" value="Дружить" class="input-default btn-friend"/>
-                    </a>
+                  <p class="b-profile-about-profile__name">{{@$creator->description->first_name . ' '. @$creator->description->last_name}}</p>
+                  <div class="b-profile-about-profile__buttons">  
+                    @if($creator->id !== $user_data->id)                                  
+                      <input type="submit" value="Профиль" class="input-default btn-profile"/>
+                      <a href="{{ URL::to('people/friendRequest/'. $creator->id)}}">
+                          <input type="submit" value="Дружить" class="input-default btn-friend"/>
+                      </a>
+                    @endif
                     <span class="rating-text">Рейтинг: <span class="rating-num">+0.00</span></span>
                   </div>
                   <div class="clear"></div>
@@ -60,7 +64,7 @@
                   <div class="b-profile-about-tags__user">
                     <div class="b-profile-about-tags-user">
                       <div class="b-profile-about-tags-user__left"><span class="b-profile-about-tags-user__name">Блог</span><img src="{{ asset('img/48.png') }}" alt="" class="b-profile-about-tags-user__image"/>
-                        <p class="b-profile-about-tags-user__title">Красота Кыргызского народа</p>
+                        <p class="b-profile-about-tags-user__title">{{$topic->blog->title}}</p>
                         <div class="b-profile-about-tags-user__buttons">
                           <button class="btn-default btn-view">Просмотреть</button>
                           <button class="btn-default btn-follow">Подписаться</button><span class="count-topic">999 топиков</span><span class="count-followers">57 подписчиков</span>
@@ -124,7 +128,7 @@
                             <img src="{{ asset('img/48.png') }}" alt="" class="b-profile-about-form__image"/>
                         @endif
                     </a>
-                      <p class="b-profile-about-form__title">Ярослав Александрович Маркин</p>
+                      <p class="b-profile-about-form__title">{{@$user_data->description->first_name . ' '. @$user_data->description->last_name}}</p>
                       <div class="clear"></div>
                     </div>
                     <div class="b-profile-about-form__item">

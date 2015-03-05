@@ -55,7 +55,7 @@
                 @if(@$user->description->user_profile_avatar)
                         <img style="width:100px" src="{{$user->description->user_profile_avatar}}" alt=""><br>
                 @endif	
-                {{Form::submit('Go!')}}
+                {{Form::submit('Сохранить')}}
             </fieldset>
         {{Form::close()}}
     </div>

@@ -28,7 +28,7 @@
                     Новый пароль {{Form::password('new_password')}}<br>
                     Повторите новый пароль {{Form::password('new_password_confirmation')}}<br>
                 </div>
-                {{Form::submit('Go!')}}
+                {{Form::submit('Сохранить')}}
             </fieldset>
         {{Form::close()}}
     </div>

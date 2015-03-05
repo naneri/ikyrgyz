@@ -1,31 +1,28 @@
 @extends('misc.layout')
 @extends('message.layout')
 @section('form')
+{{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
 <div class="panel panel-default">
-    {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
     <div class="panel-heading">
+        <h4>Контакты</h4>
         {{Form::hidden('page', 'contact')}}
     </div>
     <div class="panel-body" id="messages">
-        <!-- Nav tabs -->
-        <ul class="nav nav-pills nav-justified">
-            <li class="active"><a href="#friends" data-toggle="tab">Друзья</a></li>
-            <li><a href="#groups" data-toggle="tab">Группы</a></li>
-        </ul>
-        <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active" id="friends">
-                <ul>
                 @foreach(Friend::friendsList(Auth::id()) as $friend)
-                    <li>{{$friend->email}}</li>
+                <p class='' style="padding:5px;border: 1px solid #D2D2D2;">
+                    <img src='{{asset($friend->user_profile_avatar)}}' style='width:50px;height:50px;'> 
+                    {{$friend->first_name.' '.$friend->last_name}} 
+                    {{HTML::link('messages/new?receiver='.$friend->first_name.'+'.$friend->last_name, 'Написать сообщение', array('style' => 'float:right;line-height:50px;'))}}
+                </p>
                 @endforeach
-                </ul>
             </div>
             <div class="tab-pane" id="groups">
                 
             </div>
         </div>
     </div>
-    {{Form::close()}}
 </div>
+{{Form::close()}}
 @stop

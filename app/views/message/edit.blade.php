@@ -3,7 +3,7 @@
 @section('form')
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>Новое сообщение</h4>
+        <h4>Редактировать сообщение</h4>
     </div>
     <div class="panel-body">
         <div class="all-alerts">
@@ -15,9 +15,9 @@
             @endforeach
         </div>
         <fieldset>
-        {{Form::open(array('files' => true))}}
+        {{Form::open(array('url' => 'messages/new','files' => true))}}
             <div class="form-group">
-                {{Form::text('receiver', ($receiver!='')?$receiver:'Кому', array('class' => 'form-control'))}}{{HTML::link('#', 'Контакты', array('id' => 'contacts'))}}<br>
+                {{Form::text('receiver', $message->receiver->getNames(), array('class' => 'form-control'))}}{{HTML::link('#', 'Контакты', array('id' => 'contacts'))}}<br>
                 <div id="contacts-list" style="display: none;">
                     @foreach(Auth::user()->friends() as $friend)
                         <a onclick="addReceiver('{{$friend->first_name.' '.$friend->last_name}}')">{{$friend->first_name.' '.$friend->last_name}}</a><br>
@@ -25,16 +25,25 @@
                 </div>
             </div>
             <div class="form-group">
-                {{Form::text('title', 'Тема', array('class' => 'form-control'))}}
+                {{Form::text('title', $message->title, array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
-                {{Form::textarea('text', 'Сообщение', array('class' => 'form-control'))}}
+                {{Form::textarea('text', $message->text, array('class' => 'form-control'))}}
             </div>
-            <div class="form-group">
+        <div class="form-group">
+                @if($message->attachments->count() > 0)
+                <p><br>
+                    Прикрепленные файлы:<br>
+                    @foreach($message->attachments as $attachment)
+                    {{HTML::link(asset($attachment->path), $attachment->name, array('target' => '_blank'))}}<br>
+                    @endforeach
+                </p>
+                @endif
                 {{Form::file('attachments[]', array('multiple' => true, 'class' => 'form-control'))}}
             </div>
             <div class="form-group">
                 {{Form::hidden('is_draft', '0')}}
+                {{Form::hidden('message_id', $message->id)}}
                 {{Form::submit('Черновик', array('name' => 'draft'))}}
                 {{Form::submit('Отправить', array('name' => 'publish'))}}
             </div>

@@ -52,7 +52,7 @@ class BlogController extends BaseController {
 
 	public function show($id){
 		$blog = Blog::findOrFail($id);
-                return View::make('blog.show', array('blog' => $blog));
+        return View::make('blog.show', array('blog' => $blog));
 	}
         
 	public function showPersonal($email) {

@@ -20,7 +20,8 @@ Route::get('register', 'AuthController@getRegister');
 Route::post('register', 'AuthController@postRegister');
 Route::get('activate/{code}', 'AuthController@getActivate');
 
-Route::group(array('before' => 'auth'),function(){
+
+Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index','MainController@index');
 	Route::get('main/ajaxTopics/{page}','MainController@ajaxTopics');
         Route::get('blog/create', 'BlogController@create');
@@ -53,6 +54,7 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+        Route::get('profile/random', 'ProfileController@getRandom');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');
@@ -105,6 +107,11 @@ Route::group(array('before' => 'auth'),function(){
         Route::get('messages/new', 'MessageController@newMessage');
         Route::post('messages/new', 'MessageController@postNewMessage');
         Route::post('messages/action', 'MessageController@postAction');
+        Route::group(array('before' => 'message_edit_permission'), function(){
+            Route::get('message/send/{id}', 'MessageController@sendMessageDraft');
+            Route::get('message/edit/{id}', 'MessageController@editMessage');
+            Route::get('message/delete/{id}', 'MessageController@deleteMessage');
+        });
 
         Route::get('custom/history', 'CustomController@showHistory');
         Route::get('custom/customs', 'CustomController@showCustoms');
@@ -123,17 +130,19 @@ Route::group(array('before' => 'auth'),function(){
 
 	Route::get('logout', 'AuthController@logout');
 
-        if(Request::ajax()){
-            Route::post('topic/comments/show', 'TopicCommentsController@showComments');
-            Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
-            Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
-            Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
+    Route::post('topic/comment/add', 'TopicCommentsController@postAdd');;
+    
+    if(Request::ajax()){
+        Route::post('topic/comments/show', 'TopicCommentsController@showComments');
+        Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
+        Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
+        Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
 
-            Route::post('vote/comment', 'VoteController@postVoteComment');
-            Route::post('vote/topic', 'VoteController@postVoteTopic');
-            Route::post('vote/blog', 'VoteController@postVoteBlog');
-            Route::post('vote/user', 'VoteController@postVoteUser');
-        }
+        Route::post('vote/comment', 'VoteController@postVoteComment');
+        Route::post('vote/topic', 'VoteController@postVoteTopic');
+        Route::post('vote/blog', 'VoteController@postVoteBlog');
+        Route::post('vote/user', 'VoteController@postVoteUser');
+    }
 });
 
 Route::filter('blog_edit_permission', function($route){
@@ -147,5 +156,12 @@ Route::filter('topic_edit_permission', function($route) {
     $topic = Topic::findOrFail($route->parameter('id'));
     if (!$topic->canEdit()) {
         return View::make('error.permission', array('error' => 'You don\'t have enough permissions to do that.'));
+    }
+});
+
+Route::filter('message_edit_permission', function($route) {
+    $message = Message::findOrFail($route->parameter('id'));
+    if (!$message->canEdit()) {
+        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
     }
 });
