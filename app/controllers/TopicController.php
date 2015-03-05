@@ -94,7 +94,7 @@ class TopicController extends BaseController {
     
     private function createNewTopic(){
         $topic = new Topic();
-        $topic->type_id = Input::get('topic_type');
+        $topic->type_id = 1;
         $topic->user_id = Auth::user()->id;
         $topic->blog_id = $this->getBlogId();
         if(Input::hasFile('photo')){
@@ -268,7 +268,7 @@ class TopicController extends BaseController {
         $this->topic->description = Input::get('description');
         $this->topic->blog_id = $blogId;
         $this->topic->user_id = Auth::user()->id;
-        $this->topic->type_id = Input::get('topic_type');
+        $this->topic->type_id = 1;
         $this->topic->draft = $isDraft;
         $this->topic->save();
 
