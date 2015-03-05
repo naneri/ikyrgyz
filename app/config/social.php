@@ -12,5 +12,5 @@ return array(
             ),
 	
 	'user_site'								=> URL::to('/'),
-
+    
 	);
