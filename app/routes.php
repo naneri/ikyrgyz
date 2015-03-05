@@ -126,17 +126,19 @@ Route::group(array('before' => 'auth|activated'),function(){
 
 	Route::get('logout', 'AuthController@logout');
 
-        if(Request::ajax()){
-            Route::post('topic/comments/show', 'TopicCommentsController@showComments');
-            Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
-            Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
-            Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
+    Route::post('topic/comment/add', 'TopicCommentsController@postAdd');;
+    
+    if(Request::ajax()){
+        Route::post('topic/comments/show', 'TopicCommentsController@showComments');
+        Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
+        Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
+        Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
 
-            Route::post('vote/comment', 'VoteController@postVoteComment');
-            Route::post('vote/topic', 'VoteController@postVoteTopic');
-            Route::post('vote/blog', 'VoteController@postVoteBlog');
-            Route::post('vote/user', 'VoteController@postVoteUser');
-        }
+        Route::post('vote/comment', 'VoteController@postVoteComment');
+        Route::post('vote/topic', 'VoteController@postVoteTopic');
+        Route::post('vote/blog', 'VoteController@postVoteBlog');
+        Route::post('vote/user', 'VoteController@postVoteUser');
+    }
 });
 
 Route::filter('blog_edit_permission', function($route){

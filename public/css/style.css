@@ -2417,3 +2417,9 @@ interface
 .b-user-interface-tab-list__list {
   float: left;
 }
+
+
+.b-profile-about-text p{
+  font-size:15px;
+  font-family: 'PT Sans Caption';
+}

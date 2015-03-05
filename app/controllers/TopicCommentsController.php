@@ -36,8 +36,9 @@ class TopicCommentsController extends \BaseController {
         if(Request::ajax()){
         	return Response::json($result);
         }
-
-        return Redirect::back();
+        Debugbar::info($result['error']);
+        Debugbar::error('Error!');
+        return Redirect::back()->with('errors');
     }
 
 	/**
