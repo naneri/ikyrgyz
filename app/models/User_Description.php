@@ -33,6 +33,11 @@ class User_Description extends Eloquent{
 		$fileName = time() . rand(1,100) .'.' . $extension;
 		$file->move($destinationPath, $fileName);
 		$avapath = URL::to('/') . '/' . $destinationPath .'/'. $fileName;
+                $personalBlog = Auth::user()->getPersonalBlog();
+                if($personalBlog){
+                    $personalBlog->avatar = $avapath;
+                    $personalBlog->save();
+                }
 		return $avapath;
 	}
 

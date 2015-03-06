@@ -3,7 +3,7 @@ $(document).ready(function(){
     
         startSearch();
         
-        $('input').change(function(){
+        $('input, select').change(function(){
             setSearchTimeout();
         });
         

@@ -38,8 +38,8 @@ class MessageController extends BaseController{
 	public function show($id){
 		$message = Message::withTrashed()->find($id);
 		if($message->receiver_id == Auth::id()){
-                    Message::setWatched($id);
-                }
+            Message::setWatched($id);
+        }
 		return View::make('message.show', array('message' => $message));
 	}
         
