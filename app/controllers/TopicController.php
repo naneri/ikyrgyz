@@ -27,7 +27,7 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-            if(!Auth::user()->getPersonalBlog()){
+            if(!Auth::user()->isHavePersonalBlog()){
                 Auth::user()->createPersonalBlog();
             }
 
@@ -102,17 +102,7 @@ class TopicController extends BaseController {
     }
     
     private function getBlogId(){
-        $blogId = null;
-        if(Input::get('blog_id') == '0'){
-            $personalBlog = Auth::user()->getPersonalBlog();
-            if(!$personalBlog){
-                $personalBlog = Auth::user()->createPersonalBlog();
-            }
-            $blogId = $personalBlog->id;
-        }else{
-            $blogId = Input::get('blog_id');
-        }
-        return $blogId;
+        return (Input::get('blog_id') == '0') ? Auth::user()->getPersonalBlog()->id : Input::get('blog_id');
     }
     
     private function syncTopicRelations(){

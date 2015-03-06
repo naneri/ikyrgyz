@@ -1,4 +1,4 @@
-{{$comment->user->getNames()}}<br>
+{{$comment->user->email}}<br>
 @if($comment->trash)
     @if($comment->canView())
         {{$comment->text}}<br>

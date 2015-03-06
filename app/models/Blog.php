@@ -8,7 +8,7 @@ Class Blog extends Eloquent{
             'type_id' => 'required'
         );
         
-        protected $fillable = ['title', 'description', 'type_id', 'user_id', 'avatar'];
+        protected $fillable = ['title', 'description', 'type_id', 'user_id'];
         
         public function user() {
             return $this->belongsTo('User', 'user_id');
