@@ -19,7 +19,7 @@
 			   		$.get(base_url + '/main/ajaxTopics/' + page, function(data){
 				   		var elements = $(data).find(".b-user-wall");
 				   		console.log('donwloaded elements' + page);
-				   		setTimeout($container.append( elements ).masonry( 'appended', elements ), 200);
+				   		setTimeout($container.append( elements ).masonry( 'appended', elements ), 330);
 				   		elements = null;
 				   		console.log(elements);
 				   		page += 1;

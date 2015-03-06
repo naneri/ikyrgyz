@@ -172,4 +172,18 @@ Class Blog extends Eloquent{
                         ->select('blogs.*')
                         ->first();
         }
+
+        public function roles(){
+            $this->hasMany('BlogRole');
+        }
+
+        public static function canPublishBlogs(){
+
+            $blogs = Blog::join('blog_roles', 'blogs.id', '=', 'blog_roles.blog_id')
+                        ->where('blog_roles.user_id', '=', Auth::id())
+                        //1,2,3 - roles from Roles table equal to admin, moderator and reader   
+                        ->whereIn('blog_roles.user_id', array(1,2,3))->get(); 
+
+            return $blogs;                            
+        }
 }
