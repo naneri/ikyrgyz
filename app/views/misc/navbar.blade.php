@@ -78,9 +78,9 @@
                     <span class="search-friend">Энциклопедия</span>
                   </a>
                   <ul class="b-header-nav-dropdown">
-                    <li><a href="">История</a></li>
-                    <li><a href="">Обычаи</a></li>
-                    <li><a href="">Культура </a></li>
+                    <li><a href="{{ URL::to('custom/history') }}">История</a></li>
+                    <li><a href="{{ URL::to('custom/customs') }}">Обычаи</a></li>
+                    <li><a href="{{ URL::to('custom/culture') }}">Культура </a></li>
                   </ul>
                 </li>
                 <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/39.png') }}" alt="search"/></a>
