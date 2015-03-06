@@ -33,6 +33,8 @@ body {
 }
 .b-header-nav__list img {
   vertical-align: middle;
+  
+ 
 }
 .b-header-nav__list a {
   color: #fff;
@@ -432,11 +434,12 @@ body {
 .b-user-wall-header__image {
   float: left;
   margin: 0 15px 0 0;
-}
-.b-user-wall-header__image img {
   width: 45px;
   height: 45px;
   overflow: hidden;
+}
+.b-user-wall-header__image img {  
+  max-height: 100%;  
 }
 .b-user-wall-header__title {
   color: #333;
