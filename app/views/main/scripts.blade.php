@@ -9,7 +9,7 @@
 		  	var $container = $('.masonry');
 		  	setTimeout(function(){
 			  		$container.masonry({
-			    	columnWidth: 490,
+			    	columnWidth: 495,
 			    	'gutter': 10
 		  		});
 		  	}, 200);

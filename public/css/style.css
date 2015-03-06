@@ -2953,3 +2953,8 @@ blog style
 .b-user-blog-right {
 	float: right;
 }
+
+.b-user-wall {
+	width: 495px;
+	margin: 0 auto;
+}
