@@ -26,13 +26,16 @@ class TopicController extends BaseController {
     if(!$canPublishBlogs){
         return Redirect::back()->with('message', 'Please create a blog first');
     }
-    
+
     return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView()));
 	}
         
     private function getCanPublishBlogsForView(){
-        foreach (Blog::canPublishBlogs() as $blog) {
-            $canPublishBlogs[$blog->id] = $blog->title;
+        $canPublishBlogs = null;
+        foreach (Blog::canPublishBlogs() as $result) {
+           foreach($result as $blog){
+             $canPublishBlogs[$blog->id] = $blog->title;
+           }
         }
         return $canPublishBlogs;
     }

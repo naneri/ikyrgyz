@@ -154,12 +154,6 @@ class BlogController extends BaseController {
             $roleId = Role::whereName('request')->pluck('id');
         }
         
-        $blogRole = new BlogRole();
-        $blogRole->blog_id = $blog->id;
-        $blogRole->user_id = Auth::user()->id;
-        $blogRole->role_id = $roleId;
-        $blogRole->save();
-        
         return Redirect::back();
     }
     
