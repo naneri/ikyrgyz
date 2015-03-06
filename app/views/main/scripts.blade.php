@@ -11,7 +11,7 @@
 			  		$container.masonry({
 			    	columnWidth: 495,
 			    	'gutter': 10
-		  		});
+		  		});	
 		  	}, 200);
 
 		  	$(window).scroll(function() {
