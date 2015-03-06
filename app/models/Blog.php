@@ -182,7 +182,7 @@ Class Blog extends Eloquent{
             $blogs = Blog::join('blog_roles', 'blogs.id', '=', 'blog_roles.blog_id')
                         ->where(function($query){
                             $query->where('blog_roles.user_id', '=', Auth::id())
-                                ->orWhere('blog.user_id', '=', Auth::id())    ;
+                                ->orWhere('blogs.user_id', '=', Auth::id())    ;
                         })
                         //1,2,3 - roles from Roles table equal to admin, moderator and reader   
                         ->whereIn('blog_roles.user_id', array(1,2,3))->get(); 

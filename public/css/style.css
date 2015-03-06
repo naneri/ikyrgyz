@@ -599,7 +599,7 @@ body {
 	background: url("../img/24.png") no-repeat;
 	background-position: 50% 50%;
 	text-indent: -9999px;
-	margin-left: 36px;
+	margin-left: 58px;
 	cursor: pointer;
 }
 
@@ -2144,6 +2144,12 @@ about profile Style
 .b-profile-about-text__text {
 	color: #3e4142;
 	font: 15px 'PT Sans Caption';
+}
+
+.b-profile-about-text + p {
+	color: #3e4142;
+	font: 15px 'PT Sans Caption';
+	line-height: 23px;
 }
 
 p.b-profile-about-gallery__title {
