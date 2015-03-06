@@ -3,7 +3,7 @@
           <div class="b-header__inner">
             <div class="b-header-nav">
               <ul>
-                <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">I-Kyrgyz</span></a></li>
+                <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">{{Config::get('app.network_name')}}</span></a></li>
                 <li class="b-header-nav__list"><a href="#">
                   @if(isset($user_data->description->user_profile_avatar))
                     <img style="width:40px" src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
@@ -23,20 +23,44 @@
                     @if(count(@$new_messages))
                       <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($new_messages)}}</span>
+                      <ul class="b-header-nav-dropdown">
+                        <li><a href="#">Изменить профиль</a></li>
+                        <li><a href="#">Личные сообщения(1877)</a></li>
+                        <li><a href="#">Друзья</a></li>
+                        <li><a href="#">Группы  </a></li>
+                      </ul>
                     @else
                       <img src="{{ asset('img/navbar/mail_inact.png') }}" alt="msg"/>
                       <span style="opacity:0" class="counter">{{count($new_messages)}}</span>
                     @endif
                   </a>
-                  <a href="#" class="counter-block">
+                </li>
+                <li class="b-header-nav__list">  
+                  
                     @if(count(@$friend_requests))
+                    <a href="#" class="counter-block">
                       <img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($friend_requests)}}</span>
+                      </a> 
+                      <ul class="b-header-nav-dropdown">
+                        @foreach($friend_requests as $friend)
+                          <li>
+                            @if(!empty($friend->user_profile_avatar))
+                              <img src="{{$friend->user_profile_avatar}}" alt="">
+                            @endif
+                          <span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>отправил вам сообщения</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">Принять</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">Отклонить</a></li>
+                        @endforeach
+                      </ul>  
+                     
                     @else
+                    <a href="#" class="counter-block">
                       <img src="{{ asset('img/navbar/f_req_inact.png') }}" alt="msg"/>
                       <span style="opacity:0" class="counter">{{count($friend_requests)}}</span>
+                       </a>
                     @endif
-                  </a>
+                  
+                 </li> 
+                 <li class="b-header-nav__list"> 
                   <a href="#" class="counter-block">
                     <img src="{{ asset('img/navbar/setting_inact.png') }}" alt="msg"/>
                     <span style="opacity:0" class="counter">25</span>

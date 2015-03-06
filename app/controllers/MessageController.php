@@ -33,31 +33,45 @@ class MessageController extends BaseController{
 	 * Достаёт информацию по сообщению
 	 * 
 	 * @param  [type] $id id сообщения
-	 * @return [type]     [description]
+     * 
+	 * @return открывает вьюху
 	 */
 	public function show($id){
+
+        // ищет сообщение по id включая удалённые сообщения
 		$message = Message::withTrashed()->find($id);
+
+        // выясняет равен ли получатель владельцу сообщения
 		if($message->receiver_id == Auth::id()){
-                    Message::setWatched($id);
-                }
+
+            // отмечает сообщение прочитанным
+            $message->setWatched();
+        }
 		return View::make('message.show', array('message' => $message));
 	}
         
-        public function inbox($filter){
-            $messages = array();
-            switch($filter){
-                case 'friend':
-                    $messages = Auth::user()->messagesInbox;
-                    break;
-                case 'group':
-                    break;
-                case 'event':
-                    break;
-                default:
-                    $messages = Auth::user()->messagesInbox;                    
-            }
-            return View::make('message.inbox', array('messages' => $messages));
+    /**
+     * Открывает ящик пользователя
+     * 
+     * @param  [type] $filter [description]
+     * @return [type]         [description]
+     */
+    public function inbox($filter = NULL){
+        $messages = array();
+        switch($filter){
+            case 'friend':
+                $messages = Auth::user()->messagesInbox;
+                break;
+            case 'group':
+                break;
+            case 'event':
+                break;
+            default:
+                $messages = Message::inbox(Auth::user());                    
         }
+
+        return View::make('message.inbox', array('messages' => $messages));
+    }
         
         public function newMessage(){
             $receiver = Input::get('receiver');

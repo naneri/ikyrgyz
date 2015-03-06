@@ -1,38 +1,53 @@
 @extends('misc.layout')
 
 @section('content')
+{{HTML::style('css/bootstrap.css')}}
 <div class="container">
     {{Form::open()}}
-        <div class="col-lg-5">
-            {{HTML::link('#', 'Люди')}}
-            {{HTML::link('search/content', 'Контент')}}
-            {{HTML::link('#', 'Группы')}}
-            {{HTML::link('#', 'Медиа')}}
-            <br>
-                Место поиска:<br>
-                Выборка места проживания по заполненному
-                профилю пользователя<br>
-                Например: Бишкек, Кырзыгстан<br>
-                Страна: {{Form::select('country', Country::getAllForView())}}<br>
-                Город: {{Form::select('city', City::getAllForView())}}<br>
-                <hr>
-                Учебные заведения:<br>
-                <hr>
-                Пол:<br>
-                {{Form::radio('gender', 'male', null)}}Мужской<br>
-                {{Form::radio('gender', 'female', null)}}Женский<br>
-                {{Form::radio('gender', 'other', true)}}Любой<br>
-                <hr>
-                Возраст<br>
-                От {{Form::text('age-from')}} До {{Form::text('age-to')}}<br>
+        <div class="col-md-4">
+            <div class="panel panel-default" style="padding:30px;">
+                {{HTML::link('#', 'Люди')}} |
+                {{HTML::link('search/content', 'Контент')}} 
+                <!--{{HTML::link('#', 'Группы')}} |
+                {{HTML::link('#', 'Медиа')}} -->
+                <br><br>
+                    Место поиска:<br>
+                    {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control'))}}<br>
+                    {{Form::select('city', City::getAllForView(), null, array('class' => 'form-control'))}}<br>
+                    <hr>
+                    Учебные заведения:
+                    {{Form::select('school', array_merge(array('' => 'Выберите школу'), ProfileItem::getForView('school')), null, array('class' => 'form-control'))}}<br>
+                    {{Form::select('university', array_merge(array('' => 'Выберите университет'), ProfileItem::getForView('university')), null, array('class' => 'form-control'))}}
+                    <hr>
+                    Места работы:
+                    {{Form::select('job', array_merge(array('' => 'Выберите место работы'), ProfileItem::getForView('job')), null, array('class' => 'form-control'))}}
+                    <hr>
+                    Пол:<br>
+                    <div class="checkbox">
+                        <label>
+                            {{Form::radio('gender', 'male', null)}} Мужской
+                        </label>
+                        <label>
+                            {{Form::radio('gender', 'female', null)}} Женский
+                        </label>
+                        <label>
+                            {{Form::radio('gender', 'other', true)}} Любой
+                        </label>
+                    </div>
+                    <hr>
+                    Возраст<br>
+                    От {{Form::text('age-from', null, array('size' => 4))}} До {{Form::text('age-to', null, array('size' => 4))}}<br>
+            </div>
         </div>
-        <div class="col-lg-7" id="users-list">
-            <div class="col-lg-7 search-text">
-                {{Form::text('search-text')}}
+    <div class="col-md-8 panel panel-default" id="users-list">
+        <div class="" style="padding:30px;">
+            <div class="col-md-12 search-text" style="margin-bottom:20px;">
+                {{Form::text('search-text', null, array('size' => '60', 'class' => 'form-group'))}}
                 {{Form::submit('Поиск', array('onclick' => 'return false;', 'id' => 'btn-search'))}}
             </div>
-            <div class="col-lg-7" id="search-result">
+            <div class="col-md-12" id="search-result">
             </div>
+        </div>
         </div>
     {{Form::close()}}
 </div>

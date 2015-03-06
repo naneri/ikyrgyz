@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8"/>
-		<title>I-kyrgyz		</title>
+		<title>{{Config::get('app.network_name')}}</title>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="{{URL::to('css/bootstrap.css')}}">
 		<link rel="stylesheet" href="{{URL::to('css/login.css')}}">
@@ -22,7 +22,7 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <div class="login-form">
-                                <span class="login-span1">Кыргызская Социальная Сеть</span>
+                                <span class="login-span1">{{ trans('nation.'.Config::get('app.nation_name').'_adjective') }} Социальная Сеть</span>
                                 <span class="login-span2">ПРИСОЕДИНЯЙСЯ</span>
                                 <span class="login-span3">Авторизация</span>
                                 <div class="form-area">

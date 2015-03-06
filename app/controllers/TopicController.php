@@ -27,11 +27,11 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-            if(!Auth::user()->isHavePersonalBlog()){
-                Auth::user()->createPersonalBlog();
-            }
+      /*  if(!Auth::user()->isHavePersonalBlog()){
+            Auth::user()->createPersonalBlog();
+        }*/
 
-            return View::make('topic.create', array('canPublishBlogs' => $this->getCanPublishBlogsForView(),'type_list' => $this->getTopicTypesForView()));
+        return View::make('topic.create', array('canPublishBlogs' => $this->getCanPublishBlogsForView(),'type_list' => $this->getTopicTypesForView()));
 	}
         
         private function getCanPublishBlogsForView(){
@@ -59,19 +59,19 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
-                $blogIds = Auth::user()->canPublishBlogs()->lists('id');
-                $blogIdsRegex = implode(',', $blogIds);
+        $blogIds = Auth::user()->canPublishBlogs()->lists('id');
+        $blogIdsRegex = implode(',', $blogIds);
 		$rules = Topic::$rules;
-                $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
+        $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
 		$validator = Validator::make(Input::all(), $rules);
 
 		if($validator->fails()){
-                    return Redirect::back()->withErrors($validator);
-                }
-                $this->topic = $this->getTopic();
-                $this->publishTopic(false);
+            return Redirect::back()->withErrors($validator);
+        }
+        $this->topic = $this->getTopic();
+        $this->publishTopic(false);
 
-                return Redirect::to('topic/show/'.$this->topic->id);
+        return Redirect::to('topic/show/'.$this->topic->id);
 	}
         
     private function getTopic(){
@@ -94,14 +94,9 @@ class TopicController extends BaseController {
     
     private function createNewTopic(){
         $topic = new Topic();
-        $topic->type_id = Input::get('topic_type');
+        $topic->type_id = 1;
         $topic->user_id = Auth::user()->id;
         $topic->blog_id = $this->getBlogId();
-        if(Input::hasFile('photo')){
-            $new_name = str_random(15) . '.' . Input::file('photo')->getClientOriginalExtension();
-            Input::file('photo')->move('images/' . $topic->blog_id . '/' . $topic->id,  $new_name);
-            $topic->image_url = URL::to('/') .'/images/' . $topic->blog_id . '/' . $topic->id . '/'. $new_name;
-        }
         $topic->save();
         return $topic;
     }
@@ -137,11 +132,13 @@ class TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-        $topic = Topic::findOrFail($id)->with('blog')->get()[0];
-        $creator = User::findOrFail($topic->user_id)->with('description')->get()[0];
+        $topic = Topic::findOrFail($id);
+        $blog = Blog::findOrFail($topic->blog_id);
+        $creator = User::findOrFail($topic->user_id);
+        $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
         $topic->increment('count_read');
 
-        return View::make('topic.show', compact('topic', 'creator'));
+        return View::make('topic.show', compact('topic', 'creator', 'blog'));
 	}
 
 
@@ -224,9 +221,10 @@ class TopicController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function delete($id)
 	{
-		//
+		Topic::findOrFail($id)->delete();
+        return Redirect::to('/');
 	}
 
 	public function uploadImage() {
@@ -265,8 +263,13 @@ class TopicController extends BaseController {
         $this->topic->description = Input::get('description');
         $this->topic->blog_id = $blogId;
         $this->topic->user_id = Auth::user()->id;
-        $this->topic->type_id = Input::get('topic_type');
+        $this->topic->type_id = 1;
         $this->topic->draft = $isDraft;
+        if (Input::hasFile('avatar')) {
+            $new_name = str_random(15) . '.' . Input::file('avatar')->getClientOriginalExtension();
+            Input::file('avatar')->move('images/' . $this->topic->blog_id . '/' . $this->topic->id, $new_name);
+            $this->topic->image_url = URL::to('/') . '/images/' . $this->topic->blog_id . '/' . $this->topic->id . '/' . $new_name;
+        }
         $this->topic->save();
 
         $this->syncTopicTags(Input::get('tags'));

@@ -223,7 +223,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 Blog::create(array(
                     'user_id' => $this->id,
                     'type_id' => Config::get('blog.blogType.personal'),
-                    'title' => 'Блог им. ' . $this->first_name,
+                    'title' => 'Блог пользователя' . $this->id,
                     'description' => 'Это ваш персональный блог.'
                 ));
             }

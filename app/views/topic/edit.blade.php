@@ -25,14 +25,17 @@
                     <div class="b-topic-create-modal-content__item">
                         {{ Form::select('blog_id', $canPublishBlogs, $topic->blog_id, array('class' => 'choose-blog input-default sync-input')) }}
                     </div>
-                    <div class="b-topic-create-modal-content__item">
+                   <!-- <div class="b-topic-create-modal-content__item">
                         {{ Form::select('topic_type', $type_list, $topic->type_id, array('class' => 'choose-blog input-default sync-input')) }}
-                    </div>
+                    </div> -->
                     <div class="b-topic-create-modal-content__item">
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input">{{$topic->description}}</textarea>
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                        <input type="file" name="photo" multiple>
+                        <input type="file" name="avatar">
+                        @if($topic->image_url)
+                            <br><br>{{HTML::image(asset($topic->image_url))}}<br><br>
+                        @endif
                           <div class="b-topic-create-modal-content__btns">
                             <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>
                             <input type="submit" value="Препросмотр" class="btn btn-preview input-default"/>

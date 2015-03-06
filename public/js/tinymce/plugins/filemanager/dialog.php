@@ -28,7 +28,7 @@ if(isset($_GET['subfolder']) && !empty($_GET['subfolder'])) {
     if($_GET['subfolder'] != "undefined") $subfolder = $_GET['subfolder'];
     $cur_dir = $upload_dir . $subfolder . '/' . $subdir;
     $cur_path = $current_path . $subfolder . $subdir;
-    $thumbs_path = 'thumbs/' . $subfolder . '\\';
+    $thumbs_path = 'thumbs/' . $subfolder . '/';
     if (!is_dir($cur_path)) {
             mkdir($cur_path);
     }

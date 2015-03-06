@@ -11,4 +11,12 @@ class ProfileItem extends \Eloquent {
         public function phones(){
             
         }
+        
+        public static function getForView($subtype){
+            $profileItems = array();//'' => 'Выбрать');
+            foreach(ProfileItem::where('subtype', $subtype)->select('value')->distinct()->lists('value') as $item){
+                $profileItems[$item] = $item;
+            }
+            return $profileItems;
+        }
 }

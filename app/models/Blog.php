@@ -164,4 +164,12 @@ Class Blog extends Eloquent{
                             ->get(array('user_id'))->toArray();
             return User::whereIn('id', $userIds)->get();
         }
+        
+        public static function getPersonalBlog($userId){
+            return Blog::join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                        ->where('blog_types.name', 'personal')
+                        ->where('blogs.user_id', $userId)
+                        ->select('blogs.*')
+                        ->first();
+        }
 }

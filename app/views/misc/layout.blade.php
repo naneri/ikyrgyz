@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
-    <title>I-kyrgyz		</title>
+    <title>{{Config::get('app.network_name')}}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}"/>

@@ -83,6 +83,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::group(array('before' => 'topic_edit_permission'), function(){
             Route::get('topic/edit/{id}', 'TopicController@getEdit');
             Route::post('topic/edit/{id}', 'TopicController@postEdit');
+            Route::get('topic/delete/{id}', 'TopicController@delete');
         });
     Route::post('topic/update', 'TopicController@update');
     Route::post('topic/store', 'TopicController@store');
