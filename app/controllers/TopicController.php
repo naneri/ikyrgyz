@@ -97,11 +97,6 @@ class TopicController extends BaseController {
         $topic->type_id = 1;
         $topic->user_id = Auth::user()->id;
         $topic->blog_id = $this->getBlogId();
-        if(Input::hasFile('photo')){
-            $new_name = str_random(15) . '.' . Input::file('photo')->getClientOriginalExtension();
-            Input::file('photo')->move('images/' . $topic->blog_id . '/' . $topic->id,  $new_name);
-            $topic->image_url = URL::to('/') .'/images/' . $topic->blog_id . '/' . $topic->id . '/'. $new_name;
-        }
         $topic->save();
         return $topic;
     }
@@ -270,6 +265,11 @@ class TopicController extends BaseController {
         $this->topic->user_id = Auth::user()->id;
         $this->topic->type_id = 1;
         $this->topic->draft = $isDraft;
+        if (Input::hasFile('avatar')) {
+            $new_name = str_random(15) . '.' . Input::file('avatar')->getClientOriginalExtension();
+            Input::file('avatar')->move('images/' . $this->topic->blog_id . '/' . $this->topic->id, $new_name);
+            $this->topic->image_url = URL::to('/') . '/images/' . $this->topic->blog_id . '/' . $this->topic->id . '/' . $new_name;
+        }
         $this->topic->save();
 
         $this->syncTopicTags(Input::get('tags'));
