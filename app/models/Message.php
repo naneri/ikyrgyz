@@ -17,12 +17,20 @@ class Message extends Eloquent{
         return $this->belongsTo('User', 'receiver_id');
     }
 
-    // Отмечает сообщение как прочитанное
-    public function setWatched(){  
+    /**
+     * Отмечает сообщение как прочитанное
+     */
+    public function setWatched(){ 
+
          if($this->watched === 0){
             $this->watched = 1;
             $this->save();
+
+            Debugbar::info('попал в функцию Message.php - setWatched() - $this->watched === 0');
+            
+            return True;
          }
+         return False;
     }
         
     public static function inbox(){

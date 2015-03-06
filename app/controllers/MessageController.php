@@ -45,7 +45,9 @@ class MessageController extends BaseController{
 		if($message->receiver_id == Auth::id()){
 
             // отмечает сообщение прочитанным
-            $message->setWatched();
+            $result = $message->setWatched();
+            Debugbar::info('результат отметки $message->setWatched()');
+            Debugbar::info($result);
         }
 		return View::make('message.show', array('message' => $message));
 	}
