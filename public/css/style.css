@@ -1006,7 +1006,7 @@ Topic
 }
 
 .topic-preview-text {
-	margin: 0 10px 10px;
+	margin: 15px 25px 10px;
 	color: #3f4242;
 	font: 15px 'PT Sans Caption';
 	line-height: 23px;
@@ -1076,7 +1076,7 @@ Topic
 	border: 1px solid #dbdbdb;
 	height: 28px;
 	position: relative;
-	margin-left: 50px;
+	margin-left: 54px;
 }
 
 .b-topic-navigation-format__list .format-type {
