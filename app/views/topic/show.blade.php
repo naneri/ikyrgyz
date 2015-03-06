@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="b-wrapper">
+    <div class="b-wrapper" id="topic_{{$topic->id}}">
         <div class="b-page">
             <div class="b-content">
           <div class="b-profile-about">
@@ -118,8 +118,12 @@
                     <div class="clear"></div>
                   </ul>
                 </div>
-              </div> -->
-              <div class="b-profile-about__form">
+                </div> -->
+              <div class="comments" id="comments">
+                  @include('comments.build', array('topic' => $topic))
+                  @include('comments.scripts')
+              </div>
+              <!--div class="b-profile-about__form">
                 <div class="b-profile-about-form">
                   {{Form::open(array('url' =>  URL::to('topic/comment/add') ))}}
                     <div class="b-profile-about-form__item"><a href="">
@@ -143,7 +147,7 @@
                     </div>
                   {{Form::close()}}
                 </div>
-              </div>
+              </div-->
             </div>
           </div>
         </div>

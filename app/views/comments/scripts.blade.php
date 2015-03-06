@@ -16,38 +16,34 @@
                 });
             },
             addForm: function(commentId, topicId) {
+                var $commentAddForm = $('#add_comment_form');
                 var $commentBody = $('#topic_'+topicId+' #comment_body_' + commentId);
-                if($commentBody.children('.comment_add_form').length){
-                    comment.removeForm();
-                } else {
-                    comment.removeForm();
-                    var form = '<div class="comment_add_form" id="add_comment_'+commentId+'">'+
-                                    '<input type="hidden" class="topic_id" value="'+topicId+'">'+
-                                    '<textarea class="comment_text" /><br>'+
-                                    '<button type="button" class="btn btn-primary" onclick="comment.submit('+commentId+','+topicId+');">Добавить</button></div>';
-                    $commentBody.append(form);
-                    $('html, body').animate({
-                        scrollTop: parseInt($("#topic_" + topicId + " #add_comment_"+commentId).offset().top-100)
-                    }, 1000);
-                }
+                var onClickSubmit = "comment.submit(" + commentId + "," + topicId + ");";
+                $commentAddForm.find('#submit_btn').attr('onclick', onClickSubmit);
+                $commentAddForm.find('div.b-profile-about-form').attr('id', '#add_comment_'+commentId);
+                $commentAddForm.appendTo($commentBody);
+                $('html, body').animate({
+                    scrollTop: parseInt($commentAddForm.offset().top-100)
+                }, 1000);
             },
             removeForm: function(){
                 $('.comment_add_form').remove();
             },
             submit: function(commentId, topicId){
-                var $commentBody = $('#topic_'+topicId+' #comment_body_' + commentId);
+                var $commentBody = $('#add_comment_form');
                 $.ajax({
                     method: "POST",
                     url: "{{$base_config['base_url']}}/topic/comment/add",
                     data: {
-                        'text': $commentBody.find('.comment_text').val(),
+                        'text': $commentBody.find('#add_comment_text').val(),
                         'parent_id': commentId,
-                        'topic_id': $commentBody.find('.topic_id').val()
+                        'topic_id': topicId
                     },
                     success: function($result) {
                         if(!$result['error'] && $result['comment']){
                             comment.removeForm();
                             $('#topic_' + topicId + ' #comments_child_' + commentId).append($result.comment);
+                            comment.addForm(0, topicId);
                         }
                     }
                 });

@@ -215,18 +215,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return Blog::join('blog_types', 'blog_types.id','=','blogs.type_id')
                     ->where('blog_types.name', 'personal')
                     ->where('blogs.user_id', $this->id)
+                    ->select('blogs.*')
                     ->exists();
         }
 
         public function createPersonalBlog() {
-            if (!$this->isHavePersonalBlog()) {
+            return
                 Blog::create(array(
                     'user_id' => $this->id,
                     'type_id' => Config::get('blog.blogType.personal'),
-                    'title' => 'Блог им. ' . $this->description->first_name,
-                    'description' => 'Это ваш персональный блог.'
+                    'title' => 'Блог ' . $this->description->first_name,
+                    'description' => 'Это ваш персональный блог.',
+                    'avatar' => $this->avatar(),
                 ));
-            }
         }
         
         public function getPersonalBlog(){
