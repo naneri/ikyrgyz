@@ -433,10 +433,17 @@ body {
   float: left;
   margin: 0 15px 0 0;
 }
-.b-user-wall-header__image img {
+.b-user-wall-header__image img,
+img.blog-avatar{
   width: 45px;
   height: 45px;
   overflow: hidden;
+}
+.topic-preview-text {
+    margin: 0 10px 10px;
+}
+.topic-description {
+    color: #3f4242;
 }
 .b-user-wall-header__title {
   color: #333;

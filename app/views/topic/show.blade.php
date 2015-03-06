@@ -11,7 +11,7 @@
                 <div class="b-profile-about-title">
                   <p class="b-profile-about-title__title">{{$topic->title}}</p>
                   <div class="b-profile-about-title__right"><span class="date">{{$topic->created_at}}</span>
-                    @if($creator->id === $user_data->id)
+                    @if($topic->canEdit())
                       <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="Редактировать" class="btn-edit button-default"/></a>
                       <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="Удалить" class="btn-delete button-default"/></a>
                     @endif
@@ -45,7 +45,7 @@
                 </div>
               </div>
               <div class="b-profile-about__text">
-                <div class="b-profile-about-text">
+                <div class="b-profile-about-text topic-description">
                     @if(isset($topic->image_url))
                         <img src="{{$topic->image_url}}" alt="" class="b-profile-about-text__image"/>
                     @else
@@ -60,14 +60,15 @@
               
               <div class="b-profile-about__tags">
                 <div class="b-profile-about-tags">
-                  <p class="b-profile-about-tags__title">Теги: Тег номер один,  Тег номер два, Тег номер три, и так далее</p>
+                    <p class="b-profile-about-tags__title">Теги: {{$topic->tagsToString()}}</p>
                   <div class="b-profile-about-tags__user">
                     <div class="b-profile-about-tags-user">
-                      <div class="b-profile-about-tags-user__left"><span class="b-profile-about-tags-user__name">Блог</span><img src="{{ asset('img/48.png') }}" alt="" class="b-profile-about-tags-user__image"/>
+                      <div class="b-profile-about-tags-user__left"><span class="b-profile-about-tags-user__name">Блог</span><img src="{{ asset($blog->avatar) }}" alt="" class="b-profile-about-tags-user__image blog-avatar"/>
                         <p class="b-profile-about-tags-user__title">{{$blog->title}}</p>
                         <div class="b-profile-about-tags-user__buttons">
-                          <button class="btn-default btn-view">Просмотреть</button>
-                          <button class="btn-default btn-follow">Подписаться</button><span class="count-topic">999 топиков</span><span class="count-followers">57 подписчиков</span>
+                            <a href="{{URL::to('blog/show/'.$blog->id)}}"><button class="btn-default btn-view">Просмотреть</button></a>
+                            <a href="{{URL::to('blog/'.$blog->id.'/read')}}"><button class="btn-default btn-follow">Подписаться</button></a>
+                            <span class="count-topic">{{$blog->topics->count()}} топиков</span><span class="count-followers">{{$blog->getBlogUsers()->count()}} подписчиков</span>
                         </div>
                       </div>
                       <div class="b-profile-about-tags-user__right">
@@ -82,8 +83,8 @@
                             </ul>
                           </li>
                         </ul>
-                        <input type="submit" class="btn btn-minus"/>
-                        <input type="submit" class="btn btn-plus"/><span class="likes">+99</span>
+                          <input type="submit" class="btn btn-minus" onclick="return vote.topic({{$topic->id}},-1);"/>
+                          <input type="submit" class="btn btn-plus" onclick="return vote.topic({{$topic->id}},1);" /><span class="likes" id="rating_topic_{{$topic->id}}">{{round($topic->rating,2)}}</span>
                       </div>
                       <div class="clear"></div>
                     </div>

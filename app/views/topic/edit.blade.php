@@ -32,7 +32,10 @@
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input">{{$topic->description}}</textarea>
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                        <input type="file" name="photo" multiple>
+                        <input type="file" name="avatar">
+                        @if($topic->image_url)
+                            <br><br>{{HTML::image(asset($topic->image_url))}}<br><br>
+                        @endif
                           <div class="b-topic-create-modal-content__btns">
                             <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>
                             <input type="submit" value="Препросмотр" class="btn btn-preview input-default"/>
