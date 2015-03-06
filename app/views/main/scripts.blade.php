@@ -12,14 +12,14 @@
 			    	columnWidth: 490,
 			    	'gutter': 10
 		  		});
-		  	}, 100);
+		  	}, 200);
 
 		  	$(window).scroll(function() {
 			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
 			   		$.get(base_url + '/main/ajaxTopics/' + page, function(data){
 				   		var elements = $(data).find(".b-user-wall");
 				   		console.log('donwloaded elements' + page);
-				   		$container.append( elements ).masonry( 'appended', elements );
+				   		setTimeout($container.append( elements ).masonry( 'appended', elements ), 330);
 				   		elements = null;
 				   		console.log(elements);
 				   		page += 1;

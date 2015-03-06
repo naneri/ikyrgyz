@@ -14,3 +14,4 @@ app/public/images/user/*
 app/config/devzone51/*
 /nbproject/private/
 public/js/tinymce/plugins/filemanager/config.php
+node_modules/*

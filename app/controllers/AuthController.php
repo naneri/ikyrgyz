@@ -17,6 +17,8 @@ class AuthController extends BaseController {
      * Process the post login data
      */
     public function postLogin(){
+
+        //  запускаем валидацию
         $rules = array('email' => 'required', 'password' => 'required');
         $validator = Validator::make(Input::all(), $rules);
         
@@ -24,29 +26,33 @@ class AuthController extends BaseController {
             return Redirect::to('login')->withErrors($validator);
         }
         
+        // пробуем авторизовать пользователя
         $auth = Auth::attempt(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
         ), false);
         
+        // при неудачной авторизации отправляем на страницу логинка и выдаём ошибки
         if(!$auth){
             return Redirect::to('login')->withErrors(array(
                 'Invalid credentials provided'
             ));
         }
         
+        // Если пользователь не заполнил поля то отправляем его на страницу заполнения
         if(@Auth::user()->description->first_name == '' || @Auth::user()->description->gender == '' || @Auth::user()->description->liveplace_country_id == ''){
             return Redirect::to('profile/fill');
         }
         
-        return Redirect::intended();
+        // направляем пользователя по первоначальному маршруту, либо на главную
+        return Redirect::intended('/');
     }
     
 
     /**
      * Signs out the user
      */
-    public function Logout(){
+    public function logout(){
         Auth::logout();
         return Redirect::to('/');
     }
@@ -98,16 +104,22 @@ class AuthController extends BaseController {
             $description->user_id = $user->id;
             $description->save();
             
+            // создаём персональный блог пользователя
             $user->createPersonalBlog();
 
+            // отправляем пользователю почту с активацией
             Mail::send('emails.activate', array('user' => $user), function($message)
             {
                 $message->from('noreply@niamiko.com');
                 $message->to(Input::get('email'))->subject('Welcome!');
             });
+
+            // логиним пользователя и отправляем на заполнение профиля
+            Auth::login($user);
+            return Redirect::to('profile/fill');
         }
-        
-        return Redirect::to('profile/fill');
+
+        return Redirect::back();
     }
     
 

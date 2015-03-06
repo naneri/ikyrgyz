@@ -54,6 +54,10 @@ return array(
 
 	'locale' => 'ru',
 
+	'locales' => array(
+        'en', // English
+        'ru', // Spanish
+    ),
 	/*
 	|--------------------------------------------------------------------------
 	| Application Fallback Locale
