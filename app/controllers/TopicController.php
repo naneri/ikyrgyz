@@ -27,11 +27,11 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-            if(!Auth::user()->isHavePersonalBlog()){
-                Auth::user()->createPersonalBlog();
-            }
+      /*  if(!Auth::user()->isHavePersonalBlog()){
+            Auth::user()->createPersonalBlog();
+        }*/
 
-            return View::make('topic.create', array('canPublishBlogs' => $this->getCanPublishBlogsForView(),'type_list' => $this->getTopicTypesForView()));
+        return View::make('topic.create', array('canPublishBlogs' => $this->getCanPublishBlogsForView(),'type_list' => $this->getTopicTypesForView()));
 	}
         
         private function getCanPublishBlogsForView(){
