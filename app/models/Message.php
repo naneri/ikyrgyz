@@ -22,7 +22,9 @@ class Message extends Eloquent{
      */
     public function setWatched(){ 
 
-         if($this->watched === 0){
+        Debugbar::info('$this->watched = ' . $this->watched);
+        
+         if($this->watched == 0){
             $this->watched = 1;
             $this->save();
 
