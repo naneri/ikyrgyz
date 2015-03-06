@@ -52,7 +52,7 @@ class AuthController extends BaseController {
     /**
      * Signs out the user
      */
-    public function Logout(){
+    public function logout(){
         Auth::logout();
         return Redirect::to('/');
     }

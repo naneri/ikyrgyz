@@ -2,22 +2,12 @@
 
 class TopicController extends BaseController {
     
-        private $topic;
-        private $errors;
-        
-        function __construct() {
-            parent::__construct();
-        }
+    private $topic;
+    private $errors;
     
-       /**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
+    function __construct() {
+        parent::__construct();
+    }
 
 
 	/**
@@ -31,25 +21,30 @@ class TopicController extends BaseController {
             Auth::user()->createPersonalBlog();
         }*/
 
-        return View::make('topic.create', array('canPublishBlogs' => $this->getCanPublishBlogsForView(),'type_list' => $this->getTopicTypesForView()));
+    // Достаём список блогов в которые может постить пользователь
+    $canPublishBlogs = $this->getCanPublishBlogsForView();       
+    if(!$canPublishBlogs){
+        return Redirect::back()->with('message', 'Please create a blog first');
+    }
+    
+    return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView()));
 	}
         
-        private function getCanPublishBlogsForView(){
-            $canPublishBlogs = array(0 => 'Мой персональный блог');
-            foreach (Auth::user()->canPublishBlogs() as $blog) {
-                $canPublishBlogs[$blog->id] = $blog->title;
-            }
-            return $canPublishBlogs;
+    private function getCanPublishBlogsForView(){
+        foreach (Blog::canPublishBlogs() as $blog) {
+            $canPublishBlogs[$blog->id] = $blog->title;
         }
+        return $canPublishBlogs;
+    }
         
-        private function getTopicTypesForView(){
-            $topicType_list = TopicType::all();
-            $forView = array();
-            foreach ($topicType_list as $Type) {
-                $forView[$Type->id] = $Type->name;
-            }
-            return $forView;
+    private function getTopicTypesForView(){
+        $topicType_list = TopicType::all();
+        $forView = array();
+        foreach ($topicType_list as $Type) {
+            $forView[$Type->id] = $Type->name;
         }
+        return $forView;
+    }
 
 
 	/**

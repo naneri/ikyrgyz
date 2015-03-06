@@ -39,7 +39,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		 return $this->belongsTo('Blog');
 	}
-        
+
     public function photoAlbums(){
         return $this->hasMany('PhotoAlbum');
     }
@@ -220,12 +220,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
         public function createPersonalBlog() {
             if (!$this->isHavePersonalBlog()) {
-                Blog::create(array(
+                $blog = Blog::create(array(
                     'user_id' => $this->id,
                     'type_id' => Config::get('blog.blogType.personal'),
                     'title' => 'Блог пользователя' . $this->id,
                     'description' => 'Это ваш персональный блог.'
                 ));
+                if($blog){
+                    BlogRole::create(array(
+                        'blog_id' => $blog->id,
+                        'role_id' => 1,  // admin role hard_coded
+                        'user_id' => $blog->user_id
+                        ));
+                }
             }
         }
         

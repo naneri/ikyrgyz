@@ -21,7 +21,7 @@
             <a href=""><img src="{{$topic->image_url}}" alt=""></a>
           @endif
           <div class="topic-preview-text">
-            {{substr(strip_tags($topic->description), 0 ,200) }}
+            {{mb_substr(strip_tags($topic->description), 0 ,200, 'UTF-8') }}
           </div>
         </div>
         <div class="b-user-wall-footer">

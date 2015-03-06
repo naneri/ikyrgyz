@@ -19,7 +19,7 @@ Route::get('login/fb', 'AuthController@loginWithFacebook');
 Route::get('register', 'AuthController@getRegister');
 Route::post('register', 'AuthController@postRegister');
 Route::get('activate/{code}', 'AuthController@getActivate');
-
+Route::get( 'locale/{locale}', 'BaseController@setLocale' );
 
 Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index','MainController@index');
