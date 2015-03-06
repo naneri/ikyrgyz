@@ -12,7 +12,7 @@
                   @endif
                   <span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span></a>
                   <ul class="b-header-nav-dropdown">
-                    <li><a href="{{ URL::to('profile/edit/main') }}">Изменить профиль</a></li>
+                    <li><a href="{{ URL::to('profile/edit/main') }}">Мой профиль</a></li>
                     <li><a href="{{ URL::to('messages/inbox/all') }}">Личные сообщения</a></li>
                     <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
                     <!--<li><a href="{{ URL::to('group/create')  }}">Группы</a></li>-->
