@@ -20,10 +20,12 @@
           @if(isset($topic->image_url))
             <a href=""><img src="{{$topic->image_url}}" alt=""></a>
           @endif
-          {{substr(strip_tags($topic->description), 0 ,200) }}
+          <div class="topic-preview-text">
+            {{substr(strip_tags($topic->description), 0 ,200) }}
+          </div>
         </div>
         <div class="b-user-wall-footer">
-            <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" alt=""/></a></div>
+            <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" class="blog-avatar" alt=""/></a></div>
           <p class="b-user-wall-footer__title">{{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title, array('class' => 'b-user-wall-footer__title'))}}</p>
           <?php $blogTopicsCount = $topic->blog->topics->count(); ?>
           <p class="b-user-wall-footer__number">{{$blogTopicsCount}}

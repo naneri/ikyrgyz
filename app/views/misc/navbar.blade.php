@@ -43,9 +43,12 @@
                       <span class="counter">{{count($friend_requests)}}</span>
                       </a> 
                       <ul class="b-header-nav-dropdown">
-                        @foreach($friend_requests as $request)
-                          <li><img src="http://lorempixel.com/400/200/" alt="">
-                          <span>{{$request->first_name . ' ' . $request->last_name }}<br/>отправил вам сообщения</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $request->id }}" class="btn">Принять</a>  <a href="{{ URL::to('people/removeFriend'). '/' . $request->id }}" class="btn">Отклонить</a></li>
+                        @foreach($friend_requests as $friend)
+                          <li>
+                            @if(!empty($friend->user_profile_avatar))
+                              <img src="{{$friend->user_profile_avatar}}" alt="">
+                            @endif
+                          <span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>отправил вам сообщения</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">Принять</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">Отклонить</a></li>
                         @endforeach
                       </ul>  
                      
