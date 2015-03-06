@@ -476,11 +476,18 @@ body {
 	margin: 0 15px 0 0;
 }
 
-
 .b-user-wall-header__image img {
 	width: 45px;
 	height: 45px;
 	overflow: hidden;
+}
+
+.b-user-wall-header__image img.blog-avatar {
+	overflow: hidden;
+}
+
+.b-user-wall-header__image img.blog-avatar width 45px {
+	height: 45px;
 }
 
 .b-user-wall-header__title {
@@ -996,6 +1003,14 @@ Topic
 
 .b-topic-navigation-icons-list__list:nth-child(6) a {
 	background-position: 0 -166px;
+}
+
+.topic-preview-text {
+	margin: 0 10px 10px;
+}
+
+.topic-description {
+	color: #3f4242;
 }
 
 .b-topic-navigation__right {
