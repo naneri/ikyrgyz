@@ -25,33 +25,54 @@ class SearchController extends \BaseController {
         }
         
         private function getUsers(){
-            $where = "WHERE 1=1 ";
+            $where = "WHERE `users`.`id` != ".Auth::id()." ";
 
             if (Input::has('age-from')) {
                 $dateFrom = date((date('Y') - Input::get('age-from')) . '-m-d');
-                $where .= " AND `user_description`.`birthday` <= '$dateFrom' ";
+                $where .= " AND `user_description`.`birthday` <= '$dateFrom' "
+                        . " AND `user_description`.`birthday_access` = 'all' ";
             }
             if (Input::has('age-to')) {
                 $dateTo = date((date('Y') - Input::get('age-to') - 1) . '-m-d');
-                $where .= " AND `user_description`.`birthday` >= '$dateTo' ";
+                $where .= " AND `user_description`.`birthday` >= '$dateTo' "
+                    . " AND `user_description`.`birthday_access` = 'all' ";
+            }
+            if (Input::has('school')) {
+                $where .= " AND (`profile_items`.`subtype` = 'school' "
+                        . " AND `profile_items`.`value` like '%".Input::get('school')."%' "
+                        . " AND `profile_items`.`access` = 'all') ";
+            }
+            if (Input::has('university')) {
+                $where .= " AND (`profile_items`.`subtype` = 'university' "
+                        . " AND `profile_items`.`value` like '%" . Input::get('university') . "%' "
+                        . " AND `profile_items`.`access` = 'all') ";
+            }
+            if (Input::has('job')) {
+                $where .= " AND (`profile_items`.`subtype` = 'job' "
+                        . " AND `profile_items`.`value` like '%" . Input::get('job') . "%' "
+                        . " AND `profile_items`.`access` = 'all') ";
             }
             if (Input::has('gender') && Input::get('gender') != 'other') {
                 $gender = Input::get('gender');
                 if (in_array($gender, array('male', 'female'))) {
-                    $where .= " AND `user_description`.`gender` = '$gender' ";
+                    $where .= " AND `user_description`.`gender` = '$gender' "
+                    . " AND `user_description`.`gender_access` = 'all' ";
                 }
             }
             if (Input::has('search-text')) {
                 $searchText = Input::get('search-text');
-                $where .= " AND (`users`.`email` LIKE '%$searchText%' "
-                        . "OR `user_description`.`first_name` LIKE '%$searchText%' "
-                        . "OR `user_description`.`last_name` LIKE '%$searchText%') ";
+                $searchTextConcat = str_replace(' ', '',$searchText);
+                $where .= " AND (`user_description`.`first_name` LIKE '%$searchText%' "
+                        . "OR `user_description`.`last_name` LIKE '%$searchText%' "
+                        . "OR CONCAT(`last_name`, `first_name`) LIKE '%$searchTextConcat%' "
+                        . "OR CONCAT(`first_name`, `last_name`) LIKE '%$searchTextConcat%') ";
             }
 
             $users = DB::connection('mysql_users')
-                    ->select("select * "
+                    ->select("select distinct `users`.*, `user_description`.* "
                     . "from `users` "
                     . "inner join `user_description` on `user_description`.`user_id` = `users`.`id` "
+                    . "left outer join `profile_items` on `profile_items`.`user_id` = `users`.`id` "
                     . $where);
             
             return $users;

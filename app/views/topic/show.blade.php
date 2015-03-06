@@ -11,7 +11,7 @@
                 <div class="b-profile-about-title">
                   <p class="b-profile-about-title__title">{{$topic->title}}</p>
                   <div class="b-profile-about-title__right"><span class="date">{{$topic->created_at}}</span>
-                    @if($creator->id === $user_data->id)
+                    @if($topic->canEdit())
                       <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="Редактировать" class="btn-edit button-default"/></a>
                       <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="Удалить" class="btn-delete button-default"/></a>
                     @endif
