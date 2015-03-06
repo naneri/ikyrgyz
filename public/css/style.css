@@ -476,11 +476,18 @@ body {
 	margin: 0 15px 0 0;
 }
 
-
 .b-user-wall-header__image img {
 	width: 45px;
 	height: 45px;
 	overflow: hidden;
+}
+
+.b-user-wall-header__image img.blog-avatar {
+	overflow: hidden;
+}
+
+.b-user-wall-header__image img.blog-avatar width 45px {
+	height: 45px;
 }
 
 .b-user-wall-header__title {
@@ -998,6 +1005,15 @@ Topic
 	background-position: 0 -166px;
 }
 
+.topic-preview-text {
+	margin: 0 10px 10px;
+	color;
+}
+
+.topic-description {
+	color: #3f4242;
+}
+
 .b-topic-navigation__right {
 	float: right;
 	width: 22%;
@@ -1057,6 +1073,7 @@ Topic
 	border-radius: 3px;
 	border: 1px solid #dbdbdb;
 	height: 28px;
+	position: relative;
 }
 
 .b-topic-navigation-format__list .format-type {
@@ -1078,6 +1095,8 @@ Topic
 	border-top-right-radius: 3px;
 	border-bot-right-radius: 3px;
 	cursor: pointer;
+	position: absolute;
+	right: 0;
 }
 
 .b-topic-navigation-online-dropdown {
