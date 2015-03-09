@@ -7,19 +7,19 @@
 		$( function() {
 
 		  	var $container = $('.masonry');
-		  	setTimeout(function(){
-			  		$container.masonry({
+	  		$container.imagesLoaded(function(){
+	  			$container.masonry({
 			    	columnWidth: 495,
 			    	'gutter': 10
 		  		});	
-		  	}, 200);
+	  		});
 
 		  	$(window).scroll(function() {
 			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
 			   		$.get(base_url + '/main/ajaxTopics/' + page, function(data){
 				   		var elements = $(data).find(".b-user-wall");
 				   		console.log('donwloaded elements' + page);
-				   		setTimeout($container.append( elements ).masonry( 'appended', elements ), 330);
+				   		$container.append( elements ).masonry( 'appended', elements );
 				   		elements = null;
 				   		console.log(elements);
 				   		page += 1;
