@@ -1,0 +1,186 @@
+extends block/layout.jade
+block content
+	.b-wrapper
+		.b-page
+			include block/header
+			.b-content
+				.b-profile-about
+					.b-profile-about__inner
+						.b-profile-about__title
+							.b-profile-about-title
+								p.b-profile-about-title__title Вся соль народа в его остроумных пословицах
+								.b-profile-about-title__right
+									span.date 01 сентября 2015
+									input.btn-edit.button-default(type="submit" value="Редактировать") 
+									input.btn-delete.button-default(type="submit" value="Удалить")
+									img(src="img/22.png", alt="vision")
+									span.count 19
+									img(src="img/23.png", alt="vision")
+									span.count 34
+								.clear
+						.b-profile-about__profile
+							.b-profile-about-profile
+								span.author Автор
+								a(href="#")
+									img(src="img/48.png", alt="").b-profile-about-profile__image
+								p.b-profile-about-profile__name Ярослав Александрович Маркин
+								.b-profile-about-profile__buttons									
+									input.input-default.btn-profile(type="submit" value="Профиль")
+									input.input-default.btn-friend(type="submit" value="Дружить")
+									span.rating-text Рейтинг: 
+										span.rating-num +0.00
+								.clear
+						.b-profile-about__text
+							.b-profile-about-text
+								img(src="img/55.png", alt="").b-profile-about-text__image
+								p.b-profile-about-text__text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in nibh viverra, ultricies purus in, tempor elit. Phasellus efficitur tempus nunc vel sollicitudin. Donec elementum, ante ut maximus tincidunt, lacus tortor elementum ante, vitae aliquam nisl ipsum sed massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean eleifend turpis lectus. Curabitur vulputate risus ac urna fermentum, at accumsan enim pellentesque. Phasellus gravida sagittis est sed lacinia. Mauris ullamcorper nunc turpis, quis lacinia massa sagittis a. Praesent consequat lacus ligula, id tristique urna ullamcorper ac. Suspendisse ornare elit suscipit luctus posuere. Donec condimentum, dui eu aliquet tincidunt, risus risus commodo ipsum, sed accumsan felis mauris sit amet dolor. Proin ullamcorper magna arcu, placerat condimentum sem tincidunt sed. Nullam vel dui ac ligula consequat tincidunt. Nulla facilisi. Etiam non mauris ullamcorper, tristique eros sed, accumsan dolor. Sed eros odio, porttitor et varius ac, laoreet ornare lectus.
+									| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in nibh viverra, ultricies purus in, tempor elit. Phasellus efficitur tempus nunc vel sollicitudin. Donec elementum, ante ut maximus tincidunt, lacus tortor elementum ante, vitae aliquam nisl ipsum sed massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean eleifend turpis lectus. Curabitur vulputate risus ac urna fermentum, at accumsan enim pellentesque. Phasellus gravida sagittis est sed lacinia. Mauris ullamcorper nunc turpis, quis lacinia massa sagittis a. Praesent consequat lacus ligula, id tristique urna ullamcorper ac. Suspendisse ornare elit suscipit luctus posuere. Donec condimentum, dui eu aliquet tincidunt, risus risus commodo ipsum, sed accumsan felis mauris sit amet dolor. Proin ullamcorper magna arcu, placerat condimentum sem tincidunt sed. Nullam vel dui ac ligula consequat tincidunt. Nulla facilisi. Etiam non mauris ullamcorper, tristique eros sed, accumsan dolor. Sed eros odio, porttitor et varius ac, laoreet ornare lectus.
+								.clear
+						.b-profile-about__gallery
+							p.b-profile-about-gallery__title Имя прикрепленного фото альбома
+								input.input-default.btn-all(type="submit" value="Все")
+							ul.b-profile-about-gallery-list
+								-for (var x = 0; x < 10; x ++)
+									li.b-profile-about-gallery-list__list
+										.b-profile-about-gallery-list__image
+											a(href="")
+												img(src="img/56.png", alt="")
+
+								.clear
+							
+							button.btn-all.button-default Просмотреть все
+							.clear
+						.b-profile-about__player
+							.b-profile-about-player
+								.b-profile-about-player__title Имя прикрепленного музыкального альбома
+									input.input-default.btn-all(type="submit" value="Все")
+								.b-profile-about-player__player
+									ul.b-profile-about-player-list
+										li.b-profile-about-player-list__list
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+										li.b-profile-about-player-list__list
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+											.b-profile-about-player-list__item
+												.b-profile-about-player-list__wrapper
+													button#play
+													button.stop
+													span.song-name(song="zhu-faded.mp3" artist="linkin Park") Название музыкального трека
+									.b-profile-about-player-list__item
+										.b-profile-about-player-list__button
+											button.btn-all.button-default Просмотреть все	
+										.clear
+						.b-profile-about__tags
+							.b-profile-about-tags
+								p.b-profile-about-tags__title Теги: Тег номер один,  Тег номер два, Тег номер три, и так далее
+								.b-profile-about-tags__user
+									.b-profile-about-tags-user
+										.b-profile-about-tags-user__left
+											span.b-profile-about-tags-user__name Блог
+											img.b-profile-about-tags-user__image(src="img/48.png", alt="")
+											p.b-profile-about-tags-user__title Красота Кыргызского народа
+											.b-profile-about-tags-user__buttons
+												button.btn-default.btn-view Просмотреть
+												button.btn-default.btn-follow Подписаться
+												span.count-topic 999 топиков
+												span.count-followers 57 подписчиков
+										.b-profile-about-tags-user__right
+											ul.b-profile-about-tags-user-list.dropdown
+												li
+													a.share-btn.btn(href="")
+														
+													ul.b-profile-about-tags-user-list-dropdown.sub-dropdown
+														li
+															a(href="") Facebook
+														li
+															a(href="") Google+
+														li
+															a(href="") Twitter
+														li
+															a(href="") Мой мир
+														li
+															a(href="") В контакте
+
+											input.btn.btn-minus(type="submit")
+											input.btn.btn-plus(type="submit")
+											span.likes +99
+										.clear
+						.b-profile-about__topics
+							.b-profile-about-topics
+								p.b-profile-about-topics__title Новые топики в блоге
+								ul.b-profile-about-topics-list
+									-for(var x = 0; x < 5; x ++)
+										li.b-profile-about-topics-list__list
+											
+											p.b-profile-about-topics-list__text В верстке имени топика нужно учесть, что имя топика может состоять из длинного названия в 3 ряда
+											.b-profile-about-topics-list__image
+												a(href="")
+													img(src="img/59.png", alt="")
+									.clear
+
+						.b-profile-about__form
+							.b-profile-about-form
+								form(id="", method="", action="")
+									.b-profile-about-form__item
+										a(href="")
+											img.b-profile-about-form__image(src="img/48.png", alt="")
+										p.b-profile-about-form__title Ярослав Александрович Маркин
+										.clear
+									.b-profile-about-form__item
+										.b-profile-about-form__inner
+											textarea.add-comment(name="", cols="30", rows="10") Добавить комметарии
+											ul.b-profile-about-form-list
+												li.b-profile-about-form-list__list
+													a(href="#")
+												li.b-profile-about-form-list__list
+													a(href="#")
+												li.b-profile-about-form-list__list
+													a(href="#")
+												li.b-profile-about-form-list__list
+													a(href="#")
+												.clear
+									.b-profile-about-form__item
+										input.default-button.cancel-button(type="submit" value="Отмена")
+										input.default-button.submit-button(type="submit" value="Опубликовать")

@@ -1,0 +1,197 @@
+extends block/layout.jade
+block content
+	.b-wrapper
+		.b-page
+			include block/header
+			.b-content
+				.b-user-profile
+					.b-user-profile__left
+						a.user-image(href="")
+							img(src="img/12.png", alt="")
+						p.user-link-photo
+							a(href="#") Загрузить фото
+
+					.b-user-profile__middle
+						p.user-raiting Рейтинг
+							span.num +0.00
+						p.user-name Ярослав Александрович </br>Маркин
+						p.user-date 10 декабря 1990
+
+					.b-user-profile__right
+						.b-user-profile-link
+							a.b-user-profile-link__create(href="#") Создать
+						ul.b-user-profile-links
+							li.b-user-profile-links__list
+								a(href="#")
+							li.b-user-profile-links__list
+								a(href="#")
+							li.b-user-profile-links__list
+								a(href="#")
+							li.b-user-profile-links__list
+								a(href="#")
+							li.b-user-profile-links__list
+								a(href="#")
+							li.b-user-profile-links__list
+								a(href="#")
+							li.b-user-profile-links__list
+								a(href="#")
+							.clear
+						ul.b-user-profile-buttons
+							li.b-user-profile-buttons__list
+								a(href="#") Отравить сообщение
+									span.msg-image
+							li.b-user-profile-buttons__list
+								a(href="#") Поиск друзей
+									span.search-image
+							li.b-user-profile-buttons__list
+								a(href="#") Системные сообщения
+									span.system-image
+							li.b-user-profile-buttons__list
+								a(href="#") Случайный профиль
+									span.random-image
+					.clear
+				.b-user-navigation
+					ul.b-user-navigation-list
+						li.b-user-navigation-list__list
+							a(href="#") Лента
+						li.b-user-navigation-list__list
+							a(href="#") Публикации
+							span 999
+						li.b-user-navigation-list__list
+							a(href="#") Друзья
+							span 999
+						li.b-user-navigation-list__list
+							a(href="#") Избранное
+
+						a.b-user-navigation-list__setting(href="#") Настройки
+							
+						.clear
+				
+				.b-section-wrapper
+					.b-user-wall
+						.b-user-wall__inner
+							.b-user-wall-header
+								.b-user-wall-header__image
+									a(href="")
+										img(src="img/48.png", alt="")
+								p.b-user-wall-header__title Бурана
+								p.b-user-wall-header__date 17 июня 2014, 12:53
+										.clear
+								p.b-user-wall-header__vision
+									img(src="img/22.png", alt="")
+									span 19
+									img(src="img/23.png", alt="")
+									span 34
+							.b-user-wall-image
+								a(href="")
+									img(src="img/21.png", alt="")
+							.b-user-wall-footer
+								.b-user-wall-footer__image
+									a(href="")
+										img(src="img/40.png", alt="")
+								p.b-user-wall-footer__title Красота Кыргызского народа
+								p.b-user-wall-footer__number 31 топик
+										.clear
+								.b-user-wall-footer__btn
+									a.about-btn.btn(href="") Подробнее
+									ul.b-user-wall-footer-list
+										li
+											a.share-btn.btn(href="") Поделиться
+											ul.b-user-wall-footer-dropdown
+												li
+													a(href="") Facebook
+												li
+													a(href="") Google+
+												li
+													a(href="") Twitter
+												li
+													a(href="") Мой мир
+												li
+													a(href="") В контакте
+									input.btn.btn-minus(type="submit")
+									input.btn.btn-plus(type="submit")
+									span.likes +99
+					
+					.b-user-media
+						.b-user-media__video
+							.b-user-media-video-top
+								p.b-user-media-video-top__title dd
+								.b-user-media-video-top__btn
+									input.btn.btn-all(type='submit', value='Все')
+							ul.b-user-media-video-gallery
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								.clear
+						.b-user-media__photo
+							.b-user-media-video-top
+								p.b-user-media-video-top__title dd
+								.b-user-media-video-top__btn
+									input.btn.btn-all(type='submit', value='Все')
+							ul.b-user-media-video-gallery
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								.clear
+						.b-user-media__music
+							.b-user-media-video-top
+								p.b-user-media-video-top__title dd
+								.b-user-media-video-top__btn
+									input.btn.btn-all(type='submit', value='Все')
+							ul.b-user-media-video-gallery
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								li.b-user-media-video-gallery__list
+									a(href='')
+										img(src='img/19.png', alt='')
+								.clear
+					
+					
+
+				
+
+
+	

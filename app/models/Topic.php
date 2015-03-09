@@ -22,6 +22,37 @@ class Topic extends Eloquent {
                       ->offset($offset)
         				->get(['topics.*']);*/
         }
+        
+        static function getTopicsByDate($offset = 0){
+            $topicLimit = Config::get('topic.topics_per_page');
+            $topics = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                    ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                    ->where('topics.draft', '=', '0')
+                    ->whereIn('blog_types.name', array('personal', 'open'))
+                    ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'))
+                    ->skip($offset*$topicLimit)
+                    ->take($topicLimit)
+                    ->orderBy('topics.created_at', 'DESC')
+                    ->select('topics.*')
+                    ->get();
+            return $topics;
+        }
+        
+        static function getTopicsByRating($offset = 0){
+            $topicLimit = Config::get('topic.topics_per_page');
+            $topics = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                    ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                    ->where('topics.draft', '=', '0')
+                    ->whereIn('blog_types.name', array('personal', 'open'))
+                    ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'))
+                    ->skip($offset * $topicLimit)
+                    ->take($topicLimit)
+                    ->orderBy('topics.rating', 'DESC')
+                    ->orderBy('topics.created_at', 'DESC')
+                    ->select('topics.*')
+                    ->get();
+            return $topics;
+        }
 
         public function tags() {
             return $this->belongsToMany('Tag');

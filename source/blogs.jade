@@ -1,0 +1,178 @@
+extends block/layout.jade
+block content
+	.b-wrapper
+		.b-page
+			include block/header
+			.b-content
+				.b-topic-navigation
+					.b-topic-navigation__inner
+						.b-topic-navigation__create
+							ul.b-topic-navigation-list
+								li
+									a(href="#").b-topic-navigation__item Создать
+									ul.b-topic-navigation-create.b-topic-navigation-create-dropdown
+										li.b-topic-navigation-create__list
+
+											a(href="form.html") Топик
+											
+												
+										li.b-topic-navigation-create__list
+											a(href="blog.html") Блог
+												
+										li.b-topic-navigation-create__list
+											a(href="#") Черновики
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Ссылка
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Фото альбом
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Опрос
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Событие
+									
+
+						
+
+						.b-topic-navigation__middle
+							ul
+								li.b-topic-navigation-item__item
+									img(src="img/33.png", alt="")
+									span 19
+								li.b-topic-navigation-item__item
+									img(src="img/41.png", alt="")
+									span 19
+								li.b-topic-navigation-item__item
+									img(src="img/34.png", alt="")
+									span 19
+								li.b-topic-navigation-item__item
+									a.icon-image(href="")
+										img(src="img/35.png", alt="")
+									ul.b-topic-navigation-icons-list.b-topic-navigation-icons-dropdown
+										li.b-topic-navigation-icons-list__list.b-topic-navigation-icons-list__list-padding
+											a(href="") Видео
+
+										li.b-topic-navigation-icons-list__list
+											a(href="") Фотоальбомы
+										li.b-topic-navigation-icons-list__list
+											a(href="") Музыка
+										li.b-topic-navigation-icons-list__list
+											a(href="") Ссылки
+										li.b-topic-navigation-icons-list__list
+											a(href="") Опросы
+										li.b-topic-navigation-icons-list__list
+											a(href="") События
+
+						.b-topic-navigation__right
+							ul.b-topic-navigation-format
+								li.b-topic-navigation-format__list
+									a.format-icon(href="#")
+										img(src="img/42.png", alt="")
+									ul.b-topic-navigation-format-dropdown
+										li
+											a(href="")
+												img(src="img/44.png", alt="")
+										li
+											a(href="")
+												img(src="img/45.png", alt="")
+										li
+											a(href="")
+												img(src="img/46.png", alt="")
+								li.b-topic-navigation-format__list
+									a.format-icon(href="")
+										img(src="img/37.png", alt="")
+										span 11
+									ul.b-topic-navigation-online-dropdown
+										li
+											- for(var x = 0; x <7; x++)
+												a(href="")
+													span Фамилия Имя Отчество
+													img(src="img/47.png", alt="")
+								li.b-topic-navigation-format__list
+									.buttons-wrapper
+										form(id="", method="", action="")
+											input.format-type.btn(type="text")
+											input.format-submit(type="submit")
+												
+										
+						.clear
+				.b-user-blog
+					.b-user-blog__inner
+						.b-user-blog-header
+							.b-user-blog-header__top
+								p.b-user-blog-header__title Название блога
+								.b-user-blog-header__vision
+									img(src="img/62.png", alt="vision")
+									span 99
+									img(src="img/63.png", alt="vision")
+									span 34
+								
+							.b-user-blog-header__bot
+								p.b-user-blog-header__date Дата создания
+								p.b-user-blog-header__tags Бурана, Кыргызстан, Древняя архитектура, Моя родина
+						.b-user-blog-image
+							a(href="#")
+								img(src="img/21.png", alt="blog-image")
+						.b-user-blog-footer
+							.b-user-blog-footer__btn
+								a.about-btn.btn(href="") Подробнее
+								input.button-default.btn-follow(type="submit" value="Подписаться")							
+								ul.b-user-wall-footer-list
+									li
+										a.share-btn.btn(href="") Поделиться
+										ul.b-user-wall-footer-dropdown
+											li
+												a(href="") Facebook
+											li
+												a(href="") Google+
+											li
+												a(href="") Twitter
+											li
+												a(href="") Мой мир
+											li
+												a(href="") В контакте
+								input.btn.btn-minus(type="submit")
+								input.btn.btn-plus(type="submit")
+								span.likes +99
+				.b-user-blog.b-user-blog-right
+					.b-user-blog__inner
+						.b-user-blog-header
+							.b-user-blog-header__top
+								p.b-user-blog-header__title Название блога
+								.b-user-blog-header__vision
+									img(src="img/62.png", alt="vision")
+									span 99
+									img(src="img/63.png", alt="vision")
+									span 34
+								
+							.b-user-blog-header__bot
+								p.b-user-blog-header__date Дата создания
+								p.b-user-blog-header__tags Бурана, Кыргызстан, Древняя архитектура, Моя родина
+						.b-user-blog-image
+							a(href="#")
+								img(src="img/21.png", alt="blog-image")
+						.b-user-blog-footer
+							.b-user-blog-footer__btn
+								a.about-btn.btn(href="") Подробнее
+								input.button-default.btn-follow(type="submit" value="Подписаться")							
+								ul.b-user-wall-footer-list
+									li
+										a.share-btn.btn(href="") Поделиться
+										ul.b-user-wall-footer-dropdown
+											li
+												a(href="") Facebook
+											li
+												a(href="") Google+
+											li
+												a(href="") Twitter
+											li
+												a(href="") Мой мир
+											li
+												a(href="") В контакте
+								input.btn.btn-minus(type="submit")
+								input.btn.btn-plus(type="submit")
+								span.likes +99				
+

@@ -23,7 +23,9 @@ Route::get( 'locale/{locale}', 'BaseController@setLocale' );
 
 Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index','MainController@index');
-	Route::get('main/ajaxTopics/{page}','MainController@ajaxTopics');
+    Route::get('main/index/new', 'MainController@newTopics');
+    Route::get('main/index/top', 'MainController@topTopics');
+    Route::get('main/ajaxTopics/{sort}/{page}','MainController@ajaxTopics');
         Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');

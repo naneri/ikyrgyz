@@ -1,0 +1,117 @@
+extends block/layout.jade
+block content
+	.b-wrapper
+		.b-page
+			include block/header
+			.b-content
+				.b-topic-create-modal
+					.b-topic-create-modal__inner
+						.b-topic-create-modal__title Создать топик
+							button.btn-close
+						.b-topic-create-modal__content
+							.b-topic-create-modal-content
+								form(id="", method="", action="")
+									.b-topic-create-modal-content__item
+										input.input-default.add-name(type="text" value="Введите название")
+										a.draft(href="") Черновики 
+											span 999
+									.b-topic-create-modal-content__item
+										select.choose-blog.input-default
+
+											option Выберете блог
+										
+									.b-topic-create-modal-content__item
+										textarea.input-default.textarea-topic(name="", cols="30", rows="10")
+									.b-topic-create-modal-content__item
+										input.tags.input-default(type="text" value="Тэги")
+										a.input-default.add-gallery-btn(href="#") Добавить галерею
+										.b-topic-create__gallery
+											.b-topic-create-gallery
+												.b-topic-create-gallery__title Добавить галлерею
+												.b-topic-create-gallery-content
+													form(id="", method="", action="")
+														.b-topic-create-gallery-content__item
+															input.input-default.search-by-name(type="text" value="Поиск по названию")
+															input.input-default.btn-search(type="submit")
+															input.input-default.btn-cancel(type="submit")
+															select.input-default.sort-select(name="")
+																option(value="") Сортировка
+														.b-topic-create-gallery-content__item
+															.b-topic-create-gallery-content-table
+																.b-topic-create-gallery-content-table__title
+																	span.skin Обложка
+																	span.photo-name  Название фотогаллерии
+																	span.access Доступ
+														
+															.b-topic-create-gallery-content-table.gallery-wrapper
+																- for(var x=0; x<7; x++)
+																	.b-topic-create-gallery-content-table__item
+																		img.skin(src="img/52.png", alt="")
+																		span.photo-name  Название фотогаллерии
+																		span.access Доступ
+
+														.b-topic-create-gallery-content__item
+															.b-topic-create-gallery-content-btns
+																input.input-default(type="submit" value="отмена")
+																input.input-default(type="submit" value="добавить")
+
+																
+	
+
+
+
+												
+										a.input-default.add-music-btn(href="#") Добавить музыку
+										.b-topic-create__music
+											.b-topic-create-music
+												.b-topic-create-music__title Добавить музыкальный альбом
+												.b-topic-create-music-content
+													form(id="", method="", action="")
+														.b-topic-create-music-content__item
+															input.input-default.search-by-name(type="text" value="Поиск по названию")
+															input.input-default.btn-search(type="submit")
+															input.input-default.btn-cancel(type="submit")
+															select.input-default.sort-select(name="")
+																option(value="") Сортировка
+														.b-topic-create-music-content__item
+															.b-topic-create-music-content-table
+																.b-topic-create-music-content-table__title
+																	span.skin Обложка
+																	span.photo-name  Название музыкального альбома
+																	span.access Доступ
+														
+															.b-topic-create-music-content-table.music-wrapper
+																- for(var x=0; x<7; x++)
+																	.b-topic-create-music-content-table__item
+																		img.skin(src="img/52.png", alt="")
+																		span.photo-name  Название музыкального альбома
+																		span.access Доступ
+														.b-topic-create-music-content__item
+															.b-topic-create-music-content-btns
+																input.input-default(type="submit" value="отмена")
+																input.input-default(type="submit" value="добавить")
+									.b-topic-create-modal-content__item
+										span.change-skin-title Изображение топика
+										a.input-default.change-skin(href="#") Добавить
+										.b-topic-create__skin
+											.b-topic-create-skin
+												.b-topic-create-skin__title Добавить изображение топика
+												.b-topic-create-skin__content
+													.b-topic-create-skin-content
+														form(id="", method="", action="")
+															.b-topic-create-skin-content-wrapper
+																.b-topic-create-skin-content__item
+																	input.jq-file__name.input-default.input.pc-input(type="file" placeholder="Выбрать файла")
+																.b-topic-create-skin-content__item
+																	input.jq-file__name.input-default.it-input(type="file" placeholder="Ссылка")
+															.b-topic-create-skin-content__item
+																.b-topic-create-skin-content-buttons
+																	input.input-default(type="submit" value="Отмена")
+																	input.input-default(type="submit" value="Добавить")
+										.b-topic-create-modal-content__btns
+											input.btn.btn-cancel.input-default(type="submit" value="Отмена")
+											input.btn.btn-preview.input-default(type="submit" value="Препросмотр")
+											input.btn.btn-submit.input-default(type="submit" value="Опубликовать")
+										.clear
+				
+					

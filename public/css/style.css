@@ -2700,13 +2700,10 @@ interface
 
 .b-user-interface-tab__left {
 	float: left;
+	display: inline-block;
 }
 
 .b-user-interface-tab__right {
-	float: right;
-}
-
-.b-user-interface-tab__search {
 	float: right;
 	display: inline-block;
 }

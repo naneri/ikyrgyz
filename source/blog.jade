@@ -1,0 +1,43 @@
+extends block/layout.jade
+block content
+	.b-wrapper
+		.b-page
+			include block/header
+			.b-content
+				.b-blog-create-modal
+					.b-blog-create-modal__inner
+						.b-blog-create-modal__title Создать блог
+							button.btn-close
+						.b-blog-create-modal__content
+							.b-blog-create-modal-content
+								form(id="", method="", action="")
+									.b-blog-create-modal-content__item
+										input.input-default.name-blog(type="text" value="Введите название блога")
+									.b-blog-create-modal-content__item
+										select.input-default.select-blog
+											option(value="") Доступ к блогу	
+										span.change-skin-title Изображение блога
+										a.input-default.change-skin(href="#") Добавить
+										.b-topic-create__skin
+											.b-topic-create-skin
+												.b-topic-create-skin__title Добавить изображение блога
+												.b-topic-create-skin__content
+													.b-topic-create-skin-content
+														form(id="", method="", action="")
+															.b-topic-create-skin-content-wrapper
+																.b-topic-create-skin-content__item
+																	input.jq-file__name.input-default.input.pc-input(type="file" placeholder="Выбрать файла")
+																.b-topic-create-skin-content__item
+																	input.jq-file__name.input-default.it-input(type="file" placeholder="Ссылка")
+															.b-topic-create-skin-content__item
+																.b-topic-create-skin-content-buttons
+																	input.input-default(type="submit" value="Отмена")
+																	input.input-default(type="submit" value="Добавить")
+									.b-blog-create-modal-content__item
+										textarea.textarea-blog.input-default(name="", cols="30", rows="10" ) Описание блога
+									.b-blog-create-modal-content__item
+										input.input-tag.input-default(type="text" value="Тэги")
+										.button-group
+											input.btn-cancel.input-default(type="submit" value="Отмена")
+											input.btn-submit.input-default(type="submit" value="Опубликовать")
+
