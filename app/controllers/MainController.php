@@ -23,11 +23,34 @@ class MainController extends BaseController {
 		return View::make('main.index', array('topics' => $topics));
 	}
 
-	public function ajaxTopics($page = 0){
-		$offset = $page; // с какого начинать просмотр
-        $rating = Config::get('topic.index_good_topic_rating');
-		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
-		return View::make('topic.build', array('topics' => $topics));
+	public function ajaxTopics($sort, $page = 0){
+            $rating = Config::get('topic.index_good_topic_rating');
+            $offset = $page; // с какого начинать просмотр
+            $topics = array();
+            switch ($sort){
+                case 'good':
+                    $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
+                    break;
+                case 'new':
+                    $topics = Topic::getTopicsByDate($offset);
+                    break;
+                case 'top':
+                    $topics = Topic::getTopicsByRating($offset);
+                    break;
+                default:
+                    $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
+            }
+            return View::make('topic.build', array('topics' => $topics));
 	}
+        
+        public function newTopics(){
+            $topics = Topic::getTopicsByDate();
+            return View::make('main.index', array('topics' => $topics));
+        }
+
+        public function topTopics() {
+            $topics = Topic::getTopicsByRating();
+            return View::make('main.index', array('topics' => $topics));
+        }
 
 }

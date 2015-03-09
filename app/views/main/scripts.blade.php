@@ -13,10 +13,15 @@
 			    	'gutter': 10
 		  		});	
 	  		});
+                        
+                        var inProgress = false;
 
 		  	$(window).scroll(function() {
-			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-			   		$.get(base_url + '/main/ajaxTopics/' + page, function(data){
+			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100 && !inProgress) {
+                                        inProgress = true;
+                                        var array = document.URL.split('/');
+                                        var sort = (array[array.length - 1].length > 1) ? array[array.length - 1] : array[array.length - 2];
+			   		$.get(base_url + '/main/ajaxTopics/' + sort + '/' + page, function(data){
 
 			   			// находим все блоки с классом .b-user-wall и добавляем в массив elements
 			   			var elements = $(data).find(".b-user-wall");
@@ -35,6 +40,7 @@
 
 				   		// увеличиваем страничку на одну
 				   		page += 1;
+                                                inProgress = false;
 			   		});
 			   }
 			});

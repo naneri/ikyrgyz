@@ -33,9 +33,9 @@
               </div>
               <div class="b-topic-navigation__middle">
                 <ul>
-                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/33.png') }}" alt=""/><span style="opacity:0">19</span></li>
+                    <li class="b-topic-navigation-item__item"><a href="{{URL::to('main/index/new')}}"><img src="{{ asset('img/33.png') }}" alt=""/><span style="opacity:0">19</span></a></li>
                   <li class="b-topic-navigation-item__item"><img src="{{ asset('img/41.png') }}" alt=""/><span style="opacity:0">19</span></li>
-                  <li class="b-topic-navigation-item__item"><img src="{{ asset('img/34.png') }}" alt=""/><span style="opacity:0">19</span></li>
+                  <li class="b-topic-navigation-item__item"><a href="{{URL::to('main/index/top')}}"><img src="{{ asset('img/34.png') }}" alt=""/><span style="opacity:0">19</span></a></li>
                   <!--
                   <li class="b-topic-navigation-item__item"><a href="" class="icon-image"><img src="{{ asset('img/35.png') }}" alt=""/></a>
                     <ul class="b-topic-navigation-icons-list b-topic-navigation-icons-dropdown">

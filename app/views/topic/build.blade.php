@@ -6,7 +6,7 @@
     <div class="b-user-wall">
       <div class="b-user-wall__inner">
         <div class="b-user-wall-header">
-          <div class="b-user-wall-header__image"><a href=""><img src="{{ $topic->user->description->user_profile_avatar or ''}}" alt=""/></a></div>
+          <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->description->user_profile_avatar or ''}}" alt=""/></a></div>
           <p class="b-user-wall-header__title">{{$topic->title}}</p>
           <p class="b-user-wall-header__date">{{$topic->created_at}}
             <div class="clear"></div>
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="b-user-wall-footer">
-            <div class="b-user-wall-footer__image"><a href=""><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" class="blog-avatar" alt=""/></a></div>
+            <div class="b-user-wall-footer__image b-user-wall-header__image"><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" class="blog-avatar" alt=""/></div>
           <p class="b-user-wall-footer__title">{{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title, array('class' => 'b-user-wall-footer__title'))}}</p>
           <?php $blogTopicsCount = $topic->blog->topics->count(); ?>
           <p class="b-user-wall-footer__number">{{$blogTopicsCount}}
