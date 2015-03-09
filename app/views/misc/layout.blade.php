@@ -11,6 +11,9 @@
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
     <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.formstyler.js') }}"></script>
+    <script src="{{ asset('js/jquery.formstyler.js') }}"></script>
+    <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
     
   </head>
   <body>
