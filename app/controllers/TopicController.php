@@ -58,37 +58,27 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
-        $blogIds = Auth::user()->canPublishBlogs()->lists('id');
-        $blogIdsRegex = implode(',', $blogIds);
-		$rules = Topic::$rules;
-        $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
-		$validator = Validator::make(Input::all(), $rules);
+            $blogIds = Auth::user()->canPublishBlogs()->lists('id');
+            $blogIdsRegex = implode(',', $blogIds);
+            $rules = Topic::$rules;
+            $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
+            $validator = Validator::make(Input::all(), $rules);
 
-		if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }
-        $this->topic = $this->getTopic();
-        $this->publishTopic(false);
+            if($validator->fails()){
+                return Redirect::back()->withErrors($validator);
+            }
+            $this->topic = $this->getTopic();
+            $this->publishTopic(false);
 
-        return Redirect::to('topic/show/'.$this->topic->id);
+            return Redirect::to('topic/show/'.$this->topic->id);
 	}
         
     private function getTopic(){
-        $topic = Topic::find($this->getTopicId());
-        while(!$topic || !$topic->canEdit()){
+        $topic = Topic::find(Input::get('topic_id'));
+        if(!$topic || !$topic->canEdit()){
             $topic = $this->createNewTopic();
         }
         return $topic;
-    }
-    
-    private function getTopicId(){
-        $topicId = null;
-        if (!Input::has('topic_id')) {
-            $topicId = $this->createNewTopic()->id;
-        } else {
-            $topicId = Input::get('topic_id');
-        }
-        return $topicId;
     }
     
     private function createNewTopic(){
@@ -248,7 +238,7 @@ class TopicController extends BaseController {
 
     public function drafts(){
         $topics = Auth::user()->drafts();
-        return View::make('main.index', array('topics' => $topics));
+        return View::make('topic.drafts', array('topics' => $topics));
     }
     
     private function publishTopic($isDraft){
