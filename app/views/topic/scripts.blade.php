@@ -6,6 +6,13 @@ $(document).ready(function(){
             window.history.back()
           });
           
+        $(".btn-submit").click(function(){
+            if (timer) {
+                clearTimeout(timer); //cancel the previous timer.
+                timer = null;
+            }
+        });
+          
         $('.rel-photo').click(function(){
             $('.photo-box').css('display','block');
         });

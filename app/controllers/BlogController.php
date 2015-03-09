@@ -61,7 +61,7 @@ class BlogController extends BaseController {
             } while (File::exists(public_path() . $dir . $filename));
 
             Input::file('avatar')->move(public_path() . $dir, $filename);
-            $blog->image = $dir.$filename;
+            $blog->avatar = $dir.$filename;
         }
         
         if($blog->save()){
