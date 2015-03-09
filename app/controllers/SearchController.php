@@ -27,6 +27,20 @@ class SearchController extends \BaseController {
         private function getUsers(){
             $where = "WHERE `users`.`id` != ".Auth::id()." ";
 
+            if (Input::has('country') && Input::get('country') != 0) {
+                $countryId = Input::get('country');
+                $where .= " AND ((`user_description`.`liveplace_country_id` = '$countryId'"
+                        . " AND `user_description`.`liveplace_access` = 'all') "
+                        . " OR (`user_description`.`birthplace_country_id` = '$countryId'"
+                        . " AND `user_description`.`birthplace_access` = 'all')) ";
+            }
+            if (Input::has('city') && Input::get('city') != 0) {
+                $cityId = Input::get('city');
+                $where .= " AND ((`user_description`.`liveplace_city_id` = '$cityId'"
+                        . " AND `user_description`.`liveplace_access` = 'all') "
+                        . " OR (`user_description`.`birthplace_city_id` = '$cityId'"
+                        . " AND `user_description`.`birthplace_access` = 'all')) ";
+            }
             if (Input::has('age-from')) {
                 $dateFrom = date((date('Y') - Input::get('age-from')) . '-m-d');
                 $where .= " AND `user_description`.`birthday` <= '$dateFrom' "

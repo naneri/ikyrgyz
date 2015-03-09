@@ -9,25 +9,8 @@ class CountryTableSeeder extends Seeder {
 	{
             //deletes all info
             DB::connection('mysql_users')->table('countries')->delete();
-
-            // the data
-            $countries = array(
-                array(
-                    'id' => '1',
-                    'name' => 'Кыргызстан'
-                ),
-                array(
-                    'id' => '2',
-                    'name' => 'Казахстан'
-                ),
-                array(
-                    'id' => '3',
-                    'name' => 'Россия'
-                )
-            );
-
-            // inserts the data
-            DB::connection('mysql_users')->table('countries')->insert($countries);
+            DB::connection('mysql_users')->unprepared(file_get_contents(dirname(__FILE__) . '/countries_dump.sql'));
+            
         }
 
 }

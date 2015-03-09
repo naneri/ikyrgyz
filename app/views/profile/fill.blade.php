@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="{{ asset('css/reset.css') }}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ asset('jquery/jquery-ui.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
         <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
     </head>
     <body style='background-color: #4CA7D3;'>
@@ -66,18 +65,18 @@
                                 </div>
                                 <div class="form-group">
                                     Вы проживаете <span style="color:red;font-size: 18px;">*</span> :
-                                    {{Form::select('liveplace_city_id', City::getAllForView(), $user['description']->liveplace_city_id)}}
-                                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id)}}
+                                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'select-country form-control'))}}
+                                    {{Form::select('liveplace_city_id', City::getAllForView(), $user['description']->liveplace_city_id, array('class' => 'select-city form-control'))}}
                                     {{Form::hidden('liveplace_access', $user['description']->liveplace_access)}}
                                 </div>
                                 <div class="form-group">
                                     Ваша родина:
-                                    {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id)}}
-                                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id)}}
+                                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'select-country form-control'))}}
+                                    {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
                                     {{Form::hidden('birthplace_access', $user['description']->birthplace_access)}}
                                 </div>
 
-                                {{Form::file('image')}} <br>
+                                Изображение профиля: {{Form::file('image')}} <br>
                                 @if(@$user->description->user_profile_avatar)
                                         <img src="{{$user->description->user_profile_avatar}}" alt=""><br>
                                 @endif	
@@ -88,6 +87,7 @@
                 </div>
                 </div>
                 </div>
+                @include('scripts.countries-cities')
             </div>
         </div>
     </body>

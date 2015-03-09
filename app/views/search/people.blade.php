@@ -2,6 +2,7 @@
 
 @section('content')
 {{HTML::style('css/bootstrap.css')}}
+@include('scripts.countries-cities')
 <div class="container">
     {{Form::open()}}
         <div class="col-md-4">
@@ -12,8 +13,8 @@
                 {{HTML::link('#', 'Медиа')}} -->
                 <br><br>
                     Место поиска:<br>
-                    {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control'))}}<br>
-                    {{Form::select('city', City::getAllForView(), null, array('class' => 'form-control'))}}<br>
+                    {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control select-country'))}}<br>
+                    {{Form::select('city', City::getAllForView(), null, array('class' => 'form-control select-city'))}}<br>
                     <hr>
                     Учебные заведения:
                     {{Form::select('school', array_merge(array('' => 'Выберите школу'), ProfileItem::getForView('school')), null, array('class' => 'form-control'))}}<br>

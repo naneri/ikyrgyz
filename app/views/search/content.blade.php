@@ -6,7 +6,7 @@
     {{Form::open()}}
     <div class="col-lg-4">
         <div class="panel panel-default" style="padding:30px;">
-            {{HTML::link('search/people', 'Люди')}}
+            {{HTML::link('search/people', 'Люди')}} |
             {{HTML::link('#', 'Контент')}}
             <!--{{HTML::link('#', 'Группы')}}
             {{HTML::link('#', 'Медиа')}}-->

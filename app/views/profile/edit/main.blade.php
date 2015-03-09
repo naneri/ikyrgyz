@@ -40,18 +40,18 @@
                 </div>
                 <div class="form-group">
                     Вы проживаете:
-                    {{Form::select('liveplace_city_id', City::getAllForView(), $user['description']->liveplace_city_id)}}
-                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id)}}
+                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'select-country form-control'))}}
+                    {{Form::select('liveplace_city_id', City::getAllForView(), $user['description']->liveplace_city_id, array('class' => 'select-city form-control'))}}
                     {{Form::select('liveplace_access', $access, $user['description']->liveplace_access)}}
                 </div>
                 <div class="form-group">
                     Ваша родина:
-                    {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id)}}
-                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id)}}
+                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'select-country form-control'))}}
+                    {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
                     {{Form::select('birthplace_access', $access, $user['description']->birthplace_access)}}
                 </div>
 
-                {{Form::file('image')}} <br>
+                Изображение профиля: {{Form::file('image')}} <br>
                 @if(@$user->description->user_profile_avatar)
                         <img style="width:100px" src="{{$user->description->user_profile_avatar}}" alt=""><br>
                 @endif	
@@ -60,4 +60,5 @@
         {{Form::close()}}
     </div>
 </div>
+@include('scripts.countries-cities')
 @stop
