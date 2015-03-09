@@ -293,9 +293,10 @@ $('#play').show();
 
 
 $(document).ready(function(){
-  $('select.country-default').styler({
-  	selectPlaceholder: "Страна"
-  });
+  $('.select-default').styler();
+  	
+
+
   	
   
 

@@ -19,7 +19,7 @@ gulp.task('stylus', function () {
 
 
 gulp.task('jade', function() {
-  gulp.src('./source/*.jade')
+  gulp.src(['./source/*.jade', 'source/blocks/*.jade'])
 	.pipe(jade({
 	  pretty: true    }))
 

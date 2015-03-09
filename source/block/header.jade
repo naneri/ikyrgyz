@@ -1,3 +1,4 @@
+include ../blocks/dropdown-message.jade
 .b-header
 	.b-header__inner
 		.b-header-nav
@@ -40,16 +41,8 @@
 					a.counter-block(href="#")
 						img(src="img/5.png", alt="msg")
 						span.counter 25
-					ul.b-header-nav-dropdown
-						li
-							a(href="#") Изменить профиль
-						li
-							a(href="#") Личные сообщения(1877)
+					+dropdown-message
 
-						li
-							a(href="#") Друзья
-						li
-							a(href="#") Группы	
 				li.b-header-nav__list
 					a.counter-block(href="#")
 						img(src="img/6.png", alt="msg")

@@ -183,10 +183,12 @@
 	border-top: 5px solid #000;
 	border-right: 5px solid transparent;
 	border-left: 5px solid transparent;
-
+	
 	opacity: 0.3;
 	filter: alpha(opacity=30);
+
 }
+
 .jq-selectbox:hover .jq-selectbox__trigger-arrow {
 	opacity: 1;
 	filter: alpha(opacity=100);
