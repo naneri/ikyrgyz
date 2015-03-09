@@ -10,6 +10,8 @@
     <script type="text/javascript" src="{{ asset('jquery/jquery-ui.js') }}">		</script>
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
+    <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
+    
   </head>
   <body>
     <div class="b-wrapper">
