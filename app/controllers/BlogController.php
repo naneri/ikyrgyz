@@ -12,12 +12,20 @@ class BlogController extends BaseController {
      * @return [type] [description]
      */
 	public function create(){
-        $blog_types = BlogType::all();
-        foreach($blog_types as $Type){
-            $type_list[$Type->id] = $Type->name; 
-        }
+            $blog_types = BlogType::all();
+            $type_list = array();
+            foreach($blog_types as $Type){
+                switch($Type->name){
+                    case 'open':
+                        $type_list[$Type->id] = 'Открытый';
+                        break;
+                    case 'close':
+                        $type_list[$Type->id] = 'Закрытый';
+                        break;
+                }
+            }
         
-		return View::make('blog.create', array('type_list' => $type_list));
+            return View::make('blog.create', array('type_list' => $type_list));
 	}
 
     /**
@@ -35,11 +43,15 @@ class BlogController extends BaseController {
             return Redirect::to('blog/create')->withErrors($validator);
         }
         
+        $blogType = BlogType::find(Input::get('type_id'));
+        if (!$blogType && $blogType->name == 'personal') {
+            $blogType = BlogType::whereName('open')->first();
+        }
 
         $blog = new Blog;
         $blog->title = Input::get('title');
         $blog->description = Input::get('description');
-        $blog->type_id = Input::get('type_id');
+        $blog->type_id = $blogType->id;
         $blog->user_id = Auth::user()->id;
         
         if(Input::hasFile('avatar')){

@@ -32,10 +32,11 @@ class TopicController extends BaseController {
         
     private function getCanPublishBlogsForView(){
         $canPublishBlogs = null;
-        foreach (Blog::canPublishBlogs() as $result) {
-           foreach($result as $blog){
-             $canPublishBlogs[$blog->id] = $blog->title;
-           }
+        if (Auth::user()->isHavePersonalBlog()) {
+            $canPublishBlogs[0] = Auth::user()->getPersonalBlog()->title;
+        }
+        foreach (Auth::user()->canPublishBlogs() as $blog) {
+            $canPublishBlogs[$blog->id] = $blog->title;
         }
         return $canPublishBlogs;
     }
