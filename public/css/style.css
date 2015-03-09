@@ -1035,6 +1035,7 @@ Topic
 	color: #3f4242;
 	font: 15px 'PT Sans Caption';
 	line-height: 23px;
+	word-wrap: break-word;
 }
 
 .topic-description {
@@ -2751,11 +2752,7 @@ interface
 
 .b-user-interface-tab-list__list a {
 	display: block;
-	background: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+	background: #fff;
 	color: #676767;
 	font: 15px 'PT Sans Caption';
 	padding: 5px;
@@ -2768,6 +2765,20 @@ interface
 	background: -ms-linear-gradient(top, #f67658 0%, #c4563c 100%);
 	background: linear-gradient(to bottom, #f67658 0%, #c4563c 100%);
 	color: #fff;
+}
+
+.b-user-interface-tab-item__item .input-default {
+	border: 1px solid #d5d5d5;
+	background-image: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+	width: 190px;
+	color: #676767;
+	font: 15px 'PT Sans Caption';
+	padding-left: 10px;
+	background: #fff;
 }
 /*
 ==============================
