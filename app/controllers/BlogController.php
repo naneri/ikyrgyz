@@ -81,7 +81,7 @@ class BlogController extends BaseController {
      * @return [type] [description]
      */
 	public function getAll(){
-		$blogs = Blog::paginate('3');
+		$blogs = Blog::orderBy('created_at', 'DESC')->paginate('10');
 		return View::make('blog.all',array('blogs' => $blogs));
 	}
 

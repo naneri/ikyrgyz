@@ -1,7 +1,7 @@
 @extends('misc.layout')
 
 @section('content')
-		<div class="container">
+                <div class="b-content">
 		    @foreach($blogs as $blog)
 		        {{HTML::link('blog/show/'.$blog->id, $blog->title)}} <br>
 		    @endforeach
