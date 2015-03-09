@@ -1,8 +1,7 @@
 var stylus = require('gulp-stylus');
-
 var gulp = require('gulp');
 var nib = require('nib');
-
+var jade = require('gulp-jade');
 var cssbeautify = require('gulp-cssbeautify');
 
 
@@ -19,6 +18,13 @@ gulp.task('stylus', function () {
 });
 
 
+gulp.task('jade', function() {
+  gulp.src('./source/*.jade')
+	.pipe(jade({
+	  pretty: true    }))
+
+	.pipe(gulp.dest('./template/'))
+});
 
 
 
@@ -43,8 +49,9 @@ gulp.task('stylus', function () {
 gulp.task('watch', function() {
  
   gulp.watch('./source/**/*.styl', ['stylus']);
+  gulp.watch('./source/**/*.jade', ['jade']);
 
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'stylus']);
+gulp.task('default', ['watch', 'stylus','jade']);

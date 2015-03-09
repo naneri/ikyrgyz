@@ -1,0 +1,80 @@
+html
+	head
+		meta(charset="UTF-8")
+		title List Of Files
+
+		style.
+			body{
+				font-family: "Arial";
+			}
+			.content{
+				padding: 20px 55px;
+				max-width: 700px;
+			}
+			h1{
+				font-weight: normal;				
+			}
+			hr{
+				height: 1px;
+				background: #cecece;
+				border: none;
+			}
+			ul{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+				padding: 0 0 10px 0;
+				font-size: 14px;
+			}
+			a, a:visited{
+				display: inline-block;
+				height: 15px;
+				color: #290656;
+				text-decoration: underline;
+			}
+			a:hover{
+				text-decoration: none;
+				color: #374EC5;
+			}
+			span{
+				color: grey;
+				font-size: 12px;
+				font-family: georgia;
+				font-style: italic;
+				padding: 5px 0 10px 10px;
+				margin:0;
+			}
+
+
+	body
+		.content
+			h1 I-KYRYZ
+			ul
+				-var data = [{page: "home", name: "home"}]
+				each ent, num in data
+					li
+						a(href="#{ent.page}.html")= ent.name
+						span  — 
+						span(class="file") #{ent.page}.html
+					li
+						a(href="topic.html") topic
+						span  -
+						span(clas="file") topic.html
+					li
+						a(href="form.html") form
+						span  -
+						span(clas="file") form.html
+					li
+						a(href="blog.html") blog
+						span  -
+						span(clas="file") blog.html
+					li
+						a(href="about.html") about
+						span  -
+						span(clas="file") about.html		
+					li
+						a(href="people.html") people
+						span  -
+						span(clas="file") people.html

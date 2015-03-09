@@ -70,6 +70,7 @@ $(function() {
 	});
 });
 
+
 $(function() {
 	$('ul.b-topic-navigation-list li  ').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
@@ -97,7 +98,34 @@ $(function() {
 	});
 });
 
+$(function() {
+	$('.dropdown li').hover(function(){
+		$(this).children('.sub-dropdown').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('.sub-dropdown').stop(false, true).fadeOut(500);
 
+	});
+});
+
+// $(function(){
+	
+// 	$('.b-topic-create-modal').dialog({
+// 		modal: true,	
+// 		autoOpen: false,
+// 		dialogClass:"myClass"			         
+// 	 });
+// 	$('#opener').click(function(){
+// 		$('.b-topic-create-modal').dialog('open');
+// 	});
+// });
+
+// $(document).ready(function(){	 
+//     $(".ui-dialog").addClass(".b-topic-create-modal__inner");
+//  	$('.ui-dialog-title').addClass('.b-topic-create-modal__title');
+//  	$('.b-topic-create-modal__header button').addClass('.ul-button');
+ 	
+   
+// });
 
 
 
@@ -190,4 +218,86 @@ $(function(){
 
 
 
+$(document).ready(function(){
+  
+  $('input.pc-input').styler({
+  	filePlaceholder: 'Файл с компьютера',
+  	fileBrowse: 'Выбрать файл'
+  });  
+  });
 
+
+$(document).ready(function(){
+  $('input.it-input').styler({
+  	filePlaceholder: 'Файл из интернета',
+  	fileBrowse: 'Ссылка'
+  	
+  });  
+
+});
+  
+
+
+
+
+// (function($) {  
+// $(function() {  
+  
+// $('select').styler();  
+  
+// })  
+// })(jQuery);
+
+
+// $(document).ready(function(){
+// 	var audioArray = $('.playsong');
+// 	var nowPlaying = audioArray[i=0];
+// 	nowPlaying.load();
+// 	$('.play').on('click', function(){
+// 		nowPlaying.play();
+// 	},
+// 	$(this).on('click', function(){
+// 		nowPlaying.pause();
+// 	});
+	
+// });
+
+
+// Hide Pause Button
+	var audio;
+
+$(document).ready(function(){
+
+$('.stop').hide();
+var audio = new Audio('zhu-faded.mp3');
+$('#play').click(function(){
+audio.play();
+$('#play').hide();
+$('.stop').show();
+});
+
+$('.stop').click(function(){
+audio.pause();
+$('.stop').hide();
+$('#play').show();
+});
+
+
+});
+
+
+
+
+	 $(document).ready(function(){ $('.b-user-interface-tab').easytabs(); });
+
+
+
+$(document).ready(function(){
+  $('select.country-default').styler({
+  	selectPlaceholder: "Страна"
+  });
+  	
+  
+
+});
+  
