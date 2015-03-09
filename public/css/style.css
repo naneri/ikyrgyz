@@ -141,6 +141,9 @@ body {
 .b-header-nav-dropdown__message .header-dropdown-image {
 	float: left;
 	margin-right: 10px;
+	width: 31px;
+	height: 39px;
+	overflow: hidden;
 }
 
 .b-header-nav-dropdown__message .text {
