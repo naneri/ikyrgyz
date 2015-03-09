@@ -17,11 +17,23 @@
 		  	$(window).scroll(function() {
 			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
 			   		$.get(base_url + '/main/ajaxTopics/' + page, function(data){
-				   		var elements = $(data).find(".b-user-wall");
+
+			   			// находим все блоки с классом .b-user-wall и добавляем в массив elements
+			   			var elements = $(data).find(".b-user-wall");
+
 				   		console.log('donwloaded elements' + page);
-				   		$container.append( elements ).masonry( 'appended', elements );
-				   		elements = null;
+
+				   		// крепим новые элементы к контейнеру
+				   		$container.append(elements).masonry( 'appended', elements );
+
+				   		// располагаем новые элементы плиткой
+				   		$container.imagesLoaded( function() {
+						  $container.masonry('layout');
+						});
+
 				   		console.log(elements);
+
+				   		// увеличиваем страничку на одну
 				   		page += 1;
 			   		});
 			   }
