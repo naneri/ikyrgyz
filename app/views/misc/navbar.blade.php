@@ -19,29 +19,44 @@
                   </ul>
                 </li>
                 <li class="b-header-nav__list">
-                  <a href="{{ URL::to('messages/inbox/all') }}" class="counter-block">
+                  
                     @if(count(@$new_messages))
-                      <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
-                      <span class="counter">{{count($new_messages)}}</span>
-                      <ul class="b-header-nav-dropdown">
-                        <li><a href="#">Изменить профиль</a></li>
-                        <li><a href="#">Личные сообщения(1877)</a></li>
-                        <li><a href="#">Друзья</a></li>
-                        <li><a href="#">Группы  </a></li>
+                      <a href="#" class="counter-block">
+                        <img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
+                        <span class="counter">{{count($new_messages)}}</span>
+                      </a>
+                      <ul class="b-header-nav-dropdown b-header-nav-dropdown-message">
+                        @foreach($new_messages as $message)
+                        <li>
+                          <a href="{{ URL::to('message/show'). '/' . $message->id }}">
+                          <div class="b-header-nav-dropdown__message">
+                            @if(isset($message->user_profile_avatar))
+                              <img src="{{$message->user_profile_avatar}}" alt="" class="header-dropdown-image"/>
+                            @else
+                              
+                            @endif
+                            <p class="text text-name">{{$message->first_name}} {{$message->last_name}}</p>
+                            <p class="text text-message">{{mb_substr(strip_tags($message->title), 0 ,50, 'UTF-8')}}</p>
+                          </div>  
+                          </a>
+                        </li>
+                        @endforeach
                       </ul>
+                     
                     @else
+                    <a href="#" class="counter-block">
                       <img src="{{ asset('img/navbar/mail_inact.png') }}" alt="msg"/>
                       <span style="opacity:0" class="counter">{{count($new_messages)}}</span>
+                    </a>
                     @endif
-                  </a>
+                  
                 </li>
                 <li class="b-header-nav__list">  
-                  
                     @if(count(@$friend_requests))
                     <a href="#" class="counter-block">
                       <img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
                       <span class="counter">{{count($friend_requests)}}</span>
-                      </a> 
+                    </a> 
                       <ul class="b-header-nav-dropdown">
                         @foreach($friend_requests as $friend)
                           <li>

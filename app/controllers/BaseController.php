@@ -25,7 +25,7 @@ class BaseController extends Controller {
 
 			View::share('friend_requests', $friend_requests);
 			// Отправляет в шаблон все новые сообщения
-			$new_messages = Message::where('receiver_id', '=', Auth::id())->where('watched', '=', 0)->join('users', 'messages.sender_id', '=', 'users.id')->get();
+			$new_messages = Message::where('receiver_id', '=', Auth::id())->where('watched', '=', 0)->join('users', 'messages.sender_id', '=', 'users.id')->join('user_description', 'messages.sender_id', '=', 'user_description.user_id')->select('messages.*', 'user_description.*')->get();
 			View::share('new_messages', $new_messages);
 
 

@@ -8,5 +8,5 @@ return array(
 	'uzbek_adjective' 		=> 'Узбекская',
 	'chechen_adjective' 	=> 'Чеченская',
 	'armenian_adjective' 	=> 'Армянская',
-
+	'dagestan_adjective' 	=> 'Дагестанская',
 	);
