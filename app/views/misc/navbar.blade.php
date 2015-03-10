@@ -100,6 +100,7 @@
                 </li>
                 <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/39.png') }}" alt="search"/></a>
                   <ul class="b-header-nav-dropdown">
+                    <!--
                     <li><a href="#">Выбор языка</a>
                       <ul class="b-header-sub-menu">
                         <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Английский</span></a></li>
@@ -107,6 +108,7 @@
                         <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский  </span></a></li>
                       </ul>
                     </li>
+                    -->
                     <!--
                     <li><a href="#">Помощь</a>
                       <ul class="b-header-sub-menu">

@@ -6,6 +6,10 @@
             font-size: 30px;
             font-weight: bold;
         }
+        h3{
+            font-size: 20px;
+            font-weight: bold;
+        }
     </style>
     <div class="b-wrapper">
         <div class="b-page">
