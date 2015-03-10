@@ -7,6 +7,7 @@ block content
 				.b-user-interface
 					.b-user-interface__inner
 						.b-user-interface-tab
+
 						
 							ul.b-user-interface-tab-list
 								li.b-user-interface-tab-list__list
@@ -20,17 +21,57 @@ block content
 								.clear
 
 							
-							.clear
+							
 							
 							
 							
 							
 							.b-user-interface-tab__item#tab-1-div
-								.b-user-interface-tab__right
-
-
-
+								.b-user-interface-tab-item
+									p.b-user-interface-tab-item__title Место поиска											
+									.b-user-interface-tab-item__search-place
+										select.select-default(name="")
+												option(value="Страна") Страна
+									.b-user-interface-tab-item__search-place
+										select.select-default(name="")
+											option(value="Город") Город
+									.b-user-interface-tab-item__item
+										input.input-default(type="text" value="Нет в списке")
 							
+								.b-user-interface-tab-item
+									p.b-user-interface-tab-item__title Учебные заведения
+									
+										
+									.b-user-interface-tab-item__search-place
+										select.select-default(name="")
+											option(value="Школа") Школа
+									.b-user-interface-tab-item__search-place
+										select.select-default(name="")
+											option(value="Высшее учебное заведение") Высшее учебное заведение
+									.b-user-interface-tab-item__search-place
+										select.select-default(name="")
+											option(value="Работа") Работа
+							
+								.b-user-interface-tab-item
+									p.b-user-interface-tab-item__title Пол
+									.b-user-interface-tab-item__gender
+										input(type="radio" )
+										span Мужской
+									.b-user-interface-tab-item__gender
+										input(type="radio")
+										span Женский
+									.b-user-interface-tab-item__gender
+										input(type="radio" )
+										span Любой
+							
+								.b-user-interface-tab-item
+									p.b-user-interface-tab-item__title Возраст
+									.b-user-interface-tab-item__age
+										select.select-default(name="")
+											option(value="от") от
+										select.select-default(name="")
+											option(value="от") до	
+								.b-user-interface-tab__right
 									.b-user-interface-tab__search
 										input.input-default(type="text" value="Поиск")
 										input.input-default(type="submit" value="Поиск")
@@ -41,63 +82,14 @@ block content
 											span Количество лет,
 											span Место проживания,
 											span Учебное заведение
-									.b-user-interface-tab__buttons
-										
+									.b-user-interface-tab__buttons								
 										input.input-default(type="submit" value="Написать лс")
 										input.input-default(type="submit" value="Подписаться")
 										input.input-default(type="submit" value="Дружить")
-								.b-user-interface-tab__left
-									.b-user-interface-tab-item
-										p.b-user-interface-tab-item__title Место поиска											
-										.b-user-interface-tab-item__search-place
-											select.select-default(name="")
-													option(value="Страна") Страна
-										.b-user-interface-tab-item__search-place
-											select.select-default(name="")
-												option(value="Город") Город
-										.b-user-interface-tab-item__item
-											input.input-default(type="text" value="Нет в списке")
-								
-									.b-user-interface-tab-item
-										p.b-user-interface-tab-item__title Учебные заведения
-										
-											
-										.b-user-interface-tab-item__search-place
-											select(name="")
-												option(value="") Школа
-										.b-user-interface-tab-item__search-place
-											select(name="")
-												option(value="") Высшее учебное заведение
-										.b-user-interface-tab-item__search-place
-											select(name="")
-												option(value="") Работа
-								
-									.b-user-interface-tab-item
-										p.b-user-interface-tab-item__title Пол
-										.b-user-interface-tab-item__gender
-											input(type="radio" )
-											span Мужской
-										.b-user-interface-tab-item__gender
-											input(type="radio")
-											span Женский
-										.b-user-interface-tab-item__gender
-											input(type="radio" )
-											span Любой
-								
-									.b-user-interface-tab-item
-										p.b-user-interface-tab-item__title Возраст
-										.b-user-interface-tab-item__age
-											span от
-											input(type="text")
-											span до
-											input(type="text")
-							
-								
-								
-									
-								.clear
-									
-							.clear
+						
+						
+						
+						
 							.b-user-inferface-tab__tabf#that-other-tab
 								.b-user-interface-tab__right
 									.b-user-interface-tab__search
@@ -112,7 +104,7 @@ block content
 													option(value="") Страна
 							
 
-								.clear
+								
 
 
 							

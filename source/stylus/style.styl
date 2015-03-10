@@ -67,7 +67,9 @@
 		
 	}
 	
-
+.header-logo__image
+	width 40px !important
+	height 40px !important
 .b-header-nav-dropdown 
 	display none
 	position absolute
@@ -416,13 +418,10 @@
 			float left
 			margin 0 15px 0 0
 			img
-				width 45px
-				height 45px
-				overflow hidden
-			img.blog-avatar
-				width 45px
-  				height 45px
- 				overflow hidden
+				width 40px !important
+				height 40px !important
+				
+			
 				
 		&__title 
 			color #333
@@ -840,7 +839,10 @@ Topic
 .topic-description 
     color #3f4242
 	
-	
+.b-topic-navigation__middle > ul li img
+	//
+	&:hover
+		opacity 0.5
 	
 	
 	
@@ -2068,36 +2070,50 @@ interface
 ===========================
 */
 
+.b-user-interface
+	position relative
 
 .b-user-interface-tab
+	border 1px solid #999
+	
+	width 253px
+	box-sizing border-box
 	//
+	&__item
+		//
+		
 	&-list
 		display inline-block
 		
 		
 	&-item
-		//
+		margin 10px
 		&__title
 			font 15px $baseFontFamily
 			color $baseFontColorLight
 		&__search-place
 			//
 			.select-default
-				width 200px
+				width 230px
 				
 				.jq-selectbox__select
 					background #fff
 					button-default()
 					border-radius 0
 	
-				
+		&__gender
+			//
+			span 
+				color $baseFontColor
+				font 14px $baseFontFamily		
 	&__left
-		float left
-		display inline-block
+		//
 		
 	&__right
-		float right
-		display inline-block
+		position absolute
+		right 0
+		top 0
+		
 	
 		
 	
@@ -2108,27 +2124,48 @@ interface
 			float left
 			
 			
+			
 			a
 				display block
 				background #fff
 				color #676767
 				font 15px $baseFontFamily
 				padding 5px
+				border-right 1px solid #999
 				&:hover
 					background $orangeGradient
 					color #fff
+			&:last-child
+				//
+				a
+					border 0
 					
 .b-user-interface-tab-item__item
 	//
 	.input-default
 		button-default()
-		width 190px
+		width 220px
 		color $baseFontColorLight
 		font 15px $baseFontFamily
 		padding-left 10px
 		background #fff
 		
-
+.b-user-interface-tab__search
+	border $baseBorder
+	.input-default:first-child
+		width 545px
+		height 30px
+		focus
+		border 0
+		
+		
+	.input-default:last-child
+		width 35px
+		height 30px	
+		background $lightGradient
+		border 0
+		color transparent
+	
 
 /*
 ==============================

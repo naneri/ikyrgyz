@@ -3,12 +3,12 @@
           <div class="b-header__inner">
             <div class="b-header-nav">
               <ul>
-                <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}" alt="logo"/><span class="logo">{{Config::get('app.network_name')}}</span></a></li>
+                <li class="b-header-nav__list"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}"  alt="logo"/><span class="logo">{{Config::get('app.network_name')}}</span></a></li>
                 <li class="b-header-nav__list"><a href="#">
                   @if(isset($user_data->description->user_profile_avatar))
-                    <img style="width:40px" src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
+                    <img class="header-logo__image"  src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
                   @else
-                    <img src="{{ asset('img/38.png') }}" alt="user"/>
+                    <img class="header-logo__image" src="{{ asset('img/38.png') }}" alt="user"/>
                   @endif
                   <span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span></a>
                   <ul class="b-header-nav-dropdown">
