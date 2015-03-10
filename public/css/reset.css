@@ -54,3 +54,7 @@ a {
 .clear {
 	clear: both;
 }
+
+*:focus {
+	outline: 0;
+}
