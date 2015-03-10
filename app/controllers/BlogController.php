@@ -81,10 +81,15 @@ class BlogController extends BaseController {
      * @return [type] [description]
      */
 	public function getAll(){
-		$blogs = Blog::orderBy('created_at', 'DESC')->paginate('10');
+		$blogs = Blog::getMainBlogs();
+
 		return View::make('blog.all',array('blogs' => $blogs));
 	}
 
+    public function ajaxBlogs($page){
+        $blogs = Blog::getMainBlogs($page);
+        return View::make('blog.build', array('blogs' => $blogs));
+    }
     /**
      * Показывает страницу с описанием блога
      * 

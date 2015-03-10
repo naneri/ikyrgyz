@@ -43,6 +43,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
         Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
         Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
+        Route::get('blog/ajaxBlogs/{page}', 'BlogController@ajaxBlogs');
 
         Route::get('group', 'GroupController@index');
         Route::get('group/show/{id}', 'GroupController@show');

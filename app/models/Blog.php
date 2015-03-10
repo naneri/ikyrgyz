@@ -187,4 +187,12 @@ Class Blog extends Eloquent{
             $blogs[] =  Blog::where('user_id', '=', Auth::id())->get();   
             return $blogs;                            
         }
+
+        public static function getMainBlogs($offset = 0){
+            $blog_number = Config::get('topic.topics_per_page');
+            return Blog::skip($offset*$blog_number)
+                    ->take($blog_number)
+                    ->orderBy('blogs.id', 'DESC')
+                    ->get();
+        }
 }

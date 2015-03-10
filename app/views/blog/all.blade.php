@@ -1,11 +1,11 @@
 @extends('misc.layout')
 
 @section('content')
-                <div class="b-content">
-		    @foreach($blogs as $blog)
-		        {{HTML::link('blog/show/'.$blog->id, $blog->title)}} <br>
-		    @endforeach
 
-                    {{$blogs->links()}}
-		</div>
+	@include('blog.scripts')
+   	<div class="b-content">
+    	@include('misc.createnav')
+    	@include('blog.build', array('blogs' => $blogs))
+
+	</div>
 @stop
