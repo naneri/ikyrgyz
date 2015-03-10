@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var nib = require('nib');
 var jade = require('gulp-jade');
 var cssbeautify = require('gulp-cssbeautify');
+var webserver = require('gulp-webserver');
 
 
 
@@ -27,7 +28,14 @@ gulp.task('jade', function() {
 });
 
 
-
+gulp.task('webserver', function() {
+  gulp.src('template')
+	.pipe(webserver({
+	  livereload: true,
+	  directoryListing: true,
+	  open: '/index.html'
+	}));
+});
 
 
 
@@ -54,4 +62,4 @@ gulp.task('watch', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'stylus','jade']);
+gulp.task('default', ['watch', 'stylus','jade', 'webserver']);
