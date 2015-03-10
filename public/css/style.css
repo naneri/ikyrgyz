@@ -82,6 +82,11 @@ body {
 	}
 }
 
+.header-logo__image {
+	width: 40px !important;
+	height: 40px !important;
+}
+
 .b-header-nav-dropdown {
 	display: none;
 	position: absolute;
@@ -502,16 +507,8 @@ body {
 }
 
 .b-user-wall-header__image img {
-	width: 45px !important;
-	height: 45px !important;
-}
-
-.b-user-wall-header__image img.blog-avatar {
-	overflow: hidden;
-}
-
-.b-user-wall-header__image img.blog-avatar width 45px {
-	height: 45px;
+	width: 40px !important;
+	height: 40px !important;
 }
 
 .b-user-wall-header__title {
