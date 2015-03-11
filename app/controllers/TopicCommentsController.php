@@ -30,7 +30,8 @@ class TopicCommentsController extends \BaseController {
         } else {
             $data['user_id'] = Auth::user()->id;
             $comment = Topiccomment::create($data);
-            $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
+            $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
+            $result['comment_id'] = $comment->id;
         }
         
         if(Request::ajax()){
@@ -121,9 +122,9 @@ class TopicCommentsController extends \BaseController {
                 if($comment->canDelete()){
                     $comment->trash = true;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
                 } else {
-                    $result['error'] = "error permission!";
+                    $result['error'] = "У вас нет прав не удаление этого комментария";
                 }
                 return Response::json($result);
 	}
@@ -140,9 +141,9 @@ class TopicCommentsController extends \BaseController {
                 if ($comment->canRestore()) {
                     $comment->trash = false;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment, 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
                 } else {
-                    $result['error'] = "error permission!";
+                    $result['error'] = "У вас нет прав не восстановление этого комментария";
                 }
                 return Response::json($result);
        }

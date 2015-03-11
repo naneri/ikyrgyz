@@ -1,5 +1,30 @@
+{{HTML::script('js/tinymce/tinymce.min.js')}}
 <script>
+$(document).ready(function(){
+    comment.initEditor("textarea.add_comment_text");
+});
     var comment = {
+            submit: function(commentId, topicId){
+                tinyMCE.triggerSave();
+                var $commentBody = $('#add_comment_'+commentId);
+                $.ajax({
+                    method: "POST",
+                    url: "{{$base_config['base_url']}}/topic/comment/add",
+                    data: {
+                        'text': $commentBody.find('.add_comment_text').val(),
+                        'parent_id': commentId,
+                        'topic_id': topicId
+                    },
+                    success: function($result) {
+                        if(!$result.error && $result.comment){
+                            $('#comments_child_' + commentId).append($result.comment);
+                            comment.replyForm(commentId);
+                            comment.initEditor('#comments_child_'+commentId+' textarea');
+                            comment.scrollTo('#comment_' + $result.comment_id);
+                        }
+                    }
+                });
+            },
             delete: function(commentId) {
                 var $commentBody = $('#comment_body_' + commentId);
                 $.ajax({
@@ -15,43 +40,6 @@
                     }
                 });
             },
-            addForm: function(commentId, topicId) {
-                var $commentAddForm = $('#add_comment_form');
-                var $commentBody = $('#topic_'+topicId+' #comment_body_' + commentId);
-                var onClickSubmit = "comment.submit(" + commentId + "," + topicId + ");";
-                $commentAddForm.find('#submit_btn').attr('onclick', onClickSubmit);
-                $commentAddForm.find('div.b-profile-about-form').attr('id', '#add_comment_'+commentId);
-                $commentAddForm.find('#add_comment_text').val('');
-                $commentAddForm.appendTo($commentBody);
-                $('html, body').animate({
-                    scrollTop: parseInt($commentAddForm.offset().top-100)
-                }, 1000);
-            },
-            removeForm: function(){
-            },
-            submit: function(commentId, topicId){
-                var $commentBody = $('#add_comment_form');
-                $.ajax({
-                    method: "POST",
-                    url: "{{$base_config['base_url']}}/topic/comment/add",
-                    data: {
-                        'text': $commentBody.find('#add_comment_text').val(),
-                        'parent_id': commentId,
-                        'topic_id': topicId
-                    },
-                    success: function($result) {
-                        if(!$result['error'] && $result['comment']){
-                            $('#topic_' + topicId + ' #comments_child_' + commentId).append($result.comment);
-                            comment.addForm(0, topicId);
-                        }
-                    }
-                });
-            },
-            response: function(parentId, commentHtml){
-                var $commentContainer = null;
-                $commentContainer = $('#comments_child_' + parentId);
-                $commentContainer.append(commentHtml);
-            },
             restore: function(commentId){
                 var $commentBody = $('#comment_body_' + commentId);
                 $.ajax({
@@ -66,6 +54,16 @@
                         }
                     }
                 });
+            },
+            scroll: function(topicId) {
+                $('html, body').animate({
+                    scrollTop: parseInt($('#topic_' + topicId).find('#comments').offset().top - 100)
+                }, 1000);
+            },
+            scrollTo: function(selector) {
+                $('html, body').animate({
+                    scrollTop: parseInt($(selector).offset().top - 100)
+                }, 1000);
             },
             show: function(topicId){
                 var $topicBox = $('#topic_' + topicId);
@@ -88,10 +86,42 @@
                     });
                 }
             },
-            scroll: function(topicId) {
-                $('html, body').animate({
-                    scrollTop: parseInt($('#topic_' + topicId).find('#comments').offset().top - 100)
-                }, 1000);
+            replyForm: function(commentId){
+                var formSelector = '#add_comment_'+commentId;
+                var $replyForm = $(formSelector);
+                if($replyForm.is(':visible')){
+                    $replyForm.hide();
+                } else {
+                    $replyForm.show();
+                    comment.scrollTo(formSelector);
+                }
             },
+            initEditor: function(selector){
+                tinymce.init({
+                    selector: selector,
+                    language: 'ru',
+                    menubar: false,
+                    statusbar: false,
+                    subfolder: "{{Auth::user()->id}}",
+                    plugins: [
+                        "autolink link image smileys filemanager media paste youtube"
+                    ],
+                    image_advtab: true,
+                    relative_urls: false,
+                    remove_script_host: true,
+                    toolbar: "image youtube media smileys | publish",
+                    setup: function(ed) {
+                        /*ed.addButton('publish', {
+                         text: 'Опубликовать',
+                         icon: false,
+                         onclick: function() {
+                         // Add you own code to execute something on click
+                         ed.focus();
+                         ed.selection.setContent('Hello world!');
+                         }
+                         });*/
+                    }
+                });
+            }
         };
 </script>
