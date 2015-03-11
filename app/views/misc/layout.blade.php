@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8"/>
     <title>{{Config::get('app.network_name')}}</title>
+    <link rel="shortcut icon" href="{{ URL::to('img/favicon/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}"/>
@@ -26,6 +27,6 @@
     @include('scripts.vote')
  	@yield('scripts')
 
-    
+    {{Config::get('social.yandex-metrika')[Config::get('app.nation_name')]}}
   </body>
 </html>
