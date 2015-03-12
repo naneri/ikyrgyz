@@ -15,8 +15,32 @@ class TopicComment extends \Eloquent {
             return $this->hasMany('TopicComment', 'parent_id');
         }
         
+        public function childCommentsWithUserData(){
+            return $this->childComments()
+                        ->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
+                        ->get();
+        }
+        
+        public function withUserData(){
+            return $this->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
+                        ->where('topic_comments.id', $this->id)
+                        ->first();
+        }
+
+        public function parentWithUserData() {
+            return $this->parent()->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')->first();
+        }
+
         public function user(){
             return $this->belongsTo('User');
+        }
+
+        public function parent() {
+            return $this->belongsTo('TopicComment', 'parent_id', 'id');
+        }
+
+        public function userDescription(){
+            return $this->belongsTo('User_Description', 'user_id', 'user_id');
         }
         
         public function topic(){

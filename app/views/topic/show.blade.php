@@ -63,7 +63,7 @@
                     <p class="b-profile-about-tags__title">Теги: {{$topic->tagsToString()}}</p>
                   <div class="b-profile-about-tags__user">
                     <div class="b-profile-about-tags-user">
-                      <div class="b-profile-about-tags-user__left"><span class="b-profile-about-tags-user__name">Блог</span><img src="{{ asset($blog->avatar) }}" alt="" class="b-profile-about-tags-user__image blog-avatar"/>
+                      <div class="b-profile-about-tags-user__left"><span class="b-profile-about-tags-user__name">Блог</span><img src="{{ $blog->avatar() }}" alt="" class="b-profile-about-tags-user__image blog-avatar"/>
                         <p class="b-profile-about-tags-user__title">{{$blog->title}}</p>
                         <div class="b-profile-about-tags-user__buttons">
                             <a href="{{URL::to('blog/show/'.$blog->id)}}"><button class="btn-default btn-view">Просмотреть</button></a>
@@ -91,120 +91,37 @@
                   </div>
                 </div>
               </div>
-              <!--<div class="b-profile-about__topics">
-                <div class="b-profile-about-topics">
-                  <p class="b-profile-about-topics__title">Новые топики в блоге</p>
-                  <ul class="b-profile-about-topics-list">
-                    <li class="b-profile-about-topics-list__list">
-                      <p class="b-profile-about-topics-list__text">В верстке имени топика нужно учесть, что имя топика может состоять из длинного названия в 3 ряда</p>
-                      <div class="b-profile-about-topics-list__image"><a href=""><img src="img/59.png" alt=""/></a></div>
-                    </li>
-                    <li class="b-profile-about-topics-list__list">
-                      <p class="b-profile-about-topics-list__text">В верстке имени топика нужно учесть, что имя топика может состоять из длинного названия в 3 ряда</p>
-                      <div class="b-profile-about-topics-list__image"><a href=""><img src="img/59.png" alt=""/></a></div>
-                    </li>
-                    <li class="b-profile-about-topics-list__list">
-                      <p class="b-profile-about-topics-list__text">В верстке имени топика нужно учесть, что имя топика может состоять из длинного названия в 3 ряда</p>
-                      <div class="b-profile-about-topics-list__image"><a href=""><img src="img/59.png" alt=""/></a></div>
-                    </li>
-                    <li class="b-profile-about-topics-list__list">
-                      <p class="b-profile-about-topics-list__text">В верстке имени топика нужно учесть, что имя топика может состоять из длинного названия в 3 ряда</p>
-                      <div class="b-profile-about-topics-list__image"><a href=""><img src="img/59.png" alt=""/></a></div>
-                    </li>
-                    <li class="b-profile-about-topics-list__list">
-                      <p class="b-profile-about-topics-list__text">В верстке имени топика нужно учесть, что имя топика может состоять из длинного названия в 3 ряда</p>
-                      <div class="b-profile-about-topics-list__image"><a href=""><img src="img/59.png" alt=""/></a></div>
-                    </li>
-                    <div class="clear"></div>
-                  </ul>
-                </div>
-                </div> -->
-              <div class="comments" id="comments">
-                  @include('comments.build', array('topic' => $topic))
-                  @include('comments.scripts')
+              <div>
+                  <div class="b-profile-about-profile__name" style="height: 20px;">
+                      <div style="float:left;">Комментарии {{$topic->comments->count()}}</div>
+                      <div style="float:right;">Сортировка: {{Form::select('sort_by', array('old' => 'Старые', 'new' => 'Новые', 'rating' => 'По рейтингу'))}}</div>
+                  </div>
+                  <hr>
+                  <br>
+                  <div style="height:50px;">
+                        {{HTML::image(Auth::user()->avatar(), '', array('style' => 'float:left;width:40px;height:40px;margin-right:10px;'))}}
+                        <span style="line-height: 40px;" class="b-profile-about-profile__name"> {{Auth::user()->getNames()}}</span>
+                  </div>
+                  <div id="add_comment_0">
+                      {{Form::textarea('comment', null, array('class' => 'add_comment_text'))}}
+                      <input type="button" value="Опубликовать" class="default-button submit-button" onclick="comment.submit(0,{{$topic->id}});">
+                  </div>
+                  <div id="comments_child_0">
+                    @include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => null))
+                  </div>
+                @include('comments.scripts')
               </div>
-              <!--div class="b-profile-about__form">
-                <div class="b-profile-about-form">
-                  {{Form::open(array('url' =>  URL::to('topic/comment/add') ))}}
-                    <div class="b-profile-about-form__item"><a href="">
-                        @if(isset($user_data->description->user_profile_avatar))
-                            <img style="width:40px"src="{{ asset($user_data->description->user_profile_avatar) }}" alt="" class="b-profile-about-form__image"/>
-                        @else
-                            <img src="{{ asset('img/48.png') }}" alt="" class="b-profile-about-form__image"/>
-                        @endif
-                    </a>
-                      <p class="b-profile-about-form__title">{{@$user_data->description->first_name . ' '. @$user_data->description->last_name}}</p>
-                      <div class="clear"></div>
-                    </div>
-                    <div class="b-profile-about-form__item">
-                      <div class="b-profile-about-form__inner">
-                        <textarea name="" cols="30" rows="10" class="add-comment">Добавить комметарии</textarea>
-                      </div>
-                    </div>
-                    <div class="b-profile-about-form__item">
-                      <input type="submit" value="Отмена" class="default-button cancel-button"/>
-                      <input type="submit" value="Опубликовать" class="default-button submit-button"/>
-                    </div>
-                  {{Form::close()}}
-                </div>
-              </div-->
             </div>
           </div>
         </div>
         </div>
     </div>
-
-
- <!--   <div class="container">
-        @if($topic->canEdit())
-            {{HTML::link('topic/edit/'.$topic->id, '[Редактировать]')}}
-        @endif
-        <div class="item" id="topic_{{$topic->id}}">
-            user email - {{$topic->user->email}}<br>
-            created at - {{$topic->created_at}}<br>
-            views - {{$topic->count_read}}<br>
-            <a href="#" onclick="comment.show({{$topic->id}});return false;">comments - {{$topic->comments->count()}}</a><br>
-            rating - 
-            <a href="#" class="comment_vote_up" onclick="vote.topic({{$topic->id}}, 1);return false;">UP</a>
-            <span class="rating" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
-            <a href="#" class="comment_vote_down" onclick="vote.topic({{$topic->id}}, -1);return false;">DOWN</a><br>
-            <b>{{$topic->title}}</b> <br>
-            {{$topic->description}}<br>
-
-            @if ($topic->photoAlbums->count() > 0)
-                @foreach($topic->photoAlbums as $photoAlbum)
-                    {{$photoAlbum->name}}<br>
-                @endforeach
-            @endif
-
-            @if ($topic->photos->count() > 0)
-                @foreach($topic->photos as $photo)
-                    <img src="{{$photo->url}}" /><br>
-                @endforeach
-            @endif
-
-            @if ($topic->audioAlbums->count() > 0)
-                @foreach($topic->audioAlbums as $audioAlbum)
-                    {{$audioAlbum->name}}<br>
-                @endforeach
-            @endif
-
-            @if ($topic->audio->count() > 0)
-                @foreach($topic->audio as $audio)
-                    {{$audio->name}}<br>
-                @endforeach
-            @endif
-
-            blog title - {{HTML::link('blog/show/'.$blog->id, $blog->title)}}<br>
-            blog topics count - {{$blog->topics->count()}}<br>
-            <br>
-            <div class="comments" id="comments">
-                @include('comments.build', array('topic' => $topic))
-                @include('comments.scripts')
-            </div>
-            <br>
-            <br>
-        </div>
-    </div> -->
-
+<script>
+$(document).ready(function(){
+    comment.initEditor("textarea.add_comment_text");
+    $('select[name="sort_by"]').change(function(){
+        comment.sort({{$topic->id}}, $(this).val());
+    });
+});
+</script>
 @stop

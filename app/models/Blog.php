@@ -195,4 +195,9 @@ Class Blog extends Eloquent{
                     ->orderBy('blogs.id', 'DESC')
                     ->get();
         }
+        
+        public function avatar() {
+            return ($this->avatar) ? $this->avatar : asset('img/48.png');
+        }
+
 }

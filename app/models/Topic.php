@@ -81,11 +81,37 @@ class Topic extends Eloquent {
         public function author() {
             return $this->belongsTo('User', 'user_id');
         }
-
+        
         public function comments(){
             return $this->hasMany('TopicComment');
         }
+
+        public function commentsChild($parentId = 0){
+            return $this->hasMany('TopicComment')->where('parent_id', $parentId);
+        }
         
+        public function commentsWithData(){
+            return $this->comments()
+                    ->join(Config::get('database.connections.mysql_users.database').'.user_description','user_description.user_id','=','topic_comments.user_id');
+        }
+
+        public function commentsWithDataSortBy($sort) {
+            $comments = array();
+            switch($sort){
+                case 'new':
+                    $comments = $this->commentsWithData()->orderBy('id', 'DESC')->get();
+                    break;
+                case 'rating':
+                    $comments = $this->commentsWithData()->orderBy('rating', 'DESC')->get();
+                    break;
+                case 'old':
+                default:
+                    $comments = $this->commentsWithData()->orderBy('id', 'ASC')->get();
+                    break;
+            }
+            return $comments;
+        }
+
         public function blog(){
             return $this->belongsTo('Blog');
         }

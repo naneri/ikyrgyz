@@ -121,13 +121,15 @@ class TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-        $topic = Topic::findOrFail($id);
-        $blog = Blog::findOrFail($topic->blog_id);
-        $creator = User::findOrFail($topic->user_id);
-        $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
-        $topic->increment('count_read');
+            $topic = Topic::findOrFail($id);
+            $blog = Blog::findOrFail($topic->blog_id);
+            $isModerator = $topic->blog->isModeratorCurrentUser();
+            $comments = $topic->commentsWithDataSortBy('old');
+            $creator = User::findOrFail($topic->user_id);
+            $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
+            $topic->increment('count_read');
 
-        return View::make('topic.show', compact('topic', 'creator', 'blog'));
+            return View::make('topic.show', compact('topic', 'creator', 'blog', 'isModerator', 'comments'));
 	}
 
 
