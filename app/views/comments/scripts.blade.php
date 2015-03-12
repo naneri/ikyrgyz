@@ -1,4 +1,5 @@
 {{HTML::script('js/tinymce/tinymce.min.js')}}
+{{HTML::script('js/moment-with-locales.js')}}
 <script>
     var comment = {
             submit: function(commentId, topicId){
@@ -20,10 +21,10 @@
                             }else{
                                 $commentsContainer.append($result.comment);
                             }
-                            $('#comments_child_' + commentId).append($result.comment);
                             comment.replyForm(commentId);
                             comment.initEditor('#comment_' + $result.comment_id + ' textarea');
                             comment.scrollTo('#comment_' + $result.comment_id);
+                            comment.convertTimes('#comment_' + $result.comment_id + ' ');
                         }
                         comment.notify($result);
                     }
@@ -104,6 +105,13 @@
                     $replyForm.show(300);
                     comment.scrollTo(formSelector);
                 }
+            },
+            convertTimes:function(selector){
+                moment.locale('ru');
+                $(selector+' .comment_time').each(function(){
+                    var time = moment(this.innerText, "YYYY-MM-DD h:mm:ss").fromNow();
+                    this.innerText = time;
+                });
             },
             notify: function($result){
                 $.notify($result.message, $result.status);
