@@ -11,10 +11,17 @@
         <div style="margin:10px 0;" class="b-profile-about-text__text">{{$comment->text}}</div><br>
             <a href="#" class="comment_restore" onclick="comment.restore({{$comment->id}});return false;">Восстановить</a>
         @else
-            Comment deleted<br>
+            Комментарий удален<br>
         @endif
     @else
-    <div style="margin:10px 0;" class="b-profile-about-text__text">{{$comment->text}}</div>
+    <div style="margin:10px 0;" class="b-profile-about-text__text">
+        @if($comment->rating > Config::get('social.topic_comment.hide_comment_rating'))
+            <span id="comment_{{$comment->id}}_text">{{$comment->text}}</span>
+        @else
+            <span style="display: none;" id="comment_{{$comment->id}}_text">{{$comment->text}}</span>
+            <span id="comment_{{$comment->id}}_text_show_msg">Комментарий скрыт из-за низкого рейтинга <a href="#" class="comment_reply" onclick="comment.show({{$comment->id}});return false;">Показать</a></span>
+        @endif
+    </div>
     <div style="width: 300px;height: 35px;line-height: 35px;">
             <a href="#" class="comment_reply" onclick="comment.replyForm({{$comment->id}});return false;">Ответить</a>
             @if(Auth::id() == $comment->user_id || $isModerator)

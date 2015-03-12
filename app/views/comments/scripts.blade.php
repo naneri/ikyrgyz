@@ -1,11 +1,5 @@
 {{HTML::script('js/tinymce/tinymce.min.js')}}
 <script>
-$(document).ready(function(){
-    comment.initEditor("textarea.add_comment_text");
-    $('select[name="sort_by"]').change(function(){
-        comment.sort({{$topic->id}}, $(this).val());
-    });
-});
     var comment = {
             submit: function(commentId, topicId){
                 tinyMCE.triggerSave();
@@ -94,6 +88,10 @@ $(document).ready(function(){
                     }
                 });
             },
+            show: function(commentId){
+                $('#comment_'+commentId+'_text_show_msg').hide();
+                $('#comment_'+commentId+'_text').show();
+            },
             replyForm: function(commentId){
                 if(commentId == 0){
                     return;
@@ -101,9 +99,9 @@ $(document).ready(function(){
                 var formSelector = '#add_comment_'+commentId;
                 var $replyForm = $(formSelector);
                 if($replyForm.is(':visible')){
-                    $replyForm.hide();
+                    $replyForm.hide(300);
                 } else {
-                    $replyForm.show();
+                    $replyForm.show(300);
                     comment.scrollTo(formSelector);
                 }
             },

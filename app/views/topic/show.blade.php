@@ -107,7 +107,7 @@
                       <input type="button" value="Опубликовать" class="default-button submit-button" onclick="comment.submit(0,{{$topic->id}});">
                   </div>
                   <div id="comments_child_0">
-                    @include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => false))
+                    @include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => null))
                   </div>
                 @include('comments.scripts')
               </div>
@@ -116,5 +116,12 @@
         </div>
         </div>
     </div>
-
+<script>
+$(document).ready(function(){
+    comment.initEditor("textarea.add_comment_text");
+    $('select[name="sort_by"]').change(function(){
+        comment.sort({{$topic->id}}, $(this).val());
+    });
+});
+</script>
 @stop

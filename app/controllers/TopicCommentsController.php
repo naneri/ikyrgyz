@@ -31,7 +31,7 @@ class TopicCommentsController extends \BaseController {
             } else {
                 $data['user_id'] = Auth::user()->id;
                 $comment = Topiccomment::create($data);
-                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
+                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => true))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";
@@ -125,11 +125,11 @@ class TopicCommentsController extends \BaseController {
                 if($comment->canDelete()){
                     $comment->trash = true;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['message'] = "Комментарий удален";
-                    $result['status'] = "error";
-                } else {
                     $result['status'] = "success";
+                } else {
+                    $result['status'] = "error";
                     $result['message'] = "У вас нет прав на удаление этого комментария";
                 }
                 return Response::json($result);
@@ -147,7 +147,7 @@ class TopicCommentsController extends \BaseController {
                 if ($comment->canRestore()) {
                     $comment->trash = false;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['message'] = "Комментарий восстановлен";
                     $result['status'] = "success";
                 } else {
@@ -168,8 +168,8 @@ class TopicCommentsController extends \BaseController {
             $isModerator = $topic->blog->isModeratorCurrentUser();
             $comments = $topic->commentsWithDataSortBy(Input::get('sort_by'));
             $result = array();
-            if($comments){
-                $result['comments'] = View::make('comments.build', array('comments' => $comments, 'parent_id' => 0, 'isModerator' => $isModerator))->render();
+            if($comments->count() > 0){
+                $result['comments'] = View::make('comments.build', array('comments' => $comments, 'parent' => null, 'isModerator' => $isModerator))->render();
                 $result['message'] = "Комментарии отсортированы";
                 $result['status'] = 'success';
             }else{
