@@ -1,6 +1,5 @@
-<?php if(!isset($parent_id))$parent_id = 0; ?>
 @foreach($comments as $comment)
-    @if($comment->parent_id == $parent_id)
-        @include('comments.item', array('comment' => $comment, 'with_child' => true))
+    @if($comment->parent_id == (($parent)?$parent->id:0))
+        @include('comments.item', array('comment' => $comment, 'with_child' => true, 'parent' => $parent))
     @endif
 @endforeach 

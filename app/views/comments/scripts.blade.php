@@ -2,6 +2,9 @@
 <script>
 $(document).ready(function(){
     comment.initEditor("textarea.add_comment_text");
+    $('select[name="sort_by"]').change(function(){
+        comment.sort({{$topic->id}}, $(this).val());
+    });
 });
     var comment = {
             submit: function(commentId, topicId){
@@ -17,11 +20,18 @@ $(document).ready(function(){
                     },
                     success: function($result) {
                         if(!$result.error && $result.comment){
+                            var $commentsContainer = $('#comments_child_' + commentId);
+                            if($('select[name="sort_by"').val() == 'new'){
+                                $commentsContainer.prepend($result.comment);
+                            }else{
+                                $commentsContainer.append($result.comment);
+                            }
                             $('#comments_child_' + commentId).append($result.comment);
                             comment.replyForm(commentId);
-                            comment.initEditor('#comments_child_'+commentId+' textarea');
+                            comment.initEditor('#comment_' + $result.comment_id + ' textarea');
                             comment.scrollTo('#comment_' + $result.comment_id);
                         }
+                        comment.notify($result);
                     }
                 });
             },
@@ -37,6 +47,7 @@ $(document).ready(function(){
                         if(!$result['error'] && $result['comment']){
                             $commentBody.html($result.comment);
                         }
+                        comment.notify($result);
                     }
                 });
             },
@@ -52,6 +63,7 @@ $(document).ready(function(){
                         if (!$result['error'] && $result['comment']) {
                             $commentBody.html($result.comment);
                         }
+                        comment.notify($result);
                     }
                 });
             },
@@ -65,28 +77,27 @@ $(document).ready(function(){
                     scrollTop: parseInt($(selector).offset().top - 100)
                 }, 1000);
             },
-            show: function(topicId){
-                var $topicBox = $('#topic_' + topicId);
-                if($topicBox.find('#comments').length) {
-                    comment.scroll(topicId);
-                } else {
-                    $.ajax({
-                        method: "POST",
-                        url: "{{$base_config['base_url']}}/topic/comments/show",
-                        data: {
-                            'topic_id': topicId
-                        },
-                        success: function($result) {
-                            if (!$result['error'] && $result['comments']) {
-                                var commentsBox = '<div class= "comments" id = "comments">' + $result.comments + '</div>';
-                                $topicBox.append(commentsBox);
-                                comment.scroll(topicId);
-                            }
+            sort: function(topicId, sortBy){
+                var $commentsBox = $('#comments_child_0');
+                $.ajax({
+                    method: "POST",
+                    url: "{{$base_config['base_url']}}/topic/comments/sort",
+                    data: {
+                        'topic_id': topicId,
+                        'sort_by': sortBy
+                    },
+                    success: function($result) {
+                        if (!$result['error'] && $result['comments']) {
+                            $commentsBox.html($result.comments);
                         }
-                    });
-                }
+                        comment.notify($result);
+                    }
+                });
             },
             replyForm: function(commentId){
+                if(commentId == 0){
+                    return;
+                }
                 var formSelector = '#add_comment_'+commentId;
                 var $replyForm = $(formSelector);
                 if($replyForm.is(':visible')){
@@ -95,6 +106,9 @@ $(document).ready(function(){
                     $replyForm.show();
                     comment.scrollTo(formSelector);
                 }
+            },
+            notify: function($result){
+                $.notify($result.message, $result.status);
             },
             initEditor: function(selector){
                 tinymce.init({

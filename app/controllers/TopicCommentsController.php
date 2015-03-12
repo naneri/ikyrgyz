@@ -21,26 +21,29 @@ class TopicCommentsController extends \BaseController {
 	 */
 	public function postAdd()
 	{
-        $result = array();
-                
-		$validator = Validator::make($data = Input::all(), TopicComment::$rules);
+            $result = array();
 
-        if ($validator->fails()) {
-            $result['error'] = $validator;
-        } else {
-            $data['user_id'] = Auth::user()->id;
-            $comment = Topiccomment::create($data);
-            $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
-            $result['comment_id'] = $comment->id;
+                    $validator = Validator::make($data = Input::all(), TopicComment::$rules);
+
+            if ($validator->fails()) {
+                $result['status'] = "error";
+                $result['message'] = $validator;
+            } else {
+                $data['user_id'] = Auth::user()->id;
+                $comment = Topiccomment::create($data);
+                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $data['parent_id'], 'with_child' => true))->render();
+                $result['comment_id'] = $comment->id;
+                $result['message'] = "Комментарий успешно добавлен";
+                $result['status'] = "success";
+            }
+
+            if(Request::ajax()){
+                    return Response::json($result);
+            }
+            Debugbar::info($result['error']);
+            Debugbar::error('Error!');
+            return Redirect::back()->with('errors');
         }
-        
-        if(Request::ajax()){
-        	return Response::json($result);
-        }
-        Debugbar::info($result['error']);
-        Debugbar::error('Error!');
-        return Redirect::back()->with('errors');
-    }
 
 	/**
 	 * Store a newly created topiccomment in storage.
@@ -69,12 +72,12 @@ class TopicCommentsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$topiccomment = Topiccomment::findOrFail($id);
+            $topiccomment = Topiccomment::findOrFail($id);
 
-		return View::make('topiccomments.show', compact('topiccomment'));
-	}
+            return View::make('topiccomments.show', compact('topiccomment'));
+        }
 
-	/**
+        /**
 	 * Show the form for editing the specified topiccomment.
 	 *
 	 * @param  int  $id
@@ -123,8 +126,11 @@ class TopicCommentsController extends \BaseController {
                     $comment->trash = true;
                     $comment->save();
                     $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                    $result['message'] = "Комментарий удален";
+                    $result['status'] = "error";
                 } else {
-                    $result['error'] = "У вас нет прав не удаление этого комментария";
+                    $result['status'] = "success";
+                    $result['message'] = "У вас нет прав на удаление этого комментария";
                 }
                 return Response::json($result);
 	}
@@ -142,8 +148,11 @@ class TopicCommentsController extends \BaseController {
                     $comment->trash = false;
                     $comment->save();
                     $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent_id' => $comment->parent_id, 'with_child' => false))->render();
+                    $result['message'] = "Комментарий восстановлен";
+                    $result['status'] = "success";
                 } else {
-                    $result['error'] = "У вас нет прав не восстановление этого комментария";
+                    $result['status'] = "error";
+                    $result['message'] = "У вас нет прав на восстановление этого комментария";
                 }
                 return Response::json($result);
        }
@@ -154,10 +163,19 @@ class TopicCommentsController extends \BaseController {
         * @param  int  $id
         * @return Response
         */
-        public function showComments() {
-            $topic = Topic::findOrFail(Input::get('topic_id'));
+        public function sortComments() {
+            $topic = Topic::find(Input::get('topic_id'));
+            $isModerator = $topic->blog->isModeratorCurrentUser();
+            $comments = $topic->commentsWithDataSortBy(Input::get('sort_by'));
             $result = array();
-            $result['comments'] = View::make('comments.build', array('topic' => $topic, 'parent_id' => 0))->render();
+            if($comments){
+                $result['comments'] = View::make('comments.build', array('comments' => $comments, 'parent_id' => 0, 'isModerator' => $isModerator))->render();
+                $result['message'] = "Комментарии отсортированы";
+                $result['status'] = 'success';
+            }else{
+                $result['status'] = 'warn';
+                $result['message'] = "Комментариев к топику пока нет";
+            }
             return Response::json($result);
         }
 
