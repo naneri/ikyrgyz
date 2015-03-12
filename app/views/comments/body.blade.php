@@ -1,7 +1,10 @@
 <div>
     {{HTML::image(($comment->user_profile_avatar)?$comment->user_profile_avatar:asset('img/48.png'), null, array('style' => 'max-width:40px;max-height:40px;float:left;margin-right:10px;'))}}
-    <span style="line-height: 40px;margin-right:20px;" class="b-profile-about-text__text" >{{$comment->first_name.' '.$comment->last_name}}</span>
-    <span style="font-size: 10px; font-family: 'PT sans caption'; color: #aaa;">{{$comment->created_at}}</span>
+    <span style="line-height: 40px;" class="b-profile-about-text__text" >{{$comment->first_name.' '.$comment->last_name}}</span>
+    @if($parent)
+        <span style='color:#ccc;'>→ {{$parent->first_name.' '.$parent->last_name}}</span>
+    @endif
+    <span style="margin-left:20px;font-size: 10px; font-family: 'PT sans caption'; color: #aaa;">{{$comment->created_at}}</span>
 </div>
     @if($comment->trash)
         @if(Auth::id() == $comment->user_id || $isModerator)

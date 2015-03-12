@@ -18,7 +18,6 @@ class TopicComment extends \Eloquent {
         public function childCommentsWithUserData(){
             return $this->childComments()
                         ->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
-                        ->where('parent_id', $this->id)
                         ->get();
         }
         

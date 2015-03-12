@@ -94,7 +94,7 @@
               <div>
                   <div class="b-profile-about-profile__name" style="height: 20px;">
                       <div style="float:left;">Комментарии {{$topic->comments->count()}}</div>
-                      <div style="float:right;">Сортировка: {{Form::select('sort_by', array('new' => 'Новые', 'old' => 'Старые', 'rate' => 'По рейтингу'))}}</div>
+                      <div style="float:right;">Сортировка: {{Form::select('sort_by', array('old' => 'Старые', 'new' => 'Новые', 'rating' => 'По рейтингу'))}}</div>
                   </div>
                   <hr>
                   <br>
@@ -107,9 +107,9 @@
                       <input type="button" value="Опубликовать" class="default-button submit-button" onclick="comment.submit(0,{{$topic->id}});">
                   </div>
                   <div id="comments_child_0">
-                    @include('comments.build', array('comments' => $topic->commentsWithData(), 'isModerator' => $isModerator))
-                    @include('comments.scripts')
+                    @include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => false))
                   </div>
+                @include('comments.scripts')
               </div>
             </div>
           </div>

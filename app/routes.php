@@ -140,7 +140,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::post('topic/comment/add', 'TopicCommentsController@postAdd');;
     
     if(Request::ajax()){
-        Route::post('topic/comments/show', 'TopicCommentsController@showComments');
+        Route::post('topic/comments/sort', 'TopicCommentsController@sortComments');
         Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
         Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
         Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
