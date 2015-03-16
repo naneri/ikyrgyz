@@ -17,10 +17,26 @@ class TopicComment extends \Eloquent {
         
         public function childCommentsWithUserData(){
             return $this->childComments()
-                        ->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
-                        ->get();
+                        ->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id');
         }
-        
+
+        public function childCommentsSortBy($sort) {
+            $comments = array();
+            switch ($sort) {
+                case 'new':
+                    $comments = $this->childCommentsWithUserData()->orderBy('created_at', 'DESC')->get();
+                    break;
+                case 'rating':
+                    $comments = $this->childCommentsWithUserData()->orderBy('rating', 'DESC')->get();
+                    break;
+                case 'old':
+                default:
+                    $comments = $this->childCommentsWithUserData()->orderBy('created_at', 'ASC')->get();
+                    break;
+            }
+            return $comments;
+        }
+
         public function withUserData(){
             return $this->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
                         ->where('topic_comments.id', $this->id)

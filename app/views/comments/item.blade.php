@@ -8,7 +8,7 @@
     </div>
     <div class="comments_child" id="comments_child_{{$comment->id}}" style="margin-left:20px;">
         @if($with_child)
-            @include('comments.build', array('comments' => $comment->childCommentsWithUserData(), 'parent_id' => $comment->id, 'parent' => $comment))
+            @include('comments.build', array('comments' => $comment->childCommentsSortBy($sort), 'parent' => $comment))
         @endif
     </div>
 </div>
