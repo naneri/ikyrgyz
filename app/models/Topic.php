@@ -99,14 +99,14 @@ class Topic extends Eloquent {
             $comments = array();
             switch($sort){
                 case 'new':
-                    $comments = $this->commentsWithData()->orderBy('id', 'DESC')->get();
+                    $comments = $this->commentsWithData()->orderBy('created_at', 'DESC')->get();
                     break;
                 case 'rating':
                     $comments = $this->commentsWithData()->orderBy('rating', 'DESC')->get();
                     break;
                 case 'old':
                 default:
-                    $comments = $this->commentsWithData()->orderBy('id', 'ASC')->get();
+                    $comments = $this->commentsWithData()->orderBy('created_at', 'ASC')->get();
                     break;
             }
             return $comments;

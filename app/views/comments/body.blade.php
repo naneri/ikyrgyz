@@ -4,7 +4,7 @@
     @if($parent)
         <span style='color:#ccc;'>→ {{$parent->first_name.' '.$parent->last_name}}</span>
     @endif
-    <span style="margin-left:20px;font-size: 10px; font-family: 'PT sans caption'; color: #aaa;">{{$comment->created_at}}</span>
+    <span style="margin-left:20px;font-size: 10px; font-family: 'PT sans caption'; color: #aaa;" class="comment_time">{{$comment->created_at}}</span>
 </div>
     @if($comment->trash)
         @if(Auth::id() == $comment->user_id || $isModerator)

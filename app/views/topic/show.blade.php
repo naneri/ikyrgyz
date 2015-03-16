@@ -118,6 +118,7 @@
     </div>
 <script>
 $(document).ready(function(){
+    comment.convertTimes('body');
     comment.initEditor("textarea.add_comment_text");
     $('select[name="sort_by"]').change(function(){
         comment.sort({{$topic->id}}, $(this).val());
