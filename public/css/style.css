@@ -2706,6 +2706,10 @@ ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li:nt
 	border-bottom: 2px solid #b43b1f;
 }
 
+.b-profile-about-message_margin {
+	margin-left: 50px;
+}
+
 .b-profile-about-message__image {
 	float: left;
 	width: 60px;
