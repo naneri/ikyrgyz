@@ -4,7 +4,7 @@
             <div class="b-user-blog__inner">
               <div class="b-user-blog-header">
                 <div class="b-user-blog-header__top">
-                  <p class="b-user-blog-header__title">{{$blog->title}}</p>
+                  <p class="b-user-blog-header__title"><a href="{{ URL::to('blog/show') . '/' . $blog->id }}">{{$blog->title}}</a></p>
                   <div class="b-user-blog-header__vision">
                     <!--<img src="img/62.png" alt="vision"/><span>99</span>
                     <img src="img/63.png" alt="vision"/><span>34</span> -->
@@ -18,7 +18,7 @@
               <div class="b-user-blog-image">
                 @if(isset($blog->avatar))
                 <a href="#">
-                  <img src="{{$blog->avatar}}" alt="blog-image"/>
+                  <a href="{{ URL::to('blog/show') . '/' . $blog->id }}"><img src="{{$blog->avatar}}" alt="blog-image"/></a>
                 </a>
                 @endif
               </div>

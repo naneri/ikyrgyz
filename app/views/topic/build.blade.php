@@ -7,7 +7,7 @@
       <div class="b-user-wall__inner">
         <div class="b-user-wall-header">
           <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->description->user_profile_avatar or ''}}" alt=""/></a></div>
-          <p class="b-user-wall-header__title">{{$topic->title}}</p>
+          <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}</a></p>
           <p class="b-user-wall-header__date">{{$topic->created_at}}
             <div class="clear"></div>
           </p>
@@ -18,7 +18,7 @@
         </div>
         <div class="b-user-wall-image">
           @if(isset($topic->image_url))
-            <a href=""><img src="{{$topic->image_url}}" alt=""></a>
+            <a href="{{ URL::to('topic/show/'. $topic->id) }}"><img src="{{$topic->image_url}}" alt=""></a>
           @endif
           <div class="topic-preview-text">
             {{mb_substr(strip_tags($topic->description), 0 ,200, 'UTF-8') }}
