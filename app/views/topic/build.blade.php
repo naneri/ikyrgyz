@@ -17,7 +17,7 @@
           </p> -->
         </div>
         <div class="b-user-wall-image">
-          @if(isset($topic->image_url))
+          @if($topic->image_url)
             <a href="{{ URL::to('topic/show/'. $topic->id) }}"><img src="{{$topic->image_url}}" alt=""></a>
           @endif
           <div class="topic-preview-text">

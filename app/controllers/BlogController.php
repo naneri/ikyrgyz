@@ -97,10 +97,16 @@ class BlogController extends BaseController {
      * @return [type]     [description]
      */
 	public function show($id){
-		$blog = Blog::findOrFail($id);
-        return View::make('blog.show', array('blog' => $blog));
+        $blog = Blog::findOrFail($id);
+		$topics = Blog::getTopics($id);
+        return View::make('blog.show', compact('blog', 'topics'));
 	}
         
+    public function showAjax($id,$page){
+        $topics = Blog::getTopics($id, $page);
+        return View::make('topic.build', compact('topics'));
+    }
+
 	public function showPersonal($email) {
         $user = User::whereEmail($email)->get();
         $blog = $user->getPersonalBlog();

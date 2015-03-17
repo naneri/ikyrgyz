@@ -2,7 +2,7 @@
 
 
 @section('content')
-	@include('main.scripts')
+	@include('scripts.script-topic', array('page' => '/main/ajaxTopics/'))
 	
     <div class="b-content">
     	@include('misc.createnav')

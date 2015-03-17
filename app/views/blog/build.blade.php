@@ -4,7 +4,9 @@
             <div class="b-user-blog__inner">
               <div class="b-user-blog-header">
                 <div class="b-user-blog-header__top">
-                  <p class="b-user-blog-header__title"><a href="{{ URL::to('blog/show') . '/' . $blog->id }}">{{$blog->title}}</a></p>
+                  <p class="b-user-blog-header__title">
+                    <a href="{{ URL::to('blog/show') . '/' . $blog->id }}">{{$blog->title}}</a>
+                  </p>
                   <div class="b-user-blog-header__vision">
                     <!--<img src="img/62.png" alt="vision"/><span>99</span>
                     <img src="img/63.png" alt="vision"/><span>34</span> -->
