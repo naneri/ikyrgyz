@@ -109,6 +109,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->get();
     }
     
+    public function newsline(){
+        $topicIds = $this->votes()->where('target_type', 'comment')->orderBy('created_at')->lists('target_id');
+        return Topic::whereIn('id', $topicIds)->get();
+    }
+    
+    public function votes(){
+        return $this->hasMany('Vote');
+    }
+    
     public function getNames(){
         return $this->description->first_name.' '.$this->description->last_name;
     }

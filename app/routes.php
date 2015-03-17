@@ -61,6 +61,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+        Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');
         Route::get('profile/random', 'ProfileController@getRandom');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');

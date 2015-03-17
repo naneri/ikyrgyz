@@ -15,15 +15,48 @@ class ProfileController extends BaseController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function getShow($id){
+	public function getShow($id, $page = 'newsline'){
 		$user = User::find($id);
 		$friend_status = False;
 		if(Friend::checkIfFriend($id, Auth::id())){
 			$friend_status = True;
 		}
+                
+                $items = null;
+                switch($page){
+                    case 'publications':
+                        $items = $user->topics;
+                        break;
+                    case 'friends':
+                        $items = array();
+                        break;
+                    case 'subscribtions':
+                        $items = array();
+                        break;
+                    case 'newsline':
+                    default:
+                        $items = $user->newsline();
+                        break;
+                }
+                
+                if($user->id == Auth::id()){
+                    //$items = Auth::user()->topics;
+                    return View::make('profile.show.my', compact('user', 'items', 'page'));
+                }
 
-		return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status));
+		return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status, 'topics' => $items));
 	}
+        
+        public function getRandom(){
+            $friendIds = Auth::user()->friends()->lists('id');
+            array_push($friendIds, Auth::id());
+            $user = User::whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first();
+            $friend_status = False;
+            if (Friend::checkIfFriend($user->id, Auth::id())) {
+                $friend_status = True;
+            }
+            return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status));
+        }
         
         public function getProfileFill(){
             $user = User::with('description')->find(Auth::id());
@@ -381,7 +414,7 @@ class ProfileController extends BaseController {
             return $correctAccess;
         }
 
-        public function getRandom(){
+        public function getRandomOld(){
             $users = DB::connection('mysql_users')->statement("SELECT * FROM `users` WHERE id >= (SELECT FLOOR( MAX(id) * RAND()) FROM `users` ) ORDER BY id LIMIT 1;");
             echo "<pre>"; print_r($users); echo "</pre>";exit;
         }

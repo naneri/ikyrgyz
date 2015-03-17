@@ -45,5 +45,11 @@ class User_Description extends Eloquent{
     {
         return $this->belongsTo('User');
     }
+    
+    public function getBirthdayAttribute($birthday){
+        if($this->birthday_access == 'all'){
+            return $birthday;
+        }
+    }
 
 }
