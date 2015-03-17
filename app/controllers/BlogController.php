@@ -165,12 +165,18 @@ class BlogController extends BaseController {
         }
         
         $roleId = null;
-        if($blog->type->name == 'open'){
-            $roleId = Role::whereName('reader')->pluck('id');
-        } else {
+        if($blog->type->name == 'close'){
             $roleId = Role::whereName('request')->pluck('id');
+        } else {
+            $roleId = Role::whereName('reader')->pluck('id');
         }
-        
+
+        $blogRole = new BlogRole();
+        $blogRole->blog_id = $blog->id;
+        $blogRole->user_id = Auth::user()->id;
+        $blogRole->role_id = $roleId;
+        $blogRole->save();
+
         return Redirect::back();
     }
     

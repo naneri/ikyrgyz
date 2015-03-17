@@ -1,10 +1,16 @@
-<div>
+<div style="height: 40px;">
     {{HTML::image(($comment->user_profile_avatar)?$comment->user_profile_avatar:asset('img/48.png'), null, array('style' => 'max-width:40px;max-height:40px;float:left;margin-right:10px;'))}}
-    <span style="line-height: 40px;" class="b-profile-about-text__text" >{{$comment->first_name.' '.$comment->last_name}}</span>
-    @if($parent)
-        <span style='color:#ccc;'>→ {{$parent->first_name.' '.$parent->last_name}}</span>
-    @endif
-    <span style="margin-left:20px;font-size: 10px; font-family: 'PT sans caption'; color: #aaa;" class="comment_time">{{$comment->created_at}}</span>
+    <div style="float:left;">
+        <span class="b-profile-about-text__text" >{{$comment->first_name.' '.$comment->last_name}}</span>
+        <br>
+        <span>{{round($comment->author_rating, 2)}}</span>
+    </div>
+    <div>
+        @if($parent)
+            <span style='color:#ccc;'>→ {{$parent->first_name.' '.$parent->last_name}}</span>
+        @endif
+        <span style="margin-left:20px;font-size: 10px; font-family: 'PT sans caption'; color: #aaa;" class="comment_time">{{$comment->created_at}}</span>
+    </div>
 </div>
     @if($comment->trash)
         @if(Auth::id() == $comment->user_id || $isModerator)
