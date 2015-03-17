@@ -3181,6 +3181,11 @@ blog style
 	margin: 5px 0 0 0;
 }
 
+.b-user-blog-header__title a {
+	color: #333;
+	font-family: 'PT Sans Caption Bold';
+}
+
 .b-user-blog-header__date {
 	font-size: 12px;
 	color: #999;
