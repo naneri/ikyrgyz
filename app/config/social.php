@@ -12,7 +12,7 @@ return array(
             ),
 	
 	'user_site'								=> URL::to('/'),
-        'topic_comment.hide_comment_rating' => -0.5,
+        'topic_comment.hide_comment_rating' => -5,
       
       'yandex-metrika' => array(
             'kyrgyz' => '<script type="text/javascript">

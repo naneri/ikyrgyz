@@ -107,7 +107,7 @@
                       <input type="button" value="Опубликовать" class="default-button submit-button" onclick="comment.submit(0,{{$topic->id}});">
                   </div>
                   <div id="comments_child_0">
-                    @include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => null))
+                    @include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => null, 'sort' => $commentsSort))
                   </div>
                 @include('comments.scripts')
               </div>

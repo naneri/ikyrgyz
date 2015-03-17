@@ -24,7 +24,7 @@
                             comment.replyForm(commentId);
                             comment.initEditor('#comment_' + $result.comment_id + ' textarea');
                             comment.scrollTo('#comment_' + $result.comment_id);
-                            comment.convertTimes('#comment_' + $result.comment_id + ' ');
+                            comment.convertTimes('#comment_' + $result.comment_id);
                         }
                         comment.notify($result);
                     }
@@ -57,6 +57,8 @@
                     success: function($result) {
                         if (!$result['error'] && $result['comment']) {
                             $commentBody.html($result.comment);
+                            comment.initEditor('#comment_' + $result.comment_id + ' textarea');
+                            comment.convertTimes('#comment_' + $result.comment_id);
                         }
                         comment.notify($result);
                     }
@@ -84,6 +86,8 @@
                     success: function($result) {
                         if (!$result['error'] && $result['comments']) {
                             $commentsBox.html($result.comments);
+                            comment.convertTimes($commentsBox.selector);
+                            comment.initEditor("textarea.add_comment_text");
                         }
                         comment.notify($result);
                     }
@@ -129,18 +133,7 @@
                     image_advtab: true,
                     relative_urls: false,
                     remove_script_host: true,
-                    toolbar: "image youtube media smileys | publish",
-                    setup: function(ed) {
-                        /*ed.addButton('publish', {
-                         text: 'Опубликовать',
-                         icon: false,
-                         onclick: function() {
-                         // Add you own code to execute something on click
-                         ed.focus();
-                         ed.selection.setContent('Hello world!');
-                         }
-                         });*/
-                    }
+                    toolbar: "image youtube media smileys"
                 });
             }
         };
