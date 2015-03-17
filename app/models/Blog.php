@@ -200,4 +200,13 @@ Class Blog extends Eloquent{
             return ($this->avatar) ? $this->avatar : asset('img/48.png');
         }
 
+        public static function getTopics($id, $page = 0){
+            $topic_number = Config::get('topic.topics_per_page');
+            return Blog::findOrFail($id)->topics()
+                ->skip($page*$topic_number)
+                ->take($topic_number)
+                ->orderBy('topics.id', 'DESC')
+                ->get();
+        }
+
 }

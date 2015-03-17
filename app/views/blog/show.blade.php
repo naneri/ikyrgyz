@@ -1,16 +1,12 @@
 @extends('misc.layout')
 
 @section('content')
-<div class="b-content">
 
-{{HTML::script('js/bootstrap.js')}}
+   	<div class="b-content">
+    	@include('misc.createnav')
+    	@include('topic.build', array('topics' => $topics))
 
-<div id="blog_{{$blog->id}}">
-    @if($blog->type->name == 'personal')
-        @include('blog.type.personal', compact($blog))
-    @else
-        @include('blog.type.other', compact($blog))
-    @endif
-</div>
-</div>
+	</div>
+
+	@include('scripts.script-topic', array('page' => '/blog/showAjax/' . $blog->id . '/', 'no_sorting' => true))	
 @stop
