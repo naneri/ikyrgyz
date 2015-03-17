@@ -40,7 +40,9 @@ class TopicComment extends \Eloquent {
 
         public function withUserData(){
             return $this->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
+                        ->join(Config::get('database.connections.mysql_users.database') . '.users', 'users.id', '=', 'topic_comments.user_id')
                         ->where('topic_comments.id', $this->id)
+                        ->select('topic_comments.*', 'user_description.*', 'users.rating as author_rating')
                         ->first();
         }
 
