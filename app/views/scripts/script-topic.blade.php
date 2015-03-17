@@ -20,12 +20,12 @@
 			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100 && !inProgress) {
                                         inProgress = true;
                                         var array = document.URL.split('/');
-                                        @if(!$no_sorting)
-                                    		var sort = (array[array.length - 1].length > 1) ? array[array.length - 1] : array[array.length - 2]+ '/';
-                                        @else
+                                        @if(@$no_sorting)
                                         	var sort = '';
+                                        @else
+                                        	var sort = (array[array.length - 1].length > 1) ? array[array.length - 1] : array[array.length - 2];
                                         @endif
-			   		$.get(base_url + '{{$page}}' + sort + page, function(data){
+			   		$.get(base_url + '{{$page}}' + sort + '/' + page, function(data){
 
 			   			// находим все блоки с классом .b-user-wall и добавляем в массив elements
 			   			var elements = $(data).find(".b-user-wall");

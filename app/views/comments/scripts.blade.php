@@ -23,7 +23,7 @@
                             }
                             comment.replyForm(commentId);
                             comment.initEditor('#comment_' + $result.comment_id + ' textarea');
-                            comment.scrollTo('#comment_' + $result.comment_id);
+                            comment.scrollToMargin('#comment_' + $result.comment_id, 300);
                             comment.convertTimes('#comment_' + $result.comment_id);
                         }
                         comment.notify($result);
@@ -74,6 +74,11 @@
                     scrollTop: parseInt($(selector).offset().top - 100)
                 }, 1000);
             },
+            scrollToMargin: function(selector, marginTop) {
+                $('html, body').animate({
+                    scrollTop: parseInt($(selector).offset().top - marginTop)
+                }, 1000);
+            },
             sort: function(topicId, sortBy){
                 var $commentsBox = $('#comments_child_0');
                 $.ajax({
@@ -94,7 +99,7 @@
                 });
             },
             show: function(commentId){
-                $('#comment_'+commentId+'_text_show_msg').hide();
+                $('#comment_'+commentId+'_hidden_text').hide();
                 $('#comment_'+commentId+'_text').show();
             },
             replyForm: function(commentId){

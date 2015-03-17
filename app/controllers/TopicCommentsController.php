@@ -31,7 +31,7 @@ class TopicCommentsController extends \BaseController {
             } else {
                 $data['user_id'] = Auth::user()->id;
                 $comment = Topiccomment::create($data);
-                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => true))->render();
+                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => false))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";

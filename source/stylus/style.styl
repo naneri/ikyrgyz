@@ -418,8 +418,8 @@
 			float left
 			margin 0 15px 0 0
 			img
-				width 40px !important
-				height 40px !important
+				
+				max-height 40px !important
 				
 			
 				
@@ -428,6 +428,11 @@
 			font-family 'PT Sans Caption Bold'
 			
 			margin 5px 0 0 0
+			
+			a
+				color #333
+				font-family 'PT Sans Caption Bold'
+				
 		&__date
 			font-size 12px
 			color #999
@@ -2055,13 +2060,71 @@ ul.b-profile-about-tags-user-list
 				border-bottom 2px solid #b43b1f
 				
 
-
-
-
-
-
-
-
+.b-profile-about-message_margin
+	margin-left 50px
+.b-profile-about-message
+	//
+	&__image
+		float left
+		width 60px
+	&__message
+		float left
+		width 490px
+.b-profile-about-message-top
+	padding-bottom 5px
+	&__user
+		float left
+		font 14px $baseFontFamily
+		color #e16549
+	&__date
+		float right
+		font 12px $baseFontFamily
+		color $baseFontColor
+		span
+			padding 0 5px
+.b-profile-about-message-text
+	//
+	&__text
+		color #3e4142
+		font 14px $baseFontFamily
+.b-profile-about-message-button
+	padding 20px 0
+	&__answer, &__delete, &__minus, &__plus, &__raiting
+		display inline-block
+		
+	&__minus
+		margin-left 150px
+	.button-submit
+		button-default()
+		color $baseFontColor
+		font 12px $baseFontFamily
+		cursor pointer
+		padding 5px 10px
+.b-profile-about-message-button__minus
+	//
+	.button-small
+		button-default()
+		background url(../img/24.png) no-repeat
+		background-position 50% 50%
+		width 32px
+		height 32px
+		text-indent -9999px
+		background-color $lightGradient
+		
+.b-profile-about-message-button__plus
+	//
+	.button-small
+		button-default()
+		background url(../img/25.png) no-repeat
+		background-position 50% 50%
+		width 32px
+		height 32px
+		text-indent -9999px
+		background-color $lightGradient		
+	
+p.b-profile-about-message-button__raiting
+	color #26ad85
+	font 15px $baseFontFamilyBold
 /*
 ===========================
 ===========================
@@ -2071,100 +2134,223 @@ interface
 */
 
 .b-user-interface
-	position relative
+	background-color #fff
+	&__header
+		
+		background $lightGradient
+		position relative
+		box-shadow $baseBoxShadow
+		height 45px
+		margin-bottom 20px
+		.input-default
+			width 10px
+			height 10px
+			background url(../img/51.png) no-repeat
+			background-position 50% 50%
+			display inline-block
+			border 0
+			position absolute
+			right 10px
+			top 17px
+			cursor pointer
+			color transparent
+			&:hover
+				background url(../img/50.png) no-repeat
+				background-position 50% 50%
+		p.title-header
+			color $baseFontColor
+			font 16px $baseFontFamilyBold
+			padding-left 10px
+			line-height 45px
+	
 
-.b-user-interface-tab
-	border 1px solid #999
-	
-	width 253px
-	box-sizing border-box
+.b-user-interface-content
 	//
-	&__item
-		//
-		
-	&-list
-		display inline-block
-		
-		
-	&-item
-		margin 10px
-		&__title
-			font 15px $baseFontFamily
-			color $baseFontColorLight
-		&__search-place
-			//
-			.select-default
-				width 230px
-				
-				.jq-selectbox__select
-					background #fff
-					button-default()
-					border-radius 0
-	
-		&__gender
-			//
-			span 
-				color $baseFontColor
-				font 14px $baseFontFamily		
 	&__left
-		//
+		float left
+	&-wrapper
+		border $baseBorder
+		
+		
 		
 	&__right
-		position absolute
-		right 0
-		top 0
+		float right
+		padding-right 10px
+	&-nav
+		padding-bottom 10px
+		
+		&__list
+			float left
+			a
+				background $lightGradient
+				padding 6px
+				color $baseFontColorLight
+				font 15px $baseFontFamily
+				line-height 30px
+				border $baseBorder
+				&:hover
+					color #fff
+					background $orangeGradient
+.b-user-interface-content-item
+	margin 0 10px
+	&__item
+		padding-bottom 10px
+		.input-default
+			width 80px
+			height 30px
+			
+		.select-default
+			width 240px
+			height 30px
+			
+			.jq-selectbox__select
+				background #fff
+				color $baseFontColor
+				font 14px $baseFontFamily
+				line-height 30px
+			.jq-selectbox__trigger
+				background $lightGradient
+		label
+			color $baseFontColor
+			font 14px $baseFontFamily
+			
+			
+			
+	&__title
+		padding-bottom 10px
+		font 15px $baseFontFamily
+		color $baseFontColorLight	
+.b-user-interface-content-search
+	//
+	&__search
+		border $baseBorder
+		margin-bottom 10px
+	.input-default
+		width 540px
+		height 30px
+		border 0
+		padding-left 10px
+		color $baseFontColor
+		font 15px $baseFontFamily
+	.button-default
+		width 35px
+		height 32px
+		border 0
+		color transparent
+		float right
+		background-image url(../img/64.png)
+		background-repeat no-repeat
+		background-color #f2f1f1
+		background-position 50% 50%
+		cursor pointer
+		
+.b-user-interface-content-profile
+	
+	margin 10px 0 0 0
+	border $baseBorder
+	padding 10px
+	&__image
+		float left
+		margin-right 10px
+	&__name
+		font 14px $baseFontFamily
+		color $baseFontColorLight
+	&__desc
+		font 12	px $baseFontFamily
+		color $baseFontColor
+	&__buttons
+		float right
+		margin -35px 20px 0 0
+		.button-default
+			button-default()
+			color $baseFontColor
+			font 15px $baseFontFamily
+			padding 5px
+			cursor pointer
+			&:hover
+				background $orangeGradient
+				color #fff
 		
 	
-		
-	
-		
+.b-user-interface-content-sort
+	margin 0 10px
+	&__title
+		padding-bottom 10px
+		font 15px $baseFontFamily
+		color $baseFontColorLight
 	&-list
 		//
 		&__list
-			float left
-			
-			
-			
+			padding-bottom 10px
 			a
-				display block
-				background #fff
-				color #676767
-				font 15px $baseFontFamily
-				padding 5px
-				border-right 1px solid #999
-				&:hover
-					background $orangeGradient
-					color #fff
-			&:last-child
-				//
-				a
-					border 0
-					
-.b-user-interface-tab-item__item
-	//
-	.input-default
-		button-default()
-		width 220px
-		color $baseFontColorLight
+				font 14px $baseFontFamily
+				color $baseFontColor
+.b-user-interface-content-filter
+	margin 0 10px	
+	&__title 
+		padding-bottom 10px
 		font 15px $baseFontFamily
-		padding-left 10px
-		background #fff
+		color $baseFontColorLight
+	&-list
+		//
+		&__list
+			padding-bottom 10px
+			a
+				font 14px $baseFontFamily
+				color $baseFontColor
 		
-.b-user-interface-tab__search
+.tab-content
+	display none
+.tab-content.current
+	display inherit
+	
+.b-user-interface-content-block
+	margin 10px 0 0 0
 	border $baseBorder
-	.input-default:first-child
-		width 545px
-		height 30px
+	padding 10px
+	&__image
 		
-		border 0
-		
-		
-	.input-default:last-child
-		width 35px
-		height 30px	
-		background $lightGradient
-		border 0
-		color transparent
+		float left
+		margin-right 10px
+		img
+			max-height 82px
+			max-width 124px
+	&__text
+		float left
+	&__detail
+		float right
+.b-user-interface-content-block-text
+	//
+	&__title
+		font 14px $baseFontFamily
+		color $baseFontColorLight
+	&__date, &__name, &__desc
+		font 12px $baseFontFamily
+		color $baseFontColor
+.b-user-interface-content-block-detail
+	//
+	&__vision
+		padding-bottom 10px
+		span
+			font 11px $baseFontFamilyBold
+			color $baseFontColor
+			padding 0 5px
+	&__raiting
+		padding-bottom 10px
+		span
+			font 18px $baseFontFamilyBold
+			color #26ad85
+	&__buttons
+		//
+		.button-default
+			button-default()
+			color $baseFontColor
+			font 15px $baseFontFamily
+			padding 5px
+			cursor pointer
+			&:hover
+				background $orangeGradient
+				color #fff
 	
 
 /*
@@ -2174,6 +2360,9 @@ blog style
 =============================
 ===============================
 */
+
+
+
 .b-user-blog
 	width 49%
 	float left

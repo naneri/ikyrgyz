@@ -8,5 +8,5 @@
 
 	</div>
 
-	@include('scripts.script-topic', array('page' => '/blog/showAjax/' . $blog->id . '/', 'no_sorting' => true))	
+	@include('scripts.script-topic', array('page' => '/blog/showAjax/' . $blog->id , 'no_sorting' => true))	
 @stop
