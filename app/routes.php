@@ -41,6 +41,7 @@ Route::group(array('before' => 'auth|activated'),function(){
             Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
         });
         Route::get('blog/{id}/read', 'BlogController@readBlog');
+        Route::get('blog/user/{id}/read', 'BlogController@readPersonalBlog');
         Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
         Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
         Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
@@ -61,6 +62,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+        Route::get('profile', 'ProfileController@showMyProfile')->where('id', '[0-9]+');
         Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');
         Route::get('profile/random', 'ProfileController@getRandom');
 	Route::get('profile/edit', 'ProfileController@getEdit');

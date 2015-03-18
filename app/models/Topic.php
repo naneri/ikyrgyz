@@ -78,6 +78,10 @@ class Topic extends Eloquent {
             return $this->belongsTo('User');
         }
 
+        public function userDescription() {
+            return $this->belongsTo('User_Description', 'user_id', 'user_id');
+        }
+
         public function author() {
             return $this->belongsTo('User', 'user_id');
         }
@@ -167,4 +171,9 @@ class Topic extends Eloquent {
             $this->comments()->delete();
             return parent::delete();
         }
+
+        public function getRatingAttribute($rating) {
+            return round($rating, 2);
+        }
+
 }

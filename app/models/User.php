@@ -105,13 +105,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return User::join('friends', 'friends.user_one', '=', 'users.id')
                 ->join('user_description', 'user_description.user_id', '=', 'users.id')
                 ->where('friends.status', Config::get('social.friend_status.friends'))
-                ->where('friends.user_two', Auth::id())
+                ->where('friends.user_two', $this->id)
+                ->select('users.*', 'user_description.*')
                 ->get();
     }
     
     public function newsline(){
-        $topicIds = $this->votes()->where('target_type', 'comment')->orderBy('created_at')->lists('target_id');
-        return Topic::whereIn('id', $topicIds)->get();
+        $votedTopicIds = $this->votes()->where('target_type', 'topic')->lists('target_id');
+        $subscribedTopicIds = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                ->whereIn('blogs.id', $this->canPublishBlogs()->lists('id'))
+                ->select('topics.id')
+                ->lists('id');
+        $topicIds = array_merge($votedTopicIds, $subscribedTopicIds);
+        $uniqueTopicIds = array_unique($topicIds);
+        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')->whereIn('id', $uniqueTopicIds)->orderBy('created_at')->get();
     }
     
     public function votes(){
@@ -135,6 +142,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function topics(){
+        return $this->hasMany('Topic')->where('draft', '0');
+    }
+
+    public function topicsWithDraft() {
         return $this->hasMany('Topic');
     }
 
@@ -286,6 +297,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         
         public function additionals(){
             return $this->hasMany('ProfileItem')->where('type', 'additional');
+        }
+        
+        public function getRatingAttribute($rating){
+            return round($rating, 2);
         }
 
 }

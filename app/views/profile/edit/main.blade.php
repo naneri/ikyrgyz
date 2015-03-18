@@ -13,23 +13,10 @@
                     <input type="text" class="form-control" placeholder="last name" name="last_name" value="{{$user['description']->last_name}}">
                 </div>
                 <div class="form-group">
-                    <?php
-                    $birthday = explode('-', $user['description']->birthday);
-                    $days = ['0' => 'День'];
-                    for ($day = 1; $day < 32; $day++) {
-                        $days[$day] = $day;
-                    }
-                    $startYear = (int) date('Y');
-                    $endYear = (int) date('Y') - 100;
-                    $years = ['0' => 'Год'];
-                    for ($year = $startYear; $year > $endYear; $year--) {
-                        $years[$year] = $year;
-                    };
-                    ?>
                     Дата рождения:
-                    {{Form::select('day', $days, $birthday[2], array('class' => 'form-control'))}}
-                    {{Form::select('month', $month, $birthday[1], array('class' => 'form-control'))}}
-                    {{Form::select('year', $years, $birthday[0], ['class' => 'form-control'])}}
+                    {{Form::select('day', $days, $birthday['day'], array('class' => 'form-control'))}}
+                    {{Form::select('month', $month, $birthday['month'], array('class' => 'form-control'))}}
+                    {{Form::select('year', $years, $birthday['year'], ['class' => 'form-control'])}}
                     {{Form::select('birthday_access', $access, $user['description']->birthday_access)}}
                 </div>
                 <div class="form-group">

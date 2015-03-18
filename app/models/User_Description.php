@@ -47,7 +47,7 @@ class User_Description extends Eloquent{
     }
     
     public function getBirthdayAttribute($birthday){
-        if($this->birthday_access == 'all'){
+        if($this->birthday_access == 'all' || Auth::id() == $this->user_id){
             return $birthday;
         }
     }

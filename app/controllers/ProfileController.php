@@ -28,10 +28,10 @@ class ProfileController extends BaseController {
                         $items = $user->topics;
                         break;
                     case 'friends':
-                        $items = array();
+                        $items = $user->friends();
                         break;
                     case 'subscribtions':
-                        $items = array();
+                        $items = $user->canPublishBlogs();
                         break;
                     case 'newsline':
                     default:
@@ -40,22 +40,21 @@ class ProfileController extends BaseController {
                 }
                 
                 if($user->id == Auth::id()){
-                    //$items = Auth::user()->topics;
                     return View::make('profile.show.my', compact('user', 'items', 'page'));
+                }else{
+                    return View::make('profile.show.user', array('user' => $user, 'friend_status' => $friend_status, 'items' => $items, 'page' => $page));
                 }
-
-		return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status, 'topics' => $items));
 	}
+        
+        public function showMyProfile(){
+            return $this->getShow(Auth::id());
+        }
         
         public function getRandom(){
             $friendIds = Auth::user()->friends()->lists('id');
             array_push($friendIds, Auth::id());
-            $user = User::whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first();
-            $friend_status = False;
-            if (Friend::checkIfFriend($user->id, Auth::id())) {
-                $friend_status = True;
-            }
-            return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status));
+            $userId = User::whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first()->id;
+            return $this->getShow($userId);
         }
         
         public function getProfileFill(){
@@ -159,8 +158,27 @@ class ProfileController extends BaseController {
         }
 
         public function getEditMain(){
-            $user = User::with('description')->find(Auth::id());       
-            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'month' => $this->month));
+            
+            $user = User::with('description')->find(Auth::id());
+            
+            $birthdayExploded = explode('-', $user['description']->birthday);
+            $birthday['year'] = $birthdayExploded[0];
+            $birthday['month'] = $birthdayExploded[1];
+            $birthday['day'] = $birthdayExploded[2];
+            
+            $days = ['0' => 'День'];
+            for ($day = 1; $day < 32; $day++) {
+                $days[$day] = $day;
+            }
+            
+            $startYear = (int) date('Y');
+            $endYear = (int) date('Y') - 100;
+            $years = ['0' => 'Год'];
+            for ($year = $startYear; $year > $endYear; $year--) {
+                $years[$year] = $year;
+            }; 
+            
+            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'month' => $this->month, 'birthday' => $birthday, 'days' => $days, 'years' => $years));
         }
         
         public function postEditMain(){

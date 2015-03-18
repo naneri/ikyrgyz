@@ -84,7 +84,7 @@
                           </li>
                         </ul>
                           <input type="submit" class="btn btn-minus" onclick="return vote.topic({{$topic->id}},-1);"/>
-                          <input type="submit" class="btn btn-plus" onclick="return vote.topic({{$topic->id}},1);" /><span class="likes" id="rating_topic_{{$topic->id}}">{{round($topic->rating,2)}}</span>
+                          <input type="submit" class="btn btn-plus" onclick="return vote.topic({{$topic->id}},1);" /><span class="likes" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
                       </div>
                       <div class="clear"></div>
                     </div>

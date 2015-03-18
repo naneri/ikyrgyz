@@ -185,7 +185,13 @@ class BlogController extends BaseController {
 
         return Redirect::back();
     }
-    
+
+    public function readPersonalBlog($id) {
+        $user = User::findOrFail($id);
+        $blogId = $user->getPersonalBlog()->id;
+        $this->readBlog($blogId);
+    }
+
     public function rejectBlog($id){
         $blog = Blog::findOrFail($id);
 
