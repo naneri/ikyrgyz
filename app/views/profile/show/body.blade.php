@@ -35,57 +35,59 @@
     <script>
         $(document).ready(function() {
             $('.b-user-media').prependTo(".masonry");
+            $('.video-item').each(function(){
+                var $video = $(this).find('div.youtube');
+                $video = $video.find('object').attr('width', '120').attr('height', '120');
+                $(this).html($video);
+            });
         });
     </script>
     <div class="b-user-media" style="right: 0px; padding-bottom: 100px;">
         <div class="b-user-media__video">
             <div class="b-user-media-video-top">
-                <p class="b-user-media-video-top__title">Мое видео</p>
+                <p class="b-user-media-video-top__title">Видео</p>
                 <div class="b-user-media-video-top__btn">
                     <input type="submit" value="Все" class="btn btn-all"/>
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                @foreach($videos as $video)
+                    <li class="b-user-media-video-gallery__list video-item">{{$video->description}}</li>
+                @endforeach
                 <div class="clear"></div>
             </ul>
         </div>
         <div class="b-user-media__photo">
             <div class="b-user-media-video-top">
-                <p class="b-user-media-video-top__title">Мое фото</p>
+                <p class="b-user-media-video-top__title">Фотографии</p>
                 <div class="b-user-media-video-top__btn">
                     <input type="submit" value="Все" class="btn btn-all"/>
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных фотографии</p></li>
+                <!--li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li-->
                 <div class="clear"></div>
             </ul>
         </div>
         <div class="b-user-media__music">
             <div class="b-user-media-video-top">
-                <p class="b-user-media-video-top__title">Моя музыка</p>
+                <p class="b-user-media-video-top__title">Музыка</p>
                 <div class="b-user-media-video-top__btn">
                     <input type="submit" value="Все" class="btn btn-all"/>
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="img/19.png" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных музыкальных файлов</p></li>
+                <!--li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
+                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li-->
                 <div class="clear"></div>
             </ul>
         </div>

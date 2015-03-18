@@ -18,7 +18,6 @@
         <div class="b-user-profile__middle">
             <p class="user-raiting">Рейтинг <span class="num">{{$user->rating}}</span></p>
             <p class="user-name">{{$user->getNames()}}</p>
-            <p class="user-date">{{$user->description->birthday}}</p>
         </div>
         <div class="b-user-profile__right">
             <ul class="b-user-profile-buttons">

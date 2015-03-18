@@ -118,7 +118,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->lists('id');
         $topicIds = array_merge($votedTopicIds, $subscribedTopicIds);
         $uniqueTopicIds = array_unique($topicIds);
-        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')->whereIn('id', $uniqueTopicIds)->orderBy('created_at')->get();
+        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')->whereIn('id', $uniqueTopicIds)->orderBy('created_at', 'desc')->get();
     }
     
     public function votes(){
@@ -147,6 +147,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function topicsWithDraft() {
         return $this->hasMany('Topic');
+    }
+    
+    public function topicsWithVideo(){
+        return $this->topics()->where('description', 'like', '%youtube%');
     }
 
     public function drafts(){
@@ -275,6 +279,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return $this->hasMany('ProfileItem');
         }
         
+        public function profileItemsValues($subtype) {
+            return $this->profileItems()->where('subtype', $subtype)->lists('value');
+        }
+
         public function schools(){
             return $this->hasMany('ProfileItem')->where('type', 'study')->where('subtype', 'school');
         }
@@ -301,6 +309,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         
         public function getRatingAttribute($rating){
             return round($rating, 2);
+        }
+        
+        public function age(){
+            return date_diff(date_create($this->description->birthday), date_create('today'))->y;
         }
 
 }
