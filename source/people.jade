@@ -5,104 +5,182 @@ block content
 			include block/header
 			.b-content
 				.b-user-interface
+					.b-user-interface__header
+						p.title-header Поиск
+							input.input-default(type="submit")
 					.b-user-interface__inner
-						.b-user-interface-tab
-
 						
-							ul.b-user-interface-tab-list
-								li.b-user-interface-tab-list__list
-									a(href="#tab-1-div"  class="active") Люди
-								li.b-user-interface-tab-list__list
-									a(href="#that-other-tab" ) Контент
-								li.b-user-interface-tab-list__list
-									a(href="#lastly" ) Группы
-								li.b-user-interface-tab-list__list
-									a(href="#sometab" ) Медиа
-								.clear
-
+						.b-user-interface-content(id="tab-1" class="tab-content current")
 							
-							
-							
-							
-							
-							
-							.b-user-interface-tab__item#tab-1-div
-								.b-user-interface-tab-item
-									p.b-user-interface-tab-item__title Место поиска											
-									.b-user-interface-tab-item__search-place
-										select.select-default(name="")
+							.b-user-interface-content__left
+								.b-user-interface-content-wrapper
+									.b-user-interface-content-nav
+										ul.tabs
+											li.b-user-interface-content-nav__list.tab-link.current(data-tab="tab-1")
+												a(href="#") Люди
+											li.b-user-interface-content-nav__list.tab-link(data-tab="tab-2")
+												a(href="#") Контент
+											li.b-user-interface-content-nav__list.tab-link(data-tab="tab-3")
+												a(href="#") Группы
+											li.b-user-interface-content-nav__list.tab-link(data-tab="tab-4")
+												a(href="#") Медиа
+											.clear
+									.b-user-interface-content-item
+										p.b-user-interface-content-item__title Место поиска
+										.b-user-interface-content-item__item
+											select.select-default(name="")
 												option(value="Страна") Страна
-									.b-user-interface-tab-item__search-place
-										select.select-default(name="")
-											option(value="Город") Город
-									.b-user-interface-tab-item__item
-										input.input-default(type="text" value="Нет в списке")
-							
-								.b-user-interface-tab-item
-									p.b-user-interface-tab-item__title Учебные заведения
-									
+										.b-user-interface-content-item__item
+											select.select-default(name="")
+												option(value="Город") Город									
+										p.b-user-interface-content-item__title Учебные заведения
+										.b-user-interface-content-item__item
+											select.select-default(name="")
+												option(value="Выберите школу") Выберите школу
+										.b-user-interface-content-item__item
+											select.select-default(name="")
+												option(value="Выберите университет") Выберите университет	
 										
-									.b-user-interface-tab-item__search-place
-										select.select-default(name="")
-											option(value="Школа") Школа
-									.b-user-interface-tab-item__search-place
-										select.select-default(name="")
-											option(value="Высшее учебное заведение") Высшее учебное заведение
-									.b-user-interface-tab-item__search-place
-										select.select-default(name="")
-											option(value="Работа") Работа
-							
-								.b-user-interface-tab-item
-									p.b-user-interface-tab-item__title Пол
-									.b-user-interface-tab-item__gender
-										input(type="radio" )
-										span Мужской
-									.b-user-interface-tab-item__gender
-										input(type="radio")
-										span Женский
-									.b-user-interface-tab-item__gender
-										input(type="radio" )
-										span Любой
-							
-								.b-user-interface-tab-item
-									p.b-user-interface-tab-item__title Возраст
-									.b-user-interface-tab-item__age
-										select.select-default(name="")
-											option(value="от") от
-										select.select-default(name="")
-											option(value="от") до	
-								.b-user-interface-tab__right
-									.b-user-interface-tab__search
-										input.input-default(type="text" value="Поиск")
-										input.input-default(type="submit" value="Поиск")
-									.b-user-interface-tab-item
-										img(src="img/20.png", alt="img")
-										p.b-user-interface-tab-profile__name Сниткин Иван Петрович
-										p.b-user-interface-tab-profile__desc
-											span Количество лет,
-											span Место проживания,
-											span Учебное заведение
-									.b-user-interface-tab__buttons								
-										input.input-default(type="submit" value="Написать лс")
-										input.input-default(type="submit" value="Подписаться")
-										input.input-default(type="submit" value="Дружить")
-						
-						
-						
-						
-							.b-user-inferface-tab__tabf#that-other-tab
-								.b-user-interface-tab__right
-									.b-user-interface-tab__search
-										input.input-default(type="text" value="Поиск")
-										input.input-default(type="submit" value="Поиск")
+										p.b-user-interface-content-item__title Место работы
+										.b-user-interface-content-item__item
+											select.select-default(name="")
+												option(value="Выберите место работы") Выберите место работы	
+										
+										p.b-user-interface-content-item__title Пол
+										.b-user-interface-content-item__item
+											input(type="radio")
+											label Мужской
+										.b-user-interface-content-item__item
+											input(type="radio")
+											label Женский
+										.b-user-interface-content-item__item
+											input(type="radio")
+											label Любой									
+										p.b-user-interface-content-item__title Возраст
+										.b-user-interface-content-item__item
+											label от
+											input.input-default(type="text")
+											label до
+											input.input-default(type="text")
+
+
+							.b-user-interface-content__right
+								.b-user-interface-content-search
+									.b-user-interface-content-search__search
+										input.input-default(type="text" value="Поиск людей")
+										input.button-default(type="submit")
+								.b-user-interface-content-profile
+									img.b-user-interface-content-profile__image(src="img/20.png", alt="")
+
+									p.b-user-interface-content-profile__name Имя Фамилия Отчество
+									p.b-user-interface-content-profile__desc
+										span Возраст,
+										span Город,
+										span Страна
+									.b-user-interface-content-profile__buttons
+										input.button-default(type="submit" value="Профиль")
+										input.button-default(type="submit" value="Дружить")
+									.clear
+							.clear
+						.b-user-interface-content(id="tab-2" class="tab-content")
+							.b-user-interface-content__left
+								.b-user-interface-content-wrapper
+									.b-user-interface-content-nav
+										ul.tabs
+											li.b-user-interface-content-nav__list.tab-link.current(data-tab="tab-1")
+												a(href="#") Люди
+											li.b-user-interface-content-nav__list.tab-link(data-tab="tab-2")
+												a(href="#") Контент
+											li.b-user-interface-content-nav__list.tab-link(data-tab="tab-3")
+												a(href="#") Группы
+											li.b-user-interface-content-nav__list.tab-link(data-tab="tab-4")
+												a(href="#") Медиа
+											.clear
+									.b-user-interface-content-sort
+										.b-user-interface-content-sort__title Сортировка
+										ul.b-user-interface-content-sort-list
+											li.b-user-interface-content-sort-list__list
+												a(href="") По рейтингу
+											li.b-user-interface-content-sort-list__list
+												a(href="") По релевантности
+											li.b-user-interface-content-sort-list__list
+												a(href="") По дате создания
+									.b-user-interface-content-filter
+										p.b-user-interface-content-filter__title Фильтры
+										ul.b-user-interface-content-filter-list
+											li.b-user-interface-content-filter-list__list
+												a(href="") Топики
+											li.b-user-interface-content-filter-list__list
+												a(href="") Блоги
+											li.b-user-interface-content-filter-list__list
+												a(href="") Любые
+											li.b-user-interface-content-filter-list__list
+												a(href="") По времени
+											li.b-user-interface-content-filter-list__list
+												a(href="") По дате
+							.b-user-interface-content__right
 								
-								.b-user-interface-tab__left
-									.b-user-interface-tab-item
-										p.b-user-interface-tab-item__title Место поиска											
-										.b-user-interface-tab-item__search-place
-											select(name="")
-													option(value="") Страна
+								.b-user-interface-content-search
+									.b-user-interface-content-search__search
+										input.input-default(type="text" value="Поиск людей")
+										input.button-default(type="submit")
+								.b-user-interface-content-block
+									.b-user-interface-content-block__image
+										img(src="img/66.png", alt="")
+									.b-user-interface-content-block__text
+										.b-user-interface-content-block-text
+											p.b-user-interface-content-block-text__title Название топика
+											p.b-user-interface-content-block-text__date Дата создания, Блог топика
+											p.b-user-interface-content-block-text__name Имя пользователя
+											p.b-user-interface-content-block-text__desc Топик
+									.b-user-interface-content-block__detail
+										.b-user-interface-content-block-detail
+											p.b-user-interface-content-block-detail__vision
+												img(src="img/22.png", alt="")
+												span 19
+												img(src="img/23.png", alt="")
+												span 34
+											p.b-user-interface-content-block-detail__raiting
+												span + 0.00
+											.b-user-interface-content-block-detail__buttons
+												input.button-default(type="submit")
+									.clear
+								.b-user-interface-content-block
+									.b-user-interface-content-block__image
+										img(src="img/66.png", alt="")
+									.b-user-interface-content-block__text
+										.b-user-interface-content-block-text
+											p.b-user-interface-content-block-text__title Название топика
+											p.b-user-interface-content-block-text__date Дата создания, Блог топика
+											p.b-user-interface-content-block-text__name Имя пользователя
+											p.b-user-interface-content-block-text__desc Топик
+									.b-user-interface-content-block__detail
+										.b-user-interface-content-block-detail
+											p.b-user-interface-content-block-detail__vision
+												img(src="img/22.png", alt="")
+												span 19
+												img(src="img/23.png", alt="")
+												span 34
+											p.b-user-interface-content-block-detail__raiting
+												span + 0.00
+											.b-user-interface-content-block-detail__buttons
+												input.button-default(type="submit")
+
+									.clear
+
+							.clear
+										
+
+
+
+									
+								
 							
+
+						
+						
+						
+								
 
 								
 

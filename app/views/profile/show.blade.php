@@ -21,9 +21,9 @@
           @endif
             
             <div class="b-user-profile__middle">
-              <p class="user-raiting">Рейтинг<span class="num">+0.00</span></p>
-              <p class="user-name">Ярослав Александрович </br>Маркин</p>
-              <p class="user-date">10 декабря 1990</p>
+              <p class="user-raiting">Рейтинг <span class="num">{{number_format($user->rating, 2)}}</span></p>
+              <p class="user-name">{{$user->getNames()}}</p>
+              <p class="user-date">{{$user->description->birthday}}</p>
             </div>
             <div class="b-user-profile__right">
               <div class="b-user-profile-link"><a href="#" class="b-user-profile-link__create">Создать</a></div>
@@ -41,7 +41,7 @@
                 <li class="b-user-profile-buttons__list"><a href="#">Отравить сообщение<span class="msg-image"></span></a></li>
                 <li class="b-user-profile-buttons__list"><a href="#">Поиск друзей<span class="search-image"></span></a></li>
                 <li class="b-user-profile-buttons__list"><a href="#">Системные сообщения<span class="system-image"></span></a></li>
-                <li class="b-user-profile-buttons__list"><a href="#">Случайный профиль<span class="random-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="{{URL::to('profile/random')}}">Случайный профиль<span class="random-image"></span></a></li>
               </ul>
             </div>
             <div class="clear"></div>

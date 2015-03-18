@@ -31,7 +31,7 @@ class TopicCommentsController extends \BaseController {
             } else {
                 $data['user_id'] = Auth::user()->id;
                 $comment = Topiccomment::create($data);
-                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => true))->render();
+                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => false))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";
@@ -148,6 +148,7 @@ class TopicCommentsController extends \BaseController {
                     $comment->trash = false;
                     $comment->save();
                     $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                    $result['comment_id'] = $comment->id;
                     $result['message'] = "Комментарий восстановлен";
                     $result['status'] = "success";
                 } else {
@@ -169,7 +170,7 @@ class TopicCommentsController extends \BaseController {
             $comments = $topic->commentsWithDataSortBy(Input::get('sort_by'));
             $result = array();
             if($comments->count() > 0){
-                $result['comments'] = View::make('comments.build', array('comments' => $comments, 'parent' => null, 'isModerator' => $isModerator))->render();
+                $result['comments'] = View::make('comments.build', array('comments' => $comments, 'parent' => null, 'isModerator' => $isModerator, 'sort' => Input::get('sort_by')))->render();
                 $result['message'] = "Комментарии отсортированы";
                 $result['status'] = 'success';
             }else{

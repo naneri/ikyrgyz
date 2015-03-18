@@ -33,6 +33,7 @@ Route::group(array('before' => 'auth|activated'),function(){
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');
         Route::get('blog/show/{id}', 'BlogController@show');
+        Route::get('blog/showAjax/{id}/{page}', 'BlogController@showAjax');
         Route::group(array('before' => 'blog_edit_permission'), function(){
             Route::get('blog/edit/{id}', 'BlogController@getEdit');
             Route::post('blog/edit/{id}', 'BlogController@postEdit');
@@ -40,6 +41,7 @@ Route::group(array('before' => 'auth|activated'),function(){
             Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
         });
         Route::get('blog/{id}/read', 'BlogController@readBlog');
+        Route::get('blog/user/{id}/read', 'BlogController@readPersonalBlog');
         Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
         Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
         Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
@@ -60,6 +62,8 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
+        Route::get('profile', 'ProfileController@showMyProfile')->where('id', '[0-9]+');
+        Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');
         Route::get('profile/random', 'ProfileController@getRandom');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');

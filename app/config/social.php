@@ -12,7 +12,7 @@ return array(
             ),
 	
 	'user_site'								=> URL::to('/'),
-        'topic_comment.hide_comment_rating' => -0.5,
+        'topic_comment.hide_comment_rating' => -5,
       
       'yandex-metrika' => array(
             'kyrgyz' => '<script type="text/javascript">
@@ -237,6 +237,406 @@ return array(
                   <noscript><div><img src="//mc.yandex.ru/watch/28933950" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
                   <!-- /Yandex.Metrika counter -->',      
 
+              'azerbaijan' => '<!-- Yandex.Metrika counter -->
+                  <script type="text/javascript">
+                  (function (d, w, c) {
+                      (w[c] = w[c] || []).push(function() {
+                          try {
+                              w.yaCounter29062900 = new Ya.Metrika({id:29062900,
+                                      webvisor:true,
+                                      clickmap:true,
+                                      trackLinks:true,
+                                      accurateTrackBounce:true});
+                          } catch(e) { }
+                      });
+
+                      var n = d.getElementsByTagName("script")[0],
+                          s = d.createElement("script"),
+                          f = function () { n.parentNode.insertBefore(s, n); };
+                      s.type = "text/javascript";
+                      s.async = true;
+                      s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                      if (w.opera == "[object Opera]") {
+                          d.addEventListener("DOMContentLoaded", f, false);
+                      } else { f(); }
+                  })(document, window, "yandex_metrika_callbacks");
+                  </script>
+                  <noscript><div><img src="//mc.yandex.ru/watch/29062900" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                  <!-- /Yandex.Metrika counter -->',
+
+                  'arab' => '<!-- Yandex.Metrika counter -->
+                      <script type="text/javascript">
+                      (function (d, w, c) {
+                          (w[c] = w[c] || []).push(function() {
+                              try {
+                                  w.yaCounter29062930 = new Ya.Metrika({id:29062930,
+                                          webvisor:true,
+                                          clickmap:true,
+                                          trackLinks:true,
+                                          accurateTrackBounce:true});
+                              } catch(e) { }
+                          });
+
+                          var n = d.getElementsByTagName("script")[0],
+                              s = d.createElement("script"),
+                              f = function () { n.parentNode.insertBefore(s, n); };
+                          s.type = "text/javascript";
+                          s.async = true;
+                          s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                          if (w.opera == "[object Opera]") {
+                              d.addEventListener("DOMContentLoaded", f, false);
+                          } else { f(); }
+                      })(document, window, "yandex_metrika_callbacks");
+                      </script>
+                      <noscript><div><img src="//mc.yandex.ru/watch/29062930" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                      <!-- /Yandex.Metrika counter -->',
+                    
+
+                    'byelorussian' => '
+                        <!-- Yandex.Metrika counter -->
+                        <script type="text/javascript">
+                        (function (d, w, c) {
+                            (w[c] = w[c] || []).push(function() {
+                                try {
+                                    w.yaCounter29062975 = new Ya.Metrika({id:29062975,
+                                            webvisor:true,
+                                            clickmap:true,
+                                            trackLinks:true,
+                                            accurateTrackBounce:true});
+                                } catch(e) { }
+                            });
+
+                            var n = d.getElementsByTagName("script")[0],
+                                s = d.createElement("script"),
+                                f = function () { n.parentNode.insertBefore(s, n); };
+                            s.type = "text/javascript";
+                            s.async = true;
+                            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                            if (w.opera == "[object Opera]") {
+                                d.addEventListener("DOMContentLoaded", f, false);
+                            } else { f(); }
+                        })(document, window, "yandex_metrika_callbacks");
+                        </script>
+                        <noscript><div><img src="//mc.yandex.ru/watch/29062975" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                        <!-- /Yandex.Metrika counter -->', 
+
+                  'greek' => '<!-- Yandex.Metrika counter -->
+                    <script type="text/javascript">
+                    (function (d, w, c) {
+                        (w[c] = w[c] || []).push(function() {
+                            try {
+                                w.yaCounter29063030 = new Ya.Metrika({id:29063030,
+                                        webvisor:true,
+                                        clickmap:true,
+                                        trackLinks:true,
+                                        accurateTrackBounce:true});
+                            } catch(e) { }
+                        });
+
+                        var n = d.getElementsByTagName("script")[0],
+                            s = d.createElement("script"),
+                            f = function () { n.parentNode.insertBefore(s, n); };
+                        s.type = "text/javascript";
+                        s.async = true;
+                        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                        if (w.opera == "[object Opera]") {
+                            d.addEventListener("DOMContentLoaded", f, false);
+                        } else { f(); }
+                    })(document, window, "yandex_metrika_callbacks");
+                    </script>
+                    <noscript><div><img src="//mc.yandex.ru/watch/29063030" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                    <!-- /Yandex.Metrika counter -->',
+
+               'georgian' => '<!-- Yandex.Metrika counter -->
+                  <script type="text/javascript">
+                  (function (d, w, c) {
+                      (w[c] = w[c] || []).push(function() {
+                          try {
+                              w.yaCounter29063065 = new Ya.Metrika({id:29063065,
+                                      webvisor:true,
+                                      clickmap:true,
+                                      trackLinks:true,
+                                      accurateTrackBounce:true});
+                          } catch(e) { }
+                      });
+
+                      var n = d.getElementsByTagName("script")[0],
+                          s = d.createElement("script"),
+                          f = function () { n.parentNode.insertBefore(s, n); };
+                      s.type = "text/javascript";
+                      s.async = true;
+                      s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                      if (w.opera == "[object Opera]") {
+                          d.addEventListener("DOMContentLoaded", f, false);
+                      } else { f(); }
+                  })(document, window, "yandex_metrika_callbacks");
+                  </script>
+                  <noscript><div><img src="//mc.yandex.ru/watch/29063065" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                  <!-- /Yandex.Metrika counter -->',
+
+              'dungan' => '
+                  <!-- Yandex.Metrika counter -->
+                  <script type="text/javascript">
+                  (function (d, w, c) {
+                      (w[c] = w[c] || []).push(function() {
+                          try {
+                              w.yaCounter29063105 = new Ya.Metrika({id:29063105,
+                                      webvisor:true,
+                                      clickmap:true,
+                                      trackLinks:true,
+                                      accurateTrackBounce:true});
+                          } catch(e) { }
+                      });
+
+                      var n = d.getElementsByTagName("script")[0],
+                          s = d.createElement("script"),
+                          f = function () { n.parentNode.insertBefore(s, n); };
+                      s.type = "text/javascript";
+                      s.async = true;
+                      s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                      if (w.opera == "[object Opera]") {
+                          d.addEventListener("DOMContentLoaded", f, false);
+                      } else { f(); }
+                  })(document, window, "yandex_metrika_callbacks");
+                  </script>
+                  <noscript><div><img src="//mc.yandex.ru/watch/29063105" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                  <!-- /Yandex.Metrika counter -->',
+
+
+                'jewish' => '<!-- Yandex.Metrika counter -->
+                        <script type="text/javascript">
+                        (function (d, w, c) {
+                            (w[c] = w[c] || []).push(function() {
+                                try {
+                                    w.yaCounter29063145 = new Ya.Metrika({id:29063145,
+                                            webvisor:true,
+                                            clickmap:true,
+                                            trackLinks:true,
+                                            accurateTrackBounce:true});
+                                } catch(e) { }
+                            });
+
+                            var n = d.getElementsByTagName("script")[0],
+                                s = d.createElement("script"),
+                                f = function () { n.parentNode.insertBefore(s, n); };
+                            s.type = "text/javascript";
+                            s.async = true;
+                            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                            if (w.opera == "[object Opera]") {
+                                d.addEventListener("DOMContentLoaded", f, false);
+                            } else { f(); }
+                        })(document, window, "yandex_metrika_callbacks");
+                        </script>
+                        <noscript><div><img src="//mc.yandex.ru/watch/29063145" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                        <!-- /Yandex.Metrika counter -->',    
+
+
+                'ingush' => '<!-- Yandex.Metrika counter -->
+                    <script type="text/javascript">
+                    (function (d, w, c) {
+                        (w[c] = w[c] || []).push(function() {
+                            try {
+                                w.yaCounter29063185 = new Ya.Metrika({id:29063185,
+                                        webvisor:true,
+                                        clickmap:true,
+                                        trackLinks:true,
+                                        accurateTrackBounce:true});
+                            } catch(e) { }
+                        });
+
+                        var n = d.getElementsByTagName("script")[0],
+                            s = d.createElement("script"),
+                            f = function () { n.parentNode.insertBefore(s, n); };
+                        s.type = "text/javascript";
+                        s.async = true;
+                        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                        if (w.opera == "[object Opera]") {
+                            d.addEventListener("DOMContentLoaded", f, false);
+                        } else { f(); }
+                    })(document, window, "yandex_metrika_callbacks");
+                    </script>
+                    <noscript><div><img src="//mc.yandex.ru/watch/29063185" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                    <!-- /Yandex.Metrika counter -->',
+
+                    'latvian' => '<!-- Yandex.Metrika counter -->
+                          <script type="text/javascript">
+                          (function (d, w, c) {
+                              (w[c] = w[c] || []).push(function() {
+                                  try {
+                                      w.yaCounter29063245 = new Ya.Metrika({id:29063245,
+                                              webvisor:true,
+                                              clickmap:true,
+                                              trackLinks:true,
+                                              accurateTrackBounce:true});
+                                  } catch(e) { }
+                              });
+
+                              var n = d.getElementsByTagName("script")[0],
+                                  s = d.createElement("script"),
+                                  f = function () { n.parentNode.insertBefore(s, n); };
+                              s.type = "text/javascript";
+                              s.async = true;
+                              s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                              if (w.opera == "[object Opera]") {
+                                  d.addEventListener("DOMContentLoaded", f, false);
+                              } else { f(); }
+                          })(document, window, "yandex_metrika_callbacks");
+                          </script>
+                          <noscript><div><img src="//mc.yandex.ru/watch/29063245" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                          <!-- /Yandex.Metrika counter -->',
+
+              'ossetian' => '<!-- Yandex.Metrika counter -->
+                  <script type="text/javascript">
+                  (function (d, w, c) {
+                      (w[c] = w[c] || []).push(function() {
+                          try {
+                              w.yaCounter29063270 = new Ya.Metrika({id:29063270,
+                                      webvisor:true,
+                                      clickmap:true,
+                                      trackLinks:true,
+                                      accurateTrackBounce:true});
+                          } catch(e) { }
+                      });
+
+                      var n = d.getElementsByTagName("script")[0],
+                          s = d.createElement("script"),
+                          f = function () { n.parentNode.insertBefore(s, n); };
+                      s.type = "text/javascript";
+                      s.async = true;
+                      s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                      if (w.opera == "[object Opera]") {
+                          d.addEventListener("DOMContentLoaded", f, false);
+                      } else { f(); }
+                  })(document, window, "yandex_metrika_callbacks");
+                  </script>
+                  <noscript><div><img src="//mc.yandex.ru/watch/29063270" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                  <!-- /Yandex.Metrika counter -->',
+
+               'tajik'    => '<!-- Yandex.Metrika counter -->
+                    <script type="text/javascript">
+                    (function (d, w, c) {
+                        (w[c] = w[c] || []).push(function() {
+                            try {
+                                w.yaCounter29063305 = new Ya.Metrika({id:29063305,
+                                        webvisor:true,
+                                        clickmap:true,
+                                        trackLinks:true,
+                                        accurateTrackBounce:true});
+                            } catch(e) { }
+                        });
+
+                        var n = d.getElementsByTagName("script")[0],
+                            s = d.createElement("script"),
+                            f = function () { n.parentNode.insertBefore(s, n); };
+                        s.type = "text/javascript";
+                        s.async = true;
+                        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                        if (w.opera == "[object Opera]") {
+                            d.addEventListener("DOMContentLoaded", f, false);
+                        } else { f(); }
+                    })(document, window, "yandex_metrika_callbacks");
+                    </script>
+                    <noscript><div><img src="//mc.yandex.ru/watch/29063305" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                    <!-- /Yandex.Metrika counter -->',
+
+
+                    'tatar' => '<!-- Yandex.Metrika counter -->
+                          <script type="text/javascript">
+                          (function (d, w, c) {
+                              (w[c] = w[c] || []).push(function() {
+                                  try {
+                                      w.yaCounter29063335 = new Ya.Metrika({id:29063335,
+                                              webvisor:true,
+                                              clickmap:true,
+                                              trackLinks:true,
+                                              accurateTrackBounce:true});
+                                  } catch(e) { }
+                              });
+
+                              var n = d.getElementsByTagName("script")[0],
+                                  s = d.createElement("script"),
+                                  f = function () { n.parentNode.insertBefore(s, n); };
+                              s.type = "text/javascript";
+                              s.async = true;
+                              s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                              if (w.opera == "[object Opera]") {
+                                  d.addEventListener("DOMContentLoaded", f, false);
+                              } else { f(); }
+                          })(document, window, "yandex_metrika_callbacks");
+                          </script>
+                          <noscript><div><img src="//mc.yandex.ru/watch/29063335" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                          <!-- /Yandex.Metrika counter -->
+                          ',
+
+                   
+                 'turkmen' => '<!-- Yandex.Metrika counter -->
+                    <script type="text/javascript">
+                    (function (d, w, c) {
+                        (w[c] = w[c] || []).push(function() {
+                            try {
+                                w.yaCounter29063385 = new Ya.Metrika({id:29063385,
+                                        webvisor:true,
+                                        clickmap:true,
+                                        trackLinks:true,
+                                        accurateTrackBounce:true});
+                            } catch(e) { }
+                        });
+
+                        var n = d.getElementsByTagName("script")[0],
+                            s = d.createElement("script"),
+                            f = function () { n.parentNode.insertBefore(s, n); };
+                        s.type = "text/javascript";
+                        s.async = true;
+                        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                        if (w.opera == "[object Opera]") {
+                            d.addEventListener("DOMContentLoaded", f, false);
+                        } else { f(); }
+                    })(document, window, "yandex_metrika_callbacks");
+                    </script>
+                    <noscript><div><img src="//mc.yandex.ru/watch/29063385" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                    <!-- /Yandex.Metrika counter -->',
+
+
+                 'turk'    => '<!-- Yandex.Metrika counter -->
+                      <script type="text/javascript">
+                      (function (d, w, c) {
+                          (w[c] = w[c] || []).push(function() {
+                              try {
+                                  w.yaCounter29063410 = new Ya.Metrika({id:29063410,
+                                          webvisor:true,
+                                          clickmap:true,
+                                          trackLinks:true,
+                                          accurateTrackBounce:true});
+                              } catch(e) { }
+                          });
+
+                          var n = d.getElementsByTagName("script")[0],
+                              s = d.createElement("script"),
+                              f = function () { n.parentNode.insertBefore(s, n); };
+                          s.type = "text/javascript";
+                          s.async = true;
+                          s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                          if (w.opera == "[object Opera]") {
+                              d.addEventListener("DOMContentLoaded", f, false);
+                          } else { f(); }
+                      })(document, window, "yandex_metrika_callbacks");
+                      </script>
+                      <noscript><div><img src="//mc.yandex.ru/watch/29063410" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                      <!-- /Yandex.Metrika counter -->',
             ),
             
             

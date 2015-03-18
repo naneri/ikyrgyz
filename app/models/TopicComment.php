@@ -18,12 +18,31 @@ class TopicComment extends \Eloquent {
         public function childCommentsWithUserData(){
             return $this->childComments()
                         ->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
-                        ->get();
+                        ->join(Config::get('database.connections.mysql_users.database') . '.users', 'users.id', '=', 'topic_comments.user_id');
         }
-        
+
+        public function childCommentsSortBy($sort) {
+            $comments = array();
+            switch ($sort) {
+                case 'new':
+                    $comments = $this->childCommentsWithUserData()->orderBy('created_at', 'DESC');
+                    break;
+                case 'rating':
+                    $comments = $this->childCommentsWithUserData()->orderBy('rating', 'DESC');
+                    break;
+                case 'old':
+                default:
+                    $comments = $this->childCommentsWithUserData()->orderBy('created_at', 'ASC');
+                    break;
+            }
+            return $comments->select('topic_comments.*', 'user_description.*', 'users.rating as author_rating')->get();
+        }
+
         public function withUserData(){
             return $this->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'user_description.user_id', '=', 'topic_comments.user_id')
+                        ->join(Config::get('database.connections.mysql_users.database') . '.users', 'users.id', '=', 'topic_comments.user_id')
                         ->where('topic_comments.id', $this->id)
+                        ->select('topic_comments.*', 'user_description.*', 'users.rating as author_rating')
                         ->first();
         }
 
@@ -77,4 +96,9 @@ class TopicComment extends \Eloquent {
             }
             return $iValue;
         }
+
+        public function getRatingAttribute($rating) {
+            return round($rating, 2);
+        }
+
 }

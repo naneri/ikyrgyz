@@ -97,10 +97,16 @@ class BlogController extends BaseController {
      * @return [type]     [description]
      */
 	public function show($id){
-		$blog = Blog::findOrFail($id);
-        return View::make('blog.show', array('blog' => $blog));
+        $blog = Blog::findOrFail($id);
+		$topics = Blog::getTopics($id);
+        return View::make('blog.show', compact('blog', 'topics'));
 	}
         
+    public function showAjax($id,$page){
+        $topics = Blog::getTopics($id, $page);
+        return View::make('topic.build', compact('topics'));
+    }
+
 	public function showPersonal($email) {
         $user = User::whereEmail($email)->get();
         $blog = $user->getPersonalBlog();
@@ -165,15 +171,27 @@ class BlogController extends BaseController {
         }
         
         $roleId = null;
-        if($blog->type->name == 'open'){
-            $roleId = Role::whereName('reader')->pluck('id');
-        } else {
+        if($blog->type->name == 'close'){
             $roleId = Role::whereName('request')->pluck('id');
+        } else {
+            $roleId = Role::whereName('reader')->pluck('id');
         }
-        
+
+        $blogRole = new BlogRole();
+        $blogRole->blog_id = $blog->id;
+        $blogRole->user_id = Auth::user()->id;
+        $blogRole->role_id = $roleId;
+        $blogRole->save();
+
         return Redirect::back();
     }
-    
+
+    public function readPersonalBlog($id) {
+        $user = User::findOrFail($id);
+        $blogId = $user->getPersonalBlog()->id;
+        $this->readBlog($blogId);
+    }
+
     public function rejectBlog($id){
         $blog = Blog::findOrFail($id);
 

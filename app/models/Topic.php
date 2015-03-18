@@ -78,6 +78,10 @@ class Topic extends Eloquent {
             return $this->belongsTo('User');
         }
 
+        public function userDescription() {
+            return $this->belongsTo('User_Description', 'user_id', 'user_id');
+        }
+
         public function author() {
             return $this->belongsTo('User', 'user_id');
         }
@@ -92,24 +96,25 @@ class Topic extends Eloquent {
         
         public function commentsWithData(){
             return $this->comments()
-                    ->join(Config::get('database.connections.mysql_users.database').'.user_description','user_description.user_id','=','topic_comments.user_id');
+                    ->join(Config::get('database.connections.mysql_users.database').'.user_description','user_description.user_id','=','topic_comments.user_id')
+                    ->join(Config::get('database.connections.mysql_users.database') . '.users', 'users.id', '=', 'topic_comments.user_id');
         }
 
         public function commentsWithDataSortBy($sort) {
             $comments = array();
             switch($sort){
                 case 'new':
-                    $comments = $this->commentsWithData()->orderBy('created_at', 'DESC')->get();
+                    $comments = $this->commentsWithData()->orderBy('created_at', 'DESC');
                     break;
                 case 'rating':
-                    $comments = $this->commentsWithData()->orderBy('rating', 'DESC')->get();
+                    $comments = $this->commentsWithData()->orderBy('rating', 'DESC');
                     break;
                 case 'old':
                 default:
-                    $comments = $this->commentsWithData()->orderBy('created_at', 'ASC')->get();
+                    $comments = $this->commentsWithData()->orderBy('created_at', 'ASC');
                     break;
             }
-            return $comments;
+            return $comments->select('topic_comments.*', 'user_description.*', 'users.rating as author_rating')->get();
         }
 
         public function blog(){
@@ -166,4 +171,9 @@ class Topic extends Eloquent {
             $this->comments()->delete();
             return parent::delete();
         }
+
+        public function getRatingAttribute($rating) {
+            return round($rating, 2);
+        }
+
 }
