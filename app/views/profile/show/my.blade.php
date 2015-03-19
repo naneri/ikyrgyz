@@ -16,41 +16,7 @@
         @endif
 
         <div class="b-user-profile__middle">
-            <p class="user-raiting">Рейтинг <span class="num">{{$user->rating}}</span></p>
-            <p class="user-name">{{$user->getNames()}}</p>
-            <p class="user-date">{{$user->description->birthday}}, {{$gender}}, {{$maritalStatus}}</p>
-            <p class="user-date">Место рождения: {{Country::find($user->description->birthplace_country_id)->name_ru}}, {{City::find($user->description->birthplace_city_id)->name_ru}}</p>
-            <p class="user-date">Проживает: {{Country::find($user->description->liveplace_country_id)->name_ru}}, {{City::find($user->description->liveplace_city_id)->name_ru}}</p>
-            <p class="user-date">
-                @foreach($user->profileItemsValues('address') as $address)
-                    {{$address}}, 
-                @endforeach
-            </p>
-            <p class="user-date">
-                @foreach($user->profileItemsValues('school') as $school)
-                    {{$school}}, 
-                @endforeach
-            </p>
-            <p class="user-date">
-                @foreach($user->profileItemsValues('university') as $university)
-                    {{$university}}, 
-                @endforeach
-            </p>
-            <p class="user-date">
-                @foreach($user->profileItemsValues('job') as $job)
-                    {{$job}}, 
-                @endforeach
-            </p>
-            <p class="user-date">
-                @foreach($user->profileItemsValues('phone') as $phone)
-                    {{$phone}}, 
-                @endforeach
-            </p>
-            <p class="user-date">
-                @foreach($user->profileItemsValues('email') as $email)
-                    {{$email}}, 
-                @endforeach
-            </p>            
+            @include('profile.show.info', compact('user', 'gender', 'marital_status'))
         </div>
         <div class="b-user-profile__right">
             <div class="b-user-profile-link"><a href="#" class="b-user-profile-link__create">Создать</a></div>

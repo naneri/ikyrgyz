@@ -46,10 +46,14 @@ class User_Description extends Eloquent{
         return $this->belongsTo('User');
     }
     
-    public function getBirthdayAttribute($birthday){
-        if($this->birthday_access == 'all' || Auth::id() == $this->user_id){
-            return $birthday;
+    public function checkAccess($accessColumn){
+        $access = false;
+        if(Auth::id() == $this->user_id || $this->$accessColumn == 'all'){
+            $access = true;
+        }else if($this->$accessColumn == 'friend'){
+            $access = Friend::checkIfFriend($this->user_id, Auth::id());
         }
+        return $access;
     }
 
 }

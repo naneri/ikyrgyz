@@ -279,8 +279,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return $this->hasMany('ProfileItem');
         }
         
-        public function profileItemsValues($subtype) {
-            return $this->profileItems()->where('subtype', $subtype)->lists('value');
+        public function profileItemsGetValues($subtype) {
+            $canSee = Auth::id() == $this->id;
+            $isFriends = Friend::checkIfFriend($this->id, Auth::id());
+            $items = $this->profileItems()->where('subtype', $subtype)->get();//->lists('value');
+            $values = array();
+            foreach($items as $item){
+                if(($canSee || $item->access == 'all') || ($item->access == 'friend' && $isFriends)){
+                    $values[] = $item->value;  
+                }
+            }
+            return $values;
         }
 
         public function schools(){

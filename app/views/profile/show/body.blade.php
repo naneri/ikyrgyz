@@ -51,9 +51,13 @@
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
-                @foreach($videos as $video)
-                    <li class="b-user-media-video-gallery__list video-item">{{$video->description}}</li>
-                @endforeach
+                @if($videos->count() > 0)
+                    @foreach($videos as $video)
+                        <li class="b-user-media-video-gallery__list video-item">{{$video->description}}</li>
+                    @endforeach
+                @else
+                    <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных видео</p></li>
+                @endif
                 <div class="clear"></div>
             </ul>
         </div>
