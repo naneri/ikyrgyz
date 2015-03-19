@@ -6,19 +6,17 @@
 <div class="b-content">
     <div class="b-user-profile">
         @if(isset($user->description->user_profile_avatar))
-        <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
+        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
             <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
         </div>
         @else
-        <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
+        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
             <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
         </div>
         @endif
 
         <div class="b-user-profile__middle">
-            <p class="user-raiting">Рейтинг <span class="num">{{$user->rating}}</span></p>
-            <p class="user-name">{{$user->getNames()}}</p>
-            <p class="user-date">{{$user->description->birthday}}</p>
+            @include('profile.show.info', compact('user', 'gender', 'marital_status'))
         </div>
         <div class="b-user-profile__right">
             <ul class="b-user-profile-buttons">

@@ -8,6 +8,7 @@ class ProfileController extends BaseController {
         var $familyMemberRelatives = array('' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
         var $maritalStatuses = array('' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
         var $month =  array("0" => "Месяц", "1" => "Январь", "2" => "Февраль", "3" => "Март", "4" => "Апрель", "5" => "Май", "6" => "Июнь", "7" => "Июль", "8" => "Август", "9" => "Сентябрь", "10" => "Октябрь", "11" => "Ноябрь", "12" => "Декабрь");
+        var $genders = array('male' => 'Мужской', 'female' => 'Женский');
 
     /**
 	 * Страница с профилем пользователя
@@ -16,13 +17,14 @@ class ProfileController extends BaseController {
 	 * @return [type]     [description]
 	 */
 	public function getShow($id, $page = 'newsline'){
-		$user = User::find($id);
+		$user = User::findOrFail($id);
 		$friend_status = False;
 		if(Friend::checkIfFriend($id, Auth::id())){
 			$friend_status = True;
 		}
                 
                 $items = null;
+                $videos = array();
                 switch($page){
                     case 'publications':
                         $items = $user->topics;
@@ -36,25 +38,29 @@ class ProfileController extends BaseController {
                     case 'newsline':
                     default:
                         $items = $user->newsline();
+                        $videos = $user->topicsWithVideo;
                         break;
                 }
                 
+                @$maritalStatus = $this->maritalStatuses[$user->description->marital_status];
+                @$gender = $this->genders[$user->description->gender];
+                
                 if($user->id == Auth::id()){
-                    return View::make('profile.show.my', compact('user', 'items', 'page'));
+                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
                 }else{
-                    return View::make('profile.show.user', array('user' => $user, 'friend_status' => $friend_status, 'items' => $items, 'page' => $page));
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
                 }
 	}
         
-        public function showMyProfile(){
-            return $this->getShow(Auth::id());
+        public function showMyProfile($page = 'newsline'){
+            return $this->getShow(Auth::id(), $page);
         }
         
         public function getRandom(){
             $friendIds = Auth::user()->friends()->lists('id');
             array_push($friendIds, Auth::id());
             $userId = User::whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first()->id;
-            return $this->getShow($userId);
+            return Redirect::to('profile/'.$userId);
         }
         
         public function getProfileFill(){

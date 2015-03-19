@@ -2179,6 +2179,20 @@ about profile Style
 	font: 15px 'PT Sans Caption';
 }
 
+.b-profile-about-text__text h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.b-profile-about-text__text h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.b-profile-about-text__text img {
+    width: 100%;
+}
+
 .b-profile-about-text + p {
 	color: #3e4142;
 	font: 15px 'PT Sans Caption';

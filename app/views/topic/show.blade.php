@@ -34,7 +34,9 @@
                   <p class="b-profile-about-profile__name">{{@$creator->description->first_name . ' '. @$creator->description->last_name}}</p>
                   <div class="b-profile-about-profile__buttons">  
                     @if($creator->id !== $user_data->id)                                  
-                      <input type="submit" value="Профиль" class="input-default btn-profile"/>
+                      <a href="{{ URL::to('profile/'. $creator->id)}}">
+                        <input type="submit" value="Профиль" class="input-default btn-profile"/>
+                      </a>
                       <a href="{{ URL::to('people/friendRequest/'. $creator->id)}}">
                           <input type="submit" value="Дружить" class="input-default btn-friend"/>
                       </a>

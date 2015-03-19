@@ -63,12 +63,13 @@ Route::group(array('before' => 'auth|activated'),function(){
 
         Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
+        Route::get('profile/random', 'ProfileController@getRandom');
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
+        Route::get('profile', 'ProfileController@showMyProfile');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
-        Route::get('profile', 'ProfileController@showMyProfile')->where('id', '[0-9]+');
+        Route::get('profile/{page}', 'ProfileController@showMyProfile');
         Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');
-        Route::get('profile/random', 'ProfileController@getRandom');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');

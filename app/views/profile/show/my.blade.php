@@ -6,19 +6,17 @@
 <div class="b-content">
     <div class="b-user-profile">
         @if(isset($user->description->user_profile_avatar))
-        <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
+        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
             <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
         </div>
         @else
-        <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
+        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
             <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
         </div>
         @endif
 
         <div class="b-user-profile__middle">
-            <p class="user-raiting">Рейтинг <span class="num">{{$user->rating}}</span></p>
-            <p class="user-name">{{$user->getNames()}}</p>
-            <p class="user-date">{{$user->description->birthday}}</p>
+            @include('profile.show.info', compact('user', 'gender', 'marital_status'))
         </div>
         <div class="b-user-profile__right">
             <div class="b-user-profile-link"><a href="#" class="b-user-profile-link__create">Создать</a></div>
@@ -43,10 +41,10 @@
     </div>
     <div class="b-user-navigation">
         <ul class="b-user-navigation-list">
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/newsline')}}">Лента</a></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/publications')}}">Публикации</a><span>{{$user->topics->count()}}</span></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/subscribtions')}}">Подписки</a></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/newsline')}}">Лента</a></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/publications')}}">Публикации</a><span>{{$user->topics->count()}}</span></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscribtions')}}">Подписки</a></li>
             <a href="{{URL::to('profile/edit/main')}}" class="b-user-navigation-list__setting">Настройки</a>
             <div class="clear"></div>
         </ul>

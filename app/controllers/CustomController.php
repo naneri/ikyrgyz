@@ -13,15 +13,15 @@ class CustomController extends BaseController{
     }
 
     public function showHistory(){
-        return View::make('custom.'.Config::get('app.nation_name').'_history', array());
+        return View::make('custom.'.Config::get('app.nation_name').'.history', array());
     }
 
     public function showCustoms(){
-        return View::make('custom.'.Config::get('app.nation_name').'_customs', array());
+        return View::make('custom.'.Config::get('app.nation_name').'.customs', array());
     }
 
     public function showCulture(){
-        return View::make('custom.'.Config::get('app.nation_name').'_culture', array());
+        return View::make('custom.'.Config::get('app.nation_name').'.culture', array());
     }
 
     public function showHelp(){
