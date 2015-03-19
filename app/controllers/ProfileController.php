@@ -48,17 +48,7 @@ class ProfileController extends BaseController {
                 if($user->id == Auth::id()){
                     return View::make('profile.show.my', compact('user', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
                 }else{
-                    return View::make('profile.show.user', 
-                            array(
-                                'user' => $user, 
-                                'friend_status' => $friend_status, 
-                                'items' => $items, 
-                                'page' => $page, 
-                                'videos' => $videos,
-                                'maritalStatus' => $maritalStatus,
-                                'gender' => $gender
-                            )
-                        );
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
                 }
 	}
         
@@ -70,7 +60,7 @@ class ProfileController extends BaseController {
             $friendIds = Auth::user()->friends()->lists('id');
             array_push($friendIds, Auth::id());
             $userId = User::whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first()->id;
-            return $this->getShow($userId);
+            return Redirect::to('profile/'.$userId);
         }
         
         public function getProfileFill(){
