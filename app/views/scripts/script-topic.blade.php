@@ -14,7 +14,7 @@
 		  		});	
 	  		});
                         
-                        var inProgress = false;
+            var inProgress = false;
 
 		  	$(window).scroll(function() {
 			   if($(window).scrollTop() + $(window).height() > $(document).height() - 100 && !inProgress) {

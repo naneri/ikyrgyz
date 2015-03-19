@@ -7,9 +7,6 @@ class AuthController extends BaseController {
      * Renders the 'Login' page
      */
 	public function getLogin(){
-        if(Auth::check()){
-            return Redirect::to('main/index');
-        }
         return View::make('login');
     }
 
@@ -63,9 +60,6 @@ class AuthController extends BaseController {
      * @return [type] [description]
      */
     public function getRegister(){
-        if(Auth::check()){
-            return Redirect::to('main/index');
-        }
         return View::make('register');
     }
 

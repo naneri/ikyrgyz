@@ -2,19 +2,19 @@
             <div class="b-topic-navigation__inner">
               <div class="b-topic-navigation__create">
                 <ul class="b-topic-navigation-list">
-                  <li><a href="#" class="b-topic-navigation__item">Создать</a>
+                  <li><a href="#" class="b-topic-navigation__item">{{ trans('network.create') }}</a>
                     <ul class="b-topic-navigation-create b-topic-navigation-create-dropdown" style="height: 160px !important">
                       <li class="b-topic-navigation-create__list">
-                      	<a href="{{ URL::to('topic/create') }}">Топик</a>
+                      	<a href="{{ URL::to('topic/create') }}">{{ trans('network.topic') }}</a>
                       </li>
                       <li class="b-topic-navigation-create__list">
-                      	<a href="{{ URL::to('blog/create') }}">Блог</a>
+                      	<a href="{{ URL::to('blog/create') }}">{{ trans('network.blog') }}</a>
                       </li>
                       <li class="b-topic-navigation-create__list">
-                      	<a href="#">Черновики</a>
+                      	<a href="#">{{ trans('network.drafts') }}</a>
                       </li>
                       <li class="b-topic-navigation-create__list">
-                      	<a href="#">Ссылка</a>
+                      	<a href="#">{{ trans('network.link') }}</a>
                       </li>
                       <!--
                       <li class="b-topic-navigation-create__list">

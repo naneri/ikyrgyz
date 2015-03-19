@@ -12,9 +12,9 @@
                   @endif
                   <span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span></a>
                   <ul class="b-header-nav-dropdown">
-                    <li><a href="{{ URL::to('profile') }}">Мой профиль</a></li>
-                    <li><a href="{{ URL::to('messages/inbox/all') }}">Личные сообщения</a></li>
-                    <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
+                    <li><a href="{{ URL::to('profile') }}">{{ trans('network.my-profile') }}</a></li>
+                    <li><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a></li>
+                    <li><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a></li>
                     <!--<li><a href="{{ URL::to('group/create')  }}">Группы</a></li>-->
                   </ul>
                 </li>
@@ -63,7 +63,7 @@
                             @if(!empty($friend->user_profile_avatar))
                               <img src="{{$friend->user_profile_avatar}}" alt="">
                             @endif
-                          <span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>отправил вам сообщения</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">Принять</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">Отклонить</a></li>
+                          <span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>{{ trans('network.sent-you-message') }}</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">{{ trans('network.accept') }}</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">{{ trans('network.reject') }}</a></li>
                         @endforeach
                       </ul>  
                      
@@ -84,31 +84,30 @@
                 <li class="b-header-nav__list">
                   <a href="{{ URL::to('search/people') }}">
                     <img src="{{ asset('img/navbar/friend_search.png') }}" alt="search"/>
-                    <span class="search-friend">Поиск друзей</span>
+                    <span class="search-friend">{{ trans('network.search_friends') }}</span>
                   </a>
                 </li>
                 <li class="b-header-nav__list">
                   <a href="#">
                     <img src="{{ asset('img/navbar/encyclopedia.png') }}" alt="search"/>
-                    <span class="search-friend">Энциклопедия</span>
+                    <span class="search-friend">{{ trans('network.encyclopedia') }}</span>
                   </a>
                   <ul class="b-header-nav-dropdown">
-                    <li><a href="{{ URL::to('custom/history') }}">История</a></li>
-                    <li><a href="{{ URL::to('custom/customs') }}">Обычаи</a></li>
-                    <li><a href="{{ URL::to('custom/culture') }}">Культура </a></li>
+                    <li><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></li>
+                    <li><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></li>
+                    <li><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></li>
                   </ul>
                 </li>
                 <li class="b-header-nav__list"><a href="#"><img src="{{ asset('img/39.png') }}" alt="search"/></a>
                   <ul class="b-header-nav-dropdown">
-                    <!--
-                    <li><a href="#">Выбор языка</a>
+                   
+                    <li><a href="#">{{ trans('network.language-choice') }}</a>
                       <ul class="b-header-sub-menu">
-                        <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Английский</span></a></li>
-                        <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский</span></a></li>
-                        <li><a href=""><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский  </span></a></li>
+                        <li><a href="{{ URL::to('locale/en') }}"><img src="{{ asset('img/30.png') }}" alt=""/><span>English</span></a></li>
+                        <li><a href="{{ URL::to('locale/ru') }}"><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский</span></a></li>
                       </ul>
                     </li>
-                    -->
+                   
                     <!--
                     <li><a href="#">Помощь</a>
                       <ul class="b-header-sub-menu">
@@ -117,7 +116,7 @@
                       </ul>
                     </li>
                     -->
-                    <li><a href="{{ URL::to('logout') }}">Выход</a></li>
+                    <li><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a></li>
                   </ul>
                 </li>
                 <div class="clear"></div>
@@ -133,109 +132,3 @@
     {{Session::get('message')}}<br>
   </div>
 </div>
-
-<!--  <div class="b-header">
-        <div class="b-header__inner">
-          <div class="b-header__logo"><a href="{{ URL::to('main/index') }}"><img src="{{ asset('img/content/logo__image.png') }}" alt=""/><span>I-KYRGYZ</span></a></div>
-          <div class="b-header__menu"><a href="#">&#9776;</a></div>
-          <div class="b-header__navigation">
-            <ul>
-              <li><a href="#" class="b-header__user">
-                @if(isset($user_data['description']->user_profile_avatar))
-                  <img style="height:49px;width:49px" src="{{$user_data['description']->user_profile_avatar}}" alt=""/>
-                @else
-                  <img src="{{URL::to('/img')}}/content/user-name.png" alt=""/>
-                @endif
-                <span>Ярослав...</span></a>
-                <ul class="b-header-sub-menu">
-                  <li><a href="{{ URL::to('profile/edit') }}">Изменить профиль</a></li>
-                  <li><a href="{{ URL::to('message/all') }}">Личные сообщения(1877)</a></li>
-                  <li><a href="{{ URL::to('profile/friends') }}">Друзья</a></li>
-                  <li><a href="#">Группы</a></li>
-                </ul>
-              </li>
-              <li class="b-header__list-count"><a href="#"><img src="{{ asset('img/content/message.png') }}" alt=""/></a><span class="nav-count">25</span></li>
-              <li class="b-header__list-count"><a href="#"><img src="{{ asset('img/content/friends.png') }}" alt=""/></a><span class="nav-count">25</span></li>
-              <li class="b-header__list-count"><a href="#"><img src="{{ asset('img/content/setting2.png') }}" alt=""/></a><span class="nav-count">25</span></li>
-              <li><a href="{{ URL::to('people') }}"><img src="{{ asset('img/content/search-btn.png') }}" alt=""/><span>Поиск друзей</span></a></li>
-              <li class="b-header__list-enc"><a href="#"><img src="{{ asset('img/content/enc.png') }}" alt=""/><span>Энциклопедия</span></a>
-                <ul class="sub-menu-enc">
-                  <li><a href="#">привет</a></li>
-                  <li><a href="#">привет как дела</a></li>
-                  <li><a href="#">чем занимаешься,</a></li>
-                </ul>
-              </li>
-              <li><a href="#"><img src="{{ asset('img/content/setting.png') }}" alt=""/></a>
-                <ul class="sub-menu-setting">
-                  <li><a href="#"><span>Выбор языка</span></a>
-                    <ul class="item1">
-                      <li><a href="#"><img src="{{ asset('img/content/flag.png') }}" alt=""/><span>Русский</span></a></li>
-                      <li><a href="#"><img src="{{ asset('img/content/flag.png') }}" alt=""/><span>Русский</span></a></li>
-                      <li><a href="#"><img src="{{ asset('img/content/flag.png') }}" alt=""/><span>Русский</span></a></li>
-                      <div class="clear"></div>
-                    </ul>
-                  </li>
-                  <li><a href="#">помощь</a>
-                    <ul class="item2">
-                      <li class="sub-menu-ask"><a href="#">asdasd</a></li>
-                      <li class="sub-menu-ask"><a href="#">asdasd</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="{{ URL::to('logout') }}">выход</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="clear"></div>
-        </div>
-      </div>
---> 
-
-
-<!--<div class="b-header">
-      <div class="b-header__inner">
-        <div class="b-header__logo"><a href="{{URL::to('/')}}"><img src="{{URL::to('/img')}}/content/logo__image.png" alt=""/><span>I-KYRGYZ</span></a></div>
-        <div class="b-header__menu"><a href="#">&#9776;</a></div>
-        <div class="b-header__navigation">
-          <ul class="menu dropit">
-            <li class="dropit-trigger dropit-open"><a href="#">
-              
-              <span>Имя пользователя</span></a>
-              <ul class="dropit-submenu dropdown dropdown-margin">
-                <li><a href="{{URL::to('profile/edit')}}">Изменить профиль</a></li>
-                <li><a href="{{URL::to('message/all')}}">Личные сообщения(1877)</a></li>
-                <li><a href="{{URL::to('profile/friends')}}">Друзья</a></li>
-                <li><a href="">Группы</a></li>
-              </ul>
-            </li>
-            <li><a href="#"><img src="{{URL::to('/img')}}/content/message.png" alt=""/><span>25</span></a></li>
-            <li><a href="#"><img src="{{URL::to('/img')}}/content/friends.png" alt=""/><span>25</span></a></li>
-            <li><a href="#"><img src="{{URL::to('/img')}}/content/setting2.png" alt=""/><span>25</span></a></li>
-            <li><a href="{{URL::to('people')}}"><img src="{{URL::to('/img')}}/content/search-btn.png" alt=""/><span>Поиск друзей</span></a></li>
-            <li class="enc"><a href="#"><img src="{{URL::to('/img')}}/content/enc.png" alt=""/><span>Энциклопедия</span></a>
-              <ul class="dropdown">
-                <li><a href="">item</a></li>
-                <li><a href="">item</a></li>
-                <li><a href="">item  </a></li>
-              </ul>
-            </li>
-            <li><a href="#"><img src="{{URL::to('/img')}}/content/ask.png" alt=""/></a>
-              <ul class="dropdown">
-                <li><a href="">item</a></li>
-                <li><a href="">item</a></li>
-                <li><a href="">item  </a></li>
-              </ul>
-            </li>
-            <li class="flag"><a href="#"><img src="{{URL::to('/img')}}/content/flag.png" alt=""/></a>
-              <ul class="dropdown">
-                <li><a href=""> Lorem ipsum dolor sit amet.</a></li>
-                <li><a href="">item</a></li>
-                <li><a href="">item</a></li>
-              </ul>
-            </li>
-            <li><a href="{{URL::to('/logout')}}"><img src="{{URL::to('/img')}}/content/close.png" alt=""/></a></li>
-          </ul>
-        </div>
-        <div class="clear"></div>
-      </div>
-    </div> -->
