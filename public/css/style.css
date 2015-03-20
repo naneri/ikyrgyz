@@ -1102,13 +1102,11 @@ Topic
 }
 
 .b-topic-navigation-format__list .buttons-wrapper {
-	width: 139px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	border: 1px solid #dbdbdb;
 	height: 28px;
-	position: relative;
-	margin-left: 54px;
+	margin-left: 57px;
 }
 
 .b-topic-navigation-format__list .format-type {
@@ -1130,8 +1128,6 @@ Topic
 	border-top-right-radius: 3px;
 	border-bot-right-radius: 3px;
 	cursor: pointer;
-	position: absolute;
-	right: 0;
 }
 
 .b-topic-navigation-online-dropdown {
@@ -2877,7 +2873,7 @@ interface
 }
 
 .b-user-interface-content-nav {
-	padding-bottom: 10px;
+	padding-bottom: 19px;
 }
 
 .b-user-interface-content-nav__list {
@@ -2890,10 +2886,9 @@ interface
 	background: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
-	padding: 6px;
+	padding: 5px 9px;
 	color: #676767;
 	font: 15px 'PT Sans Caption';
-	line-height: 30px;
 	border: 1px solid #d5d5d5;
 }
 
@@ -2904,10 +2899,11 @@ interface
 	background: -o-linear-gradient(top, #f67658 0%, #c4563c 100%);
 	background: -ms-linear-gradient(top, #f67658 0%, #c4563c 100%);
 	background: linear-gradient(to bottom, #f67658 0%, #c4563c 100%);
+	border-bottom: 2px solid #b43c1f;
 }
 
 .b-user-interface-content-item {
-	margin: 0 10px;
+	margin: 0 20px;
 }
 
 .b-user-interface-content-item__item {
@@ -2978,7 +2974,7 @@ interface
 }
 
 .b-user-interface-content-profile {
-	margin: 10px 0 0 0;
+	margin: 20px 0 0 0;
 	border: 1px solid #d5d5d5;
 	padding: 10px;
 }
@@ -2991,6 +2987,7 @@ interface
 .b-user-interface-content-profile__name {
 	font: 14px 'PT Sans Caption';
 	color: #676767;
+	padding-bottom: 5px;
 }
 
 .b-user-interface-content-profile__desc {
@@ -3012,7 +3009,7 @@ interface
 	background-image: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
 	color: #999;
 	font: 15px 'PT Sans Caption';
-	padding: 5px;
+	padding: 6px 10px;
 	cursor: pointer;
 }
 
@@ -3023,10 +3020,13 @@ interface
 	background: -ms-linear-gradient(top, #f67658 0%, #c4563c 100%);
 	background: linear-gradient(to bottom, #f67658 0%, #c4563c 100%);
 	color: #fff;
+	border-bottom: 2px solid #b43c1f;
 }
 
 .b-user-interface-content-sort {
-	margin: 0 10px;
+	margin: 5px 20px;
+	border-bottom: 1px solid #d5d5d5;
+	padding-bottom: 10px;
 }
 
 .b-user-interface-content-sort__title {
@@ -3036,7 +3036,7 @@ interface
 }
 
 .b-user-interface-content-sort-list__list {
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 }
 
 .b-user-interface-content-sort-list__list a {
@@ -3045,7 +3045,9 @@ interface
 }
 
 .b-user-interface-content-filter {
-	margin: 0 10px;
+	margin: 20px 20px;
+	border-bottom: 1px solid #d5d5d5;
+	padding-bottom: 10px;
 }
 
 .b-user-interface-content-filter__title {
@@ -3055,7 +3057,7 @@ interface
 }
 
 .b-user-interface-content-filter-list__list {
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 }
 
 .b-user-interface-content-filter-list__list a {
@@ -3098,6 +3100,7 @@ interface
 .b-user-interface-content-block-text__title {
 	font: 14px 'PT Sans Caption';
 	color: #676767;
+	padding-bottom: 5px;
 }
 
 .b-user-interface-content-block-text__date,
@@ -3105,10 +3108,12 @@ interface
 .b-user-interface-content-block-text__desc {
 	font: 12px 'PT Sans Caption';
 	color: #999;
+	padding-bottom: 5px;
 }
 
 .b-user-interface-content-block-detail__vision {
 	padding-bottom: 10px;
+	text-align: right;
 }
 
 .b-user-interface-content-block-detail__vision span {
@@ -3119,6 +3124,7 @@ interface
 
 .b-user-interface-content-block-detail__raiting {
 	padding-bottom: 10px;
+	text-align: right;
 }
 
 .b-user-interface-content-block-detail__raiting span {
@@ -3135,7 +3141,7 @@ interface
 	background-image: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
 	color: #999;
 	font: 15px 'PT Sans Caption';
-	padding: 5px;
+	padding: 5px 10px;
 	cursor: pointer;
 }
 
@@ -3146,6 +3152,7 @@ interface
 	background: -ms-linear-gradient(top, #f67658 0%, #c4563c 100%);
 	background: linear-gradient(to bottom, #f67658 0%, #c4563c 100%);
 	color: #fff;
+	border-bottom: 2px solid #b43c1f;
 }
 /*
 ==============================
@@ -3379,4 +3386,33 @@ blog style
 .b-user-wall {
 	width: 495px;
 	margin: 0 auto 10px;
+}
+/*
+=================================
+music player style
+
+================================
+*/
+.b-music-interface-player__button {
+	background: -webkit-linear-gradient(top, #f67658 0%, #c4563c 100%);
+	background: -moz-linear-gradient(top, #f67658 0%, #c4563c 100%);
+	background: -o-linear-gradient(top, #f67658 0%, #c4563c 100%);
+	background: -ms-linear-gradient(top, #f67658 0%, #c4563c 100%);
+	background: linear-gradient(to bottom, #f67658 0%, #c4563c 100%);
+	width: 32px;
+	height: 31px;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+button.play {
+	background: url("../img/71.png") no-repeat;
+	float: left;
+	width: 10px;
+	height: 11px;
+	border: 0;
+}
+
+.b-music-interface-player__item {
+	display: inline-block;
 }

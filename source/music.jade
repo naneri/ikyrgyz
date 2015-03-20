@@ -1,0 +1,123 @@
+extends block/layout.jade
+block content
+	.b-wrapper
+		.b-page
+			include block/header
+			.b-content
+				.b-topic-navigation
+					.b-topic-navigation__inner
+						.b-topic-navigation__create
+							ul.b-topic-navigation-list
+								li
+									a(href="#").b-topic-navigation__item Создать
+									ul.b-topic-navigation-create.b-topic-navigation-create-dropdown
+										li.b-topic-navigation-create__list
+
+											a(href="form.html") Топик
+											
+												
+										li.b-topic-navigation-create__list
+											a(href="blog.html") Блог
+												
+										li.b-topic-navigation-create__list
+											a(href="#") Черновики
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Ссылка
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Фото альбом
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Опрос
+											
+										li.b-topic-navigation-create__list
+											a(href="#") Событие
+									
+
+						
+
+						.b-topic-navigation__middle
+							ul
+								li.b-topic-navigation-item__item
+									img(src="img/33.png", alt="")
+									span 19
+								li.b-topic-navigation-item__item
+									img(src="img/41.png", alt="")
+									span 19
+								li.b-topic-navigation-item__item
+									img(src="img/34.png", alt="")
+									span 19
+								//- li.b-topic-navigation-item__item
+								//- 	a.icon-image(href="")
+								//- 		img(src="img/35.png", alt="")
+								//- 	ul.b-topic-navigation-icons-list.b-topic-navigation-icons-dropdown
+								//- 		li.b-topic-navigation-icons-list__list.b-topic-navigation-icons-list__list-padding
+								//- 			a(href="") Видео
+
+								//- 		li.b-topic-navigation-icons-list__list
+								//- 			a(href="") Фотоальбомы
+								//- 		li.b-topic-navigation-icons-list__list
+								//- 			a(href="") Музыка
+								//- 		li.b-topic-navigation-icons-list__list
+								//- 			a(href="") Ссылки
+								//- 		li.b-topic-navigation-icons-list__list
+								//- 			a(href="") Опросы
+								//- 		li.b-topic-navigation-icons-list__list
+								//- 			a(href="") События
+
+						.b-topic-navigation__right
+							ul.b-topic-navigation-format
+								//- li.b-topic-navigation-format__list
+								//- 	a.format-icon(href="#")
+								//- 		img(src="img/42.png", alt="")
+								//- 	ul.b-topic-navigation-format-dropdown
+								//- 		li
+								//- 			a(href="")
+								//- 				img(src="img/44.png", alt="")
+								//- 		li
+								//- 			a(href="")
+								//- 				img(src="img/45.png", alt="")
+								//- 		li
+								//- 			a(href="")
+								//- 				img(src="img/46.png", alt="")
+								//- li.b-topic-navigation-format__list
+								//- 	a.format-icon(href="")
+								//- 		img(src="img/37.png", alt="")
+								//- 		span 11
+								//- 	ul.b-topic-navigation-online-dropdown
+								//- 		li
+								//- 			- for(var x = 0; x <7; x++)
+								//- 				a(href="")
+								//- 					span Фамилия Имя Отчество
+								//- 					img(src="img/47.png", alt="")
+								li.b-topic-navigation-format__list
+									.buttons-wrapper
+										form(id="", method="", action="")
+											input.format-type.btn(type="text")
+											input.format-submit(type="submit")
+												
+										
+						.clear
+				.b-music-interface
+					.b-music-interface__left
+						.b-music-interface-player
+							.b-music-interface-player__top
+								.b-music-interface-player__item
+									.b-music-interface-player__button
+										button.play
+								.b-music-interface-player__item
+									span.artist-name Артист
+								.b-music-interface-player__item
+									span.song-name Название песни
+							.b-music-interface-player__middle
+								.b-music-interface-player__item
+									input.volume(type="range" min="0" max="10" value="5")
+								.b-music-interface-player__item
+									span.duration 0:00
+							.b-music-interface-player__progressbar
+								.b-music-interface-player__item
+									span.progress
+										
+
+					.b-music-interface__right

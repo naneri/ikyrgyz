@@ -898,12 +898,12 @@ Topic
 		
 		
 	.buttons-wrapper
-		width 139px
+		
 		border-radius 3px
 		border 1px solid #DBDBDB
 		height 28px
-		position relative
-		margin-left 54px
+		margin-left 57px
+		
 	.format-type		
 		display inline-block		
 		border 0
@@ -923,8 +923,7 @@ Topic
 		border-top-right-radius 3px
 		border-bot-right-radius 3px
 		cursor pointer
-		position absolute
-		right 0
+		
 		
 	
 		
@@ -2177,22 +2176,23 @@ interface
 		float right
 		padding-right 10px
 	&-nav
-		padding-bottom 10px
+		padding-bottom 19px
 		
 		&__list
 			float left
 			a
 				background $lightGradient
-				padding 6px
+				padding 5px 9px	
 				color $baseFontColorLight
-				font 15px $baseFontFamily
-				line-height 30px
+				font 15px $baseFontFamily				
 				border $baseBorder
+				
 				&:hover
 					color #fff
 					background $orangeGradient
+					border-bottom 2px solid #b43c1f
 .b-user-interface-content-item
-	margin 0 10px
+	margin 0 20px
 	&__item
 		padding-bottom 10px
 		.input-default
@@ -2210,6 +2210,7 @@ interface
 				line-height 30px
 			.jq-selectbox__trigger
 				background $lightGradient
+				
 		label
 			color $baseFontColor
 			font 14px $baseFontFamily
@@ -2246,7 +2247,7 @@ interface
 		
 .b-user-interface-content-profile
 	
-	margin 10px 0 0 0
+	margin 20px 0 0 0
 	border $baseBorder
 	padding 10px
 	&__image
@@ -2255,6 +2256,7 @@ interface
 	&__name
 		font 14px $baseFontFamily
 		color $baseFontColorLight
+		padding-bottom 5px
 	&__desc
 		font 12	px $baseFontFamily
 		color $baseFontColor
@@ -2265,15 +2267,20 @@ interface
 			button-default()
 			color $baseFontColor
 			font 15px $baseFontFamily
-			padding 5px
+			padding  6px 10px
 			cursor pointer
 			&:hover
 				background $orangeGradient
 				color #fff
+				border-bottom 2px solid #b43c1f
 		
 	
 .b-user-interface-content-sort
-	margin 0 10px
+	margin 5px 20px
+	border-bottom $baseBorder
+	padding-bottom 10px
+	
+	 
 	&__title
 		padding-bottom 10px
 		font 15px $baseFontFamily
@@ -2281,12 +2288,14 @@ interface
 	&-list
 		//
 		&__list
-			padding-bottom 10px
+			padding-bottom 5px
 			a
 				font 14px $baseFontFamily
 				color $baseFontColor
 .b-user-interface-content-filter
-	margin 0 10px	
+	margin 20px 20px
+	border-bottom $baseBorder
+	padding-bottom 10px
 	&__title 
 		padding-bottom 10px
 		font 15px $baseFontFamily
@@ -2294,7 +2303,7 @@ interface
 	&-list
 		//
 		&__list
-			padding-bottom 10px
+			padding-bottom 5px
 			a
 				font 14px $baseFontFamily
 				color $baseFontColor
@@ -2324,19 +2333,23 @@ interface
 	&__title
 		font 14px $baseFontFamily
 		color $baseFontColorLight
+		padding-bottom 5px
 	&__date, &__name, &__desc
 		font 12px $baseFontFamily
 		color $baseFontColor
+		padding-bottom 5px
 .b-user-interface-content-block-detail
 	//
 	&__vision
 		padding-bottom 10px
+		text-align right
 		span
 			font 11px $baseFontFamilyBold
 			color $baseFontColor
 			padding 0 5px
 	&__raiting
 		padding-bottom 10px
+		text-align right
 		span
 			font 18px $baseFontFamilyBold
 			color #26ad85
@@ -2346,11 +2359,13 @@ interface
 			button-default()
 			color $baseFontColor
 			font 15px $baseFontFamily
-			padding 5px
+			padding  5px 10px
 			cursor pointer
+			
 			&:hover
 				background $orangeGradient
 				color #fff
+				border-bottom 2px solid #b43c1f
 	
 
 /*
@@ -2546,3 +2561,33 @@ blog style
 	margin 0 auto 10px
 	
 	
+
+
+/*
+=================================
+music player style
+
+================================
+*/
+
+.b-music-interface-player__button
+	background $orangeGradient
+	width 32px
+	height 31px
+	border-radius 50%
+	
+button.play
+	background url(../img/71.png) no-repeat
+	
+	float left
+	width 10px
+	height 11px
+	border 0
+	
+	
+		
+		
+	
+		
+.b-music-interface-player__item
+	display inline-block	
