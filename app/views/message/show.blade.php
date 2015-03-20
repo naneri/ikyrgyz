@@ -25,6 +25,11 @@
             {{HTML::link('message/edit/'.$message->id, 'Редактировать')}} |
             {{HTML::link('message/delete/'.$message->id, 'Удалить')}}
         @endif
+
+        @if($message->sender_id != Auth::id())
+            <br>
+            {{HTML::link('messages/new', 'Ответить')}} 
+        @endif
     </div>
     @else
         <div class="panel-body">

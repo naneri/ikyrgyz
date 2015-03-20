@@ -96,4 +96,9 @@ class TopicComment extends \Eloquent {
             }
             return $iValue;
         }
+
+        public function getRatingAttribute($rating) {
+            return round($rating, 2);
+        }
+
 }

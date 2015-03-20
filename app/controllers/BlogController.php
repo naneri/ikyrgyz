@@ -86,6 +86,11 @@ class BlogController extends BaseController {
 		return View::make('blog.all',array('blogs' => $blogs));
 	}
 
+    /**
+     * Метод для Ajax пагинации по блогам
+     * @param  [int] $page страница
+     * @return [html]      
+     */
     public function ajaxBlogs($page){
         $blogs = Blog::getMainBlogs($page);
         return View::make('blog.build', array('blogs' => $blogs));
@@ -101,7 +106,13 @@ class BlogController extends BaseController {
 		$topics = Blog::getTopics($id);
         return View::make('blog.show', compact('blog', 'topics'));
 	}
-        
+    
+    /**
+     * Ajax пагинация для топиков в блоге
+     * @param  [type] $id   ай-ди блога
+     * @param  [type] $page страница
+     * @return [type]       [description]
+     */
     public function showAjax($id,$page){
         $topics = Blog::getTopics($id, $page);
         return View::make('topic.build', compact('topics'));
@@ -185,7 +196,13 @@ class BlogController extends BaseController {
 
         return Redirect::back();
     }
-    
+
+    public function readPersonalBlog($id) {
+        $user = User::findOrFail($id);
+        $blogId = $user->getPersonalBlog()->id;
+        $this->readBlog($blogId);
+    }
+
     public function rejectBlog($id){
         $blog = Blog::findOrFail($id);
 

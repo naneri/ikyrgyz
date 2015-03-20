@@ -8,6 +8,7 @@ class ProfileController extends BaseController {
         var $familyMemberRelatives = array('' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
         var $maritalStatuses = array('' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
         var $month =  array("0" => "Месяц", "1" => "Январь", "2" => "Февраль", "3" => "Март", "4" => "Апрель", "5" => "Май", "6" => "Июнь", "7" => "Июль", "8" => "Август", "9" => "Сентябрь", "10" => "Октябрь", "11" => "Ноябрь", "12" => "Декабрь");
+        var $genders = array('male' => 'Мужской', 'female' => 'Женский');
 
     /**
 	 * Страница с профилем пользователя
@@ -15,15 +16,52 @@ class ProfileController extends BaseController {
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function getShow($id){
-		$user = User::find($id);
+	public function getShow($id, $page = 'newsline'){
+		$user = User::findOrFail($id);
 		$friend_status = False;
 		if(Friend::checkIfFriend($id, Auth::id())){
 			$friend_status = True;
 		}
-
-		return View::make('profile.show', array('user' => $user, 'friend_status' => $friend_status));
+                
+                $items = null;
+                $videos = array();
+                switch($page){
+                    case 'publications':
+                        $items = $user->topics;
+                        break;
+                    case 'friends':
+                        $items = $user->friends();
+                        break;
+                    case 'subscribtions':
+                        $items = $user->canPublishBlogs();
+                        break;
+                    case 'newsline':
+                    default:
+                        $items = $user->newsline();
+                        $videos = $user->topicsWithVideo;
+                        break;
+                }
+                
+                @$maritalStatus = $this->maritalStatuses[$user->description->marital_status];
+                @$gender = $this->genders[$user->description->gender];
+                
+                if($user->id == Auth::id()){
+                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
+                }else{
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
+                }
 	}
+        
+        public function showMyProfile($page = 'newsline'){
+            return $this->getShow(Auth::id(), $page);
+        }
+        
+        public function getRandom(){
+            $friendIds = Auth::user()->friends()->lists('id');
+            array_push($friendIds, Auth::id());
+            $userId = User::whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first()->id;
+            return Redirect::to('profile/'.$userId);
+        }
         
         public function getProfileFill(){
             $user = User::with('description')->find(Auth::id());
@@ -126,8 +164,27 @@ class ProfileController extends BaseController {
         }
 
         public function getEditMain(){
-            $user = User::with('description')->find(Auth::id());       
-            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'month' => $this->month));
+            
+            $user = User::with('description')->find(Auth::id());
+            
+            $birthdayExploded = explode('-', $user['description']->birthday);
+            $birthday['year'] = $birthdayExploded[0];
+            $birthday['month'] = $birthdayExploded[1];
+            $birthday['day'] = $birthdayExploded[2];
+            
+            $days = ['0' => 'День'];
+            for ($day = 1; $day < 32; $day++) {
+                $days[$day] = $day;
+            }
+            
+            $startYear = (int) date('Y');
+            $endYear = (int) date('Y') - 100;
+            $years = ['0' => 'Год'];
+            for ($year = $startYear; $year > $endYear; $year--) {
+                $years[$year] = $year;
+            }; 
+            
+            return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'month' => $this->month, 'birthday' => $birthday, 'days' => $days, 'years' => $years));
         }
         
         public function postEditMain(){
@@ -381,7 +438,7 @@ class ProfileController extends BaseController {
             return $correctAccess;
         }
 
-        public function getRandom(){
+        public function getRandomOld(){
             $users = DB::connection('mysql_users')->statement("SELECT * FROM `users` WHERE id >= (SELECT FLOOR( MAX(id) * RAND()) FROM `users` ) ORDER BY id LIMIT 1;");
             echo "<pre>"; print_r($users); echo "</pre>";exit;
         }

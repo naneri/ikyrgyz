@@ -23,9 +23,9 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <div class="login-form">
-                                <span class="login-span1">{{ trans('nation.'.Config::get('app.nation_name').'_adjective') }} Социальная Сеть</span>
-                                <span class="login-span2">ПРИСОЕДИНЯЙСЯ</span>
-                                <span class="login-span3">Авторизация</span>
+                                <span class="login-span1">{{ trans('nation.'.Config::get('app.nation_name').'_adjective') }} {{ trans('network.social-network') }}</span>
+                                <span class="login-span2">{{ trans('network.join-us') }}</span>
+                                <span class="login-span3">{{ trans('network.authorize') }}</span>
                                 <div class="form-area">
                                     <div class="form">
                                         <div class="panel-body">
@@ -38,7 +38,7 @@
                                                         <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                                     </div>
                                                     <div class="checkbox" style="margin-left: 20px">
-                                                        <input name="remember" type="checkbox" value="Remember Me">Запомнить меня
+                                                        <input name="remember" type="checkbox" value="Remember Me">{{ trans('network.remember-me') }}
                                                     </div>
                                                     <div class="all-alerts">
                                                         @foreach ($errors->all() as $error)
@@ -48,10 +48,10 @@
                                                         </div>
                                                         @endforeach
                                                     </div>
-                                                    <button type="submit" name="submit_login" class="submit-button" id="login-form-submit">Войти</button>
+                                                    <button type="submit" name="submit_login" class="submit-button" id="login-form-submit">{{ trans('network.log-in') }}</button>
                                                 </fieldset>
                                             {{Form::close()}}
-                                            <a href="#registration" class="registration-button"  data-value="Войти">Регистрация</a>
+                                            <a href="#registration" class="registration-button"  data-value="Войти">{{ trans('network.registration') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -78,20 +78,20 @@
                                 </div>
                                 -->
 
-                                <span class="registration-span2">Регистрация</span>
+                                <span class="registration-span2">{{ trans('network.registration') }}</span>
                                 <div class="form-area">
                                     <div class="form">
                                         <div class="panel-body">
                                             {{Form::open(array('url' => 'register'))}}
                                                 <fieldset>
                                                     <div class="form-group">
-                                                        <input class="form-control" placeholder="Введите Email" name="email" type="email" autofocus="">
+                                                        <input class="form-control" placeholder="{{ trans('network.enter-email') }}" name="email" type="email" autofocus="">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input class="form-control pass" placeholder="Введите пароль" name="password" type="password" value="">
+                                                        <input class="form-control pass" placeholder="{{ trans('network.enter-password') }}" name="password" type="password" value="">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input class="form-control pass-check" placeholder="Повторите пароль" name="" type="password" value="">
+                                                        <input class="form-control pass-check" placeholder="{{ trans('network.repeat-password') }}" name="" type="password" value="">
                                                     </div>
                                                     <div class="form-group" style="margin-left: -15px">
                                                         {{Form::captcha(array('theme' => 'red'))}}
@@ -104,7 +104,7 @@
                                                         </div>
                                                         @endforeach
                                                     </div>
-                                                    <button type="submit" id="registration-form-submit" class="submit-button" >Зарегистрироваться</button>
+                                                    <button type="submit" id="registration-form-submit" class="submit-button" >{{ trans('network.do-register') }}</button>
                                                 </fieldset>
                                             {{Form::close()}}
                                         </div>

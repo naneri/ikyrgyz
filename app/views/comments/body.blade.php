@@ -4,11 +4,16 @@
 </div>
 <div class="b-profile-about-message__message">
     <div class="b-profile-about-message-top">
-        <p class="b-profile-about-message-top__user">{{$comment->first_name.' '.$comment->last_name}}
-            @if($parent)
-            <span style='color:#ccc;'>→ {{$parent->first_name.' '.$parent->last_name}}</span>
-            @endif
-        </p>
+        <a href="{{URL::to('profile/'.$comment->user_id)}}">
+            <p class="b-profile-about-message-top__user">
+                {{$comment->first_name.' '.$comment->last_name}}
+            </p>
+        </a>
+        @if($parent)
+            <p class="b-profile-about-message-top__user">
+                <span style='color:#ccc;'>→ {{$parent->first_name.' '.$parent->last_name}}</span>
+            </p>
+        @endif
         <p class="b-profile-about-message-top__date">
             <span class="comment_time">{{$comment->created_at}}</span>
         </p>

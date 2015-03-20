@@ -208,5 +208,8 @@ Class Blog extends Eloquent{
                 ->orderBy('topics.id', 'DESC')
                 ->get();
         }
-
+        
+        public function getRatingAttribute($rating){
+            return round($rating, 2);
+        }
 }

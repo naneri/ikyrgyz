@@ -105,8 +105,24 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return User::join('friends', 'friends.user_one', '=', 'users.id')
                 ->join('user_description', 'user_description.user_id', '=', 'users.id')
                 ->where('friends.status', Config::get('social.friend_status.friends'))
-                ->where('friends.user_two', Auth::id())
+                ->where('friends.user_two', $this->id)
+                ->select('users.*', 'user_description.*')
                 ->get();
+    }
+    
+    public function newsline(){
+        $votedTopicIds = $this->votes()->where('target_type', 'topic')->lists('target_id');
+        $subscribedTopicIds = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                ->whereIn('blogs.id', $this->canPublishBlogs()->lists('id'))
+                ->select('topics.id')
+                ->lists('id');
+        $topicIds = array_merge($votedTopicIds, $subscribedTopicIds);
+        $uniqueTopicIds = array_unique($topicIds);
+        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')->whereIn('id', $uniqueTopicIds)->orderBy('created_at', 'desc')->get();
+    }
+    
+    public function votes(){
+        return $this->hasMany('Vote');
     }
     
     public function getNames(){
@@ -126,7 +142,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function topics(){
+        return $this->hasMany('Topic')->where('draft', '0');
+    }
+
+    public function topicsWithDraft() {
         return $this->hasMany('Topic');
+    }
+    
+    public function topicsWithVideo(){
+        return $this->topics()->where('description', 'like', '%youtube%');
     }
 
     public function drafts(){
@@ -255,6 +279,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return $this->hasMany('ProfileItem');
         }
         
+        public function profileItemsGetValues($subtype) {
+            $canSee = Auth::id() == $this->id;
+            $isFriends = Friend::checkIfFriend($this->id, Auth::id());
+            $items = $this->profileItems()->where('subtype', $subtype)->get();//->lists('value');
+            $values = array();
+            foreach($items as $item){
+                if(($canSee || $item->access == 'all') || ($item->access == 'friend' && $isFriends)){
+                    $values[] = $item->value;  
+                }
+            }
+            return $values;
+        }
+
         public function schools(){
             return $this->hasMany('ProfileItem')->where('type', 'study')->where('subtype', 'school');
         }
@@ -277,6 +314,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         
         public function additionals(){
             return $this->hasMany('ProfileItem')->where('type', 'additional');
+        }
+        
+        public function getRatingAttribute($rating){
+            return round($rating, 2);
+        }
+        
+        public function age(){
+            return date_diff(date_create($this->description->birthday), date_create('today'))->y;
         }
 
 }

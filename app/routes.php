@@ -11,15 +11,19 @@
 |
 */
 
-Route::get('/', 'AuthController@getLogin');
 
-Route::get('login', 'AuthController@getLogin');
-Route::post('login', 'AuthController@postLogin');
-Route::get('login/fb', 'AuthController@loginWithFacebook');
-Route::get('register', 'AuthController@getRegister');
-Route::post('register', 'AuthController@postRegister');
-Route::get('activate/{code}', 'AuthController@getActivate');
-Route::get( 'locale/{locale}', 'BaseController@setLocale' );
+Route::get('locale/{locale}', 'BaseController@setLocale' );
+
+
+Route::group(array('before' => 'notauth'),function(){
+    Route::get('/', 'AuthController@getLogin');
+    Route::get('login', 'AuthController@getLogin');
+    Route::post('login', 'AuthController@postLogin');
+    Route::get('login/fb', 'AuthController@loginWithFacebook');
+    Route::get('register', 'AuthController@getRegister');
+    Route::post('register', 'AuthController@postRegister');
+    Route::get('activate/{code}', 'AuthController@getActivate');
+});
 
 Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index','MainController@index');
@@ -41,6 +45,7 @@ Route::group(array('before' => 'auth|activated'),function(){
             Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
         });
         Route::get('blog/{id}/read', 'BlogController@readBlog');
+        Route::get('blog/user/{id}/read', 'BlogController@readPersonalBlog');
         Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
         Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
         Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
@@ -58,10 +63,13 @@ Route::group(array('before' => 'auth|activated'),function(){
 
         Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
+        Route::get('profile/random', 'ProfileController@getRandom');
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
+        Route::get('profile', 'ProfileController@showMyProfile');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
-        Route::get('profile/random', 'ProfileController@getRandom');
+        Route::get('profile/{page}', 'ProfileController@showMyProfile');
+        Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');
 	Route::get('profile/edit', 'ProfileController@getEdit');
 	Route::post('profile/edit', 'ProfileController@postEdit');
 	Route::get('profile/friends', 'ProfileController@friends');

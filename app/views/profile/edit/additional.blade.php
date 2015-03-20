@@ -103,7 +103,7 @@
                 data: data,
                 success: function(result){
                     if(!result.errors){
-                        alert('success');
+                        $.notify('Данные успешно сохранены', 'success');
                     }
                 },
                 error: function(){

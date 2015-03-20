@@ -3,18 +3,18 @@
 <div class="masonry">
     @foreach($topics as $topic)
   
-    <div class="b-user-wall">
+    <div class="b-user-wall item">
       <div class="b-user-wall__inner">
         <div class="b-user-wall-header">
-          <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->description->user_profile_avatar or ''}}" alt=""/></a></div>
+          <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
           <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}</a></p>
           <p class="b-user-wall-header__date">{{$topic->created_at}}
             <div class="clear"></div>
           </p>
-          <!--<p class="b-user-wall-header__vision">
-            <img src="{{ asset('img/22.png') }}" alt=""/><span>19</span>
-            <img src="{{ asset('img/23.png') }}" alt=""/><span>34</span>
-          </p> -->
+          <p class="b-user-wall-header__vision">
+            <img src="{{ asset('img/22.png') }}" alt=""/><span>{{$topic->count_read}}</span>
+            <img src="{{ asset('img/23.png') }}" alt=""/><span>{{$topic->comments->count()}}</span>
+          </p>
         </div>
         <div class="b-user-wall-image">
           @if($topic->image_url)
@@ -51,7 +51,7 @@
               </li>
             </ul>
             <input type="submit" onclick="return vote.topic({{$topic->id}},-1);" class="btn btn-minus"/>
-            <input type="submit" onclick="return vote.topic({{$topic->id}},1);" class="btn btn-plus"/><span class="likes" id="rating_topic_{{$topic->id}}">{{round($topic->rating,2)}}</span>
+            <input type="submit" onclick="return vote.topic({{$topic->id}},1);" class="btn btn-plus"/><span class="likes" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
           </div>
         </div>
       </div>
