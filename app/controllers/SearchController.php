@@ -89,8 +89,7 @@ class SearchController extends \BaseController {
                     . "left outer join `countries` on `user_description`.`liveplace_country_id` = `countries`.`id` "
                     . "left outer join `cities` on `user_description`.`liveplace_city_id` = `cities`.`id` "
                     . "left outer join `profile_items` on `profile_items`.`user_id` = `users`.`id` "
-                    . $where 
-                    . " AND `user_description`.`liveplace_access` = 'all' ");
+                    . $where);
             
             return $users;
         }
