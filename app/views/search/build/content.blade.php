@@ -1,37 +1,49 @@
 @if($content)
-@foreach($content as $entry)
-<div style="padding: 10px;border:1px solid #bbb;margin-bottom: 10px;">
+    @foreach($content as $entry)
         @if($entry->is_topic)
-            <?php $entry = Topic::find($entry->id); ?>
-            <img src="{{asset($entry->image_url)}}" style="float:left;width:80px;height:80px;margin-right: 10px;" />
-            <div>{{HTML::link('topic/show/'.$entry->id, $entry->title)}}</div>
-            <div>{{$entry->created_at}}</div>
-            <div>{{$entry->author->getNames()}}</div>
-            <div>Топик</div>
+            <div class="b-user-interface-content-block">
+                <div class="b-user-interface-content-block__image"><img src="{{asset(($entry->image_url)?$entry->image_url:'img/56.png')}}" alt=""/></div>
+                <div class="b-user-interface-content-block__text">
+                    <div class="b-user-interface-content-block-text">
+                        <p class="b-user-interface-content-block-text__title">{{$entry->title}}</p>
+                        <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}, Блог топика</p>
+                        <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
+                        <p class="b-user-interface-content-block-text__desc">Топик</p>
+                    </div>
+                </div>
+                <div class="b-user-interface-content-block__detail">
+                    <div class="b-user-interface-content-block-detail">
+                        <p class="b-user-interface-content-block-detail__vision"><img src="{{asset('img/22.png')}}" alt=""/><span>{{$entry->count_read}}</span><img src="{{asset('img/23.png')}}" alt=""/><span>{{$entry->comments_count}}</span></p>
+                        <p class="b-user-interface-content-block-detail__raiting"><span>{{round($entry->rating,2)}}</span></p>
+                        <div class="b-user-interface-content-block-detail__buttons">
+                            <a href="{{URL::to('topic/show/'.$entry->id)}}"><input type="button" value="Подробнее" class="button-default"/></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
         @elseif($entry->is_topic == 0)
-            <?php $entry = Blog::find($entry->id); ?>
-            <img src="{{asset($entry->avatar)}}" style="float:left;width:80px;height:80px;margin-right: 10px;" />
-            <div>{{HTML::link('blog/show/'.$entry->id, $entry->title)}}</div>
-            <div>{{$entry->created_at}}</div>
-            <div>{{$entry->author->getNames()}}</div>
-            <div>Блог  
-                @if(!$entry->isUserHaveRole())
-                [{{HTML::link('/blog/'.$entry->id.'/read', 'читать')}}]
-                @else
-                    <?php $userRole = $entry->getUserRole(); ?>
-                    @if($userRole == 'reader')
-                    [{{HTML::link('/blog/'.$entry->id.'/reject', 'не читать')}}]
-                    @elseif($userRole == 'invite')
-                    [{{HTML::link('/blog/'.$entry->id.'/accept', 'принять приглашение')}}]
-                    @elseif($userRole == 'request')
-                    [request][{{HTML::link('/blog/'.$entry->id.'/reject', 'отменить запрос')}}]
-                    @elseif($userRole == 'reject')
-                    [{{HTML::link('/blog/'.$entry->id.'/refollow', 'читать')}}]        
-                    @endif
-                @endif
+            <div class="b-user-interface-content-block">
+                <div class="b-user-interface-content-block__image"><img src="{{asset(($entry->avatar)?$entry->avatar:'img/56.png')}}" alt=""/></div>
+                <div class="b-user-interface-content-block__text">
+                    <div class="b-user-interface-content-block-text">
+                        <p class="b-user-interface-content-block-text__title">{{$entry->title}}</p>
+                        <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}</p>
+                        <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
+                        <p class="b-user-interface-content-block-text__desc">Блог</p>
+                    </div>
+                </div>
+                <div class="b-user-interface-content-block__detail">
+                    <div class="b-user-interface-content-block-detail">
+                        <p class="b-user-interface-content-block-detail__raiting"><span>{{round($entry->rating, 2)}}</span></p>
+                        <div class="b-user-interface-content-block-detail__buttons">
+                            <a href="{{URL::to('blog/show/'.$entry->id)}}"><input type="button" value="Подробнее" class="button-default"/></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
             </div>
         @endif
-    </div>
     @endforeach
 @else
     По данным критериям ничего не найдено

@@ -83,11 +83,14 @@ class SearchController extends \BaseController {
             }
 
             $users = DB::connection('mysql_users')
-                    ->select("select distinct `users`.*, `user_description`.* "
+                    ->select("select distinct `users`.*, `user_description`.*, `cities`.`name_ru` as `city`, `countries`.`name_ru` as `country` "
                     . "from `users` "
                     . "inner join `user_description` on `user_description`.`user_id` = `users`.`id` "
+                    . "left outer join `countries` on `user_description`.`liveplace_country_id` = `countries`.`id` "
+                    . "left outer join `cities` on `user_description`.`liveplace_city_id` = `cities`.`id` "
                     . "left outer join `profile_items` on `profile_items`.`user_id` = `users`.`id` "
-                    . $where);
+                    . $where 
+                    . " AND `user_description`.`liveplace_access` = 'all' ");
             
             return $users;
         }
@@ -130,16 +133,20 @@ class SearchController extends \BaseController {
             }
 
             if (in_array(Input::get('filter'), array('any', 'blog'))) {
-                $blogs = DB::select(" select `blogs`.* "
-                                . $blogsAdditionalColumns
-                                . " from `blogs` "
-                                . $blogsWhere);
+                $blogs = DB::select(" select `blogs`.*, `user_description`.* "
+                            . $blogsAdditionalColumns
+                            . " from `blogs` "
+                            . " inner join `" . Config::get('database.connections.mysql_users.database') . "`.`user_description` on `user_description`.`user_id` = `blogs`.`user_id` "
+                            . $blogsWhere);
             }
             if (in_array(Input::get('filter'), array('any', 'topic'))) {
-                $topics = DB::select("select `topics`.* "
-                                . $topicsAdditionalColumns
-                                . "from `topics` "
-                                . $topicsWhere);
+                $topics = DB::select("select `topics`.*, `user_description`.*, COUNT(`topic_comments`.`id`) AS `comments_count` "
+                            . $topicsAdditionalColumns
+                            . "from `topics` "
+                            . "left outer join `topic_comments` on `topic_comments`.`topic_id` = `topics`.`id` "
+                            . "inner join `".Config::get('database.connections.mysql_users.database')."`.`user_description` on `user_description`.`user_id` = `topics`.`user_id` "
+                            . $topicsWhere
+                            . " GROUP BY `topic_comments`.`topic_id` ");
             }
             
 //            dd(DB::getQueryLog());

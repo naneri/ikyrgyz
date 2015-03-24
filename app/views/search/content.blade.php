@@ -1,58 +1,60 @@
 @extends('misc.layout')
 
 @section('content')
-{{HTML::style('css/bootstrap.css')}}
-<div class="container">
-    {{Form::open()}}
-    <div class="col-lg-4">
-        <div class="panel panel-default" style="padding:30px;">
-            {{HTML::link('search/people', 'Люди')}} |
-            {{HTML::link('#', 'Контент')}}
-            <!--{{HTML::link('#', 'Группы')}}
-            {{HTML::link('#', 'Медиа')}}-->
-            <br>
-            Сортировка:
-            <div class="checkbox">
-                <label>
-                    {{Form::radio('sort', 'rating', null)}}По рейтингу
-                </label>
-                <br>
-                <label>
-                    {{Form::radio('sort', 'relevant', null)}}По релевантности
-                </label>
-                <br>
-                <label>
-                    {{Form::radio('sort', 'date', true)}}По дате
-                </label>
-            </div>
-            <hr>
-            Фильтр:
-            <div class="checkbox">
-                <label>
-                    {{Form::radio('filter', 'blog', null)}}Блоги
-                </label>
-                <br>
-                <label>
-                    {{Form::radio('filter', 'topic', null)}}Топики
-                </label>
-                <br>
-                <label>
-                    {{Form::radio('filter', 'any', true)}}Любые
-                </label>
-            </div>
+<div class="b-content">
+    <div class="b-user-interface">
+        <div class="b-user-interface__header">
+            <p class="title-header">Поиск
+                <input type="submit" class="input-default"/>
+            </p>
         </div>
-        </div>
-    <div class="col-lg-8 col-md-8 panel panel-default">
-        <div class="" style="padding:30px;">
-            <div class="col-md-12 search-text" style="margin-bottom: 10px;">
-                {{Form::text('search-text', null, array('size' => '60'))}}
-                {{Form::submit('Поиск', array('onclick' => 'return false;', 'id' => 'btn-search'))}}
+        <div class="b-user-interface__inner">
+            {{Form::open()}}
+            <div id="tab-1" class="b-user-interface-content tab-content current">
+                <div class="b-user-interface-content__left">
+                    <div class="b-user-interface-content-wrapper">
+                        <div class="b-user-interface-content-nav">
+                            <ul class="tabs">
+                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link current"><a href="{{URL::to('search/people')}}">Люди</a></li>
+                                <li data-tab="tab-2" class="b-user-interface-content-nav__list tab-link"><a href="#">Контент</a></li>
+                                <!--li data-tab="tab-3" class="b-user-interface-content-nav__list tab-link"><a href="#">Группы</a></li>
+                                <li data-tab="tab-4" class="b-user-interface-content-nav__list tab-link"><a href="#">Медиа</a></li-->
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                        <div class="b-user-interface-content-sort">
+                            <div class="b-user-interface-content-sort__title">Сортировка</div>
+                            <ul class="b-user-interface-content-sort-list">
+                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'rating', false)}}По рейтингу</a></li>
+                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'relevant', false)}}По релевантности</a></li>
+                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'date', true)}}По дате создания</a></li>
+                            </ul>
+                        </div>
+                        <div class="b-user-interface-content-filter">
+                            <p class="b-user-interface-content-filter__title">Фильтры</p>
+                            <ul class="b-user-interface-content-filter-list">
+                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'topic', false)}} Топики</label></a></li>
+                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'blog', false)}} Блоги</label></a></li>
+                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'any', true)}} По дате</label></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-user-interface-content__right">
+                    <div class="b-user-interface-content-search">
+                        <div class="b-user-interface-content-search__search">
+                            {{Form::text('search-text', null, array('class' => 'input-default'))}}
+                            {{Form::submit(null, array('onclick' => 'return false;', 'id' => 'btn-search', 'class' => 'button-default'))}}
+                        </div>
+                    </div>
+                    <div id="search-result">
+                    </div>
+                </div>
+                <div class="clear"></div>
             </div>
-            <div class="col-md-12" id="search-result">
-            </div>
+            {{Form::close()}}
         </div>
-        </div>
-    {{Form::close()}}
+    </div>
 </div>
 @stop
 
