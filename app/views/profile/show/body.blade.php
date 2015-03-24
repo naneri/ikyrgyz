@@ -1,4 +1,4 @@
-@if($page == 'newsline' || $page == 'publications')
+@if($page == 'newsline' || $page == 'publications' || $page == 'videos')
     @include('topic.build', array('topics' => $items))
 @elseif($page == 'subscribtions')
     @include('blog.build', array('blogs' => $items))
@@ -47,7 +47,7 @@
             <div class="b-user-media-video-top">
                 <p class="b-user-media-video-top__title">Видео</p>
                 <div class="b-user-media-video-top__btn">
-                    <input type="submit" value="Все" class="btn btn-all"/>
+                    <a href="{{URL::to('profile/'.$user->id.'/videos')}}"><input type="button" value="Все" class="btn btn-all"/></a>
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
@@ -65,7 +65,7 @@
             <div class="b-user-media-video-top">
                 <p class="b-user-media-video-top__title">Фотографии</p>
                 <div class="b-user-media-video-top__btn">
-                    <input type="submit" value="Все" class="btn btn-all"/>
+                    <a href="{{URL::to('profile/'.$user->id.'/photos')}}"><input type="submit" value="Все" class="btn btn-all"/></a>
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
