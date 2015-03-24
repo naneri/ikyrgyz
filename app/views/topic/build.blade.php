@@ -1,5 +1,3 @@
-
-
 <div class="masonry">
     @foreach($topics as $topic)
   
@@ -38,25 +36,33 @@
                 @endif
             <div class="clear"></div>
           </p>
-          <div class="b-user-wall-footer__btn"><a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">Подробнее</a>
-            <ul class="b-user-wall-footer-list">
-              <li><a href="" class="share-btn btn">Поделиться</a>
-                <ul class="b-user-wall-footer-dropdown">
-                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook()  }}">Facebook</a></li>
-                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus()  }}">Google+</a></li>
-                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->twitter()  }}">Twitter</a></li>
-                  <li><a href="{{ 'http://connect.mail.ru/share?share_url='.URL::to("topic/show/". $topic->id).'&title='.htmlspecialchars($topic->description)}}">Мой мир</a></li>
-                  <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->vk()  }}">В контакте</a></li>
+            <div class="b-user-wall-footer__btn"><a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">Подробнее</a>
+                <ul class="b-user-wall-footer-list">
+                    <li><a href="" class="share-btn btn">Поделиться</a>
+                        <ul class="b-user-wall-footer-dropdown">
+                            <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook() }}')">Facebook</a></li>
+                            <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus() }}')">Google+</a></li>
+                            <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->twitter() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->twitter() }}')">Twitter</a></li>
+                            <li><a href="{{ 'http://connect.mail.ru/share?share_url='.URL::to("topic/show/". $topic->id).'&title='.htmlspecialchars($topic->description)}}" onclick="return popitup('{{ 'http://connect.mail.ru/share?share_url='.URL::to("topic/show/". $topic->id).'&title='.htmlspecialchars($topic->description)}}')">Мой мир</a></li>
+                            <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->vk() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->vk() }}')">В контакте</a></li>
+                        </ul>
+                    </li>
                 </ul>
-              </li>
-            </ul>
-            <input type="submit" onclick="return vote.topic({{$topic->id}},-1);" class="btn btn-minus"/>
-            <input type="submit" onclick="return vote.topic({{$topic->id}},1);" class="btn btn-plus"/><span class="likes" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
-          </div>
+                <input type="submit" onclick="return vote.topic({{$topic->id}},-1);" class="btn btn-minus"/>
+                <input type="submit" onclick="return vote.topic({{$topic->id}},1);" class="btn btn-plus"/><span class="likes" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
+            </div>
         </div>
       </div>
     </div>
 
     @endforeach
 </div>
+
+<script>
+    function popitup(url) {
+        newwindow=window.open(url,'name','height=400,width=400');
+        if (window.focus) {newwindow.focus()}
+        return false;
+    }
+</script>
 
