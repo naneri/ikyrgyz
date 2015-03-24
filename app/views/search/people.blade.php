@@ -1,56 +1,83 @@
 @extends('misc.layout')
 
 @section('content')
-{{HTML::style('css/bootstrap.css')}}
+{{--HTML::style('css/bootstrap.css')--}}
 @include('scripts.countries-cities')
-<div class="container">
-    {{Form::open()}}
-        <div class="col-md-4">
-            <div class="panel panel-default" style="padding:30px;">
-                {{HTML::link('#', 'Люди')}} |
-                {{HTML::link('search/content', 'Контент')}} 
-                <!--{{HTML::link('#', 'Группы')}} |
-                {{HTML::link('#', 'Медиа')}} -->
-                <br><br>
-                    Место поиска:<br>
-                    {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control select-country'))}}<br>
-                    {{Form::select('city', City::getAllForView(), null, array('class' => 'form-control select-city'))}}<br>
-                    <hr>
-                    Учебные заведения:
-                    {{Form::select('school', array_merge(array('' => 'Выберите школу'), ProfileItem::getForView('school')), null, array('class' => 'form-control'))}}<br>
-                    {{Form::select('university', array_merge(array('' => 'Выберите университет'), ProfileItem::getForView('university')), null, array('class' => 'form-control'))}}
-                    <hr>
-                    Места работы:
-                    {{Form::select('job', array_merge(array('' => 'Выберите место работы'), ProfileItem::getForView('job')), null, array('class' => 'form-control'))}}
-                    <hr>
-                    Пол:<br>
-                    <div class="checkbox">
-                        <label>
-                            {{Form::radio('gender', 'male', null)}} Мужской
-                        </label>
-                        <label>
-                            {{Form::radio('gender', 'female', null)}} Женский
-                        </label>
-                        <label>
-                            {{Form::radio('gender', 'other', true)}} Любой
-                        </label>
+<div class="b-content">
+    <div class="b-user-interface">
+        <div class="b-user-interface__header">
+            <p class="title-header">Поиск
+                <input type="submit" class="input-default"/>
+            </p>
+        </div>
+        <div class="b-user-interface__inner">
+            {{Form::open()}}
+            <div id="tab-1" class="b-user-interface-content tab-content current">
+                <div class="b-user-interface-content__left">
+                    <div class="b-user-interface-content-wrapper">
+                        <div class="b-user-interface-content-nav">
+                            <ul class="tabs">
+                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link current"><a href="#">Люди</a></li>
+                                <li data-tab="tab-2" class="b-user-interface-content-nav__list tab-link"><a href="{{URL::to('search/content')}}">Контент</a></li>
+                                <!--li data-tab="tab-3" class="b-user-interface-content-nav__list tab-link"><a href="#">Группы</a></li>
+                                <li data-tab="tab-4" class="b-user-interface-content-nav__list tab-link"><a href="#">Медиа</a></li-->
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                        <div class="b-user-interface-content-item">
+                            <p class="b-user-interface-content-item__title">Место поиска</p>
+                            <div class="b-user-interface-content-item__item">
+                                {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control select-country select-default'))}}
+                            </div>
+                            <div class="b-user-interface-content-item__item">
+                                {{Form::select('city', array('0' => 'Город'), null, array('class' => 'form-control select-city select-default'))}}
+                            </div>
+                            <p class="b-user-interface-content-item__title">Учебные заведения</p>
+                            <div class="b-user-interface-content-item__item">
+                                {{Form::select('school', array_merge(array('' => 'Выберите школу'), ProfileItem::getForView('school')), null, array('class' => 'form-control select-default'))}}
+                            </div>
+                            <div class="b-user-interface-content-item__item">
+                                {{Form::select('university', array_merge(array('' => 'Выберите университет'), ProfileItem::getForView('university')), null, array('class' => 'form-control select-default'))}}
+                            </div>
+                            <p class="b-user-interface-content-item__title">Место работы</p>
+                            <div class="b-user-interface-content-item__item">
+                                {{Form::select('job', array_merge(array('' => 'Выберите место работы'), ProfileItem::getForView('job')), null, array('class' => 'form-control select-default'))}}
+                            </div>
+                            <p class="b-user-interface-content-item__title">Пол</p>
+                            <div class="b-user-interface-content-item__item">
+                                <label>{{Form::radio('gender', 'male', null)}} Мужской</label>
+                            </div>
+                            <div class="b-user-interface-content-item__item">
+                                <label>{{Form::radio('gender', 'female', null)}} Женский</label>
+                            </div>
+                            <div class="b-user-interface-content-item__item">
+                                <label>{{Form::radio('gender', 'other', null)}} Любой</label>
+                            </div>
+                            <p class="b-user-interface-content-item__title">Возраст</p>
+                            <div class="b-user-interface-content-item__item">
+                                <label>от</label>
+                                {{Form::text('age-from', null, array('class' => 'input-default'))}}
+                                <label>до</label>
+                                {{Form::text('age-to', null, array('class' => 'input-default'))}}
+                            </div>
+                        </div>
                     </div>
-                    <hr>
-                    Возраст<br>
-                    От {{Form::text('age-from', null, array('size' => 4))}} До {{Form::text('age-to', null, array('size' => 4))}}<br>
+                </div>
+                <div class="b-user-interface-content__right">
+                    <div class="b-user-interface-content-search">
+                        <div class="b-user-interface-content-search__search">
+                            {{Form::text('search-text', null, array('class' => 'input-default'))}}
+                            {{Form::submit(null, array('onclick' => 'return false;', 'id' => 'btn-search', 'class' => 'button-default'))}}
+                        </div>
+                    </div>
+                    <div id="search-result">
+                    </div>
+                </div>
+                <div class="clear"></div>
             </div>
+            {{Form::close()}}
         </div>
-    <div class="col-md-8 panel panel-default" id="users-list">
-        <div class="" style="padding:30px;">
-            <div class="col-md-12 search-text" style="margin-bottom:20px;">
-                {{Form::text('search-text', null, array('size' => '60', 'class' => 'form-group'))}}
-                {{Form::submit('Поиск', array('onclick' => 'return false;', 'id' => 'btn-search'))}}
-            </div>
-            <div class="col-md-12" id="search-result">
-            </div>
-        </div>
-        </div>
-    {{Form::close()}}
+    </div>
 </div>
 @stop
 

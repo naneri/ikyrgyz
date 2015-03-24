@@ -63,6 +63,14 @@ Route::group(array('before' => 'auth|activated'),function(){
 
         Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
+        Route::get('profile/{id}/photos', 'PhotoAlbumsController@photoAlbumIndex');
+        Route::get('photoalbum/create', 'PhotoAlbumsController@create');
+        Route::post('photoalbum/create', 'PhotoAlbumsController@store');
+        Route::get('photoalbum/{id}', 'PhotoAlbumsController@show');
+        Route::get('photoalbum/{id}/upload', 'PhotosController@create');
+        Route::post('photoalbum/{id}/upload', 'PhotosController@store');
+        Route::get('photo/{id}', 'PhotosController@show');
+
         Route::get('profile/random', 'ProfileController@getRandom');
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');

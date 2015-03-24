@@ -35,6 +35,9 @@ class ProfileController extends BaseController {
                     case 'subscribtions':
                         $items = $user->canPublishBlogs();
                         break;
+                    case 'videos':
+                        $items = $user->topicsWithVideo;
+                        break;
                     case 'newsline':
                     default:
                         $items = $user->newsline();

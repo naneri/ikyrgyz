@@ -150,7 +150,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     public function topicsWithVideo(){
-        return $this->topics()->where('description', 'like', '%youtube%');
+        return $this->topics()->where('description', 'like', '%youtube%')->orderBy('created_at', 'desc');
     }
 
     public function drafts(){
