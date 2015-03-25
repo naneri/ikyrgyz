@@ -4,8 +4,10 @@
 <div class="container">
     <div class="col-md-12">
         <div class="panel panel-default" style="height: 40px; padding:0 20px;">
-            <h4 style="float: left;">Фото альбомы пользователя</h4>
-            <span style="float: right;line-height: 38px;"><a href="{{URL::to('photoalbum/create')}}">Создать</a></span>
+            <h4 style="float: left;"><a href="{{URL::to('profile/'.$user->id)}}">{{$user->getNames()}}</a> → Фотоальбомы</h4>
+            @if(Auth::id() == $user->id)
+                <span style="float: right;line-height: 38px;"><a href="{{URL::to('photoalbum/create')}}">Создать фотоальбом</a></span>
+            @endif
         </div>
         <div>
             @foreach($photoAlbums as $photoAlbum)

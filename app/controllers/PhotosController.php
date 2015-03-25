@@ -70,7 +70,7 @@ class PhotosController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$photo = Photo::findOrFail($id);
+		$photo = Photo::with('album')->findOrFail($id);
 
 		return View::make('photos.show', compact('photo'));
 	}
@@ -97,17 +97,23 @@ class PhotosController extends \BaseController {
 	public function update($id)
 	{
 		$photo = Photo::findOrFail($id);
+                
+                $rules = Photo::$rules;
+                $rules['image'] = 'image';
 
-		$validator = Validator::make($data = Input::all(), Photo::$rules);
+                $validator = Validator::make($data = Input::all(), $rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$photo->update($data);
+		if (Input::file('image')) {
+                    $data['url'] = $this->saveImage();
+                }
+                $photo->update($data);
 
-		return Redirect::route('photos.index');
+		return Redirect::to('photo/'.$photo->id);
 	}
 
 	/**
@@ -118,9 +124,10 @@ class PhotosController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+                $album = Photo::find($id)->album;
 		Photo::destroy($id);
 
-		return Redirect::route('photos.index');
-	}
+		return Redirect::to('photoalbum/' . $album->id);
+        }
 
 }

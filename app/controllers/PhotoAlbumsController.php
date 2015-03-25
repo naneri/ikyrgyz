@@ -9,15 +9,16 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$photoalbums = Photoalbum::all();
+		$photoalbums = PhotoAlbum::all();
 
 		return View::make('photoalbums.index', compact('photoalbums'));
 	}
 
         public function photoAlbumIndex($userId) {
-            $photoAlbums = PhotoAlbum::whereUserId($userId)->get();
+            $user = User::find($userId);
+            $photoAlbums = $user->photoAlbums;
 
-            return View::make('photoalbums.index', compact('photoAlbums'));
+            return View::make('photoalbums.index', compact('photoAlbums', 'user'));
         }
 
         /**
@@ -37,7 +38,7 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Photoalbum::$rules);
+		$validator = Validator::make($data = Input::all(), PhotoAlbum::$rules);
 
 		if ($validator->fails())
 		{
@@ -48,7 +49,7 @@ class PhotoAlbumsController extends \BaseController {
                     $data['cover'] = $this->saveImage();
                 }
                 $data['user_id'] = Auth::id();
-                Photoalbum::create($data);
+                PhotoAlbum::create($data);
 
 		return Redirect::to('profile/'.Auth::id().'/photos');
 	}
@@ -74,7 +75,7 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$photoAlbum = Photoalbum::findOrFail($id);
+		$photoAlbum = PhotoAlbum::findOrFail($id);
 
 		return View::make('photoalbums.show', compact('photoAlbum'));
 	}
@@ -86,9 +87,9 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$photoalbum = Photoalbum::find($id);
+		$photoAlbum = PhotoAlbum::find($id);
 
-		return View::make('photoalbums.edit', compact('photoalbum'));
+		return View::make('photoalbums.edit', compact('photoAlbum'));
 	}
 
 	/**
@@ -99,19 +100,22 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$photoalbum = Photoalbum::findOrFail($id);
+		$photoalbum = PhotoAlbum::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Photoalbum::$rules);
+		$validator = Validator::make($data = Input::all(), PhotoAlbum::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$photoalbum->update($data);
+		if (Input::file('image')) {
+                    $data['cover'] = $this->saveImage();
+                }
+                $photoalbum->update($data);
 
-		return Redirect::route('photoalbums.index');
-	}
+                return Redirect::to('photoalbum/'. $photoalbum->id);
+        }
 
 	/**
 	 * Remove the specified photoalbum from storage.
@@ -121,9 +125,9 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Photoalbum::destroy($id);
+		PhotoAlbum::destroy($id);
 
-		return Redirect::route('photoalbums.index');
-	}
+		return Redirect::to('profile/' . Auth::id() . '/photos');
+        }
 
 }

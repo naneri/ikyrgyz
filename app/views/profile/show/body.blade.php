@@ -69,12 +69,13 @@
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
-                <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных фотографии</p></li>
-                <!--li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
-                <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li-->
+                @if($photos->count() > 0)
+                    @foreach($photos as $photo)
+                    <li class="b-user-media-video-gallery__list photo-item"><div style="width:120px;height:120px;float:left;background:url({{asset($photo->url)}}) 50%;background-size: cover;border: 2px solid white;"></div></li>
+                    @endforeach
+                @else
+                    <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных фотографии</p></li>
+                @endif
                 <div class="clear"></div>
             </ul>
         </div>

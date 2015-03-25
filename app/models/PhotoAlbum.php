@@ -18,4 +18,12 @@ class PhotoAlbum extends \Eloquent {
         public function photos(){
             return $this->hasMany('Photo', 'album_id');
         }
+        
+        public function user(){
+            return $this->belongsTo('User');
+        }
+        
+        public function canEdit(){
+            return Auth::id() == $this->user_id;
+        }
 }
