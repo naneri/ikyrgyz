@@ -31,35 +31,57 @@ class PhotosController extends \BaseController {
 	 * @return Response
 	 */
 	public function store($albumId)
-	{
-		$validator = Validator::make($data = Input::all(), Photo::$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+	{                
+                $photos = array();
                 
-		if (Input::file('image')) {
-                    $data['url'] = $this->saveImage();
+                $imagesInput = Input::file('images');
+                foreach ($imagesInput as $image) {
+                    $rules = array('file' => 'required|image'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+                    $validator = Validator::make(array('file' => $image), $rules);
+                    if ($validator->passes()) {
+                        $data['url'] = $this->saveImage($image);
+                        $data['user_id'] = Auth::id();
+                        $data['album_id'] = $albumId;
+                        $data['name'] = $file_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                        $photos[] = Photo::create($data);
+                    }
                 }
-                $data['user_id'] = Auth::id();
-                $data['album_id'] = $albumId;
-                Photo::create($data);
-
-		return Redirect::to('photoalbum/'.$albumId);
+                
+                return View::make('photos.setnames', compact('photos', 'albumId'));
 	}
 
-        private function saveImage() {
-            $file = Input::file('image');
+        public function setNames($albumId) {
+            $photoNames = Input::get('photo_names');
+            foreach ($photoNames as $photoId => $photoName) {
+                Photo::find($photoId)->update(array('name' => $photoName));
+            }
+            return Redirect::to('photoalbum/' . $albumId);
+        }
+
+        private function saveImage($file) {
             $destinationPath = 'images/user/' . Auth::id() . '/photos';
             if (!file_exists($destinationPath)) {
                 File::makeDirectory($destinationPath);
             }
-            $extension = Input::file('image')->getClientOriginalExtension();
+            $extension = $file->getClientOriginalExtension();
             $fileName = time() . rand(1, 100) . '.' . $extension;
             $file->move($destinationPath, $fileName);
             $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
             return $avapath;
+        }
+        
+        public function saveFromUrl(){
+            // Your file
+            $file = 'http://....';
+
+            // Open the file to get existing content
+            $data = file_get_contents($file);
+
+            // New file
+            $new = '/var/www/uploads/';
+
+            // Write the contents back to a new file
+            file_put_contents($new, $data);
         }
 
         /**
@@ -108,8 +130,8 @@ class PhotosController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		if (Input::file('image')) {
-                    $data['url'] = $this->saveImage();
+		if (Input::hasFile('image')) {
+                    $data['url'] = $this->saveImage(Input::file('image'));
                 }
                 $photo->update($data);
 

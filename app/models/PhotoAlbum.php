@@ -9,8 +9,10 @@ class PhotoAlbum extends \Eloquent {
 	];
 
 	// Don't forget to fill this array
-	protected $fillable = ['name', 'cover', 'user_id'];
+	protected $fillable = ['name', 'cover', 'user_id', 'description', 'access'];
         
+        protected $connection = 'mysql_users';
+
         public function getCoverAttribute($value){
             return asset(($value)?$value:'img/56.png');
         }

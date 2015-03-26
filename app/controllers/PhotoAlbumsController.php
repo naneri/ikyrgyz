@@ -45,16 +45,17 @@ class PhotoAlbumsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
+
 		if (Input::file('image')) {
                     $data['cover'] = $this->saveImage();
                 }
                 $data['user_id'] = Auth::id();
                 PhotoAlbum::create($data);
 
-		return Redirect::to('profile/'.Auth::id().'/photos');
-	}
-        
-        private function saveImage(){
+                return Redirect::to('profile/' . Auth::id() . '/photos');
+        }
+
+        private function saveImage() {
             $file = Input::file('image');
             $destinationPath = 'images/user/' . Auth::id() . '/photos';
             if (!file_exists($destinationPath)) {
@@ -67,7 +68,7 @@ class PhotoAlbumsController extends \BaseController {
             return $avapath;
         }
 
-	/**
+        /**
 	 * Display the specified photoalbum.
 	 *
 	 * @param  int  $id
@@ -125,7 +126,9 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		PhotoAlbum::destroy($id);
+                $photoAlbum = PhotoAlbum::findOrFail($id);
+                $photoAlbum->photos()->delete();
+                $photoAlbum->delete();
 
 		return Redirect::to('profile/' . Auth::id() . '/photos');
         }

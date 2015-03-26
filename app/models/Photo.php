@@ -11,6 +11,8 @@ class Photo extends \Eloquent {
 	// Don't forget to fill this array
 	protected $fillable = ['name', 'url', 'user_id', 'album_id'];
         
+        protected $connection = 'mysql_users';
+        
         public function album(){
             return $this->belongsTo('PhotoAlbum', 'album_id');
         }

@@ -68,12 +68,14 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::post('photoalbum/create', 'PhotoAlbumsController@store');
         Route::get('photoalbum/{id}', 'PhotoAlbumsController@show');
         Route::get('photo/{id}', 'PhotosController@show');
+        Route::post('photoalbum/uploadCover', 'PhotoAlbumsController@uploadCover');
         Route::group(array('before' => 'photoalbum_edit_permission'), function(){
             Route::get('photoalbum/{id}/delete', 'PhotoAlbumsController@destroy');
             Route::get('photoalbum/{id}/edit', 'PhotoAlbumsController@edit');
             Route::post('photoalbum/{id}/edit', 'PhotoAlbumsController@update');
             Route::get('photoalbum/{id}/upload', 'PhotosController@create');
             Route::post('photoalbum/{id}/upload', 'PhotosController@store');
+            Route::post('photoalbum/{id}/upload/setnames', 'PhotosController@setNames');
         });
         Route::group(array('before' => 'photo_edit_permission'), function(){
             Route::get('photo/{id}/delete', 'PhotosController@destroy');
