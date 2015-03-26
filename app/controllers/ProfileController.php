@@ -25,6 +25,7 @@ class ProfileController extends BaseController {
                 
                 $items = null;
                 $videos = array();
+                $photos = array();
                 switch($page){
                     case 'publications':
                         $items = $user->topics;
@@ -35,10 +36,14 @@ class ProfileController extends BaseController {
                     case 'subscribtions':
                         $items = $user->canPublishBlogs();
                         break;
+                    case 'videos':
+                        $items = $user->topicsWithVideo;
+                        break;
                     case 'newsline':
                     default:
                         $items = $user->newsline();
-                        $videos = $user->topicsWithVideo;
+                        $videos = $user->topicsWithVideo()->take(6)->get();
+                        $photos = $user->photos()->orderBy('created_at', 'desc')->take(6)->get();
                         break;
                 }
                 
@@ -46,9 +51,9 @@ class ProfileController extends BaseController {
                 @$gender = $this->genders[$user->description->gender];
                 
                 if($user->id == Auth::id()){
-                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
+                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videos', 'maritalStatus', 'gender', 'photos'));
                 }else{
-                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videos', 'maritalStatus', 'gender', 'photos'));
                 }
 	}
         

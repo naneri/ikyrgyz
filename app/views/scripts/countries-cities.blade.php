@@ -6,7 +6,7 @@ $(document).ready(function(){
         'country': 'city'
     }
     
-    $('.select-country').change(function(){
+    $('select.select-country').change(function(){
         var $selectCity = $('.select-city[name="'+selects[$(this).attr('name')]+'"]');
         $.get("{{URL::to('country')}}"+"/"+$(this).val(),function($cities){
             cb = '';
@@ -14,6 +14,8 @@ $(document).ready(function(){
                 cb += '<option value="' + key + '">' + value + '</option>';
             });
             $selectCity.html(cb);
+        }).success(function(){
+            $selectCity.trigger('refresh');
         });
     });
 });

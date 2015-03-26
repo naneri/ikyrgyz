@@ -4,10 +4,19 @@ class Photo extends \Eloquent {
 
 	// Add your validation rules here
 	public static $rules = [
-		'file' => 'required|image'
+            'image' => 'required|image',
+            'name' => 'string'
 	];
 
 	// Don't forget to fill this array
-	protected $fillable = [];
+	protected $fillable = ['name', 'url', 'user_id', 'album_id'];
+        
+        public function album(){
+            return $this->belongsTo('PhotoAlbum', 'album_id');
+        }
+
+        public function canEdit() {
+            return Auth::id() == $this->user_id;
+        }
 
 }

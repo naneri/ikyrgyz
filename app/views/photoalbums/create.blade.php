@@ -13,19 +13,16 @@
         </div>
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>Изменение фотографии</legend>
-            <div class="form-group">
-                {{Form::file('image', null, array('class' => 'form-control'))}}
-                {{HTML::image($photo->url, null, array('style' => 'max-width:700px;'))}}
-            </div>
-            <div class="form-group">
-                {{Form::text('name', $photo->name, array('class' => 'form-control'))}}
-            </div>
-            <div class="form-group">
-                {{Form::hidden('photo_album_id', $photo->album->id)}}
-                {{Form::hidden('url', $photo->url)}}
-                {{Form::submit('Сохранить')}}
-            </div>
+                <legend>Создание фотоальбома</legend>
+                <div class="form-group">
+                    {{Form::text('name', null, array('class' => 'form-control', 'placeholder' => 'введите название'))}}
+                </div>
+                <div class="form-group">
+                    {{Form::file('image', null, array('class' => 'form-control'))}}
+                </div>
+                <div class="form-group">
+                    {{Form::submit('Сохранить')}}
+                </div>
             {{Form::close()}}
         </div>
     </div>

@@ -19,9 +19,10 @@ class PhotosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($photoAlbumId)
 	{
-		return View::make('photos.create');
+            $photoAlbum = PhotoAlbum::findOrFail($photoAlbumId);
+            return View::make('photos.create', compact('photoAlbum'));
 	}
 
 	/**
@@ -29,7 +30,7 @@ class PhotosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($albumId)
 	{
 		$validator = Validator::make($data = Input::all(), Photo::$rules);
 
@@ -37,13 +38,31 @@ class PhotosController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+                
+		if (Input::file('image')) {
+                    $data['url'] = $this->saveImage();
+                }
+                $data['user_id'] = Auth::id();
+                $data['album_id'] = $albumId;
+                Photo::create($data);
 
-		Photo::create($data);
-
-		return Redirect::route('photos.index');
+		return Redirect::to('photoalbum/'.$albumId);
 	}
 
-	/**
+        private function saveImage() {
+            $file = Input::file('image');
+            $destinationPath = 'images/user/' . Auth::id() . '/photos';
+            if (!file_exists($destinationPath)) {
+                File::makeDirectory($destinationPath);
+            }
+            $extension = Input::file('image')->getClientOriginalExtension();
+            $fileName = time() . rand(1, 100) . '.' . $extension;
+            $file->move($destinationPath, $fileName);
+            $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
+            return $avapath;
+        }
+
+        /**
 	 * Display the specified photo.
 	 *
 	 * @param  int  $id
@@ -51,7 +70,7 @@ class PhotosController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$photo = Photo::findOrFail($id);
+		$photo = Photo::with('album')->findOrFail($id);
 
 		return View::make('photos.show', compact('photo'));
 	}
@@ -78,17 +97,23 @@ class PhotosController extends \BaseController {
 	public function update($id)
 	{
 		$photo = Photo::findOrFail($id);
+                
+                $rules = Photo::$rules;
+                $rules['image'] = 'image';
 
-		$validator = Validator::make($data = Input::all(), Photo::$rules);
+                $validator = Validator::make($data = Input::all(), $rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$photo->update($data);
+		if (Input::file('image')) {
+                    $data['url'] = $this->saveImage();
+                }
+                $photo->update($data);
 
-		return Redirect::route('photos.index');
+		return Redirect::to('photo/'.$photo->id);
 	}
 
 	/**
@@ -99,9 +124,10 @@ class PhotosController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+                $album = Photo::find($id)->album;
 		Photo::destroy($id);
 
-		return Redirect::route('photos.index');
-	}
+		return Redirect::to('photoalbum/' . $album->id);
+        }
 
 }

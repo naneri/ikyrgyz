@@ -63,7 +63,7 @@
 <script>
 $(document).ready(function(){
     $('.user-date').each(function(){
-        this.innerText = this.innerText.replace(/,\s*$/, '');
+        //this.innerText = this.innerText.replace(/,\s*$/, '');
     });
 });
 </script>
