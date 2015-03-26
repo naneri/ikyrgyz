@@ -324,3 +324,10 @@ $(document).ready(function(){
 
 // TABs
 
+
+$(document).ready(function(){
+	$('.b-header-nav__icon').click(function(){
+		$('.b-header-nav__list').slideToggle();
+	
+});
+});

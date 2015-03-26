@@ -9,7 +9,7 @@
 		  	var $container = $('.masonry');
 	  		$container.imagesLoaded(function(){
 	  			$container.masonry({
-			    	columnWidth: 495,
+			    	
 			    	'gutter': 10
 		  		});	
 	  		});
