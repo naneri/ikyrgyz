@@ -111,7 +111,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     public function newsline(){
-        $votedTopicIds = $this->votes()->where('target_type', 'topic')->lists('target_id');
+        $votedTopicIds = $this->votes()->where('target_type', 'topic')->where('value', '1')->lists('target_id');
         $subscribedTopicIds = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
                 ->whereIn('blogs.id', $this->canPublishBlogs()->lists('id'))
                 ->select('topics.id')

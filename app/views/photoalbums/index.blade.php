@@ -13,8 +13,11 @@
             @foreach($photoAlbums as $photoAlbum)
                 <a href="{{URL::to('photoalbum/'.$photoAlbum->id)}}">
                     <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{$photoAlbum->cover}});background-size: cover;border: 2px solid white;">
-                        <div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
-                            {{$photoAlbum->name}}
+                        <div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 5px;  opacity: 0.8;">
+                            {{$photoAlbum->name}}<br>
+                            @if(!$photoAlbum->canView())
+                                {{HTML::image('img/lock.png', null, array('style' => 'width: 20px; height:20px;'))}}
+                            @endif
                         </div>
                     </div>
                 </a>
