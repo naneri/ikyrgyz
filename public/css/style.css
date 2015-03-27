@@ -19,17 +19,10 @@ body {
 	margin-bottom: 13px;
 }
 
-<<<<<<< HEAD
+
 .b-header-nav a {
 	font: 15px 'PT Sans Caption';
 	color: #fff;
-=======
-.b-header-nav__list {
-	display: inline-block;
-	padding: 1% 1.3%;
-	list-style: none;
-	position: relative;
->>>>>>> e0f90f0eb0d045cf67b91c7e2b0bf41c0a2a7ada
 }
 
 .b-header-nav a span {
