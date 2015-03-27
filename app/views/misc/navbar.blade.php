@@ -2,7 +2,11 @@
 <div class="b-header">
 		<div class="b-header__inner">
 			<div class="b-header-nav">
-				<a href="#" class="b-header-nav__icon">&#9776;</a>
+				<a href="#" class="b-header-nav__icon">
+					<div></div>
+					<div></div>
+					<div></div>
+				</a>
 				<ul class="b-header-nav-list">
 					<li class="b-header-nav__left">
 						<div class="b-header-nav-logo">
