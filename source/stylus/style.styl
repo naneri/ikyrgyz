@@ -5,11 +5,13 @@
  	width 100%
  	background #e5e5e5
  	overflow-x hidden
+ .b-header-nav__icon
+ 	display none	
 .b-header 
 	background url(../img/1.png) repeat-x
 	
 	
-	
+		
 	&__inner
 		max-width 1100px
 		margin 0 auto
@@ -17,37 +19,29 @@
 		margin-bottom 13px
 	&-nav
 		//
-	
-		&__list
-			display inline-block
-			padding 1% 1%
-			list-style none
-			position relative
-			margin 0 1px
+		a
+			font 15px $baseFontFamily
+			color #fff
+			span
+				margin-left 10px
+		&__left
+			float left
+			width 40%
 			
 			
-			
-			
-			.user-name
-				padding-left 18px
-				
-			.logo
-				padding-left 18px
-				font-size 18px
-				text-transform uppercase
-			.counter-block	
-				//
-			.search-friend
-				padding-left 15px
-				
-			img 
+			img
 				vertical-align middle
-				
-			a 
-				color #fff
-				font-family 'PT Sans Caption'
-				font-size 15px
-			.counter 
+			.b-header-nav-logo, .b-header-nav-user
+				display inline-block
+				line-height 80px
+				vertical-align middle
+				padding-right 20px
+			.b-header-nav-user
+				position relative
+		&__middle
+			float left
+			width 27%
+			.counter
 				background-clip padding-box
 				display inline-block
 				width 18px
@@ -57,31 +51,115 @@
 				border-radius 2px
 				text-align center
 				box-shadow 0 1px 4px rgba(0,0,0,.5)
-				background #ef1b29
-				margin-left 10px
+				background #ef1b29				
 				font-family 'PT Sans Caption Bold'
 				background-image linear-gradient(bottom, rgba(79,79,79,.1) 0%, rgba(255,255,255,.1) 100%)
-.b-header-nav__icon
-	display none
+				
+			
+			
+			.b-header-nav-button
+				//	
+			
+			.b-header-nav-button__item
+				display inline-block
+				line-height 80px
+				vertical-align middle
+				padding 0 10px
+				position relative
+				
+				
+				img
+					vertical-align middle
+		&__right
+			float right
+			width 33%
+			.b-header-nav-search, .b-header-nav-enc, .b-header-nav-setting
+				line-height 80px 		
+				display inline-block
+				padding-left 10px
+			
+			img
+				vertical-align middle
+			.b-header-nav-setting
+				position relative
+			
+
+// 		&__list
+// 			display inline-block
+// 			padding 1% 15px 0 0
+// 			list-style none
+// 			position relative
+			
+			
+			
+			
+			
+// 			.user-name
+// 				padding-left 18px
+				
+// 			.logo
+// 				padding-left 18px
+// 				font-size 18px
+// 				text-transform uppercase
+// 			.counter-block	
+// 				//
+// 			.search-friend
+// 				padding-left 15px
+				
+// 			img 
+// 				vertical-align middle
+				
+// 			a 
+// 				color #fff
+// 				font-family 'PT Sans Caption'
+// 				font-size 15px
+// 			
+// .b-header-nav__icon
+// 	display none
 	
-	color #fff
-	width 10px
-	height 10px
-	font-size 20px
-	cursor pointer
-	padding 10px	
+// 	color #fff
+// 	width 10px
+// 	height 10px
+// 	font-size 20px
+// 	cursor pointer
+// 	padding 10px	
 @media screen and (max-width:1200px) {
 	
-	.b-header-nav__list {
-		padding 1% 2.5%
+	.b-header-nav {	
+		//	
 		span.search-friend, span.user-name  {
 			display none
 		}
 		
+
+		li.b-header-nav__left {
+		width 30%
+	}
+	li.b-header-nav__middle {
+		width 33%
+	}
+	li.b-header-nav__right {
+		width 33%
+	}
+	
+	.b-header__inner {
+		width 100%
+		max-width 1000px
+		margin 0 auto
+	}
+		
+		
+	}
+	
+	.b-header-nav__right {
+		float right
+		.b-header-nav-search, .b-header-nav-enc, .b-header-nav-setting {
+			padding-right 20%
+		}
 	}
 		
 	.b-header__inner { 
-		max-width 1000px
+		max-width 1200px
 		margin 0 auto
 		width 100%
 	}
@@ -94,15 +172,27 @@
 
 	
 }
-@media screen and (max-width:940px) {
-	.b-header-nav__list {
-		display none
+@media screen and (max-width:942px) {
+	.b-header-nav__left, .b-header-nav__middle, .b-header-nav__right{
+		
 		padding 3% 0
+		float none
+		
 	}
 	.b-header-nav__icon {
 		display block
 		
 	}
+	.b-header-nav-list {
+		display none
+	}
+	.b-header-nav-button {
+		width 150px
+	}
+	.b-header-nav-enc {
+		width 150px
+	}
+	
 	
 }
 
@@ -121,6 +211,7 @@
 	background #e1674a
 	min-width 160px 
 	border-bottom 4px solid #c84526
+	line-height 1.2px
 	&:before
 		width 0 
 		height 0
@@ -134,14 +225,15 @@
 	
 	
 	> li
-		padding 10px 30px
-		text-align left
+		padding 10px
 		
 		&:hover {
 			background #db5637
 		}
 		a
 			font-size 13px
+			
+			
 		.btn
 			button-default()
 			color #999
@@ -188,6 +280,7 @@
 	border-bottom 4px solid #c84526	
 	float left
 	z-index 1000
+	top 0
 	li
 		padding 10px 10px
 		

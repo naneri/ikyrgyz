@@ -13,7 +13,33 @@ $(function(){
  // });
 
 $(function() {
-	$('.b-header-nav li').hover(function(){
+	$('.b-header-nav-user__item').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
+$(function() {
+	$('.b-header-nav-setting__item').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
+
+$(function() {
+	$('.b-header-nav-dropdown li').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
+
+$(function() {
+	$('.b-header-nav-button__item').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
 		$(this).children('ul').stop(false, true).fadeOut(500);
@@ -327,7 +353,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$('.b-header-nav__icon').click(function(){
-		$('.b-header-nav__list').slideToggle();
+		$('ul.b-header-nav-list').slideToggle();
 	
 });
 });
