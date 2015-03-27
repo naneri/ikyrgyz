@@ -12,7 +12,7 @@ class DropPhotoAlbumsTable extends Migration {
 	 */
 	public function up()
 	{
-                Schema::table('photo_albums')->delete();
+                DB::table('photo_albums')->delete();
                 Schema::drop('photo_albums');
 	}
 

@@ -28,4 +28,16 @@ class PhotoAlbum extends \Eloquent {
         public function canEdit(){
             return Auth::id() == $this->user_id;
         }
+        
+        public function canView(){
+            $access = false;
+            if(
+                    $this->user_id == Auth::id() ||
+                    $this->access == 'all' || 
+                    ($this->access == 'friend' && Friend::checkIfFriend($this->user_id, Auth::id()))
+            ){
+                $access = true;
+            }
+            return $access;
+        }
 }

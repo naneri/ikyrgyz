@@ -20,5 +20,9 @@ class Photo extends \Eloquent {
         public function canEdit() {
             return Auth::id() == $this->user_id;
         }
+        
+        public function canView(){
+            return $this->album->canView();
+        }
 
 }

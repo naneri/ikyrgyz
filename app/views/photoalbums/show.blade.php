@@ -18,29 +18,42 @@
             @endif
         </div>
         <div>
-            @if($photoAlbum->getOriginal('cover'))
-                <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{$photoAlbum->cover}}) 50%;background-size: cover;border: 2px solid white;">
-                    <div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
-                        Обложка фотоальбома
+            @if($photoAlbum->canView())
+                @if($photoAlbum->description)
+                    <div class="panel panel-default" style="height: 40px; padding:0 20px;">
+                        <h5><b>Описание:</b> {{$photoAlbum->description}}</h5>
                     </div>
-                </div>
-            @endif
-            @foreach($photoAlbum->photos as $photo)
-            <a href="{{URL::to('photo/'.$photo->id)}}">
-                <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{$photo->url}}) 50%;background-size: cover;border: 2px solid white;">
-                    <div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
-                        {{$photo->name}}
+                @endif
+                @if($photoAlbum->getOriginal('cover'))
+                    <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{$photoAlbum->cover}}) 50%;background-size: cover;border: 2px solid white;">
+                        <div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
+                            Обложка фотоальбома
+                        </div>
                     </div>
-                </div>
-            </a>
-            @endforeach
-            @if($photoAlbum->canEdit())
-                <a href="{{URL::to('photoalbum/'.$photoAlbum->id.'/upload')}}">
-                        <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{asset('img/upload_photo.jpg')}}) 50%;background-size: cover;border: 2px solid white;"><div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
-                            Загрузить фотографии
+                @endif
+                @foreach($photoAlbum->photos as $photo)
+                <a href="{{URL::to('photo/'.$photo->id)}}">
+                    <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{$photo->url}}) 50%;background-size: cover;border: 2px solid white;">
+                        <div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
+                            {{$photo->name}}
                         </div>
                     </div>
                 </a>
+                @endforeach
+                @if($photoAlbum->canEdit())
+                    <a href="{{URL::to('photoalbum/'.$photoAlbum->id.'/upload')}}">
+                            <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{asset('img/upload_photo.jpg')}}) 50%;background-size: cover;border: 2px solid white;"><div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
+                                Загрузить фотографии
+                            </div>
+                        </div>
+                    </a>
+                @endif
+            @else 
+                <div class="panel panel-default" style="height: 40px; padding:0 20px;">
+                    <h5 style="">
+                        Фото альбом не доступен для просмотра
+                    </h5>
+                </div>
             @endif
         </div>
     </div>
