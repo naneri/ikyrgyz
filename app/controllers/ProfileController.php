@@ -43,7 +43,7 @@ class ProfileController extends BaseController {
                     default:
                         $items = $user->newsline();
                         $videos = $user->topicsWithVideo()->take(6)->get();
-                        $photos = $user->photos()->orderBy('created_at', 'desc')->take(6)->get();
+                        $photos = $user->photos()->orderByRaw("RAND()")->take(6)->get();
                         break;
                 }
                 

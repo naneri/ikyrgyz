@@ -13,7 +13,7 @@
                 <span style="float: right;line-height: 38px;">
                     <a href="{{URL::to('photoalbum/'.$photoAlbum->id.'/delete')}}">Удалить фотоальбом</a> |
                     <a href="{{URL::to('photoalbum/'.$photoAlbum->id.'/edit')}}">Изменить фотоальбом</a> |
-                    <a href="{{URL::to('photoalbum/'.$photoAlbum->id.'/upload')}}">Загрузить фотографию</a>
+                    <a href="{{URL::to('photoalbum/'.$photoAlbum->id.'/upload')}}">Загрузить фотографии</a>
                 </span>
             @endif
         </div>

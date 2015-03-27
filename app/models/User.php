@@ -130,7 +130,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     public function avatar(){
-        return ($this->description->user_profile_avatar)?$this->description->user_profile_avatar:asset('img/48.png');
+        return (@$this->description->user_profile_avatar)?@$this->description->user_profile_avatar:asset('img/48.png');
     }
     
     public function canSendMessage($userId){
