@@ -195,6 +195,10 @@ body {
 	.b-header-nav-enc {
 		width: 150px;
 	}
+
+	.b-header-nav-logo {
+		width: 400px;
+	}
 }
 
 .header-logo__image {
