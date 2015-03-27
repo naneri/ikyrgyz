@@ -21,7 +21,7 @@
                     {{Form::select('access', array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне'), null, array('class' => 'form-control'))}}
                 </div>
                 <div class="form-group">
-                    <div id="dialog" title="Загрузить обложку">
+                    <!--div id="dialog" title="Загрузить обложку">
                         <p>
                             <div class="form-group">
                                 <label for="">с компьютера</label>
@@ -35,9 +35,9 @@
                                 {{Form::button('OK', array('id' => 'upload_image_btn'))}}
                             </div>
                         </p>
-                    </div>
-                    {{Form::file('image', null, array('class' => 'form-control'))}}
-                    <input type="button" id="upload_image_dialog" style="display: none;" value="Загрузить обложку" />
+                    </div-->
+                    {{Form::file('image', array('class' => 'form-control'))}}
+                    <!--<input type="button" id="upload_image_dialog" style="display: none;" value="Загрузить обложку" />-->
                 </div>
                 <div class="form-group">
                     {{Form::textarea('description', null, array('class' => 'form-control', 'placeholder' => 'Описание фотоальбома'))}}
@@ -52,7 +52,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script>
   $(function() {
-    $( "#dialog" ).dialog({
+    /*$( "#dialog" ).dialog({
         autoOpen: false
     });
     $('#upload_image_dialog').click(function(){
@@ -72,7 +72,7 @@
             }
         })
         $( "#dialog" ).dialog( "close" );
-    });
+    });*/
   });
 </script>
 @stop

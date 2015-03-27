@@ -208,6 +208,14 @@ class ProfileController extends BaseController {
             return Redirect::back();
         }
         
+        public function uploadAvatar(){
+            if(Input::hasFile('avatar')){
+                $data['user_profile_avatar'] = User_Description::saveAvatar(Input::file('avatar'));
+                User_Description::update_data($data);
+            }
+            return Redirect::to('profile');
+        }
+        
         public function getEditStudy(){
             return View::make('profile.edit.study', array('access' => $this->access));
         }
