@@ -6,7 +6,7 @@
     <div class="panel-heading">
         <h4>Исходящие</h4>
         {{Form::checkbox('check-all')}}
-        {{Form::select('action', array('' => 'Выберите действие', 'delete' => 'Удалить'))}}
+        {{Form::select('action', array('' => trans('network.choose-action'), 'delete' => trans('network.delete')))}}
         {{Form::hidden('page', 'outbox')}}
     </div>
     <div class="panel-body" id="messages">

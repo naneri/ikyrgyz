@@ -6,7 +6,7 @@
     <div class="panel-heading">
         <h4>Входящие</h4>
         {{Form::checkbox('check-all')}}
-        {{Form::select('action', array('' => 'Выберите действие', 'set_watch' => 'Прочитанное', 'set_notwatch' => 'Непрочитанное', 'blacklist' => 'Черный список', 'delete' => 'Удалить'))}}
+        {{Form::select('action', array('' => trans('network.choose-action'), 'set_watch' => trans('set-watch'), 'set_notwatch' => trans('network.set-notwatch'), 'blacklist' => trans('blacklist'), 'delete' => trans('network.delete')))}}
         <!--{{HTML::link('messages/inbox/friend', 'Друзья')}}
         {{HTML::link('messages/inbox/group', 'Группы')}}
         {{HTML::link('messages/inbox/event', 'События')}}

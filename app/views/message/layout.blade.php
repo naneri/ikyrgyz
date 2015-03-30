@@ -4,13 +4,13 @@
 <div class="b-content">
     <div class="col-md-4 messages-nav">
         <h4></h4>
-        {{HTML::link('messages/new', 'Новое сообщение')}}
-        {{HTML::link('messages/contacts', 'Контакты')}}
-        {{HTML::link('messages/inbox/all', 'Входящие')}}
-        {{HTML::link('messages/outbox', 'Исходящие')}}
-        {{HTML::link('messages/draft', 'Черновики')}}
-        {{HTML::link('messages/blacklist', 'Черный список')}}
-        {{HTML::link('messages/trash', 'Удаленные')}}
+        {{HTML::link('messages/new', trans('network.new-message'))}}
+        {{HTML::link('messages/contacts', trans('network.contacts'))}}
+        {{HTML::link('messages/inbox/all', trans('inbox'))}}
+        {{HTML::link('messages/outbox', trans('outbox'))}}
+        {{HTML::link('messages/draft', trans('drafts'))}}
+        {{HTML::link('messages/blacklist', trans('blacklist'))}}
+        {{HTML::link('messages/trash', trans('deleted'))}}
     </div>
     <div class="col-md-8">
         @yield('form')
@@ -27,7 +27,7 @@
 </style>
 <script>
     $('select[name="action"]').change(function(){
-        if($('input[name="messages[]"]:checked').length && confirm("Вы действительно хотите выполнить действие?")){
+        if($('input[name="messages[]"]:checked').length && confirm(trans('network.sure-perform-action'))){
             var $form = $('form[name="messages"]');
             var data = $form.serialize();
             $.ajax({

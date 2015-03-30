@@ -35,5 +35,100 @@ return array(
 	'topic' 			=> 'Топик',
 	'blog'				=> 'Блог',
 	'drafts'			=> 'Черновики',
-	'link'				=> 'Ссылка'
-	);
+	'link'				=> 'Ссылка',
+
+	//topic build
+	'read-more'			=> 'Подробнее',
+	'share'				=> 'Поделиться',
+
+	// topic create
+	'create-topic'		=> 'Создать топик',
+	'drafts'			=> 'Черновики',
+	'edit-topic'		=> 'Черновики',
+	'create-blog'		=> 'Создать блог',
+	'blog-image'		=> 'Изображение блога',
+	'blog-add'			=> 'Добавить',
+	'add-blog-image'	=> 'Добавить изображение блога',
+	'blog-description'	=> 'Описание блога',
+	'edit-blog'			=> 'Редактировать блог',
+	'edit-blog-users'	=> 'Редактировать пользователей блога',
+
+
+	// edit blog users
+	'user' 				=> 'пользователь',
+	'admin' 			=> 'админ',
+	'moderator'			=> 'модератор',
+	'reader'			=> 'читатель',
+	'banned'			=> 'забанен',
+
+	'blog-dont-read'	=> 'не читать',
+	'accept-invitation' => 'принять приглашение',
+	'reject-request'	=> 'отменить запрос',
+	'read' 				=> 'читать',
+	'edit'				=> 'редактировать',
+	'about'				=> 'about',
+	'administrators'	=> 'Администраторы',
+	'moderators'		=> 'Модераторы',	
+	'readers'			=> 'Читатели',
+
+	'dont-read'			=> 'не читать',
+
+	//comment body
+	'restore'			=> 'Восстановить',
+	'comment-deleted'	=> 'Комментарий удален',
+	'com-low-rating'	=> 'Комментарий скрыт из-за низкого рейтинга',
+	'show'				=> 'Показать',
+	'mess-not-found'	=> 'Сообщений по данному запросу не найдено',
+	'users-not-found'	=> 'Пользователей по данному запросу не найдено',
+	'new-messages'		=> 'Новые сообщения',
+	'black-list'		=> 'Черный список',
+	'contacts'			=> 'Контакты',
+
+	//message
+	'send-message'		=> 'Написать сообщение',
+	'choose-action'		=> 'Выберите действие',
+	'delete'			=> 'Удалить',
+	'edit-message'		=> 'Редактировать сообщение',
+	'draft'				=> 'Черновик',
+	'choose-action'		=> 'Выберите действие',
+	'set-watch'			=> 'Прочитанное',
+	'set-notwatch'		=> 'Непрочитанное',
+	'blacklist'			=> 'Черный список',
+	'delete'			=> 'Удалить',
+	'new-message'		=> 'Новое сообщение',
+	'inbox'				=> 'Входящие',
+	'outbox'			=> 'Исходящие',
+	'deleted'			=> 'Удаленные',
+	'sure-perform-action'	=> "Вы действительно хотите выполнить действие?",
+	'message-topic'		=> 'Тема',
+	'message'			=> 'Сообщение',
+	'draft'				=> 'Черновик',
+	'send'				=> 'Отправить',
+	'reply'				=> 'Ответить',
+	'force-delete'		=> 'Удалить без возможности восстановления',
+
+	//photoalbum
+	'create-photoalbum'	=> 'Создание фотоальбома',
+	'choose-name'		=> 'введите название',
+	'save'				=> 'Сохранить',
+	'user-photoalbums'	=> 'Фото альбомы пользователя',
+	'upload'			=> 'Загрузить',
+	'photoalbum-cover'	=> 'Обложка фотоальбома',
+	
+	//photos
+	'load-photo'		=> 'Загрузка фотографии',
+
+	//profile
+	'available'			=> 'Доступно',
+	'specialization' 	=> 'Специальность',
+	'notes'				=> 'Примечания',
+	'public-settings'	=> 'Настройка публичности',
+	'main-info'			=> 'Основная информация',
+	'to-all'			=> 'Всем',
+	'to-friends'		=> 'Друзьям',
+	'to-me'				=> 'Только мне',
+	'education'			=> 'Образование',
+	'you-live-in'		=> 'Вы проживаете',
+	'your-motherland'	=> 'Ваша родина',
+	
+	);				

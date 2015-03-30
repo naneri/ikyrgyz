@@ -4,7 +4,7 @@
 {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>Контакты</h4>
+        <h4>{{ trans('network.contacts') }}</h4>
         {{Form::hidden('page', 'contact')}}
     </div>
     <div class="panel-body" id="messages">
@@ -18,7 +18,7 @@
                         <img src='{{ URL::to("img/12.png") }}' style='width:50px;height:50px;'>
                     @endif    
                     {{$friend->first_name.' '.$friend->last_name}} 
-                    {{HTML::link('messages/new?receiver='.$friend->first_name.'+'.$friend->last_name, 'Написать сообщение', array('style' => 'float:right;line-height:50px;'))}}
+                    {{HTML::link('messages/new?receiver='.$friend->first_name.'+'.$friend->last_name, trans('network.send-message'), array('style' => 'float:right;line-height:50px;'))}}
                 </p>
                 @endforeach
             </div>

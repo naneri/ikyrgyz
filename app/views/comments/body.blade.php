@@ -25,10 +25,10 @@
             @if(Auth::id() == $comment->user_id || $isModerator)
             {{$comment->text}}
         <div class="b-profile-about-message-button">
-            <input type="submit" value="Восстановить" class="button-default button-submit" onclick="comment.restore({{$comment->id}}); return false;">
+            <input type="submit" value="{{ trans('network.restore') }}" class="button-default button-submit" onclick="comment.restore({{$comment->id}}); return false;">
         </div>
         @else
-        Комментарий удален
+        {{ trans('network.comment-deleted') }}
         @endif
         </p>
     </div>
@@ -39,7 +39,7 @@
             <span id="comment_{{$comment->id}}_text">{{$comment->text}}</span>
             @else
             <span style="display: none;" id="comment_{{$comment->id}}_text">{{$comment->text}}</span>
-            <span id="comment_{{$comment->id}}_hidden_text">Комментарий скрыт из-за низкого рейтинга <a href="#" class="comment_reply" onclick="comment.show({{$comment->id}}); return false;">Показать</a></span>
+            <span id="comment_{{$comment->id}}_hidden_text">{{ trans('network.com-low-rating') }}<a href="#" class="comment_reply" onclick="comment.show({{$comment->id}}); return false;">{{ trans('network.show') }}</a></span>
             @endif
         </p>
     </div>

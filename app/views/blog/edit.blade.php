@@ -14,7 +14,7 @@
 			<div class="col-md-4">
                             <div class="login-panel panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Edit Blog</h3><br>
+                                    <h3 class="panel-title">{{ trans('network.edit-blog') }}</h3><br>
                                     <span class="text-right">{{HTML::link('blog/edit/'.$blog->id.'/users', 'Edit users')}}</span>
                                 </div>
                                 <div class="panel-body">

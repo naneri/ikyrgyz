@@ -13,16 +13,16 @@
         </div>
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>Загрузка фотографии</legend>
+            <legend>{{ trans('network.load-photo') }}</legend>
             <div class="form-group">
                 {{Form::file('image', null, array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
-                {{Form::text('name', null, array('class' => 'form-control', 'placeholder' => 'введите название'))}}
+                {{Form::text('name', null, array('class' => 'form-control', 'placeholder' => trans('network.choose-name')))}}
             </div>
             <div class="form-group">
                 {{Form::hidden('photo_album_id', $photoAlbum->id)}}
-                {{Form::submit('Сохранить')}}
+                {{Form::submit(trans('network.save'))}}
             </div>
             {{Form::close()}}
         </div>
