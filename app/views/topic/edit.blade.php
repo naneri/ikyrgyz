@@ -5,7 +5,7 @@
     <div class="b-content">
           <div class="b-topic-create-modal">
             <div class="b-topic-create-modal__inner">
-              <div class="b-topic-create-modal__title">Редактировать топик
+              <div class="b-topic-create-modal__title">{{ trans('network.edit-topic') }}
                 <button class="btn-close"></button>
               </div>
               <div class="b-topic-create-modal__content">

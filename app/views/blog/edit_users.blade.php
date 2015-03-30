@@ -13,7 +13,7 @@
 			<div class="col-md-8 col-md-offset-2">
                             <div class="login-panel panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Edit Blog users</h3>
+                                    <h3 class="panel-title">{{ trans('network.edit-blog-users') }}</h3>
                                 </div>
                                 <div class="panel-body">
                                     {{Form::open(array('url' => 'blog/edit/'.$blog->id.'/users'))}}
@@ -21,11 +21,11 @@
                                         <fieldset>
                                             <table class="table">
                                                 <thead>
-                                                    <th>user</th>
-                                                    <th>admin</th>
-                                                    <th>moderator</th>
-                                                    <th>reader</th>
-                                                    <th>banned</th>
+                                                    <th>{{ trans('network.user') }}</th>
+                                                    <th>{{ trans('network.admin') }}</th>
+                                                    <th>{{ trans('network.moderator') }}</th>
+                                                    <th>{{ trans('network.reader') }}</th>
+                                                    <th>{{ trans('network.banned') }}</th>
                                                 </thead>
                                                 <tbody>
                                                     <tr>

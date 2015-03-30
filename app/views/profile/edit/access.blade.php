@@ -3,7 +3,7 @@
 @section('form')
     <div class="login-panel panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Настройка публичности</h3>
+            <h3 class="panel-title">{{ trans('network.public-settings') }}</h3>
         </div>
         <div class="panel-body">
             {{Form::open(array('url' => 'profile/edit/access'))}}
@@ -12,10 +12,10 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Основная информация:</td>
-                                    <td>Всем</td>
-                                    <td>Друзьям</td>
-                                    <td>Только мне</td>
+                                    <td>{{ trans('network.main-info') }}:</td>
+                                    <td>{{ trans('network.to-all') }}</td>
+                                    <td>{{ trans('network.to-friends') }}</td>
+                                    <td>{{ trans('network.to-me') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,13 +38,13 @@
                                     <td>{{Form::radio('gender_access', 'me', $user['description']->gender_access == 'me')}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Вы проживаете</td>
+                                    <td>{{ trans('network.you-live-in') }}</td>
                                     <td>{{Form::radio('liveplace_access', 'all', $user['description']->liveplace_access == 'all')}}</td>
                                     <td>{{Form::radio('liveplace_access', 'friend', $user['description']->liveplace_access == 'friend')}}</td>
                                     <td>{{Form::radio('liveplace_access', 'me', $user['description']->liveplace_access == 'me')}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Ваша родина</td>
+                                    <td>{{ trans('network.your-motherland') }}</td>
                                     <td>{{Form::radio('birthplace_access', 'all', $user['description']->birthplace_access == 'all')}}</td>
                                     <td>{{Form::radio('birthplace_access', 'friend', $user['description']->birthplace_access == 'friend')}}</td>
                                     <td>{{Form::radio('birthplace_access', 'me', $user['description']->birthplace_access == 'me')}}</td>
@@ -55,8 +55,8 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Образование:</td>
-                                    <td>Всем</td>
+                                    <td>{{ trans('network.education') }}:</td>
+                                    <td>{{ trans('network.to-all') }}</td>
                                     <td>Друзьям</td>
                                     <td>Только мне</td>
                                     <td>По умолчанию</td>

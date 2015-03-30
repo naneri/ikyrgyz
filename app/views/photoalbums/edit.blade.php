@@ -14,7 +14,7 @@
         </div>
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>Создание фотоальбома</legend>
+            <legend>Изменить фотоальбом</legend>
             <div class="form-group">
                 {{Form::text('name', $photoAlbum->name, array('class' => 'form-control', 'placeholder' => 'введите название'))}}
             </div>

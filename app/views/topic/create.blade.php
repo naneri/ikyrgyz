@@ -5,7 +5,7 @@
     <div class="b-content">
           <div class="b-topic-create-modal">
             <div class="b-topic-create-modal__inner">
-              <div class="b-topic-create-modal__title">Создать топик
+              <div class="b-topic-create-modal__title">{{ trans('network.create-topic') }}
                 <button class="btn-close"></button>
               </div>
               <div class="b-topic-create-modal__content">
@@ -21,7 +21,7 @@
                   {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
                     <div class="b-topic-create-modal-content__item">
                         {{Form::text('title', 'Введите название', array('class' => 'input-default add-name sync-input'))}}
-                        <a href="{{asset('topic/drafts')}}" class="draft">Черновики <span>{{Auth::user()->drafts()->count()}}</span></a>
+                        <a href="{{asset('topic/drafts')}}" class="draft">{{ trans('network.drafts') }} <span>{{Auth::user()->drafts()->count()}}</span></a>
                     </div>
                     <div class="b-topic-create-modal-content__item">
                         {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default sync-input')) }}
@@ -31,6 +31,9 @@
                     </div> -->
                     <div class="b-topic-create-modal-content__item">
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
+                        {{ Form::text('tags', 'Теги', array('class' => 'input-default sync-input add-name', 'id' => 'tags')) }}
                     </div>
                     <div class="b-topic-create-modal-content__item">
                         <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg">

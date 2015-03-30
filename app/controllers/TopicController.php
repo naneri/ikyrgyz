@@ -17,9 +17,6 @@ class TopicController extends BaseController {
 	 */
 	public function create()
 	{
-      /*  if(!Auth::user()->isHavePersonalBlog()){
-            Auth::user()->createPersonalBlog();
-        }*/
 
     // Достаём список блогов в которые может постить пользователь
     $canPublishBlogs = $this->getCanPublishBlogsForView();       

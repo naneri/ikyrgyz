@@ -25,6 +25,6 @@
     </div>
     @endforeach
     @else
-        Пользователей по данному запросу не найдено
+        {{ trans('network.users-not-found') }}
     @endif
 </div>

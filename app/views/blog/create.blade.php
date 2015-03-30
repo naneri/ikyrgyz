@@ -10,7 +10,7 @@
                 @endforeach
           <div class="b-blog-create-modal">
             <div class="b-blog-create-modal__inner">
-              <div class="b-blog-create-modal__title">Создать блог
+              <div class="b-blog-create-modal__title">{{ trans('network.create-blog') }}
                 <button class="btn-close"></button>
               </div>
               <div class="b-blog-create-modal__content">
@@ -21,15 +21,15 @@
                     </div>
                     <div class="b-blog-create-modal-content__item">
                       {{ Form::select('type_id', $type_list, null, array('class' => 'input-default select-blog')) }}
-                      <span class="change-skin-title">Изображение блога</span><a href="#" class="input-default change-skin">Добавить</a>
+                      <span class="change-skin-title">{{ trans('network.blog-image') }}</span><a href="#" class="input-default change-skin">{{ trans('network.blog-add') }}</a>
                       <div class="b-topic-create__skin">
                         <div class="b-topic-create-skin">
-                          <div class="b-topic-create-skin__title">Добавить изображение блога</div>
+                          <div class="b-topic-create-skin__title">{{ trans('network.add-blog-image') }}</div>
                         </div>
                       </div>
                     </div>
                     <div class="b-blog-create-modal-content__item">
-                      <textarea name="description" cols="30" rows="10" class="textarea-blog input-default">Описание блога</textarea>
+                      <textarea name="description" cols="30" rows="10" class="textarea-blog input-default">{{ trans('network.blog-description') }}</textarea>
                     </div>
                     <div class="b-blog-create-modal-content__item">
                       <input type="file" name="avatar">

@@ -112,6 +112,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::post('profile/edit/additional', 'ProfileController@postAdditional');
     Route::get('profile/edit/access', 'ProfileController@getEditAccess');
     Route::post('profile/edit/access', 'ProfileController@postAccess');
+    Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
 
     Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');

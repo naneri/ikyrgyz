@@ -1,16 +1,16 @@
 {{$blog->author->email}} created topics<br>
 @if(!$blog->isUserHaveRole())
-    [{{HTML::link('/blog/'.$blog->id.'/read', 'читать')}}]
+    [{{HTML::link('/blog/'.$blog->id.'/read', trans('network.read'))}}]
 @else
     <?php $userRole = $blog->getUserRole(); ?>
     @if($userRole == 'reader')
-        [{{HTML::link('/blog/'.$blog->id.'/reject', 'не читать')}}]
+        [{{HTML::link('/blog/'.$blog->id.'/reject', trans('network.dont-read'))}}]
     @elseif($userRole == 'invite')
-        [{{HTML::link('/blog/'.$blog->id.'/accept', 'принять приглашение')}}]
+        [{{HTML::link('/blog/'.$blog->id.'/accept', trans('network.accept-invitation'))}}]
     @elseif($userRole == 'request')
-        [request][{{HTML::link('/blog/'.$blog->id.'/reject', 'отменить запрос')}}]
+        [request][{{HTML::link('/blog/'.$blog->id.'/reject', trans('network.reject-request'))}}]
     @elseif($userRole == 'reject')
-        [{{HTML::link('/blog/'.$blog->id.'/refollow', 'читать')}}]        
+        [{{HTML::link('/blog/'.$blog->id.'/refollow', trans('network.read'))}}]        
     @endif
 @endif
 <br>

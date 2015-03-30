@@ -13,9 +13,9 @@
         </div>
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-                <legend>Создание фотоальбома</legend>
+                <legend>{{ trans('network.create-photoalbum') }}</legend>
                 <div class="form-group">
-                    {{Form::text('name', null, array('class' => 'form-control', 'placeholder' => 'введите название'))}}
+                    {{Form::text('name', null, array('class' => 'form-control', 'placeholder' => trans('network.choose-name')))}}
                 </div>
                 <div class="form-group">
                     {{Form::select('access', array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне'), null, array('class' => 'form-control'))}}
@@ -43,7 +43,7 @@
                     {{Form::textarea('description', null, array('class' => 'form-control', 'placeholder' => 'Описание фотоальбома'))}}
                 </div>
                 <div class="form-group">
-                    {{Form::submit('Сохранить')}}
+                    {{Form::submit(trans('save'))}}
                 </div
             {{Form::close()}}
         </div>

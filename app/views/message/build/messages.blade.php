@@ -22,5 +22,5 @@
     </div>
 @endforeach
 @else
-    Сообщений по данному запросу не найдено
+    {{ trans('network.mess-not-found') }}
 @endif

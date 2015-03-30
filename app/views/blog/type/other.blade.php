@@ -11,28 +11,28 @@ type - {{$blog->type->name}}
 @else
     <?php $userRole = $blog->getUserRole(); ?>
     @if($userRole == 'reader')
-        [{{HTML::link('/blog/'.$blog->id.'/reject', 'не читать')}}]
+        [{{HTML::link('/blog/'.$blog->id.'/reject', trans('network.blog-dont-read') )}}]
     @elseif($userRole == 'invite')
-        [{{HTML::link('/blog/'.$blog->id.'/accept', 'принять приглашение')}}]
+        [{{HTML::link('/blog/'.$blog->id.'/accept',  trans('network.accept-invitation') )}}]
     @elseif($userRole == 'request')
-        [request][{{HTML::link('/blog/'.$blog->id.'/reject', 'отменить запрос')}}]
+        [request][{{HTML::link('/blog/'.$blog->id.'/reject',  trans('reject.request') )}}]
     @elseif($userRole == 'reject')
-        [{{HTML::link('/blog/'.$blog->id.'/refollow', 'читать')}}]        
+        [{{HTML::link('/blog/'.$blog->id.'/refollow',  trans('network.read') )}}]        
     @endif
 @endif
 
 @if($blog->canEdit())
-    [{{HTML::link('blog/edit/'.$blog->id, 'редактировать')}}]
+    [{{HTML::link('blog/edit/'.$blog->id, trans('network.edit'))}}]
 @endif
 <br>
 <div role="tabpanel">
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">About</a></li>
-        <li role="presentation"><a href="#admins" aria-controls="profile" role="tab" data-toggle="tab">Administrators</a></li>
-        <li role="presentation"><a href="#moderators" aria-controls="messages" role="tab" data-toggle="tab">Moderators</a></li>
-        <li role="presentation"><a href="#readers" aria-controls="readers" role="tab" data-toggle="tab">Readers</a></li>
+        <li role="presentation" class="active"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">{{ trans('network.about') }}</a></li>
+        <li role="presentation"><a href="#admins" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('network.administrators') }}</a></li>
+        <li role="presentation"><a href="#moderators" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('network.moderators') }}</a></li>
+        <li role="presentation"><a href="#readers" aria-controls="readers" role="tab" data-toggle="tab">{{ trans('networks.readers') }}</a></li>
     </ul>
 
     <!-- Tab panes -->

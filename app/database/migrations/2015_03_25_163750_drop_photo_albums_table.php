@@ -12,9 +12,12 @@ class DropPhotoAlbumsTable extends Migration {
 	 */
 	public function up()
 	{
-                DB::table('photo_albums')->delete();
-                Schema::drop('photo_albums');
-	}
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+            DB::connection('mysql')->table('photo_albums')->delete();
+            Schema::connection('mysql')->drop('photo_album_topic');
+            Schema::connection('mysql')->drop('photo_albums');
+            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        }
 
 
 	/**

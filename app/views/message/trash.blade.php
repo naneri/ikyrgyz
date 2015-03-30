@@ -6,7 +6,7 @@
     <div class="panel-heading">
         <h4>Удаленные сообщения</h4>
         {{Form::checkbox('check-all')}}
-        {{Form::select('action', array('' => 'Выберите действие', 'restore' => 'Восстановить', 'force_delete' => 'Удалить без возможности восстановления'))}}
+        {{Form::select('action', array('' => trans('network.choose-action'), 'restore' => trans('network.restore'), 'force_delete' => trans('network.force-delete')))}}
         <!--{{HTML::link('messages/inbox/friend', 'Друзья')}}
         {{HTML::link('messages/inbox/group', 'Группы')}}
         {{HTML::link('messages/inbox/event', 'События')}}

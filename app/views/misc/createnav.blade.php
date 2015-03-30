@@ -1,4 +1,4 @@
-<div class="b-topic-navigation">
+<div class="b-topic-navigation menu">
     <div class="b-topic-navigation__inner">
         <div class="b-topic-navigation__create">
             <ul class="b-topic-navigation-list">
