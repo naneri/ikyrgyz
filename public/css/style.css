@@ -497,6 +497,16 @@ body {
 	border-bottom-width: 2px;
 }
 
+.b-user-wall-325{
+    width: 325px !important;
+}
+.b-user-wall-495{
+    width: 495px !important;
+}
+.b-user-wall-1000{
+    width: 1000px !important;
+}
+
 .b-user-wall-header {
 	padding: 10px;
 }
@@ -1106,7 +1116,6 @@ Topic
 	border-radius: 3px;
 	border: 1px solid #dbdbdb;
 	height: 28px;
-	margin-left: 57px;
 }
 
 .b-topic-navigation-format__list .format-type {

@@ -59,7 +59,6 @@
                         <li><a href="javascript: makeColumnN('1')"><img src="{{ asset('img/44.png') }}" alt=""/></a></li>
                         <li><a href="javascript: makeColumnN('2')"><img src="{{ asset('img/45.png') }}" alt=""/></a></li>
                         <li><a href="javascript: makeColumnN('3')"><img src="{{ asset('img/46.png') }}" alt=""/></a></li>
-                        <li><input type="hidden" name="ColumnN" id="ColumnN" value="2"></li>
                     </ul>
                 </li>
                 <li class="b-topic-navigation-format__list"><!-- <a href="" class="format-icon"><img src="{{ asset('img/37.png') }}" alt=""/><span style="opacity:0">11</span>  --></a>

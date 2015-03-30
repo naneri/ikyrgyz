@@ -4,14 +4,30 @@
 		
 	$(document).ready(function(){
 		$( function() {
+		    var ColumnN = $('#ColumnN').val();
+		    var columnWidth, masonryClass;
+
+            if(ColumnN == 1){
+                columnWidth = 1000;
+                masonryClass = 'b-user-wall-1000';
+            }
+            else if(ColumnN == 2){
+                columnWidth = 495;
+                masonryClass = 'b-user-wall-495';
+            }
+            else if(ColumnN == 3){
+                columnWidth = 325;
+                masonryClass = 'b-user-wall-325';
+            }
+
 		  	var $container = $('.masonry');
 	  		$container.imagesLoaded(function(){
 	  			$container.masonry({
-			    	
+			    	columnWidth: columnWidth,
 			    	'gutter': 10
 		  		});	
 	  		});
-            $container.children().addClass('b-user-wall-495');
+            $container.children().removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
 
             var inProgress = false;
 
@@ -61,14 +77,17 @@
 	    if(column == 1){
 	        columnWidth = 1000;
 	        masonryClass = 'b-user-wall-1000';
+	        document.cookie = 'ColumnN = 1';
 	    }
 	    else if(column == 2){
 	        columnWidth = 495;
 	        masonryClass = 'b-user-wall-495';
+	        document.cookie = 'ColumnN = 2';
 	    }
 	    else if(column == 3){
 	        columnWidth = 325;
 	        masonryClass = 'b-user-wall-325';
+	        document.cookie = 'ColumnN = 3';
 	    }
 
 	    $('#ColumnN').val(column);
@@ -84,4 +103,10 @@
 
         var inProgress = false;
 	}
+
+	function popitup(url) {
+        newwindow=window.open(url,'name','height=400,width=400');
+        if (window.focus) {newwindow.focus()}
+        return false;
+    }
 </script>
