@@ -33,6 +33,9 @@
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
                     </div>
                     <div class="b-topic-create-modal-content__item">
+                        {{ Form::text('tags', 'Теги', array('class' => 'input-default sync-input add-name', 'id' => 'tags')) }}
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
                         <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg">
                           <div class="b-topic-create-modal-content__btns">
                             <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>

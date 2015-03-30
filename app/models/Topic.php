@@ -63,6 +63,7 @@ class Topic extends Eloquent {
             foreach($this->tags as $tag){
                 $stringTags .= $tag->name.', ';
             }
+            $stringTags = rtrim(trim($stringTags), ',');
             return $stringTags;
         }
         
