@@ -25,12 +25,4 @@
         </div>
     </div>
 </div>
-<script>
-$(function(){
-    $('form input[type="submit"]').click(function(){
-        $(this).attr('disabled', true);
-        $('form').submit();
-    });
-});
-</script>
 @stop

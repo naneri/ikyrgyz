@@ -28,8 +28,8 @@
             <ul class="b-user-profile-links">
                 <li class="b-user-profile-links__list"><a href="{{URL::to('topic/create')}}"></a></li>
                 <li class="b-user-profile-links__list"><a href="{{URL::to('blog/create')}}"></a></li>
+                <li class="b-user-profile-links__list"><a href="{{URL::to('photoalbum/create')}}"></a></li>
                 <!--li class="b-user-profile-links__list"><a href="#"></a></li>
-                <li class="b-user-profile-links__list"><a href="#"></a></li>
                 <li class="b-user-profile-links__list"><a href="#"></a></li>
                 <li class="b-user-profile-links__list"><a href="#"></a></li>
                 <li class="b-user-profile-links__list"><a href="#"></a></li-->

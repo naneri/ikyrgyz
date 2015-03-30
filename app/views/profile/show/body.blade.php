@@ -70,9 +70,16 @@
             </div>
             <ul class="b-user-media-video-gallery">
                 @if($photos->count() > 0)
-                    @foreach($photos as $photo)
-                    <li class="b-user-media-video-gallery__list photo-item"><div style="width:120px;height:120px;float:left;background:url({{asset($photo->url)}}) 50%;background-size: cover;border: 2px solid white;"></div></li>
-                    @endforeach
+                    <div id='gallery'>
+                        @foreach($photos as $photo)
+                            <a href="{{$photo->url}}">
+                                <div class="b-user-media-video-gallery__list" style="width:110px;height:110px;float:left;background:url({{asset($photo->url)}}) 50%;background-size: cover;border: 2px solid white;"></div>
+                                <img src="{{$photo->url}}" alt="{{$photo->name}}" style="display: none;">
+                            </a>
+                            <!--<li class="b-user-media-video-gallery__list photo-item"><div style="width:120px;height:120px;float:left;background:url({{asset($photo->url)}}) 50%;background-size: cover;border: 2px solid white;"></div></li>-->
+                        @endforeach
+                    </div>
+                    @include('scripts.photobox')
                 @else
                     <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных фотографии</p></li>
                 @endif
