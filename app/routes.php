@@ -67,9 +67,21 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('photoalbum/create', 'PhotoAlbumsController@create');
         Route::post('photoalbum/create', 'PhotoAlbumsController@store');
         Route::get('photoalbum/{id}', 'PhotoAlbumsController@show');
-        Route::get('photoalbum/{id}/upload', 'PhotosController@create');
-        Route::post('photoalbum/{id}/upload', 'PhotosController@store');
-        Route::get('photo/{id}', 'PhotosController@show');
+        Route::get('photo/{id}',  array('before' => 'can_view_photo', 'uses' => 'PhotosController@show'));
+        Route::post('photoalbum/uploadCover', 'PhotoAlbumsController@uploadCover');
+        Route::group(array('before' => 'photoalbum_edit_permission'), function(){
+            Route::get('photoalbum/{id}/delete', 'PhotoAlbumsController@destroy');
+            Route::get('photoalbum/{id}/edit', 'PhotoAlbumsController@edit');
+            Route::post('photoalbum/{id}/edit', 'PhotoAlbumsController@update');
+            Route::get('photoalbum/{id}/upload', 'PhotosController@create');
+            Route::post('photoalbum/{id}/upload', 'PhotosController@store');
+            Route::post('photoalbum/{id}/upload/setnames', 'PhotosController@setNames');
+        });
+        Route::group(array('before' => 'photo_edit_permission'), function(){
+            Route::get('photo/{id}/delete', 'PhotosController@destroy');
+            Route::get('photo/{id}/edit', 'PhotosController@edit');
+            Route::post('photo/{id}/edit', 'PhotosController@update');
+        });
 
         Route::get('profile/random', 'ProfileController@getRandom');
         Route::get('profile/fill', 'ProfileController@getProfileFill');
@@ -100,6 +112,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::post('profile/edit/additional', 'ProfileController@postAdditional');
     Route::get('profile/edit/access', 'ProfileController@getEditAccess');
     Route::post('profile/edit/access', 'ProfileController@postAccess');
+    Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
 
     Route::get('topic/show/{id}', 'TopicController@show');
 	Route::get('topic/create', 'TopicController@create');
@@ -186,6 +199,27 @@ Route::filter('topic_edit_permission', function($route) {
 Route::filter('message_edit_permission', function($route) {
     $message = Message::findOrFail($route->parameter('id'));
     if (!$message->canEdit()) {
+        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+    }
+});
+
+Route::filter('photoalbum_edit_permission', function($route) {
+    $photoAlbum = PhotoAlbum::findOrFail($route->parameter('id'));
+    if (!$photoAlbum->canEdit()) {
+        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+    }
+});
+
+Route::filter('photo_edit_permission', function($route) {
+    $photo = Photo::findOrFail($route->parameter('id'));
+    if (!$photo->canEdit()) {
+        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+    }
+});
+
+Route::filter('can_view_photo', function($route){
+    $photo = Photo::findOrFail($route->parameter('id'));
+    if(!$photo->canView()){
         return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
     }
 });

@@ -7,13 +7,18 @@
     <div class="b-user-profile">
         @if(isset($user->description->user_profile_avatar))
         <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
-            <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
+            <p class="user-link-photo"><a href="#" id="upload_user_avatar">Изменить фото</a></p>
         </div>
         @else
         <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
-            <p class="user-link-photo"><a href="#">Загрузить фото</a></p>
+            <p class="user-link-photo"><a href="#" id="upload_user_avatar">Загрузить фото</a></p>
         </div>
         @endif
+        <div style="display: none;">
+            {{Form::open(array('url' => URL::to('profile/uploadAvatar'), 'files' => true, 'id' => 'upload_avatar'))}}
+                {{Form::file('avatar', array('accept' => 'image/*', 'id' => 'input_avatar'))}}
+            {{Form::close()}}
+        </div>
 
         <div class="b-user-profile__middle">
             @include('profile.show.info', compact('user', 'gender', 'marital_status'))
@@ -23,8 +28,8 @@
             <ul class="b-user-profile-links">
                 <li class="b-user-profile-links__list"><a href="{{URL::to('topic/create')}}"></a></li>
                 <li class="b-user-profile-links__list"><a href="{{URL::to('blog/create')}}"></a></li>
+                <li class="b-user-profile-links__list"><a href="{{URL::to('photoalbum/create')}}"></a></li>
                 <!--li class="b-user-profile-links__list"><a href="#"></a></li>
-                <li class="b-user-profile-links__list"><a href="#"></a></li>
                 <li class="b-user-profile-links__list"><a href="#"></a></li>
                 <li class="b-user-profile-links__list"><a href="#"></a></li>
                 <li class="b-user-profile-links__list"><a href="#"></a></li-->
@@ -57,4 +62,15 @@
 </div>
 
 </div>
+<script>
+$(function(){
+    $('#upload_user_avatar').click(function(){
+        $('#input_avatar').click();
+    });
+    
+    $('#input_avatar').change(function(){
+        $('#upload_avatar').submit();
+    });
+});
+</script>
 @stop

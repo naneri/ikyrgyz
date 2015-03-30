@@ -14,8 +14,8 @@ class User_Description extends Eloquent{
 
 	// обновление дополнительных данных пользователя.
 	static function update_data($data){
-		if(Input::file('image')){
-			$data['user_profile_avatar'] = User_Description::saveAvatar();
+		if(Input::hasFile('image')){
+			$data['user_profile_avatar'] = User_Description::saveAvatar(Input::file('image'));
 		}
 		$description = User_Description::where('user_id', Auth::id())->update($data);
 
@@ -23,13 +23,12 @@ class User_Description extends Eloquent{
 	}
 
 	// сохранение аватарки пользователя.
-	static function saveAvatar(){
-		$file = Input::file('image');
+	static function saveAvatar($file){
 		$destinationPath = 'images/user/' . Auth::id();
 		if(!file_exists($destinationPath)){
 				File::makeDirectory($destinationPath);
 		}
-		$extension = Input::file('image')->getClientOriginalExtension();
+		$extension = $file->getClientOriginalExtension();
 		$fileName = time() . rand(1,100) .'.' . $extension;
 		$file->move($destinationPath, $fileName);
 		$avapath = URL::to('/') . '/' . $destinationPath .'/'. $fileName;

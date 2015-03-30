@@ -9,13 +9,35 @@ class PhotoAlbum extends \Eloquent {
 	];
 
 	// Don't forget to fill this array
-	protected $fillable = ['name', 'cover', 'user_id'];
+	protected $fillable = ['name', 'cover', 'user_id', 'description', 'access'];
         
+        protected $connection = 'mysql_users';
+
         public function getCoverAttribute($value){
             return asset(($value)?$value:'img/56.png');
         }
         
         public function photos(){
             return $this->hasMany('Photo', 'album_id');
+        }
+        
+        public function user(){
+            return $this->belongsTo('User');
+        }
+        
+        public function canEdit(){
+            return Auth::id() == $this->user_id;
+        }
+        
+        public function canView(){
+            $access = false;
+            if(
+                    $this->user_id == Auth::id() ||
+                    $this->access == 'all' || 
+                    ($this->access == 'friend' && Friend::checkIfFriend($this->user_id, Auth::id()))
+            ){
+                $access = true;
+            }
+            return $access;
         }
 }

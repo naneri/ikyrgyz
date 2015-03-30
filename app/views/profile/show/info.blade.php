@@ -12,10 +12,16 @@
     @endif
 </p>
 @if($user->description->checkAccess('birthplace_access') && $user->description->birthplace_country_id && $user->description->birthplace_city_id)
-    <p class="user-date">Место рождения: {{Country::find($user->description->birthplace_country_id)->name_ru}}, {{City::find($user->description->birthplace_city_id)->name_ru}}</p>
+    <p class="user-date">
+        <span class="place-info">Место рождения:</span> 
+        {{Country::find($user->description->birthplace_country_id)->name_ru}}, {{City::find($user->description->birthplace_city_id)->name_ru}}
+    </p>
 @endif
 @if($user->description->checkAccess('liveplace_access') && $user->description->liveplace_country_id && $user->description->liveplace_city_id)
-    <p class="user-date">Проживает: {{Country::find($user->description->liveplace_country_id)->name_ru}}, {{City::find($user->description->liveplace_city_id)->name_ru}}</p>
+    <p class="user-date">
+        <span class="place-info">Проживает:</span>
+        {{Country::find($user->description->liveplace_country_id)->name_ru}}, {{City::find($user->description->liveplace_city_id)->name_ru}}
+    </p>
 @endif
 @if(array_count_values($addresses = $user->profileItemsGetValues('address')) > 0)
 <p class="user-date">

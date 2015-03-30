@@ -1,3 +1,15 @@
+<style>
+    .b-user-wall-325{
+        width: 325px;
+    }
+    .b-user-wall-495{
+        width: 495px;
+    }
+    .b-user-wall-1000{
+        width: 1000px;
+    }
+</style>
+
 <div class="masonry">
     @foreach($topics as $topic)
   

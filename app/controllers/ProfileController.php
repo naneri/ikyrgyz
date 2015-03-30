@@ -25,6 +25,8 @@ class ProfileController extends BaseController {
                 
                 $items = null;
                 $videos = array();
+                $photos = array();
+                $videoIds = array();
                 switch($page){
                     case 'publications':
                         $items = $user->topics;
@@ -41,17 +43,23 @@ class ProfileController extends BaseController {
                     case 'newsline':
                     default:
                         $items = $user->newsline();
-                        $videos = $user->topicsWithVideo;
+                        $videos = $user->topicsWithVideo()->take(6)->get();
+                        $photos = $user->photos()->orderByRaw("RAND()")->take(6)->get();
                         break;
                 }
                 
                 @$maritalStatus = $this->maritalStatuses[$user->description->marital_status];
                 @$gender = $this->genders[$user->description->gender];
                 
+                foreach ($videos as $video) {
+                    preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
+                    $videoIds[] = end($matches);
+                }
+
                 if($user->id == Auth::id()){
-                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
+                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
                 }else{
-                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videos', 'maritalStatus', 'gender'));
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
                 }
 	}
         
@@ -204,6 +212,14 @@ class ProfileController extends BaseController {
             $description_data['birthday'] = ((Input::has('year'))?Input::get('year'):'0000').'-'.(Input::has('month')?Input::get('month'):'00').'-'.(Input::has('day')?Input::get('day'):'00');
             User_Description::update_data($description_data);
             return Redirect::back();
+        }
+        
+        public function uploadAvatar(){
+            if(Input::hasFile('avatar')){
+                $data['user_profile_avatar'] = User_Description::saveAvatar(Input::file('avatar'));
+                User_Description::update_data($data);
+            }
+            return Redirect::to('profile');
         }
         
         public function getEditStudy(){

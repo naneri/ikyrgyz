@@ -17,4 +17,4 @@ public/js/tinymce/plugins/filemanager/config.php
 node_modules/*
 
 public/images/*
-template/*
+
