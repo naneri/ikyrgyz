@@ -28,7 +28,7 @@
 
         @if($message->sender_id != Auth::id())
             <br>
-            {{HTML::link('messages/new', trans('network.reply'))}} 
+            {{HTML::link('messages/new?receiver='.$message->sender->getNames(), trans('network.reply'))}} 
         @endif
     </div>
     @else
