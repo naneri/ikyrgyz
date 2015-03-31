@@ -20,7 +20,7 @@ class MainController extends BaseController {
 		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
         //echo "<pre>"; print_r($topics); echo "</pre>";exit;
 
-        if(!$_COOKIE['ColumnN'])
+        if(!isset($_COOKIE['ColumnN']))
         {
             $_COOKIE['ColumnN']='2';
         }
