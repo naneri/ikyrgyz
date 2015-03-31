@@ -13,13 +13,13 @@
 </p>
 @if($user->description->checkAccess('birthplace_access') && $user->description->birthplace_country_id && $user->description->birthplace_city_id)
     <p class="user-date">
-        <span class="place-info">Место рождения:</span> 
+        <span class="place-info">{{ trans('network.birth-place') }}:</span> 
         {{Country::find($user->description->birthplace_country_id)->name_ru}}, {{City::find($user->description->birthplace_city_id)->name_ru}}
     </p>
 @endif
 @if($user->description->checkAccess('liveplace_access') && $user->description->liveplace_country_id && $user->description->liveplace_city_id)
     <p class="user-date">
-        <span class="place-info">Проживает:</span>
+        <span class="place-info">{{ trans('network.lives-in') }}:</span>
         {{Country::find($user->description->liveplace_country_id)->name_ru}}, {{City::find($user->description->liveplace_city_id)->name_ru}}
     </p>
 @endif

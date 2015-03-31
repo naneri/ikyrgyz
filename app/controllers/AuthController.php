@@ -102,7 +102,7 @@ class AuthController extends BaseController {
             $user->createPersonalBlog();
 
             // отправляем пользователю почту с активацией
-            Queue::push(
+            \Queue::push(
                 Mail::send('emails.activate', array('user' => $user), function($message)
                 {
                     $message->from('noreply@niamiko.com');
