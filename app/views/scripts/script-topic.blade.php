@@ -4,7 +4,7 @@
 		
 	$(document).ready(function(){
 		$( function() {
-		    var ColumnN = $('#ColumnN').val();
+		    var ColumnN = {{ $_COOKIE['ColumnN'] }};
 		    var columnWidth, masonryClass;
 
             if(ColumnN == 1){
@@ -46,7 +46,7 @@
 
 				   		console.log('donwloaded elements' + page);
 
-                        var ColumnN = $('#ColumnN').val();
+                        var ColumnN = {{ $_COOKIE['ColumnN'] }};
                         if(ColumnN == 1) elements.addClass('b-user-wall-1000');
                         else if(ColumnN == 2) elements.addClass('b-user-wall-495');
                         else if(ColumnN == 3) elements.addClass('b-user-wall-325');
@@ -90,7 +90,6 @@
 	        document.cookie = 'ColumnN = 3';
 	    }
 
-	    $('#ColumnN').val(column);
 	    var $container = $('.masonry');
         $container.imagesLoaded(function(){
             $container.masonry({

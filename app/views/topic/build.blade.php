@@ -1,4 +1,3 @@
-<input type="hidden" name="ColumnN" id="ColumnN" value="{{ $_COOKIE['ColumnN'] }}">
 <div class="masonry">
     @foreach($topics as $topic)
     <div class="b-user-wall item">
