@@ -4,7 +4,7 @@
 <div class="b-content">
     <div class="b-user-interface">
         <div class="b-user-interface__header">
-            <p class="title-header">Поиск
+            <p class="title-header">{{ trans('network.search') }}
                 <input type="submit" class="input-default"/>
             </p>
         </div>
@@ -15,8 +15,8 @@
                     <div class="b-user-interface-content-wrapper">
                         <div class="b-user-interface-content-nav">
                             <ul class="tabs">
-                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link current"><a href="{{URL::to('search/people')}}">Люди</a></li>
-                                <li data-tab="tab-2" class="b-user-interface-content-nav__list tab-link"><a href="#">Контент</a></li>
+                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link current"><a href="{{URL::to('search/people')}}">{{ trans('network.people') }}</a></li>
+                                <li data-tab="tab-2" class="b-user-interface-content-nav__list tab-link"><a href="#">{{ trans('network.content') }}</a></li>
                                 <!--li data-tab="tab-3" class="b-user-interface-content-nav__list tab-link"><a href="#">Группы</a></li>
                                 <li data-tab="tab-4" class="b-user-interface-content-nav__list tab-link"><a href="#">Медиа</a></li-->
                                 <div class="clear"></div>

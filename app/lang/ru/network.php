@@ -130,5 +130,20 @@ return array(
 	'education'			=> 'Образование',
 	'you-live-in'		=> 'Вы проживаете',
 	'your-motherland'	=> 'Ваша родина',
+	'video'				=> 'видео',
+	'no-available-video'=> 'Нет доступных видео',
+	'photos'			=> 'Фотографии',
+	'no-available-photos'=> 'Нет доступных фотографии',
+	'music'				=> 'Музыка',
+	'no-available-music'=> 'Нет доступных музыкальных файлов',
+	'birth-place'		=> 'Место рождения',
+	'lives-in'			=> 'Проживает',
+	'edit-photo'		=> 'Изменить фото',
+	'upload-photo'		=> 'Загрузить фото',
+	'search-friends'	=> 'Поиск друзей'	,
 	
+	//search
+	'search'			=> 'поиск',
+	'people'			=> 'люди',
+	'content'			=> 'контент'
 	);				

@@ -7,11 +7,11 @@
     <div class="b-user-profile">
         @if(isset($user->description->user_profile_avatar))
         <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
-            <p class="user-link-photo"><a href="#" id="upload_user_avatar">Изменить фото</a></p>
+            <p class="user-link-photo"><a href="#" id="upload_user_avatar">{{ trans('network.edit-photo') }}</a></p>
         </div>
         @else
         <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
-            <p class="user-link-photo"><a href="#" id="upload_user_avatar">Загрузить фото</a></p>
+            <p class="user-link-photo"><a href="#" id="upload_user_avatar">{{ trans('network.upload-photo') }}</a></p>
         </div>
         @endif
         <div style="display: none;">
@@ -24,7 +24,7 @@
             @include('profile.show.info', compact('user', 'gender', 'marital_status'))
         </div>
         <div class="b-user-profile__right">
-            <div class="b-user-profile-link"><a href="#" class="b-user-profile-link__create">Создать</a></div>
+            <div class="b-user-profile-link"><a href="#" class="b-user-profile-link__create">{{ trans('network.create') }}</a></div>
             <ul class="b-user-profile-links">
                 <li class="b-user-profile-links__list"><a href="{{URL::to('topic/create')}}"></a></li>
                 <li class="b-user-profile-links__list"><a href="{{URL::to('blog/create')}}"></a></li>
@@ -36,8 +36,8 @@
                 <div class="clear"></div>
             </ul>
             <ul class="b-user-profile-buttons">
-                <li class="b-user-profile-buttons__list"><a href="{{URL::to('messages/new')}}">Отравить сообщение<span class="msg-image"></span></a></li>
-                <li class="b-user-profile-buttons__list"><a href="{{URL::to('search/people')}}">Поиск друзей<span class="search-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="{{URL::to('messages/new')}}">{{ trans('network.send-message') }}<span class="msg-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="{{URL::to('search/people')}}">{{ trans('network.search-friends') }}<span class="search-image"></span></a></li>
                 <li class="b-user-profile-buttons__list"><a href="#">Системные сообщения<span class="system-image"></span></a></li>
                 <li class="b-user-profile-buttons__list"><a href="{{URL::to('profile/random')}}">Случайный профиль<span class="random-image"></span></a></li>
             </ul>

@@ -46,7 +46,7 @@
     <div class="b-user-media" style="right: 0px; padding-bottom: 100px;">
         <div class="b-user-media__video">
             <div class="b-user-media-video-top">
-                <p class="b-user-media-video-top__title">Видео</p>
+                <p class="b-user-media-video-top__title">{{ trans('network.video') }}</p>
                 <div class="b-user-media-video-top__btn">
                     <a href="{{URL::to('profile/'.$user->id.'/videos')}}"><input type="button" value="Все" class="btn btn-all"/></a>
                 </div>
@@ -64,14 +64,14 @@
                         </script>
                     </div>
                 @else
-                    <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных видео</p></li>
+                    <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">{{ trans('network.no-available-video') }}</p></li>
                 @endif
                 <div class="clear"></div>
             </ul>
         </div>
         <div class="b-user-media__photo">
             <div class="b-user-media-video-top">
-                <p class="b-user-media-video-top__title">Фотографии</p>
+                <p class="b-user-media-video-top__title">{{ trans('network.photos') }}</p>
                 <div class="b-user-media-video-top__btn">
                     <a href="{{URL::to('profile/'.$user->id.'/photos')}}"><input type="submit" value="Все" class="btn btn-all"/></a>
                 </div>
@@ -90,20 +90,20 @@
                         $('#gallery').photobox('a', {thumbs: false});
                     </script>
                 @else
-                    <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных фотографии</p></li>
+                    <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">{{ trans('network.no-available-photos') }}</p></li>
                 @endif
                 <div class="clear"></div>
             </ul>
         </div>
         <div class="b-user-media__music">
             <div class="b-user-media-video-top">
-                <p class="b-user-media-video-top__title">Музыка</p>
+                <p class="b-user-media-video-top__title">{{ trans('network.music') }}</p>
                 <div class="b-user-media-video-top__btn">
                     <input type="submit" value="Все" class="btn btn-all"/>
                 </div>
             </div>
             <ul class="b-user-media-video-gallery">
-                <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">Нет доступных музыкальных файлов</p></li>
+                <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">{{ trans('network.no-available-music') }}</p></li>
                 <!--li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
                 <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
                 <li class="b-user-media-video-gallery__list"><a href=""><img src="{{asset('img/19.png')}}" alt=""/></a></li>
