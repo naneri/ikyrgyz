@@ -192,3 +192,12 @@ $(document).ready(function(){
 	});
 });
 </script>
+<style>
+    .ui-helper-hidden-accessible{
+        display:none;
+    }
+    .ui-autocomplete {
+        background: #fff;
+        width: 500px !important;
+    }
+</style>

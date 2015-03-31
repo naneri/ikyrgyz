@@ -32,6 +32,9 @@
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input">{{$topic->description}}</textarea>
                     </div>
                     <div class="b-topic-create-modal-content__item">
+                        {{ Form::text('tags', $topic->tagsToString(), array('class' => 'input-default add-name', 'id' => 'tags')) }}
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
                         <input type="file" name="avatar">
                         @if($topic->image_url)
                             <br><br>{{HTML::image(asset($topic->image_url))}}<br><br>
