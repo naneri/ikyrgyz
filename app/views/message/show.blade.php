@@ -21,14 +21,14 @@
         @if($message->draft && $message->sender_id == Auth::id())
             <br>
             Сообщение еще находится в черновиках.<br>
-            {{HTML::link('message/send/'.$message->id, 'Отправить')}} |
-            {{HTML::link('message/edit/'.$message->id, 'Редактировать')}} |
-            {{HTML::link('message/delete/'.$message->id, 'Удалить')}}
+            {{HTML::link('message/send/'.$message->id, trans('network.send'))}} |
+            {{HTML::link('message/edit/'.$message->id, trans('network.edit'))}} |
+            {{HTML::link('message/delete/'.$message->id, trans('network.delete'))}}
         @endif
 
         @if($message->sender_id != Auth::id())
             <br>
-            {{HTML::link('messages/new', 'Ответить')}} 
+            {{HTML::link('messages/new?receiver='.$message->sender->getNames(), trans('network.reply'))}} 
         @endif
     </div>
     @else

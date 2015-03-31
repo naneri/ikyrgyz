@@ -13,24 +13,16 @@
         </div>
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>Загрузка фотографии</legend>
+            <legend>{{ trans('network.load-photo') }}</legend>
             <div class="form-group">
                 {{Form::file('images[]', array('class' => 'form-control', 'multiple' => true, 'accept' => 'image/*'))}}
             </div>
             <div class="form-group">
                 {{Form::hidden('photo_album_id', $photoAlbum->id)}}
-                {{Form::submit('Сохранить')}}
+                {{Form::submit(trans('network.save'))}}
             </div>
             {{Form::close()}}
         </div>
     </div>
 </div>
-<script>
-$(function(){
-    $('form input[type="submit"]').click(function(){
-        $(this).attr('disabled', true);
-        $('form').submit();
-    });
-});
-</script>
 @stop

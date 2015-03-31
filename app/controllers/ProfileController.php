@@ -26,6 +26,7 @@ class ProfileController extends BaseController {
                 $items = null;
                 $videos = array();
                 $photos = array();
+                $videoIds = array();
                 switch($page){
                     case 'publications':
                         $items = $user->topics;
@@ -50,10 +51,15 @@ class ProfileController extends BaseController {
                 @$maritalStatus = $this->maritalStatuses[$user->description->marital_status];
                 @$gender = $this->genders[$user->description->gender];
                 
+                foreach ($videos as $video) {
+                    preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
+                    $videoIds[] = end($matches);
+                }
+
                 if($user->id == Auth::id()){
-                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videos', 'maritalStatus', 'gender', 'photos'));
+                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
                 }else{
-                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videos', 'maritalStatus', 'gender', 'photos'));
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
                 }
 	}
         

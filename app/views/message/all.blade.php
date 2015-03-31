@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
-			<h2>Новые сообщения</h2><br>
+			<h2>{{ trans('network.new-messages') }}</h2><br>
 			@foreach($messages as $message)
 				{{$message->email}} | 
 				<a href="{{URL::to('message/show/' . $message->id)}}">{{$message->text}}</a>

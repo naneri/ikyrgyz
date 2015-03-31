@@ -3,7 +3,7 @@
 @section('form')
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>Редактировать сообщение</h4>
+        <h4>{{ trans('network.edit-message') }}</h4>
     </div>
     <div class="panel-body">
         <div class="all-alerts">
@@ -17,7 +17,7 @@
         <fieldset>
         {{Form::open(array('url' => 'messages/new','files' => true))}}
             <div class="form-group">
-                {{Form::text('receiver', $message->receiver->getNames(), array('class' => 'form-control'))}}{{HTML::link('#', 'Контакты', array('id' => 'contacts'))}}<br>
+                {{Form::text('receiver', $message->receiver->getNames(), array('class' => 'form-control'))}}{{HTML::link('#', trans('network.contacts'), array('id' => 'contacts'))}}<br>
                 <div id="contacts-list" style="display: none;">
                     @foreach(Auth::user()->friends() as $friend)
                         <a onclick="addReceiver('{{$friend->first_name.' '.$friend->last_name}}')">{{$friend->first_name.' '.$friend->last_name}}</a><br>
@@ -44,7 +44,7 @@
             <div class="form-group">
                 {{Form::hidden('is_draft', '0')}}
                 {{Form::hidden('message_id', $message->id)}}
-                {{Form::submit('Черновик', array('name' => 'draft'))}}
+                {{Form::submit(trans('network.draft), array('name' => 'draft'))}}
                 {{Form::submit('Отправить', array('name' => 'publish'))}}
             </div>
         {{Form::close()}}

@@ -4,7 +4,7 @@
 {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>Черный список</h4>
+        <h4>{{ trans('network.black-list') }}</h4>
         {{Form::hidden('page', 'blacklist')}}
     </div>
     <div class="panel-body" id="users">
