@@ -8,7 +8,7 @@
 		    var columnWidth, masonryClass;
 
             if(ColumnN == 1){
-                columnWidth = 1000;
+                columnWidth = 650;
                 masonryClass = 'b-user-wall-1000';
             }
             else if(ColumnN == 2){
@@ -75,7 +75,7 @@
 	    var masonryClass;
 
 	    if(column == 1){
-	        columnWidth = 1000;
+	        columnWidth = 650;
 	        masonryClass = 'b-user-wall-1000';
 	        document.cookie = 'ColumnN = 1';
 	    }

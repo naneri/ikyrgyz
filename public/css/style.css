@@ -605,7 +605,6 @@ body {
 }
 
 .b-user-wall {
-	width: 49%;
 	float: left;
 	position: relative;
 	background: #fff;
@@ -624,7 +623,8 @@ body {
     width: 495px !important;
 }
 .b-user-wall-1000{
-    width: 1000px !important;
+    width: 650px !important;
+    margin-left: 175px !important;
 }
 
 .b-user-wall-header {
@@ -3550,7 +3550,6 @@ blog style
 }
 
 .b-user-wall {
-	width: 495px;
 	margin: 0 auto 10px;
 }
 

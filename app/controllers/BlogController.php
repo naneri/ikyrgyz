@@ -104,6 +104,10 @@ class BlogController extends BaseController {
 	public function show($id){
         $blog = Blog::findOrFail($id);
 		$topics = Blog::getTopics($id);
+        if(!isset($_COOKIE['ColumnN']))
+        {
+            $_COOKIE['ColumnN']='2';
+        }
         return View::make('blog.show', compact('blog', 'topics'));
 	}
     
