@@ -263,7 +263,8 @@ a.white:hover{
     height: 930px;
     max-width: 80%;
     background: url('../img/login/background.png');
-    background-size: 100% !important;
+    background-size: 100%;
+
 }
 .login-form{
     margin-left: auto;
