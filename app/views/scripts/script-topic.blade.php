@@ -28,6 +28,7 @@
 		  		});	
 	  		});
             $container.children().removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
+            $('.masonry').css('display', 'block');
 
             var inProgress = false;
 
