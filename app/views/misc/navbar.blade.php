@@ -75,13 +75,31 @@
 								<img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
 								<span class="counter">{{count($friend_requests)}}</span>
 							</a> 
-								<ul class="b-header-nav-dropdown">
+								<ul class="b-header-nav-dropdown b-header-nav-dropdown_add-btn">
 									@foreach($friend_requests as $friend)
 										<li>
+											<div class="b-header-nav-dropdown__wrapper">
+												<img src="http://lorempixel.com/400/200/" alt="" class="b-header-nav-dropdown__image">
 											@if(!empty($friend->user_profile_avatar))
-												<img src="{{$friend->user_profile_avatar}}" alt="">
+												<img src="{{$friend->user_profile_avatar}}" alt="" class="b-header-nav-dropdown__image">
 											@endif
-										<span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>{{ trans('network.sent-you-message') }}</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">{{ trans('network.accept') }}</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">{{ trans('network.reject') }}</a></li>
+										<div class="b-header-nav-dropdown__item">
+											<span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>{{ trans('network.sent-you-message') }}</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">{{ trans('network.accept') }}</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">{{ trans('network.reject') }}</a>
+										</div>
+										</div>
+										</li>
+										<li>
+										<div class="b-header-nav-dropdown__wrapper">
+											<img src="http://lorempixel.com/400/200/" alt="" class="b-header-nav-dropdown__image">
+											@if(!empty($friend->user_profile_avatar))
+
+												<img src="{{$friend->user_profile_avatar}}" alt="" class="b-header-nav-dropdown__image">
+											@endif
+										<div class="b-header-nav-dropdown__item">
+										<span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>{{ trans('network.sent-you-message') }}</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">{{ trans('network.accept') }}</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">{{ trans('network.reject') }}</a>
+										</div>
+										</div>
+										</li>
 									@endforeach
 								</ul>  
 							 
