@@ -206,8 +206,8 @@ body {
 }
 
 .header-logo__image {
-	width: 40px !important;
-	height: 40px !important;
+	max-width: 40px !important;
+	max-height: 40px !important;
 }
 
 .b-header-nav-dropdown_add-btn {
@@ -706,7 +706,6 @@ body {
 
 .b-user-wall-image img {
 	width: 100%;
-	max-width: 550px;
 	overflow: hidden;
 }
 

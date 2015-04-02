@@ -400,3 +400,13 @@ $(function() {
 
 	});
 });
+
+
+$(function() {
+	$('.b-header-nav-enc__item').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
