@@ -82,7 +82,7 @@
                         @foreach($photos as $photo)
                             <a href="{{$photo->url}}">
                                 <div class="b-user-media-video-gallery__list" style="margin: 4px;width:120px;height:120px;float:left;background:url({{asset($photo->url)}}) 50%;background-size: cover;border: 2px solid white;"></div>
-                                <img src="{{$photo->url}}" alt="{{$photo->name}}" style="display: none;">
+                                <img src="{{$photo->url}}" style="display: none;" data-pb-captionlink="{{$photo->name}}[{{URL::to('photos/'.$photo->id)}}]" id="photo_{{$photo->id}}" data-photo-id="{{$photo->id}}" data-can-edit="{{$photo->canEdit()}}" data-rating="{{$photo->rating}}">
                             </a>
                         @endforeach
                     </div>

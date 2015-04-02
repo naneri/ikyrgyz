@@ -66,7 +66,24 @@
                     vote.notify($result);
                 }
             });
-        }
+        },
+        photo: function(photoId, value){
+            $rating = $('#rating_photo_' + photoId);
+                $.ajax({
+                    method: "POST",
+                    url: voteUrl + "photo",
+                    data: {
+                        'photo_id': photoId,
+                        'value': value
+                    },
+                    success: function($result) {
+                        vote.notify($result);
+                        if($result.success){
+                            $('#photo_'+photoId).attr({'data-rating': $result.rating });
+                        }
+                    }
+                });
+        },
     }
 </script>
 @endif

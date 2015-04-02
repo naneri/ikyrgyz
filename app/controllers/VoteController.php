@@ -36,16 +36,16 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'Ошибка в значении'));
             }
             
+            if($oComment->user_id == Auth::user()->id){
+                return Response::json(array('error' => 'Вы не можете проголосовать за свой комментарий'));
+            }
+            
             $voteExists = Vote::where('target_type', 'comment')
                     ->where('user_id', Auth::user()->id)
                     ->where('target_id', $oComment->id)
                     ->exists();
             if($voteExists){
                 return Response::json(array('error' => 'Вы уже голосовали за этот комментарий'));
-            }
-            
-            if($oComment->user_id == Auth::user()->id){
-                return Response::json(array('error' => 'Автор не может проголосовать за свой комментарий'));
             }
 
             $oComment->vote($iValue);
@@ -69,16 +69,16 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'Ошибка значения'));
             }
 
+            if ($oTopic->user_id == Auth::user()->id) {
+                return Response::json(array('error' => 'Вы не может проголосовать за свой топик'));
+            }
+
             $voteExists = Vote::where('target_type', 'topic')
                     ->where('user_id', Auth::user()->id)
                     ->where('target_id', $oTopic->id)
                     ->exists();
             if ($voteExists) {
                 return Response::json(array('error' => 'Вы уже голосовали за этот топик'));
-            }
-
-            if ($oTopic->user_id == Auth::user()->id) {
-                return Response::json(array('error' => 'Автор не может проголосовать за свой топик'));
             }
             
             $oTopic->vote($iValue);
@@ -102,16 +102,16 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'Ошибка значения'));
             }
 
+            if ($oBlog->user_id == Auth::user()->id) {
+                return Response::json(array('error' => 'Вы не может проголосовать за свой блог'));
+            }
+
             $voteExists = Vote::where('target_type', 'blog')
                     ->where('user_id', Auth::user()->id)
                     ->where('target_id', $oBlog->id)
                     ->exists();
             if ($voteExists) {
                 return Response::json(array('error' => 'Вы уже голосовали за этот блог'));
-            }
-
-            if ($oBlog->user_id == Auth::user()->id) {
-                return Response::json(array('error' => 'Автор не может проголосовать за свой блог'));
             }
 
             $oBlog->vote($iValue);
@@ -133,6 +133,10 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'Ошибка значения'));
             }
 
+            if ($oUser->id == Auth::user()->id) {
+                return Response::json(array('error' => 'Вы не может проголосовать за свой профиль'));
+            }
+
             $voteExists = Vote::where('target_type', 'user')
                     ->where('user_id', Auth::user()->id)
                     ->where('target_id', $oUser->id)
@@ -142,10 +146,6 @@ class VoteController extends \BaseController {
                 return Response::json(array('error' => 'Вы уже голосовали за этого пользователя'));
             }
 
-            if ($oUser->id == Auth::user()->id) {
-                return Response::json(array('error' => 'Автор не может проголосовать за свой профиль'));
-            }
-
             $oUser->vote($iValue);
             $oUser->save();
 
@@ -153,6 +153,41 @@ class VoteController extends \BaseController {
             $this->setSkillUser($oUser->id, $iValue);
 
             return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oUser->rating,2)));
+        }
+        
+        public function postVotePhoto(){
+            $oPhoto = Photo::find(Input::get('photo_id'));
+            $iValue = Input::get('value');
+
+            if (!$oPhoto) {
+                return Response::json(array('error' => 'Фотография не найдена'));
+            }
+            if (!in_array($iValue, array('1', '-1'))) {
+                return Response::json(array('error' => 'Ошибка значения'));
+            }
+
+            if ($oPhoto->user_id == Auth::id()) {
+                return Response::json(array('error' => 'Вы не может проголосовать за свою фотографию'));
+            }
+            
+            $voteExists = Vote::where('target_type', 'photo')
+                    ->where('user_id', Auth::id())
+                    ->where('target_id', $oPhoto->id)
+                    ->exists();
+
+            if ($voteExists) {
+                return Response::json(array('error' => 'Вы уже голосовали за эту фотографию'));
+            }
+
+            $oPhoto->vote($iValue);
+            $oPhoto->save();
+
+            $this->createVote('photo', $oPhoto->id, $iValue, $oPhoto->rating);
+            
+            // начисляем силу автору как в комментариях
+            $this->setSkillCommentAuthor($oPhoto->user_id, $iValue);
+
+            return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oPhoto->rating, 2)));
         }
 
         private function setSkillCommentAuthor($commentAuthorId, $voteValue) {

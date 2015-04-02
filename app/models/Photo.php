@@ -24,5 +24,19 @@ class Photo extends \Eloquent {
         public function canView(){
             return $this->album->canView();
         }
+        
+        public function getRatingAttribute($value){
+            return round($value, 2);
+        }
+        
+        public function vote($iValue) {
+            $this->rating += $iValue;
+            if ($iValue == 1) {
+                $this->increment('vote_up');
+            } elseif ($iValue == -1) {
+                $this->increment('vote_down');
+            }
+            return $iValue;
+        }
 
 }
