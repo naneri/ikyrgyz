@@ -116,7 +116,7 @@ $(function() {
 });
 
 $(function() {
-	$('.b-topic-navigation-format li  ').hover(function(){
+	$('.b-topic-navigation-format__wrapper').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
 		$(this).children('ul').stop(false, true).fadeOut(500);
@@ -394,6 +394,16 @@ function stickIt() {
 
 $(function() {
 	$('ul.b-topic-navigation-list li').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
+
+
+$(function() {
+	$('.b-header-nav-enc__item').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
 		$(this).children('ul').stop(false, true).fadeOut(500);
