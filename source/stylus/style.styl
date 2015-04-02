@@ -186,6 +186,11 @@
 .header-logo__image
 	width 40px !important
 	height 40px !important
+.b-header-nav-dropdown_add-btn
+	width 330px
+.b-header-nav-dropdown__wrapper
+	height 70px
+	
 .b-header-nav-dropdown 
 	display none
 	position absolute
@@ -194,9 +199,17 @@
 	float left
 	z-index 1000
 	background #e1674a
-	min-width 160px 
+	min-width 160px
 	border-bottom 4px solid #c84526
 	line-height 1.2px
+	
+	&__image
+		float left
+		max-height 70px
+		max-width 70px
+	&__item
+		float left
+		padding-left 10px
 	&:before
 		width 0 
 		height 0
@@ -212,25 +225,27 @@
 	> li
 		padding 10px
 		
-		&:hover {
-			background #db5637
-		}
+		
+		
 		a
 			font-size 13px
 			
 			
 		.btn
 			button-default()
-			color #999
+			color #333
 			margin 5px
 			display inline-block
 			padding 0 5px
-			font 13px $baseFontFamily
+			font 12px $baseFontFamily
+			border $baseBorder
+			line-height 20px
 			
 		span 
 			color #fff
 			font 15px $baseFontFamily
 			white-space nowrap
+			
 
 	
 			

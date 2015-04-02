@@ -1,4 +1,4 @@
-<div class="masonry">
+<div class="masonry" style="display: none">
     @foreach($topics as $topic)
     <div class="b-user-wall item">
         <div class="b-user-wall__inner">

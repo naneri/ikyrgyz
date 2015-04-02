@@ -8,7 +8,7 @@
 		    var columnWidth, masonryClass;
 
             if(ColumnN == 1){
-                columnWidth = 1000;
+                columnWidth = 650;
                 masonryClass = 'b-user-wall-1000';
             }
             else if(ColumnN == 2){
@@ -28,6 +28,7 @@
 		  		});	
 	  		});
             $container.children().removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
+            $('.masonry').css('display', 'block');
 
             var inProgress = false;
 
@@ -75,7 +76,7 @@
 	    var masonryClass;
 
 	    if(column == 1){
-	        columnWidth = 1000;
+	        columnWidth = 650;
 	        masonryClass = 'b-user-wall-1000';
 	        document.cookie = 'ColumnN = 1';
 	    }
