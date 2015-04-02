@@ -166,8 +166,6 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::resource('photos', 'PhotosController');
 
 	Route::get('logout', 'AuthController@logout');
-
-    Route::post('topic/comment/add', 'TopicCommentsController@postAdd');;
     
     if(Request::ajax()){
         Route::post('topic/comments/sort', 'TopicCommentsController@sortComments');
@@ -179,6 +177,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::post('vote/topic', 'VoteController@postVoteTopic');
         Route::post('vote/blog', 'VoteController@postVoteBlog');
         Route::post('vote/user', 'VoteController@postVoteUser');
+        Route::post('vote/photo', 'VoteController@postVotePhoto');
     }
 });
 

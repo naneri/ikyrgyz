@@ -38,6 +38,8 @@
 		a
 			font 15px $baseFontFamily
 			color #fff
+			&:hover
+				background
 			span
 				margin-left 10px
 		&__left
@@ -86,6 +88,7 @@
 				
 				img
 					vertical-align middle
+			
 		&__right
 			float right
 			width 33%
@@ -98,6 +101,9 @@
 				vertical-align middle
 			.b-header-nav-setting
 				position relative
+			.b-header-nav-enc__item
+				position relative	
+				
 			
 
 @media screen and (max-width:1200px) {
@@ -224,11 +230,15 @@
 	
 	> li
 		padding 10px
+		&:hover
+			background #db5637
+			color #fff
 		
 		
 		
 		a
 			font-size 13px
+			
 			
 			
 		.btn
@@ -283,6 +293,9 @@
 	top 0
 	li
 		padding 10px 10px
+		&:hover
+			background #db5637
+			color #fff
 		
 		img
 			padding-right 10px
@@ -530,9 +543,18 @@
 .b-section-wrapper
 	width 100%
 	max-width 1000px
-									
+.b-user-wall-1000
+	width 650px !important
+	margin-left 175px !important
+	
+.b-user-wall-325
+	width 325px
+.b-user-wall-495
+	width 495px
+
+
 .b-user-wall
-	width 49%
+	
 	float left
 	position relative
 	background #fff
@@ -1011,7 +1033,7 @@ Topic
 	display none
 	position absolute
 	background #fff	
-	top 30px
+	top 100%
 	left 0
 	z-index 1000
 	padding 8px 8px
@@ -1030,11 +1052,10 @@ Topic
 	a
 		&:hover
 			opacity 0.5	
-	
+.b-topic-navigation-format__wrapper
+	position relative	
 .b-topic-navigation-format__list
-	display inline-block
-	
-	position relative
+	display inline-block	
 	padding 5px
 	span
 		color #e16549
@@ -2744,7 +2765,7 @@ blog style
 
 .b-user-wall
 	
-	width 495px
+	
 	margin 0 auto 10px
 @media screen and (max-width:1024px) {
 	.b-user-wall {

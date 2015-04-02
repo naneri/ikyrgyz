@@ -127,6 +127,10 @@ body {
 	position: relative;
 }
 
+.b-header-nav__right .b-header-nav-enc__item {
+	position: relative;
+}
+
 @media screen and (max-width: 1200px) {
 	.b-header-nav span.search-friend,
   .b-header-nav span.user-name {
@@ -253,6 +257,11 @@ body {
 	padding: 10px;
 }
 
+.b-header-nav-dropdown > li:hover {
+	background: #db5637;
+	color: #fff;
+}
+
 .b-header-nav-dropdown > li a {
 	font-size: 13px;
 }
@@ -314,6 +323,11 @@ body {
 
 .b-header-sub-menu li {
 	padding: 10px 10px;
+}
+
+.b-header-sub-menu li:hover {
+	background: #db5637;
+	color: #fff;
 }
 
 .b-header-sub-menu li img {
@@ -621,8 +635,20 @@ body {
 	max-width: 1000px;
 }
 
+.b-user-wall-1000 {
+	width: 650px !important;
+	margin-left: 175px !important;
+}
+
+.b-user-wall-325 {
+	width: 325px;
+}
+
+.b-user-wall-495 {
+	width: 495px;
+}
+
 .b-user-wall {
-	width: 49%;
 	float: left;
 	position: relative;
 	background: #fff;
@@ -1204,7 +1230,7 @@ Topic
 	display: none;
 	position: absolute;
 	background: #fff;
-	top: 30px;
+	top: 100%;
 	left: 0;
 	z-index: 1000;
 	padding: 8px 8px;
@@ -1233,9 +1259,12 @@ Topic
 	filter: alpha(opacity=50);
 }
 
+.b-topic-navigation-format__wrapper {
+	position: relative;
+}
+
 .b-topic-navigation-format__list {
 	display: inline-block;
-	position: relative;
 	padding: 5px;
 }
 
@@ -3557,7 +3586,6 @@ blog style
 }
 
 .b-user-wall {
-	width: 495px;
 	margin: 0 auto 10px;
 }
 

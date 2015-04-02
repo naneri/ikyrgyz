@@ -116,7 +116,7 @@ $(function() {
 });
 
 $(function() {
-	$('.b-topic-navigation-format li  ').hover(function(){
+	$('.b-topic-navigation-format__wrapper').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
 		$(this).children('ul').stop(false, true).fadeOut(500);
