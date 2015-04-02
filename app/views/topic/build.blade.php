@@ -56,3 +56,8 @@
     </div>
     @endforeach
 </div>
+<script>
+    $(document).ready(function(){
+        $('.masonry').css('display', 'block');
+    });
+</script>
