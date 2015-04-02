@@ -127,6 +127,10 @@ body {
 	position: relative;
 }
 
+.b-header-nav__right .b-header-nav-enc__item {
+	position: relative;
+}
+
 @media screen and (max-width: 1200px) {
 	.b-header-nav span.search-friend,
   .b-header-nav span.user-name {
@@ -1226,7 +1230,7 @@ Topic
 	display: none;
 	position: absolute;
 	background: #fff;
-	top: 30px;
+	top: 100%;
 	left: 0;
 	z-index: 1000;
 	padding: 8px 8px;
@@ -1255,9 +1259,12 @@ Topic
 	filter: alpha(opacity=50);
 }
 
+.b-topic-navigation-format__wrapper {
+	position: relative;
+}
+
 .b-topic-navigation-format__list {
 	display: inline-block;
-	position: relative;
 	padding: 5px;
 }
 

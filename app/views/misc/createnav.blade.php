@@ -54,12 +54,15 @@
         <div class="b-topic-navigation__right">
             <ul class="b-topic-navigation-format">
                 <li class="b-topic-navigation-format__list">
+                    <div class="b-topic-navigation-format__wrapper">
                     <a href="#" class="format-icon" style="display: block; margin: 5px 0 0 5px;"><img src="{{ asset('img/42.png') }}" alt=""/></a>
+
                     <ul class="b-topic-navigation-format-dropdown">
                         <li><a href="javascript: makeColumnN('1')"><img src="{{ asset('img/44.png') }}" alt=""/></a></li>
                         <li><a href="javascript: makeColumnN('2')"><img src="{{ asset('img/45.png') }}" alt=""/></a></li>
                         <li><a href="javascript: makeColumnN('3')"><img src="{{ asset('img/46.png') }}" alt=""/></a></li>
                     </ul>
+                     </div>
                 </li>
                 <li class="b-topic-navigation-format__list"><!-- <a href="" class="format-icon"><img src="{{ asset('img/37.png') }}" alt=""/><span style="opacity:0">11</span>  --></a>
                     <ul style="opacity:0" class="b-topic-navigation-online-dropdown">
