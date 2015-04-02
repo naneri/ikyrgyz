@@ -6,7 +6,7 @@
     <div class="panel-heading">
         <h4>{{ trans('network.drafts') }}</h4>
         {{Form::checkbox('check-all')}}
-        {{Form::select('action', array('' => trans('network.choose-action', 'delete' => trans('network.delete')))}}
+        {{Form::select('action', array('' => trans('network.choose-action'), 'delete' => trans('network.delete')))}}
         {{Form::hidden('page', 'draft')}}
     </div>
     <div class="panel-body" id="messages">

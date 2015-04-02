@@ -36,6 +36,7 @@ return array(
 	'blog'				=> 'Блог',
 	'drafts'			=> 'Черновики',
 	'link'				=> 'Ссылка',
+        'photoalbum'                    => 'Фото альбом',
 
 	//topic build
 	'read-more'			=> 'Подробнее',

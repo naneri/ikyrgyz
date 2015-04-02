@@ -5,15 +5,19 @@
 @elseif($page == 'friends')
 <div class="masonry">
     @foreach($items as $user)
-    <div class="item" style="padding: 10px; border: 1px solid #d8d8d8; background: #fff;width:470px;">
-        <img src="{{asset(($user->user_profile_avatar) ? $user->user_profile_avatar : asset('img/48.png'))}}" style="float:left;width:60px;height:60px;margin-right: 10px;"/> 
-        <div>{{$user->first_name}} {{$user->last_name}}</div>
-        <div>{{date_diff(date_create(@$user->birthday), date_create('today'))->y;}}, {{@$user->country}}</div>
-        <div>
-            [{{HTML::link('profile/'.$user->id, 'Посмотреть профиль')}}]
-            [{{HTML::link('messages/new?receiver='.$user->first_name.'+'.$user->last_name, 'Написать сообщение')}}]
+        <div class="item" style="padding: 10px; border: 1px solid #d8d8d8; background: #fff;width:470px;">
+            <img src="{{asset(($user->user_profile_avatar) ? $user->user_profile_avatar : asset('img/48.png'))}}" style="float:left;width:60px;height:60px;margin-right: 10px;"/> 
+            <div>{{$user->first_name}} {{$user->last_name}}</div>
+            <div>{{date_diff(date_create(@$user->birthday), date_create('today'))->y;}}, {{@$user->country}}</div>
+            <div>
+                [{{HTML::link('profile/'.$user->id, 'Посмотреть профиль')}}]
+                @if(Friend::checkIfFriend($user->id, Auth::id()))
+                    [{{HTML::link('messages/new?receiver='.$user->first_name.'+'.$user->last_name, 'Написать сообщение')}}]
+                @else
+                    [{{HTML::link('people/friendRequest/'.$user->id, 'Подружиться')}}]
+                @endif
+            </div>
         </div>
-    </div>
     @endforeach
 </div>
 @endif

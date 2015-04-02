@@ -760,6 +760,8 @@
             var rating = $('#photo_' + images[activeImage][3]).attr('data-rating');
             var ratingBox = '<input type = "submit" onclick = "return vote.photo(' + images[activeImage][3] + ',-1);" class = "btn btn-minus"><input type = "submit" onclick = "return vote.photo(' + images[activeImage][3] + ',1);" class = "btn btn-plus"><span class="likes" id="rating_photo_'+images[activeImage][3]+'">'+rating+'</span>';
             caption.find('.rating').html(ratingBox);
+        }else{
+            caption.find('.rating').html('');
         }
         
         // Edit Delete Box
