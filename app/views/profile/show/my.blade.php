@@ -38,19 +38,19 @@
             <ul class="b-user-profile-buttons">
                 <li class="b-user-profile-buttons__list"><a href="{{URL::to('messages/new')}}">{{ trans('network.send-message') }}<span class="msg-image"></span></a></li>
                 <li class="b-user-profile-buttons__list"><a href="{{URL::to('search/people')}}">{{ trans('network.search-friends') }}<span class="search-image"></span></a></li>
-                <li class="b-user-profile-buttons__list"><a href="#">Системные сообщения<span class="system-image"></span></a></li>
-                <li class="b-user-profile-buttons__list"><a href="{{URL::to('profile/random')}}">Случайный профиль<span class="random-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="#">{{ trans('network.system-messages') }}<span class="system-image"></span></a></li>
+                <li class="b-user-profile-buttons__list"><a href="{{URL::to('profile/random')}}">{{ trans('network.random-profile') }}<span class="random-image"></span></a></li>
             </ul>
         </div>
         <div class="clear"></div>
     </div>
     <div class="b-user-navigation">
         <ul class="b-user-navigation-list">
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/newsline')}}">Лента</a></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/publications')}}">Публикации</a><span>{{$user->topics->count()}}</span></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscribtions')}}">Подписки</a></li>
-            <a href="{{URL::to('profile/edit/main')}}" class="b-user-navigation-list__setting">Настройки</a>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/newsline')}}">{{ trans('network.timeline') }}</a></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/publications')}}">{{ trans('network.publications') }}</a><span>{{$user->topics->count()}}</span></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/friends')}}">{{ trans('network.friends') }}</a><span>{{$user->friends()->count()}}</span></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscribtions')}}">{{ trans('network.subscriptions') }}</a></li>
+            <a href="{{URL::to('profile/edit/main')}}" class="b-user-navigation-list__setting">{{ trans('network.settings') }}</a>
             <div class="clear"></div>
         </ul>
     </div>

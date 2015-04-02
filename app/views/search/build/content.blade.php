@@ -6,9 +6,9 @@
                 <div class="b-user-interface-content-block__text">
                     <div class="b-user-interface-content-block-text">
                         <p class="b-user-interface-content-block-text__title">{{$entry->title}}</p>
-                        <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}, Блог топика</p>
+                        <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}, {{ trans('network.topic-of-blog') }}</p>
                         <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
-                        <p class="b-user-interface-content-block-text__desc">Топик</p>
+                        <p class="b-user-interface-content-block-text__desc">{{ trans('network.topic') }}</p>
                     </div>
                 </div>
                 <div class="b-user-interface-content-block__detail">

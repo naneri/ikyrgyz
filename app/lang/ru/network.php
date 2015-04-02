@@ -15,7 +15,7 @@ return array(
 	'do-register' 		=> 'Зарегистрироваться',
 
 	//navbar
-	'search_friends' 	=> 'Поиск Друзей',
+	'search-friends' 	=> 'Поиск Друзей',
 	'logout' 			=> 'Выход',
 	'encyclopedia' 		=> 'Энциклопедия',
 	'history' 			=> 'История',
@@ -141,7 +141,29 @@ return array(
 	'edit-photo'		=> 'Изменить фото',
 	'upload-photo'		=> 'Загрузить фото',
 	'search-friends'	=> 'Поиск друзей'	,
+	'system-messages'	=> 'Системные сообщения',
+	'random-profile'	=> 'Случайный профиль',
+	'timeline'			=> 'Лента',
+	'publications'		=> 'Публикации',
+	'subscriptions'		=> 'Подписки',
+	'settings'			=> 'Настройки',
+	'add-to-friends'	=> 'Добавить в друзья',
+	'send-message'		=> 'Отправить сообщение',
+	'random-profile'	=> 'Случайный профиль',
+	'main-info'			=> 'Основная информация',
+	'close'				=> 'Close',
+	'birth-date'		=> 'Дата рождения',
+	'gender-male'		=> 'Мужской',
+	'gender-female'		=> 'Женский',
+	'profile-image'		=> 'Изображение профиля',
+	'remove-friend'		=> 'remove friend',
+	'upload-photo'		=> 'Загрузить фото',
+	'rating'			=> 'Рейтинг',
+	'favorite'			=> 'Избранное',
+	'my-video'			=> 'Мое видео',
 	
+
+
 	//search
 	'search'			=> 'поиск',
 	'people'			=> 'люди',

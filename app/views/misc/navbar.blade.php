@@ -105,7 +105,7 @@
 						<div class="b-header-nav-search">
 							<div class="b-header-nav-search__item"><a href="{{ URL::to('search/people') }}">
 							<img src="{{ asset('img/navbar/friend_search.png') }}" alt="search"/>
-							<span class="search-friend">{{ trans('network.search_friends') }}</span>
+							<span class="search-friend">{{ trans('network.search-friends') }}</span>
 						</a></div>
 						</div>
 						<div class="b-header-nav-enc">
