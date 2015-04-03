@@ -47,7 +47,12 @@
 
 				   		console.log('donwloaded elements' + page);
 
-                        var ColumnN = {{ $_COOKIE['ColumnN'] }};
+                        var ColumnN;
+                        if($('#ColumnN').val() == "")
+                            ColumnN = {{ $_COOKIE['ColumnN'] }};
+                        else
+                            ColumnN = $('#ColumnN').val();
+
                         if(ColumnN == 1) elements.addClass('b-user-wall-1000');
                         else if(ColumnN == 2) elements.addClass('b-user-wall-495');
                         else if(ColumnN == 3) elements.addClass('b-user-wall-325');
@@ -79,16 +84,19 @@
 	        columnWidth = 650;
 	        masonryClass = 'b-user-wall-1000';
 	        document.cookie = 'ColumnN = 1';
+	        $('#ColumnN').val('1');
 	    }
 	    else if(column == 2){
 	        columnWidth = 495;
 	        masonryClass = 'b-user-wall-495';
 	        document.cookie = 'ColumnN = 2';
+	        $('#ColumnN').val('2');
 	    }
 	    else if(column == 3){
 	        columnWidth = 325;
 	        masonryClass = 'b-user-wall-325';
 	        document.cookie = 'ColumnN = 3';
+	        $('#ColumnN').val('3');
 	    }
 
 	    var $container = $('.masonry');
