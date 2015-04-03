@@ -226,7 +226,7 @@ body {
 	float: left;
 	z-index: 1000;
 	background: #e1674a;
-	min-width: 160px;
+	min-width: 170px;
 	border-bottom: 4px solid #c84526;
 	line-height: 1.2px;
 }
@@ -2306,6 +2306,11 @@ about profile Style
 	display: inline-block;
 	font: 22px 'PT Sans Caption Bold';
 	color: #676767;
+}
+
+.b-profile-about-tags-user__image {
+	max-width: 45px;
+	max-height: 45px;
 }
 
 .b-profile-about-profile {
