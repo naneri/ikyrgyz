@@ -134,6 +134,7 @@ return array(
 	'video'				=> 'видео',
 	'no-available-video'=> 'Нет доступных видео',
 	'photos'			=> 'Фотографии',
+        'photoalbums'          => 'Фотоальбомы',
 	'no-available-photos'=> 'Нет доступных фотографии',
 	'music'				=> 'Музыка',
 	'no-available-music'=> 'Нет доступных музыкальных файлов',

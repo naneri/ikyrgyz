@@ -40,6 +40,7 @@
             thumbAttr     : 'data-src',   // Attribute to get the image for the thumbnail from
             counter       : "(A/B)",      // Counts which piece of content is being viewed, relative to the total count of items in the photobox set. ["false","String"]
             title         : true,         // show the original alt or title attribute of the image's thumbnail. (path to image, relative to the element which triggers photobox)
+            autoplayBtn   : true,         // show autoplay button
             autoplay      : false,        // should autoplay on first time or not
             time          : 3000,         // autoplay interval, in miliseconds (less than 1000 will hide the autoplay button)
             history       : false,        // should use history hashing if possible (HTML5 API)
@@ -383,7 +384,7 @@
                     overlay.addClass('hasArrows hasCounter')
 
                     // check is the autoplay button should be visible (per gallery) and if so, should it autoplay or not.
-                    if( options.time > 1000 ){
+                    if( options.time > 1000 && options.autoplayBtn ){
                         overlay.addClass('hasAutoplay');
                         if( options.autoplay )
                             APControl.progress.start();

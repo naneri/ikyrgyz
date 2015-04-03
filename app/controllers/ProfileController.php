@@ -3,7 +3,7 @@
 class ProfileController extends BaseController {
     
         
-        var $access = array('me' => 'Только мне', 'friend' => 'Друзьям', 'all' => 'Всем');
+        var $access = array( 'all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне');
         var $profileItemTypes = array('school', 'university', 'company', 'contact');
         var $familyMemberRelatives = array('' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
         var $maritalStatuses = array('' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
@@ -25,7 +25,7 @@ class ProfileController extends BaseController {
                 
                 $items = null;
                 $videos = array();
-                $photos = array();
+                $photoAlbums = array();
                 $videoIds = array();
                 switch($page){
                     case 'publications':
@@ -44,7 +44,7 @@ class ProfileController extends BaseController {
                     default:
                         $items = $user->newsline();
                         $videos = $user->topicsWithVideo()->take(6)->get();
-                        $photos = $user->photos()->orderByRaw("RAND()")->take(6)->get();
+                        $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
                         break;
                 }
                 
@@ -55,11 +55,11 @@ class ProfileController extends BaseController {
                     preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
                     $videoIds[] = end($matches);
                 }
-
+                
                 if($user->id == Auth::id()){
-                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
+                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
                 }else{
-                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
                 }
 	}
         
