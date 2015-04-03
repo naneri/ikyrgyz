@@ -206,8 +206,8 @@ body {
 }
 
 .header-logo__image {
-	max-width: 40px !important;
-	max-height: 40px !important;
+	max-width: 45px !important;
+	max-height: 45px !important;
 }
 
 .b-header-nav-dropdown_add-btn {
@@ -370,6 +370,8 @@ body {
 
 .b-user-profile__left .user-image img {
 	border-bottom: 10px solid #7da027;
+	max-width: 255px;
+	max-height: 255px;
 }
 
 .b-user-profile__middle {
