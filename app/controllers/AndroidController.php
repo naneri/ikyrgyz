@@ -2,9 +2,7 @@
 
 class AndroidController extends BaseController {
     public function __construct(){
-        var_dump(Session::get('android_authorized', 0));
-        die;
-        if (Session::get('android_authorized', 0)) {
+        if (isset($_SESSION['android_authorized']) && $_SESSION['android_authorized'] == 1) {
             return;
             $returnData = array();
             $user_data = User::with('description')->find(Auth::id());
