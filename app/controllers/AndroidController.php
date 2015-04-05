@@ -2,6 +2,7 @@
 
 class AndroidController extends BaseController {
     public function __construct(){
+        parent::__construct();
         if (Session::get('android_authorized', 0)) {
             return;
             $returnData = array();
