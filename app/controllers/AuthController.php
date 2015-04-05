@@ -193,6 +193,7 @@ class AuthController extends BaseController {
         }
 
         Session::put('android_authorized', 1);
+        var_dump(Session::get('android_authorized', 0)); die;
         if(@Auth::user()->description->first_name == '' || @Auth::user()->description->gender == '' || @Auth::user()->description->liveplace_country_id == ''){
             exit('authorized!@#'.csrf_token().'!@#profile_needs_to_be_filled');
         }
