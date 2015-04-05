@@ -173,6 +173,7 @@ class AuthController extends BaseController {
 
     public function postAndroidLogin(){
 
+        die("testset");
         //  запускаем валидацию
         $rules = array('email' => 'required', 'password' => 'required');
         $validator = Validator::make(Input::all(), $rules);
