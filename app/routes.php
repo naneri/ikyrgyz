@@ -31,10 +31,10 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index/new', 'MainController@newTopics');
     Route::get('main/index/top', 'MainController@topTopics');
     Route::get('main/ajaxTopics/{sort}/{page}','MainController@ajaxTopics');
-    Route::get('main/androidIndex','MainController@androidIndex');
-    Route::get('main/index/androidNew', 'MainController@androidNewTopics');
-    Route::get('main/index/androidTop', 'MainController@androidTopTopics');
-    Route::get('main/androidAjaxTopics/{sort}/{page}','MainController@androidAjaxTopics');
+    Route::get('main/androidIndex','AndroidController@androidIndex');
+    Route::get('main/index/androidNew', 'AndroidController@androidNewTopics');
+    Route::get('main/index/androidTop', 'AndroidController@androidTopTopics');
+    Route::get('main/androidAjaxTopics/{sort}/{page}','AndroidController@androidAjaxTopics');
 
     Route::get('country/{id}', function($id){ return Response::json(City::getCitiesByCountryId($id)); });
 
