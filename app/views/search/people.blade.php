@@ -6,8 +6,7 @@
 <div class="b-content">
     <div class="b-user-interface">
         <div class="b-user-interface__header">
-            <p class="title-header">Поиск
-                <input type="submit" class="input-default"/>
+            <p class="title-header">{{ trans('network.search') }}
             </p>
         </div>
         <div class="b-user-interface__inner">
@@ -34,14 +33,11 @@
                             </div>
                             <p class="b-user-interface-content-item__title">Учебные заведения</p>
                             <div class="b-user-interface-content-item__item">
-                                {{Form::select('school', array_merge(array('' => 'Выберите школу'), ProfileItem::getForView('school')), null, array('class' => 'form-control select-default'))}}
-                            </div>
-                            <div class="b-user-interface-content-item__item">
-                                {{Form::select('university', array_merge(array('' => 'Выберите университет'), ProfileItem::getForView('university')), null, array('class' => 'form-control select-default'))}}
+                                {{Form::text('study', null, array('class' => 'form-control select-default'))}}
                             </div>
                             <p class="b-user-interface-content-item__title">Место работы</p>
                             <div class="b-user-interface-content-item__item">
-                                {{Form::select('job', array_merge(array('' => 'Выберите место работы'), ProfileItem::getForView('job')), null, array('class' => 'form-control select-default'))}}
+                                {{Form::text('job', null, array('class' => 'form-control select-default'))}}
                             </div>
                             <p class="b-user-interface-content-item__title">Пол</p>
                             <div class="b-user-interface-content-item__item">
@@ -56,9 +52,9 @@
                             <p class="b-user-interface-content-item__title">Возраст</p>
                             <div class="b-user-interface-content-item__item">
                                 <label>от</label>
-                                {{Form::text('age-from', null, array('class' => 'input-default'))}}
+                                {{Form::select('age-from', $ageFrom, null, array('class' => 'input-default'))}}
                                 <label>до</label>
-                                {{Form::text('age-to', null, array('class' => 'input-default'))}}
+                                {{Form::select('age-to', $ageTo, null, array('class' => 'input-default'))}}
                             </div>
                         </div>
                     </div>

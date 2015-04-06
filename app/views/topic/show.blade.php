@@ -41,7 +41,7 @@
                           <input type="submit" value="Дружить" class="input-default btn-friend"/>
                       </a>
                     @endif
-                    <span class="rating-text">Рейтинг: <span class="rating-num">+0.00</span></span>
+                    <span class="rating-text">Рейтинг: <span class="rating-num">{{$creator->rating}}</span></span>
                   </div>
                   <div class="clear"></div>
                 </div>
