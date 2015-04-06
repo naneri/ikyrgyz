@@ -82,8 +82,9 @@
             </div>
             <ul class="b-user-media-video-gallery">
                 @if($photoAlbums->count() > 0)
+                <div id="photoAlbums">
                     @foreach($photoAlbums as $photoAlbum)
-                        <div id='gallery_{{$photoAlbum->id}}' style="float:left;">
+                        <div id='gallery_{{$photoAlbum->id}}' style="float:left;" class="photoAlbum">
                             <a href="{{$photoAlbum->cover}}">
                                 <div class="b-user-media-video-gallery__list" style="margin: 4px;width:120px;height:120px;float:left;background:url({{asset($photoAlbum->cover)}}) 50%;background-size: cover;border: 2px solid white;"></div>
                                 <img src="{{$photoAlbum->cover}}" style="display: none;" data-pb-captionlink="Обложка фотоальбома '{{$photoAlbum->name}}'[{{URL::to('photoalbum/'.$photoAlbum->id)}}]">
@@ -100,9 +101,20 @@
                             </div>
                         </div>
                         <script>
-                            $('#gallery_{{$photoAlbum->id}}').photobox('a', {thumbs: false});
+                            $('#gallery_{{$photoAlbum->id}}').photobox('a', {thumbs: false, albums: true});
                         </script>
                     @endforeach
+                </div>
+                <script>
+                 function photobox(selector){
+                     $('#pbCloseBtn').click();
+                     $('#pbOverlay').css({ opacity: 1 });
+                     setTimeout(function(){
+                        $(selector+' a div').click();
+                        $('#pbOverlay').removeAttr('style');
+                      }, 1000);
+                 }
+                </script>
                 @else
                     <li class="b-user-media-video-gallery__list" style="width:100%;"><p class="b-user-media-video-top__title">{{ trans('network.no-available-photos') }}</p></li>
                 @endif
