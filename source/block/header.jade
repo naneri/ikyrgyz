@@ -3,109 +3,53 @@ include ../blocks/dropdown-message.jade
 	.b-header__inner
 		.b-header-nav
 			ul
-				li.b-header-nav__list
+				li.b-header-nav__left
+					.b-header-nav-logo
+						.b-header-nav-logo__item
+							a(href="#")
+								img(src="img/2.png", alt="logo")
+								span.logo I-Kyrgyz
+					.b-header-nav-user
+						.b-header-nav-user__item
+							a(href="#")
+								img(src="img/38.png", alt="user")
+								span.user-name Имя пользователя
+				li.b-header-nav__middle
+					.b-header-nav-button
+						.b-header-nav-button__item
+							a.counter-block(href="#")
+								img(src="img/4.png", alt="msg")
+								span.counter 999
+						.b-header-nav-button__item
+							a.counter-block(href="#")
+								img(src="img/4.png", alt="msg")
+								span.counter 999
+						.b-header-nav-button__item
+							a.counter-block(href="#")
+								img(src="img/4.png", alt="msg")
+								span.counter 999
 
 
-					a(href="#")
-						img(src="img/2.png", alt="logo")
-						span.logo I-Kyrgyz
-				li.b-header-nav__list
-					a(href="#")
-						img(src="img/38.png", alt="user")
-						span.user-name Имя пользователя
-					ul.b-header-nav-dropdown
-						li
-							a(href="#") Изменить профиль
-						li
-							a(href="#") Личные сообщения(1877)
 
-						li
-							a(href="#") Друзья
-						li
-							a(href="#") Группы
-				li.b-header-nav__list
+
+
 					
-					a.counter-block(href="#")
-						img(src="img/4.png", alt="msg")
-						span.counter 25
-					ul.b-header-nav-dropdown
-						li
-							img(src="img/3.png", alt="")
-							span Cергей Бобровский </br>отправил вам приглашение в друзья</br>
-						
-							a.btn(href="#") Принять
-						
-							a.btn(href="") Отклонить
-												
-				li.b-header-nav__list
-					a.counter-block(href="#")
-						img(src="img/5.png", alt="msg")
-						span.counter 25
-					+dropdown-message
-
-				li.b-header-nav__list
-					a.counter-block(href="#")
-						img(src="img/6.png", alt="msg")
-						span.counter 25
-					ul.b-header-nav-dropdown
-						li
-							a(href="#") Изменить профиль
-						li
-							a(href="#") Личные сообщения(1877)
-
-						li
-							a(href="#") Друзья
-						li
-							a(href="#") Группы	
-				li.b-header-nav__list
-					a(href="#")
-						img(src="img/7.png", alt="search")
-						span.search-friend Поиск друзей
+				li.b-header-nav__right
+					.b-header-nav-search
+						.b-header-nav-search__item
+							a(href="#")
+								img(src="img/7.png", alt="search")
+								span.search-friend Поиск друзей
+					.b-header-nav-enc
+						.b-header-nav-enc__item
+							a(href="#")
+								img(src="img/8.png", alt="search")
+							span.search-friend Энциклопедия
+					.b-header-nav-setting
+						.b-header-nav-setting__item
+							a(href="")
+								img(src="img/8.png", alt="")
 					
-								
-				li.b-header-nav__list
-					a(href="#")
-						img(src="img/8.png", alt="search")
-						span.search-friend Энциклопедия
-					ul.b-header-nav-dropdown
-						li
-							a(href="") История
-						li
-							a(href="") Обычаи
-						li
-							a(href="") Культура	
-				
-				li.b-header-nav__list
-					a(href="#")
-						img(src="img/39.png", alt="search")
-					ul.b-header-nav-dropdown
-
-						
-						
-						li
-							a(href="#") Выбор языка
-							ul.b-header-sub-menu
-								li
-									a(href="")
-										img(src="img/30.png", alt="")
-										span Английский
-								li
-									a(href="")
-										img(src="img/30.png", alt="")
-										span Русский
-								li
-									a(href="")
-										img(src="img/30.png", alt="")
-										span Русский	
-						li
-							a(href="#") Помощь
-							ul.b-header-sub-menu
-								li
-									a(href="") Сообщить о проблеме
-								li
-									a(href="") История действии
-								
-						li
-							a(href="#") выход
 				.clear
+				
 						
