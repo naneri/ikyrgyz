@@ -15,8 +15,8 @@ class SearchController extends \BaseController {
         
         public function searchPeople(){
             $users = $this->getUsers();
-            $ageFrom = array('' => 'от');
-            $ageTo = array('' => 'до');
+            $ageFrom = array('' => '');
+            $ageTo = array('' => '');
             for($i = 14; $i <= 99; $i++){
                 $ageFrom[$i] = $i;
                 $ageTo[$i] = $i;
@@ -57,15 +57,25 @@ class SearchController extends \BaseController {
                 $where .= " AND `user_description`.`birthday` >= '$dateTo' "
                     . " AND `user_description`.`birthday_access` = 'all' ";
             }
-            if (Input::has('study')) {
-                $where .= " AND (`profile_items`.`type` = 'study' "
-                        . " AND `profile_items`.`value` like '%".Input::get('study')."%' "
-                        . " AND `profile_items`.`access` = 'all') ";
+            if (Input::has('study') || Input::has('study_text')) {
+                $where .= " AND (`profile_items`.`type` = 'study' ";
+                if(Input::has('study')){
+                    $where .= " AND `profile_items`.`value` like '%".Input::get('study')."%' ";
+                }
+                if (Input::has('study_text')) {
+                    $where .= " AND `profile_items`.`value` like '%" . Input::get('study_text') . "%' ";
+                }
+                $where .= " AND `profile_items`.`access` = 'all') ";
             }
-            if (Input::has('job')) {
-                $where .= " AND (`profile_items`.`subtype` = 'job' "
-                        . " AND `profile_items`.`value` like '%" . Input::get('job') . "%' "
-                        . " AND `profile_items`.`access` = 'all') ";
+            if (Input::has('job') || Input::has('job_text')) {
+                $where .= " AND (`profile_items`.`subtype` = 'job' ";
+                if(Input::has('job')){
+                    $where .= " AND `profile_items`.`value` like '%" . Input::get('job') . "%' ";
+                }
+                if (Input::has('job_text')) {
+                    $where .= " AND `profile_items`.`value` like '%" . Input::get('job_text') . "%' ";
+                }
+                $where .= " AND `profile_items`.`access` = 'all') ";
             }
             if (Input::has('gender') && Input::get('gender') != 'other') {
                 $gender = Input::get('gender');

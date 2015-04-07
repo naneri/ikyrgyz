@@ -33,11 +33,20 @@
                             </div>
                             <p class="b-user-interface-content-item__title">Учебные заведения</p>
                             <div class="b-user-interface-content-item__item">
-                                {{Form::text('study', null, array('class' => 'form-control select-default'))}}
+                                @foreach(ProfileItem::getForViewMy('school') as $item)
+                                    {{Form::radio('study', $item)}} {{$item}}<br>
+                                @endforeach
+                                @foreach(ProfileItem::getForViewMy('university') as $item)
+                                    {{Form::radio('study', $item)}} {{$item}}<br>
+                                @endforeach
+                                {{Form::text('study_text', null, array('class' => 'form-control select-default'))}}
                             </div>
                             <p class="b-user-interface-content-item__title">Место работы</p>
                             <div class="b-user-interface-content-item__item">
-                                {{Form::text('job', null, array('class' => 'form-control select-default'))}}
+                                @foreach(ProfileItem::getForViewMy('job') as $item)
+                                    {{Form::radio('study', $item)}} {{$item}}<br>
+                                @endforeach
+                                {{Form::text('job_text', null, array('class' => 'form-control select-default'))}}
                             </div>
                             <p class="b-user-interface-content-item__title">Пол</p>
                             <div class="b-user-interface-content-item__item">

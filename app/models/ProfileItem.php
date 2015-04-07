@@ -19,4 +19,13 @@ class ProfileItem extends \Eloquent {
             }
             return $profileItems;
         }
+
+        public static function getForViewMy($subtype) {
+            $profileItems = array(); //'' => 'Выбрать');
+            foreach (ProfileItem::where('user_id', Auth::id())->where('subtype', $subtype)->select('value')->distinct()->lists('value') as $item) {
+                $profileItems[$item] = $item;
+            }
+            return $profileItems;
+        }
+
 }
