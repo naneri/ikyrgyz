@@ -55,8 +55,7 @@
             <ul class="b-topic-navigation-format">
                 <li class="b-topic-navigation-format__list">
                     <div class="b-topic-navigation-format__wrapper">
-                    <a href="#" class="format-icon" style="display: block; margin: 5px 0 0 5px;"><img src="{{ asset('img/42.png') }}" alt=""/></a>
-
+                    <a href="javascript: void(0)" class="format-icon" style="display: block; width: 42px; padding: 5px 0px 0px 18px;"><img src="{{ asset('img/42.png') }}" alt=""/></a>
                     <ul class="b-topic-navigation-format-dropdown">
                         <li><a href="javascript: makeColumnN('1')"><img src="{{ asset('img/44.png') }}" alt=""/></a></li>
                         <li><a href="javascript: makeColumnN('2')"><img src="{{ asset('img/45.png') }}" alt=""/></a></li>
