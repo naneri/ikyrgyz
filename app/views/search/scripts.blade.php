@@ -43,5 +43,15 @@ $(document).ready(function(){
         $('#btn-search').click(function() {
             startSearch();
         });
+        
+        $('select[name=age-from]').change(function(){
+            var beginNum = $(this).val();
+            var items = '<option value=""></option>';
+            for(var i=beginNum;i<100;i++){
+                 items += '<option value="' + i + '">' + i + '</option>';
+            }
+            $('select[name=age-to]').html( items);
+        });
+        
 });
 </script>

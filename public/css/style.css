@@ -206,8 +206,8 @@ body {
 }
 
 .header-logo__image {
-	max-width: 40px !important;
-	max-height: 40px !important;
+	max-width: 45px !important;
+	max-height: 45px !important;
 }
 
 .b-header-nav-dropdown_add-btn {
@@ -226,7 +226,7 @@ body {
 	float: left;
 	z-index: 1000;
 	background: #e1674a;
-	min-width: 160px;
+	min-width: 170px;
 	border-bottom: 4px solid #c84526;
 	line-height: 1.2px;
 }
@@ -413,6 +413,17 @@ body {
 	color: #999;
 	font-size: 12px;
 	font-family: 'PT Sans Caption';
+}
+
+.b-user-profile-image {
+	width: 255px;
+	height: 255px;
+	overflow: hidden;
+}
+
+.b-user-profile-image img {
+	min-height: 100%;
+	min-width: 100%;
 }
 
 .b-user-profile-links__list {
@@ -2304,6 +2315,11 @@ about profile Style
 	display: inline-block;
 	font: 22px 'PT Sans Caption Bold';
 	color: #676767;
+}
+
+.b-profile-about-tags-user__image {
+	max-width: 45px;
+	max-height: 45px;
 }
 
 .b-profile-about-profile {

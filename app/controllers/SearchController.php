@@ -15,7 +15,13 @@ class SearchController extends \BaseController {
         
         public function searchPeople(){
             $users = $this->getUsers();
-            return View::make('search.people', array('users' => $users));
+            $ageFrom = array('' => '');
+            $ageTo = array('' => '');
+            for($i = 14; $i <= 99; $i++){
+                $ageFrom[$i] = $i;
+                $ageTo[$i] = $i;
+            }
+            return View::make('search.people', compact('users', 'ageFrom', 'ageTo'));
         }
         
         public function postSearchPeople(){
@@ -51,20 +57,25 @@ class SearchController extends \BaseController {
                 $where .= " AND `user_description`.`birthday` >= '$dateTo' "
                     . " AND `user_description`.`birthday_access` = 'all' ";
             }
-            if (Input::has('school')) {
-                $where .= " AND (`profile_items`.`subtype` = 'school' "
-                        . " AND `profile_items`.`value` like '%".Input::get('school')."%' "
-                        . " AND `profile_items`.`access` = 'all') ";
+            if (Input::has('study') || Input::has('study_text')) {
+                $where .= " AND (`profile_items`.`type` = 'study' ";
+                if(Input::has('study')){
+                    $where .= " AND `profile_items`.`value` like '%".Input::get('study')."%' ";
+                }
+                if (Input::has('study_text')) {
+                    $where .= " AND `profile_items`.`value` like '%" . Input::get('study_text') . "%' ";
+                }
+                $where .= " AND `profile_items`.`access` = 'all') ";
             }
-            if (Input::has('university')) {
-                $where .= " AND (`profile_items`.`subtype` = 'university' "
-                        . " AND `profile_items`.`value` like '%" . Input::get('university') . "%' "
-                        . " AND `profile_items`.`access` = 'all') ";
-            }
-            if (Input::has('job')) {
-                $where .= " AND (`profile_items`.`subtype` = 'job' "
-                        . " AND `profile_items`.`value` like '%" . Input::get('job') . "%' "
-                        . " AND `profile_items`.`access` = 'all') ";
+            if (Input::has('job') || Input::has('job_text')) {
+                $where .= " AND (`profile_items`.`subtype` = 'job' ";
+                if(Input::has('job')){
+                    $where .= " AND `profile_items`.`value` like '%" . Input::get('job') . "%' ";
+                }
+                if (Input::has('job_text')) {
+                    $where .= " AND `profile_items`.`value` like '%" . Input::get('job_text') . "%' ";
+                }
+                $where .= " AND `profile_items`.`access` = 'all') ";
             }
             if (Input::has('gender') && Input::get('gender') != 'other') {
                 $gender = Input::get('gender');
@@ -139,9 +150,10 @@ class SearchController extends \BaseController {
                             . $blogsWhere);
             }
             if (in_array(Input::get('filter'), array('any', 'topic'))) {
-                $topics = DB::select("select `topics`.*, `user_description`.*, COUNT(`topic_comments`.`id`) AS `comments_count` "
+                $topics = DB::select("select `topics`.*, `user_description`.*, COUNT(`topic_comments`.`id`) AS `comments_count`, `blogs`.`title` as `blog_name` "
                             . $topicsAdditionalColumns
                             . "from `topics` "
+                            . "inner join `blogs` on `blogs`.`id` = `topics`.`blog_id` "
                             . "left outer join `topic_comments` on `topic_comments`.`topic_id` = `topics`.`id` "
                             . "inner join `".Config::get('database.connections.mysql_users.database')."`.`user_description` on `user_description`.`user_id` = `topics`.`user_id` "
                             . $topicsWhere

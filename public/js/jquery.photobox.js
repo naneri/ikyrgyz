@@ -40,12 +40,14 @@
             thumbAttr     : 'data-src',   // Attribute to get the image for the thumbnail from
             counter       : "(A/B)",      // Counts which piece of content is being viewed, relative to the total count of items in the photobox set. ["false","String"]
             title         : true,         // show the original alt or title attribute of the image's thumbnail. (path to image, relative to the element which triggers photobox)
+            autoplayBtn   : true,         // show autoplay button
             autoplay      : false,        // should autoplay on first time or not
             time          : 3000,         // autoplay interval, in miliseconds (less than 1000 will hide the autoplay button)
             history       : false,        // should use history hashing if possible (HTML5 API)
             hideFlash     : true,         // Hides flash elements on the page when photobox is activated. NOTE: flash elements must have wmode parameter set to "opaque" or "transparent" if this is set to false
             zoomable      : true,         // disable/enable mousewheel image zooming
             wheelNextPrev : true,         // change image using mousewheel left/right
+            albums        : false,        // 
             keys          : {
                 close : [27, 88, 67],    // keycodes to close photobox, default: esc (27), 'x' (88), 'c' (67)
                 prev  : [37, 80],        // keycodes to navigate to the previous image, default: Left arrow (37), 'p' (80)
@@ -69,7 +71,7 @@
                         ),
                         caption = $('<div id="pbCaption">').append(
                             '<label for="pbThumbsToggler" title="thumbnails on/off"></label>',
-                            captionText = $('<div class="pbCaptionText">').append('<div class="title"></div><div class="counter"></div><div class = "b-user-wall-footer__btn rating" style = "float:right;"></div><div class = "b-user-wall-footer__btn edit" style = "float:right;"></div>'),
+                            captionText = $('<div class="pbCaptionText">').append('<div class="title"></div><div class="counter"></div><div class = "b-user-wall-footer__btn rating" style = "float:right;"></div><div class = "b-user-wall-footer__btn edit" style = "float:right;"></div><div class="album-nav" style="margin-top:15px;"></div>'),
                             thumbs = $('<div>').addClass('pbThumbs')
                         )
                     );
@@ -383,7 +385,7 @@
                     overlay.addClass('hasArrows hasCounter')
 
                     // check is the autoplay button should be visible (per gallery) and if so, should it autoplay or not.
-                    if( options.time > 1000 ){
+                    if( options.time > 1000 && options.autoplayBtn ){
                         overlay.addClass('hasAutoplay');
                         if( options.autoplay )
                             APControl.progress.start();
@@ -762,6 +764,18 @@
             caption.find('.rating').html(ratingBox);
         }else{
             caption.find('.rating').html('');
+        }
+        
+        if(options.albums){
+            caption.find('.album-nav').html('');
+            if (photobox.selector.prev().prev().length > 0){
+                caption.find('.album-nav').append('<a style="color:#fff;cursor:pointer;margin:10px;" onclick="photobox(\'#' + photobox.selector.prev().prev().attr('id') + '\')">Предыдущий фотоальбом</a>');
+            }
+            if(photobox.selector.next().next().length > 0){
+                caption.find('.album-nav').append('<a style="color:#fff;cursor:pointer;margin:10px;" onclick="photobox(\'#'+photobox.selector.next().next().attr('id')+'\')">Следующий фотоальбом</a>');
+            }
+        } else {
+            caption.find('.album-nav').html('');
         }
         
         // Edit Delete Box
