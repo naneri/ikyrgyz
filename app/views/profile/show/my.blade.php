@@ -6,11 +6,11 @@
 <div class="b-content">
     <div class="b-user-profile">
         @if(isset($user->description->user_profile_avatar))
-        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
+        <div class="b-user-profile__left"><a href="#" class="user-image"><img style="background: url('{{ asset($user->description->user_profile_avatar) }}') 50%; background-size: cover; width: 244px; height: 244px;"/></a>
             <p class="user-link-photo"><a href="#" id="upload_user_avatar">{{ trans('network.edit-photo') }}</a></p>
         </div>
         @else
-        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
+        <div class="b-user-profile__left"><a href="#" class="user-image"><img style="background: url('{{asset("images/content/12.png")}}') 50%;background-size: cover; width: 244px; height: 244px;"/></a>
             <p class="user-link-photo"><a href="#" id="upload_user_avatar">{{ trans('network.upload-photo') }}</a></p>
         </div>
         @endif

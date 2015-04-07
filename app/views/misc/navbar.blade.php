@@ -14,7 +14,7 @@
 						</div>
 						<div class="b-header-nav-user">
 							<div class="b-header-nav-user__item">
-							<a href="#">
+                                                            <a href="{{ URL::to('profile') }}">
 						@if(isset($user_data->description->user_profile_avatar))
 							<img class="header-logo__image"  src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
 						@else

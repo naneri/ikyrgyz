@@ -48,6 +48,7 @@
         });
     </script>
     <div class="b-user-media" style="right: 0px; padding-bottom: 100px;">
+        @if(count($videoIds) > 0)
         <div class="b-user-media__video">
             <div class="b-user-media-video-top">
                 <p class="b-user-media-video-top__title">{{ trans('network.video') }}</p>
@@ -73,6 +74,8 @@
                 <div class="clear"></div>
             </ul>
         </div>
+        @endif
+        @if($photoAlbums->count() > 0)
         <div class="b-user-media__photo">
             <div class="b-user-media-video-top">
                 <p class="b-user-media-video-top__title">{{ trans('network.photoalbums') }}</p>
@@ -121,6 +124,8 @@
                 <div class="clear"></div>
             </ul>
         </div>
+        @endif
+        @if(isset($musics))
         <div class="b-user-media__music">
             <div class="b-user-media-video-top">
                 <p class="b-user-media-video-top__title">{{ trans('network.music') }}</p>
@@ -138,5 +143,6 @@
                 <div class="clear"></div>
             </ul>
         </div>
+        @endif
     </div>
 @endif
