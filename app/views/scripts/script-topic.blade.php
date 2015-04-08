@@ -7,7 +7,7 @@
                     
             var $container = $('.masonry');
             
-            @if($columnN)
+            @if(@$columnN)
                 var ColumnN = {{ $_COOKIE['ColumnN'] }};
                 var columnWidth, masonryClass;
 
@@ -56,7 +56,7 @@
 
                             console.log('donwloaded elements' + page);
                             
-                            @if($columnN)
+                            @if(@$columnN)
                                 var ColumnN;
                                 if($('#ColumnN').val() == "")
                                     ColumnN = {{ $_COOKIE['ColumnN'] }};
@@ -88,7 +88,7 @@
         });
     })
     
-    @if($columnN)
+    @if(@$columnN)
         function makeColumnN(column){
             var columnWidth;
             var masonryClass;
