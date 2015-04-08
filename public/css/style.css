@@ -369,7 +369,9 @@ body {
 }
 
 .b-user-profile__left .user-image img {
-	border-bottom: 10px solid #7da027;
+	border: 5px solid #fff;
+	max-width: 255px;
+	max-height: 255px;
 }
 
 .b-user-profile__middle {
@@ -413,17 +415,6 @@ body {
 	color: #999;
 	font-size: 12px;
 	font-family: 'PT Sans Caption';
-}
-
-.b-user-profile-image {
-	width: 255px;
-	height: 255px;
-	overflow: hidden;
-}
-
-.b-user-profile-image img {
-	min-height: 100%;
-	min-width: 100%;
 }
 
 .b-user-profile-links__list {
@@ -933,7 +924,7 @@ body {
 
 .b-user-media-video-gallery__list img {
 	border: 1px solid rgba(127,127,127,0.3);
-	padding: 2%;
+	padding: 3px;
 	background: #fff;
 	max-width: 113px;
 	overflow: hidden;
