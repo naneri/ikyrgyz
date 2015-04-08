@@ -8,8 +8,12 @@ class Topic extends Eloquent {
 
         static function getSubscribedTopics($userId, $rating, $offset = 0) {
             $topic_number = Config::get('topic.topics_per_page');
-    		return 	Topic::with('blog', 'user', 'user.description')
+    		return 	Topic::with('blog', 'user', 'user.description', 'comments', 'blog.topics')
+                        ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                        ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
                         ->where('topics.draft', '=', '0')
+                        ->whereIn('blog_types.name', array('personal', 'open'))
+                        ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'))
                         ->skip($offset*$topic_number)
                         ->take($topic_number)
                         ->orderBy('topics.id', 'DESC')
@@ -26,7 +30,8 @@ class Topic extends Eloquent {
         
         static function getTopicsByDate($offset = 0){
             $topicLimit = Config::get('topic.topics_per_page');
-            $topics = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
+            $topics = Topic::with('blog', 'user', 'user.description', 'comments', 'blog.topics')
+                    ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
                     ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
                     ->where('topics.draft', '=', '0')
                     ->whereIn('blog_types.name', array('personal', 'open'))
@@ -41,7 +46,8 @@ class Topic extends Eloquent {
         
         static function getTopicsByRating($offset = 0){
             $topicLimit = Config::get('topic.topics_per_page');
-            $topics = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
+            $topics = Topic::with('blog', 'user', 'user.description', 'comments', 'blog.topics')
+                    ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
                     ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
                     ->where('topics.draft', '=', '0')
                     ->whereIn('blog_types.name', array('personal', 'open'))

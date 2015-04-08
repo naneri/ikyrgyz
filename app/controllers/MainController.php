@@ -32,7 +32,7 @@ class MainController extends BaseController {
             $offset = $page; // с какого начинать просмотр
             $topics = array();
             switch ($sort){
-                case 'good':
+                case 'index':
                     $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
                     break;
                 case 'new':
@@ -41,8 +41,6 @@ class MainController extends BaseController {
                 case 'top':
                     $topics = Topic::getTopicsByRating($offset);
                     break;
-                default:
-                    $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
             }
             return View::make('topic.build', array('topics' => $topics));
 	}
