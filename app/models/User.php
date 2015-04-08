@@ -263,6 +263,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return $blogs;
         }
         
+        public function subscribtions(){
+            $blogs = Blog::join('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
+                    ->join('roles', 'blog_roles.role_id', '=', 'roles.id')
+                    ->whereIn('roles.name', array('admin', 'moderator', 'reader'))
+                    ->where('blog_roles.user_id', $this->id)
+                    ->select('blogs.*')
+                    ->get();
+            return $blogs;
+        }
+        
         public function isHavePersonalBlog(){
             return Blog::join('blog_types', 'blog_types.id','=','blogs.type_id')
                     ->where('blog_types.name', 'personal')

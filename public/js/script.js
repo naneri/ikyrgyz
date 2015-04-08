@@ -251,13 +251,13 @@ $(document).ready(function(){
 
 
 
-// (function($) {  
-// $(function() {  
+ (function($) {  
+ $(function() {  
   
-// $('select').styler();  
+ $('select').styler();  
   
-// })  
-// })(jQuery);
+ })  
+ })(jQuery);
 
 
 // $(document).ready(function(){

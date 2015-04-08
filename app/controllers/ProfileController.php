@@ -36,7 +36,7 @@ class ProfileController extends BaseController {
                         $items = $user->friends();
                         break;
                     case 'subscribtions':
-                        $items = $user->canPublishBlogs();
+                        $items = $user->subscribtions();
                         break;
                     case 'videos':
                         $items = $user->topicsWithVideo;
@@ -57,6 +57,9 @@ class ProfileController extends BaseController {
                     $videoIds[] = end($matches);
                 }
                 
+                if (!isset($_COOKIE['ColumnN'])) {
+                    $_COOKIE['ColumnN'] = '2';
+                }
                 if($user->id == Auth::id()){
                     return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
                 }else{
