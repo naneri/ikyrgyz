@@ -118,14 +118,34 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->lists('id');
         $topicIds = array_merge($votedTopicIds, $subscribedTopicIds);
         $uniqueTopicIds = array_unique($topicIds);
-        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')->whereIn('id', $uniqueTopicIds)->orderBy('created_at', 'desc')->take($topicsLimit)->offset($page*$topicsLimit)->get();
+        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')
+                ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                ->where(function($query){
+                    $query->whereIn('blog_types.name', array('personal', 'open'))
+                        ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'));
+                })
+                ->whereIn('topics.id', $uniqueTopicIds)
+                ->orderBy('topics.created_at', 'desc')
+                ->take($topicsLimit)
+                ->offset($page*$topicsLimit)
+                ->select('topics.*')
+                ->get();
     }
     
     public function publications($topicsLimit, $page=0){
         return $this->topics()
                 ->with('blog', 'blog.topics', 'user', 'comments', 'user.description')
+                ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                ->where(function($query){
+                    $query->whereIn('blog_types.name', array('personal', 'open'))
+                        ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'));
+                })
+                ->orderBy('topics.created_at', 'desc')
                 ->take($topicsLimit)
                 ->offset($topicsLimit*$page)
+                ->select('topics.*')
                 ->get();
     }
     

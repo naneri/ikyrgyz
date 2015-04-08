@@ -17,6 +17,7 @@ class Topic extends Eloquent {
                         ->skip($offset*$topic_number)
                         ->take($topic_number)
                         ->orderBy('topics.id', 'DESC')
+                        ->select('topics.*')
                         ->get();/*where('topics.rating', '>', $rating)
                       ->join('blogs', 'topics.blog_id', '=', 'blogs.id')
                       ->join('blog_subscriptions as us', function ($j) use ($userId){
