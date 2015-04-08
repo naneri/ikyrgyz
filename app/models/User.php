@@ -110,7 +110,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->get();
     }
     
-    public function newsline(){
+    public function newsline($topicsLimit, $page=0){
         $votedTopicIds = $this->votes()->where('target_type', 'topic')->where('value', '1')->lists('target_id');
         $subscribedTopicIds = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
                 ->whereIn('blogs.id', $this->canPublishBlogs()->lists('id'))
@@ -118,7 +118,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->lists('id');
         $topicIds = array_merge($votedTopicIds, $subscribedTopicIds);
         $uniqueTopicIds = array_unique($topicIds);
-        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')->whereIn('id', $uniqueTopicIds)->orderBy('created_at', 'desc')->get();
+        return Topic::with('blog', 'user', 'comments', 'user.description', 'blog.topics')->whereIn('id', $uniqueTopicIds)->orderBy('created_at', 'desc')->take($topicsLimit)->offset($page*$topicsLimit)->get();
+    }
+    
+    public function publications($topicsLimit, $page=0){
+        return $this->topics()
+                ->with('blog', 'blog.topics', 'user', 'comments', 'user.description')
+                ->take($topicsLimit)
+                ->offset($topicsLimit*$page)
+                ->get();
     }
     
     public function votes(){

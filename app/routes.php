@@ -92,6 +92,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile', 'ProfileController@showMyProfile');
+        Route::get('profile/{userId}/ajaxTopics/{pageName}/{pageNumber}', 'ProfileController@ajaxTopics');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
         Route::get('profile/{page}', 'ProfileController@showMyProfile');
         Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');

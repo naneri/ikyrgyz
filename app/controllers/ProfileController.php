@@ -27,9 +27,10 @@ class ProfileController extends BaseController {
                 $videos = array();
                 $photoAlbums = array();
                 $videoIds = array();
+                $topicsLimit = Config::get('topic.topics_per_page');
                 switch($page){
                     case 'publications':
-                        $items = $user->topics;
+                        $items = $user->publications($topicsLimit);
                         break;
                     case 'friends':
                         $items = $user->friends();
@@ -42,7 +43,7 @@ class ProfileController extends BaseController {
                         break;
                     case 'newsline':
                     default:
-                        $items = $user->newsline();
+                        $items = $user->newsline($topicsLimit);
                         $videos = $user->topicsWithVideo()->take(6)->get();
                         $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
                         break;
@@ -62,7 +63,23 @@ class ProfileController extends BaseController {
                     return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
                 }
 	}
-        
+
+        public function ajaxTopics($userId, $pageName, $pageNumber = 0) {
+            $user = User::find($userId);
+            $topicsLimit = Config::get('topic.topics_per_page');
+            $topics = array();
+            switch ($pageName) {
+                case 'newsline':
+                case 'profile':
+                    $topics = $user->newsline($topicsLimit, $pageNumber);
+                    break;
+                case 'publications':
+                    $topics = $user->publications($topicsLimit, $pageNumber);
+                    break;
+            }
+            return View::make('topic.build', array('topics' => $topics));
+        }
+
         public function showMyProfile($page = 'newsline'){
             return $this->getShow(Auth::id(), $page);
         }

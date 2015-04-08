@@ -21,7 +21,7 @@
     @endforeach
 </div>
 @endif
-<script>
+<!--script>
     $(document).ready(function() {
         var $container = $('.masonry');
         $container.imagesLoaded(function() {
@@ -33,7 +33,8 @@
             });
         });
     });
-</script>
+</script-->
+@include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => false))
 
 @if($page == 'newsline')
     @include('scripts.photobox')
