@@ -173,7 +173,6 @@ class AuthController extends BaseController {
 
     public function postAndroidLogin(){
 
-        die("testset");
         //  запускаем валидацию
         $rules = array('email' => 'required', 'password' => 'required');
         $validator = Validator::make(Input::all(), $rules);
@@ -186,7 +185,7 @@ class AuthController extends BaseController {
         $auth = Auth::attempt(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
-        ), false);
+        ), true);
 
         // при неудачной авторизации выдаём ошибку
         if(!$auth){

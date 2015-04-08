@@ -25,16 +25,21 @@ Route::group(array('before' => 'notauth'),function(){
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
+Route::filter('basic.once', function () {
+    return Auth::onceBasic();
+}); 
+Route::group(array('before' => 'basic.once'), function(){
+    Route::get('main/androidIndex', 'AndroidController@androidIndex');
+    Route::get('main/index/androidNew', 'AndroidController@androidNewTopics');
+    Route::get('main/index/androidTop', 'AndroidController@androidTopTopics');
+    Route::get('main/androidAjaxTopics/{sort}/{page}', 'AndroidController@androidAjaxTopics');
+});
 
 Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index','MainController@index');
     Route::get('main/index/new', 'MainController@newTopics');
     Route::get('main/index/top', 'MainController@topTopics');
     Route::get('main/ajaxTopics/{sort}/{page}','MainController@ajaxTopics');
-    Route::get('main/androidIndex','AndroidController@androidIndex');
-    Route::get('main/index/androidNew', 'AndroidController@androidNewTopics');
-    Route::get('main/index/androidTop', 'AndroidController@androidTopTopics');
-    Route::get('main/androidAjaxTopics/{sort}/{page}','AndroidController@androidAjaxTopics');
 
     Route::get('country/{id}', function($id){ return Response::json(City::getCitiesByCountryId($id)); });
 
