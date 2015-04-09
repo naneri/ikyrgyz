@@ -12,7 +12,7 @@ class AndroidController extends BaseController {
     public function androidIndex(){
         $rating = Config::get('topic.index_good_topic_rating');
         var_dump($rating);
-        var_dump(Auth::user()->id); die;
+        var_dump(Auth::user()); die;
         $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
         return Response::json($topics, 200);
     }
