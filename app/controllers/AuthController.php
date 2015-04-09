@@ -184,7 +184,7 @@ class AuthController extends BaseController {
         $auth = Auth::attempt(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
-        ), true);
+        ), false);
 
         // при неудачной авторизации выдаём ошибку
         if(!$auth){
