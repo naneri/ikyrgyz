@@ -25,14 +25,11 @@ Route::group(array('before' => 'notauth'),function(){
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
-Route::filter('basic.once', function () {
-    return Auth::onceBasic();
-}); 
-Route::group(array('before' => 'basic.once'), function(){
-    Route::get('main/androidIndex', 'AndroidController@androidIndex');
-    Route::get('main/index/androidNew', 'AndroidController@androidNewTopics');
-    Route::get('main/index/androidTop', 'AndroidController@androidTopTopics');
-    Route::get('main/androidAjaxTopics/{sort}/{page}', 'AndroidController@androidAjaxTopics');
+Route::group(array('before' => 'notauth'), function(){
+    Route::post('main/androidIndex', 'AndroidController@androidIndex');
+    Route::post('main/index/androidNew', 'AndroidController@androidNewTopics');
+    Route::post('main/index/androidTop', 'AndroidController@androidTopTopics');
+    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidController@androidAjaxTopics');
 });
 
 Route::group(array('before' => 'auth|activated'),function(){

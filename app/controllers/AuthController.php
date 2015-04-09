@@ -196,7 +196,7 @@ class AuthController extends BaseController {
         if(@Auth::user()->description->first_name == '' || @Auth::user()->description->gender == '' || @Auth::user()->description->liveplace_country_id == ''){
             exit('authorized!@#'.csrf_token().'!@#profile_needs_to_be_filled');
         }
-        exit('authorized!@#'.csrf_token());
+        exit('authorized!@#'.Auth::user()->remember_token);
     }
 
 }

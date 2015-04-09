@@ -1,25 +1,14 @@
 <?php
 
 class AndroidController extends BaseController {
-//    public function __construct(){
-//        if (isset($_SESSION['android_authorized']) && $_SESSION['android_authorized'] == 1) {
-//            return;
-//            $returnData = array();
-//            $user_data = User::with('description')->find(Auth::id());
-//            if (!empty($user_data)) {
-//                // Отправляет в шаблон все запросы о добавлении в друзья
-//                $returnData['friend_requests'] = Friend::getFriendRequests(Auth::id());
-//
-//                // Отправляет в шаблон все новые сообщения
-//                $returnData['new_messages'] = Message::where('receiver_id', '=', Auth::id())->where('watched', '=', 0)->join('users', 'messages.sender_id', '=', 'users.id')->join('user_description', 'messages.sender_id', '=', 'user_description.user_id')->select('messages.*', 'user_description.*')->get();
-//
-//                // Отправляет в шаблон данные о пользователе
-//                $returnData['user_data'] = $user_data;
-////                return Response::json($returnData, 200);
-//            }
-//        }
-//    }
 
+    public function __construct(){
+        Auth::attempt(array(
+            'email' => Input::get('email'),
+            'password' => Input::get('password')
+        ), false);
+        parent::__construct();
+    }
     public function androidIndex(){
         $rating = Config::get('topic.index_good_topic_rating');
         $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
