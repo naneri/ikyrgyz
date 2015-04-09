@@ -42,7 +42,7 @@
                                 @foreach(ProfileItem::getForViewMy('university') as $item)
                                     {{Form::radio('study', $item)}} {{$item}}<br>
                                 @endforeach
-                                {{Form::text('study_text', null, array('class' => 'form-control select-default'))}}
+                                {{Form::text('study_text', null, array('class' => 'form-control select-default school-item'))}}
                             </div>
                             <!-- <p class="b-user-interface-content-item__title">Место работы</p>
                             <div class="b-user-interface-content-item__item">

@@ -3094,6 +3094,7 @@ interface
 .b-user-interface-content__right {
 	float: right;
 	padding-right: 10px;
+	width: 680px;
 }
 
 .b-user-interface-content-nav {
@@ -3152,6 +3153,12 @@ interface
 	font: 14px 'PT Sans Caption';
 	color: #999;
 	padding-left: 10px;
+}
+
+.b-user-interface-content-item__item .school-item {
+	border: 1px solid #d5d5d5;
+	width: 230px;
+	height: 29px;
 }
 
 .b-user-interface-content-item__item .select-default {
@@ -3229,6 +3236,11 @@ interface
 	overflow: hidden;
 }
 
+.b-user-interface-content-profile__left {
+	float: left;
+	width: 60px;
+}
+
 .b-user-interface-content-profile__name {
 	font: 14px 'PT Sans Caption';
 	color: #676767;
@@ -3238,11 +3250,18 @@ interface
 .b-user-interface-content-profile__desc {
 	font: 12 px 'PT Sans Caption';
 	color: #999;
+	float: left;
+}
+
+.b-user-interface-content-profile__center {
+	width: 310px;
+	float: left;
 }
 
 .b-user-interface-content-profile__buttons {
 	float: right;
-	margin: -30px 20px 0 0;
+	width: 200px;
+	padding-top: 13px;
 }
 
 .b-user-interface-content-profile__buttons .button-default {

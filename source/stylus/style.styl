@@ -2400,6 +2400,7 @@ interface
 	&__right
 		float right
 		padding-right 10px
+		width 680px
 	&-nav
 		padding-bottom 16px
 		
@@ -2434,7 +2435,10 @@ interface
 			font 14px $baseFontFamily
 			color $baseFontColor
 			padding-left 10px
-			
+		.school-item
+			border 1px solid #d5d5d5
+			width 230px
+			height 29px
 		.select-default
 			width 240px
 			height 29px
@@ -2496,17 +2500,28 @@ interface
 		width 50px
 		height 50px
 		overflow hidden
+	&__left
+		float left
+		width 60px
 	&__name
 		font 14px $baseFontFamily
 		color $baseFontColorLight
 		padding-bottom 5px
+		
+		
 	&__desc
 		font 12	px $baseFontFamily
 		color $baseFontColor
+		float left
+	&__center
+		width 310px
+		float left
 	&__buttons
 		float right
-		margin -30px 20px 0 0
+		width 200px
+		padding-top 13px
 		.button-default
+		
 			button-default()
 			color $baseFontColor
 			font 15px $baseFontFamily
