@@ -51,7 +51,6 @@ class AuthController extends BaseController {
      */
     public function logout(){
         Auth::logout();
-        Session::put('android_authorized', 0);
         return Redirect::to('/');
     }
 
@@ -192,9 +191,8 @@ class AuthController extends BaseController {
             exit('invalid_credentials_provided');
         }
 
-        $_SESSION['android_authorized'] = 1;
         if(@Auth::user()->description->first_name == '' || @Auth::user()->description->gender == '' || @Auth::user()->description->liveplace_country_id == ''){
-            exit('authorized!@#'.csrf_token().'!@#profile_needs_to_be_filled');
+            exit('authorized!@#'.Auth::user()->remember_token.'!@#profile_needs_to_be_filled');
         }
         exit('authorized!@#'.Auth::user()->remember_token);
     }

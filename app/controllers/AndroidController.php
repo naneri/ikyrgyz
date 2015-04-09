@@ -6,11 +6,13 @@ class AndroidController extends BaseController {
         Auth::login(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
-        ), true);
+        ), false);
         parent::__construct();
     }
     public function androidIndex(){
         $rating = Config::get('topic.index_good_topic_rating');
+        var_dump($rating);
+        var_dump(Auth::user()->id); die;
         $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
         return Response::json($topics, 200);
     }
