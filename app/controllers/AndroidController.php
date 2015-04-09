@@ -6,7 +6,7 @@ class AndroidController extends BaseController {
         Auth::attempt(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
-        ), false);
+        ), true);
         parent::__construct();
     }
     public function androidIndex(){
