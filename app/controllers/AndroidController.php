@@ -3,7 +3,7 @@
 class AndroidController extends BaseController {
 
     public function __construct(){
-        Auth::login(array(
+        Auth::attempt(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
         ), false);
