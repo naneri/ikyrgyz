@@ -3,13 +3,11 @@
 class AndroidController extends BaseController {
 
     public function __construct(){
-        if (!Auth::check()) {
-            Auth::attempt(array(
-                'email' => Input::get('email'),
-                'password' => Input::get('password')
-            ), false);
-            return Redirect::to('main/androidIndex');
-        }
+        die(Input::get('email'));
+        Auth::attempt(array(
+            'email' => Input::get('email'),
+            'password' => Input::get('password')
+        ), false);
         parent::__construct();
     }
     public function androidIndex(){
