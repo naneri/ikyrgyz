@@ -3083,6 +3083,7 @@ interface
 
 .b-user-interface-content__left {
 	float: left;
+	width: 285px;
 }
 
 .b-user-interface-content-wrapper {
@@ -3111,7 +3112,13 @@ interface
 	padding: 5px 9px;
 	color: #676767;
 	font: 15px 'PT Sans Caption';
-	border: 1px solid #d5d5d5;
+	-webkit-box-shadow: 0 1px 1px rgba(127,127,127,0.3);
+	box-shadow: 0 1px 1px rgba(127,127,127,0.3);
+	display: block;
+	-webkit-box-sizing: padding-box;
+	-moz-box-sizing: padding-box;
+	box-sizing: padding-box;
+	border-bottom: 2px solid #f2f1f1;
 }
 
 .b-user-interface-content-nav__list a:hover {
@@ -3171,10 +3178,11 @@ interface
 .b-user-interface-content-search__search {
 	border: 1px solid #d5d5d5;
 	margin-bottom: 10px;
+	width: 100%;
 }
 
 .b-user-interface-content-search .input-default {
-	width: 540px;
+	width: 630px;
 	height: 30px;
 	border: 0;
 	padding-left: 10px;
@@ -3204,6 +3212,9 @@ interface
 .b-user-interface-content-profile__image {
 	float: left;
 	margin-right: 10px;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
 }
 
 .b-user-interface-content-profile__name {
@@ -3307,8 +3318,8 @@ interface
 }
 
 .b-user-interface-content-block__image img {
-	max-height: 82px;
-	max-width: 124px;
+	height: 82px;
+	width: 124px;
 }
 
 .b-user-interface-content-block__text {

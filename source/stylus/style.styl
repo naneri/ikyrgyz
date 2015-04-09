@@ -2364,6 +2364,7 @@ interface
 		box-shadow $baseBoxShadow
 		height 45px
 		margin-bottom 20px
+		
 		.input-default
 			width 10px
 			height 10px
@@ -2390,6 +2391,7 @@ interface
 	//
 	&__left
 		float left
+		width 285px
 	&-wrapper
 		border $baseBorder
 		
@@ -2405,10 +2407,14 @@ interface
 			float left
 			a
 				background $lightGradient
-				padding 5px 9px	
+				padding 5px 9px
 				color $baseFontColorLight
 				font 15px $baseFontFamily				
-				border $baseBorder
+				box-shadow 0 1px 1px rgba(127,127,127,.3)
+				display block
+				box-sizing padding-box
+				border-bottom 2px solid  #f2f1f1
+				
 				
 				&:hover
 					color #fff
@@ -2449,8 +2455,10 @@ interface
 	&__search
 		border $baseBorder
 		margin-bottom 10px
+		width 100%
+		
 	.input-default
-		width 540px
+		width 630px
 		height 30px
 		border 0
 		padding-left 10px
@@ -2476,6 +2484,9 @@ interface
 	&__image
 		float left
 		margin-right 10px
+		width 50px
+		height 50px
+		overflow hidden
 	&__name
 		font 14px $baseFontFamily
 		color $baseFontColorLight
@@ -2545,8 +2556,8 @@ interface
 		float left
 		margin-right 10px
 		img
-			max-height 82px
-			max-width 124px
+			height 82px
+			width 124px
 	&__text
 		float left
 	&__detail

@@ -2,7 +2,7 @@
     @foreach($users as $user)
         <div class="b-user-interface-content-profile">
             <a href="{{URL::to('profile/'.$user->id)}}">
-                <img src="{{asset(($user->user_profile_avatar)?$user->user_profile_avatar:'img/20.png')}}" alt="" class="b-user-interface-content-profile__image" style="max-width: 40px;max-height: 40px;"/>
+                <img src="{{asset(($user->user_profile_avatar)?$user->user_profile_avatar:'img/20.png')}}" alt="" class="b-user-interface-content-profile__image"/>
                 <p class="b-user-interface-content-profile__name">{{$user->first_name.' '.$user->last_name}}</p>
             </a>
             <p class="b-user-interface-content-profile__desc">
