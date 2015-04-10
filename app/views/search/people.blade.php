@@ -31,6 +31,9 @@
                             <div class="b-user-interface-content-item__item">
                                 {{Form::select('city', array('0' => 'Город'), null, array('class' => 'form-control select-city select-default'))}}
                             </div>
+                             <div class="b-user-interface-content-item__item">
+                                <input type="text" class="noinlist" value="Нет в списке">
+                            </div>
                             <p class="b-user-interface-content-item__title">Учебные заведения</p>
                             <div class="b-user-interface-content-item__item">
                                 @foreach(ProfileItem::getForViewMy('school') as $item)
@@ -41,13 +44,13 @@
                                 @endforeach
                                 {{Form::text('study_text', null, array('class' => 'form-control select-default'))}}
                             </div>
-                            <p class="b-user-interface-content-item__title">Место работы</p>
+                            <!-- <p class="b-user-interface-content-item__title">Место работы</p>
                             <div class="b-user-interface-content-item__item">
                                 @foreach(ProfileItem::getForViewMy('job') as $item)
                                     {{Form::radio('study', $item)}} {{$item}}<br>
                                 @endforeach
                                 {{Form::text('job_text', null, array('class' => 'form-control select-default'))}}
-                            </div>
+                            </div> -->
                             <p class="b-user-interface-content-item__title">Пол</p>
                             <div class="b-user-interface-content-item__item">
                                 <label>{{Form::radio('gender', 'male', null)}} Мужской</label>

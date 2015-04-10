@@ -25,16 +25,18 @@ Route::group(array('before' => 'notauth'),function(){
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
+Route::group(array('before' => 'notauth'), function(){
+    Route::post('main/androidIndex', 'AndroidController@androidIndex');
+    Route::post('main/index/androidNew', 'AndroidController@androidNewTopics');
+    Route::post('main/index/androidTop', 'AndroidController@androidTopTopics');
+    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidController@androidAjaxTopics');
+});
 
 Route::group(array('before' => 'auth|activated'),function(){
     Route::get('main/index','MainController@index');
     Route::get('main/index/new', 'MainController@newTopics');
     Route::get('main/index/top', 'MainController@topTopics');
     Route::get('main/ajaxTopics/{sort}/{page}','MainController@ajaxTopics');
-    Route::get('main/androidIndex','AndroidController@androidIndex');
-    Route::get('main/index/androidNew', 'AndroidController@androidNewTopics');
-    Route::get('main/index/androidTop', 'AndroidController@androidTopTopics');
-    Route::get('main/androidAjaxTopics/{sort}/{page}','AndroidController@androidAjaxTopics');
 
     Route::get('country/{id}', function($id){ return Response::json(City::getCitiesByCountryId($id)); });
 
@@ -92,6 +94,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('profile/fill', 'ProfileController@getProfileFill');
         Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile', 'ProfileController@showMyProfile');
+        Route::get('profile/{userId}/ajaxTopics/{pageName}/{pageNumber}', 'ProfileController@ajaxTopics');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
         Route::get('profile/{page}', 'ProfileController@showMyProfile');
         Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');

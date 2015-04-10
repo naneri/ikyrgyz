@@ -11,21 +11,11 @@
 	@endif
 					<div class="b-user-profile">
           @if(isset($user->description->user_profile_avatar))
-            <div class="b-user-profile__left"><a href="" class="user-image">
-             <div class="b-user-profile-image">
-
-            <img  src="{{ asset($user->description->user_profile_avatar) }}" alt=""/>
-            </div>
-            </a>
+            <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt=""/></a>
               <p class="user-link-photo"><a href="#">{{ trans('network.upload-photo') }}</a></p>
             </div>
           @else
-            <div class="b-user-profile__left"><a href="" class="user-image">
-             <div class="b-user-profile-image">
-
-            <img  src="{{ asset('images/content/12.png') }}" alt=""/>
-            </div>
-            </a>
+            <div class="b-user-profile__left"><a href="" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
               <p class="user-link-photo"><a href="#">{{ trans('network.upload-photo') }}</a></p>
             </div>
           @endif

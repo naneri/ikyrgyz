@@ -71,7 +71,7 @@
 				border-radius 2px
 				text-align center
 				box-shadow 0 1px 4px rgba(0,0,0,.5)
-				background #ef1b29				
+				background #ef1b29
 				font-family 'PT Sans Caption Bold'
 				background-image linear-gradient(bottom, rgba(79,79,79,.1) 0%, rgba(255,255,255,.1) 100%)
 				
@@ -330,8 +330,9 @@
 		.user-image
 			//
 			img				
-				border-bottom 10px solid #7da027
-				
+				border 5px solid #fff
+				max-width 255px
+				max-height 255px		
 				
 	
 	&__middle 
@@ -366,13 +367,6 @@
 				font-family 'PT Sans Caption'
 				
 
-.b-user-profile-image
-	width 255px
-	height 255px
-	overflow hidden
-	img
-		min-height 100%
-		min-width 100%
 
 
 
@@ -584,8 +578,8 @@
 			float left
 			margin 0 15px 0 0
 			img
-				
-				max-height 40px !important
+				width 45px
+				height 45px
 				
 			
 				
@@ -773,8 +767,8 @@
 		margin 9px
 		
 		img
-			border: 1px solid rgba(127,127,127,.3)
-			padding 2%	
+			border 1px solid rgba(127,127,127,.3)
+			padding 3px	
 			background #fff
 			max-width 113px
 			overflow hidden
@@ -2370,6 +2364,7 @@ interface
 		box-shadow $baseBoxShadow
 		height 45px
 		margin-bottom 20px
+		
 		.input-default
 			width 10px
 			height 10px
@@ -2388,7 +2383,7 @@ interface
 		p.title-header
 			color $baseFontColor
 			font 16px $baseFontFamilyBold
-			padding-left 10px
+			padding-left 20px
 			line-height 45px
 	
 
@@ -2396,6 +2391,7 @@ interface
 	//
 	&__left
 		float left
+		width 283px
 	&-wrapper
 		border $baseBorder
 		
@@ -2405,32 +2401,43 @@ interface
 		float right
 		padding-right 10px
 	&-nav
-		padding-bottom 19px
+		padding-bottom 16px
 		
 		&__list
 			float left
 			a
 				background $lightGradient
-				padding 5px 9px	
+				padding 5px 9px
 				color $baseFontColorLight
 				font 15px $baseFontFamily				
-				border $baseBorder
+				box-shadow 0 1px 1px rgba(127,127,127,.3)
+				display block
+				box-sizing padding-box
+				border-bottom 2px solid  #f2f1f1
+				
 				
 				&:hover
 					color #fff
 					background $orangeGradient
 					border-bottom 2px solid #b43c1f
 .b-user-interface-content-item
-	margin 0 20px
+	margin 0 18px
 	&__item
 		padding-bottom 10px
 		.input-default
 			width 80px
 			height 30px
+		.noinlist
+			width 230px
+			height 29px
+			border 1px solid #d5d5d5
+			font 14px $baseFontFamily
+			color $baseFontColor
+			padding-left 10px
 			
 		.select-default
 			width 240px
-			height 30px
+			height 29px
 			
 			.jq-selectbox__select
 				background #fff
@@ -2439,6 +2446,8 @@ interface
 				line-height 30px
 			.jq-selectbox__trigger
 				background $lightGradient
+				border-radius 5px
+				
 				
 		label
 			color $baseFontColor
@@ -2447,7 +2456,7 @@ interface
 			
 			
 	&__title
-		padding-bottom 10px
+		padding-bottom 14px
 		font 15px $baseFontFamily
 		color $baseFontColorLight	
 .b-user-interface-content-search
@@ -2455,16 +2464,18 @@ interface
 	&__search
 		border $baseBorder
 		margin-bottom 10px
+		width 100%
+		
 	.input-default
-		width 540px
-		height 30px
+		width 630px
+		height 26px
 		border 0
 		padding-left 10px
 		color $baseFontColor
 		font 15px $baseFontFamily
 	.button-default
 		width 35px
-		height 32px
+		height 28px
 		border 0
 		color transparent
 		float right
@@ -2478,10 +2489,13 @@ interface
 	
 	margin 20px 0 0 0
 	border $baseBorder
-	padding 10px
+	padding 6px
 	&__image
 		float left
 		margin-right 10px
+		width 50px
+		height 50px
+		overflow hidden
 	&__name
 		font 14px $baseFontFamily
 		color $baseFontColorLight
@@ -2491,17 +2505,25 @@ interface
 		color $baseFontColor
 	&__buttons
 		float right
-		margin -35px 20px 0 0
+		margin -30px 20px 0 0
 		.button-default
 			button-default()
 			color $baseFontColor
 			font 15px $baseFontFamily
-			padding  6px 10px
 			cursor pointer
+			
 			&:hover
 				background $orangeGradient
 				color #fff
 				border-bottom 2px solid #b43c1f
+		.button-profile
+			width 80px
+			height 30px
+			
+		.button-add
+			width 88px
+			height 30px
+			
 		
 	
 .b-user-interface-content-sort
@@ -2551,8 +2573,8 @@ interface
 		float left
 		margin-right 10px
 		img
-			max-height 82px
-			max-width 124px
+			height 82px
+			width 124px
 	&__text
 		float left
 	&__detail
