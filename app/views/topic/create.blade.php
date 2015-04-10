@@ -20,7 +20,7 @@
                       </div>
                   {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
                     <div class="b-topic-create-modal-content__item">
-                        {{Form::text('title', '{{ trans("network.choose-name") }}', array('class' => 'input-default add-name sync-input'))}}
+                        {{Form::text('title', trans("network.choose-name"), array('class' => 'input-default add-name sync-input'))}}
                         <a href="{{asset('topic/drafts')}}" class="draft">{{ trans('network.drafts') }} <span>{{Auth::user()->drafts()->count()}}</span></a>
                     </div>
                     <div class="b-topic-create-modal-content__item">
