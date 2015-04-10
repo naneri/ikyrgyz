@@ -30,7 +30,7 @@
                         <p class="b-user-interface-content-block-text__title">{{$entry->title}}</p>
                         <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}</p>
                         <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
-                        <p class="b-user-interface-content-block-text__desc">Блог</p>
+                        <p class="b-user-interface-content-block-text__desc">{{ trans('network.blog') }}</p>
                     </div>
                 </div>
                 <div class="b-user-interface-content-block__detail">

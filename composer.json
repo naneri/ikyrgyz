@@ -11,7 +11,8 @@
 		"artdarek/oauth-4-laravel": "dev-master",
 		"barryvdh/laravel-debugbar": "1.8",
         "greggilbert/recaptcha": "1.1.5",
-        "thujohn/share": "dev-master"
+        "thujohn/share": "dev-master",
+		"jenssegers/date": "~2.0"
 	},
         "require-dev": {
             "codeception/codeception": "*",

@@ -20,7 +20,7 @@
                       </div>
                   {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
                     <div class="b-topic-create-modal-content__item">
-                        {{Form::text('title', 'Введите название', array('class' => 'input-default add-name sync-input'))}}
+                        {{Form::text('title', '{{ trans("network.choose-name") }}', array('class' => 'input-default add-name sync-input'))}}
                         <a href="{{asset('topic/drafts')}}" class="draft">{{ trans('network.drafts') }} <span>{{Auth::user()->drafts()->count()}}</span></a>
                     </div>
                     <div class="b-topic-create-modal-content__item">
@@ -33,14 +33,14 @@
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                        {{ Form::text('tags', 'Теги', array('class' => 'input-default add-name', 'id' => 'tags')) }}
+                        {{ Form::text('tags', '{{ trans("network.tags") }}', array('class' => 'input-default add-name', 'id' => 'tags')) }}
                     </div>
                     <div class="b-topic-create-modal-content__item">
                         <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg">
                           <div class="b-topic-create-modal-content__btns">
-                            <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>
-                            <input type="submit" value="Препросмотр" class="btn btn-preview input-default"/>
-                            <input type="submit" value="Опубликовать" class="btn btn-submit input-default"/>
+                            <input type="submit" value="{{ trans('network.cancel') }}" class="btn btn-cancel input-default"/>
+                            <input type="submit" value="{{ trans('network.preview') }}" class="btn btn-preview input-default"/>
+                            <input type="submit" value="{{ trans('network.publish') }}" class="btn btn-submit input-default"/>
                           </div>
                       <div class="clear"></div>
                     </div>

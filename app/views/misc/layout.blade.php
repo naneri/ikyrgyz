@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
+    <meta http-equiv='Content-Type' in your page content='text/html; charset=UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
     <title>{{Config::get('app.network_name')}}</title>
     <link rel="shortcut icon" href="{{ URL::to('img/favicon/favicon.ico') }}">

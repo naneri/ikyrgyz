@@ -133,7 +133,7 @@ return array(
 	'video'				=> 'видео',
 	'no-available-video'=> 'Нет доступных видео',
 	'photos'			=> 'Фотографии',
-	'no-available-photos'=> 'Нет доступных фотографии',
+	'no-available-photos'	=> 'Нет доступных фотографии',
 	'music'				=> 'Музыка',
 	'no-available-music'=> 'Нет доступных музыкальных файлов',
 	'birth-place'		=> 'Место рождения',
@@ -161,11 +161,43 @@ return array(
 	'rating'			=> 'Рейтинг',
 	'favorite'			=> 'Избранное',
 	'my-video'			=> 'Мое видео',
-	
+
 
 
 	//search
 	'search'			=> 'поиск',
 	'people'			=> 'люди',
-	'content'			=> 'контент'
+	'content'			=> 'контент',
+	'topic-of-blog'		=> 'Блог топика',
+	'profile'			=> 'Профиль',
+	'become-friend'		=> 'Дружить',
+	'sorting'			=> 'Сортировка',
+	'according-to-rating'	=> 'По рейтингу',
+	'accroding-to-relevance'=> 'По релевантности',
+	'according-to-date'		=> 'По дате создания',
+	'filters'			=> 'Фильтры',
+	'topics'			=> 'Топики',
+	'blogs'				=> 'Блоги',
+	'place-to-search'	=> 'Место поиска',
+	'study-organization'=> 'Учебные заведения',
+	'city'				=> 'Город',
+	'choose-school'		=> 'Выберите школу',
+	'choose-university'	=> 'Выберите университет',
+	'working-place'		=> 'Место работы',
+	'choose-working-place'	=> 'Выберите место работы',
+	'gender'			=> 'Пол',
+	'any'				=> 'Любой',
+	'age'				=> 'Возраст',
+
+	//topic
+	'cancel'			=> 'Отмена',
+	'preview'			=> 'Препросмотр',
+	'publish'			=> 'Опубликовать',
+	'tags'				=> 'Теги',
+	'author'			=> 'Автор',
+	'profile'			=> 'Профиль',
+	'rating'			=> 'Рейтинг',
+	'watch'				=> 'Просмотреть',
+	
+
 	);				

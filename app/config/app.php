@@ -130,6 +130,7 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
         'Greggilbert\Recaptcha\RecaptchaServiceProvider',
         'Thujohn\Share\ShareServiceProvider',
+        'Jenssegers\Date\DateServiceProvider',
 	),
 
 	/*
@@ -199,6 +200,8 @@ return array(
 		'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
         'Share' => 'Thujohn\Share\ShareFacade',
+        'Date' => 'Jenssegers\Date\Date',
+        
 	),
 
 );

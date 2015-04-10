@@ -9,8 +9,8 @@
                 <span>{{($user->country)?$user->country:''}}</span>
             </p>
             <div class="b-user-interface-content-profile__buttons">
-                <a href="{{URL::to('profile/'.$user->id)}}"><input type="button" value="Профиль" class="button-default"/></a>
-                <a href="{{URL::to('people/friendRequest/'.$user->id)}}"><input type="button" value="Дружить" class="button-default"/></a>
+                <a href="{{URL::to('profile/'.$user->id)}}"><input type="button" value="{{ trans('network.profile') }}" class="button-default"/></a>
+                <a href="{{URL::to('people/friendRequest/'.$user->id)}}"><input type="button" value="{{ trans('network.become-friend') }}" class="button-default"/></a>
             </div>
             <div class="clear"></div>
         </div>

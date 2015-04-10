@@ -12,8 +12,8 @@
                   <p class="b-profile-about-title__title">{{$topic->title}}</p>
                   <div class="b-profile-about-title__right"><span class="date">{{$topic->created_at}}</span>
                     @if($topic->canEdit())
-                      <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="Редактировать" class="btn-edit button-default"/></a>
-                      <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="Удалить" class="btn-delete button-default"/></a>
+                      <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="{{ trans('network.edit') }}" class="btn-edit button-default"/></a>
+                      <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="{{ trans('network.edit') }}" class="btn-delete button-default"/></a>
                     @endif
                     <!--<img src="{{ asset('img/22.png') }}" alt="vision"/>
                     <span class="count">19</span>
@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="b-profile-about__profile">
-                <div class="b-profile-about-profile"><span class="author">Автор</span><a href="#">
+                <div class="b-profile-about-profile"><span class="author">{{ trans('network.author') }}</span><a href="#">
                     @if(isset($creator->description->user_profile_avatar))
                         <img style="width:40px" src="{{$creator->description->user_profile_avatar}}" alt="" class="b-profile-about-profile__image"/>
                     @else
@@ -35,13 +35,13 @@
                   <div class="b-profile-about-profile__buttons">  
                     @if($creator->id !== $user_data->id)                                  
                       <a href="{{ URL::to('profile/'. $creator->id)}}">
-                        <input type="submit" value="Профиль" class="input-default btn-profile"/>
+                        <input type="submit" value="{{ trans('network.profile') }}" class="input-default btn-profile"/>
                       </a>
                       <a href="{{ URL::to('people/friendRequest/'. $creator->id)}}">
-                          <input type="submit" value="Дружить" class="input-default btn-friend"/>
+                          <input type="submit" value="{{ trans('network.become-friend') }}" class="input-default btn-friend"/>
                       </a>
                     @endif
-                    <span class="rating-text">Рейтинг: <span class="rating-num">+0.00</span></span>
+                    <span class="rating-text">{{ trans('network.rating') }}: <span class="rating-num">+0.00</span></span>
                   </div>
                   <div class="clear"></div>
                 </div>
@@ -62,13 +62,13 @@
               
               <div class="b-profile-about__tags">
                 <div class="b-profile-about-tags">
-                    <p class="b-profile-about-tags__title">Теги: {{$topic->tagsToString()}}</p>
+                    <p class="b-profile-about-tags__title">{{ trans('network.tags') }}: {{$topic->tagsToString()}}</p>
                   <div class="b-profile-about-tags__user">
                     <div class="b-profile-about-tags-user">
                       <div class="b-profile-about-tags-user__left"><span class="b-profile-about-tags-user__name">Блог</span><img src="{{ $blog->avatar() }}" alt="" class="b-profile-about-tags-user__image blog-avatar"/>
                         <p class="b-profile-about-tags-user__title">{{$blog->title}}</p>
                         <div class="b-profile-about-tags-user__buttons">
-                            <a href="{{URL::to('blog/show/'.$blog->id)}}"><button class="btn-default btn-view">Просмотреть</button></a>
+                            <a href="{{URL::to('blog/show/'.$blog->id)}}"><button class="btn-default btn-view">{{ trans('network.watch') }}</button></a>
                             <a href="{{URL::to('blog/'.$blog->id.'/read')}}"><button class="btn-default btn-follow">Подписаться</button></a>
                             <span class="count-topic">{{$blog->topics->count()}} топиков</span><span class="count-followers">{{$blog->getBlogUsers()->count()}} подписчиков</span>
                         </div>
