@@ -14,7 +14,7 @@
 						</div>
 						<div class="b-header-nav-user">
 							<div class="b-header-nav-user__item">
-							<a href="#">
+                                                            <a href="{{ URL::to('profile') }}">
 						@if(isset($user_data->description->user_profile_avatar))
 							<img class="header-logo__image"  src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
 						@else
@@ -79,7 +79,7 @@
 									@foreach($friend_requests as $friend)
 										<li>
 											<div class="b-header-nav-dropdown__wrapper">
-												<img src="http://lorempixel.com/400/200/" alt="" class="b-header-nav-dropdown__image">
+												
 											@if(!empty($friend->user_profile_avatar))
 												<img src="{{$friend->user_profile_avatar}}" alt="" class="b-header-nav-dropdown__image">
 											@endif
@@ -88,18 +88,7 @@
 										</div>
 										</div>
 										</li>
-										<li>
-										<div class="b-header-nav-dropdown__wrapper">
-											<img src="http://lorempixel.com/400/200/" alt="" class="b-header-nav-dropdown__image">
-											@if(!empty($friend->user_profile_avatar))
-
-												<img src="{{$friend->user_profile_avatar}}" alt="" class="b-header-nav-dropdown__image">
-											@endif
-										<div class="b-header-nav-dropdown__item">
-										<span>{{$friend->first_name . ' ' . $friend->last_name }}<br/>{{ trans('network.sent-you-message') }}</span><br/><a href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}" class="btn">{{ trans('network.accept') }}</a>  <a href="{{ URL::to('people/removeFriend'). '/' .  $friend->id }}" class="btn">{{ trans('network.reject') }}</a>
-										</div>
-										</div>
-										</li>
+										
 									@endforeach
 								</ul>  
 							 

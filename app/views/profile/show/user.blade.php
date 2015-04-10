@@ -6,10 +6,16 @@
 <div class="b-content">
     <div class="b-user-profile">
         @if(isset($user->description->user_profile_avatar))
-        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset($user->description->user_profile_avatar) }}" alt="" style="max-width: 244px;max-height: 244px;"/></a>
+        <div class="b-user-profile__left">
+            <a href="#" class="user-image">
+                <img style="background: url('{{ asset($user->description->user_profile_avatar) }}') 50%; background-size: cover; width: 244px; height: 244px;" />
+            </a>
         </div>
         @else
-        <div class="b-user-profile__left"><a href="#" class="user-image"><img  src="{{ asset('images/content/12.png') }}" alt=""/></a>
+        <div class="b-user-profile__left">
+            <a href="#" class="user-image">
+                <img   style="background: url('{{asset("images/content/12.png")}}') 50%;background-size: cover; width: 244px; height: 244px;"/>
+            </a>
         </div>
         @endif
 
@@ -31,7 +37,7 @@
     <div class="b-user-navigation">
         <ul class="b-user-navigation-list">
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/newsline')}}">{{ trans('network.timeline') }}</a></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/publications')}}">{{ trans('network.publications') }}</a><span>{{$user->topics->count()}}</span></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/publications')}}">{{ trans('network.publications') }}</a><span>{{$user->publications(10000)->count()}}</span></li>
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/friends')}}">{{ trans('network.friends') }}</a><span>{{$user->friends()->count()}}</span></li>
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/subscribtions')}}">{{ trans('network.subscriptions') }}</a></li>
             <div class="clear"></div>

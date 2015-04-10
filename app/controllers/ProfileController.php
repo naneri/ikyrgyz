@@ -3,7 +3,7 @@
 class ProfileController extends BaseController {
     
         
-        var $access = array('me' => 'Только мне', 'friend' => 'Друзьям', 'all' => 'Всем');
+        var $access = array( 'all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне');
         var $profileItemTypes = array('school', 'university', 'company', 'contact');
         var $familyMemberRelatives = array('' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
         var $maritalStatuses = array('' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
@@ -25,26 +25,27 @@ class ProfileController extends BaseController {
                 
                 $items = null;
                 $videos = array();
-                $photos = array();
+                $photoAlbums = array();
                 $videoIds = array();
+                $topicsLimit = Config::get('topic.topics_per_page');
                 switch($page){
                     case 'publications':
-                        $items = $user->topics;
+                        $items = $user->publications($topicsLimit);
                         break;
                     case 'friends':
                         $items = $user->friends();
                         break;
                     case 'subscribtions':
-                        $items = $user->canPublishBlogs();
+                        $items = $user->subscribtions();
                         break;
                     case 'videos':
                         $items = $user->topicsWithVideo;
                         break;
                     case 'newsline':
                     default:
-                        $items = $user->newsline();
+                        $items = $user->newsline($topicsLimit);
                         $videos = $user->topicsWithVideo()->take(6)->get();
-                        $photos = $user->photos()->orderByRaw("RAND()")->take(6)->get();
+                        $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
                         break;
                 }
                 
@@ -55,22 +56,41 @@ class ProfileController extends BaseController {
                     preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
                     $videoIds[] = end($matches);
                 }
-
+                
+                if (!isset($_COOKIE['ColumnN'])) {
+                    $_COOKIE['ColumnN'] = '2';
+                }
                 if($user->id == Auth::id()){
-                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
+                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
                 }else{
-                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photos'));
+                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
                 }
 	}
-        
+
+        public function ajaxTopics($userId, $pageName, $pageNumber = 0) {
+            $user = User::find($userId);
+            $topicsLimit = Config::get('topic.topics_per_page');
+            $topics = array();
+            switch ($pageName) {
+                case 'newsline':
+                case 'profile':
+                    $topics = $user->newsline($topicsLimit, $pageNumber);
+                    break;
+                case 'publications':
+                    $topics = $user->publications($topicsLimit, $pageNumber);
+                    break;
+            }
+            return View::make('topic.build', array('topics' => $topics));
+        }
+
         public function showMyProfile($page = 'newsline'){
             return $this->getShow(Auth::id(), $page);
         }
         
         public function getRandom(){
-            $friendIds = Auth::user()->friends()->lists('id');
+            $friendIds = array();//Auth::user()->friends()->lists('id');
             array_push($friendIds, Auth::id());
-            $userId = User::whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first()->id;
+            $userId = User::has('photos')->whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first()->id;
             return Redirect::to('profile/'.$userId);
         }
         

@@ -4,23 +4,23 @@
             <ul class="b-topic-navigation-list">
                 <li>
                     <a href="#" class="b-topic-navigation__item">{{ trans('network.create') }}</a>
-                    <ul class="b-topic-navigation-create b-topic-navigation-create-dropdown" style="height: 160px !important">
+                    <ul class="b-topic-navigation-create b-topic-navigation-create-dropdown" style="height: 125px !important">
                         <li class="b-topic-navigation-create__list">
                             <a href="{{ URL::to('topic/create') }}">{{ trans('network.topic') }}</a>
                         </li>
                         <li class="b-topic-navigation-create__list">
                             <a href="{{ URL::to('blog/create') }}">{{ trans('network.blog') }}</a>
                         </li>
-                        <li class="b-topic-navigation-create__list">
+                        <li class="b-topic-navigation-create__list" style="display: none;">
                             <a href="#">{{ trans('network.drafts') }}</a>
                         </li>
-                        <li class="b-topic-navigation-create__list">
+                        <li class="b-topic-navigation-create__list" style="display: none;">
                             <a href="#">{{ trans('network.link') }}</a>
                         </li>
-                        <!--
                         <li class="b-topic-navigation-create__list">
-                            <a href="#">Фото альбом</a>
+                            <a href="{{URL::to('photoalbum/create')}}">{{trans('network.photoalbum')}}</a>
                         </li>
+                        <!--
                         <li class="b-topic-navigation-create__list">
                             <a href="#">Опрос</a>
                         </li>
@@ -55,8 +55,7 @@
             <ul class="b-topic-navigation-format">
                 <li class="b-topic-navigation-format__list">
                     <div class="b-topic-navigation-format__wrapper">
-                    <a href="#" class="format-icon" style="display: block; margin: 5px 0 0 5px;"><img src="{{ asset('img/42.png') }}" alt=""/></a>
-
+                    <a href="javascript: void(0)" class="format-icon" style="display: block; width: 42px; padding: 5px 0px 0px 18px;"><img src="{{ asset('img/42.png') }}" alt=""/></a>
                     <ul class="b-topic-navigation-format-dropdown">
                         <li><a href="javascript: makeColumnN('1')"><img src="{{ asset('img/44.png') }}" alt=""/></a></li>
                         <li><a href="javascript: makeColumnN('2')"><img src="{{ asset('img/45.png') }}" alt=""/></a></li>

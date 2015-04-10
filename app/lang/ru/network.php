@@ -36,6 +36,7 @@ return array(
 	'blog'				=> 'Блог',
 	'drafts'			=> 'Черновики',
 	'link'				=> 'Ссылка',
+        'photoalbum'                    => 'Фото альбом',
 
 	//topic build
 	'read-more'			=> 'Подробнее',
@@ -133,6 +134,7 @@ return array(
 	'video'				=> 'видео',
 	'no-available-video'=> 'Нет доступных видео',
 	'photos'			=> 'Фотографии',
+    'photoalbums'          	=> 'Фотоальбомы',
 	'no-available-photos'	=> 'Нет доступных фотографии',
 	'music'				=> 'Музыка',
 	'no-available-music'=> 'Нет доступных музыкальных файлов',
@@ -187,6 +189,7 @@ return array(
 	'choose-working-place'	=> 'Выберите место работы',
 	'gender'			=> 'Пол',
 	'any'				=> 'Любой',
+	'any-plural'		=> 'Любые',
 	'age'				=> 'Возраст',
 
 	//topic

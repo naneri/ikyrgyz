@@ -39,11 +39,14 @@
                                         {{$photo->name}}
                                     </div>
                                 </div>
-                                <img src="{{$photo->url}}" alt="{{$photo->name}}" style="display: none;">
+                                <img src="{{$photo->url}}" style="display: none;"  data-pb-captionlink="{{$photo->name}}[{{URL::to('photos/'.$photo->id)}}]" id="photo_{{$photo->id}}" data-photo-id="{{$photo->id}}" data-can-edit="{{$photo->canEdit()}}" data-rating="{{$photo->rating}}">
                             </a>
                         @endforeach
-                    </ul>
                 </div>
+                @include('scripts.photobox')
+                <script>
+                    $('#gallery').photobox('a', {thumbs: false});
+                </script>
                 <div class="gamma-overlay"></div>
             @else 
                 <div class="panel panel-default" style="height: 40px; padding:0 20px;">
@@ -55,5 +58,4 @@
         </div>
     </div>
 </div>
-@include('scripts.photobox')
 @stop

@@ -7,7 +7,6 @@
     <div class="b-user-interface">
         <div class="b-user-interface__header">
             <p class="title-header">{{ trans('network.search') }}
-                <input type="submit" class="input-default"/>
             </p>
         </div>
         <div class="b-user-interface__inner">
@@ -32,18 +31,27 @@
                             <div class="b-user-interface-content-item__item">
                                 {{Form::select('city', array('0' => '{{ trans("network.city") }}'), null, array('class' => 'form-control select-city select-default'))}}
                             </div>
-                            <p class="b-user-interface-content-item__title">{{ trans('network.study-organization') }}</p>
-                            <div class="b-user-interface-content-item__item">
-                                {{Form::select('school', array_merge(array('' => '{{ trans("network.choose-school") }}'), ProfileItem::getForView('school')), null, array('class' => 'form-control select-default'))}}
+                             <div class="b-user-interface-content-item__item">
+                                <input type="text" class="noinlist" value="Нет в списке">
                             </div>
+                            <p class="b-user-interface-content-item__title">Учебные заведения</p>
                             <div class="b-user-interface-content-item__item">
-                                {{Form::select('university', array_merge(array('' => '{{ trans("network.choose-university") }}'), ProfileItem::getForView('university')), null, array('class' => 'form-control select-default'))}}
+                                @foreach(ProfileItem::getForViewMy('school') as $item)
+                                    {{Form::radio('study', $item)}} {{$item}}<br>
+                                @endforeach
+                                @foreach(ProfileItem::getForViewMy('university') as $item)
+                                    {{Form::radio('study', $item)}} {{$item}}<br>
+                                @endforeach
+                                {{Form::text('study_text', null, array('class' => 'form-control select-default'))}}
                             </div>
-                            <p class="b-user-interface-content-item__title">{{ trans('network.working-place') }}</p>
+                            <!-- <p class="b-user-interface-content-item__title">Место работы</p>
                             <div class="b-user-interface-content-item__item">
-                                {{Form::select('job', array_merge(array('' => '{{ trans("network.choose-working-place") }}'), ProfileItem::getForView('job')), null, array('class' => 'form-control select-default'))}}
-                            </div>
-                            <p class="b-user-interface-content-item__title">{{ trans('network.gender') }}</p>
+                                @foreach(ProfileItem::getForViewMy('job') as $item)
+                                    {{Form::radio('study', $item)}} {{$item}}<br>
+                                @endforeach
+                                {{Form::text('job_text', null, array('class' => 'form-control select-default'))}}
+                            </div> -->
+                            <p class="b-user-interface-content-item__title">Пол</p>
                             <div class="b-user-interface-content-item__item">
                                 <label>{{Form::radio('gender', 'male', null)}} {{ trans('network.gender-male') }}</label>
                             </div>
@@ -56,9 +64,9 @@
                             <p class="b-user-interface-content-item__title">{{ trans('network.age') }}</p>
                             <div class="b-user-interface-content-item__item">
                                 <label>от</label>
-                                {{Form::text('age-from', null, array('class' => 'input-default'))}}
+                                {{Form::select('age-from', $ageFrom, null, array('class' => 'input-default'))}}
                                 <label>до</label>
-                                {{Form::text('age-to', null, array('class' => 'input-default'))}}
+                                {{Form::select('age-to', $ageTo, null, array('class' => 'input-default'))}}
                             </div>
                         </div>
                     </div>

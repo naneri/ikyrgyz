@@ -35,5 +35,6 @@ return array(
 	'topic' 			=> 'Topic',
 	'blog'				=> 'Blog',
 	'drafts'			=> 'Drafts',
-	'link'				=> 'Link'
+	'link'				=> 'Link',
+        'photoalbum'                    => 'Photo album'
 	);

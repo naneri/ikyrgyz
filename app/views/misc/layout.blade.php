@@ -14,7 +14,7 @@
     <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
     <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('js/jquery.formstyler.js') }}"></script>
-    <script src="{{ asset('js/jquery.formstyler.js') }}"></script>
+    {{HTML::style('css/jquery.formstyler.css')}}
     <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
     
   </head>

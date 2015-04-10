@@ -5,8 +5,8 @@
                 <div class="b-user-interface-content-block__image"><img src="{{asset(($entry->image_url)?$entry->image_url:'img/56.png')}}" alt=""/></div>
                 <div class="b-user-interface-content-block__text">
                     <div class="b-user-interface-content-block-text">
-                        <p class="b-user-interface-content-block-text__title">{{$entry->title}}</p>
-                        <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}, {{ trans('network.topic-of-blog') }}</p>
+                        <p class="b-user-interface-content-block-text__title" style="max-width: 500px;">{{$entry->title}}</p>
+                        <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}, {{ $entry->blog_name }}</p>
                         <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
                         <p class="b-user-interface-content-block-text__desc">{{ trans('network.topic') }}</p>
                     </div>
@@ -27,7 +27,7 @@
                 <div class="b-user-interface-content-block__image"><img src="{{asset(($entry->avatar)?$entry->avatar:'img/56.png')}}" alt=""/></div>
                 <div class="b-user-interface-content-block__text">
                     <div class="b-user-interface-content-block-text">
-                        <p class="b-user-interface-content-block-text__title">{{$entry->title}}</p>
+                        <p class="b-user-interface-content-block-text__title" style="max-width: 500px;">{{$entry->title}}</p>
                         <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}</p>
                         <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
                         <p class="b-user-interface-content-block-text__desc">{{ trans('network.blog') }}</p>

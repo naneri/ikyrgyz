@@ -206,8 +206,8 @@ body {
 }
 
 .header-logo__image {
-	width: 40px !important;
-	height: 40px !important;
+	max-width: 45px !important;
+	max-height: 45px !important;
 }
 
 .b-header-nav-dropdown_add-btn {
@@ -226,7 +226,7 @@ body {
 	float: left;
 	z-index: 1000;
 	background: #e1674a;
-	min-width: 160px;
+	min-width: 170px;
 	border-bottom: 4px solid #c84526;
 	line-height: 1.2px;
 }
@@ -369,7 +369,9 @@ body {
 }
 
 .b-user-profile__left .user-image img {
-	border-bottom: 10px solid #7da027;
+	border: 5px solid #fff;
+	max-width: 255px;
+	max-height: 255px;
 }
 
 .b-user-profile__middle {
@@ -670,7 +672,8 @@ body {
 }
 
 .b-user-wall-header__image img {
-	max-height: 40px !important;
+	width: 45px;
+	height: 45px;
 }
 
 .b-user-wall-header__title {
@@ -706,7 +709,6 @@ body {
 
 .b-user-wall-image img {
 	width: 100%;
-	max-width: 550px;
 	overflow: hidden;
 }
 
@@ -923,7 +925,7 @@ body {
 
 .b-user-media-video-gallery__list img {
 	border: 1px solid rgba(127,127,127,0.3);
-	padding: 2%;
+	padding: 3px;
 	background: #fff;
 	max-width: 113px;
 	overflow: hidden;
@@ -2307,6 +2309,11 @@ about profile Style
 	color: #676767;
 }
 
+.b-profile-about-tags-user__image {
+	max-width: 45px;
+	max-height: 45px;
+}
+
 .b-profile-about-profile {
 	position: relative;
 }
@@ -2375,6 +2382,20 @@ about profile Style
 .b-profile-about-text__text {
 	color: #3e4142;
 	font: 15px 'PT Sans Caption';
+}
+
+.b-profile-about-text__text h2 {
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.b-profile-about-text__text h3 {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.b-profile-about-text__text img {
+	width: 100%;
 }
 
 .b-profile-about-text + p {
@@ -3057,12 +3078,13 @@ interface
 .b-user-interface__header p.title-header {
 	color: #999;
 	font: 16px 'PT Sans Caption Bold';
-	padding-left: 10px;
+	padding-left: 20px;
 	line-height: 45px;
 }
 
 .b-user-interface-content__left {
 	float: left;
+	width: 283px;
 }
 
 .b-user-interface-content-wrapper {
@@ -3075,7 +3097,7 @@ interface
 }
 
 .b-user-interface-content-nav {
-	padding-bottom: 19px;
+	padding-bottom: 16px;
 }
 
 .b-user-interface-content-nav__list {
@@ -3091,7 +3113,13 @@ interface
 	padding: 5px 9px;
 	color: #676767;
 	font: 15px 'PT Sans Caption';
-	border: 1px solid #d5d5d5;
+	-webkit-box-shadow: 0 1px 1px rgba(127,127,127,0.3);
+	box-shadow: 0 1px 1px rgba(127,127,127,0.3);
+	display: block;
+	-webkit-box-sizing: padding-box;
+	-moz-box-sizing: padding-box;
+	box-sizing: padding-box;
+	border-bottom: 2px solid #f2f1f1;
 }
 
 .b-user-interface-content-nav__list a:hover {
@@ -3105,7 +3133,7 @@ interface
 }
 
 .b-user-interface-content-item {
-	margin: 0 20px;
+	margin: 0 18px;
 }
 
 .b-user-interface-content-item__item {
@@ -3117,9 +3145,18 @@ interface
 	height: 30px;
 }
 
+.b-user-interface-content-item__item .noinlist {
+	width: 230px;
+	height: 29px;
+	border: 1px solid #d5d5d5;
+	font: 14px 'PT Sans Caption';
+	color: #999;
+	padding-left: 10px;
+}
+
 .b-user-interface-content-item__item .select-default {
 	width: 240px;
-	height: 30px;
+	height: 29px;
 }
 
 .b-user-interface-content-item__item .select-default .jq-selectbox__select {
@@ -3135,6 +3172,8 @@ interface
 	background: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .b-user-interface-content-item__item label {
@@ -3143,7 +3182,7 @@ interface
 }
 
 .b-user-interface-content-item__title {
-	padding-bottom: 10px;
+	padding-bottom: 14px;
 	font: 15px 'PT Sans Caption';
 	color: #676767;
 }
@@ -3151,11 +3190,12 @@ interface
 .b-user-interface-content-search__search {
 	border: 1px solid #d5d5d5;
 	margin-bottom: 10px;
+	width: 100%;
 }
 
 .b-user-interface-content-search .input-default {
-	width: 540px;
-	height: 30px;
+	width: 630px;
+	height: 26px;
 	border: 0;
 	padding-left: 10px;
 	color: #999;
@@ -3164,7 +3204,7 @@ interface
 
 .b-user-interface-content-search .button-default {
 	width: 35px;
-	height: 32px;
+	height: 28px;
 	border: 0;
 	color: transparent;
 	float: right;
@@ -3178,12 +3218,15 @@ interface
 .b-user-interface-content-profile {
 	margin: 20px 0 0 0;
 	border: 1px solid #d5d5d5;
-	padding: 10px;
+	padding: 6px;
 }
 
 .b-user-interface-content-profile__image {
 	float: left;
 	margin-right: 10px;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
 }
 
 .b-user-interface-content-profile__name {
@@ -3199,7 +3242,7 @@ interface
 
 .b-user-interface-content-profile__buttons {
 	float: right;
-	margin: -35px 20px 0 0;
+	margin: -30px 20px 0 0;
 }
 
 .b-user-interface-content-profile__buttons .button-default {
@@ -3211,7 +3254,6 @@ interface
 	background-image: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
 	color: #999;
 	font: 15px 'PT Sans Caption';
-	padding: 6px 10px;
 	cursor: pointer;
 }
 
@@ -3223,6 +3265,16 @@ interface
 	background: linear-gradient(to bottom, #f67658 0%, #c4563c 100%);
 	color: #fff;
 	border-bottom: 2px solid #b43c1f;
+}
+
+.b-user-interface-content-profile__buttons .button-profile {
+	width: 80px;
+	height: 30px;
+}
+
+.b-user-interface-content-profile__buttons .button-add {
+	width: 88px;
+	height: 30px;
 }
 
 .b-user-interface-content-sort {
@@ -3287,8 +3339,8 @@ interface
 }
 
 .b-user-interface-content-block__image img {
-	max-height: 82px;
-	max-width: 124px;
+	height: 82px;
+	width: 124px;
 }
 
 .b-user-interface-content-block__text {
