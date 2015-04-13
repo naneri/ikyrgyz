@@ -6,7 +6,7 @@
             <div class="b-user-wall-header">
                 <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
                 <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}</a></p>
-                <p class="b-user-wall-header__date">{{$topic->created_at}}
+                <p class="b-user-wall-header__date">{{$topic->created_at()}}
                     <div class="clear"></div>
                 </p>
                 <p class="b-user-wall-header__vision">
@@ -36,10 +36,10 @@
                     @endif
                     <div class="clear"></div>
                 </p>
-                <div class="b-user-wall-footer__btn"><a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">Подробнее</a>
+                <div class="b-user-wall-footer__btn"><a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">{{ trans('network.read-more') }}</a>
                     <ul class="b-user-wall-footer-list">
                         <li>
-                            <a href="" class="share-btn btn">Поделиться</a>
+                            <a href="" class="share-btn btn">{{ trans('network.share') }}</a>
                             <ul class="b-user-wall-footer-dropdown">
                                 <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook() }}')">Facebook</a></li>
                                 <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus() }}')">Google+</a></li>

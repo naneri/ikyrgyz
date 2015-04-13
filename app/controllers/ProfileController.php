@@ -90,7 +90,13 @@ class ProfileController extends BaseController {
         public function getRandom(){
             $friendIds = array();//Auth::user()->friends()->lists('id');
             array_push($friendIds, Auth::id());
-            $userId = User::has('photos')->whereNotIn('id', $friendIds)->orderByRaw("RAND()")->first()->id;
+            $userId = User::whereHas('description', function($query){
+                                $query->where('user_profile_avatar', '!=', 'NULL');
+                            })
+                            ->whereNotIn('id', $friendIds)
+                            ->orderByRaw("RAND()")
+                            ->first()
+                            ->id;
             return Redirect::to('profile/'.$userId);
         }
         

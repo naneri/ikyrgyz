@@ -173,8 +173,8 @@ Class Blog extends Eloquent{
                         ->first();
         }
 
-        public function roles(){
-            $this->hasMany('BlogRole');
+        public function blogRoles(){
+            return $this->hasMany('BlogRole');
         }
 
         public static function canPublishBlogs(){
@@ -211,5 +211,18 @@ Class Blog extends Eloquent{
         
         public function getRatingAttribute($rating){
             return round($rating, 2);
+        }
+        
+        public function canView(){
+            $access = true;
+            if($this->type->name == 'close'){
+                $access = in_array(
+                    Auth::id(),
+                    $this->blogRoles()
+                    ->join('roles', 'roles.id', '=', 'blog_roles.role_id')
+                    ->whereIn('roles.name', array('admin', 'moderator', 'reader'))
+                    ->lists('user_id'));
+            }
+            return $access;
         }
 }
