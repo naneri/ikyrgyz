@@ -44,13 +44,15 @@
         </p>
     </div>
     <div class="b-profile-about-message-button">
-        <div class="b-profile-about-message-button__answer">
-            <input type="submit" value="Ответить" class="button-default button-submit" onclick="comment.replyForm({{$comment->id}}); return false;" />
-        </div>
+        @if(Auth::id() != $comment->user_id)
+            <div class="b-profile-about-message-button__answer">
+                <input type="submit" value="Ответить" class="button-default button-submit" onclick="comment.replyForm({{$comment->id}}); return false;" />
+            </div>
+        @endif
         @if(Auth::id() == $comment->user_id || $isModerator)
-        <div class="b-profile-about-message-button__delete">
-            <input type="submit" value="Удалить" class="button-default button-submit" onclick="comment.delete({{$comment->id}}); return false;"/>
-        </div>
+            <div class="b-profile-about-message-button__delete">
+                <input type="submit" value="Удалить" class="button-default button-submit" onclick="comment.delete({{$comment->id}}); return false;"/>
+            </div>
         @endif
         <div class="b-profile-about-message-button__minus">
             <input type="submit" class="button-default button-small" onclick="vote.comment({{$comment->id}}, - 1);"/>

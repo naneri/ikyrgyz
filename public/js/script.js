@@ -228,36 +228,27 @@ $(function(){
 });
 
 
+/*
+$(document).ready(function() {
 
-$(document).ready(function(){
-  
-  $('input.pc-input').styler({
-  	filePlaceholder: 'Файл с компьютера',
-  	fileBrowse: 'Выбрать файл'
-  });  
-  });
+    $('input.pc-input').styler({
+        filePlaceholder: 'Файл с компьютера',
+        fileBrowse: 'Выбрать файл'
+    });
+});
 
 
-$(document).ready(function(){
-  $('input.it-input').styler({
-  	filePlaceholder: 'Файл из интернета',
-  	fileBrowse: 'Ссылка'
-  	
-  });  
+$(document).ready(function() {
+    $('input.it-input').styler({
+        filePlaceholder: 'Файл из интернета',
+        fileBrowse: 'Ссылка'
+
+    });
 
 });
-  
+*/
 
 
-
-
- (function($) {  
- $(function() {  
-  
- $('select').styler();  
-  
- })  
- })(jQuery);
 
 
 // $(document).ready(function(){
