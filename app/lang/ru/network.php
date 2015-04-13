@@ -53,6 +53,8 @@ return array(
 	'blog-description'	=> 'Описание блога',
 	'edit-blog'			=> 'Редактировать блог',
 	'edit-blog-users'	=> 'Редактировать пользователей блога',
+        'topic-edit'            => 'редактировать',
+        'topic-delete'          => 'удалить',
 
 
 	// edit blog users

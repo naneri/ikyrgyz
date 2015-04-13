@@ -10,10 +10,10 @@
               <div class="b-profile-about__title">
                 <div class="b-profile-about-title">
                   <p class="b-profile-about-title__title">{{$topic->title}}</p>
-                  <div class="b-profile-about-title__right"><span class="date">{{$topic->created_at}}</span>
+                  <div class="b-profile-about-title__right"><span class="date">{{$topic->created_at()}}</span>
                     @if($topic->canEdit())
-                      <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="{{ trans('network.edit') }}" class="btn-edit button-default"/></a>
-                      <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="{{ trans('network.edit') }}" class="btn-delete button-default"/></a>
+                      <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="{{ trans('network.topic-edit') }}" class="btn-edit button-default"/></a>
+                      <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="{{ trans('network.topic-delete') }}" class="btn-delete button-default"/></a>
                     @endif
                     <!--<img src="{{ asset('img/22.png') }}" alt="vision"/>
                     <span class="count">19</span>

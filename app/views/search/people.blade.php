@@ -29,7 +29,7 @@
                                 {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control select-country select-default'))}}
                             </div>
                             <div class="b-user-interface-content-item__item">
-                                {{Form::select('city', array('0' => '{{ trans("network.city") }}'), null, array('class' => 'form-control select-city select-default'))}}
+                                {{Form::select('city', array('0' => trans("network.city")), null, array('class' => 'form-control select-city select-default'))}}
                             </div>
                              <div class="b-user-interface-content-item__item">
                                 <input type="text" class="noinlist" value="Нет в списке">
