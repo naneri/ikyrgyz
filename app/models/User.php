@@ -178,7 +178,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     public function topicsWithVideo(){
-        return $this->topics()->where('description', 'like', '%youtube%')->orderBy('created_at', 'desc');
+        return $this->topics()
+                ->with('blog', 'blog.topics', 'user', 'comments', 'user.description')
+                ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
+                ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
+                ->where(function($query) {
+                    $query->whereIn('blog_types.name', array('personal', 'open'))
+                    ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'));
+                })
+                ->where('topics.description', 'like', '%youtube%')
+                ->orderBy('topics.created_at', 'desc')
+                ->select('topics.*');
     }
 
     public function drafts(){
