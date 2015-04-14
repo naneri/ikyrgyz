@@ -133,10 +133,8 @@ class AuthController extends BaseController {
     }
 
     public function loginWithFacebook() {
-
         // get data from input
         $code = Input::get( 'code' );
-
         // get fb service
         $fb = OAuth::consumer( 'Facebook' );
 
@@ -168,6 +166,32 @@ class AuthController extends BaseController {
             return Redirect::to( (string)$url );
         }
 
+/*
+
+        $code = Input::get('code');
+        $fb = OAuth::consumer( 'Facebook' ,'http://myhost.dev/login/fb');
+        if ( !empty( $code ) ) {
+            $token = $fb->requestAccessToken( $code );
+            $result = json_decode( $fb->request( '/me' ), true );
+            if ($user = User::where( 'social_id', '=' , $result['id']  )->first()) {
+                Auth::login($user);
+                return Redirect::to('profile');
+            } else {
+                $user = new User();
+                $user->email = $result['email'];
+                $user->social_id = $result['id'];
+                $user->save();
+                $profile = new UserProfile();
+                $profile->firstname = $result['first_name'];
+                $profile->lastname = $result['last_name'];
+                $user->profile()->save($profile);
+                Auth::login( $user );
+                return Redirect::to('profile');
+            }
+        } else {
+            $url = $fb->getAuthorizationUri();
+            return Redirect::to((string)$url );
+        }*/
     }
 
     public function postAndroidLogin(){

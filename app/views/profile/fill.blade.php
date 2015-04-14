@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/fonts.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/reset.css') }}"/>
+        {{HTML::style('css/bootstrap.css')}}
+        {{HTML::style('css/bootstrap-select.css')}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ asset('jquery/jquery-ui.js') }}"></script>
         <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
@@ -52,9 +54,9 @@
                                     };
                                     ?>
                                     {{ trans('network.birth-date') }}:
-                                    {{Form::select('day', $days, $birthday[2], array('class' => 'form-control'))}}
-                                    {{Form::select('month', $month, $birthday[1], array('class' => 'form-control'))}}
-                                    {{Form::select('year', $years, $birthday[0], ['class' => 'form-control'])}}
+                                    {{Form::select('day', $days, $birthday[2], array('class' => 'selectpicker form-control'))}}
+                                    {{Form::select('month', $month, $birthday[1], array('class' => 'selectpicker form-control'))}}
+                                    {{Form::select('year', $years, $birthday[0], ['class' => 'selectpicker form-control'])}}
                                     {{Form::hidden('birthday_access', $user['description']->birthday_access)}}
                                 </div>
                                 <div class="form-group">
@@ -67,13 +69,13 @@
                                 </div>
                                 <div class="form-group">
                                     {{ trans('network.you-live-in') }} <span style="color:red;font-size: 18px;">*</span> :
-                                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'select-country form-control'))}}
+                                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
                                     {{Form::select('liveplace_city_id', City::getAllForView(), $user['description']->liveplace_city_id, array('class' => 'select-city form-control'))}}
                                     {{Form::hidden('liveplace_access', $user['description']->liveplace_access)}}
                                 </div>
                                 <div class="form-group">
                                     {{ trans('network.your-motherland') }}:
-                                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'select-country form-control'))}}
+                                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
                                     {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
                                     {{Form::hidden('birthplace_access', $user['description']->birthplace_access)}}
                                 </div>
