@@ -12,7 +12,6 @@
 */
 
 $app = new Illuminate\Foundation\Application;
-
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment

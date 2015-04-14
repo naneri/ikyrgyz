@@ -53,5 +53,6 @@ $(document).ready(function(){
             $('select[name=age-to]').html( items);
         });
         
+        $('select').styler();
 });
 </script>

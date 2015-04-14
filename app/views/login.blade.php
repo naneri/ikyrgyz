@@ -70,14 +70,12 @@
                         <div class="col-md-4">
                             <div class="registration-form">
 
-                                <!--
                                 <span class="registration-span1">Войти через</span>
                                 <div class="social-networks">
-                                    <a href="#"><img src="{{URL::to('img/login/vk.png')}}"/></a>
+                                    <!--<a href="#"><img src="{{URL::to('img/login/vk.png')}}"/></a>-->
                                     <a href="{{ URL::to('login/fb')  }}"><img src="{{URL::to('img/login/f.png')}}"/></a>
-                                    <a href="#"><img src="{{URL::to('img/login/g.png')}}"/></a>
+                                    <!--<a href="#"><img src="{{URL::to('img/login/g.png')}}"/></a>-->
                                 </div>
-                                -->
 
                                 <span class="registration-span2">{{ trans('network.registration') }}</span>
                                 <div class="form-area">

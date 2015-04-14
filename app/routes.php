@@ -105,6 +105,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::post('profile/edit/account', 'ProfileController@postEditAccount');
     Route::get('profile/edit/main', 'ProfileController@getEditMain');
     Route::post('profile/edit/main', 'ProfileController@postEditMain');
+    Route::post('profile/edit/avatar', 'ProfileController@postEditAvatar');
     Route::get('profile/edit/study', 'ProfileController@getEditStudy');
     Route::post('profile/edit/study/school', 'ProfileController@postStudySchool');
     Route::post('profile/edit/study/university', 'ProfileController@postStudyUniversity');
@@ -122,7 +123,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::post('profile/edit/access', 'ProfileController@postAccess');
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
 
-    Route::get('topic/show/{id}', 'TopicController@show');
+    Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
 	Route::get('topic/create', 'TopicController@create');
         Route::group(array('before' => 'topic_edit_permission'), function(){
             Route::get('topic/edit/{id}', 'TopicController@getEdit');
@@ -229,4 +230,11 @@ Route::filter('can_view_photo', function($route){
     if(!$photo->canView()){
         return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
     }
+});
+
+Route::filter('topic.canview', function($route){
+   $topic = Topic::findOrFail($route->parameter('id'));
+   if(!$topic->blog->canView()){
+       return Redirect::back()->with('message', 'You don\'t have enough permissions to see topic.');
+   }
 });

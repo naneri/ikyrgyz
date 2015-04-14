@@ -22,19 +22,19 @@
                             </ul>
                         </div>
                         <div class="b-user-interface-content-sort">
-                            <div class="b-user-interface-content-sort__title">Сортировка</div>
+                            <div class="b-user-interface-content-sort__title">{{ trans('network.sorting') }}</div>
                             <ul class="b-user-interface-content-sort-list">
-                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'rating', false)}}По рейтингу</a></li>
-                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'relevant', false)}}По релевантности</a></li>
-                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'date', true)}}По дате создания</a></li>
+                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{ trans('network.according-to-rating') }}{Form::radio('sort', 'rating', false)}</a></li>
+                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'relevant', false)}} {{ trans('network.according-to-relevance') }}</a></li>
+                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'date', true)}} {{ trans('network.according-to-date') }}</a></li>
                             </ul>
                         </div>
                         <div class="b-user-interface-content-filter">
-                            <p class="b-user-interface-content-filter__title">Фильтры</p>
+                            <p class="b-user-interface-content-filter__title">{{ trans('network.filters') }}</p>
                             <ul class="b-user-interface-content-filter-list">
-                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'topic', false)}} Топики</label></a></li>
-                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'blog', false)}} Блоги</label></a></li>
-                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'any', true)}} Любые</label></a></li>
+                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'topic', false)}} {{ trans('network.topics') }}</label></a></li>
+                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'blog', false)}} {{ trans('network.blogs') }}</label></a></li>
+                                <li class="b-user-interface-content-filter-list__list"><a href=""><label>{{Form::radio('filter', 'any', true)}} {{ trans('network.any-plural') }}</label></a></li>
                             </ul>
                         </div>
                     </div>

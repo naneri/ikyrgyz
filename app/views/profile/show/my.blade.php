@@ -5,15 +5,9 @@
 
 <div class="b-content">
     <div class="b-user-profile">
-        @if(isset($user->description->user_profile_avatar))
-        <div class="b-user-profile__left"><a href="#" class="user-image"><img style="background: url('{{ asset($user->description->user_profile_avatar) }}') 50%; background-size: cover; width: 244px; height: 244px;"/></a>
-            <p class="user-link-photo"><a href="#" id="upload_user_avatar">{{ trans('network.edit-photo') }}</a></p>
+        <div class="b-user-profile__left">
+            @include('profile.edit.set-avatar', array('reloadConfirm' => true))
         </div>
-        @else
-        <div class="b-user-profile__left"><a href="#" class="user-image"><img style="background: url('{{asset("images/content/12.png")}}') 50%;background-size: cover; width: 244px; height: 244px;"/></a>
-            <p class="user-link-photo"><a href="#" id="upload_user_avatar">{{ trans('network.upload-photo') }}</a></p>
-        </div>
-        @endif
         <div style="display: none;">
             {{Form::open(array('url' => URL::to('profile/uploadAvatar'), 'files' => true, 'id' => 'upload_avatar'))}}
                 {{Form::file('avatar', array('accept' => 'image/*', 'id' => 'input_avatar'))}}

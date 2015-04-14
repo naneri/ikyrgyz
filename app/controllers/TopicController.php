@@ -119,7 +119,7 @@ class TopicController extends BaseController {
 	public function show($id)
 	{
             $topic = Topic::findOrFail($id);
-            $blog = Blog::findOrFail($topic->blog_id);
+            $blog = $topic->blog;
             $isModerator = $topic->blog->isModeratorCurrentUser();
             $comments = $topic->commentsWithDataSortBy('old');
             $commentsSort = 'old';

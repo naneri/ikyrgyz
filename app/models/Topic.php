@@ -1,9 +1,13 @@
 <?php
 
 class Topic extends Eloquent {
-	
+    
 	protected $fillable = [];
         
+        public function created_at(){
+            return Date::parse($this->created_at)->format('j F Y');
+        }
+
         public static $rules = array();
 
         static function getSubscribedTopics($userId, $rating, $offset = 0) {

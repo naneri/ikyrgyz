@@ -20,7 +20,7 @@
               <div class="b-user-blog-image">
                 @if(isset($blog->avatar))
                 <a href="#">
-                  <a href="{{ URL::to('blog/show') . '/' . $blog->id }}"><img src="{{$blog->avatar}}" alt="blog-image"/></a>
+                  <a href="{{ URL::to('blog/show') . '/' . $blog->id }}"><img src="{{$blog->avatar()}}" alt="blog-image"/></a>
                 </a>
                 @endif
               </div>

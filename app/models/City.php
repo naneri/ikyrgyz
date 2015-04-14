@@ -13,10 +13,14 @@ class City extends \Eloquent {
         }
         
         public static function getCitiesByCountryId($countryId){
-            $cities = City::where('country_id', $countryId)->get();
-            $citiesForView = array('0' => 'Город');
+            $cities = City::where('country_id', $countryId)
+                            ->orderBy('name_ru', 'ASC')
+                            ->get();
+            //print_r($cities);
+            $citiesForView = array();
+            $citiesForView[] = array('id' => ' ', 'name' => 'Город');
             foreach ($cities as $city) {
-                $citiesForView[$city->id] = $city->name_ru;
+                $citiesForView[] = array('id' =>  $city->id, 'name' => $city->name_ru);
             }
             return $citiesForView;
         }
