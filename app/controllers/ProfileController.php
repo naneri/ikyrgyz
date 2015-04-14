@@ -498,7 +498,7 @@ class ProfileController extends BaseController {
             );
             
             if(!$crop->getMsg()){
-                User_Description::where('user_id', Auth::id())->update(array('user_profile_avatar' => $crop->getResult()));
+                User_Description::where('user_id', Auth::id())->update(array('user_profile_avatar' => asset($crop->getResult())));
             }
 
             return Response::json($response);
@@ -555,7 +555,7 @@ class CropAvatar {
                 $dir = $this->srcDir;
 
                 if (!file_exists($dir)) {
-                    mkdir($dir, 0777);
+                    mkdir($dir, 0777, true);
                 }
 
                 $extension = image_type_to_extension($type);
@@ -592,7 +592,7 @@ class CropAvatar {
         $dir = $this->dstDir;
 
         if (!file_exists($dir)) {
-            mkdir($dir, 0777);
+            mkdir($dir, 0777, true);
         }
 
         $this->dst = $dir . '/' . date('YmdHis') . '.png';
