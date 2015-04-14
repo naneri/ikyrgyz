@@ -25,11 +25,7 @@
               </div>
               <div class="b-profile-about__profile">
                 <div class="b-profile-about-profile"><span class="author">{{ trans('network.author') }}</span><a href="#">
-                    @if(isset($creator->description->user_profile_avatar))
-                        <img style="width:40px" src="{{$creator->description->user_profile_avatar}}" alt="" class="b-profile-about-profile__image"/>
-                    @else
-                        <img src="{{ asset('img/48.png') }}" alt="" class="b-profile-about-profile__image"/>
-                    @endif
+                        <img style="width:40px" src="{{$creator->avatar()}}" alt="" class="b-profile-about-profile__image"/>
                 </a>
                   <p class="b-profile-about-profile__name">{{@$creator->description->first_name . ' '. @$creator->description->last_name}}</p>
                   <div class="b-profile-about-profile__buttons">  
