@@ -66,10 +66,46 @@ class ProfileController extends BaseController {
                 if (!isset($_COOKIE['ColumnN'])) {
                     $_COOKIE['ColumnN'] = '2';
                 }
+                
+                $friends = $user->friends();
+                $subscribers = $user->subscribers();
+                $photos = $user->photos();
+                $videos = $user->topicsWithVideo;
+                
                 if($user->id == Auth::id()){
-                    return View::make('profile.show.my', compact('user', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
+                    return View::make('profile.show.my', 
+                            compact(
+                                    'user', 
+                                    'items', 
+                                    'page', 
+                                    'videoIds', 
+                                    'maritalStatus', 
+                                    'gender', 
+                                    'photoAlbums',
+                                    'friends',
+                                    'subscribers',
+                                    'photos',
+                                    'videos'
+                                    )
+                            );
                 }else{
-                    return View::make('profile.show.user', compact('user', 'friend_status', 'items', 'page', 'videoIds', 'maritalStatus', 'gender', 'photoAlbums'));
+                    $mutualFriends = $user->mutualFriends();
+                    return View::make('profile.show.user', 
+                            compact(
+                                    'user', 
+                                    'friend_status', 
+                                    'items', 'page', 
+                                    'videoIds', 
+                                    'maritalStatus', 
+                                    'gender', 
+                                    'photoAlbums', 
+                                    'friends', 
+                                    'subscribers', 
+                                    'photos',
+                                    'videos',
+                                    'mutualFriends'
+                                )
+                            );
                 }
 	}
 

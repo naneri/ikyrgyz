@@ -66,51 +66,49 @@
 </p>
 @endif
 
-@if($user->id != Auth::id())
 <hr>
 <div style="text-align: center;">
-    @if($user->friends()->count() > 0)
+    @if($friends->count() > 0)
         <a href="{{URL::to('profile/'.$user->id.'/friends')}}">
             <div style="float:left;width:20%;">
-                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$user->friends()->count()}}</div>
+                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$friends->count()}}</div>
                 <div class="user-date" style="font-size: 15px;">друзей</div>
             </div>
         </a>
     @endif
-    @if($user->mutualFriends()->count() > 0)
+    @if($user->id != Auth::id() && $mutualFriends->count() > 0)
         <a href="{{URL::to('profile/'.$user->id.'/mutualFriends')}}">
             <div style="float:left;width:20%;">
-                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$user->mutualFriends()->count()}}</div>
+                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$mutualFriends->count()}}</div>
                 <div class="user-date" style="font-size: 15px;">общих</div>
             </div>
         </a>
     @endif
-    @if($user->subscribers()->count() > 0)
+    @if($subscribers->count() > 0)
         <a href="{{URL::to('profile/'.$user->id.'/subscribers')}}">
             <div style="float:left;width:20%;">
-                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$user->subscribers()->count()}}</div>
-                <div class="user-date" style="font-size: 15px;">подписчика</div>
+                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$subscribers->count()}}</div>
+                <div class="user-date" style="font-size: 15px;">подписчиков</div>
             </div>
         </a>
     @endif
-    @if($user->photos()->count() > 0)
+    @if($photos->count() > 0)
         <a href="{{URL::to('profile/'.$user->id.'/photos')}}">
             <div style="float:left;width:20%;">
-                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$user->photos()->count()}}</div>
+                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$photos->count()}}</div>
                 <div class="user-date" style="font-size: 15px;">фото</div>
             </div>
         </a>
     @endif
-    @if($user->topicsWithVideo()->count() > 0)
+    @if($videos->count() > 0)
         <a href="{{URL::to('profile/'.$user->id.'/videos')}}">
             <div style="float:left;width:20%;">
-                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$user->topicsWithVideo()->count()}}</div>
+                <div style="color: #0086b3; font-size: 30px; font-family: 'PT Sans Caption';">{{$videos->count()}}</div>
                 <div class="user-date" style="font-size: 15px;">видео</div>
             </div>
         </a>
     @endif
 </div>
-@endif
 
 <script>
 $(document).ready(function(){

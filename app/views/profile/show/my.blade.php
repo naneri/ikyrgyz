@@ -8,11 +8,6 @@
         <div class="b-user-profile__left">
             @include('profile.edit.set-avatar', array('reloadConfirm' => true))
         </div>
-        <div style="display: none;">
-            {{Form::open(array('url' => URL::to('profile/uploadAvatar'), 'files' => true, 'id' => 'upload_avatar'))}}
-                {{Form::file('avatar', array('accept' => 'image/*', 'id' => 'input_avatar'))}}
-            {{Form::close()}}
-        </div>
 
         <div class="b-user-profile__middle">
             @include('profile.show.info', compact('user', 'gender', 'marital_status'))
@@ -56,15 +51,4 @@
 </div>
 
 </div>
-<script>
-$(function(){
-    $('#upload_user_avatar').click(function(){
-        $('#input_avatar').click();
-    });
-    
-    $('#input_avatar').change(function(){
-        $('#upload_avatar').submit();
-    });
-});
-</script>
 @stop
