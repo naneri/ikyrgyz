@@ -3159,6 +3159,16 @@ interface
 	border-bottom: 2px solid #b43c1f;
 }
 
+.tabCurrentLink {
+	color: #fff;
+	background: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+	border-bottom: 2px solid #b43c1f;
+}
+
 .b-user-interface-content-item {
 	margin: 0 18px;
 }

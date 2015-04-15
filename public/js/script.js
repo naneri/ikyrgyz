@@ -272,8 +272,13 @@ $(document).ready(function() {
 
 
 
-
-	 
+$(function() {
+	$(".tabs li a").each(function() {
+		if (this.href == window.location) {
+			$(this).addClass("tabCurrentLink");
+		};
+	});
+});
 
 
 
@@ -373,3 +378,5 @@ $(function() {
 
 	});
 });
+
+
