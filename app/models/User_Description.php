@@ -56,7 +56,8 @@ class User_Description extends Eloquent{
     }
     
     public function birthday() {
-        return Date::parse($this->birthday)->format('j F Y');
+        $age = date_diff(date_create($this->birthday), date_create('today'))->y;
+        return Date::parse($this->birthday)->format('j F')." ($age лет)";
     }
 
 }
