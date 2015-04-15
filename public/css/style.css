@@ -680,13 +680,17 @@ body {
 .b-user-wall-header__title {
 	color: #333;
 	font-family: 'PT Sans Caption Bold';
-	width: 390px;
 	margin: 5px 0 0 0;
 }
 
 .b-user-wall-header__title a {
 	color: #333;
 	font-family: 'PT Sans Caption Bold';
+}
+
+.b-user-wall-header__text {
+	float: left;
+	width: 56%;
 }
 
 .b-user-wall-header__date {
@@ -700,9 +704,7 @@ body {
 	color: #999;
 	font-family: 'PT Sans Caption Bold';
 	font-size: 10px;
-	position: absolute;
-	right: 15px;
-	top: 15px;
+	float: right;
 }
 
 .b-user-wall-header__vision span {

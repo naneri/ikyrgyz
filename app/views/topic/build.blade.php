@@ -5,15 +5,18 @@
         <div class="b-user-wall__inner">
             <div class="b-user-wall-header">
                 <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
-                <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}</a></p>
+                <div class="b-user-wall-header__text"
+                <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}  </a></p>
                 <p class="b-user-wall-header__date">{{$topic->created_at}}
                     <div class="clear"></div>
                 </p>
+                </div>
                 <p class="b-user-wall-header__vision">
                     <img src="{{ asset('img/22.png') }}" alt=""/><span>{{$topic->count_read}}</span>
                     <img src="{{ asset('img/23.png') }}" alt=""/><span>{{$topic->comments->count()}}</span>
                 </p>
             </div>
+            <div class="clear"></div>
             <div class="b-user-wall-image">
                 @if($topic->image_url)
                     <a href="{{ URL::to('topic/show/'. $topic->id) }}"><img src="{{$topic->image_url}}" alt=""></a>
