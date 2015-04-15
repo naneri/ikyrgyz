@@ -109,7 +109,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->select('users.*', 'user_description.*')
                 ->get();
     }
-    
+
+    public function mutualFriends() {
+        return User::join('friends', 'friends.user_one', '=', 'users.id')
+                        ->join('user_description', 'user_description.user_id', '=', 'users.id')
+                        ->where('friends.status', Config::get('social.friend_status.friends'))
+                        ->where('friends.user_two', $this->id)
+                        ->whereIn('friends.user_one', Auth::user()->friends()->lists('id'))
+                        ->select('users.*', 'user_description.*')
+                        ->get();
+    }
+
     public function newsline($topicsLimit, $page=0){
         $votedTopicIds = $this->votes()->where('target_type', 'topic')->where('value', '1')->lists('target_id');
         $subscribedTopicIds = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
@@ -281,6 +291,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                     ->select('blogs.*')
                     ->get();
             return $blogs;
+        }
+        
+        public function subscribers(){
+            $subscribers = Blog::join('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
+                    ->join(Config::get('database.connections.mysql_users.database') . '.users', 'users.id', '=', 'blog_roles.user_id')
+                    ->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'users.id', '=', 'user_description.user_id')
+                    ->join('roles', 'blog_roles.role_id', '=', 'roles.id')
+                    ->whereIn('roles.name', array('admin', 'moderator', 'reader'))
+                    ->where('blog_roles.user_id', '!=', $this->id)
+                    ->where('blogs.user_id', $this->id)
+                    ->select('users.*', 'user_description.*')
+                    ->get();
+            return $subscribers;
         }
         
         public function isHavePersonalBlog(){

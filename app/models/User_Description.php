@@ -54,5 +54,9 @@ class User_Description extends Eloquent{
         }
         return $access;
     }
+    
+    public function birthday() {
+        return Date::parse($this->birthday)->format('j F Y');
+    }
 
 }

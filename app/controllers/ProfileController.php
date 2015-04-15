@@ -35,8 +35,14 @@ class ProfileController extends BaseController {
                     case 'friends':
                         $items = $user->friends();
                         break;
+                    case 'mutualFriends':
+                        $items = $user->mutualFriends();
+                        break;
                     case 'subscribtions':
                         $items = $user->subscribtions();
+                        break;
+                    case 'subscribers':
+                        $items = $user->subscribers();
                         break;
                     case 'videos':
                         $items = $user->topicsWithVideo;
