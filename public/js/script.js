@@ -251,6 +251,7 @@ $(document).ready(function() {
 
 
 
+
 // $(document).ready(function(){
 // 	var audioArray = $('.playsong');
 // 	var nowPlaying = audioArray[i=0];
@@ -266,26 +267,8 @@ $(document).ready(function() {
 
 
 // Hide Pause Button
-	var audio;
+	
 
-$(document).ready(function(){
-
-$('.stop').hide();
-var audio = new Audio('zhu-faded.mp3');
-$('#play').click(function(){
-audio.play();
-$('#play').hide();
-$('.stop').show();
-});
-
-$('.stop').click(function(){
-audio.pause();
-$('.stop').hide();
-$('#play').show();
-});
-
-
-});
 
 
 
@@ -359,6 +342,7 @@ function stickIt() {
 }
 
 });
+
 
 
 $(function() {
