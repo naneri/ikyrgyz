@@ -7,7 +7,7 @@
 @elseif($page == 'subscribtions')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     @include('blog.build', array('blogs' => $items))
-@elseif($page == 'friends')
+@elseif($page == 'friends' || $page == 'mutualFriends' || $page == 'subscribers')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     <div class="masonry">
         @foreach($items as $user)
