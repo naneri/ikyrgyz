@@ -5,7 +5,7 @@
         <div class="b-user-wall__inner">
             <div class="b-user-wall-header">
                 <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
-                <div class="b-user-wall-header__text"
+                <div class="b-user-wall-header__text">
                 <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}  </a></p>
                 <p class="b-user-wall-header__date">{{$topic->created_at}}
                     <div class="clear"></div>
@@ -58,6 +58,8 @@
                         </li>
                     </ul>
                     </div>
+
+
                     <div class="b-user-wall-footer-btn__minus">
                     <input type="submit" onclick="return vote.topic({{$topic->id}},-1);" class="btn btn-minus"/>
                     </div>

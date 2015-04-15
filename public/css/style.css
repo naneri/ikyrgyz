@@ -643,12 +643,28 @@ body {
 	margin-left: 175px !important;
 }
 
+.b-user-wall-1000 .b-user-wall-footer-btn__about {
+	padding-right: 250px;
+}
+
+.b-user-wall-1000 .b-user-wall-footer-btn__share {
+	padding-right: 40px;
+}
+
 .b-user-wall-325 {
 	width: 325px;
 }
 
 .b-user-wall-495 {
 	width: 495px;
+}
+
+.b-user-wall-495 .b-user-wall-footer-btn__about {
+	padding-right: 150px;
+}
+
+.b-user-wall-495 .b-user-wall-footer-btn__share {
+	padding-right: 20px;
 }
 
 .b-user-wall {
@@ -678,8 +694,6 @@ body {
 }
 
 .b-user-wall-header__title {
-	color: #333;
-	font-family: 'PT Sans Caption Bold';
 	margin: 5px 0 0 0;
 }
 
@@ -690,6 +704,8 @@ body {
 
 .b-user-wall-header__text {
 	float: left;
+	color: #333;
+	font-family: 'PT Sans Caption Bold';
 	width: 56%;
 }
 
@@ -788,7 +804,7 @@ body {
 
 .b-user-wall-footer__btn .btn-minus {
 	width: 32px;
-	height: 32px;
+	height: 34px;
 	background: url("../img/24.png") no-repeat;
 	background-position: 50% 50%;
 	text-indent: -9999px;
@@ -797,7 +813,7 @@ body {
 
 .b-user-wall-footer__btn .btn-plus {
 	width: 32px;
-	height: 32px;
+	height: 34px;
 	background: url("../img/25.png") no-repeat;
 	background-position: 50% 50%;
 	text-indent: -9999px;
@@ -813,28 +829,23 @@ body {
 }
 
 .b-user-wall-footer-btn__about {
-	width: 60%;
 	float: left;
 }
 
 .b-user-wall-footer-btn__share {
-	width: 15%;
 	float: left;
 }
 
 .b-user-wall-footer-btn__minus {
-	width: 11.5%;
 	float: left;
 }
 
 .b-user-wall-footer-btn__plus {
-	width: 10%;
 	float: left;
 }
 
 .b-user-wall-footer-btn__raiting {
-	width: 2%;
-	float: left;
+	float: right;
 }
 
 .b-user-wall-footer-list {
