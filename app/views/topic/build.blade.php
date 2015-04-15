@@ -6,7 +6,7 @@
             <div class="b-user-wall-header">
                 <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
                 <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}</a></p>
-                <p class="b-user-wall-header__date">{{$topic->created_at()}}
+                <p class="b-user-wall-header__date">{{$topic->created_at}}
                     <div class="clear"></div>
                 </p>
                 <p class="b-user-wall-header__vision">
@@ -36,10 +36,15 @@
                     @endif
                     <div class="clear"></div>
                 </p>
-                <div class="b-user-wall-footer__btn"><a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">{{ trans('network.read-more') }}</a>
+                <div class="b-user-wall-footer__btn">
+                <div class="b-user-wall-footer-btn">
+                <div class="b-user-wall-footer-btn__about">
+                <a href="{{ URL::to('topic/show/'. $topic->id) }}" class="about-btn btn">Подробнее</a>
+                </div>
+                <div class="b-user-wall-footer-btn__share">
                     <ul class="b-user-wall-footer-list">
                         <li>
-                            <a href="" class="share-btn btn">{{ trans('network.share') }}</a>
+                            <a href="" class="share-btn btn">Поделиться</a>
                             <ul class="b-user-wall-footer-dropdown">
                                 <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->facebook() }}')">Facebook</a></li>
                                 <li><a href="{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus() }}" onclick="return popitup('{{ Share::load(URL::to('topic/show/'. $topic->id), $topic->description)->gplus() }}')">Google+</a></li>
@@ -49,8 +54,18 @@
                             </ul>
                         </li>
                     </ul>
+                    </div>
+                    <div class="b-user-wall-footer-btn__minus">
                     <input type="submit" onclick="return vote.topic({{$topic->id}},-1);" class="btn btn-minus"/>
-                    <input type="submit" onclick="return vote.topic({{$topic->id}},1);" class="btn btn-plus"/><span class="likes" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
+                    </div>
+                    <div class="b-user-wall-footer-btn__plus">
+                    <input type="submit" onclick="return vote.topic({{$topic->id}},1);" class="btn btn-plus"/>
+                    </div>
+                    <div class="b-user-wall-footer-btn__raiting">
+                    <span class="likes" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
+                    </div>
+                    </div>
+                    <div class="clear"></div>
                 </div>
             </div>
         </div>

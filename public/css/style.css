@@ -498,7 +498,7 @@ body {
 
 .b-user-profile-buttons__list a {
 	height: 35px;
-	width: 251px;
+	width: 260px;
 	display: block;
 	background: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
@@ -527,7 +527,7 @@ body {
 }
 
 .b-user-profile-buttons__list a:hover .random-image {
-	background-position: 5px -256px;
+	background-position: 5px -252px;
 }
 
 .b-user-profile-buttons__list span {
@@ -553,8 +553,9 @@ body {
 }
 
 .b-user-profile-buttons__list .random-image {
-	background-position: 5px -311px;
-	height: 52px;
+	background-position: 5px -307px;
+	width: 63px;
+	height: 60px;
 }
 
 .b-user-profile-buttons__list:nth-child(4) a {
@@ -679,6 +680,7 @@ body {
 .b-user-wall-header__title {
 	color: #333;
 	font-family: 'PT Sans Caption Bold';
+	width: 390px;
 	margin: 5px 0 0 0;
 }
 
@@ -762,7 +764,6 @@ body {
 	vertical-align: middle;
 	text-align: center;
 	line-height: 32px;
-	margin-right: 100px;
 }
 
 .b-user-wall-footer__btn .about-btn:hover {
@@ -789,7 +790,6 @@ body {
 	background: url("../img/24.png") no-repeat;
 	background-position: 50% 50%;
 	text-indent: -9999px;
-	margin-left: 58px;
 	cursor: pointer;
 }
 
@@ -807,6 +807,32 @@ body {
 	color: #676767;
 	font-size: 15px;
 	font-family: 'PT Sans Caption Bold';
+	line-height: 30px;
+}
+
+.b-user-wall-footer-btn__about {
+	width: 60%;
+	float: left;
+}
+
+.b-user-wall-footer-btn__share {
+	width: 15%;
+	float: left;
+}
+
+.b-user-wall-footer-btn__minus {
+	width: 11.5%;
+	float: left;
+}
+
+.b-user-wall-footer-btn__plus {
+	width: 10%;
+	float: left;
+}
+
+.b-user-wall-footer-btn__raiting {
+	width: 2%;
+	float: left;
 }
 
 .b-user-wall-footer-list {
