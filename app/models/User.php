@@ -301,6 +301,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                     ->whereIn('roles.name', array('admin', 'moderator', 'reader'))
                     ->where('blog_roles.user_id', '!=', $this->id)
                     ->where('blogs.user_id', $this->id)
+                    ->distinct()
                     ->select('users.*', 'user_description.*')
                     ->get();
             return $subscribers;

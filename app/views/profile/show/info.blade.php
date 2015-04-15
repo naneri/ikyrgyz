@@ -67,6 +67,7 @@
 @endif
 
 @if($user->id != Auth::id())
+<hr>
 <div style="text-align: center;">
     @if($user->friends()->count() > 0)
         <a href="{{URL::to('profile/'.$user->id.'/friends')}}">
