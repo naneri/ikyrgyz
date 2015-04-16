@@ -1,8 +1,8 @@
 <p class="user-raiting">Рейтинг <span class="num">{{$user->rating}}</span></p>
 <p class="user-name">{{$user->getNames()}}</p>
 <p class="user-date">
-    @if($user->description->checkAccess('birthday_access') && $user->description->birthday)
-        {{$user->description->birthday()}}
+    @if($user->description->checkAccess('birthday_access') && $user->description->age())
+        {{$user->description->age()}} лет
     @endif
     {{--@if($user->description->checkAccess('gender_access') && $gender)
         {{$gender}},
