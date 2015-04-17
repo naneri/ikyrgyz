@@ -163,7 +163,7 @@ class AuthController extends BaseController {
                         'password' => $result['id'],
                             ), true);
             }else{
-                $user = $this->saveSocialUser($result['email'], $result['id'], $result['first_name'], $result['last_name'], $result['gender']);
+                $user = $this->saveSocialUser($result['email'], $result['first_name'], $result['last_name'], $result['gender']);
                 // логиним пользователя и отправляем на заполнение профиля
                 Auth::login($user);
             }
@@ -206,12 +206,12 @@ class AuthController extends BaseController {
         }*/
     }
     
-    public function saveSocialUser($email, $password, $first_name, $last_name, $gender){
+    public function saveSocialUser($email, $first_name, $last_name, $gender){
         
         // создаём нового юзера и сохраняем данные
         $user = new User;
         $user->email = $email;
-        $user->password = Hash::make($password);
+        $user->password = Hash::make(str_random(30));
         $user->activated = true;
 
         // если юзер создан успешно, то создаём пустую запись с его дополнительными полями

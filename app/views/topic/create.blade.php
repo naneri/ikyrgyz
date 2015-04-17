@@ -39,7 +39,7 @@
                         <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg">
                           <div class="b-topic-create-modal-content__btns">
                             <input type="submit" value="{{ trans('network.cancel') }}" class="btn btn-cancel input-default"/>
-                            <input type="submit" value="{{ trans('network.preview') }}" class="btn btn-preview input-default"/>
+                            <input type="button" value="{{ trans('network.preview') }}" class="btn btn-preview input-default" onclick="tinyMCE.execCommand('mcePreview');"/>
                             <input type="submit" value="{{ trans('network.publish') }}" class="btn btn-submit input-default"/>
                           </div>
                       <div class="clear"></div>
