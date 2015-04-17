@@ -14,14 +14,24 @@
                 </a>
             
             <p class="b-user-interface-content-profile__desc">
-                <span>{{date_diff(date_create(@$user->birthday), date_create('today'))->y;}},</span>
+                @if($user->age)
+                    <span>{{$user->age}},</span>
+                @endif
                 <span>{{($user->city)?$user->city.',':''}}</span>
                 <span>{{($user->country)?$user->country:''}}</span>
             </p>
             </div>
             <div class="b-user-interface-content-profile__buttons">
                 <a href="{{URL::to('profile/'.$user->id)}}"><input type="button" value="{{ trans('network.profile') }}" class="button-default button-profile" /></a>
-                <a href="{{URL::to('people/friendRequest/'.$user->id)}}"><input type="button" value="{{ trans('network.become-friend') }}" class="button-default button-add"/></a>
+                @if($user->friendStatus == Config::get('social.friend_status.friends'))
+                    <a href="{{URL::to('messages/new?receiver='.$user->first_name.' '.$user->last_name)}}"><input type="button" value="{{ trans('network.message') }}" class="button-default button-add"/></a>
+                @elseif($user->friendStatus == Config::get('social.friend_status.friend_send_request'))
+                    <a href="{{URL::to('people/removeFriend/'.$user->id)}}"><input type="button" value="Отменить запрос" class="button-default button-add"/></a>
+                @elseif($user->friendStatus == Config::get('social.friend_status.friends_got_request'))
+                    <a href="{{URL::to('people/submitFriend/'.$user->id)}}"><input type="button" value="Принять запрос" class="button-default button-add"/></a>
+                @else
+                    <a href="{{URL::to('people/friendRequest/'.$user->id)}}"><input type="button" value="{{ trans('network.become-friend') }}" class="button-default button-add"/></a>
+                @endif
             </div>
             <div class="clear"></div>
         </div>

@@ -80,7 +80,7 @@
                                     {{Form::hidden('birthplace_access', $user['description']->birthplace_access)}}
                                 </div>
                                 
-                                {{Form::submit('Go!')}}
+                                {{Form::submit(trans('network.save'))}}
                             </fieldset>
                         {{Form::close()}}
 
