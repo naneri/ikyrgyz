@@ -95,17 +95,21 @@
                       <div style="float:right;">Сортировка: {{Form::select('sort_by', array('old' => 'Старые', 'new' => 'Новые', 'rating' => 'По рейтингу'))}}</div>
                   </div>
                   <hr>
-                  <br>
-                  <div style="height:50px;">
-                        {{HTML::image(Auth::user()->avatar(), '', array('style' => 'float:left;width:40px;height:40px;margin-right:10px;'))}}
-                        <span style="line-height: 40px;" class="b-profile-about-profile__name"> {{Auth::user()->getNames()}}</span>
+                  <div style="padding: 20px 0; font-size: 18px;">
+                    <a href="javascript:;" onclick="comment.postCommentForm()">Оставить комментарий</a>
                   </div>
-                  <div id="add_comment_0">
-                      {{Form::textarea('comment', null, array('class' => 'add_comment_text'))}}
-                      <div class="b-profile-about-message-button">
-                          <input type="button" value="Опубликовать" class="button-default button-submit" onclick="comment.submit(0,{{$topic->id}});">
-                      </div>
-                  </div>
+                  <div class="post-comment" style="display: none;">
+                        <div style="height:50px;">
+                              {{HTML::image(Auth::user()->avatar(), '', array('style' => 'float:left;width:40px;height:40px;margin-right:10px;'))}}
+                              <span style="line-height: 40px;" class="b-profile-about-profile__name"> {{Auth::user()->getNames()}}</span>
+                        </div>
+                        <div id="add_comment_0">
+                            {{Form::textarea('comment', null, array('class' => 'add_comment_text'))}}
+                            <div class="b-profile-about-message-button">
+                                <input type="button" value="Опубликовать" class="button-default button-submit" onclick="comment.submit(0,{{$topic->id}});">
+                            </div>
+                        </div>
+                    </div>
                   <div id="comments_child_0">
                     @include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => null, 'sort' => $commentsSort))
                   </div>
