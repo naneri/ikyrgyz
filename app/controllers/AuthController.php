@@ -27,7 +27,7 @@ class AuthController extends BaseController {
         $auth = Auth::attempt(array(
             'email' => Input::get('email'),
             'password' => Input::get('password')
-        ), false);
+        ), Input::get('remember'));
         
         // при неудачной авторизации отправляем на страницу логинка и выдаём ошибки
         if(!$auth){
@@ -150,12 +150,24 @@ class AuthController extends BaseController {
             $result = json_decode( $fb->request( '/me' ), true );
 
             $message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-            echo $message. "<br/>";
+            //echo $message. "<br/>";
 
             //Var_dump
             //display whole array().
-            dd($result);
-
+            //dd($result);
+            
+            if(User::whereEmail($result['email'])->first()){
+                // пробуем авторизовать пользователя
+                $auth = Auth::attempt(array(
+                        'email' => $result['email'],
+                        'password' => $result['id'],
+                            ), true);
+            }else{
+                $user = $this->saveSocialUser($result['email'], $result['id'], $result['first_name'], $result['last_name'], $result['gender']);
+                // логиним пользователя и отправляем на заполнение профиля
+                Auth::login($user);
+            }
+            return Redirect::to('profile/fill');
         }
         // if not ask for permission first
         else {
@@ -192,6 +204,31 @@ class AuthController extends BaseController {
             $url = $fb->getAuthorizationUri();
             return Redirect::to((string)$url );
         }*/
+    }
+    
+    public function saveSocialUser($email, $password, $first_name, $last_name, $gender){
+        
+        // создаём нового юзера и сохраняем данные
+        $user = new User;
+        $user->email = $email;
+        $user->password = Hash::make($password);
+        $user->activated = true;
+
+        // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
+        if ($user->save()) {
+            $description = new User_Description;
+            $description->user_id = $user->id;
+            $description->first_name = $first_name;
+            $description->last_name = $last_name;
+            $description->gender = $gender;
+            $description->gender_access = 'all';
+            $description->save();
+
+            // создаём персональный блог пользователя
+            $user->createPersonalBlog();
+            
+            return $user;
+        }
     }
 
     public function postAndroidLogin(){
