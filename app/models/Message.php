@@ -51,4 +51,15 @@ class Message extends Eloquent{
     public function canEdit(){
         return $this->sender_id == Auth::id() && $this->draft == 1;
     }
+
+
+    public static function sendMessage($sender_id, $reciever_id, $text){
+
+        return self::create([
+            'sender_id'     => $sender_id,
+            'receiver_id'   => $reciever_id,
+            'text'          => $text
+            ]);
+        
+    }
 }

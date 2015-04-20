@@ -65,11 +65,9 @@ class BlogController extends BaseController {
         }
         
         if($blog->save()){
-            $role = new BlogRole;
-            $role->blog_id = $blog->id;
-            $role->user_id = Auth::id();
-            $role->role_id = 1;
-            $role->save();
+
+            BlogRole::createOwner($blog->id, Auth::id());
+            
         }
 
     
@@ -189,18 +187,14 @@ class BlogController extends BaseController {
             return Redirect::back()->withMessage('You are already blog follower');
         }
         
-        $roleId = null;
+        $role_id = null;
         if($blog->type->name == 'close'){
-            $roleId = Role::whereName('request')->pluck('id');
+            $role_id = Role::whereName('request')->pluck('id');
         } else {
-            $roleId = Role::whereName('reader')->pluck('id');
+            $role_id = Role::whereName('reader')->pluck('id');
         }
 
-        $blogRole = new BlogRole();
-        $blogRole->blog_id = $blog->id;
-        $blogRole->user_id = Auth::user()->id;
-        $blogRole->role_id = $roleId;
-        $blogRole->save();
+        BlogRole::addUser($blog->id, Auth::id(), $role_id);
 
         return Redirect::back();
     }
@@ -236,7 +230,7 @@ class BlogController extends BaseController {
 
         $roleId = Role::whereName('reader')->pluck('id');
 
-        $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+        $blogRole = BlogRole::getRole('user_id', Auth::id());
         $blogRole->update(array('role_id' => $roleId));
 
         return Redirect::back();
@@ -249,19 +243,15 @@ class BlogController extends BaseController {
             return Redirect::back()->withMessage('You are not blog follower');
         }
 
-        $roleId = null;
+        $role_id = null;
         if ($blog->type->name == 'open') {
-            $roleId = Role::whereName('reader')->pluck('id');
+            $role_id = Role::whereName('reader')->pluck('id');
         } else {
-            $roleId = Role::whereName('request')->pluck('id');
+            $role_id = Role::whereName('request')->pluck('id');
         }
 
-        $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
-        $blogRole->blog_id = $blog->id;
-        $blogRole->user_id = Auth::user()->id;
-        $blogRole->role_id = $roleId;
-        $blogRole->save();
-    
+        BlogRole::refollow($blog->id, Auth::id(), $role_id);
+        
         return Redirect::back();
     }
 

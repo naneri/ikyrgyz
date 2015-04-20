@@ -83,20 +83,12 @@ class AuthController extends BaseController {
             return Redirect::back()->withErrors($validator);
         }
 
-        // генерируем код для активации пользователя
-        $code = str_random(60);
-
         // создаём нового юзера и сохраняем данные
-        $user = new User;
-        $user->email    = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
-        $user->activation_code = $code;
-
+        $user = User::newUser(Input::get('email'), Input::get('password'));
+        
         // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
         if($user->save()){
-            $description = new User_Description;
-            $description->user_id = $user->id;
-            $description->save();
+            User_Description::create(['user_id' => $user->id]);
             
             // создаём персональный блог пользователя
             $user->createPersonalBlog();

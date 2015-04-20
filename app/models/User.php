@@ -396,4 +396,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return date_diff(date_create($this->description->birthday), date_create('today'))->y;
         }
 
+        public function newUser($email, $password){
+
+            // генерируем код для активации пользователя
+            $code = str_random(60);
+
+            // хэшируем пароль
+            $hashed_pass  = Hash::make($password);
+
+            // создаём юзера
+            return Self::create([
+                'email'             => $email,
+                'password'          => $hashed_pass,
+                'activation_code'   => $code
+                ]);
+        }
 }
