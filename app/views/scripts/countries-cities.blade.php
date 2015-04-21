@@ -1,8 +1,4 @@
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="{{ asset('js/bootstrap-select.js') }}"></script>
-
-<!--<script src="{{ asset('js/bootstrap.min.js') }}"></script>
--->
 
 <script>
 $(document).ready(function(){
