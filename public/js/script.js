@@ -251,6 +251,7 @@ $(document).ready(function() {
 
 
 
+
 // $(document).ready(function(){
 // 	var audioArray = $('.playsong');
 // 	var nowPlaying = audioArray[i=0];
@@ -266,31 +267,10 @@ $(document).ready(function() {
 
 
 // Hide Pause Button
-	var audio;
-
-$(document).ready(function(){
-
-$('.stop').hide();
-var audio = new Audio('zhu-faded.mp3');
-$('#play').click(function(){
-audio.play();
-$('#play').hide();
-$('.stop').show();
-});
-
-$('.stop').click(function(){
-audio.pause();
-$('.stop').hide();
-$('#play').show();
-});
-
-
-});
+	
 
 
 
-
-	 
 
 
 
@@ -300,21 +280,13 @@ $('#play').show();
 
 
 
-$(document).ready(function(){
-	
-	$('ul.tabs li').click(function(){
-		/*var tab_id = $(this).attr('data-tab');
-
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');*/
-	})
-
-})  
-
-
+// $(function () { 
+//   $('ul.tabs li a').each(function () {
+//     if (location.href == this.href) {
+//       $(this).addClass('tabCurrentLink');
+//     }
+//   });
+// });
 
 // TABs
 
@@ -361,6 +333,7 @@ function stickIt() {
 });
 
 
+
 $(function() {
 	$('ul.b-topic-navigation-list li').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
@@ -389,3 +362,5 @@ $(function() {
 
 	});
 });
+
+

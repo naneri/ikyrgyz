@@ -94,12 +94,13 @@ class SearchController extends \BaseController {
             }
 
             $users = DB::connection('mysql_users')
-                    ->select("select distinct `users`.*, `user_description`.*, `cities`.`name_ru` as `city`, `countries`.`name_ru` as `country` "
+                    ->select("select distinct `users`.*, `user_description`.*, `cities`.`name_ru` as `city`, `countries`.`name_ru` as `country`, `friends`.`status` as `friendStatus`, TIMESTAMPDIFF(YEAR, `birthday`, CURDATE()) AS `age` "
                     . "from `users` "
                     . "inner join `user_description` on `user_description`.`user_id` = `users`.`id` "
                     . "left outer join `countries` on `user_description`.`liveplace_country_id` = `countries`.`id` "
                     . "left outer join `cities` on `user_description`.`liveplace_city_id` = `cities`.`id` "
                     . "left outer join `profile_items` on `profile_items`.`user_id` = `users`.`id` "
+                    . "left outer join `friends` on `user_one` = ".Auth::id()." and  `user_two` = `users`.`id` "
                     . $where);
             
             return $users;

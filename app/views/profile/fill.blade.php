@@ -22,7 +22,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ trans('network.main-info') }}</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body edit-profile">
                         {{Form::open(array('files'=> true))}}
                             <fieldset>
                                 <div class="all-alerts">
@@ -79,14 +79,12 @@
                                     {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
                                     {{Form::hidden('birthplace_access', $user['description']->birthplace_access)}}
                                 </div>
-
-                                {{ trans('network.profile-image') }}: {{Form::file('image')}} <br>
-                                @if(@$user->description->user_profile_avatar)
-                                        <img src="{{$user->description->user_profile_avatar}}" alt=""><br>
-                                @endif	
-                                {{Form::submit('Go!')}}
+                                
+                                {{Form::submit(trans('network.save'))}}
                             </fieldset>
                         {{Form::close()}}
+
+                        @include('profile.edit.set-avatar')
                     </div>
                 </div>
                 </div>

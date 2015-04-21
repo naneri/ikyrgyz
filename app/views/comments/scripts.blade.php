@@ -140,6 +140,14 @@
                     remove_script_host: true,
                     toolbar: "image youtube media smileys"
                 });
+            },
+            postCommentForm: function(){
+                var $postCommentForm = $('.post-comment');
+                if($postCommentForm.is(':visible')){
+                    $postCommentForm.hide();
+                }else{
+                    $postCommentForm.show();
+                }
             }
         };
 </script>

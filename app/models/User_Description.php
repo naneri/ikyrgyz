@@ -54,5 +54,18 @@ class User_Description extends Eloquent{
         }
         return $access;
     }
+    
+    public function birthdayInfo() {
+        $age = date_diff(date_create($this->birthday), date_create('today'))->y;
+        return Date::parse($this->birthday)->format('j F')." ($age лет)";
+    }
+    
+    public function age(){
+        $age = (int)date_diff(date_create($this->birthday), date_create('today'))->y;
+        if($age>0 && $age<200){
+            return $age;
+        }
+        return false;
+    }
 
 }

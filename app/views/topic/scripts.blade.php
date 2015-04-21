@@ -30,12 +30,12 @@ $(document).ready(function(){
                     plugins: [
                             "advlist autolink lists link image charmap print preview anchor",
                             "code filemanager",
-                            "insertdatetime media table contextmenu paste youtube"
+                            "insertdatetime table contextmenu paste youtube"
                             ],
                     image_advtab: true,
                     relative_urls: false,
                     remove_script_host: true,
-                    toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube media | preview code",
+                    toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube | code",
                     setup : function(ed){
                                     ed.on('keyup', function(e) {
                                         //console.log('the content ' + ed.getContent());

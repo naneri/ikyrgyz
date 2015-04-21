@@ -197,7 +197,7 @@ Class Blog extends Eloquent{
         }
         
         public function avatar() {
-            return ($this->avatar) ? $this->avatar : asset('img/48.png');
+            return asset(($this->avatar) ? $this->avatar : 'img/48.png');
         }
 
         public static function getTopics($id, $page = 0){

@@ -107,6 +107,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::post('profile/edit/account', 'ProfileController@postEditAccount');
     Route::get('profile/edit/main', 'ProfileController@getEditMain');
     Route::post('profile/edit/main', 'ProfileController@postEditMain');
+    Route::post('profile/edit/avatar', 'ProfileController@postEditAvatar');
     Route::get('profile/edit/study', 'ProfileController@getEditStudy');
     Route::post('profile/edit/study/school', 'ProfileController@postStudySchool');
     Route::post('profile/edit/study/university', 'ProfileController@postStudyUniversity');

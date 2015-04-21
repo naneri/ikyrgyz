@@ -21,18 +21,12 @@ return array(
 		/**
 		 * Facebook
 		 */
-        'Facebook' => array(
-            'client_id'     => '1047357178613272',
-            'client_secret' => 'bf8a170e997961381217ee681b705158',
-            'scope'         => array('email'),
-        ),
+                'Facebook' => array(
+                    'client_id'     => '1608907909354855',
+                    'client_secret' => '813687220cb7b5b18cf583b527f66415',
+                    'scope'         => array('email', 'read_friendlists', 'user_online_presence'),
+                ),		
 
-        'Google' => array(
-            'client_id'     => 'Your Google client ID',
-            'client_secret' => 'Your Google Client Secret',
-            'scope'         => array('userinfo_email', 'userinfo_profile'),
-        ),
-
-    )
+	)
 
 );

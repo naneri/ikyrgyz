@@ -6,7 +6,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">Основная информация</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body edit-profile">
         {{Form::open(array('url' => 'profile/edit/main', 'files'=> true))}}
             <fieldset>
                 <div class="form-group">
@@ -38,14 +38,11 @@
                     {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
                     {{Form::select('birthplace_access', $access, $user['description']->birthplace_access)}}
                 </div>
-
-                Изображение профиля: {{Form::file('image')}} <br>
-                @if(@$user->description->user_profile_avatar)
-                        <img style="width:100px" src="{{$user->description->user_profile_avatar}}" alt=""><br>
-                @endif	
                 {{Form::submit('Сохранить')}}
             </fieldset>
-        {{Form::close()}}
+            {{Form::close()}}
+            
+            @include('profile.edit.set-avatar')
     </div>
 </div>
 @include('scripts.countries-cities')

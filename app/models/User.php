@@ -109,7 +109,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->select('users.*', 'user_description.*')
                 ->get();
     }
-    
+
+    public function mutualFriends() {
+        return User::join('friends', 'friends.user_one', '=', 'users.id')
+                        ->join('user_description', 'user_description.user_id', '=', 'users.id')
+                        ->where('friends.status', Config::get('social.friend_status.friends'))
+                        ->where('friends.user_two', $this->id)
+                        ->whereIn('friends.user_one', Auth::user()->friends()->lists('id'))
+                        ->select('users.*', 'user_description.*')
+                        ->get();
+    }
+
     public function newsline($topicsLimit, $page=0){
         $votedTopicIds = $this->votes()->where('target_type', 'topic')->where('value', '1')->lists('target_id');
         $subscribedTopicIds = Topic::join('blogs', 'blogs.id', '=', 'topics.blog_id')
@@ -158,7 +168,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     public function avatar(){
-        return (@$this->description->user_profile_avatar)?@$this->description->user_profile_avatar:asset('img/48.png');
+        return asset((@$this->description->user_profile_avatar)?@$this->description->user_profile_avatar:'img/48.png');
     }
     
     public function canSendMessage($userId){
@@ -283,6 +293,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return $blogs;
         }
         
+        public function subscribers(){
+            $subscribers = Blog::join('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
+                    ->join(Config::get('database.connections.mysql_users.database') . '.users', 'users.id', '=', 'blog_roles.user_id')
+                    ->join(Config::get('database.connections.mysql_users.database') . '.user_description', 'users.id', '=', 'user_description.user_id')
+                    ->join('roles', 'blog_roles.role_id', '=', 'roles.id')
+                    ->whereIn('roles.name', array('admin', 'moderator', 'reader'))
+                    ->where('blog_roles.user_id', '!=', $this->id)
+                    ->where('blogs.user_id', $this->id)
+                    ->distinct()
+                    ->select('users.*', 'user_description.*')
+                    ->get();
+            return $subscribers;
+        }
+        
         public function isHavePersonalBlog(){
             return Blog::join('blog_types', 'blog_types.id','=','blogs.type_id')
                     ->where('blog_types.name', 'personal')
@@ -372,4 +396,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return date_diff(date_create($this->description->birthday), date_create('today'))->y;
         }
 
+        public function newUser($email, $password){
+
+            // генерируем код для активации пользователя
+            $code = str_random(60);
+
+            // хэшируем пароль
+            $hashed_pass  = Hash::make($password);
+
+            // создаём юзера
+            return Self::create([
+                'email'             => $email,
+                'password'          => $hashed_pass,
+                'activation_code'   => $code
+                ]);
+        }
 }
