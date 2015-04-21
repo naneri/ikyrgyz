@@ -133,23 +133,52 @@ class AuthController extends BaseController {
     }
 
     public function loginWithFacebook() {
+
+    }
+
+    public function loginWithGoogle() {
+        $app_key = 'AIzaSyAN6BMOKrL_ovvc-m_wN7Eka9VItvqxoWY';
+        $client_id = '40805341245-59gm68ani7t2gfoof7drmgqs46ttsj0n.apps.googleusercontent.com';
+        $client_secret = 'VSzVTeryKIp2AU_PBUul89nV';
+        $redirect_uri = 'http://localhost/newkyrgyz/public/';
+
+        define('G_APP_KEY', $app_key);
+        define('G_CLIENT_ID', $client_id);
+        define('G_CLIENT_SECRET', $client_secret);
+        define('G_URL_CALLBACK', $redirect_uri);
+        define('G_URL_AUTHORIZE', 'https://accounts.google.com/o/oauth2/auth');
+        define('G_URL_ACCESS_TOKEN', 'https://accounts.google.com/o/oauth2/token');
+        define('G_URL_GET_USER_INFO', '');
+
+        if(empty($_GET['code']))
+        {
+            return Redirect::to(G_URL_AUTHORIZE.'?redirect_uri='.G_URL_CALLBACK.'&response_type=code&client_id='.G_CLIENT_ID.'&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile');
+        }
+        else{
+            echo $_GET['code'];
+        }
+
+        //'<a href="https://accounts.google.com/o/oauth2/auth?redirect_uri=http%3A%2F%2Fmysite.com%2Fgglogin&response_type=code&client_id={client_id}&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile" title="Войти через Google">Войти через Google</a>';
+
+        /*
         // get data from input
         $code = Input::get( 'code' );
-        // get fb service
-        $fb = OAuth::consumer( 'Facebook' );
+
+        // get google service
+        $googleService = OAuth::consumer( 'Google' );
 
         // check if code is valid
 
         // if code is provided get user data and sign in
         if ( !empty( $code ) ) {
 
-            // This was a callback request from facebook, get the token
-            $token = $fb->requestAccessToken( $code );
+            // This was a callback request from google, get the token
+            $token = $googleService->requestAccessToken( $code );
 
             // Send a request with it
-            $result = json_decode( $fb->request( '/me' ), true );
+            $result = json_decode( $googleService->request( 'https://www.googleapis.com/oauth2/v1/userinfo' ), true );
 
-            $message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
+            $message = 'Your unique Google user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
             echo $message. "<br/>";
 
             //Var_dump
@@ -159,39 +188,71 @@ class AuthController extends BaseController {
         }
         // if not ask for permission first
         else {
-            // get fb authorization
-            $url = $fb->getAuthorizationUri();
+            // get googleService authorization
+            $url = $googleService->getAuthorizationUri();
 
-            // return to facebook login url
+            // return to google login url
             return Redirect::to( (string)$url );
         }
+        */
+    }
 
-/*
+    public function loginWithVK(){
+        $client_id = '4877440';                                                             // ID приложения
+        $client_secret = '1BhtEnmkq4bmRfwCt4Og';                                            // Защищённый ключ
+        $redirect_uri = 'http://localhost/newkyrgyz/public/login/vk';                       // Адрес сайта
 
-        $code = Input::get('code');
-        $fb = OAuth::consumer( 'Facebook' ,'http://myhost.dev/login/fb');
-        if ( !empty( $code ) ) {
-            $token = $fb->requestAccessToken( $code );
-            $result = json_decode( $fb->request( '/me' ), true );
-            if ($user = User::where( 'social_id', '=' , $result['id']  )->first()) {
-                Auth::login($user);
-                return Redirect::to('profile');
-            } else {
-                $user = new User();
-                $user->email = $result['email'];
-                $user->social_id = $result['id'];
-                $user->save();
-                $profile = new UserProfile();
-                $profile->firstname = $result['first_name'];
-                $profile->lastname = $result['last_name'];
-                $user->profile()->save($profile);
-                Auth::login( $user );
-                return Redirect::to('profile');
+        define('VK_APP_ID', $client_id);
+        define('VK_APP_SECRET', $client_secret);
+        define('VK_URL_CALLBACK', $redirect_uri);
+        define('VK_URL_ACCESS_TOKEN', 'https://oauth.vk.com/access_token');
+        define('VK_URL_AUTHORIZE', 'https://oauth.vk.com/authorize');
+        define('VK_URL_GET_USER_INFO', 'https://api.vk.com/method/users.get');
+
+        if(empty($_GET['code']))
+        {
+            return Redirect::to(VK_URL_AUTHORIZE.'?client_id='.VK_APP_ID.'&scope=offline'.'&redirect_uri='.urlencode(VK_URL_CALLBACK).'&response_type=code');
+        }
+        elseif(!empty($_GET['code'])) {
+            if (!empty($_GET['error'])) {
+                return Redirect::to('main/index');
             }
-        } else {
-            $url = $fb->getAuthorizationUri();
-            return Redirect::to((string)$url );
-        }*/
+            if (!($res = @file_get_contents(VK_URL_ACCESS_TOKEN . '?client_id=' . VK_APP_ID . '&client_secret=' . VK_APP_SECRET . '&code=' . $_GET['code'] . '&redirect_uri=' . urlencode(VK_URL_CALLBACK)))){
+                return Redirect::to('main/index');
+            }
+            $res = json_decode($res);
+            if (!($vk_user = @file_get_contents(VK_URL_GET_USER_INFO.'?uid='.$res->user_id.'&v=5.30&access_token='.$res->access_token))){
+                return Redirect::to('main/index');
+            }
+            $vk_user = json_decode($vk_user);
+
+            // пробуем авторизовать пользователя
+            $auth = Auth::attempt(array('email' => trim($vk_user->response[0]->id),'password' => trim($vk_user->response[0]->id)));
+
+            if(!$auth) {
+                //авторизация нового пользователя
+                $user = new User;
+                $user->email = trim($vk_user->response[0]->id);
+                $user->password = Hash::make( trim($vk_user->response[0]->id) );
+
+                if ($user->save()) {
+                    $description = new User_Description;
+                    $description->user_id = $user->id;
+                    $description->first_name = $vk_user->response[0]->first_name;
+                    $description->last_name = $vk_user->response[0]->last_name;
+                    $description->save();
+
+                    $user->createPersonalBlog();
+                    // логиним пользователя и отправляем на заполнение профиля
+                    Auth::login($user);
+                    return Redirect::to('profile/fill');
+                }
+            }
+            else{
+                //авторизация существующего пользователя
+                return Redirect::to('main/index');
+            }
+        }
     }
 
     public function postAndroidLogin(){

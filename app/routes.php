@@ -21,6 +21,8 @@ Route::group(array('before' => 'notauth'),function(){
     Route::post('login', 'AuthController@postLogin');
     Route::post('login/android', 'AuthController@postAndroidLogin');
     Route::get('login/fb', 'AuthController@loginWithFacebook');
+    Route::get('login/vk', 'AuthController@loginWithVK');
+    Route::get('login/g', 'AuthController@loginWithGoogle');
     Route::get('register', 'AuthController@getRegister');
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
