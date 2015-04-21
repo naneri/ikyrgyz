@@ -9,7 +9,9 @@ class User_Description extends Eloquent{
 	protected $connection = 'mysql_users';
 	
 	protected $table = 'user_description';
-
+ 
+    protected $guarded = array();
+    
 	public $timestamps = false;
 
 	// обновление дополнительных данных пользователя.

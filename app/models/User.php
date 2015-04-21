@@ -20,7 +20,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $table = 'users';
         
-        
+    protected $guarded = array('id');    
+    
 	// Add your validation rules here
         public static $rules = [
             'email' => 'required|email|unique:users,email',
