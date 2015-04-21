@@ -53,7 +53,7 @@ class OpenGraph implements Iterator
         $curl = curl_init($URI);
 
         curl_setopt($curl, CURLOPT_FAILONERROR, true);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        //curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 15);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
