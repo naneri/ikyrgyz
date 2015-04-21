@@ -52,6 +52,9 @@
                   <p class="b-profile-about-text__text">
                     {{$topic->description}}
                   </p>
+                  @if($topic->type->name == 'link')
+                    <p>{{HTML::link($topic->meta, null, array('target' => '_blank'))}}</p>
+                  @endif
                   <div class="clear"></div>
                 </div>
               </div>
