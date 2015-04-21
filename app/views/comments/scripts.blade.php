@@ -138,7 +138,7 @@
                     image_advtab: true,
                     relative_urls: false,
                     remove_script_host: true,
-                    toolbar: "image youtube media smileys"
+                    toolbar: "image youtube smileys"
                 });
             },
             postCommentForm: function(){

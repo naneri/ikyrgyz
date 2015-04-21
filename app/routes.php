@@ -126,8 +126,11 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
 
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
-	Route::get('topic/create', 'TopicController@create');
-        Route::group(array('before' => 'topic_edit_permission'), function(){
+    Route::get('topic/create', 'TopicController@create');
+    Route::get('topic/create/link', 'TopicController@createLink');
+    Route::get('topic/create/fetch_og', 'TopicController@fetchOG');
+
+    Route::group(array('before' => 'topic_edit_permission'), function(){
             Route::get('topic/edit/{id}', 'TopicController@getEdit');
             Route::post('topic/edit/{id}', 'TopicController@postEdit');
             Route::get('topic/delete/{id}', 'TopicController@delete');

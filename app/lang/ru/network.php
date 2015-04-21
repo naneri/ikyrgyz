@@ -117,6 +117,7 @@ return array(
 	'user-photoalbums'	=> 'Фото альбомы пользователя',
 	'upload'			=> 'Загрузить',
 	'photoalbum-cover'	=> 'Обложка фотоальбома',
+        'link-placeholder'            => 'Введите URL',
 	
 	//photos
 	'load-photo'		=> 'Загрузка фотографии',
