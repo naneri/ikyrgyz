@@ -83,15 +83,21 @@
                                         <div class="panel-body">
                                             {{Form::open(array('url' => 'register'))}}
                                                 <fieldset>
+                                                <form action="">
                                                     <div class="form-group">
                                                         <input class="form-control" placeholder="{{ trans('network.enter-email') }}" name="email" type="email" autofocus="">
                                                     </div>
+                                                
+                                                
                                                     <div class="form-group">
                                                         <input class="form-control pass" placeholder="{{ trans('network.enter-password') }}" name="password" type="password" value="">
                                                     </div>
+
                                                     <div class="form-group">
                                                         <input class="form-control pass-check" placeholder="{{ trans('network.repeat-password') }}" name="" type="password" value="">
                                                     </div>
+                                                </form>
+                                                <form action="">
                                                     <div class="form-group" style="margin-left: -15px">
                                                         {{Form::captcha(array('theme' => 'red'))}}
                                                     </div>
@@ -104,6 +110,7 @@
                                                         @endforeach
                                                     </div>
                                                     <button type="submit" id="registration-form-submit" class="submit-button" >{{ trans('network.do-register') }}</button>
+                                                </form>    
                                                 </fieldset>
                                             {{Form::close()}}
                                         </div>

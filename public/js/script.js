@@ -272,14 +272,6 @@ $(document).ready(function() {
 
 
 
-$(function() {
-	$(".tabs li a").each(function() {
-		if (this.href == window.location) {
-			$(this).addClass("tabCurrentLink");
-		};
-	});
-});
-
 
 
 
@@ -288,21 +280,13 @@ $(function() {
 
 
 
-$(document).ready(function(){
-	
-	$('ul.tabs li').click(function(){
-		/*var tab_id = $(this).attr('data-tab');
-
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');*/
-	})
-
-})  
-
-
+// $(function () { 
+//   $('ul.tabs li a').each(function () {
+//     if (location.href == this.href) {
+//       $(this).addClass('tabCurrentLink');
+//     }
+//   });
+// });
 
 // TABs
 

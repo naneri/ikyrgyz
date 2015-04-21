@@ -1,4 +1,4 @@
-@if($content)
+    @if($content)
     @foreach($content as $entry)
         @if($entry->is_topic)
             <div class="b-user-interface-content-block">

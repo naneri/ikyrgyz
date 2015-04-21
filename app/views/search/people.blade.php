@@ -24,18 +24,19 @@
                             </ul>
                         </div>
                         <div class="b-user-interface-content-item">
-                            <p class="b-user-interface-content-item__title">{{ trans('network.place-to-search') }}</p>
-                            <div class="b-user-interface-content-item__item">
+                            <p class="b-user-interface-content-item__place">{{ trans('network.place-to-search') }}</p>
+                            <div class="b-user-interface-content-item__country">
                                 {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control select-country select-default'))}}
                             </div>
-                            <div class="b-user-interface-content-item__item">
+                            <div class="b-user-interface-content-item__city">
                                 {{Form::select('city', array('0' => trans("network.city")), null, array('class' => 'form-control select-city select-default'))}}
                             </div>
-                             <div class="b-user-interface-content-item__item">
+                             <div class="b-user-interface-content-item__nolist">
                                 <input type="text" class="noinlist" value="Нет в списке">
                             </div>
-                            <p class="b-user-interface-content-item__title">Учебные заведения</p>
-                            <div class="b-user-interface-content-item__item">
+
+                            <p class="b-user-interface-content-item__school-title">Учебные заведения</p>
+                            <div class="b-user-interface-content-item__school">
                                 @foreach(ProfileItem::getForViewMy('school') as $item)
                                     {{Form::radio('study', $item)}} {{$item}}<br>
                                 @endforeach
@@ -51,18 +52,18 @@
                                 @endforeach
                                 {{Form::text('job_text', null, array('class' => 'form-control select-default'))}}
                             </div> -->
-                            <p class="b-user-interface-content-item__title">Пол</p>
-                            <div class="b-user-interface-content-item__item">
+                            <p class="b-user-interface-content-item__male-title">Пол</p>
+                            <div class="b-user-interface-content-item__male">
                                 <label>{{Form::radio('gender', 'male', null)}} {{ trans('network.gender-male') }}</label>
                             </div>
-                            <div class="b-user-interface-content-item__item">
+                            <div class="b-user-interface-content-item__female">
                                 <label>{{Form::radio('gender', 'female', null)}} {{ trans('network.gender-female') }}</label>
                             </div>
-                            <div class="b-user-interface-content-item__item">
+                            <div class="b-user-interface-content-item__any">
                                 <label>{{Form::radio('gender', 'other', null)}} {{ trans('network.any') }}</label>
                             </div>
-                            <p class="b-user-interface-content-item__title">{{ trans('network.age') }}</p>
-                            <div class="b-user-interface-content-item__item">
+                            <p class="b-user-interface-content-item__age-title">{{ trans('network.age') }}</p>
+                            <div class="b-user-interface-content-item__age">
                                 <label>от</label>
                                 {{Form::select('age-from', $ageFrom, null, array('class' => 'input-default'))}}
                                 <label>до</label>

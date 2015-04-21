@@ -598,7 +598,8 @@
 			
 				
 		&__title 
-					
+			color #333
+			font-family 'PT Sans Caption Bold'			
 			margin 5px 0 0 0
 			
 			
@@ -607,8 +608,7 @@
 				font-family 'PT Sans Caption Bold'
 		&__text
 			float left
-			color #333
-			font-family 'PT Sans Caption Bold'	
+			
 			width 56%
 		&__date
 			font-size 12px
@@ -2394,6 +2394,10 @@ interface
 
 .b-user-interface
 	background-color #fff
+	max-width 900px
+	width 100%
+	&__inner
+		//
 	&__header
 		
 		background $lightGradient
@@ -2421,14 +2425,18 @@ interface
 			color $baseFontColor
 			font 16px $baseFontFamilyBold
 			padding-left 20px
-			line-height 45px
+			line-height 43px
+			&:first-letter
+				text-transform uppercase
 	
 
 .b-user-interface-content
 	//
+	
+
 	&__left
 		float left
-		width 283px
+		width 31.22222222222222%
 	&-wrapper
 		border $baseBorder
 		
@@ -2436,8 +2444,8 @@ interface
 		
 	&__right
 		float right
-		padding-right 10px
-		width 680px
+		padding-right 20px
+		width 64.33333333333333%
 	&-nav
 		padding-bottom 16px
 		
@@ -2452,60 +2460,93 @@ interface
 				display block
 				box-sizing padding-box
 				border-bottom 2px solid  #f2f1f1
+				&:first-letter
+					text-transform uppercase
 				
 				
 				&:hover
 					color #fff
 					background $orangeGradient
 					border-bottom 2px solid #b43c1f
-					
-.tabCurrentLink
-	color #fff
-	background linear-gradient(top, #fff 0%, #f2f1f1 100%)
-	border-bottom 2px solid #b43c1f
+		.tabCurrentLink
+			color #fff
+			background linear-gradient(top, #f67658 0%, #c4563c 100%)
+
+			border-bottom 2px solid #b43c1f				
+
 	
 .b-user-interface-content-item
-	margin 0 18px
-	&__item
-		padding-bottom 10px
-		.input-default
-			width 80px
-			height 30px
-		.noinlist
-			width 230px
-			height 29px
-			border 1px solid #d5d5d5
-			font 14px $baseFontFamily
+	padding 0 20px
+	&__age-title
+		font 15px $baseFontFamily
+		color $baseFontColorLight
+		padding-bottom 20px
+		
+	&__any
+		padding-bottom 42px
+		
+	&__male-title
+		font 15px $baseFontFamily
+		color $baseFontColorLight
+		padding-bottom 20px
+	&__school
+		padding-bottom 40px
+		
+	&__school-title
+		font 15px $baseFontFamily
+		color $baseFontColorLight
+		padding-bottom 22px
+		padding-top 20px
+	
+	&__place
+		font 15px $baseFontFamily
+		color $baseFontColorLight
+		padding-bottom 14px
+	&__country
+		padding-bottom 9px
+	&__city
+		padding-bottom 9px
+	&__nolist
+		padding-bottom 21px
+		border-bottom $baseBorder
+	.input-default
+		width 80px
+		height 30px
+	.noinlist
+		width 95%
+		height 29px
+		border 1px solid #d5d5d5
+		font 14px $baseFontFamily
+		color $baseFontColor
+		padding-left 10px
+	.school-item
+		border 1px solid #d5d5d5
+		width 230px
+		height 29px
+	.select-default
+		width 100%
+		height 29px
+		
+		.jq-selectbox__select
+			background #fff
 			color $baseFontColor
-			padding-left 10px
-		.school-item
-			border 1px solid #d5d5d5
-			width 230px
-			height 29px
-		.select-default
-			width 240px
-			height 29px
+			font 14px $baseFontFamily
+			line-height 30px
+		.jq-selectbox__trigger
+			background $lightGradient
+			border-radius 5px
 			
-			.jq-selectbox__select
-				background #fff
-				color $baseFontColor
-				font 14px $baseFontFamily
-				line-height 30px
-			.jq-selectbox__trigger
-				background $lightGradient
-				border-radius 5px
-				
-				
-		label
-			color $baseFontColor
-			font 14px $baseFontFamily
+			
+	label
+		color $baseFontColor
+		font 14px $baseFontFamily
 			
 			
 			
 	&__title
 		padding-bottom 14px
 		font 15px $baseFontFamily
-		color $baseFontColorLight	
+		color $baseFontColorLight
 .b-user-interface-content-search
 	//
 	&__search
@@ -2514,7 +2555,7 @@ interface
 		width 100%
 		
 	.input-default
-		width 630px
+		width 70%
 		height 26px
 		border 0
 		padding-left 10px
@@ -2561,7 +2602,7 @@ interface
 		float left
 	&__buttons
 		float right
-		width 200px
+		width 177px
 		padding-top 13px
 		.button-default
 		
