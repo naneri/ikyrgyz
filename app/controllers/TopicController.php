@@ -256,8 +256,10 @@ class TopicController extends BaseController {
         $this->topic->description = Input::get('description');
         $this->topic->blog_id = $blogId;
         $this->topic->user_id = Auth::user()->id;
-        $this->topic->type_id = TopicType::whereName(Input::get('topic_type'))->pluck('id');
         $this->topic->draft = $isDraft;
+        if(Input::has('topic_type')){
+            $this->topic->type_id = TopicType::whereName(Input::get('topic_type'))->pluck('id');
+        }
         if(Input::has('image_url')){
             $this->topic->image_url = Input::get('image_url');
         }

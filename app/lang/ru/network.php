@@ -45,7 +45,7 @@ return array(
 	// topic create
 	'create-topic'		=> 'Создать топик',
 	'drafts'			=> 'Черновики',
-	'edit-topic'		=> 'Черновики',
+	'edit-topic'		=> 'Редактировать',
 	'create-blog'		=> 'Создать блог',
 	'blog-image'		=> 'Изображение блога',
 	'blog-add'			=> 'Добавить',
