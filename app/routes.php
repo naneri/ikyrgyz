@@ -214,34 +214,34 @@ Route::filter('topic_edit_permission', function($route) {
 Route::filter('message_edit_permission', function($route) {
     $message = Message::findOrFail($route->parameter('id'));
     if (!$message->canEdit()) {
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('photoalbum_edit_permission', function($route) {
     $photoAlbum = PhotoAlbum::findOrFail($route->parameter('id'));
     if (!$photoAlbum->canEdit()) {
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('photo_edit_permission', function($route) {
     $photo = Photo::findOrFail($route->parameter('id'));
     if (!$photo->canEdit()) {
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('can_view_photo', function($route){
     $photo = Photo::findOrFail($route->parameter('id'));
     if(!$photo->canView()){
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('topic.canview', function($route){
    $topic = Topic::findOrFail($route->parameter('id'));
    if(!$topic->blog->canView()){
-       return Redirect::back()->with('message', 'You don\'t have enough permissions to see topic.');
+       return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to see topic.</p></div>');
    }
 });
