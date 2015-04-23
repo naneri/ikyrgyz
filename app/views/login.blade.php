@@ -17,7 +17,16 @@
         <script src="{{URL::to('js/npm.js')}}"></script>
 	</head>
 	<body>
-        <div id="container">
+	    <div id="container">
+	        @foreach ($errors->all() as $error)
+	            <div class="b-message b-message-error">
+                    <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+                    <div class="b-message-icon b-message-error-icon"></div>
+                    <p class="b-message-p">
+                        {{$error}}
+                    </p>
+                </div>
+            @endforeach
             <section class="login">
                 <div class="container login-container">
                     <div class="row">
@@ -40,14 +49,6 @@
                                                     </div>
                                                     <div class="checkbox" style="margin-left: 20px">
                                                         <input name="remember" type="checkbox" value="Remember Me">{{ trans('network.remember-me') }}
-                                                    </div>
-                                                    <div class="all-alerts">
-                                                        @foreach ($errors->all() as $error)
-                                                        <div class="alert alert-warning alert-dismissible" role="alert">
-                                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                            {{$error}}
-                                                        </div>
-                                                        @endforeach
                                                     </div>
                                                     <button type="submit" name="submit_login" class="submit-button" id="login-form-submit">{{ trans('network.log-in') }}</button>
                                                 </fieldset>
@@ -94,14 +95,6 @@
                                                     </div>
                                                     <div class="form-group" style="margin-left: -15px">
                                                         {{Form::captcha(array('theme' => 'red'))}}
-                                                    </div>
-                                                    <div class="all-alerts">
-                                                        @foreach ($errors->all() as $error)
-                                                        <div class="alert alert-warning alert-dismissible" role="alert">
-                                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                            {{$error}}
-                                                        </div>
-                                                        @endforeach
                                                     </div>
                                                     <button type="submit" id="registration-form-submit" class="submit-button" >{{ trans('network.do-register') }}</button>
                                                 </fieldset>

@@ -197,7 +197,65 @@ class AuthController extends BaseController {
             return Redirect::to((string)$url );
         }*/
     }
-    
+
+    public function loginWithVK(){
+        $client_id = '4877440';                                                             // ID приложения
+        $client_secret = '1BhtEnmkq4bmRfwCt4Og';                                            // Защищённый ключ
+        $redirect_uri = 'http://localhost/newkyrgyz/public/login/vk';                       // Адрес сайта
+
+        define('VK_APP_ID', $client_id);
+        define('VK_APP_SECRET', $client_secret);
+        define('VK_URL_CALLBACK', $redirect_uri);
+        define('VK_URL_ACCESS_TOKEN', 'https://oauth.vk.com/access_token');
+        define('VK_URL_AUTHORIZE', 'https://oauth.vk.com/authorize');
+        define('VK_URL_GET_USER_INFO', 'https://api.vk.com/method/users.get');
+
+        if(empty($_GET['code']))
+        {
+            return Redirect::to(VK_URL_AUTHORIZE.'?client_id='.VK_APP_ID.'&scope=offline'.'&redirect_uri='.urlencode(VK_URL_CALLBACK).'&response_type=code');
+        }
+        elseif(!empty($_GET['code'])) {
+            if (!empty($_GET['error'])) {
+                return Redirect::to('main/index');
+            }
+            if (!($res = @file_get_contents(VK_URL_ACCESS_TOKEN . '?client_id=' . VK_APP_ID . '&client_secret=' . VK_APP_SECRET . '&code=' . $_GET['code'] . '&redirect_uri=' . urlencode(VK_URL_CALLBACK)))){
+                return Redirect::to('main/index');
+            }
+            $res = json_decode($res);
+            if (!($vk_user = @file_get_contents(VK_URL_GET_USER_INFO.'?uid='.$res->user_id.'&v=5.30&access_token='.$res->access_token))){
+                return Redirect::to('main/index');
+            }
+            $vk_user = json_decode($vk_user);
+
+            // пробуем авторизовать пользователя
+            $auth = Auth::attempt(array('email' => trim($vk_user->response[0]->id),'password' => trim($vk_user->response[0]->id)));
+
+            if(!$auth) {
+                //авторизация нового пользователя
+                $user = new User;
+                $user->email = trim($vk_user->response[0]->id);
+                $user->password = Hash::make( trim($vk_user->response[0]->id) );
+
+                if ($user->save()) {
+                    $description = new User_Description;
+                    $description->user_id = $user->id;
+                    $description->first_name = $vk_user->response[0]->first_name;
+                    $description->last_name = $vk_user->response[0]->last_name;
+                    $description->save();
+
+                    $user->createPersonalBlog();
+                    // логиним пользователя и отправляем на заполнение профиля
+                    Auth::login($user);
+                    return Redirect::to('profile/fill');
+                }
+            }
+            else{
+                //авторизация существующего пользователя
+                return Redirect::to('main/index');
+            }
+        }
+    }
+
     public function saveSocialUser($email, $first_name, $last_name, $gender){
         
         // создаём нового юзера и сохраняем данные

@@ -21,7 +21,7 @@ class TopicController extends BaseController {
     // Достаём список блогов в которые может постить пользователь
     $canPublishBlogs = $this->getCanPublishBlogsForView();       
     if(!$canPublishBlogs){
-        return Redirect::back()->with('message', 'Please create a blog first');
+        return Redirect::back()->with('message', '<div class="b-message b-message-warning"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-warning-icon"></div><p class="b-message-p">Please create a blog first</p></div>');
     }
 
     return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView()));
