@@ -60,4 +60,17 @@ class AndroidController extends BaseController {
         }
         return $canPublishBlogs;
     }
+
+    public function androidCreateNewTopic() {
+        $topic = new Topic();
+        $topic->type_id = 1;
+        $topic->user_id = Auth::user()->id;
+        $topic->blog_id = $this->getBlogId();
+        $topic->save();
+        exit("ok");
+    }
+
+    private function getBlogId(){
+        return (Input::get('blog_id') == '0') ? Auth::user()->getPersonalBlog()->id : Input::get('blog_id');
+    }
 }
