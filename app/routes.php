@@ -28,6 +28,7 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
 Route::group(array('before' => 'notauth'), function(){
+    Route::post('android/myBlogIds', 'AndroidController@myBlogIds');
     Route::post('main/androidIndex', 'AndroidController@androidIndex');
     Route::post('main/index/androidNew', 'AndroidController@androidNewTopics');
     Route::post('main/index/androidTop', 'AndroidController@androidTopTopics');
