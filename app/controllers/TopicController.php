@@ -97,7 +97,7 @@ class TopicController extends BaseController {
         $topic->user_id = Auth::user()->id;
         $topic->blog_id = $this->getBlogId();
         $topic->save();
-        return Response::json($topic, 200);;
+        exit("ok");
     }
     
     private function getBlogId(){
