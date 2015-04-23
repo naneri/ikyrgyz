@@ -15,6 +15,12 @@ class AndroidController extends BaseController {
         return Response::json($topics, 200);
     }
 
+    public function myBlogIds()
+    {
+        $canPublishBlogs = $this->getCanPublishBlogsForView();
+        return Response::json($canPublishBlogs, 200);
+    }
+
     public function androidAjaxTopics($sort, $page = 0){
         $rating = Config::get('topic.index_good_topic_rating');
         $offset = $page; // с какого начинать просмотр
@@ -42,5 +48,16 @@ class AndroidController extends BaseController {
     public function androidTopTopics() {
         $topics = Topic::getTopicsByRating();
         return Response::json($topics, 200);
+    }
+
+    private function getCanPublishBlogsForView(){
+        $canPublishBlogs = null;
+        if (Auth::user()->isHavePersonalBlog()) {
+            $canPublishBlogs[0] = Auth::user()->getPersonalBlog()->title;
+        }
+        foreach (Auth::user()->canPublishBlogs() as $blog) {
+            $canPublishBlogs[$blog->id] = $blog->title;
+        }
+        return $canPublishBlogs;
     }
 }

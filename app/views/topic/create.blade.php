@@ -10,18 +10,57 @@
               </div>
               <div class="b-topic-create-modal__content">
                   <div class="b-topic-create-modal-content">
-                      @foreach ($errors->all() as $error)
-                          <div class="b-message b-message-error">
-                              <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
-                              <div class="b-message-icon b-message-error-icon"></div>
-                              <p class="b-message-p">
-                                  {{$error}}
-                              </p>
+                      <div class="all-alerts">
+                          @foreach ($errors->all() as $error)
+                          <div class="alert alert-warning alert-dismissible" role="alert">
+                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                              {{$error}}
                           </div>
-                      @endforeach
-                  {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
+                          @endforeach
+                      </div>
+                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
+                    @if($type == 'link')
                     <div class="b-topic-create-modal-content__item">
-                        {{Form::text('title', trans("network.choose-name"), array('class' => 'input-default add-name sync-input'))}}
+                        {{Form::text('link', '', array('class' => 'input-default add-name', 'placeholder' => trans("network.link-placeholder")))}}
+                        {{Form::hidden('image_url')}}
+                        {{Form::hidden('link_url')}}
+                        <img class="topic-cover" />
+                    </div>
+                    <script>
+                        var prevUrl = '';
+                        var inProgress = false;
+                        $('input[name=link]').on("paste keyup", function() {
+                            var url = this.value;
+                            if(url != '' && prevUrl != url && isValidURL(url) && !inProgress){
+                                inProgress = true;
+                                $.get('{{URL::to("topic/create/fetch_og")}}'+'?url='+url, function($urlData){
+                                   $('input[name=link_url]').val($urlData.url);
+                                   $('input[name=title]').val($urlData.title);
+                                   tinyMCE.activeEditor.setContent($urlData.description);
+                                   if($urlData.image){
+                                       $('.topic-cover').attr('src', $urlData.image);
+                                       $('input[name=image_url]').val($urlData.image);
+                                   }
+                                }).always(function(){
+                                    prevUrl = url;
+                                    inProgress = false;
+                                });
+                            }
+                        });
+
+                        function isValidURL(url){
+                            var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+
+                            if(RegExp.test(url)){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        } 
+                    </script>
+                    @endif
+                    <div class="b-topic-create-modal-content__item">
+                        {{Form::text('title', '', array('class' => 'input-default add-name sync-input', 'placeholder' =>  trans("network.choose-name")))}}
                         <a href="{{asset('topic/drafts')}}" class="draft">{{ trans('network.drafts') }} <span>{{Auth::user()->drafts()->count()}}</span></a>
                     </div>
                     <div class="b-topic-create-modal-content__item">
@@ -36,9 +75,10 @@
                     <div class="b-topic-create-modal-content__item">
                         {{ Form::text('tags', null, array('class' => 'input-default add-name', 'id' => 'tags', 'placeholder' => trans("network.tags") )) }}
                     </div>
-                    <div class="b-topic-create-modal-content__item">
+                    <div class="b-topic-create-modal-content__item image">
                         <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg">
                           <div class="b-topic-create-modal-content__btns">
+                            <input type="hidden" name="image_url" />
                             <input type="submit" value="{{ trans('network.cancel') }}" class="btn btn-cancel input-default"/>
                             <input type="button" value="{{ trans('network.preview') }}" class="btn btn-preview input-default" onclick="tinyMCE.execCommand('mcePreview');"/>
                             <input type="submit" value="{{ trans('network.publish') }}" class="btn btn-submit input-default"/>
@@ -46,6 +86,7 @@
                       <div class="clear"></div>
                     </div>
                     {{ Form::hidden('topic_id') }}
+                    {{ Form::hidden('topic_type', $type) }}
                    {{Form::close()}}
                 </div>
               </div>
