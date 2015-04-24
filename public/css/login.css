@@ -428,7 +428,7 @@ a.white:hover{
 }
 
 .b-message-success-icon{
-    background: url("../img/icons/icon_alert.png") no-repeat;
+    background: url("../img/icons/icon_check.png") no-repeat;
     background-position: 50%;
 }
 
