@@ -25,14 +25,14 @@ class PeopleController extends BaseController{
 	public function requestFriend($id){
 
 		if(Auth::id() == $id){
-			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">you can`t be friend of yourself</p></div>');
+			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">Вы не можете отправлять дружбу самому себе</p></div>');
 		}
 
 		if(!Friend::requestFriend(Auth::id(), $id)){
-			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">some troubles :(</p></div>');
+			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">Вы уже отправили этому пользователю запрос на дружбу</p></div>');
 		}
 		
-		return Redirect::back()->with('message', '<div class="b-message b-message-success"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-success-icon"></div><p class="b-message-p">your request have been sent</p></div>');
+		return Redirect::back()->with('message', '<div class="b-message b-message-success"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-success-icon"></div><p class="b-message-p">Ваш запрос на дружбу отправлен</p></div>');
 
 	}
 
@@ -46,14 +46,14 @@ class PeopleController extends BaseController{
 
 	
 		if(Auth::id() === $id){
-			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">you can\'t be friend of yourself</p></div>');
+			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">Вы не можете отправлять дружбу самому себе</p></div>');
 		}
 
 		if(!Friend::submitFriend(Auth::id(), $id)){
-			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">some troubles :(</p></div>');
+			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">Вы уже друзья</p></div>');
 		}
 		
-		return Redirect::back()->with('message', '<div class="b-message b-message-success"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-success-icon"></div><p class="b-message-p">you are now friends</p></div>');
+		return Redirect::back()->with('message', '<div class="b-message b-message-success"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-success-icon"></div><p class="b-message-p">Вы теперь друзья</p></div>');
 	}
 
 	/**
@@ -67,14 +67,14 @@ class PeopleController extends BaseController{
 		$current_user = Auth::id();
 
 		if($current_user === $id){
-			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">you can\'t unfriend yourself</p></div>');
+			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">Вы не можете удалить себя из списка друзей</p></div>');
 		}
 
 		if(!Friend::removeFriend($current_user, $id)){
-			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">some troubles</p></div>');
+			return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">Появилась ошибка</p></div>');
 		}
 
-		return Redirect::back()->with('message', '<div class="b-message b-message-success"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-success-icon"></div><p class="b-message-p">you have removed a friend</p></div>');
+		return Redirect::back()->with('message', '<div class="b-message b-message-success"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-success-icon"></div><p class="b-message-p">Вы удалили пользователя из списка друзей</p></div>');
 	}
 
 }

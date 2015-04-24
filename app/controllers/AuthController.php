@@ -32,7 +32,7 @@ class AuthController extends BaseController {
         // при неудачной авторизации отправляем на страницу логинка и выдаём ошибки
         if(!$auth){
             return Redirect::to('login')->withErrors(array(
-                'Invalid credentials provided'
+                'Неправильные данные доступа'
             ));
         }
         
