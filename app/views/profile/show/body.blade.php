@@ -1,3 +1,5 @@
+@include('scripts.photobox')
+
 @if($page == 'newsline')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => false))
     @include('topic.build', array('topics' => $items))
@@ -31,7 +33,6 @@
 @endif
 
 @if($page == 'newsline')
-    @include('scripts.photobox')
     <script>
         $(document).ready(function() {
             $('.b-user-media').prependTo(".masonry");
