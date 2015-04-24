@@ -126,6 +126,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::get('profile/edit/access', 'ProfileController@getEditAccess');
     Route::post('profile/edit/access', 'ProfileController@postAccess');
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
+    Route::get('profile/{id}/subscribtions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscribtionBlogs');
 
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
     Route::get('topic/create', 'TopicController@create');

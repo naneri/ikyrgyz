@@ -108,6 +108,12 @@ class ProfileController extends BaseController {
                             );
                 }
 	}
+        
+        public function getAjaxSubscribtionBlogs($userId, $pageNum){
+            $user = User::findOrFail($userId);
+            $blogs = $user->subscribtions($pageNum);
+            return View::make('blog.build', compact('blogs'));
+        }
 
         public function ajaxTopics($userId, $pageName, $pageNumber = 0) {
             $user = User::find($userId);

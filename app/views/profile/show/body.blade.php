@@ -7,8 +7,8 @@
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     @include('topic.build', array('topics' => $items))
 @elseif($page == 'subscribtions')
-    @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     @include('blog.build', array('blogs' => $items))
+    @include('blog.scripts', array('page' => 'profile/'.$user->id.'/subscribtions'))
 @elseif($page == 'friends' || $page == 'mutualFriends' || $page == 'subscribers')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     <div class="masonry">
