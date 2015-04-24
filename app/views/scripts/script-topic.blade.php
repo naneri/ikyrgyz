@@ -1,8 +1,14 @@
 <script>
 	var base_url = "{{$base_config['base_url']}}";
 	var page = 1;
+        
+        function timesConvert(){
+            times.init('.b-user-wall-header__date');
+            times.eachConvert('.b-user-wall');
+        }
 		
 	$(document).ready(function(){
+            timesConvert();
             $( function() {
                     
             var $container = $('.masonry');
@@ -76,6 +82,8 @@
                             $container.imagesLoaded( function() {
                                     $container.masonry('layout');
                             });
+                            
+                            timesConvert();
 
                             console.log(elements);
 
