@@ -299,4 +299,22 @@ class TopicController extends BaseController {
         }
         return Response::json($data);
     }
+    
+    public function fetchContent(){
+        $rules = array('url' => 'required|url');
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Response::json('error', 500);
+        }
+
+        $url = Input::get('url');
+        $html = file_get_contents($url);
+
+        $Readability = new Readability($html, 'UTF-8'); // default charset is utf-8
+        $ReadabilityData = $Readability->getContent();
+
+        return Response::json($ReadabilityData);
+    }
 }

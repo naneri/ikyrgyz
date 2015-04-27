@@ -33,13 +33,13 @@
                             var url = this.value;
                             if(url != '' && prevUrl != url && isValidURL(url) && !inProgress){
                                 inProgress = true;
-                                $.get('{{URL::to("topic/create/fetch_og")}}'+'?url='+url, function($urlData){
-                                   $('input[name=link_url]').val($urlData.url);
+                                $.get('{{URL::to("topic/create/fetch_content")}}'+'?url='+url, function($urlData){
+                                   $('input[name=link_url]').val(url);
                                    $('input[name=title]').val($urlData.title);
-                                   tinyMCE.activeEditor.setContent($urlData.description);
-                                   if($urlData.image){
-                                       $('.topic-cover').attr('src', $urlData.image);
-                                       $('input[name=image_url]').val($urlData.image);
+                                   tinyMCE.activeEditor.setContent($urlData.content);
+                                   if($urlData.lead_image_url){
+                                       $('.topic-cover').attr('src', $urlData.lead_image_url);
+                                       $('input[name=image_url]').val($urlData.lead_image_url);
                                    }
                                 }).always(function(){
                                     prevUrl = url;

@@ -132,6 +132,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');
     Route::get('topic/create/fetch_og', 'TopicController@fetchOG');
+    Route::get('topic/create/fetch_content', 'TopicController@fetchContent');
 
     Route::group(array('before' => 'topic_edit_permission'), function(){
             Route::get('topic/edit/{id}', 'TopicController@getEdit');
