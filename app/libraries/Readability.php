@@ -250,6 +250,21 @@ class Readability {
         return null;
     }
 
+    /**
+     * Get Leading Image Url of tag
+     *
+     * @return String
+     */
+    public function getLeadImageUrlOfBody() {
+        $body = $this->DOM->getElementsByTagName('body')->item(0);
+        $images = $body->getElementsByTagName('img');
+
+        if ($images->length && $leadImage = $images->item(0)) {
+            return $leadImage->getAttribute("src");
+        }
+
+        return null;
+    }
 
     /**
      * 获取页面的主要内容（Readability 以后的内容）

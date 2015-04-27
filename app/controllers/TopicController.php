@@ -314,6 +314,9 @@ class TopicController extends BaseController {
 
         $Readability = new Readability($html, 'UTF-8'); // default charset is utf-8
         $ReadabilityData = $Readability->getContent();
+        if(!$ReadabilityData['lead_image_url']){
+            $ReadabilityData['lead_image_url'] = $Readability->getLeadImageUrlOfBody();
+        }
 
         return Response::json($ReadabilityData);
     }
