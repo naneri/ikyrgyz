@@ -149,7 +149,6 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
 
-        Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
         Route::get('messages/inbox/{filter}', 'MessageController@inbox');
