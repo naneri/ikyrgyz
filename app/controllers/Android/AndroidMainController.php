@@ -1,6 +1,6 @@
 <?php
 
-class AndroidController extends BaseController {
+class AndroidMainController extends BaseController {
 
     public function __construct(){
         Auth::attempt(array(

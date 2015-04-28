@@ -19,7 +19,7 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
     Route::get('login', 'AuthController@getLogin');
     Route::post('login', 'AuthController@postLogin');
-    Route::post('login/android', 'AuthController@postAndroidLogin');
+    Route::post('login/android', 'AndroidAuthController@postAndroidLogin');
     Route::get('login/fb', 'AuthController@loginWithFacebook');
     Route::get('login/vk', 'AuthController@loginWithVK');
     Route::get('login/g', 'AuthController@loginWithGoogle');
@@ -28,12 +28,12 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
 Route::group(array('before' => 'notauth'), function(){
-    Route::post('android/myBlogIds', 'AndroidController@myBlogIds');
-    Route::post('android/androidCreateNewTopic', 'AndroidController@androidCreateNewTopic');
-    Route::post('main/androidIndex', 'AndroidController@androidIndex');
-    Route::post('main/index/androidNew', 'AndroidController@androidNewTopics');
-    Route::post('main/index/androidTop', 'AndroidController@androidTopTopics');
-    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidController@androidAjaxTopics');
+    Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');
+    Route::post('android/androidCreateNewTopic', 'AndroidMainController@androidCreateNewTopic');
+    Route::post('main/androidIndex', 'AndroidMainController@androidIndex');
+    Route::post('main/index/androidNew', 'AndroidMainController@androidNewTopics');
+    Route::post('main/index/androidTop', 'AndroidMainController@androidTopTopics');
+    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidMainController@androidAjaxTopics');
 });
 
 Route::group(array('before' => 'auth|activated'),function(){
