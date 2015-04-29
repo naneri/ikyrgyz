@@ -63,7 +63,7 @@
             top: 10px;
             padding: 0;
         }
-        .b-user-media div{
+        .b-user-media .sticky-box{
             width: 400px;
         }
         .b-user-media-video-top__btn a{
