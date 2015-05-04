@@ -398,7 +398,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $values;
     }
 
-    
+    public function getRandomUser($friendIds){
+        return User::whereHas('description', function($query){
+                                $query->where('user_profile_avatar', '!=', 'NULL');
+                            })
+                            ->whereNotIn('id', $friendIds)
+                            ->orderByRaw("RAND()")
+                            ->first()
+                            ->id;
+    }
     
     public function getRatingAttribute($rating){
         return round($rating, 2);

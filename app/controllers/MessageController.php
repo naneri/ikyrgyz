@@ -124,7 +124,10 @@ class MessageController extends BaseController{
         $message->draft = 0;
         $message->save();
 
-        return Redirect::back()->with('message', '<div class="b-message b-message-success"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-success-icon"></div><p class="b-message-p">Сообщение успешно отправлена</p></div>');
+        return Redirect::back()->with([
+            'type' => 'success',
+            'text' => 'Сообщение успешно отправлена'
+            ]);
     }
 
     public function outbox(){
