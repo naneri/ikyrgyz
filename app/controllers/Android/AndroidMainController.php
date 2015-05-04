@@ -73,4 +73,39 @@ class AndroidMainController extends BaseController {
     private function getBlogId(){
         return (Input::get('blog_id') == '0') ? Auth::user()->getPersonalBlog()->id : Input::get('blog_id');
     }
+
+    public function androidCreateNewBlog() {
+        $rules = Blog::$rules;
+        $validator = Validator::make(Input::all(), $rules);
+
+        if($validator->fails()){
+            exit("validation_error");
+        }
+
+        $blogType = BlogType::find(Input::get('type_id'));
+        if (!$blogType && $blogType->name == 'personal') {
+            $blogType = BlogType::whereName('open')->first();
+        }
+
+        $blog = new Blog;
+        $blog->title = Input::get('title');
+        $blog->description = Input::get('description');
+        $blog->type_id = $blogType->id;
+        $blog->user_id = Auth::user()->id;
+
+        if(Input::hasFile('avatar')){
+            $dir = '/images/blog' . date('/Y/m/d/');
+            do {
+                $filename = str_random(30) . '.jpg';
+            } while (File::exists(public_path() . $dir . $filename));
+
+            Input::file('avatar')->move(public_path() . $dir, $filename);
+            $blog->avatar = $dir.$filename;
+        }
+
+        if($blog->save()){
+            BlogRole::createOwner($blog->id, Auth::id());
+            exit("ok");
+        }
+    }
 }
