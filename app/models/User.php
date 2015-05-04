@@ -425,7 +425,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $hashed_pass  = Hash::make($password);
 
         // создаём юзера
-        return Self::create([
+        return self::create([
             'email'             => $email,
             'password'          => $hashed_pass,
             'activation_code'   => $code
