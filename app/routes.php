@@ -19,7 +19,7 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
     Route::get('login', 'AuthController@getLogin');
     Route::post('login', 'AuthController@postLogin');
-    Route::post('login/android', 'AuthController@postAndroidLogin');
+    Route::post('login/android', 'AndroidAuthController@postAndroidLogin');
     Route::get('login/fb', 'AuthController@loginWithFacebook');
     Route::get('login/vk', 'AuthController@loginWithVK');
     Route::get('login/g', 'AuthController@loginWithGoogle');
@@ -28,12 +28,12 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
 Route::group(array('before' => 'notauth'), function(){
-    Route::post('android/myBlogIds', 'AndroidController@myBlogIds');
-    Route::post('android/androidCreateNewTopic', 'AndroidController@androidCreateNewTopic');
-    Route::post('main/androidIndex', 'AndroidController@androidIndex');
-    Route::post('main/index/androidNew', 'AndroidController@androidNewTopics');
-    Route::post('main/index/androidTop', 'AndroidController@androidTopTopics');
-    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidController@androidAjaxTopics');
+    Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');
+    Route::post('android/androidCreateNewTopic', 'AndroidMainController@androidCreateNewTopic');
+    Route::post('main/androidIndex', 'AndroidMainController@androidIndex');
+    Route::post('main/index/androidNew', 'AndroidMainController@androidNewTopics');
+    Route::post('main/index/androidTop', 'AndroidMainController@androidTopTopics');
+    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidMainController@androidAjaxTopics');
 });
 
 Route::group(array('before' => 'auth|activated'),function(){
@@ -132,6 +132,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');
     Route::get('topic/create/fetch_og', 'TopicController@fetchOG');
+    Route::get('topic/create/fetch_content', 'TopicController@fetchContent');
 
     Route::group(array('before' => 'topic_edit_permission'), function(){
             Route::get('topic/edit/{id}', 'TopicController@getEdit');
@@ -148,7 +149,6 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
 
-        Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
         Route::get('messages/inbox/{filter}', 'MessageController@inbox');

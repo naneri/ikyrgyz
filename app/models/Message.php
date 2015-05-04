@@ -6,16 +6,35 @@ class Message extends Eloquent{
 
     protected $connection = 'mysql_users';
 	
+    public static $rules = array(
+            'receiver' => 'required',
+            'title' => 'required|string',
+            'text' => 'required|string',
+            'is_draft' => 'required');
+
+
 	public $timestamps = true;
-        protected $softDelete = true;
-                
-        public function sender(){
+
+    protected $softDelete = true;
+            
+    /** Relations **/ 
+    
+    public function sender(){
 		return $this->belongsTo('User', 'sender_id');
 	}
 
     public function receiver() {
         return $this->belongsTo('User', 'receiver_id');
     }
+
+     public function attachments(){
+        return $this->hasMany('MessageAttachment');
+    }
+    
+    /** Relations **/
+   
+
+
 
     /**
      * Отмечает сообщение как прочитанное
@@ -40,12 +59,10 @@ class Message extends Eloquent{
     }
     
     public function scopeWithoutBanned($query){
+
         $bannedUserIds = Auth::user()->getBannedUserIds();
+        
         return $query->whereNotIn('sender_id', $bannedUserIds);
-    }
-    
-    public function attachments(){
-        return $this->hasMany('MessageAttachment');
     }
     
     public function canEdit(){

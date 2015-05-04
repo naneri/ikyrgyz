@@ -7,7 +7,7 @@
                 <div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
                 <div class="b-user-wall-header__text">
                 <p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}  </a></p>
-                <p class="b-user-wall-header__date"><span class="moment-time"></span><span class="original-time">{{$topic->created_at}}</span>
+                <p class="b-user-wall-header__date"><span class="moment-time"></span><span class="moment-time-hover"></span><span class="original-time">{{$topic->created_at}}</span>
                     <div class="clear"></div>
                 </p>
                 </div>

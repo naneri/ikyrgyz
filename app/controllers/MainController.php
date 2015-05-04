@@ -17,9 +17,9 @@ class MainController extends BaseController {
 
 	public function index($id = 0){
         $rating = Config::get('topic.index_good_topic_rating');
-		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
-        //echo "<pre>"; print_r($topics); echo "</pre>";exit;
 
+		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
+        
         if(!isset($_COOKIE['ColumnN']))
         {
             $_COOKIE['ColumnN']='2';
