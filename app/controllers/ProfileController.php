@@ -1,7 +1,5 @@
 <?php
 
-use CropAvatar;
-
 class ProfileController extends BaseController {
     
         

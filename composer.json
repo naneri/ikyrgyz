@@ -12,7 +12,8 @@
 		"barryvdh/laravel-debugbar": "1.8",
         "greggilbert/recaptcha": "1.1.5",
         "thujohn/share": "dev-master",
-		"jenssegers/date": "~2.0"
+		"jenssegers/date": "~2.0",
+		"intervention/image": "~2.2"
 	},
         "require-dev": {
             "codeception/codeception": "*",
