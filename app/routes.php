@@ -30,6 +30,7 @@ Route::group(array('before' => 'notauth'),function(){
 Route::group(array('before' => 'notauth'), function(){
     Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');
     Route::post('android/androidCreateNewTopic', 'AndroidMainController@androidCreateNewTopic');
+    Route::post('android/androidCreateNewBlog', 'AndroidMainController@androidCreateNewBlog');
     Route::post('main/androidIndex', 'AndroidMainController@androidIndex');
     Route::post('main/index/androidNew', 'AndroidMainController@androidNewTopics');
     Route::post('main/index/androidTop', 'AndroidMainController@androidTopTopics');
