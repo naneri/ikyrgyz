@@ -2,6 +2,8 @@
 
 class AndroidMainController extends BaseController {
 
+    private $topic;
+
     public function __construct(){
         Auth::attempt(array(
             'email' => Input::get('email'),
@@ -61,22 +63,6 @@ class AndroidMainController extends BaseController {
         return $canPublishBlogs;
     }
 
-    public function androidCreateNewTopic() {
-        $topic = new Topic();
-        $topic->type_id = 1;
-        $topic->user_id = Auth::user()->id;
-        $topic->blog_id = $this->getBlogId();
-
-        if (Input::hasFile('avatar')) {
-            $new_name = str_random(15) . '.' . Input::file('avatar')->getClientOriginalExtension();
-            Input::file('avatar')->move('images/' . $this->topic->blog_id . '/' . $this->topic->id, $new_name);
-            $this->topic->image_url = URL::to('/') . '/images/' . $this->topic->blog_id . '/' . $this->topic->id . '/' . $new_name;
-        }
-
-        $topic->save();
-        exit("ok");
-    }
-
     private function getBlogId(){
         return (Input::get('blog_id') == '0') ? Auth::user()->getPersonalBlog()->id : Input::get('blog_id');
     }
@@ -115,4 +101,96 @@ class AndroidMainController extends BaseController {
             exit("ok");
         }
     }
+
+    private function getTopic(){
+        $topic = Topic::find(Input::get('topic_id'));
+        if(!$topic || !$topic->canEdit()){
+            $topic = $this->createNewTopic();
+        }
+        return $topic;
+    }
+
+    private function createNewTopic(){
+        $topic = new Topic();
+        $topic->type_id = 1;
+        $topic->user_id = Auth::user()->id;
+        $topic->blog_id = $this->getBlogId();
+        $topic->save();
+        return $topic;
+    }
+
+    public function androidCreateNewTopic() {
+        $this->topic = $this->getTopic();
+
+
+        $blogId = $this->getBlogId();
+
+        if (!$this->topic->canEdit()) {
+            exit("permission_denied");
+        }
+
+        $this->topic->title = Input::get('title');
+        $this->topic->description = Input::get('description');
+        $this->topic->blog_id = $blogId;
+        $this->topic->user_id = Auth::user()->id;
+        $this->topic->draft = false;
+        if(Input::has('topic_type')){
+            $this->topic->type_id = TopicType::whereName(Input::get('topic_type'))->pluck('id');
+        }
+        if(Input::has('image_url')){
+            $this->topic->image_url = Input::get('image_url');
+        }
+        if(Input::has('link_url')){
+            $this->topic->meta = Input::get('link_url');
+        }
+
+
+        if (Input::hasFile('avatar')) {
+            $new_name = str_random(15) . '.' . Input::file('avatar')->getClientOriginalExtension();
+            Input::file('avatar')->move('images/' . $this->topic->blog_id . '/' . $this->topic->id, $new_name);
+            $this->topic->image_url = URL::to('/') . '/images/' . $this->topic->blog_id . '/' . $this->topic->id . '/' . $new_name;
+        }
+
+        $this->topic->save();
+
+        $this->syncTopicTags(Input::get('tags'));
+        $this->syncTopicRelations();
+
+        exit("ok");
+    }
+
+    private function syncTopicRelations(){
+
+        if (Input::has('photo_albums')){
+            $this->topic->photoAlbums()->sync(Input::get('photo_albums'));
+        }
+
+        if (Input::has('photos')){
+            $this->topic->photos()->sync(Input::get('photos'));
+        }
+
+        if (Input::has('audio_albums')){
+            $this->topic->audioAlbums()->sync(Input::get('audio_albums'));
+        }
+
+        if (Input::has('audio')){
+            $this->topic->audio()->sync(Input::get('audio'));
+        }
+    }
+
+    private function syncTopicTags($tagsStr){
+        $tags = array();
+        foreach (explode(',', $tagsStr) as $tag_name) {
+            $tag_name = trim($tag_name);
+            if ($tag = Tag::where('name', '=', $tag_name)->first()) {
+                $tag_id = $tag->id;
+                $tags[] = $tag_id;
+            } elseif (trim($tag_name) != '') {
+                $tag_id = DB::table('tags')->insertGetId(array('name' => $tag_name));
+                $tags[] = $tag_id;
+            }
+        }
+        $this->topic->tags()->sync($tags);
+    }
+
 }
