@@ -2,11 +2,55 @@
 <div class="b-header">
 		<div class="b-header__inner">
 			<div class="b-header-nav">
-				<a href="#" class="b-header-nav__icon">
-					<div></div>
-					<div></div>
-					<div></div>
-				</a>
+				<!-- <ul class="b-header-mobile-nav-list">
+					<li class="b-header-mobile-nav-list__left">
+						
+
+
+					</li>
+					<li class="b-header-mobile-nav-list__middle"></li>
+					<li class="b-header-mobile-nav-list__right"></li>
+				</ul> -->
+				<div class="b-header-nav-menu">
+					<div class="b-header-nav-menu__item">
+						<a href="#"></a>
+					</div>	
+						<div class="b-topic-navigation-menu">
+				<div class="b-topic-navigation-menu__list">				
+					<dl class="dropdown-list">
+						<dt class="title">Я-Кыргыз</dt>
+						<dt class="user-name"><img src="{{ asset('img/48.png') }}" alt="">Имя пользователя</dt>
+						<dt>Мой профиль</dt>
+							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">143</span></dd>
+							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">143</span></dd>
+							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">143</span></dd>
+							<dd><a href="">Подписки</a><span class="raiting">143</span></dd>
+							<dd><a href="#">{{ trans('network.favorite') }}</a><span class="raiting">143</span></dd>
+						<dt>Энкиклопедия</dt>
+							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
+							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
+							<dd><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></dd>
+						<dt>Помощь</dt>
+							<dd><a href="">Сообщить о проблеме</a></dd>
+							<dd><a href="">Истоиря действии</a></dd>	
+						<dt>Настройки</dt>
+							<dd>Выберите язык
+							<a href="">
+								<img src="{{ asset('img/103.png') }}" alt=""/>
+							</a>
+							<a href="">
+								<img src="{{ asset('img/104.png') }}" alt=""/>
+							</a>
+							
+							</dd>
+						<dt><a href="">Выход</a></dt>	
+					</dl>
+
+				</div>
+			</div>
+					
+					
+				</div>
 				<ul class="b-header-nav-list">
 					<li class="b-header-nav__left">
 						<div class="b-header-nav-logo">
@@ -24,12 +68,13 @@
 						
 
 						</a>
-						<ul class="b-header-nav-dropdown">
+						<!-- <ul class="b-header-nav-dropdown">
 							<li><a href="{{ URL::to('profile') }}">{{ trans('network.my-profile') }}</a></li>
 							<li><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a></li>
 							<li><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a></li>
+						</ul>	 -->
 							<!--<li><a href="{{ URL::to('group/create')  }}">Группы</a></li>-->
-						</ul>
+						
 							
 
 						</div>
@@ -110,6 +155,9 @@
 
 					<li class="b-header-nav__right">
 						<div class="b-header-nav-search">
+							<input type="text" class="b-header-nav-search__item" value="Поиск">
+						</div>
+					<!-- 	<div class="b-header-nav-search">
 							<div class="b-header-nav-search__item"><a href="{{ URL::to('search/people') }}">
 							<img src="{{ asset('img/navbar/friend_search.png') }}" alt="search"/>
 							<span class="search-friend">{{ trans('network.search-friends') }}</span>
@@ -146,10 +194,20 @@
 								</ul>
 							</li>
 							-->
-							<li><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a></li>
+							<!-- <li><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a></li>
 							</div>
-						</div>
+						</div> --> 
 					</li>
+					<div class="b-header-nav-random">
+						<div class="b-header-nav-random__item">
+							<a href=""></a>
+						</div>
+					</div>
+					<div class="b-header-nav-icon-search">
+						<div class="b-header-nav-icon-search__item">
+							<a href="#"></a>
+						</div>
+					</div>
 					<div class="clear"></div>
 
 					

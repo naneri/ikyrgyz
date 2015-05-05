@@ -21,6 +21,7 @@
   <body>
     <div class="b-wrapper">
       <div class="b-page">
+        <div class="cube"><a href=""></a></div>
       	@include('misc.navbar')
 		    @yield('content')
       </div>
