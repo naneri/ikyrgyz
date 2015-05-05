@@ -94,7 +94,6 @@ class AndroidMainController extends BaseController {
         $blog->user_id = Auth::user()->id;
 
         if(Input::hasFile('avatar')){
-            var_dump($_FILES['avatar']); die;
             $dir = '/images/blog' . date('/Y/m/d/');
             do {
                 $filename = str_random(30) . '.jpg';
