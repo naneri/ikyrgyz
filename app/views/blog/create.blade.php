@@ -3,11 +3,14 @@
 @section('content')
 		<div class="b-content">
        @foreach ($errors->all() as $error)
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    {{$error}}
-                </div>
-                @endforeach
+            <div class="b-message b-message-error">
+                   <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+                   <div class="b-message-icon b-message-error-icon"></div>
+                   <p class="b-message-p">
+                       {{$error}}
+                   </p>
+               </div>
+           @endforeach
           <div class="b-blog-create-modal">
             <div class="b-blog-create-modal__inner">
               <div class="b-blog-create-modal__title">{{ trans('network.create-blog') }}

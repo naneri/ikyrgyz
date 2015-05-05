@@ -229,6 +229,13 @@
 
 <div class="container">
 	<div class="col-md-12">
-		{{Session::get('message')}}<br>
+		@if(Session::get('message'))
+		<div class="b-message b-message-{{Session::get('message.type')}}"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a>
+			<div class="b-message-icon b-message-{{Session::get('message.type')}}-icon"></div>
+			<p class="b-message-p">
+				{{Session::get('message.text')}}<br>
+			</p>
+		</div>
+		@endif
 	</div>
 </div>

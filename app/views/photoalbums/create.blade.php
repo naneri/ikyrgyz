@@ -3,14 +3,15 @@
 {{HTML::style('css/bootstrap.css')}}
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
-        <div class="all-alerts">
-            @foreach ($errors->all() as $error)
-            <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                {{$error}}
+        @foreach ($errors->all() as $error)
+            <div class="b-message b-message-error">
+                <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+                <div class="b-message-icon b-message-error-icon"></div>
+                <p class="b-message-p">
+                    {{$error}}
+                </p>
             </div>
-            @endforeach
-        </div>
+        @endforeach
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
                 <legend>{{ trans('network.create-photoalbum') }}</legend>

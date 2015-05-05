@@ -25,14 +25,23 @@ class PeopleController extends BaseController{
 	public function requestFriend($id){
 
 		if(Auth::id() == $id){
-			return Redirect::back()->with('message', "you can't be friend of yourself");
+			return Redirect::back()->with('message', [
+				'type' => 'error', 
+				'text' => 'Вы не можете отправлять дружбу самому себе'
+				]);
 		}
 
 		if(!Friend::requestFriend(Auth::id(), $id)){
-			return Redirect::back()->with('message', "some troubles :(");
+			return Redirect::back()->with('message', [
+				'type' => 'error', 
+				'text' => 'Вы уже отправили этому пользователю запрос на дружбу'
+				]);
 		}
 		
-		return Redirect::back()->with('message', 'your request have been sent');
+		return Redirect::back()->with('message', [
+				'type' => 'success', 
+				'text' => 'Ваш запрос на дружбу отправлен'
+				]);
 
 	}
 
@@ -46,14 +55,23 @@ class PeopleController extends BaseController{
 
 	
 		if(Auth::id() === $id){
-			return Redirect::back()->with('message', "you can't be friend of yourself");
+			return Redirect::back()->with('message', [
+				'type' => 'error', 
+				'text' => 'Вы не можете отправлять дружбу самому себе'
+				]);
 		}
 
 		if(!Friend::submitFriend(Auth::id(), $id)){
-			return Redirect::back()->with('message', "some troubles :(");
+			return Redirect::back()->with('message', [
+				'type' => 'error', 
+				'text' => 'Вы уже друзья'
+				]);
 		}
 		
-		return Redirect::back()->with('message', 'you are now friends');
+		return Redirect::back()->with('message', [
+			'type' => 'success', 
+			'text' => 'Вы теперь друзья'
+			]);
 	}
 
 	/**
@@ -67,14 +85,23 @@ class PeopleController extends BaseController{
 		$current_user = Auth::id();
 
 		if($current_user === $id){
-			return Redirect::back()->with('message', "you can't unfriend yourself");
+			return Redirect::back()->with('message', [
+				'type' => 'error', 
+				'text' => 'Вы не можете удалить себя из списка друзей' 
+				]);
 		}
 
 		if(!Friend::removeFriend($current_user, $id)){
-			return Redirect::back()->with('message', 'some troubles');
+			return Redirect::back()->with('message', [
+				'type' => 'error', 
+				'text' => 'Появилась ошибка'
+				]);
 		}
 
-		return Redirect::back()->with('message', 'you have removed a friend');
+		return Redirect::back()->with('message', [
+			'type' => 'success', 
+			'text' => 'Вы удалили пользователя из списка друзей'
+			]);
 	}
 
 }

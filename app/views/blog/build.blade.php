@@ -13,7 +13,7 @@
                   </div>
                 </div>
                 <div class="b-user-blog-header__bot">
-                  <p class="b-user-blog-header__date">{{$blog->created_at}}</p>
+                    <p class="b-user-blog-header__date"><span class="moment-time"></span><span class="moment-time-hover"></span><span class="original-time">{{$blog->created_at}}</span></p>
                  <!-- <p class="b-user-blog-header__tags">Бурана, Кыргызстан, Древняя архитектура, Моя родина</p> -->
                 </div>
               </div>

@@ -19,7 +19,7 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
     Route::get('login', 'AuthController@getLogin');
     Route::post('login', 'AuthController@postLogin');
-    Route::post('login/android', 'AuthController@postAndroidLogin');
+    Route::post('login/android', 'AndroidAuthController@postAndroidLogin');
     Route::get('login/fb', 'AuthController@loginWithFacebook');
     Route::get('login/vk', 'AuthController@loginWithVK');
     Route::get('login/g', 'AuthController@loginWithGoogle');
@@ -28,10 +28,13 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
 Route::group(array('before' => 'notauth'), function(){
-    Route::post('main/androidIndex', 'AndroidController@androidIndex');
-    Route::post('main/index/androidNew', 'AndroidController@androidNewTopics');
-    Route::post('main/index/androidTop', 'AndroidController@androidTopTopics');
-    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidController@androidAjaxTopics');
+    Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');
+    Route::post('android/androidCreateNewTopic', 'AndroidMainController@androidCreateNewTopic');
+    Route::post('android/androidCreateNewBlog', 'AndroidMainController@androidCreateNewBlog');
+    Route::post('main/androidIndex', 'AndroidMainController@androidIndex');
+    Route::post('main/index/androidNew', 'AndroidMainController@androidNewTopics');
+    Route::post('main/index/androidTop', 'AndroidMainController@androidTopTopics');
+    Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidMainController@androidAjaxTopics');
 });
 
 Route::group(array('before' => 'auth|activated'),function(){
@@ -124,10 +127,15 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::get('profile/edit/access', 'ProfileController@getEditAccess');
     Route::post('profile/edit/access', 'ProfileController@postAccess');
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
+    Route::get('profile/{id}/subscribtions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscribtionBlogs');
 
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
-	Route::get('topic/create', 'TopicController@create');
-        Route::group(array('before' => 'topic_edit_permission'), function(){
+    Route::get('topic/create', 'TopicController@create');
+    Route::get('topic/create/link', 'TopicController@createLink');
+    Route::get('topic/create/fetch_og', 'TopicController@fetchOG');
+    Route::get('topic/create/fetch_content', 'TopicController@fetchContent');
+
+    Route::group(array('before' => 'topic_edit_permission'), function(){
             Route::get('topic/edit/{id}', 'TopicController@getEdit');
             Route::post('topic/edit/{id}', 'TopicController@postEdit');
             Route::get('topic/delete/{id}', 'TopicController@delete');
@@ -142,7 +150,6 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::get('people/removeFriend/{id}', 'PeopleController@removeFriend');
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
 
-        Route::post('message/send/{id}', 'MessageController@sendMessage');
         Route::get('message/all', 'MessageController@getAll');
         Route::get('message/show/{id}', 'MessageController@show');
         Route::get('messages/inbox/{filter}', 'MessageController@inbox');
@@ -209,34 +216,34 @@ Route::filter('topic_edit_permission', function($route) {
 Route::filter('message_edit_permission', function($route) {
     $message = Message::findOrFail($route->parameter('id'));
     if (!$message->canEdit()) {
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('photoalbum_edit_permission', function($route) {
     $photoAlbum = PhotoAlbum::findOrFail($route->parameter('id'));
     if (!$photoAlbum->canEdit()) {
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('photo_edit_permission', function($route) {
     $photo = Photo::findOrFail($route->parameter('id'));
     if (!$photo->canEdit()) {
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('can_view_photo', function($route){
     $photo = Photo::findOrFail($route->parameter('id'));
     if(!$photo->canView()){
-        return Redirect::back()->with('message', 'You don\'t have enough permissions to do that.');
+        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
     }
 });
 
 Route::filter('topic.canview', function($route){
    $topic = Topic::findOrFail($route->parameter('id'));
    if(!$topic->blog->canView()){
-       return Redirect::back()->with('message', 'You don\'t have enough permissions to see topic.');
+       return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to see topic.</p></div>');
    }
 });

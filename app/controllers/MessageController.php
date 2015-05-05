@@ -3,22 +3,6 @@
 class MessageController extends BaseController{
 
 	/**
-	 * Отправляет сообщение пользователю от авторизованного пользователя.
-	 * 
-	 * @param   $id Id пользователя которому отправляется сообщение
-	 * 
-	 * @return 
-	 */
-	public function sendMessage($reciever_id){
-
-        $message_text = Input::get('text');
-
-        Message::sendMessage(Auth::id(), $reciever_id, $message_text);
-        
-		return Redirect::back()->with('message','message sent successfully');
-	}
-
-	/**
 	 * Достаёт последние 5 сообщений
 	 * 
 	 * @return [type] [description]
@@ -72,19 +56,21 @@ class MessageController extends BaseController{
         return View::make('message.inbox', array('messages' => $messages));
     }
         
+    /**
+     * [newMessage description]
+     * @return [type] [description]
+     */
     public function newMessage(){
+
         $receiver = Input::get('receiver');
+
         return View::make('message.new', array('receiver' => $receiver));
+
     }
 
     public function postNewMessage() {
-        $rules = array(
-            'receiver' => 'required',
-            'title' => 'required|string',
-            'text' => 'required|string',
-            'is_draft' => 'required');
         
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), Message::$rules);
                     
         if ($validator->fails()) {
             return Redirect::back()->withInput()->withErrors($validator);
@@ -94,7 +80,7 @@ class MessageController extends BaseController{
         
         $receiver = User::join('user_description as ud', 'ud.user_id', '=', 'users.id')
                 ->where('ud.first_name', 'like', $names[0])
-                ->where('ud.last_name', 'like', (count($names)>1)?$names[1]:'%')
+                ->where('ud.last_name', 'like', (count($names)>1) ? $names[1] : '%')
                 ->select('users.*')
                 ->first();
                        
@@ -138,7 +124,10 @@ class MessageController extends BaseController{
         $message->draft = 0;
         $message->save();
 
-        return Redirect::back()->with('message', 'Сообщение успешно отправлена');
+        return Redirect::back()->with([
+            'type' => 'success',
+            'text' => 'Сообщение успешно отправлена'
+            ]);
     }
 
     public function outbox(){

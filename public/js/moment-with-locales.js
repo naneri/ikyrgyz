@@ -8186,7 +8186,7 @@
             mm : relativeTimeWithPlural,
             h : 'час',
             hh : relativeTimeWithPlural,
-            d : 'день',
+            d : 'День',
             dd : relativeTimeWithPlural,
             M : 'месяц',
             MM : relativeTimeWithPlural,

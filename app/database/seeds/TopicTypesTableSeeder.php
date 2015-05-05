@@ -7,6 +7,8 @@ class TopicTypesTableSeeder extends Seeder {
 
 	public function run()
 	{
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+            
             //deletes all info
             DB::table('topic_types')->delete();
 
@@ -23,11 +25,16 @@ class TopicTypesTableSeeder extends Seeder {
                 array(
                     'id' => '3',
                     'name' => 'event'
+                ),
+                array(
+                    'id' => '4',
+                    'name' => 'link'
                 )
             );
 
             // inserts the data
             DB::table('topic_types')->insert($users);
-        }
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+    }
 
 }

@@ -1,3 +1,5 @@
+@include('scripts.photobox')
+
 @if($page == 'newsline')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => false))
     @include('topic.build', array('topics' => $items))
@@ -5,8 +7,8 @@
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     @include('topic.build', array('topics' => $items))
 @elseif($page == 'subscribtions')
-    @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     @include('blog.build', array('blogs' => $items))
+    @include('blog.scripts', array('page' => 'profile/'.$user->id.'/subscribtions'))
 @elseif($page == 'friends' || $page == 'mutualFriends' || $page == 'subscribers')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     <div class="masonry">
@@ -31,18 +33,45 @@
 @endif
 
 @if($page == 'newsline')
-    @include('scripts.photobox')
     <script>
         $(document).ready(function() {
-            $('.b-user-media').prependTo(".masonry");
+            //$('.b-user-media').prependTo(".masonry");
+            $('.masonry').css({'width': '495px', 'float': 'left'});
             $('.video-item').each(function(){
                 var $video = $(this).find('div.youtube');
                 $video = $video.find('object').attr('width', '120').attr('height', '120');
                 $(this).html($video);
             });
         });
+        
+        $(function(){
+            var $stickBox = $('.sticky-box');
+            var mediaTop = $stickBox.offset().top;
+            $(window).scroll(function(){
+                var scroll = $(window).scrollTop();
+                if(scroll>mediaTop){
+                    $stickBox.addClass('sticky');
+                }else{
+                    $stickBox.removeClass('sticky');
+                }
+            });
+        });
     </script>
+    <style>
+        .sticky{
+            position: fixed !important;
+            top: 10px;
+            padding: 0;
+        }
+        .b-user-media .sticky-box{
+            width: 400px;
+        }
+        .b-user-media-video-top__btn a{
+            float: right;
+        }
+    </style>
     <div class="b-user-media" style="right: 0px; padding-bottom: 100px;">
+        <div class="sticky-box">
         @if(count($videoIds) > 0)
         <div class="b-user-media__video">
             <div class="b-user-media-video-top">
@@ -139,5 +168,6 @@
             </ul>
         </div>
         @endif
+        </div>
     </div>
 @endif

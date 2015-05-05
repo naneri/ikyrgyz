@@ -1,8 +1,106 @@
+
 <div class="b-search">
 	<div class="b-search__item">
 		<input type="text" value="Поиск">
 		<input type="submit">
 	</div>
+
+<div class="b-topic-navigation menu">
+    <div class="b-topic-navigation__inner">
+        <div class="b-topic-navigation__create">
+            <ul class="b-topic-navigation-list">
+                <li>
+                    <a href="#" class="b-topic-navigation__item">{{ trans('network.create') }}</a>
+                    <ul class="b-topic-navigation-create b-topic-navigation-create-dropdown" style="height: 160px !important">
+                        <li class="b-topic-navigation-create__list">
+                            <a href="{{ URL::to('topic/create') }}">{{ trans('network.topic') }}</a>
+                        </li>
+                        <li class="b-topic-navigation-create__list">
+                            <a href="{{ URL::to('blog/create') }}">{{ trans('network.blog') }}</a>
+                        </li>
+                        <li class="b-topic-navigation-create__list" style="display: none;">
+                            <a href="#">{{ trans('network.drafts') }}</a>
+                        </li>
+                        <li class="b-topic-navigation-create__list">
+                            <a href="{{URL::to('topic/create/link')}}">{{ trans('network.link') }}</a>
+                        </li>
+                        <li class="b-topic-navigation-create__list">
+                            <a href="{{URL::to('photoalbum/create')}}">{{trans('network.photoalbum')}}</a>
+                        </li>
+                        <!--
+                        <li class="b-topic-navigation-create__list">
+                            <a href="#">Опрос</a>
+                        </li>
+                        <li class="b-topic-navigation-create__list">
+                            <a href="#">Событие</a>
+                        </li>
+                        -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="b-topic-navigation__middle">
+            <ul>
+                <li class="b-topic-navigation-item__item"><a href="{{URL::to('main/index/new')}}"><img src="{{ asset('img/33.png') }}" alt=""/><span style="opacity:0">19</span></a></li>
+                <li class="b-topic-navigation-item__item"><a href="{{URL::to('blog/all')}}"><img src="{{ asset('img/41.png') }}" alt=""/><span style="opacity:0">19</span></a></li>
+                <li class="b-topic-navigation-item__item"><a href="{{URL::to('main/index/top')}}"><img src="{{ asset('img/34.png') }}" alt=""/><span style="opacity:0">19</span></a></li>
+                <!--
+                <li class="b-topic-navigation-item__item"><a href="" class="icon-image"><img src="{{ asset('img/35.png') }}" alt=""/></a>
+                    <ul class="b-topic-navigation-icons-list b-topic-navigation-icons-dropdown">
+                        <li class="b-topic-navigation-icons-list__list b-topic-navigation-icons-list__list-padding"><a href="">Видео</a></li>
+                        <li class="b-topic-navigation-icons-list__list"><a href="">Фотоальбомы</a></li>
+                        <li class="b-topic-navigation-icons-list__list"><a href="">Музыка</a></li>
+                        <li class="b-topic-navigation-icons-list__list"><a href="">Ссылки</a></li>
+                        <li class="b-topic-navigation-icons-list__list"><a href="">Опросы</a></li>
+                        <li class="b-topic-navigation-icons-list__list"><a href="">События</a></li>
+                    </ul>
+                </li>
+                -->
+            </ul>
+        </div>
+        <div class="b-topic-navigation__right">
+            <ul class="b-topic-navigation-format">
+                <li class="b-topic-navigation-format__list">
+                    <div class="b-topic-navigation-format__wrapper">
+                    <a href="javascript: void(0)" class="format-icon" style="display: block; width: 42px; padding: 5px 0px 0px 18px;"><img src="{{ asset('img/42.png') }}" alt=""/></a>
+                    <ul class="b-topic-navigation-format-dropdown">
+                        <li><a href="javascript: makeColumnN('1')"><img src="{{ asset('img/44.png') }}" alt=""/></a></li>
+                        <li><a href="javascript: makeColumnN('2')"><img src="{{ asset('img/45.png') }}" alt=""/></a></li>
+                        <li><a href="javascript: makeColumnN('3')"><img src="{{ asset('img/46.png') }}" alt=""/></a></li>
+                    </ul>
+                     </div>
+                </li>
+                <li class="b-topic-navigation-format__list"><!-- <a href="" class="format-icon"><img src="{{ asset('img/37.png') }}" alt=""/><span style="opacity:0">11</span>  --></a>
+                    <ul style="opacity:0" class="b-topic-navigation-online-dropdown">
+                        <li>
+                            <a href="">
+                                <span>Фамилия Имя Отчество</span>
+                                <img src="{{ asset('img/47.png') }}" alt=""/>
+                            </a>
+                            <a href="">
+                                <span>Фамилия Имя Отчество</span>
+                                <img src="{{ asset('img/47.png') }}" alt=""/>
+                            </a>
+                            <a href="">
+                                <span>Фамилия Имя Отчество</span>
+                                <img src="{{ asset('img/47.png') }}" alt=""/>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="b-topic-navigation-format__list">
+                    <div class="buttons-wrapper">
+                        <form id="" method="" action="">
+                            <input type="text" class="format-type btn"/>
+                            <input type="submit" class="format-submit"/>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
 </div>
 <div class="b-topic-navigation menu">
 	<div class="b-topic-navigation__inner ">

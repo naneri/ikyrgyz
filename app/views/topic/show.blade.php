@@ -10,7 +10,7 @@
               <div class="b-profile-about__title">
                 <div class="b-profile-about-title">
                   <p class="b-profile-about-title__title">{{$topic->title}}</p>
-                  <div class="b-profile-about-title__right"><span class="date">{{$topic->created_at()}}</span>
+                  <div class="b-profile-about-title__right"><span class="date moment-time"></span><span class="date moment-time-hover"></span><span class="date original-time">{{$topic->created_at}}</span>
                     @if($topic->canEdit())
                       <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="{{ trans('network.topic-edit') }}" class="btn-edit button-default"/></a>
                       <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="{{ trans('network.topic-delete') }}" class="btn-delete button-default"/></a>
@@ -52,6 +52,9 @@
                   <p class="b-profile-about-text__text">
                     {{$topic->description}}
                   </p>
+                  @if($topic->type->name == 'link')
+                    <p>{{HTML::link($topic->meta, null, array('target' => '_blank'))}}</p>
+                  @endif
                   <div class="clear"></div>
                 </div>
               </div>
@@ -127,6 +130,15 @@ $(document).ready(function(){
     $('select[name="sort_by"]').change(function(){
         comment.sort({{$topic->id}}, $(this).val());
     });
+});
+</script>
+@stop
+
+@section('scripts')
+<script>
+$(document).ready(function(){
+    times.init('.b-profile-about-title__right');
+    times.convert('.b-profile-about-title__right');
 });
 </script>
 @stop

@@ -15,17 +15,21 @@ class TopicController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($type='topic')
 	{
 
-    // Достаём список блогов в которые может постить пользователь
-    $canPublishBlogs = $this->getCanPublishBlogsForView();       
-    if(!$canPublishBlogs){
-        return Redirect::back()->with('message', 'Please create a blog first');
-    }
+            // Достаём список блогов в которые может постить пользователь
+            $canPublishBlogs = $this->getCanPublishBlogsForView();       
+            if(!$canPublishBlogs){
+                return Redirect::back()->with('message', 'Please create a blog first');
+            }
 
-    return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView()));
+            return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView(), 'type' => $type));
 	}
+        
+        public function createLink(){
+            return $this->create('link');
+        }
         
     private function getCanPublishBlogsForView(){
         $canPublishBlogs = null;
@@ -252,8 +256,16 @@ class TopicController extends BaseController {
         $this->topic->description = Input::get('description');
         $this->topic->blog_id = $blogId;
         $this->topic->user_id = Auth::user()->id;
-        $this->topic->type_id = 1;
         $this->topic->draft = $isDraft;
+        if(Input::has('topic_type')){
+            $this->topic->type_id = TopicType::whereName(Input::get('topic_type'))->pluck('id');
+        }
+        if(Input::has('image_url')){
+            $this->topic->image_url = Input::get('image_url');
+        }
+        if(Input::has('link_url')){
+            $this->topic->meta = Input::get('link_url');
+        }
         if (Input::hasFile('avatar')) {
             $new_name = str_random(15) . '.' . Input::file('avatar')->getClientOriginalExtension();
             Input::file('avatar')->move('images/' . $this->topic->blog_id . '/' . $this->topic->id, $new_name);
@@ -263,5 +275,49 @@ class TopicController extends BaseController {
 
         $this->syncTopicTags(Input::get('tags'));
         $this->syncTopicRelations();
+    }
+    
+    public function fetchOG(){
+        $rules = array('url' => 'required|url');
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Response::json('error', 500);
+        }
+        
+        $url = Input::get('url');
+        $graph = OpenGraph::fetch($url);
+        $data = array();
+        if($graph){
+            foreach($graph as $key => $value){
+                $data[$key] = $value;
+            }
+        }else{
+            $data['error'] = 'error get url meta data';
+            return Response::json($data, 500);
+        }
+        return Response::json($data);
+    }
+    
+    public function fetchContent(){
+        $rules = array('url' => 'required|url');
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Response::json('error', 500);
+        }
+
+        $url = Input::get('url');
+        $html = file_get_contents($url);
+
+        $Readability = new Readability($html, 'UTF-8'); // default charset is utf-8
+        $ReadabilityData = $Readability->getContent();
+        if(!$ReadabilityData['lead_image_url']){
+            $ReadabilityData['lead_image_url'] = $Readability->getLeadImageUrlOfBody();
+        }
+
+        return Response::json($ReadabilityData);
     }
 }
