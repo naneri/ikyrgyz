@@ -5,7 +5,6 @@
 
 <div class="b-content">
 
-
 @if(Auth::id() != $user->id)
 	@if($friend_status != True)
 		
