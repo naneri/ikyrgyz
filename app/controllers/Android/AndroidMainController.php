@@ -66,6 +66,13 @@ class AndroidMainController extends BaseController {
         $topic->type_id = 1;
         $topic->user_id = Auth::user()->id;
         $topic->blog_id = $this->getBlogId();
+
+        if (Input::hasFile('avatar')) {
+            $new_name = str_random(15) . '.' . Input::file('avatar')->getClientOriginalExtension();
+            Input::file('avatar')->move('images/' . $this->topic->blog_id . '/' . $this->topic->id, $new_name);
+            $this->topic->image_url = URL::to('/') . '/images/' . $this->topic->blog_id . '/' . $this->topic->id . '/' . $new_name;
+        }
+
         $topic->save();
         exit("ok");
     }
