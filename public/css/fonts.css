@@ -17,7 +17,7 @@
 	font-family: 'PT Sans Caption Bold';
   src: url("../fonts/pt-sans-caption-bold.eot");
   src: url("../fonts/pt-sans-caption-bold.eot?#iefix") format('embedded-opentype'), url("../fonts/pt-sans-caption-bold.woff") format('woff'), url("../fonts/pt-sans-caption-bold.ttf") format('truetype'), url("../fonts/pt-sans-caption-bold.svg#PT Sans Caption Bold") format('svg');
-  font-weight: 'normal';
+  font-weight: 'bold';
   font-style: normal;
 }
 
