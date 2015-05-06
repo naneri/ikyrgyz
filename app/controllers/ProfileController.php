@@ -47,6 +47,13 @@ class ProfileController extends BaseController {
                     case 'videos':
                         $items = $user->topicsWithVideo;
                         break;
+                    case 'favourites':
+                        if($user->id != Auth::id()){
+                            return Redirect::to('profile/'.$user->id);
+                        }
+                        $items = Favourite::where('user_id', Auth::id())->get();
+                        //dd($items);
+                        break;
                     case 'newsline':
                     default:
                         $items = $user->newsline($topicsLimit);

@@ -225,4 +225,16 @@ Class Blog extends Eloquent{
             }
             return $access;
         }
+
+        public function isFavourite() {
+            return Favourite::where('user_id', Auth::id())
+                    ->where('target_type', 'blog')
+                    ->where('target_id', $this->id)
+                    ->exists();
+        }
+
+        public function favourites() {
+            return $this->morphMany('Favourite', 'target');
+        }
+
 }

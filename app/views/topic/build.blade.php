@@ -1,5 +1,6 @@
 <input type="hidden" id="ColumnN"/>
 <div class="masonry" style="display: none">
+    @if(false)
 	<div class="b-widget b-user-wall">
 		<div class="b-widget__inner">
 			<div class="b-widget-list">
@@ -17,7 +18,7 @@
 			</div>
 		</div>
 	</div>
-
+    @endif
 	@foreach($topics as $topic)
 
 	<div class="b-user-wall item">

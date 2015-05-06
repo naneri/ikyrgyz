@@ -188,5 +188,15 @@ class Topic extends Eloquent {
         public function getRatingAttribute($rating) {
             return round($rating, 2);
         }
-
+        
+        public function isFavourite(){
+            return Favourite::where('user_id', Auth::id())
+                    ->where('target_type', 'topic')
+                    ->where('target_id', $this->id)
+                    ->exists();
+        }
+        
+        public function favourites(){
+            return $this->morphMany('Favourite', 'target');
+        }
 }

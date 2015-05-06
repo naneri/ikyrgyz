@@ -255,4 +255,50 @@ class BlogController extends BaseController {
         return Redirect::back();
     }
 
+    public function postFavourite() {
+        $result = array();
+
+        $rules = array(
+            'blog_id' => 'required|exists:blogs,id'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            $result['message'] = 'Error input data!';
+            $result['status'] = 'error';
+            return Response::json($result);
+        }
+
+        $blog = Blog::find(Input::get('blog_id'));
+
+        if (!$blog->canView()) {
+            $result['message'] = 'You cannot favourite this topic';
+            $result['status'] = 'error';
+            return Response::json($result);
+        }
+
+        $favourite = Favourite::where('target_type', 'blog')
+                ->where('target_id', $blog->id)
+                ->where('user_id', Auth::id())
+                ->first();
+
+        if ($favourite) {
+            $favourite->delete();
+            $result['message'] = 'Блог успешно удален из списка избранных';
+            $result['action'] = 'remove';
+        } else {
+            Favourite::create(array(
+                'target_type' => 'blog',
+                'target_id' => $blog->id,
+                'user_id' => Auth::id()
+            ));
+            $result['message'] = 'Блог успешно добавлен в список избранных';
+            $result['action'] = 'add';
+        }
+        $result['status'] = 'success';
+
+        return Response::json($result);
+    }
+
 }

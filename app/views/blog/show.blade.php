@@ -9,6 +9,9 @@
             <div style="margin: 0 20px;font-family: 'PT Sans Caption';">
                 <h3 style="font-size: 15px;font-weight: bold;margin-bottom: 20px;">{{$blog->title}}</h3>
                 <div>{{$blog->description}}</div>
+                <div class="b-profile-about-tags-user__right">
+                    <input type="submit" class="btn btn-favourite @if($blog->isFavourite()) favourite @endif" onclick="return favourite.blog({{$blog->id}});" id="favourite_blog_{{$blog->id}}"/>
+                </div>
             </div>
         </div>
         
@@ -33,4 +36,5 @@
 	</div>
 
 	@include('scripts.script-topic', array('page' => '/blog/showAjax/' . $blog->id , 'no_sorting' => true, 'columnN' => true))	
+        @include('scripts.favourite')
 @stop

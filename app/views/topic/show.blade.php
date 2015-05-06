@@ -84,6 +84,7 @@
                             </ul>
                           </li>
                         </ul>
+                          <input type="submit" class="btn btn-favourite @if($topic->isFavourite()) favourite @endif" onclick="return favourite.topic({{$topic->id}});" id="favourite_topic_{{$topic->id}}"/>
                           <input type="submit" class="btn btn-minus" onclick="return vote.topic({{$topic->id}},-1);"/>
                           <input type="submit" class="btn btn-plus" onclick="return vote.topic({{$topic->id}},1);" /><span class="likes" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
                       </div>
@@ -141,4 +142,5 @@ $(document).ready(function(){
     times.convert('.b-profile-about-title__right');
 });
 </script>
+@include('scripts.favourite')
 @stop
