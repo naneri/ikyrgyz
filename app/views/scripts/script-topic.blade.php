@@ -8,7 +8,7 @@
         }
 		
 	$(document).ready(function(){
-            timesConvert();
+          
             $( function() {
                     
             var $container = $('.masonry');

@@ -1,38 +1,22 @@
- @import 'nib'
- @import 'nib/normalize'
- @import 'lib/*.styl'
- body 
- 	width 100%
- 	background #e5e5e5
- 	overflow-x hidden
- .b-header-nav__icon
- 	
- 	border 1px solid #374C77
- 	border-radius 3px 3px 3px 3px
- 	cursor pointer
- 	height 24px
- 	padding 3px 4px 3px
- 	width 25px
- 	
- 	
- 	display none
- 	div
- 		background-color #fff
- 		border 1px solid #eee
- 		border-radius 2px 2px 2px 2px
- 		height 2px
- 		margin-top 3px
- 		width 90%
-.b-header 
+@import 'nib'
+@import 'nib/normalize'
+@import 'lib/*.styl'
+body
+	width 100%
+	background #e5e5e5
+	overflow-x hidden
+	height 100%
+	
+
+.b-header
 	background url(../img/1.png) repeat-x
-	
-	
-		
+
 	&__inner
-		max-width 1100px
+		max-width 1000px
 		margin 0 auto
 		width 100%
 		margin-bottom 13px
+		position relative
 	&-nav
 		//
 		a
@@ -44,7 +28,7 @@
 				margin-left 10px
 		&__left
 			float left
-			width 40%
+			width 35%
 			
 			
 			img
@@ -60,7 +44,7 @@
 
 		&__middle
 			float left
-			width 27%
+			width 30%
 			.counter
 				background-clip padding-box
 				display inline-block
@@ -78,7 +62,7 @@
 			
 			
 			.b-header-nav-button
-				//	
+				//  
 			
 			.b-header-nav-button__item
 				display inline-block
@@ -93,101 +77,235 @@
 			
 		&__right
 			float right
-			width 33%
-			.b-header-nav-search, .b-header-nav-enc, .b-header-nav-setting
-				line-height 80px 		
+			width 34%
+			
+			.b-header-nav-search
+				line-height 80px        
 				display inline-block
 				padding-left 10px
+				width 100%
 			
 			img
 				vertical-align middle
 			.b-header-nav-setting
 				position relative
 			.b-header-nav-enc__item
-				position relative	
-				
-	
-
-@media screen and (max-width:1200px) {
-	
-	.b-header-nav {	
-		
-		span.search-friend, span.user-name  {
-			display none
-		}
-		
-
-		li.b-header-nav__left {
-		width 30%
-	}
-	li.b-header-nav__middle {
-		width 33%
-	}
-	li.b-header-nav__right {
-		width 33%
-	}
-	
-	.b-header__inner {
-		width 100%
-		max-width 1000px
-		margin 0 auto
-	}
-		
-		
-	}
-	
-	.b-header-nav__right {
-		float right
-		.b-header-nav-search, .b-header-nav-enc, .b-header-nav-setting {
-			padding-right 20%
-		}
-	}
-		
-	.b-header__inner { 
-		max-width 1200px
-		margin 0 auto
-		width 100%
-	}
-	.b-header {
-		background #2e2e2e
-		
-	}
-	
+				position relative  
+			.b-header-nav-search__item
+				max-width 305px
+				width 100%
+				height 26px
+				border 0
+				outline none
+				padding-left 20px
+				font-size 12px
+				font-family 'PT Sans Caption', sans-serif
+				color $baseFontColor
+				border $baseBorder
+				box-shadow $baseBoxShadow
+				border-radius 4px / 2px
 
 
+
+// .b-header-nav__icon
+// 	border 1px solid #374C77
+// 	border-radius 3px 3px 3px 3px
+// 	cursor pointer
+// 	height 24px
+// 	padding 3px 4px 3px
+// 	width 25px
+// 	display block
+// 	div
+// 		background-color #fff
+// 		border 1px solid #eee
+// 		border-radius 2px 2px 2px 2px
+// 		height 2px
+// 		margin-top 3px
+// 		width 90%
+
+.online-icon
+	background url(../img/94.png) no-repeat
+	width 7px
+	height 7px
+	display none
+	position absolute
+	top 0
+	right 10px
+.b-topic-navigation-line
+	.online-icon
+		left 42px
+		
+
+.offline-icon
+	background url(../img/95.png) no-repeat
+	width 7px
+	height 7px
+	display none
+	position absolute
+	top 0
+	right 10px		
+.b-header-nav-menu
+	float left
+	width 20%
+	line-height 80px
+	&__item
+		display inline-block
+		position relative
+		z-index 2000
 	
-}
-@media screen and (max-width:942px) {
-	.b-header-nav__left, .b-header-nav__middle, .b-header-nav__right{
-		
-		padding 3% 0
-		float none
-		
-		
+		a
+			display block
+			background url(../img/99.png) no-repeat
+			width 22px
+			height 20px
+			vertical-align middle
+.b-header-nav-menu
+	display none
+	position relative
 	
-		
-		
-		
-	}
-	.b-header-nav__icon {
+	.b-topic-navigation-menu
+		display none
+		position absolute
+		top 80px
+		left 0
+	.dropdown-list
 		display block
+		z-index 2000
+		
+	.b-topic-navigation-menu__list
+		border 0
+		.title
+			background $orangeGradient
+			color #fff
+			text-align center
+			font 16px 'PT Sans Caption Bold'
+			border 0
+			padding-right 13px
+		.user-name
+			background #fff
+			color #676767
+			font 15px 'PT Sans Caption'
+			
+			img
+				vertical-align middle
+				padding-right 10px
+	
+	
+	
+		
+.b-header-nav-random
+	display none
+	float left
+	width 10%
+	line-height 80px
+	&__item
+		display inline-block
+		a
+			display block
+			background url(../img/100.png) no-repeat
+			width 22px
+			height 22px
+			vertical-align middle
+.b-header-nav-icon-search
+	display none
+	float right
+	width 20%
+	line-height 80px
+	&__item
+		display inline-block
+		a
+			display block
+			background url(../img/101.png) no-repeat
+			width 22px
+			height 22px
+			vertical-align middle			
+.b-search
+	display none
+	width 100%
+	margin 0 20px 20px
+	&__item
+		border 1px solid #899599
+		box-shadow $baseBoxShadow
+		width 93%
+		background #fff
+		input[type="text"]
+			width 92.3%
+			height 27px
+			border 0
+			outline none
+			padding 0
+			margin 0
+			color $baseFontColorLight
+			font 12px 'PT Sans Caption', sans-serif
+			padding-left 2%
+			
+			
+		input[type="submit"]
+			width 5.1%
+			height 27px			
+			border 0
+			outline none
+			text-indent -9999px
+			cursor pointer
+			background-color #f67658
+			background-image url(../img/102.png)
+			background-repeat no-repeat
+			background-position 50% 50%
+			padding 0
+			margin 0
+			
+			
+@media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+	.b-header-nav__left {
+		display none
 		
 	}
-	.b-header-nav-list {
+	.b-header-nav-menu {
+		display block
+		width 25%
+		padding-left 5%
+	}
+	.b-header-nav__middle {
+		width 50%
+	}
+	.b-header-nav__middle .b-header-nav-button__item {
+		line-height 72px
+		
+	}
+	.b-header-nav__right  {
 		display none
 	}
-	.b-header-nav-button {
-		width 150px
+	.b-header-nav-random {
+		display block
+		width 10%
 	}
-	.b-header-nav-enc {
-		width 150px
+	.b-header-nav-icon-search {
+		display block
+		width 10%
+	}
+	.b-topic-navigation-menu {
+		display none
+	}
+	.b-topic-navigation-format {
+		display none
+	}
+	.cube {
+		display none
+	}
+	.b-topic-navigation__left {
+		padding-left 22px
+	}
+	.b-topic-navigation__right {
+		padding-right 20px
 	}
 	
-	.b-header-nav-logo {
-		width 400px
-	}
 	
+	
+	
+
 }
+
+
 
 
 	
@@ -285,11 +403,11 @@
 .b-header-sub-menu
 	display none
 	position absolute
-	right 160px	
+	right 160px 
 	background #e1674a
 	width 185px
 	height 114px
-	border-bottom 4px solid #c84526	
+	border-bottom 4px solid #c84526 
 	float left
 	z-index 1000
 	top 0
@@ -302,8 +420,8 @@
 		img
 			padding-right 10px
 		a
-			white-space wrap	
-	
+			white-space wrap    
+
 
 .b-content 
 	max-width 1000px
@@ -329,10 +447,10 @@
 				font-family 'PT Sans Caption'
 		.user-image
 			//
-			img				
+			img             
 				border 5px solid #fff
 				max-width 255px
-				max-height 255px		
+				max-height 255px        
 				
 	
 	&__middle 
@@ -356,7 +474,7 @@
 		.user-date
 			font-size 12px
 			color #676767
-			font-family 'PT Sans Caption'			
+			font-family 'PT Sans Caption'           
 	&__right
 		float right
 		width 26%
@@ -399,12 +517,12 @@
 			a
 				background-position  -87px 0
 				&:hover 
-					background-position -125px 0		
+					background-position -125px 0        
 		&:nth-child(3)
 			a
 				background-position  -170px 0
 				&:hover 
-					background-position -207px 0	
+					background-position -207px 0    
 		&:nth-child(4)
 			a
 				background-position  -254px 0
@@ -414,13 +532,13 @@
 			a
 				background-position  -340px 0
 				&:hover 
-					background-position -378px 0			
+					background-position -378px 0            
 					
 		&:nth-child(6)
 			a
 				background-position  -426px 0
 				&:hover 
-					background-position -464px 0	
+					background-position -464px 0    
 		&:nth-child(7)
 			a
 				background-position  -511px 0
@@ -451,19 +569,19 @@
 			&:hover .system-image
 				background-position 1px -217px
 			&:hover .random-image
-				background-position 5px -252px		
+				background-position 5px -252px      
 		span
 			width 44px
 			height 35px
 			background url(../img/14.png) no-repeat
 			display inline-block
 			vertical-align middle
-			float left			
+			float left          
 			padding-right 10px
 			
 			
 		.msg-image
-			background-position 0 6px	
+			background-position 0 6px   
 			
 		.search-image
 			background-position 0 -43px
@@ -475,12 +593,12 @@
 		.random-image
 			background-position 5px -307px
 			width 63px
-			height 60px	
+			height 60px 
 			
 		&:nth-child(4)
 			a
 				height 72px
-				line-height 72px				
+				line-height 72px                
 				margin 15px 0 0 0
 
 .b-user-navigation
@@ -537,26 +655,76 @@
 		padding 15px 25px
 		background url(../img/27.png) no-repeat
 		background-position 0 17px
-		&:hover			 
+		&:hover          
 			opacity 0.8
 			background-image url(../img/61.png)
 			background-repeat no-repeat
+// .b-widget
+// 	width 100%
+
+.b-widget-list
+	background #e2664a
+	
+	&__list
+		float left
+		padding 25px 0 40px 0
+		text-align center
+		&:hover
+			background #f67457
+		a
+			display block
+			background url(../img/86.png) no-repeat
+			width 61px
+			height 32px
+			font 14px 'PT Sans Caption', sans-serif
+			color #fff
+			line-height 90px
 			
-		
 			
+			
+			
+			
+		&:nth-child(1)
+			padding-left 10px
+			a
+				background-position 13px 0
+				
+		&:nth-child(2)
+			a
+				background-position -65px 0
+		&:nth-child(3)
+			a
+				background-position -146px 0
+		&:nth-child(4)
+			a
+				background-position -229px 0
+		&:nth-child(5)
+			a
+				background-position -306px 0
+		&:nth-child(6)
+			a
+				background-position -387px 0
+		&:nth-child(7)
+			a
+				background-position -464px 0
+		&:nth-child(8)
+			a
+				background-position -514px 0
+				width 40px
 .b-section-wrapper
 	width 100%
 	max-width 1000px
 .b-user-wall-1000
 	width 650px !important
-	margin-left 175px !important
-	.b-user-wall-footer-btn__about
-		padding-right 250px
-	.b-user-wall-footer-btn__share
-		padding-right 40px
+	
+	margin-left 150px !important
+
 	
 .b-user-wall-325
 	width 325px
+	.b-user-wall-footer-raiting__right
+		float left
+		padding-top 10px
 .b-user-wall-495
 	
 	width 495px
@@ -599,7 +767,7 @@
 				
 		&__title 
 			color #333
-			font-family 'PT Sans Caption Bold'			
+			font-family 'PT Sans Caption Bold'          
 			margin 5px 0 0 0
 			
 			
@@ -617,7 +785,7 @@
 			margin 5px 0 0 0
 		&__vision
 			color #999
-			font-family 'PT Sans Caption Bold'	
+			font-family 'PT Sans Caption Bold'  
 			font-size 10px
 			float right
 			
@@ -629,10 +797,13 @@
 				padding 0 5px
 	&-image
 		img
-			width 100%		
+			width 100%      
 			overflow hidden
 	&-footer
-		padding 10px
+		//
+		&-header
+			
+			padding 0 10px 10px
 		&__image
 			float left
 			margin-right 15px
@@ -645,6 +816,10 @@
 			font-size 12px
 			color #999
 			font-family 'PT Sans Caption'
+		&-social-list
+			float right
+			padding-top 10px
+			
 		&__btn
 			margin 10px 0 0 0
 			position relative
@@ -654,7 +829,7 @@
 				display inline-block
 			
 			.b-user-wall-footer-list
-				display inline-block	
+				display inline-block    
 				
 				
 			.about-btn
@@ -704,27 +879,96 @@
 				font-size 15px
 				font-family 'PT Sans Caption Bold'
 				line-height 30px
-.b-user-wall-footer-btn
-	//
-	&__about
-		
+.cube
+	position absolute
+	right 10px
+	top 170px
+	a
+		display block
+		background url(../img/105.png) no-repeat
+		width 22px
+		height 22px
+					
+.b-user-wall-footer-social-list__list
+	float left
+	a
+		display block
+		width 25px
+		height 25px
+		background url(../img/98.png) no-repeat
+	&:nth-child(1)
+		a
+			background-position 0 0
+	&:nth-child(2)			
+		a
+			background-position -25px 0
+	&:nth-child(3)			
+		a
+			background-position -50px 0	
+	&:nth-child(4)			
+		a
+			background-position -75px 0
+	&:nth-child(5)			
+		a
+			background-position -100px 0
+	&:nth-child(6)			
+		a
+			background-position -125px 0													
+.b-user-wall-footer-raiting
+	border-top $baseBorder
+	
+	padding 10px 10px 10px
+	&__left
+		max-width 360px
+		width 100%
 		float left
-	&__share
-		
-		float left
-	&__minus
-		
-		float left
-	&__plus
-		
-		float left
-	&__raiting
+	&__right
 		float right
+	&__tag
+		
+		background #f3f3f3
+		color #676767
+		font 12px 'PT Sans Caption', sans-serif
+		padding 8px 0
+		
+	&__arrow-down
+		float left
+		
+		input
+			background url(../img/96.png) no-repeat
+			background-position 50% 50%
+			
+	&__number
+		float left
+		padding-left 10px
+		span
+			line-height 30px
+		
+	&__arrow-up
+		float left
+		padding-left 10px
+		
+		input
+			background url(../img/97.png) no-repeat
+			background-position 50% 50%
+	
+.btn-raiting
+	border $baseBorder
+	background $lightGradient
+	width 32px
+	height 32px
+	cursor pointer
+.number-raiting
+	color #26ad85
+	font 15px 'PT Sans Caption Bold'
+	
+
+	
 	
 	
 			
 .b-user-wall-footer-list
-	position relative				
+	position relative               
 .b-user-wall-footer-dropdown
 	display none
 	position absolute
@@ -762,14 +1006,64 @@
 			background-position 0 -26px
 	li:nth-child(3)
 		a
-			background-position 0 -52px	
+			background-position 0 -52px 
 	li:nth-child(4)
 		a
-			background-position 0 -78px	
+			background-position 0 -78px 
 	li:nth-child(5)
 		a
-			background-position 0 -104px								
-			
+			background-position 0 -104px                                
+	
+
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	.b-user-wall-495 {
+		width 95%
+		margin-left 20px
+		margin-right 20px
+
+	}
+	.b-user-wall-1000 {
+		width 100%
+		margin-left 20px
+		margin-right 20px
+
+	}
+	.b-user-wall-325 {
+		width 95%
+		margin-left 20px
+		margin-right 20px
+
+	}
+	
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width : 768px) {
+	.b-user-wall-495 {
+		width 95%
+		margin-left 20px
+		margin-right 20px
+
+	}
+	
+	.b-user-wall-1000 {
+		width 100%
+		margin-left 20px
+		margin-right 20px
+
+	}
+	.b-user-wall-325 {
+		width 95%
+		margin-left 20px
+		margin-right 20px
+
+	}
+
+}
+
+.b-user-wall    
+	margin-bottom 10px
+  		
 .b-user-media
 	width 40%
 	float right
@@ -805,7 +1099,7 @@
 		
 		img
 			border 1px solid rgba(127,127,127,.3)
-			padding 3px	
+			padding 3px 
 			background #fff
 			max-width 113px
 			overflow hidden
@@ -852,7 +1146,7 @@ Topic
 				background-position 0 -61px
 		&:nth-child(4)
 			a
-				background-position 0 -84px	
+				background-position 0 -84px 
 		&:nth-child(5)
 			a
 				background-position 0 -121px
@@ -918,20 +1212,327 @@ Topic
 			right 0
 			top 14px
 .b-topic-navigation__inner
-	background #fff
-	height 100%
-	box-shadow 0 1px 5px rgba(0,1,0,.3)
 	max-width 1000px
 	width 100%
-.b-topic-navigation__create
+	margin 0 auto
+	border-left $baseBorder
+	
+	height 40px
+	
+	
+	
+.b-topic-navigation
 	//
+	&__left
+		float left
+	&__right
+		float right 
+	
+.b-topic-navigation-menu
+	float left
+	padding-right 47px
+	line-height 40px
+	
+	
+	&__list 
+		position relative
+		border-right $baseBorder
+		padding-left 23px
+		a.arrow
+		
+			font  16px $baseFontFamilyBold
+			color $baseFontColorLight
+			
+			
+			
+			&:after
+				display inline-block
+				content ''
+				background url(../img/75.png) no-repeat
+				width 9px
+				height 5px
+				vertical-align middle
+				margin-left 7px
+				padding-right 8px
+			
+.b-topic-navigation-menu__list
+	//
+	.raiting
+		float right 
+	
+.b-topic-navigation-sort
+	float left
+	width 145px
+	
+	
+	&__item
+		float left
+		position relative
+		a
+			
+			width 38px
+			height 40px
+			background url(../img/73.png) no-repeat
+			display block
+		
+		&:nth-child(1)
+			a
+				background-position 0 10px
+		&:nth-child(2)
+			a
+				background-position -38px 10px
+		&:nth-child(3)
+			a
+				background-position -76px 10px
+.b-topic-navigation-category
+	float left
+	width 240px
+	
+	
+	&__item
+		float left
+		a
+			width 38px
+			height 40px
+			background url(../img/81.png) no-repeat
+			display block
+			border-right $baseBorder
+			border-left 1px solid transparent
+		
+			
+			
+			&:hover
+				background url(../img/80.png) no-repeat
+				width 38px
+				height 40px
+				display block
+				border-right 1px solid transparent
+				border-left 1px solid transparent
+		&:nth-child(1)
+			a
+				background-position 0 0
+				&:hover
+					background-position 0 0
+					
+		&:nth-child(2)
+			a
+				background-position -39px 0 
+		&:nth-child(3)
+			a
+				background-position -80px 0
+		&:nth-child(4)
+			a
+				background-position -119px 0
+		&:nth-child(5)
+			a
+				background-position -157px 0
+		&:nth-child(6)
+			a
+				background-position -195px 0
+		&:first-child
+			a
+				border-left $baseBorder     
+				
+.b-topic-navigation-choose
+	float left
+	padding-top 20px	
+	padding-left 8px
+	&__list
+		position relative
+	
+	
+	
+	
+	&__item
+		width 20px
+		height 20px
+		background url(../img/77.png) no-repeat
+		display block
+		
+		
+	.dropdown-list
+		background #fff
+		width 203px
+		left -10px
+		box-shadow $baseBoxShadow 
+		border $baseBorder
+		border-bottom 4px solid #676767
+		
+		
+			
+		&__item
+			padding 10px 10px
+			line-height normal
+			&:hover
+				background #edebeb
+			&:first-child
+				&:hover
+					background #fff		
+
+
+input[type='checkbox'].choose-list
+	position relative
+	
+	
+
+
+input[type='checkbox'].choose-list + span.choose-list-target:after 
+	//
+	
+	
+	
+
+
+input[type='checkbox'].choose-list:checked + span.bigcheck-target:after 
+	//
+div.choose-list
+	//
+	
+	
+.dropdown-list__item_title
+	text-align center
+	font 12px 'PT Sans', sans-serif
+	color #899599
+	padding-top 10px
+	
+.dropdown-list__item
+	
+	
+
+	img
+		width 24px
+		height 21px
+		vertical-align middle
+		padding-right 10px
+	span
+		font 13px 'PT Sans', sans-serif
+		color $baseFontColorLight
+		padding-right 28px
+		
+	input
+		float right
+		
+	
+		
+
+		
+
+
+
+.b-topic-navigation-line
+	float left
+	
+	padding-right 5px
+	position relative
+	height 40px
+	border-left $baseBorder
+	padding-left 5px
+	&__item
+		display block
+		width 31px
+		height 50px
+		background url(../img/78.png) no-repeat
+		background-position 0 10px
+	.dropdown-list
+		background #fff
+		width 200px
+		left -160px
+		border 1px solid #dfdfdf
+		box-shadow 0 1px 5px rgba(0,1,0,.24)
+		border-bottom 4px solid #676767
+		span
+			color $baseFontColorLight
+			font 12px 'PT Sans', sans-serif
+			
+		img
+			vertical-align middle
+			width 30px 
+			height 30px
+			padding-right 7px
+			
+		li
+			padding-bottom 5px
+			padding-left 15px
+			position relative
+			&:first-child
+				padding-top 13px
+.b-topic-navigation-format
+	float left
+	position relative
+	&__item
+		display block
+		width 22px
+		height 40px
+		background url(../img/79.png) no-repeat
+		background-position 10px 10px
+		border-left $baseBorder
+		border-right $baseBorder
+		padding 0 10px
+	.dropdown-list
+		width 42px
+		left 1px
+		background #fff
+		
+
+.format-list
+	//
+	a
+		display block
+		background url(../img/85.png) no-repeat
+		width 40px
+		height 30px
+		
+	&:nth-child(1)
+		a
+			background-position 0 0
+	&:nth-child(2)
+		a
+			background-position 0 -31px
+	&:nth-child(3)
+		a
+			background-position 0 -62px    
+.dropdown-list
+	display none
+	position absolute
+	top 100%
+	left 0
+	z-index 5000
+	line-height normal
+	width 234px
+	border-bottom 4px solid #676767
+	dt
+		background $lightGradient
+		color $orangeFontColor
+		padding 16px 0 14px 13px
+		font 13px 'PT Sans ', sans-serif
+		border-bottom $baseBorder
+		border-top $baseBorder
+		a
+			color $baseFontColorLight
+		
+	dd
+		background #fff
+		color $baseFontColorLight
+		padding 0 22px 0 20px
+		font 13px 'PT Sans', sans-serif
+		line-height 30px
+		&:hover
+			background #edebeb
+		a
+			color $baseFontColorLight
+		img
+			vertical-align middle
+			float right
+		
+.b-topic-navigation__create
+
 .b-topic-navigation-create-dropdown
 	width 165px
 	height 260px
 	border-bottom 4px solid #676767;
 	a
 		color #676767
-		font-family 'PT Sans Caption'	
+		font-family 'PT Sans Caption'   
 		font-size 15px
 		
 		&:hover
@@ -953,14 +1554,18 @@ Topic
 				margin 20px 0 0 0
 	
 		
-			
+		
 	
 .b-topic-navigation-format__list:last-child
-	float right		
+	float right     
 		
 				
 .b-topic-navigation
 	margin-bottom 13px
+	background $lightGradient
+	box-shadow 0 1px 1px rgba(127,127,127,.3)
+	
+	
 	
 	
 	.b-topic-navigation__create
@@ -977,7 +1582,7 @@ Topic
 			position absolute
 			top 100%
 			left 15px
-			z-index 1000			
+			z-index 1000            
 			width 166px
 			height 260px
 			background #fff
@@ -987,7 +1592,7 @@ Topic
 				a
 					display inline-block
 					padding-left 30px
-					vertical-align middle					
+					vertical-align middle                   
 					color #676767
 					font-size 15px
 					font-family 'PT Sans Caption'
@@ -1023,34 +1628,34 @@ Topic
 		width 23px
 		height 26px
 		background url(../img/36.png) no-repeat
-	&:nth-child(1)	
+	&:nth-child(1)  
 		a
 			background-position 0 0
-	&:nth-child(2)	
+	&:nth-child(2)  
 		a
-			background-position 0 -36px		
-	&:nth-child(3)	
+			background-position 0 -36px     
+	&:nth-child(3)  
 		a
 			background-position 0 -70px
-	&:nth-child(4)	
+	&:nth-child(4)  
 		a
 			background-position 0 -102px
-	&:nth-child(5)	
+	&:nth-child(5)  
 		a
 			background-position 0 -135px
-	&:nth-child(6)	
+	&:nth-child(6)  
 		a
 			background-position 0 -166px
 
 .topic-preview-text
-    margin 15px 25px 10px
-    color #3f4242
-    font 15px 'PT Sans'
-    line-height 23px
-    word-wrap break-word
+	margin 15px 25px 10px
+	color #3f4242
+	font 15px 'PT Sans'
+	line-height 23px
+	word-wrap break-word
 
 .topic-description 
-    color #3f4242
+	color #3f4242
 	
 .b-topic-navigation__middle > ul li img
 	//
@@ -1059,12 +1664,12 @@ Topic
 	
 	
 	
-.b-topic-navigation__right
-	float right
-	width 30%
-	display inline-block
-	padding 2px 0 0 0
-	max-width 253px
+// .b-topic-navigation__right
+//  float right
+//  width 30%
+//  display inline-block
+//  padding 2px 0 0 0
+//  max-width 253px
 	
 	
 	
@@ -1072,7 +1677,7 @@ Topic
 .b-topic-navigation-format-dropdown
 	display none
 	position absolute
-	background #fff	
+	background #fff 
 	top 100%
 	left 0
 	z-index 1000
@@ -1091,11 +1696,11 @@ Topic
 		font-family 'PT Sans Caption'
 	a
 		&:hover
-			opacity 0.5	
+			opacity 0.5 
 .b-topic-navigation-format__wrapper
-	position relative	
+	position relative   
 .b-topic-navigation-format__list
-	display inline-block	
+	display inline-block    
 	padding 5px
 	span
 		color #e16549
@@ -1112,8 +1717,8 @@ Topic
 		height 28px
 		
 		
-	.format-type		
-		display inline-block		
+	.format-type        
+		display inline-block        
 		border 0
 		width 6.9em
 		height 1.625em
@@ -1127,7 +1732,7 @@ Topic
 		background-position 50% 50%
 		text-indent 9999px
 		background-color #e16549
-		display inline-block		
+		display inline-block        
 		border-top-right-radius 3px
 		border-bot-right-radius 3px
 		cursor pointer
@@ -1199,13 +1804,13 @@ a.format-icon
 		width 150px
 	}
 	.b-topic-navigation {
-		height auto
+		
 		
 	}
 	.b-topic-navigation__right {
-		display block
-		float none
-		width 133px
+		
+		
+		
 	}
 	
 	
@@ -1245,7 +1850,7 @@ Form Style
 	top 15px
 	right 20px
 	
-	cursor pointer	
+	cursor pointer  
 	&:hover
 		background url(../img/50.png) no-repeat
 #simplemodal-container 
@@ -1385,7 +1990,7 @@ Form Style
 		
 	.change-skin-title 
 		font-size 14px
-		color #999		
+		color #999      
 		font-family 'PT Sans Caption'
 		margin-right 10px
 		display inline-block
@@ -1393,7 +1998,7 @@ Form Style
 .b-topic-create-gallery
 	height 700px
 	&__title
-		background-image $lightGradient		
+		background-image $lightGradient     
 		padding 10px
 		position relative
 		font 16px 'PT Sans Caption Bold'
@@ -1445,7 +2050,7 @@ Form Style
 			.gallery-wrapper
 				height 500px
 				overflow-y scroll
-			input[value="отмена"]
+			input[value="РѕС‚РјРµРЅР°"]
 				width 73px
 				height 32px
 				background $lightGradient
@@ -1454,7 +2059,7 @@ Form Style
 					background url('../img/18.png') repeat-x
 					color #fff
 					border-bottom 2px solid #b43b1f
-			input[value="добавить"]
+			input[value="РґРѕР±Р°РІРёС‚СЊ"]
 				width 106px
 				height 32px
 				background $lightGradient
@@ -1462,7 +2067,7 @@ Form Style
 				&:hover
 					background url('../img/18.png') repeat-x
 					color #fff
-					border-bottom 2px solid #b43b1f	
+					border-bottom 2px solid #b43b1f 
 			
 .b-topic-create-gallery-content-table
 	
@@ -1480,7 +2085,7 @@ Form Style
 		margin-left 100px
 	.photo-name
 		display inline-block
-		width 370px	
+		width 370px 
 		margin-left 10px
 	&__title
 		height 15px
@@ -1502,7 +2107,7 @@ Form Style
 .b-topic-create-music
 	height 700px
 	&__title
-		background-image $lightGradient		
+		background-image $lightGradient     
 		padding 10px
 		position relative
 		font 16px 'PT Sans Caption Bold'
@@ -1556,7 +2161,7 @@ Form Style
 			.music-wrapper
 				height 500px
 				overflow-y scroll
-			input[value="отмена"]
+			input[value="РѕС‚РјРµРЅР°"]
 				width 73px
 				height 32px
 				background $lightGradient
@@ -1565,7 +2170,7 @@ Form Style
 					background url('../img/18.png') repeat-x
 					color #fff
 					border-bottom 2px solid #b43b1f
-			input[value="добавить"]
+			input[value="РґРѕР±Р°РІРёС‚СЊ"]
 				width 106px
 				height 32px
 				background $lightGradient
@@ -1573,10 +2178,10 @@ Form Style
 				&:hover
 					background url('../img/18.png') repeat-x
 					color #fff
-					border-bottom 2px solid #b43b1f	
+					border-bottom 2px solid #b43b1f 
 			
 .b-topic-create-music-content-table
-	//	
+	//  
 	
 	
 	
@@ -1591,7 +2196,7 @@ Form Style
 		margin-left 100px
 	.photo-name
 		display inline-block
-		width 370px	
+		width 370px 
 		margin-left 10px
 	&__title
 		height 15px
@@ -1612,7 +2217,7 @@ Form Style
 	width 403px
 	height 253px
 	background #fff
-	&__title		
+	&__title        
 		background-image $lightGradient
 		padding 10px
 		position relative
@@ -1629,7 +2234,7 @@ Form Style
 		border 1px solid rgba(169,169,169,.4)
 		color #999
 		font-size 12px
-		font-family 'PT Sans Caption'	
+		font-family 'PT Sans Caption'   
 	&__item
 		
 		color #999
@@ -1639,7 +2244,7 @@ Form Style
 	&-wrapper
 		border 1px solid rgba(169,169,169,.4)
 		margin 10px 10px
-	input[value="Выбрать файл"]
+	input[value="Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»"]
 		width 107px
 		
 		display inline-block
@@ -1683,7 +2288,7 @@ Form Style
 	&-buttons
 		
 		float right
-		input[value="Отмена"]
+		input[value="РћС‚РјРµРЅР°"]
 			width 73px
 			height 32px
 			background $lightGradient
@@ -1696,7 +2301,7 @@ Form Style
 				background url('../img/18.png') repeat-x
 				color #fff
 				border-bottom 2px solid #b43b1f
-		input[value="Добавить"]
+		input[value="Р”РѕР±Р°РІРёС‚СЊ"]
 			width 106px
 			height 32px
 			background $lightGradient
@@ -1814,12 +2419,12 @@ Form blog Style
 
 
 // .jq-selectbox .jq-selectbox__trigger-arrow
-// 	background url(../img/54.png) no-repeat
-// 	background-position 50% 50%
-// 	width 6px
-// 	height 12px
-// 	display block
-// 	border none
+//  background url(../img/54.png) no-repeat
+//  background-position 50% 50%
+//  width 6px
+//  height 12px
+//  display block
+//  border none
 
 
 
@@ -1852,7 +2457,7 @@ about profile Style
 	&__right
 		float right
 		display inline-block
-		margin 5px 0 0 0	
+		margin 5px 0 0 0    
 		
 		.date
 			color #999
@@ -1866,10 +2471,10 @@ about profile Style
 		.btn-edit
 			
 			display inline-block
-			font 10px $baseFontFamilyBold			
+			font 10px $baseFontFamilyBold           
 			color $baseFontColor
-		.btn-delete			
-			font 10px $baseFontFamilyBold			
+		.btn-delete         
+			font 10px $baseFontFamilyBold           
 			color $baseFontColor
 			margin-right 5px
 		.count
@@ -1886,7 +2491,7 @@ about profile Style
 	//
 	&__image
 		max-width 45px
-		max-height 45px	
+		max-height 45px 
 		
 		
 .b-profile-about-profile
@@ -1918,7 +2523,7 @@ about profile Style
 		margin-left 5px
 	.rating-num
 		color #25ad85
-		font 10px $baseFontFamilyBold	
+		font 10px $baseFontFamilyBold   
 		margin-left 5px
 		
 .b-profile-about-text
@@ -2002,8 +2607,8 @@ p.b-profile-about-gallery__title
 		
 		
 		
-.b-profile-about	
-	background #fff	
+.b-profile-about    
+	background #fff 
 	&__inner
 		margin 0 40px
 		
@@ -2031,7 +2636,7 @@ p.b-profile-about-gallery__title
 		
 		&:first-child
 			.b-profile-about-player-list__wrapper
-				//	
+				//  
 				&:active 
 					background #b7b7b5
 					opacity 0.5
@@ -2106,7 +2711,7 @@ p.b-profile-about-topics__title
 	margin-bottom 10px
 	height 35px
 	line-height 35px
-	padding-left 10px		
+	padding-left 10px       
 			
 
 
@@ -2176,8 +2781,8 @@ p.b-profile-about-topics__title
 			font 12px $baseFontFamily
 		.btn-follow, .count-topic
 			margin-right 5px
-ul.b-profile-about-tags-user-list-dropdown	
-	dropdown()	
+ul.b-profile-about-tags-user-list-dropdown  
+	dropdown()  
 	padding 10px 8px 8px 8px
 	z-index 1000
 	width 112px
@@ -2191,7 +2796,7 @@ ul.b-profile-about-tags-user-list-dropdown
 	
 ul.b-profile-about-tags-user-list
 	display inline-block
-	text-align center	
+	text-align center   
 	button-default()
 	margin-right 20px
 	
@@ -2219,8 +2824,8 @@ ul.b-profile-about-tags-user-list
 				width 20px
 				height 20px
 				margin 5px 5px
-				padding-left 30px			
-				vertical-align middle			
+				padding-left 30px           
+				vertical-align middle           
 				white-space nowrap
 				
 		li:nth-child(1)
@@ -2231,13 +2836,13 @@ ul.b-profile-about-tags-user-list
 				background-position 0 -26px
 		li:nth-child(3)
 			a
-				background-position 0 -52px	
+				background-position 0 -52px 
 		li:nth-child(4)
 			a
-				background-position 0 -78px	
+				background-position 0 -78px 
 		li:nth-child(5)
 			a
-				background-position 0 -104px	
+				background-position 0 -104px    
 		
 
 .b-profile-about-form
@@ -2277,17 +2882,17 @@ ul.b-profile-about-tags-user-list
 				a
 					background-position -35px 0
 					&:hover
-						background-position -197px 0			
+						background-position -197px 0            
 			&:nth-child(3)
 				a
 					background-position -73px 0
 					&:hover
-						background-position -160px 0	
+						background-position -160px 0    
 			&:nth-child(4)
 				a
 					background-position -113px 0
 					&:hover
-						background-position -270px 0					
+						background-position -270px 0                    
 	.b-profile-about-form__item
 		padding-bottom 15px
 		
@@ -2379,7 +2984,7 @@ ul.b-profile-about-tags-user-list
 		width 32px
 		height 32px
 		text-indent -9999px
-		background-color $lightGradient		
+		background-color $lightGradient     
 	
 p.b-profile-about-message-button__raiting
 	color #26ad85
@@ -2396,10 +3001,9 @@ interface
 	background-color #fff
 	max-width 900px
 	width 100%
-	&__inner
-		//
-	&__header
+	
 		
+	&__header
 		background $lightGradient
 		position relative
 		box-shadow $baseBoxShadow
@@ -2455,7 +3059,7 @@ interface
 				background $lightGradient
 				padding 5px 9px
 				color $baseFontColorLight
-				font 15px $baseFontFamily				
+				font 15px $baseFontFamily               
 				box-shadow 0 1px 1px rgba(127,127,127,.3)
 				display block
 				box-sizing padding-box
@@ -2472,7 +3076,7 @@ interface
 			color #fff
 			background linear-gradient(top, #f67658 0%, #c4563c 100%)
 
-			border-bottom 2px solid #b43c1f				
+			border-bottom 2px solid #b43c1f             
 
 	
 .b-user-interface-content-item
@@ -2594,7 +3198,7 @@ interface
 		
 		
 	&__desc
-		font 12	px $baseFontFamily
+		font 12 px $baseFontFamily
 		color $baseFontColor
 		float left
 	&__center
@@ -2738,7 +3342,7 @@ blog style
 	
 	
 	&-header
-		padding 10px		
+		padding 10px        
 		
 		&__tags
 			font 12px $baseFontFamily
@@ -2764,7 +3368,7 @@ blog style
 			display inline-block
 		&__vision
 			color #999
-			font-family 'PT Sans Caption Bold'	
+			font-family 'PT Sans Caption Bold'  
 			font-size 10px
 			text-align right
 			display inline-block
@@ -2780,7 +3384,7 @@ blog style
 			max-width 550px
 			overflow hidden
 	&-footer
-		padding 10px	
+		padding 10px    
 		
 		
 		&__btn
@@ -2804,7 +3408,7 @@ blog style
 				display inline-block
 			
 			.b-user-wall-footer-list
-				display inline-block	
+				display inline-block    
 				
 				
 			.about-btn
@@ -2855,7 +3459,7 @@ blog style
 				font-family 'PT Sans Caption Bold'
 				
 .b-user-blog-footer-list
-	position relative				
+	position relative               
 .b-user-blog-footer-dropdown
 	display none
 	position absolute
@@ -2893,10 +3497,10 @@ blog style
 			background-position 0 -26px
 	li:nth-child(3)
 		a
-			background-position 0 -52px	
+			background-position 0 -52px 
 	li:nth-child(4)
 		a
-			background-position 0 -78px	
+			background-position 0 -78px 
 	li:nth-child(5)
 		a
 			background-position 0 -104px
@@ -2905,24 +3509,7 @@ blog style
 	
 
 
-.b-user-wall
-	
-	
-	margin 0 auto 10px
-@media screen and (max-width:1024px) {
-	.b-user-wall {
-		
-		max-width 49%
-		
-	}
-}		
-@media screen and (max-width:640px) {
-	.b-user-wall {
-		
-		width 100%
-		max-width 600px
-	}
-}
+
 
 
 /*
@@ -2952,11 +3539,73 @@ music player style
 		top 8px
 		cursor pointer
 		
-	
-	
-		
-		
-	
-		
-.b-music-interface-player__item
-	display inline-block	
+
+
+
+
+/*
+============================================
+============================================
+			System message style
+============================================
+============================================
+*/
+.b-message
+	padding 10px
+	position fixed
+	right 0
+	margin 20px
+	width 400px
+	height auto
+	border-radius 10px
+
+.b-message-icon
+	width 60px
+	height 60px
+	float left
+
+.b-message-p
+	width 300px
+	float left
+	padding 10px
+	font-size 17px
+
+.b-message-close
+	background url("../img/icons/icon_close.png") no-repeat
+	background-position 50%
+	width 12px
+	height 12px
+	float right
+
+.b-message-success
+	background #a4eed2
+	color #78a68d
+
+.b-message-success-icon
+	background url("../img/icons/icon_alert.png") no-repeat
+	background-position 50%
+
+.b-message-error
+	background #efa3a3
+	color #ae5a5a
+
+.b-message-error-icon
+	background url("../img/icons/icon_alert.png") no-repeat
+	background-position 50%
+
+.b-message-warning
+	background #f8f7d3
+	color #8f8d5d
+
+.b-message-warning-icon
+	background url("../img/icons/icon_warning.png") no-repeat
+	background-position 50%
+
+.b-message-info
+	background #9dd7e6
+	color #3c7889
+
+.b-message-info-icon
+	background url("../img/icons/icon_info.png") no-repeat
+	background-position 50%
+

@@ -118,6 +118,8 @@ $(function() {
 	});
 });
 
+
+
 // $(function(){
 	
 // 	$('.b-topic-create-modal').dialog({
@@ -232,16 +234,16 @@ $(function(){
 $(document).ready(function() {
 
     $('input.pc-input').styler({
-        filePlaceholder: 'Файл с компьютера',
-        fileBrowse: 'Выбрать файл'
+        filePlaceholder: 'Р¤Р°Р№Р» СЃ РєРѕРјРїСЊСЋС‚РµСЂР°',
+        fileBrowse: 'Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»'
     });
 });
 
 
 $(document).ready(function() {
     $('input.it-input').styler({
-        filePlaceholder: 'Файл из интернета',
-        fileBrowse: 'Ссылка'
+        filePlaceholder: 'Р¤Р°Р№Р» РёР· РёРЅС‚РµСЂРЅРµС‚Р°',
+        fileBrowse: 'РЎСЃС‹Р»РєР°'
 
     });
 
@@ -355,7 +357,17 @@ $(function() {
 
 
 $(function() {
-	$('.b-topic-navigation-format__wrapper').hover(function(){
+	$('.b-topic-navigation__left .b-topic-navigation-menu__list ').hover(function(){
+		$(this).children('dl').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('dl').stop(false, true).fadeOut(500);
+
+	});
+});
+
+
+$(function() {
+	$('.b-topic-navigation-choose__list').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
 		$(this).children('ul').stop(false, true).fadeOut(500);
@@ -364,3 +376,169 @@ $(function() {
 });
 
 
+
+$(function() {
+	$('.b-topic-navigation-line').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
+
+$(function() {
+	$('.b-topic-navigation-format').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(500);
+
+	});
+});
+
+
+$(document).ready(function(){
+	
+$('.bigcheck1').bind('change', function () {
+
+   if ($(this).is(':checked'))
+     $(".item1").show();
+   else
+     $(".item1").hide();
+
+});
+
+});
+
+
+$(document).ready(function(){
+
+$('.bigcheck2').bind('change', function () {
+
+   if ($(this).is(':checked'))
+     $(".item2").show();
+   else
+     $(".item2").hide();
+
+});
+
+});
+$(document).ready(function(){
+	
+$('.bigcheck3').bind('change', function () {
+
+   if ($(this).is(':checked'))
+     $(".item3").show();
+   else
+     $(".item3").hide();
+
+});
+
+});
+
+$(document).ready(function(){
+	
+$('.bigcheck4').bind('change', function () {
+
+   if ($(this).is(':checked'))
+     $(".item4").show();
+   else
+     $(".item4").hide();
+
+});
+
+});
+
+$(document).ready(function(){
+	
+$('.bigcheck5').bind('change', function () {
+
+   if ($(this).is(':checked'))
+     $(".item5").show();
+   else
+     $(".item5").hide();
+
+});
+
+});
+
+$(document).ready(function(){
+	
+$('.bigcheck6').bind('change', function () {
+
+   if ($(this).is(':checked'))
+     $(".item6").show();
+   else
+     $(".item6").hide();
+
+});
+
+});
+
+
+$(document).ready(function() {
+	var status = $('.b-topic-navigation-sort__item')[0]
+
+	
+	$(status).append('<div class="online-icon"></div>')
+
+
+
+	$('.online-icon').css('display', 'block');
+
+	
+	
+});
+
+$(document).ready(function() {
+	var online = $('.b-topic-navigation-line .dropdown-list li')
+	
+	
+	$(online).append('<div class="online-icon"></div>')
+	$('.online-icon').css('display', 'block');
+	
+	
+});
+
+
+$(document).ready(function() {
+	$('.b-header-nav-icon-search').click(function(){
+		$('.b-search').toggle();
+	})
+
+
+});
+
+$(document).ready(function(){
+	$('.b-header-nav-menu__item').click(function(event){
+		  event.stopPropagation();
+	$('.b-header-nav-menu .b-topic-navigation-menu ').toggle();	
+		  var docHeight = $(document).height();
+
+   $(".b-content").append("<div id='overlay'></div>");
+
+   $("#overlay")
+      .height(docHeight)
+      .css({
+         'opacity' : 0.4,
+         'position': 'absolute',
+         'top': 0,
+         'left': 0,
+         'background-color': 'black',
+         'width': '100%',
+         'z-index': 1000,
+
+      });
+	
+	});
+
+
+	
+   
+
+});
+
+
+$(document).click( function(){
+        $(' .b-header-nav-menu  .b-topic-navigation-menu').hide();
+       	$('#overlay').remove();
+    });
