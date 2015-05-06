@@ -6,6 +6,17 @@
 @elseif($page == 'publications' || $page == 'videos')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     @include('topic.build', array('topics' => $items))
+@elseif($page == 'favourites')
+    @foreach($items as $item)
+        <?php $target = $item->target; ?>
+        @if(is_a($target, 'Topic'))
+            @include('topic.build', array('topics' => array($target)))
+        @elseif(is_a($target, 'Blog'))
+            @include('blog.build', array('blogs' => array($target)))
+        @endif
+    @endforeach
+    @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
+    @include('blog.scripts', array('page' => 'profile/'.$user->id.'/subscribtions'))
 @elseif($page == 'subscribtions')
     @include('blog.build', array('blogs' => $items))
     @include('blog.scripts', array('page' => 'profile/'.$user->id.'/subscribtions'))

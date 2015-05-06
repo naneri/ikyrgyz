@@ -1,23 +1,24 @@
 <input type="hidden" id="ColumnN"/>
 <div class="masonry" style="display: none">
-	<div class="b-widget b-user-wall">
-		<div class="b-widget__inner">
-			<div class="b-widget-list">
-				<ul>
-					<li class="b-widget-list__list"><a href="">Топик</a></li>
-					<li class="b-widget-list__list"><a href="">Видео</a></li>
-					<li class="b-widget-list__list"><a href="">Фото</a></li>
-					<li class="b-widget-list__list"><a href="">Музыка</a></li>
-					<li class="b-widget-list__list"><a href="">Ссылка</a></li>
-					<li class="b-widget-list__list"><a href="">Блог</a></li>
-					<li class="b-widget-list__list"><a href="">Событие</a></li>
-					<li class="b-widget-list__list"><a href=""></a></li>
-					<div class="clear"></div>
-				</ul>
-			</div>
-		</div>
-	</div>
-
+        @if(isset($showCreatePanel) && $showCreatePanel)
+            <div class="b-widget b-user-wall">
+                    <div class="b-widget__inner">
+                            <div class="b-widget-list">
+                                    <ul>
+                                            <li class="b-widget-list__list"><a href="">Топик</a></li>
+                                            <li class="b-widget-list__list"><a href="">Видео</a></li>
+                                            <li class="b-widget-list__list"><a href="">Фото</a></li>
+                                            <li class="b-widget-list__list"><a href="">Музыка</a></li>
+                                            <li class="b-widget-list__list"><a href="">Ссылка</a></li>
+                                            <li class="b-widget-list__list"><a href="">Блог</a></li>
+                                            <li class="b-widget-list__list"><a href="">Событие</a></li>
+                                            <li class="b-widget-list__list"><a href=""></a></li>
+                                            <div class="clear"></div>
+                                    </ul>
+                            </div>
+                    </div>
+            </div>
+        @endif
 	@foreach($topics as $topic)
 
 	<div class="b-user-wall item">
@@ -27,7 +28,10 @@
 				<div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
 				<div class="b-user-wall-header__text">
 				<p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}  </a></p>
-				<p class="b-user-wall-header__date">{{$topic->created_at}}
+				<p class="b-user-wall-header__date">
+                                    <span class="moment-time"></span>
+                                    <span class="moment-time-hover"></span>
+                                    <span class="original-time">{{$topic->created_at}}</span>
 					<div class="clear"></div>
 				</p>
 				</div>

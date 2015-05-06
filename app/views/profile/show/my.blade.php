@@ -39,6 +39,7 @@
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/publications')}}">{{ trans('network.publications') }}</a><span>{{$user->publications(10000)->count()}}</span></li>
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/friends')}}">{{ trans('network.friends') }}</a><span>{{$user->friends()->count()}}</span></li>
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscribtions')}}">{{ trans('network.subscriptions') }}</a></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/favourites')}}">{{ trans('network.favourites') }}</a><span>{{$user->favourites()->count()}}</span></li>
             <a href="{{URL::to('profile/edit/main')}}" class="b-user-navigation-list__setting">{{ trans('network.settings') }}</a>
             <div class="clear"></div>
         </ul>

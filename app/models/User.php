@@ -440,4 +440,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         }
         return False;    
     }
+    
+    public function favourites(){
+        return Favourite::where('user_id', $this->id)->get();
+    }
+
 }

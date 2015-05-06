@@ -1,3 +1,4 @@
+@include('scripts.convert-times')
 <script>
 	var base_url = "{{$base_config['base_url']}}";
 	var page = 1;
@@ -8,7 +9,7 @@
         }
 		
 	$(document).ready(function(){
-          
+            timesConvert();
             $( function() {
                     
             var $container = $('.masonry');

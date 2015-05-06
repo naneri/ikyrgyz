@@ -6,7 +6,9 @@
 	
     	@include('misc.createnav')
     <div class="b-content">
-        @include('topic.build', array('topics' => $topics, 'blogInfo' => true))
+    
+    	
+        @include('topic.build', array('topics' => $topics, 'blogInfo' => true, 'showCreatePanel' => true))
     </div>
     
     @include('comments.scripts')    

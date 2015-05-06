@@ -320,4 +320,50 @@ class TopicController extends BaseController {
 
         return Response::json($ReadabilityData);
     }
+    
+    public function postFavourite(){
+        $result = array();
+        
+        $rules = array(
+                'topic_id' => 'required|exists:topics,id'
+            );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            $result['message'] = 'Error input data!';
+            $result['status'] = 'error';
+            return Response::json($result);
+        }
+        
+        $topic = Topic::find(Input::get('topic_id'));
+        
+        if(!$topic->blog->canView()){
+            $result['message'] = 'You cannot favourite this topic';
+            $result['status'] = 'error';
+            return Response::json($result);
+        }
+        
+        $favourite = Favourite::where('target_type', 'topic')
+                ->where('target_id', $topic->id)
+                ->where('user_id', Auth::id())
+                ->first();
+        
+        if($favourite){
+            $favourite->delete();
+            $result['message'] = 'Топик успешно удален из списка избранных';
+            $result['action'] = 'remove';
+        }else{
+            Favourite::create(array(
+                'target_type' => 'topic',
+                'target_id' => $topic->id,
+                'user_id' => Auth::id()
+            ));
+            $result['message'] = 'Топик успешно добавлен в список избранных';
+            $result['action'] = 'add';
+        }        
+        $result['status'] = 'success';
+        
+        return Response::json($result);
+    }
 }

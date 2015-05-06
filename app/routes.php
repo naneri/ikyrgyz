@@ -198,6 +198,9 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::post('vote/blog', 'VoteController@postVoteBlog');
         Route::post('vote/user', 'VoteController@postVoteUser');
         Route::post('vote/photo', 'VoteController@postVotePhoto');
+        
+        Route::post('favourite/topic', 'TopicController@postFavourite');
+        Route::post('favourite/blog', 'BlogController@postFavourite');
     }
 });
 
