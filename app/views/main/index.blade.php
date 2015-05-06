@@ -6,6 +6,8 @@
 	
     	@include('misc.createnav')
     <div class="b-content">
+    
+    	
         @include('topic.build', array('topics' => $topics, 'blogInfo' => true))
     </div>
     
