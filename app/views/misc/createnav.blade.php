@@ -164,6 +164,8 @@
 			<div class="clear"></div>
 		</div>	
 		<div class="b-topic-navigation__right">
+    
+			 <div class="cube"><a href=""></a></div>
 				<div class="b-topic-navigation-line">
 
 					<a href="#" class="b-topic-navigation-line__item"></a>
