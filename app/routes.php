@@ -36,8 +36,12 @@ Route::group(array('before' => 'notauth'), function(){
     Route::post('main/index/androidTop', 'AndroidMainController@androidTopTopics');
     Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidMainController@androidAjaxTopics');
 });
-
-Route::group(array('before' => 'auth|activated'),function(){
+Route::group(array('before' => 'auth'),function(){
+    Route::get('profile/fill', 'ProfileController@getProfileFill');
+    Route::post('profile/fill', 'ProfileController@postProfileFill');
+    Route::get('logout', 'AuthController@logout');
+});
+Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('main/index','MainController@index');
     Route::get('main/index/new', 'MainController@newTopics');
     Route::get('main/index/top', 'MainController@topTopics');
@@ -96,8 +100,6 @@ Route::group(array('before' => 'auth|activated'),function(){
         });
 
         Route::get('profile/random', 'ProfileController@getRandom');
-        Route::get('profile/fill', 'ProfileController@getProfileFill');
-        Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile', 'ProfileController@showMyProfile');
         Route::get('profile/{userId}/ajaxTopics/{pageName}/{pageNumber}', 'ProfileController@ajaxTopics');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
@@ -183,7 +185,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::resource('tags', 'TagsController');
         Route::resource('photos', 'PhotosController');
 
-	Route::get('logout', 'AuthController@logout');
+	
     
     if(Request::ajax()){
         Route::post('topic/comments/sort', 'TopicCommentsController@sortComments');

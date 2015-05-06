@@ -1,6 +1,6 @@
 <?php
 
-namespace Niamiko\Repositories\Eloquent;
+namespace Niamiko\Repositories;
 
 use Niamiko\Repositories\BlogRepositoryInterface;
 

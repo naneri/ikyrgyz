@@ -130,7 +130,7 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
         'Greggilbert\Recaptcha\RecaptchaServiceProvider',
         'Thujohn\Share\ShareServiceProvider',
-        'Jenssegers\Date\DateServiceProvider',
+        'Jenssegers\Date\DateServiceProvider'
 	),
 
 	/*

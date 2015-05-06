@@ -34,7 +34,7 @@
 							</a>
 							
 							</dd>
-						<dt><a href="">Выход</a></dt>	
+						<dt><a href="{{URL::to('logout')}}">Выход</a></dt>	
 					</dl>
 
 				</div>

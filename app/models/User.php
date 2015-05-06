@@ -23,11 +23,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     protected $guarded = array('id');    
     
 	// Add your validation rules here
-        public static $rules = [
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|alpha_num|between:6,50',
-            'recaptcha_response_field' => 'required|recaptcha',
-        ];
+    public static $rules = [
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|alpha_num|between:6,50',
+        'recaptcha_response_field' => 'required|recaptcha',
+    ];
 
     /**
 	 * The attributes excluded from the model's JSON form.
@@ -430,5 +430,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             'password'          => $hashed_pass,
             'activation_code'   => $code
             ]);
+    }
+
+    public function noDescription()
+    {
+        if(empty($this->description->first_name) || empty($this->description->gender) || empty($this->description->liveplace_country_id))
+        {
+            return True;
+        }
+        return False;    
     }
 }
