@@ -106,6 +106,7 @@ class BlogController extends BaseController {
                 $topics = Blog::getTopics($id);
             }
             $userRole = $blog->getUserRole();
+            return View::make('blog.show', compact('blog', 'topics', 'userRole'));
 	}
     
     /**
