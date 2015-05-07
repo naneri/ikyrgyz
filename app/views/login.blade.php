@@ -75,7 +75,7 @@
                                 <div class="social-networks">
                                     <a href="{{ URL::to('login/vk') }}"><img src="{{URL::to('img/login/vk.png')}}"/></a>
                                     <a href="{{ URL::to('login/fb') }}"><img src="{{URL::to('img/login/f.png')}}"/></a>
-                                    <a href="{{ URL::to('login/g') }}"><img src="{{URL::to('img/login/g.png')}}"/></a>
+                                    <a href="{{ URL::to('login/google') }}"><img src="{{URL::to('img/login/g.png')}}"/></a>
                                 </div>
 
                                 <span class="registration-span2">{{ trans('network.registration') }}</span>

@@ -20,10 +20,6 @@ class MainController extends BaseController {
 
 		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
         
-        if(!isset($_COOKIE['ColumnN']))
-        {
-            $_COOKIE['ColumnN']='2';
-        }
         return View::make('main.index', array('topics' => $topics));
 	}
 

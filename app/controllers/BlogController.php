@@ -106,11 +106,6 @@ class BlogController extends BaseController {
                 $topics = Blog::getTopics($id);
             }
             $userRole = $blog->getUserRole();
-            if(!isset($_COOKIE['ColumnN']))
-            {
-                $_COOKIE['ColumnN']='2';
-            }
-            return View::make('blog.show', compact('blog', 'topics', 'userRole'));
 	}
     
     /**

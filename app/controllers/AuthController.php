@@ -128,6 +128,10 @@ class AuthController extends BaseController {
         return Redirect::route('404');
     }
 
+    /**
+     * Login with facebook
+     * @return [type] [description]
+     */
     public function loginWithFacebook() {
         
         // get data from input
@@ -144,26 +148,108 @@ class AuthController extends BaseController {
             // return to facebook login url
             return Redirect::to( (string)$url );
         }
-        // if provided get user data and sign in
-        else 
-        {
-            // This was a callback request from facebook, get the token
-            $token = $fb->requestAccessToken( $code );
+       
+        // This was a callback request from facebook, get the token
+        $token = $fb->requestAccessToken( $code );
 
-            // Send a request with it
-            $result = json_decode( $fb->request( '/me' ), true );
+        // Send a request with it
+        $result = json_decode( $fb->request( '/me' ), true );
+        
+        $user = User::whereEmail($result['email'])->first();
+        if(!$user)
+        {
+            $user = $this->user->saveSocialUser($result['email'], $result['first_name'], $result['last_name'], $result['gender']);
             
-            $user = User::whereEmail($result['email'])->first();
-            if(!$user)
-            {
-                $user = $this->saveSocialUser($result['email'], $result['first_name'], $result['last_name'], $result['gender']);
-                
-            }
-            Auth::login($user);
-            return Redirect::to('main/index');
         }
+        Auth::login($user);
+        return Redirect::to('main/index');
+        
     }
 
+    /**
+     * Login with Google
+     * @return [type] [description]
+     */
+    public function loginWithGoogle() {
+
+        // get data from input
+        $code = Input::get( 'code' );
+
+        // get google service
+        $googleService = OAuth::consumer( 'Google' );
+
+        // check if code is valid
+
+        if ( empty( $code ) ) 
+        {
+            // get googleService authorization
+            $url = $googleService->getAuthorizationUri();
+
+            // return to google login url
+            return Redirect::to( (string)$url );
+
+        }
+             
+        // This was a callback request from google, get the token
+        $token = $googleService->requestAccessToken( $code );
+
+        // Send a request with it
+        $result = json_decode( $googleService->request( 'https://www.googleapis.com/oauth2/v1/userinfo' ), true );
+
+        $user = User::whereEmail($result['email'])->first();
+
+        if(!$user)
+        {
+            $user = $this->user->saveSocialUser($result['email'], $result['given_name'], $result['family_name'], $result['gender']);
+            
+        }
+        Auth::login($user);
+        return Redirect::to('main/index');
+
+    }
     
+    /**
+     * Login with Vkontakte
+     * @return [type] [description]
+     */
+    public function loginWithVK()
+    {
+
+        // get data from input
+        $code = Input::get( 'code' );
+
+        // get google service
+        $vkService = OAuth::consumer( 'Vkontakte' );
+
+        // check if code is valid
+
+        if ( empty( $code ) ) 
+        {
+            // get googleService authorization
+            $url = $vkService->getAuthorizationUri();
+
+            // return to google login url
+            return Redirect::to( (string)$url );
+
+        }
+             
+        // This was a callback request from google, get the token
+        $token = $vkService->requestAccessToken( $code );
+
+        // Send a request with it
+        $result = json_decode( $vkService->request( 'https://api.vk.com/method/getProfiles' ), true );
+
+        echo "<pre>"; print_r($result); echo "</pre>";exit;
+        $user = User::whereEmail($result['email'])->first();
+
+        if(!$user)
+        {
+            $user = $this->user->saveSocialUser($result['email'], $result['given_name'], $result['family_name'], $result['gender']);
+            
+        }
+        Auth::login($user);
+        return Redirect::to('main/index');
+
+    }
 
 }

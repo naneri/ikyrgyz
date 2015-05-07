@@ -26,10 +26,10 @@
 							<dd><a href="">Истоиря действии</a></dd>	
 						<dt>Настройки</dt>
 							<dd>Выберите язык
-							<a href="">
+							<a href="{{ URL::to('locale/ru') }}">
 								<img src="{{ asset('img/103.png') }}" alt=""/>
 							</a>
-							<a href="">
+							<a href="{{ URL::to('locale/en') }}">
 								<img src="{{ asset('img/104.png') }}" alt=""/>
 							</a>
 							

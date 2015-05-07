@@ -69,10 +69,7 @@ class ProfileController extends BaseController {
                     preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
                     $videoIds[] = end($matches);
                 }
-                
-                if (!isset($_COOKIE['ColumnN'])) {
-                    $_COOKIE['ColumnN'] = '2';
-                }
+            
                 
                 $friends = $user->friends();
                 $subscribers = $user->subscribers();

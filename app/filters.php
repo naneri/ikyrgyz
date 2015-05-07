@@ -60,6 +60,11 @@ App::before(function($request)
 
     // set application locale for current session.
     App::setLocale( $mLocale );
+
+    if(!isset($_COOKIE['ColumnN']))
+    {
+       $_COOKIE['ColumnN']='2';
+    }
 });
 
 
