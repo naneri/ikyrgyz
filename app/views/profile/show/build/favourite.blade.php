@@ -18,7 +18,7 @@
 <script>
     function timesConvert(){
         times.init('.b-user-wall-header__date');
-        times.eachConvert('.b-user-wall');
+        times.eachConvert('.b-user-wall, .b-user-blog');
     }
     
     $(document).ready(function(){
