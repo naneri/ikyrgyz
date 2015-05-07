@@ -1,6 +1,8 @@
 @extends('misc.layout')
 
 @section('content')
+{{HTML::style('css/bootstrap.mod.css')}}
+<div class="b-content">
 		<div class="container" style="margin-top:200px">
 			@foreach ($errors->all() as $error)
 			    <div class="b-message b-message-error">
@@ -29,13 +31,13 @@
                                                     <th>{{ trans('network.banned') }}</th>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <!--tr>
                                                         <td>{{$blog->getCreator()->email}}</td>
                                                         <td colspan="4">Blog author</td>
-                                                    </tr>
-                                                    @foreach($blog->getBlogUsers() as $blogUser)
+                                                    </tr-->
+                                                    @foreach($blogUsers as $blogUser)
                                                     <tr>
-                                                        <td>{{$blogUser->email}}</td>
+                                                        <td>{{$blogUser->getNames()}}</td>
                                                         <td>{{Form::radio($blogUser->id, 'admin', $blog->isAdmin($blogUser->id))}}</td>
                                                         <td>{{Form::radio($blogUser->id, 'moderator', $blog->isModerator($blogUser->id))}}</td>
                                                         <td>{{Form::radio($blogUser->id, 'reader', $blog->isReader($blogUser->id))}}</td>
@@ -45,11 +47,12 @@
                                                 </tbody>
                                             </table>
                                             <!-- Change this to a button or input when using this as a form -->
-                                            {{Form::submit('Go!')}}
+                                            {{Form::submit('Сохранить')}}
                                         </fieldset>
                                     {{Form::close()}}
                                 </div>
                             </div>
 			</div>
 		</div>
+</div>
 @stop
