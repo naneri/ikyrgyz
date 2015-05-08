@@ -1,16 +1,16 @@
 <input type="hidden" id="ColumnN"/>
-<div class="masonry" style="display: none">
+<div class="masonry topic" style="display: none">
         @if(isset($showCreatePanel) && $showCreatePanel)
             <div class="b-widget b-user-wall">
                     <div class="b-widget__inner">
                             <div class="b-widget-list">
                                     <ul>
-                                            <li class="b-widget-list__list"><a href="">Топик</a></li>
+                                            <li class="b-widget-list__list"><a href="{{URL::to('topic/create')}}">Топик</a></li>
                                             <li class="b-widget-list__list"><a href="">Видео</a></li>
                                             <li class="b-widget-list__list"><a href="">Фото</a></li>
                                             <li class="b-widget-list__list"><a href="">Музыка</a></li>
-                                            <li class="b-widget-list__list"><a href="">Ссылка</a></li>
-                                            <li class="b-widget-list__list"><a href="">Блог</a></li>
+                                            <li class="b-widget-list__list"><a href="{{URL::to('topic/create/link')}}">Ссылка</a></li>
+                                            <li class="b-widget-list__list"><a href="{{ URL::to('blog/create') }}">Блог</a></li>
                                             <li class="b-widget-list__list"><a href="">Событие</a></li>
                                             <li class="b-widget-list__list"><a href=""></a></li>
                                             <div class="clear"></div>

@@ -21,6 +21,10 @@ class RepositoryServiceProvider extends ServiceProvider{
             'Niamiko\Repositories\MessageRepositoryInterface',
             'Niamiko\Repositories\Eloquent\DbMessageRepository'
         );
+        $this->app->bind(
+            'Niamiko\Repositories\UserRepositoryInterface',
+            'Niamiko\Repositories\Eloquent\DbUserRepository'
+        );
     }
 
 }

@@ -36,7 +36,7 @@
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/newsline')}}">{{ trans('network.timeline') }}</a></li>
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/publications')}}">{{ trans('network.publications') }}</a><span>{{$user->publications(10000)->count()}}</span></li>
             <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/friends')}}">{{ trans('network.friends') }}</a><span>{{$user->friends()->count()}}</span></li>
-            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/subscribtions')}}">{{ trans('network.subscriptions') }}</a></li>
+            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/'.$user->id.'/subscriptions')}}">{{ trans('network.subscriptions') }}</a></li>
             <div class="clear"></div>
         </ul>
     </div>

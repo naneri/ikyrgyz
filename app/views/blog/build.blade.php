@@ -1,4 +1,4 @@
-<div class="masonry">
+<div class="masonry blog">
 	@foreach($blogs as $blog)
 	<div class="b-user-blog">
             <div class="b-user-blog__inner">

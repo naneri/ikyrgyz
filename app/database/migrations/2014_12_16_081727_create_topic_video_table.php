@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateFavouritesTable extends Migration {
+class CreateTopicVideoTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,13 @@ class CreateFavouritesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('favourites', function(Blueprint $table)
+		Schema::create('topic_video', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('target_id');
-            $table->string('target_type', 50);
+			$table->integer('topic_id')->unsigned();
+            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->string('url');
+			$table->string('embed_code');
 			$table->timestamps();
 		});
 	}
@@ -30,7 +31,7 @@ class CreateFavouritesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('favourites');
+		Schema::drop('topic_video');
 	}
 
 }

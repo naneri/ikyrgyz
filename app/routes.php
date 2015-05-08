@@ -22,7 +22,7 @@ Route::group(array('before' => 'notauth'),function(){
     Route::post('login/android', 'AndroidAuthController@postAndroidLogin');
     Route::get('login/fb', 'AuthController@loginWithFacebook');
     Route::get('login/vk', 'AuthController@loginWithVK');
-    Route::get('login/g', 'AuthController@loginWithGoogle');
+    Route::get('login/google', 'AuthController@loginWithGoogle');
     Route::get('register', 'AuthController@getRegister');
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
@@ -36,8 +36,12 @@ Route::group(array('before' => 'notauth'), function(){
     Route::post('main/index/androidTop', 'AndroidMainController@androidTopTopics');
     Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidMainController@androidAjaxTopics');
 });
-
-Route::group(array('before' => 'auth|activated'),function(){
+Route::group(array('before' => 'auth'),function(){
+    Route::get('profile/fill', 'ProfileController@getProfileFill');
+    Route::post('profile/fill', 'ProfileController@postProfileFill');
+    Route::get('logout', 'AuthController@logout');
+});
+Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('main/index','MainController@index');
     Route::get('main/index/new', 'MainController@newTopics');
     Route::get('main/index/top', 'MainController@topTopics');
@@ -96,8 +100,6 @@ Route::group(array('before' => 'auth|activated'),function(){
         });
 
         Route::get('profile/random', 'ProfileController@getRandom');
-        Route::get('profile/fill', 'ProfileController@getProfileFill');
-        Route::post('profile/fill', 'ProfileController@postProfileFill');
         Route::get('profile', 'ProfileController@showMyProfile');
         Route::get('profile/{userId}/ajaxTopics/{pageName}/{pageNumber}', 'ProfileController@ajaxTopics');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
@@ -127,7 +129,7 @@ Route::group(array('before' => 'auth|activated'),function(){
     Route::get('profile/edit/access', 'ProfileController@getEditAccess');
     Route::post('profile/edit/access', 'ProfileController@postAccess');
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
-    Route::get('profile/{id}/subscribtions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscribtionBlogs');
+    Route::get('profile/{id}/subscriptions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscriptionBlogs');
 
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
     Route::get('topic/create', 'TopicController@create');
@@ -183,7 +185,7 @@ Route::group(array('before' => 'auth|activated'),function(){
         Route::resource('tags', 'TagsController');
         Route::resource('photos', 'PhotosController');
 
-	Route::get('logout', 'AuthController@logout');
+	
     
     if(Request::ajax()){
         Route::post('topic/comments/sort', 'TopicCommentsController@sortComments');
@@ -219,34 +221,49 @@ Route::filter('topic_edit_permission', function($route) {
 Route::filter('message_edit_permission', function($route) {
     $message = Message::findOrFail($route->parameter('id'));
     if (!$message->canEdit()) {
-        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
+        return Redirect::back()->with('message', [
+            'type' => 'error',
+            'text' => "You don't have enough permissions to do that."
+            ]);
     }
 });
 
 Route::filter('photoalbum_edit_permission', function($route) {
     $photoAlbum = PhotoAlbum::findOrFail($route->parameter('id'));
     if (!$photoAlbum->canEdit()) {
-        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
+        return Redirect::back()->with('message', [
+            'type' => 'error',
+            'text' => "You don't have enough permissions to do that."
+            ]);
     }
 });
 
 Route::filter('photo_edit_permission', function($route) {
     $photo = Photo::findOrFail($route->parameter('id'));
     if (!$photo->canEdit()) {
-        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
+        return Redirect::back()->with('message', [
+            'type' => 'error',
+            'text' => "You don't have enough permissions to do that."
+            ]);
     }
 });
 
 Route::filter('can_view_photo', function($route){
     $photo = Photo::findOrFail($route->parameter('id'));
     if(!$photo->canView()){
-        return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to do that.</p></div>');
+        return Redirect::back()->with('message', [
+            'type' => 'error',
+            'text' => "You don't have enough permissions to do that."
+            ]);
     }
 });
 
 Route::filter('topic.canview', function($route){
    $topic = Topic::findOrFail($route->parameter('id'));
    if(!$topic->blog->canView()){
-       return Redirect::back()->with('message', '<div class="b-message b-message-error"><a href="javascript: $(`.b-message`).remove()" class="b-message-close"></a><div class="b-message-icon b-message-error-icon"></div><p class="b-message-p">You don\'t have enough permissions to see topic.</p></div>');
+       return Redirect::back()->with('message', [
+            'type' => 'error',
+            'text' => "You don't have enough permissions to do that."
+            ]);
    }
 });

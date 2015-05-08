@@ -106,10 +106,6 @@ class BlogController extends BaseController {
                 $topics = Blog::getTopics($id);
             }
             $userRole = $blog->getUserRole();
-            if(!isset($_COOKIE['ColumnN']))
-            {
-                $_COOKIE['ColumnN']='2';
-            }
             return View::make('blog.show', compact('blog', 'topics', 'userRole'));
 	}
     
@@ -152,7 +148,7 @@ class BlogController extends BaseController {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('form')->withInput();
+            return Redirect::back()->withErrors($validator)->withInput();
         }
 
         $blog = Blog::findOrFail($id);
@@ -163,7 +159,8 @@ class BlogController extends BaseController {
     
     public function getEditUsers($id){
         $blog = Blog::findOrFail($id);
-        return View::make('blog.edit_users', array('blog' => $blog));
+        $blogUsers = $blog->getBlogUsers();
+        return View::make('blog.edit_users', compact('blog', 'blogUsers'));
     }
     
     public function postEditUsers($id){
@@ -177,7 +174,7 @@ class BlogController extends BaseController {
             $blogRole->update(array('role_id' => $roleId));
         }
         
-        return View::make('blog.edit_users', array('blog' => $blog));
+        return Redirect::to('blog/edit/'.$blog->id.'/users');
     }
     
     public function readBlog($id){

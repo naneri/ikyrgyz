@@ -60,6 +60,11 @@ App::before(function($request)
 
     // set application locale for current session.
     App::setLocale( $mLocale );
+
+    if(!isset($_COOKIE['ColumnN']))
+    {
+       $_COOKIE['ColumnN']='2';
+    }
 });
 
 
@@ -105,6 +110,18 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('no-description',function()
+{
+
+    if(Auth::guest())
+    {
+        return Response::make('Unauthorized', 401);
+    }
+    if(Auth::user()->noDescription())
+    {
+        return Redirect::to('profile/fill');
+    }
+});
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
