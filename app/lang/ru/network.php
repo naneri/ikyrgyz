@@ -88,7 +88,7 @@ return array(
 	'contacts'			=> 'Контакты',
 
 	//message
-	'send-message'		=> 'Написать сообщение',
+	'write-message'		=> 'Написать сообщение',
 	'choose-action'		=> 'Выберите действие',
 	'delete'			=> 'Удалить',
 	'edit-message'		=> 'Редактировать сообщение',
@@ -104,10 +104,13 @@ return array(
 	'deleted'			=> 'Удаленные',
 	'sure-perform-action'	=> "Вы действительно хотите выполнить действие?",
 	'message-topic'		=> 'Тема',
+	'empty-message-topic'   => 'Без темы',
 	'message'			=> 'Сообщение',
 	'draft'				=> 'Черновик',
+	'spam'				=> 'Спам',
 	'send'				=> 'Отправить',
 	'reply'				=> 'Ответить',
+	'trash'				=> 'Корзина',
 	'force-delete'		=> 'Удалить без возможности восстановления',
 
 	//photoalbum
