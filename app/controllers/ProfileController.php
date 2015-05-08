@@ -38,8 +38,8 @@ class ProfileController extends BaseController {
                     case 'mutualFriends':
                         $items = $user->mutualFriends();
                         break;
-                    case 'subscribtions':
-                        $items = $user->subscribtions();
+                    case 'subscriptions':
+                        $items = $user->subscriptions();
                         break;
                     case 'subscribers':
                         $items = $user->subscribers();
@@ -113,9 +113,9 @@ class ProfileController extends BaseController {
                 }
 	}
         
-        public function getAjaxSubscribtionBlogs($userId, $pageNum){
+        public function getAjaxsubscriptionBlogs($userId, $pageNum){
             $user = User::findOrFail($userId);
-            $blogs = $user->subscribtions($pageNum);
+            $blogs = $user->subscriptions($pageNum);
             return View::make('blog.build', compact('blogs'));
         }
 

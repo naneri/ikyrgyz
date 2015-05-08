@@ -124,7 +124,7 @@ class MessageController extends BaseController{
         $message->draft = 0;
         $message->save();
 
-        return Redirect::back()->with([
+        return Redirect::back()->with('message', [
             'type' => 'success',
             'text' => 'Сообщение успешно отправлена'
             ]);
