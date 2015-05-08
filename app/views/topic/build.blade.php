@@ -9,7 +9,7 @@
                                             <li class="b-widget-list__list"><a href="">Видео</a></li>
                                             <li class="b-widget-list__list"><a href="">Фото</a></li>
                                             <li class="b-widget-list__list"><a href="">Музыка</a></li>
-                                            <li class="b-widget-list__list"><a href="">Ссылка</a></li>
+                                            <li class="b-widget-list__list"><a href="{{URL::to('topic/create/link')}}">Ссылка</a></li>
                                             <li class="b-widget-list__list"><a href="{{ URL::to('blog/create') }}">Блог</a></li>
                                             <li class="b-widget-list__list"><a href="">Событие</a></li>
                                             <li class="b-widget-list__list"><a href=""></a></li>

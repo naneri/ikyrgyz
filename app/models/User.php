@@ -314,7 +314,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $blogs;
     }
     
-    public function subscribtions($offset = 0){
+    public function subscriptions($offset = 0){
         $blogLimit = Config::get('topic.topics_per_page');
         $blogs = Blog::join('blog_roles', 'blog_roles.blog_id', '=', 'blogs.id')
                 ->join('roles', 'blog_roles.role_id', '=', 'roles.id')
