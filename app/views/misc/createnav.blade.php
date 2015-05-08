@@ -34,7 +34,8 @@
 							</a>
 							
 							</dd>
-						<dt><a href="">Выход</a></dt>	
+						<dt><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a>
+						</dt>	
 					</dl>
 
 				</div>
