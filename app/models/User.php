@@ -116,7 +116,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         Message::where(function($query){
             $query->where('sender_id', $this->id)
                     ->orWhere('receiver_id', $this->id);
-        })->onlyTrashed()->get();
+        })->onlyTrashed();
     }
     
     public function messagesDraft(){

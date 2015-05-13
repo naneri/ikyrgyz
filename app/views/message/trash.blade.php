@@ -14,7 +14,7 @@
         {{Form::hidden('page', 'trash')}}
     </div>
     <div class="panel-body" id="messages">
-        @include('message.build.messages', array('messages' => Auth::user()->messagesTrashed()))
+        @include('message.build.messages', array('messages' => Auth::user()->messagesTrashed()->orderBy('id', 'DESC')->paginate(20)))
     </div>
 </div>
 {{Form::close()}}

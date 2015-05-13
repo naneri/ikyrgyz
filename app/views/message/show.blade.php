@@ -2,6 +2,15 @@
 @extends('message.layout')
 @section('form')
 <div class="panel panel-default">
+        @foreach ($errors->all() as $error)
+            <div class="b-message b-message-error">
+                <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+                <div class="b-message-icon b-message-error-icon"></div>
+                <p class="b-message-p">
+                    {{$error}}
+                </p>
+            </div>
+        @endforeach
     @if($message->sender_id == Auth::id() || $message->receiver_id == Auth::id())
     <div class="panel-heading">
         <h4>Отправитель: {{$message->sender->getNames()}}</h4>

@@ -18,10 +18,14 @@
         <fieldset>
         {{Form::open(array('files' => true))}}
             <div class="form-group">
-                {{Form::text('receiver', ($receiver!='')?$receiver: 'Кому' , array('class' => 'form-control'))}}{{HTML::link('#', 'Контакты', array('id' => 'contacts'))}}<br>
-                <div id="contacts-list" style="display: none;">
+                <div id="contacts-list">
+                Кому:
                     @foreach(Auth::user()->friends() as $friend)
-                        <a onclick="addReceiver('{{$friend->first_name.' '.$friend->last_name}}')">{{$friend->first_name.' '.$friend->last_name}}</a><br>
+                        @if ($receiver!='' && $receiver==$friend->first_name.' '.$friend->last_name)
+                            {{Form::checkbox('receivers[]', $friend->email, true);}}{{$friend->first_name.' '.$friend->last_name}}
+                        @else
+                            {{Form::checkbox('receivers[]', $friend->email);}}{{$friend->first_name}} {{$friend->last_name}}
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -53,6 +57,10 @@
     });
     $('#contacts').click(function(){
        $('#contacts-list').show(); 
+    });
+    $('form').submit(function(){
+        if ($('form input[name="title"]').val()=='Тема')
+            $('form input[name="title"]').val('Без темы');
     });
 </script>
 @stop

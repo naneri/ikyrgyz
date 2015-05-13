@@ -7,7 +7,7 @@ class Message extends Eloquent{
     protected $connection = 'mysql_users';
 	
     public static $rules = array(
-            'receiver' => 'required',
+            'receivers' => 'required',
             'title' => 'required|string',
             'text' => 'required|string',
             'is_draft' => 'required');
