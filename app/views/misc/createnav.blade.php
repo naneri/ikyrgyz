@@ -12,9 +12,9 @@
 					<a href="#" class="arrow">Я-КЫРГЫЗ</a>
 					<dl class="dropdown-list">
 						<dt><a href="{{URL::to('profile')}}">Мой профиль</a></dt>
-							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">143</span></dd>
-							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">143</span></dd>
-							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">143</span></dd>
+							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">{{$topic_number}}</span></dd>
+							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
+							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">{{$friend_number}}</span></dd>
 							<dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd>
 							<dd><a href="#">{{ trans('network.favorite') }}</a><span class="raiting">143</span></dd>
 						<dt><a href="">Энкиклопедия</a></dt>
@@ -42,11 +42,11 @@
 			<div class="b-topic-navigation-sort">
 				<ul>
 					<li class="b-topic-navigation-sort__item">
-						<a href="#"></a>
+						<a href="{{URL::to('main/index')}}"></a>
 						
 					</li>
 					<li class="b-topic-navigation-sort__item">
-						<a href="#"></a>
+						<a href="{{URL::to('main/index/top')}}"></a>
 					</li>
 					<li class="b-topic-navigation-sort__item">
 						<a href="#"></a>
@@ -165,7 +165,7 @@
 		</div>	
 		<div class="b-topic-navigation__right">
     
-			 <div class="cube"><a href=""></a></div>
+			 	<div class="cube"><a href="{{URL::to('profile/random')}}"></a></div>
 				<div class="b-topic-navigation-line">
 
 					<a href="#" class="b-topic-navigation-line__item"></a>

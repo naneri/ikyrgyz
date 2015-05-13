@@ -145,6 +145,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::post('topic/update', 'TopicController@update');
     Route::post('topic/store', 'TopicController@store');
     Route::get('topic/drafts', 'TopicController@drafts');
+    Route::get('audio/create', 'AudioController@create');
     Route::post('upload', array('uses' => 'TopicController@uploadImage'));
 
         Route::get('people', 'PeopleController@index');

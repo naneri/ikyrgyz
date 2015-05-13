@@ -8,6 +8,7 @@
             times.eachConvert('.b-user-wall');
         }
 		
+    
 	$(document).ready(function(){
             timesConvert();
             $( function() {

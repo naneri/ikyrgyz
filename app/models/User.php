@@ -89,6 +89,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('ProfileItem')->where('type', 'additional');
     }
     
+    public function votes(){
+        return $this->hasMany('Vote');
+    }
                                     /* RELATIONS */
 
 
@@ -190,9 +193,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->get();
     }
     
-    public function votes(){
-        return $this->hasMany('Vote');
-    }
+    
     
     public function getNames(){
         return $this->description->first_name.' '.$this->description->last_name;
@@ -398,7 +399,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $values;
     }
 
-    public function getRandomUser($friendIds){
+    public static function getRandomUser($friendIds){
         return User::whereHas('description', function($query){
                                 $query->where('user_profile_avatar', '!=', 'NULL');
                             })
@@ -445,4 +446,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return Favourite::where('user_id', $this->id)->get();
     }
 
+
+    public function topicNumber(){
+
+        $topics = $this->topics()->count();
+
+        return $topics;
+
+    }
 }

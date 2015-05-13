@@ -20,7 +20,10 @@ class MainController extends BaseController {
 
 		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
         
-        return View::make('main.index', array('topics' => $topics));
+        $topic_number = Auth::user()->topicNumber();
+        $friend_number = Friend::where('user_one', Auth::user()->id)->count();
+
+        return View::make('main.index', compact('topics', 'topic_number', 'friend_number'));
 	}
 
 	public function ajaxTopics($sort, $page = 0){
