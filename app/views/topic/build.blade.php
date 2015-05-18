@@ -54,9 +54,9 @@
 				<div class="b-user-wall-footer__image b-user-wall-header__image"><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" class="blog-avatar" alt=""/></div>
 				<div class="b-user-wall-footer-social-list">
 					<ul>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="https://plus.google.com/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="https://twitter.com/home?status={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
 						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
 						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
 					</ul>
@@ -79,18 +79,20 @@
 				<div class="b-user-wall-footer-raiting">
 					<div class="b-user-wall-footer-raiting__left">
 						<p class="b-user-wall-footer-raiting__tag">
-							#Кыргызстан #Традиции #Культура
+							@foreach($topic->tags as $tag)
+								<span>{{$tag->name}}</span>
+							@endforeach
 						</p>
 					</div>	
 					<div class="b-user-wall-footer-raiting__right">
 					<div class="b-user-wall-footer-raiting__arrow-down">
-						<input type="button" class="btn-raiting">
+						<input type="button" onclick="return vote.topic({{$topic->id}},-1);" class="btn-raiting">
 					</div>
 					<div class="b-user-wall-footer-raiting__number">
-						<span class="number-raiting">+99</span>
+						<span class="number-raiting">{{$topic->rating}}</span>
 					</div>
 					<div class="b-user-wall-footer-raiting__arrow-up">
-						<input type="button" class="btn-raiting">
+						<input type="button" onclick="return vote.topic({{$topic->id}},1);" class="btn-raiting">
 					</div>
 					</div>
 					<div class="clear"></div>

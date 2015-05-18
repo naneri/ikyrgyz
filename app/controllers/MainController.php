@@ -15,42 +15,31 @@ class MainController extends BaseController {
 	|
 	*/
 
-	public function index($id = 0){
+	public function index($sort = 'id'){
         $rating = Config::get('topic.index_good_topic_rating');
 
-		$topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
-        
+		$topics = Topic::getMainTopics($rating, $sort);
+
         $topic_number = Auth::user()->topicNumber();
+
         $friend_number = Friend::where('user_one', Auth::user()->id)->count();
+
+        JavaScript::put([
+            'sort'      => $sort,
+            'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count')
+            ]);
 
         return View::make('main.index', compact('topics', 'topic_number', 'friend_number'));
 	}
 
-	public function ajaxTopics($sort, $page = 0){
-            $rating = Config::get('topic.index_good_topic_rating');
-            $offset = $page; // с какого начинать просмотр
-            $topics = array();
-            switch ($sort){
-                case 'index':
-                    $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
-                    break;
-                case 'new':
-                    $topics = Topic::getTopicsByDate($offset);
-                    break;
-                case 'top':
-                    $topics = Topic::getTopicsByRating($offset);
-                    break;
-            }
-            return View::make('topic.build', array('topics' => $topics));
+	public function ajaxTopics($sort, $offset = 0){
+
+        $rating = Config::get('topic.index_good_topic_rating');
+
+        $topics = Topic::getMainTopics($rating, $sort, $offset);
+
+        return View::make('topic.build', array('topics' => $topics));
+
 	}
 
-        public function newTopics(){
-            $topics = Topic::getTopicsByDate();
-            return View::make('main.index', array('topics' => $topics));
-        }
-
-        public function topTopics() {
-            $topics = Topic::getTopicsByRating();
-            return View::make('main.index', array('topics' => $topics));
-        }
 }

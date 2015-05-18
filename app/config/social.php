@@ -10,7 +10,9 @@ return array(
             'banned'                => 5,
             'in_ban'                => 6
             ),
-	
+
+	'main_column_count' => 2,
+
 	'user_site'								=> URL::to('/'),
         'topic_comment.hide_comment_rating' => -5,
       

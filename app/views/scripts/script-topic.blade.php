@@ -1,7 +1,7 @@
 @include('scripts.convert-times')
 <script>
 	var base_url = "{{$base_config['base_url']}}";
-	var page = 1;
+	
         
         function timesConvert(){
             times.init('.b-user-wall-header__date');
@@ -11,32 +11,30 @@
     
 	$(document).ready(function(){
             timesConvert();
+            var page = 1;
             $( function() {
                     
             var $container = $('.masonry');
             
-            @if(@$columnN)
-                var ColumnN = {{ $_COOKIE['ColumnN'] }};
-                var columnWidth, masonryClass;
+           
+            var ColumnN = niamiko.column;
+            var columnWidth, masonryClass, columnSettings;
 
-                if(ColumnN == 1){
-                    columnWidth = 650;
-                    masonryClass = 'b-user-wall-1000';
-                }
-                else if(ColumnN == 2){
-                    columnWidth = 495;
-                    masonryClass = 'b-user-wall-495';
-                }
-                else if(ColumnN == 3){
-                    columnWidth = 325;
-                    masonryClass = 'b-user-wall-325';
-                }
-                
-                $container.find('.b-user-wall').removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
-            @else
-                var columnWidth = 500;
-                $container.find('.b-user-wall').removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass('b-user-wall-495');
-            @endif
+            if(ColumnN == 1){
+                columnWidth = 650;
+                masonryClass = 'b-user-wall-1000';
+            }
+            else if(ColumnN == 2){
+                columnWidth = 495;
+                masonryClass = 'b-user-wall-495';
+            }
+            else if(ColumnN == 3){
+                columnWidth = 325;
+                masonryClass = 'b-user-wall-325';
+            }
+            
+            $container.find('.b-user-wall').removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
+          
             
             $container.imagesLoaded(function(){
                     $container.masonry({
@@ -45,7 +43,6 @@
                     stamp: '.b-user-media'
                     });	
             });
-            $('.masonry').css('display', 'block');
 
             var inProgress = false;
 
@@ -58,7 +55,13 @@
                     @else
                         var sort = (array[array.length - 1].length > 1) ? array[array.length - 1] : array[array.length - 2];
                     @endif
+                    console.log(sort);
+                    var data = {
+                        sort : sort,
+                        page : page
+                    }
                     $.get(base_url + '{{$page}}' + sort + '/' + page, function(data){
+                        console.log(data);
                             // находим все блоки с классом .b-user-wall и добавляем в массив elements
                             var elements = $(data).find(".b-user-wall");
 
@@ -98,7 +101,6 @@
         });
     })
     
-    @if(@$columnN)
         function makeColumnN(column){
             var columnWidth;
             var masonryClass;
@@ -133,7 +135,6 @@
             $container.children().removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
             $container.masonry('layout');
         }
-    @endif
 
     function popitup(url) {
         newwindow=window.open(url,'name','height=400,width=400');
