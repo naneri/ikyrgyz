@@ -169,8 +169,8 @@
 		<div class="b-topic-navigation__right">
     
 			 	<div class="cube"><a href="{{URL::to('profile/random')}}"></a></div>
-				<div class="b-topic-navigation-line">
-
+				<!-- <div class="b-topic-navigation-line">
+				
 					<a href="#" class="b-topic-navigation-line__item"></a>
 					<ul class="dropdown-list">
 						<li><a href=""><img src="{{ asset('img/93.png') }}" alt=""><span>Имя Фамилия Отчество</span></a></li>
@@ -183,7 +183,7 @@
 						<li><a href=""><img src="{{ asset('img/93.png') }}" alt=""><span>Имя Фамилия Отчество</span></a></li>
 						<li><a href=""><img src="{{ asset('img/93.png') }}" alt=""><span>Имя Фамилия Отчество</span></a></li>
 					</ul>
-				</div>
+				</div> -->
 				<div class="b-topic-navigation-format">
 					<a href="#" class="b-topic-navigation-format__item"></a>
 					<ul class="dropdown-list">

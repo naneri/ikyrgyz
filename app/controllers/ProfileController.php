@@ -8,7 +8,7 @@ class ProfileController extends BaseController {
         var $familyMemberRelatives = array('' => 'Член семьи', 'father' => 'Отец', 'mother' => 'Мама', 'brother' => 'Брат', 'sister' => 'Сестра', 'grandFather' => 'Дедушка', 'grandMother' => 'Бабушка','husband' => 'Муж', 'wife' => 'Жена', 'son' => 'Сын', 'doughter' => 'Дочь');
         var $maritalStatuses = array('' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
         var $month =  array("0" => "Месяц", "1" => "Январь", "2" => "Февраль", "3" => "Март", "4" => "Апрель", "5" => "Май", "6" => "Июнь", "7" => "Июль", "8" => "Август", "9" => "Сентябрь", "10" => "Октябрь", "11" => "Ноябрь", "12" => "Декабрь");
-        var $genders = array('male' => 'Мужской', 'female' => 'Женский');
+    protected $genders = array('male' => 'Мужской', 'female' => 'Женский');
 
     /**
 	 * Страница с профилем пользователя
@@ -23,155 +23,161 @@ class ProfileController extends BaseController {
 			$friend_status = True;
 		}
                 
-                $items = null;
-                $videos = array();
-                $photoAlbums = array();
-                $videoIds = array();
-                $topicsLimit = Config::get('topic.topics_per_page');
-                switch($page){
-                    case 'publications':
-                        $items = $user->publications($topicsLimit);
-                        break;
-                    case 'friends':
-                        $items = $user->friends();
-                        break;
-                    case 'mutualFriends':
-                        $items = $user->mutualFriends();
-                        break;
-                    case 'subscriptions':
-                        $items = $user->subscriptions();
-                        break;
-                    case 'subscribers':
-                        $items = $user->subscribers();
-                        break;
-                    case 'videos':
-                        $items = $user->topicsWithVideo;
-                        break;
-                    case 'favourites':
-                        if($user->id != Auth::id()){
-                            return Redirect::to('profile/'.$user->id);
-                        }
-                        $items = Favourite::where('user_id', Auth::id())->get();
-                        //dd($items);
-                        break;
-                    case 'newsline':
-                    default:
-                        $items = $user->newsline($topicsLimit);
-                        $videos = $user->topicsWithVideo()->take(6)->get();
-                        $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
-                        break;
+        $items = null;
+        $videos = array();
+        $photoAlbums = array();
+        $videoIds = array();
+        $topicsLimit = Config::get('topic.topics_per_page');
+        switch($page){
+            case 'publications':
+                $items = $user->publications($topicsLimit);
+                break;
+            case 'friends':
+                $items = $user->friends();
+                break;
+            case 'mutualFriends':
+                $items = $user->mutualFriends();
+                break;
+            case 'subscriptions':
+                $items = $user->subscriptions();
+                break;
+            case 'subscribers':
+                $items = $user->subscribers();
+                break;
+            case 'videos':
+                $items = $user->topicsWithVideo;
+                break;
+            case 'favourites':
+                if($user->id != Auth::id()){
+                    return Redirect::to('profile/'.$user->id);
                 }
-                
-                @$maritalStatus = $this->maritalStatuses[$user->description->marital_status];
-                @$gender = $this->genders[$user->description->gender];
-                
-                foreach ($videos as $video) {
-                    preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
-                    $videoIds[] = end($matches);
-                }
-            
-                
-                $friends = $user->friends();
-                $subscribers = $user->subscribers();
-                $photos = $user->photos();
-                $videos = $user->topicsWithVideo;
-                
-                if($user->id == Auth::id()){
-                    return View::make('profile.show.my', 
-                            compact(
-                                    'user', 
-                                    'items', 
-                                    'page', 
-                                    'videoIds', 
-                                    'maritalStatus', 
-                                    'gender', 
-                                    'photoAlbums',
-                                    'friends',
-                                    'subscribers',
-                                    'photos',
-                                    'videos'
-                                    )
-                            );
-                }else{
-                    $mutualFriends = $user->mutualFriends();
-                    return View::make('profile.show.user', 
-                            compact(
-                                    'user', 
-                                    'friend_status', 
-                                    'items', 'page', 
-                                    'videoIds', 
-                                    'maritalStatus', 
-                                    'gender', 
-                                    'photoAlbums', 
-                                    'friends', 
-                                    'subscribers', 
-                                    'photos',
-                                    'videos',
-                                    'mutualFriends'
-                                )
-                            );
-                }
+                $items = Favourite::where('user_id', Auth::id())->get();
+                //dd($items);
+                break;
+            case 'newsline':
+            default:
+                $items = $user->newsline($topicsLimit);
+                $videos = $user->topicsWithVideo()->take(6)->get();
+                $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
+                break;
+        }
+        
+        @$maritalStatus = $this->maritalStatuses[$user->description->marital_status];
+        @$gender = $this->genders[$user->description->gender];
+        
+        foreach ($videos as $video) {
+            preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
+            $videoIds[] = end($matches);
+        }
+    
+        
+        $friends = $user->friends();
+        $subscribers = $user->subscribers();
+        $photos = $user->photos();
+        $videos = $user->topicsWithVideo;
+        
+        if($user->id == Auth::id()){
+            return View::make('profile.show.my', 
+                    compact(
+                            'user', 
+                            'items', 
+                            'page', 
+                            'videoIds', 
+                            'maritalStatus', 
+                            'gender', 
+                            'photoAlbums',
+                            'friends',
+                            'subscribers',
+                            'photos',
+                            'videos'
+                            )
+                    );
+        }else{
+            $mutualFriends = $user->mutualFriends();
+            return View::make('profile.show.user', 
+                    compact(
+                            'user', 
+                            'friend_status', 
+                            'items', 'page', 
+                            'videoIds', 
+                            'maritalStatus', 
+                            'gender', 
+                            'photoAlbums', 
+                            'friends', 
+                            'subscribers', 
+                            'photos',
+                            'videos',
+                            'mutualFriends'
+                        )
+                    );
+        }
 	}
         
-        public function getAjaxsubscriptionBlogs($userId, $pageNum){
-            $user = User::findOrFail($userId);
-            $blogs = $user->subscriptions($pageNum);
-            return View::make('blog.build', compact('blogs'));
+    public function getAjaxsubscriptionBlogs($userId, $pageNum){
+        $user = User::findOrFail($userId);
+        $blogs = $user->subscriptions($pageNum);
+        return View::make('blog.build', compact('blogs'));
+    }
+
+    public function ajaxTopics($userId, $pageName, $pageNumber = 0) {
+        $user = User::find($userId);
+        $topicsLimit = Config::get('topic.topics_per_page');
+        $topics = array();
+        switch ($pageName) {
+            case 'newsline':
+            case 'profile':
+                $topics = $user->newsline($topicsLimit, $pageNumber);
+                break;
+            case 'publications':
+                $topics = $user->publications($topicsLimit, $pageNumber);
+                break;
+        }
+        return View::make('topic.build', array('topics' => $topics));
+    }
+
+    public function showMyProfile($page = 'newsline'){
+        return $this->getShow(Auth::id(), $page);
+    }
+    
+    public function getRandom(){
+
+        $friendIds = array();//Auth::user()->friends()->lists('id');
+
+        array_push($friendIds, Auth::id());
+
+        $userId = User::getRandomUser($friendIds);
+
+        return Redirect::to('profile/'.$userId);
+    }
+    
+    public function getProfileFill(){
+
+        $user = User::with('description')->find(Auth::id());
+
+        return View::make('profile.fill', array('user' => $user, 'access' => $this->access, 'month' => $this->month, 'genders' =>  $this->genders));
+    }
+
+    public function postProfileFill() {
+
+        $rules = array(
+            'first_name' => 'required',
+            'gender' => 'required',
+            'live_country' => 'required');
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->withErrors($validator);
         }
 
-        public function ajaxTopics($userId, $pageName, $pageNumber = 0) {
-            $user = User::find($userId);
-            $topicsLimit = Config::get('topic.topics_per_page');
-            $topics = array();
-            switch ($pageName) {
-                case 'newsline':
-                case 'profile':
-                    $topics = $user->newsline($topicsLimit, $pageNumber);
-                    break;
-                case 'publications':
-                    $topics = $user->publications($topicsLimit, $pageNumber);
-                    break;
-            }
-            return View::make('topic.build', array('topics' => $topics));
-        }
+        $description_data = Input::except(array('_token', 'day', 'month', 'year', 'image'));
 
-        public function showMyProfile($page = 'newsline'){
-            return $this->getShow(Auth::id(), $page);
-        }
+        $description_data['birthday'] = ((Input::has('year')) ? Input::get('year') : '0000') . '-' . (Input::has('month') ? Input::get('month') : '00') . '-' . (Input::has('day') ? Input::get('day') : '00');
+
+        User_Description::updateProfile($description_data, Auth::user()->id);
         
-        public function getRandom(){
-
-            $friendIds = array();//Auth::user()->friends()->lists('id');
-
-            array_push($friendIds, Auth::id());
-
-            $userId = User::getRandomUser($friendIds);
-
-            return Redirect::to('profile/'.$userId);
-        }
-        
-        public function getProfileFill(){
-
-            $user = User::with('description')->find(Auth::id());
-
-            return View::make('profile.fill', array('user' => $user, 'access' => $this->access, 'month' => $this->month));
-        }
-
-        public function postProfileFill() {
-            $rules = array(
-                'first_name' => 'required',
-                'gender' => 'required',
-                'liveplace_country_id' => 'required');
-            $validator = Validator::make(Input::all(), $rules);
-
-            if ($validator->fails()) {
-                return Redirect::back()->withInput()->withErrors($validator);
-            }
-            $description_data = Input::except(array('_token', 'day', 'month', 'year', 'image'));
-            $description_data['birthday'] = ((Input::has('year')) ? Input::get('year') : '0000') . '-' . (Input::has('month') ? Input::get('month') : '00') . '-' . (Input::has('day') ? Input::get('day') : '00');
-            User_Description::update_data($description_data);
-            return Redirect::to('main/index');
-        }
+        return Redirect::to('main/index');
+    }
 
         /**
 	 * Страница редактирования профиля
@@ -192,10 +198,14 @@ class ProfileController extends BaseController {
 	 * @return [type] [description]
 	 */
 	public function postEdit(){
+
 		$user = User::find(Auth::id());
+
 		$file = Input::file('image');
+
 		$description_data = array('first_name' => Input::get('first_name'), 'last_name' => Input::get('last_name'), 'user_profile_about' => Input::get('about'));
 		User_Description::update_data($description_data);
+
 		return Redirect::back();
 	}
 

@@ -20,10 +20,6 @@ class MainController extends BaseController {
 
 		$topics = Topic::getMainTopics($rating, $sort);
 
-        $topic_number = Auth::user()->topicNumber();
-
-        $friend_number = Friend::where('user_one', Auth::user()->id)->count();
-
         JavaScript::put([
             'sort'      => $sort,
             'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count')

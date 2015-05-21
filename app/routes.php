@@ -14,6 +14,14 @@
 
 Route::get('locale/{locale}', 'BaseController@setLocale' );
 
+Route::get('country-list', function(){
+    return Country::all()->lists('name_ru');
+});
+
+Route::get('city-list/{id}', function($name){
+    $country = Country::where('name_ru', $name)->first();
+    return City::where('country_id',  $country->id)->lists('name_ru');
+});
 
 Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
