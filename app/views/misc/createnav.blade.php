@@ -51,9 +51,9 @@
 					<li class="b-topic-navigation-sort__item">
 						<a href="{{URL::to('main/index/top')}}"></a>
 					</li>
-					<li class="b-topic-navigation-sort__item">
+					<!-- <li class="b-topic-navigation-sort__item">
 						<a href="#"></a>
-					</li>
+					</li> -->
 				
 				</ul>
 				

@@ -3,11 +3,11 @@
 	var base_url = "{{$base_config['base_url']}}";
 	
         
-        function timesConvert(){
-            times.init('.b-user-wall-header__date');
-            times.eachConvert('.b-user-wall');
-        }
-		
+    function timesConvert(){
+        times.init('.b-user-wall-header__date');
+        times.eachConvert('.b-user-wall');
+    }
+	
     
 	$(document).ready(function(){
             timesConvert();
@@ -15,24 +15,26 @@
             $( function() {
                     
             var $container = $('.masonry');
-            
            
             var ColumnN = niamiko.column;
             var columnWidth, masonryClass, columnSettings;
 
-            if(ColumnN == 1){
-                columnWidth = 650;
-                masonryClass = 'b-user-wall-1000';
+            settings = {
+                '1' : {
+                    columnWidth : 650,
+                    masonryClass: 'b-user-wall-1000'
+                },
+                '2' : {
+                    columnWidth : 495,
+                    masonryClass: 'b-user-wall-495'
+                },
+                '3' : {
+                    columnWidth : 325,
+                    masonryClass: 'b-user-wall-325'
+                }
             }
-            else if(ColumnN == 2){
-                columnWidth = 495;
-                masonryClass = 'b-user-wall-495';
-            }
-            else if(ColumnN == 3){
-                columnWidth = 325;
-                masonryClass = 'b-user-wall-325';
-            }
-            
+            columnWidth     = settings[ColumnN].columnWidth;
+            masonryClass    = settings[ColumnN].masonryClass;
             $container.find('.b-user-wall').removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
           
             
@@ -49,52 +51,43 @@
             $(window).scroll(function() {
                 if($(window).scrollTop() + $(window).height() > $(document).height() - 100 && !inProgress) {
                     inProgress = true;
-                    var array = document.URL.split('/');
-                    @if(@$no_sorting)
-                        var sort = '';
-                    @else
-                        var sort = (array[array.length - 1].length > 1) ? array[array.length - 1] : array[array.length - 2];
-                    @endif
-                    console.log(sort);
-                    var data = {
-                        sort : sort,
+                   
+//console.log(sort);
+                    var parameters = {
+                        sort : niamiko.sort || '',
                         page : page
                     }
-                    $.get(base_url + '{{$page}}' + sort + '/' + page, function(data){
-                        console.log(data);
-                            // находим все блоки с классом .b-user-wall и добавляем в массив elements
-                            var elements = $(data).find(".b-user-wall");
+                    $.get(base_url + '{{$page}}', parameters).done(function(data){
+                        
+                        // находим все блоки с классом .b-user-wall и добавляем в массив elements
+                        var elements = $(data).find(".b-user-wall");
+                        
+                        @if(@$columnN)
+                            var ColumnN;
+                            if($('#ColumnN').val() == "")
+                                ColumnN = niamiko.column;
+                            else
+                                ColumnN = $('#ColumnN').val();
 
-                            console.log('donwloaded elements' + page);
-                            
-                            @if(@$columnN)
-                                var ColumnN;
-                                if($('#ColumnN').val() == "")
-                                    ColumnN = {{ $_COOKIE['ColumnN'] }};
-                                else
-                                    ColumnN = $('#ColumnN').val();
+                            if(ColumnN == 1) elements.addClass('b-user-wall-1000');
+                            else if(ColumnN == 2) elements.addClass('b-user-wall-495');
+                            else if(ColumnN == 3) elements.addClass('b-user-wall-325');
+                        @else
+                            elements.addClass('b-user-wall-495');
+                        @endif
+                        // крепим новые элементы к контейнеру
+                        $container.append(elements).masonry( 'appended', elements );
 
-                                if(ColumnN == 1) elements.addClass('b-user-wall-1000');
-                                else if(ColumnN == 2) elements.addClass('b-user-wall-495');
-                                else if(ColumnN == 3) elements.addClass('b-user-wall-325');
-                            @else
-                                elements.addClass('b-user-wall-495');
-                            @endif
-                            // крепим новые элементы к контейнеру
-                            $container.append(elements).masonry( 'appended', elements );
+                        // располагаем новые элементы плиткой
+                        $container.imagesLoaded( function() {
+                                $container.masonry('layout');
+                        });
+                        
+                        timesConvert();
 
-                            // располагаем новые элементы плиткой
-                            $container.imagesLoaded( function() {
-                                    $container.masonry('layout');
-                            });
-                            
-                            timesConvert();
-
-                            console.log(elements);
-
-                            // увеличиваем страничку на одну
-                            page += 1;
-                            inProgress = false;
+                        // увеличиваем страничку на одну
+                        page += 1;
+                        inProgress = false;
                     });
                 }
             });

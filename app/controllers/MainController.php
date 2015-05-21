@@ -28,14 +28,16 @@ class MainController extends BaseController {
         return View::make('main.index', compact('topics', 'topic_number', 'friend_number'));
 	}
 
-	public function ajaxTopics($sort, $offset = 0){
+	public function ajaxTopics(){
 
         $rating = Config::get('topic.index_good_topic_rating');
 
-        $topics = Topic::getMainTopics($rating, $sort, $offset);
+        $topics = Topic::getMainTopics($rating, Input::get('sort'), Input::get('page'));
 
         return View::make('topic.build', array('topics' => $topics));
 
 	}
+
+    
 
 }

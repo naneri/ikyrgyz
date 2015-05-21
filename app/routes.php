@@ -52,7 +52,7 @@ Route::group(array('before' => 'auth'),function(){
 Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('main/index','MainController@index');
     Route::get('main/index/{order}', 'MainController@index');
-    Route::get('main/ajaxTopics/{sort}/{page}','MainController@ajaxTopics');
+    Route::get('main/ajaxTopics','MainController@ajaxTopics');
 
     Route::get('country/{id}', function($id){ return Response::json(City::getCitiesByCountryId($id)); });
 
