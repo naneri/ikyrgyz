@@ -11,9 +11,9 @@ class AndroidMainController extends BaseController {
         ), false);
         parent::__construct();
     }
-    public function androidIndex(){
+    public function androidIndex($sort = 'id'){
         $rating = Config::get('topic.index_good_topic_rating');
-        $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating);
+        $topics = Topic::getMainTopics($rating, $sort);
         return Response::json($topics, 200);
     }
 
@@ -23,12 +23,12 @@ class AndroidMainController extends BaseController {
         return Response::json($canPublishBlogs, 200);
     }
 
-    public function androidAjaxTopics($sort, $page = 0){
+    public function androidAjaxTopics($sort='id', $page = 0){
         $rating = Config::get('topic.index_good_topic_rating');
         $offset = $page; // с какого начинать просмотр
         switch ($sort){
             case 'good':
-                $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
+                $topics = Topic::getMainTopics($rating, $sort, $page);
                 break;
             case 'new':
                 $topics = Topic::getTopicsByDate($offset);
@@ -37,7 +37,7 @@ class AndroidMainController extends BaseController {
                 $topics = Topic::getTopicsByRating($offset);
                 break;
             default:
-                $topics = Topic::getSubscribedTopics(Auth::user()->id, $rating, $offset);
+                $topics = Topic::getMainTopics($rating, $sort, $page);
         }
         return Response::json($topics, 200);
     }
