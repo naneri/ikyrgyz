@@ -23,7 +23,7 @@
 							<dd><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></dd>
 						<dt>Помощь</dt>
 							<dd><a href="">Сообщить о проблеме</a></dd>
-							<dd><a href="">Истоиря действии</a></dd>	
+						<!-- 	<dd><a href="">Истоиря действии</a></dd>	 -->
 						<dt>Настройки</dt>
 							<dd>Выберите язык
 							<a href="{{ URL::to('locale/ru') }}">
@@ -69,7 +69,7 @@
 					<li class="b-topic-navigation-category__item item2">
 						<a href="#"></a>
 					</li>
-					<li class="b-topic-navigation-category__item item3">
+					<li style="display:none" class="b-topic-navigation-category__item item3">
 						<a href="#"></a>
 					</li>
 					<li class="b-topic-navigation-category__item item4">
@@ -78,7 +78,7 @@
 					<li class="b-topic-navigation-category__item item5">
 						<a href="#"></a>
 					</li>
-					<li class="b-topic-navigation-category__item item6">
+					<li style="display:none" class="b-topic-navigation-category__item item6">
 						<a href="#"></a>
 					</li>
 				</ul>
@@ -112,18 +112,18 @@
     					</label>
 						</div>
 					</li>
-					<li class="dropdown-list__item">
+					<!-- <li class="dropdown-list__item">
 						<div class="choose-list">
 						
-    					<label class="choose-list">
-    					<img src="{{ asset('img/89.png') }}" alt="">
-    					<span>Аудио</span>
+					    					<label class="choose-list">
+					    					<img src="{{ asset('img/89.png') }}" alt="">
+					    					<span>Аудио</span>
 						
-       					 <input type="checkbox" class="bigcheck bigcheck3" name="cheese" value="yes"/ checked="checked" >
-        				<span class="choose-list-target"></span>
-    					</label>
+					       					 <input type="checkbox" class="bigcheck bigcheck3" name="cheese" value="yes"/ checked="checked" >
+					        				<span class="choose-list-target"></span>
+					    					</label>
 						</div>
-					</li>
+					</li> -->
 					<li class="dropdown-list__item">
 						<div class="choose-list">
 						
@@ -148,18 +148,18 @@
     					</label>
 						</div>
 					</li>
-					<li class="dropdown-list__item">
+					<!-- <li class="dropdown-list__item">
 						<div class="choose-list">
 						
-    					<label class="choose-list">
-    					<img src="{{ asset('img/92.png') }}" alt="">
-    					<span>Событие</span>
+					    					<label class="choose-list">
+					    					<img src="{{ asset('img/92.png') }}" alt="">
+					    					<span>Событие</span>
 						
-       					 <input type="checkbox" class="bigcheck bigcheck6" name="cheese" value="yes"/ checked="checked">
-        				<span class="choose-list-target"></span>
-    					</label>
+					       					 <input type="checkbox" class="bigcheck bigcheck6" name="cheese" value="yes"/ checked="checked">
+					        				<span class="choose-list-target"></span>
+					    					</label>
 						</div>
-					</li>
+					</li> -->
 					
 				</ul>
 			</div>

@@ -6,12 +6,12 @@
                             <div class="b-widget-list">
                                     <ul>
                                             <li class="b-widget-list__list"><a href="{{URL::to('topic/create')}}">Топик</a></li>
-                                           <!--  <li class="b-widget-list__list"><a href="">Видео</a></li>
-                                           <li class="b-widget-list__list"><a href="">Фото</a></li>
-                                           <li class="b-widget-list__list"><a href="">Музыка</a></li> -->
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Видео</a></li>
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Фото</a></li>
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Музыка</a></li>
                                             <li class="b-widget-list__list"><a href="{{URL::to('topic/create/link')}}">Ссылка</a></li>
                                             <li class="b-widget-list__list"><a href="{{ URL::to('blog/create') }}">Блог</a></li>
-                                           <!--  <li class="b-widget-list__list"><a href="">Событие</a></li> -->
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Событие</a></li>
                                             <div class="clear"></div>
                                     </ul>
                             </div>
@@ -56,8 +56,8 @@
 						<li class="b-user-wall-footer-social-list__list"><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
 						<li class="b-user-wall-footer-social-list__list"><a href="https://plus.google.com/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
 						<li class="b-user-wall-footer-social-list__list"><a href="https://twitter.com/home?status={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="http://connect.mail.ru/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="http://vkontakte.ru/share.php?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
 					</ul>
 				</div>
 				<p class="b-user-wall-footer__title">{{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title, array('class' => 'b-user-wall-footer__title'))}}</p>

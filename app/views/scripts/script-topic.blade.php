@@ -57,23 +57,21 @@
                         sort : niamiko.sort || '',
                         page : page
                     }
+                    
                     $.get(base_url + '{{$page}}', parameters).done(function(data){
                         
                         // находим все блоки с классом .b-user-wall и добавляем в массив elements
                         var elements = $(data).find(".b-user-wall");
                         
                         @if(@$columnN)
-                            var ColumnN;
-                            if($('#ColumnN').val() == "")
-                                ColumnN = niamiko.column;
-                            else
-                                ColumnN = $('#ColumnN').val();
 
-                            if(ColumnN == 1) elements.addClass('b-user-wall-1000');
-                            else if(ColumnN == 2) elements.addClass('b-user-wall-495');
-                            else if(ColumnN == 3) elements.addClass('b-user-wall-325');
+                            var ColumnN = $('#ColumnN').val() || niamiko.column;
+                            elements.addClass(settings[ColumnN].masonryClass);
+
                         @else
+
                             elements.addClass('b-user-wall-495');
+
                         @endif
                         // крепим новые элементы к контейнеру
                         $container.append(elements).masonry( 'appended', elements );
