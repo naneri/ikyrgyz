@@ -70,4 +70,19 @@ class User_Description extends Eloquent{
         return false;
     }
 
+    public static function updateProfile($data, $user_id){
+
+        $user['liveplace_country_id']   = @Country::where('name_ru', $data['live_country'])->first()->id ?: null;
+        $user['liveplace_city_id']      = @City::where('name_ru', $data['live_city'])->first()->id ?: null;
+        $user['birthplace_country_id']  = @Country::where('name_ru', $data['birth_country'])->first()->id ?: null;
+        $user['birthplace_city_id']     = @City::where('name_ru', $data['birth_city'])->first()->id ?: null;
+        $user['first_name']             = $data['first_name'] ?: null;
+        $user['last_name']              = $data['last_name'] ?: null;
+        $user['gender']                 = $data['gender'] ?: null;
+
+
+        User_Description::where('user_id', $user_id)->update($user);
+
+        return True;
+    }
 }

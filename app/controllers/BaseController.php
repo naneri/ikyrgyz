@@ -31,6 +31,14 @@ class BaseController extends Controller {
 			$user_data = User::with('description')->find(Auth::id());
 			View::share('user_data', $user_data);
 
+            $topic_number = Auth::user()->topicNumber();
+
+            View::share('topic_number', $topic_number);
+
+            $friend_number = Friend::where('user_one', Auth::user()->id)->count();
+
+            View::share('friend_number', $friend_number);
+
 		}
 
 		// отправляет в шаблон базовый УРЛ сайта

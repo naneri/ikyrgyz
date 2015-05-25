@@ -14,6 +14,14 @@
 
 Route::get('locale/{locale}', 'BaseController@setLocale' );
 
+Route::get('country-list', function(){
+    return Country::all()->lists('name_ru');
+});
+
+Route::get('city-list/{id}', function($name){
+    $country = Country::where('name_ru', $name)->first();
+    return City::where('country_id',  $country->id)->lists('name_ru');
+});
 
 Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
@@ -43,9 +51,8 @@ Route::group(array('before' => 'auth'),function(){
 });
 Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('main/index','MainController@index');
-    Route::get('main/index/new', 'MainController@newTopics');
-    Route::get('main/index/top', 'MainController@topTopics');
-    Route::get('main/ajaxTopics/{sort}/{page}','MainController@ajaxTopics');
+    Route::get('main/index/{order}', 'MainController@index');
+    Route::get('main/ajaxTopics','MainController@ajaxTopics');
 
     Route::get('country/{id}', function($id){ return Response::json(City::getCitiesByCountryId($id)); });
 
@@ -145,6 +152,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::post('topic/update', 'TopicController@update');
     Route::post('topic/store', 'TopicController@store');
     Route::get('topic/drafts', 'TopicController@drafts');
+    Route::get('audio/create', 'AudioController@create');
     Route::post('upload', array('uses' => 'TopicController@uploadImage'));
 
         Route::get('people', 'PeopleController@index');

@@ -84,7 +84,7 @@
 						<div class="b-header-nav-button">
 							<div class="b-header-nav-button__item">
 								@if(count(@$new_messages))
-								<a href="#" class="counter-block">
+								<a href="messages/inbox/all" class="counter-block">
 									<img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
 									<span class="counter">{{count($new_messages)}}</span>
 								</a>
@@ -107,7 +107,7 @@
 								</ul>
 							 
 							@else
-							<a href="#" class="counter-block">
+							<a class="counter-block">
 								<img src="{{ asset('img/navbar/mail_inact.png') }}" alt="msg"/>
 								<span style="opacity:0" class="counter">{{count($new_messages)}}</span>
 							</a>
@@ -116,7 +116,7 @@
 							</div>
 							<div class="b-header-nav-button__item">
 								@if(count(@$friend_requests))
-							<a href="#" class="counter-block">
+							<a class="counter-block">
 								<img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
 								<span class="counter">{{count($friend_requests)}}</span>
 							</a> 
@@ -138,18 +138,18 @@
 								</ul>  
 							 
 							@else
-							<a href="#" class="counter-block">
+							<a class="counter-block">
 								<img src="{{ asset('img/navbar/f_req_inact.png') }}" alt="msg"/>
 								<span style="opacity:0" class="counter">{{count($friend_requests)}}</span>
 								 </a>
 							@endif
 							</div>
-							<div class="b-header-nav-button__item">
-							<a href="#" class="counter-block">
+							<!--div class="b-header-nav-button__item">
+							<a class="counter-block">
 							<img src="{{ asset('img/navbar/setting_inact.png') }}" alt="msg"/>
 							<span style="opacity:0" class="counter">25</span>
 						</a>
-							</div>
+							</div-->
 						</div>
 					</li>
 

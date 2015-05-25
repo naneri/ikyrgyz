@@ -10,7 +10,7 @@
         {{Form::hidden('page', 'outbox')}}
     </div>
     <div class="panel-body" id="messages">
-        @include('message.build.messages', array('messages' => Auth::user()->messagesOutbox))
+        @include('message.build.messages', array('messages' => Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20)))
     </div>
 </div>
 {{Form::close()}}

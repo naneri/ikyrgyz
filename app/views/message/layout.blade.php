@@ -4,13 +4,13 @@
 <div class="b-content">
     <div class="col-md-4 messages-nav">
         <h4></h4>
-        {{HTML::link('messages/new', trans('network.new-message'))}}
+        {{HTML::link('messages/new', trans('network.write-message'))}}
         {{HTML::link('messages/contacts', trans('network.contacts'))}}
-        {{HTML::link('messages/inbox/all', trans('inbox'))}}
-        {{HTML::link('messages/outbox', trans('outbox'))}}
-        {{HTML::link('messages/draft', trans('drafts'))}}
-        {{HTML::link('messages/blacklist', trans('blacklist'))}}
-        {{HTML::link('messages/trash', trans('deleted'))}}
+        {{HTML::link('messages/inbox/all', trans('network.inbox'))}}
+        {{HTML::link('messages/outbox', trans('network.outbox'))}}
+        {{HTML::link('messages/draft', trans('network.drafts'))}}
+        {{HTML::link('messages/blacklist', trans('network.spam'))}}
+        {{HTML::link('messages/trash', trans('network.trash'))}}
     </div>
     <div class="col-md-8">
         @yield('form')

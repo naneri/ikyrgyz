@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
                 
 //                $this->call('UsersTableSeeder');
-                $this->call('BlogTypesTableSeeder');
+//                $this->call('BlogTypesTableSeeder');
 //                $this->call('BlogsTableSeeder');
-                $this->call('TopicTypesTableSeeder');
+//                $this->call('TopicTypesTableSeeder');
 //                $this->call('TopicsTableSeeder');
 //                $this->call('TagsTableSeeder');
 //                $this->call('TopicVideoTableSeeder');
@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder {
 //                $this->call('AudioTableSeeder');
 //                $this->call('PhotoAlbumTopicTableSeeder');
 //                $this->call('PhotoTopicTableSeeder');
-                $this->call('RolesTableSeeder');
-//                $this->call('UserDescriptionTableSeeder');
-//                $this->call('CitiesTableSeeder');
-//                $this->call('CountryTableSeeder');
+//                $this->call('RolesTableSeeder');
+//               $this->call('UserDescriptionTableSeeder');
+               $this->call('CityTableSeeder');
+/*               $this->call('CountryTableSeeder');*/
     }
 
 }

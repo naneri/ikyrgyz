@@ -10,7 +10,7 @@
         {{Form::hidden('page', 'draft')}}
     </div>
     <div class="panel-body" id="messages">
-        @include('message.build.messages', array('messages' => Auth::user()->messagesDraft))
+        @include('message.build.messages', array('messages' => Auth::user()->messagesDraft()->orderBy('id', 'DESC')->paginate(20)))
     </div>
 </div>
 {{Form::close()}}

@@ -43,14 +43,14 @@ class MessageController extends BaseController{
         $messages = array();
         switch($filter){
             case 'friend':
-                $messages = Auth::user()->messagesInbox;
+                $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
                 break;
             case 'group':
                 break;
             case 'event':
                 break;
             default:
-                $messages = Message::inbox(Auth::user());                    
+                $messages = Message::where('receiver_id', Auth::id())->orderBy('id', 'DESC')->paginate(20);
         }
 
         return View::make('message.inbox', array('messages' => $messages));
@@ -75,43 +75,60 @@ class MessageController extends BaseController{
         if ($validator->fails()) {
             return Redirect::back()->withInput()->withErrors($validator);
         }
-        
-        $names = explode(' ', trim(Input::get('receiver')));
-        
-        $receiver = User::join('user_description as ud', 'ud.user_id', '=', 'users.id')
-                ->where('ud.first_name', 'like', $names[0])
-                ->where('ud.last_name', 'like', (count($names)>1) ? $names[1] : '%')
-                ->select('users.*')
-                ->first();
-                       
-        if (!$receiver) {
-            return Redirect::back()->withInput()->withErrors(array('receiver' => 'Пользователь не найден'));
-        }
-        if(!Auth::user()->canSendMessage($receiver->id)){
-            return Redirect::back()->withInput()->withErrors(array('receiver' => 'Вы можете отправлять сообщения только друзьям'));
-        }
-        $message = null;
-        if(Input::has('message_id')){
-            $message = Message::find(Input::get('message_id'));
-            if(!$message->canEdit()){
-                $message = new Message;
+
+        $receivers = Input::get('receivers');
+
+        if (is_array($receivers) && count($receivers) > 0) {
+            // первый цикл для проверки нет ли среди получателей "не-друзей"
+
+            foreach ($receivers as $r) {
+                $receiver = User::where('users.email', $r)->first();
+
+                if (!$receiver) {
+                    return Redirect::back()->withInput()->withErrors(array('receiver' => 'Получатель не найден'));
+                }
+                if(!Auth::user()->canSendMessage($receiver->id)){
+                    return Redirect::back()->withInput()->withErrors(array('receiver' => 'Вы можете отправлять сообщения только друзьям'));
+                }
             }
-        }else{
-            $message = new Message;
+
+            // второй цикл уже для отправки по прежнему коду, только в цикле
+            foreach ($receivers as $r) {
+                $receiver = User::where('users.email', $r)->first();
+
+                $message = null;
+                if(Input::has('message_id')){
+                    $message = Message::find(Input::get('message_id'));
+                    if(!$message->canEdit()){
+                        $message = new Message;
+                    }
+                }else{
+                    $message = new Message;
+                }
+
+                $message->sender_id = Auth::id();
+                $message->receiver_id = $receiver->id;
+                $message->title = Input::get('title');
+                $message->text = Input::get('text');
+                $message->from = 'friend';
+                $message->draft = Input::get('is_draft');
+                $message->save();
+
+                if(Input::hasFile('attachments')){
+                    $this->saveMessageAttachments($message->id);
+                }
+            }
+        } else {
+            return Redirect::back()->withInput()->withErrors(array('receiver' => 'Укажите как минимум одного получателя'));
         }
-        
-        $message->sender_id = Auth::id();
-        $message->receiver_id = $receiver->id;
-        $message->title = Input::get('title');
-        $message->text = Input::get('text');
-        $message->from = 'friend';
-        $message->draft = Input::get('is_draft');
-        $message->save();
-        
-        if(Input::hasFile('attachments')){
-            $this->saveMessageAttachments($message->id);
-        }
-        return Redirect::to('message/show/'.$message->id);
+
+
+
+
+        return Redirect::to('message/show/'.$message->id)->with('message', [
+            'type' => 'success',
+            'text' => 'Сообщение отправлено'
+        ]);
     }
 
     public function sendMessageDraft($id) {
@@ -234,7 +251,7 @@ class MessageController extends BaseController{
                 $renderMessages = Auth::user()->messagesDraft;
                 break;
             case 'trash':
-                $renderMessages = Auth::user()->messagesTrashed();
+                $renderMessages = Auth::user()->messagesTrashed()->get();
                 break;
         }
         

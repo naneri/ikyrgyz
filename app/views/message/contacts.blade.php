@@ -8,7 +8,6 @@
         {{Form::hidden('page', 'contact')}}
     </div>
     <div class="panel-body" id="messages">
-        <div class="tab-content">
             <div class="tab-pane active" id="friends">
                 @foreach(Friend::friendsList(Auth::id()) as $friend)
                 <p class='' style="padding:5px;border: 1px solid #D2D2D2;">
@@ -25,7 +24,6 @@
             <div class="tab-pane" id="groups">
                 
             </div>
-        </div>
     </div>
 </div>
 {{Form::close()}}

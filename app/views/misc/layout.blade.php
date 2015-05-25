@@ -16,7 +16,7 @@
     <script src="{{ asset('js/jquery.formstyler.js') }}"></script>
     {{HTML::style('css/jquery.formstyler.css')}}
     <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
-    
+    @include('misc.js')
   </head>
   <body>
     <div class="b-wrapper">

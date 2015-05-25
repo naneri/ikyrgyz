@@ -6,13 +6,12 @@
                             <div class="b-widget-list">
                                     <ul>
                                             <li class="b-widget-list__list"><a href="{{URL::to('topic/create')}}">Топик</a></li>
-                                            <li class="b-widget-list__list"><a href="">Видео</a></li>
-                                            <li class="b-widget-list__list"><a href="">Фото</a></li>
-                                            <li class="b-widget-list__list"><a href="">Музыка</a></li>
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Видео</a></li>
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Фото</a></li>
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Музыка</a></li>
                                             <li class="b-widget-list__list"><a href="{{URL::to('topic/create/link')}}">Ссылка</a></li>
                                             <li class="b-widget-list__list"><a href="{{ URL::to('blog/create') }}">Блог</a></li>
-                                            <li class="b-widget-list__list"><a href="">Событие</a></li>
-                                            <li class="b-widget-list__list"><a href=""></a></li>
+                                           <li style="display:none" class="b-widget-list__list"><a href="">Событие</a></li>
                                             <div class="clear"></div>
                                     </ul>
                             </div>
@@ -54,11 +53,11 @@
 				<div class="b-user-wall-footer__image b-user-wall-header__image"><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" class="blog-avatar" alt=""/></div>
 				<div class="b-user-wall-footer-social-list">
 					<ul>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href=""></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="https://plus.google.com/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="https://twitter.com/home?status={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="http://connect.mail.ru/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+						<li class="b-user-wall-footer-social-list__list"><a href="http://vkontakte.ru/share.php?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
 					</ul>
 				</div>
 				<p class="b-user-wall-footer__title">{{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title, array('class' => 'b-user-wall-footer__title'))}}</p>
@@ -78,19 +77,23 @@
 				</div>
 				<div class="b-user-wall-footer-raiting">
 					<div class="b-user-wall-footer-raiting__left">
+                                            @if($topic->tags->count()>0)
 						<p class="b-user-wall-footer-raiting__tag">
-							#Кыргызстан #Традиции #Культура
+							@foreach($topic->tags as $tag)
+								<span>#{{$tag->name}}</span>
+							@endforeach
 						</p>
+                                            @endif
 					</div>	
 					<div class="b-user-wall-footer-raiting__right">
 					<div class="b-user-wall-footer-raiting__arrow-down">
-						<input type="button" class="btn-raiting">
+						<input type="button" onclick="return vote.topic({{$topic->id}},-1);" class="btn-raiting">
 					</div>
 					<div class="b-user-wall-footer-raiting__number">
-						<span class="number-raiting">+99</span>
+						<span class="number-raiting" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
 					</div>
 					<div class="b-user-wall-footer-raiting__arrow-up">
-						<input type="button" class="btn-raiting">
+						<input type="button" onclick="return vote.topic({{$topic->id}},1);" class="btn-raiting">
 					</div>
 					</div>
 					<div class="clear"></div>

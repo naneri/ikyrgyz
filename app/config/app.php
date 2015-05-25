@@ -125,12 +125,14 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+
 		'Way\Generators\GeneratorsServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
         'Greggilbert\Recaptcha\RecaptchaServiceProvider',
         'Thujohn\Share\ShareServiceProvider',
-        'Jenssegers\Date\DateServiceProvider'
+        'Jenssegers\Date\DateServiceProvider',
+        'Laracasts\Utilities\UtilitiesServiceProvider'
 	),
 
 	/*
@@ -197,10 +199,11 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-		'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
-		'Debugbar' => 'Barryvdh\Debugbar\Facade',
-        'Share' => 'Thujohn\Share\ShareFacade',
-        'Date' => 'Jenssegers\Date\Date',
+
+		'OAuth' 			=> 'Artdarek\OAuth\Facade\OAuth',
+		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',
+        'Share' 			=> 'Thujohn\Share\ShareFacade',
+        'Date' 				=> 'Jenssegers\Date\Date',
         
 	),
 

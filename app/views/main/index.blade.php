@@ -4,7 +4,7 @@
 @section('content')
 	@include('scripts.script-topic', array('page' => '/main/ajaxTopics/', 'columnN' => true))
 	
-    	@include('misc.createnav')
+    	@include('misc.createnav', compact('topic_number', 'new_messages', 'friend_number'))
     <div class="b-content">
     
     	

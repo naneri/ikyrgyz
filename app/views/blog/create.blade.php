@@ -20,7 +20,7 @@
                 <div class="b-blog-create-modal-content">
                   {{Form::open(array('url' => 'blog/store', 'files' => true))}}
                     <div class="b-blog-create-modal-content__item">
-                      <input name="title" type="text" value="Введите название блога" class="input-default name-blog"/>
+                      <input name="title" type="text" placeholder="Введите название блога" class="input-default name-blog"/>
                     </div>
                     <div class="b-blog-create-modal-content__item">
                       {{ Form::select('type_id', $type_list, null, array('class' => 'input-default select-blog')) }}
@@ -32,7 +32,7 @@
                       </div>
                     </div>
                     <div class="b-blog-create-modal-content__item">
-                      <textarea name="description" cols="30" rows="10" class="textarea-blog input-default">{{ trans('network.blog-description') }}</textarea>
+                        <textarea name="description" cols="30" rows="10" class="textarea-blog input-default" placeholder="{{ trans('network.blog-description') }}"></textarea>
                     </div>
                     <div class="b-blog-create-modal-content__item">
                       <input type="file" name="avatar">
