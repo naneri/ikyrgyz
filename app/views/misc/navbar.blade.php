@@ -144,12 +144,12 @@
 								 </a>
 							@endif
 							</div>
-							<!--div class="b-header-nav-button__item">
+							<div class="b-header-nav-button__item">
 							<a class="counter-block">
 							<img src="{{ asset('img/navbar/setting_inact.png') }}" alt="msg"/>
 							<span style="opacity:0" class="counter">25</span>
 						</a>
-							</div-->
+							</div>
 						</div>
 					</li>
 

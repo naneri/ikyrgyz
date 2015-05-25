@@ -208,7 +208,7 @@ body
 			vertical-align middle
 .b-header-nav-icon-search
 	display none
-	float right
+	float left
 	width 20%
 	line-height 80px
 	&__item
@@ -262,7 +262,7 @@ body
 	}
 	.b-header-nav-menu {
 		display block
-		width 25%
+		width 20%
 		padding-left 5%
 	}
 	.b-header-nav__middle {
@@ -270,6 +270,7 @@ body
 	}
 	.b-header-nav__middle .b-header-nav-button__item {
 		line-height 72px
+		
 		
 	}
 	.b-header-nav__right  {
@@ -299,13 +300,24 @@ body
 		padding-right 20px
 	}
 	
-	
-	
-	
 
 }
 
 
+@media only screen and (min-device-width: 320px) and (max-device-width: 570px) {
+	.b-header-nav-menu {
+		display block
+		width 10%
+		padding-left 5%
+	}
+	.b-header-nav__middle {
+		width 65%
+	}
+	.b-header-nav__middle .b-header-nav-button__item {
+		padding 0
+	}
+	
+}
 
 
 	
@@ -1201,7 +1213,7 @@ body
 
 .b-user-wall    
 	margin-bottom 10px
-  		
+		
 .b-user-media
 	width 40%
 	float right
@@ -3781,7 +3793,7 @@ music player style
 	
 
 .b-user-info-block
-	
+	//
 	&__left
 		float left
 		max-width 305px
@@ -3817,6 +3829,8 @@ music player style
 
 .b-user-info-block-label-item
 	padding-bottom 20px
+	
+	
 	&__labels
 		display inline-block
 		padding-right 20px
@@ -3827,6 +3841,8 @@ music player style
 			border 1px solid rgba(169,169,169,.4)
 			width 250px
 			height 30px
+			font 16px 'pt sans caption', sans-serif
+			color $baseFontColorLight
 			
 		
 		
@@ -3864,6 +3880,42 @@ music player style
 	outline none
 	cursor pointer
 
+
+.ui-autocomplete 
+	background #fff
+	width 160px
+	
+	color $baseFontColorLight
+	font 16px 'pt sans caption', sans-serif
+	border $baseBorder
+	border-bottom 4px solid #676767
+	border-top none
+
+   
+   
+@media only screen and (min-device-width: 320px) and (max-device-width: 960px) {
+	.b-user-info-block__left {
+		float none
+		padding-left 70px
+	}
+	.b-user-info-block__right {
+		float none
+		padding-right 0
+		padding-left 70px
+	}
+	
+	.b-user-info {
+		
+		width 400px
+		position static
+		margin 0 auto
+		
+		height 100%
+		
+		
+	}
+}
+	
 
 
 /*
@@ -4383,3 +4435,6 @@ music player style
 		width 45px
 		height 45px
 		text-align center	
+		
+
+
