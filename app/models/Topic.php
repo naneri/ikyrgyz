@@ -4,7 +4,11 @@ class Topic extends Eloquent {
     
 	protected $fillable = [];
         
-    public static $rules = array();
+    public static $rules = array(
+        'title' => 'required|min:3',
+        'description' => 'required',
+        'blog_id' => 'required'
+    );
 
     protected static $orderType = [
             'id'    => 'id',

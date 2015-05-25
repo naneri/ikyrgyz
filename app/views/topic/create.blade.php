@@ -2,7 +2,16 @@
 
 @section('content')
 
-    <div class="b-content">
+<div class="b-content">
+    @foreach ($errors->all() as $error)
+    <div class="b-message b-message-error">
+        <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+        <div class="b-message-icon b-message-error-icon"></div>
+        <p class="b-message-p">
+            {{$error}}
+        </p>
+    </div>
+    @endforeach
           <div class="b-topic-create-modal">
             <div class="b-topic-create-modal__inner">
               <div class="b-topic-create-modal__title">{{ trans('network.create-topic') }}
@@ -10,14 +19,6 @@
               </div>
               <div class="b-topic-create-modal__content">
                   <div class="b-topic-create-modal-content">
-                      <div class="all-alerts">
-                          @foreach ($errors->all() as $error)
-                          <div class="alert alert-warning alert-dismissible" role="alert">
-                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                              {{$error}}
-                          </div>
-                          @endforeach
-                      </div>
                     {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
                     @if($type == 'link')
                     <div class="b-topic-create-modal-content__item">

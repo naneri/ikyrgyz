@@ -77,18 +77,20 @@
 				</div>
 				<div class="b-user-wall-footer-raiting">
 					<div class="b-user-wall-footer-raiting__left">
+                                            @if($topic->tags->count()>0)
 						<p class="b-user-wall-footer-raiting__tag">
 							@foreach($topic->tags as $tag)
-								<span>{{$tag->name}}</span>
+								<span>#{{$tag->name}}</span>
 							@endforeach
 						</p>
+                                            @endif
 					</div>	
 					<div class="b-user-wall-footer-raiting__right">
 					<div class="b-user-wall-footer-raiting__arrow-down">
 						<input type="button" onclick="return vote.topic({{$topic->id}},-1);" class="btn-raiting">
 					</div>
 					<div class="b-user-wall-footer-raiting__number">
-						<span class="number-raiting">{{$topic->rating}}</span>
+						<span class="number-raiting" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
 					</div>
 					<div class="b-user-wall-footer-raiting__arrow-up">
 						<input type="button" onclick="return vote.topic({{$topic->id}},1);" class="btn-raiting">

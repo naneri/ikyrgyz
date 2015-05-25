@@ -484,16 +484,19 @@ $('.bigcheck6').bind('change', function () {
 
 $(document).ready(function() {
 	var status = $('.b-topic-navigation-sort__item')[0]
-
-	
-	$(status).append('<div class="online-icon"></div>')
-
-
+        var location = window.location;
+        var pattNew = /main\/index/;
+        var pattTop = /main\/index\/top/;
+	if(pattTop.test(location)){
+            $($('.b-topic-navigation-sort__item')[1]).append('<div class="online-icon"></div>');
+        }else if(pattNew.test(location)){
+            $($('.b-topic-navigation-sort__item')[0]).append('<div class="online-icon"></div>');
+        } 
+        
+	//$(status).append('<div class="online-icon"></div>')
 
 	$('.online-icon').css('display', 'block');
 
-	
-	
 });
 
 $(document).ready(function() {
