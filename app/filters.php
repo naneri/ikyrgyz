@@ -113,14 +113,14 @@ Route::filter('auth.basic', function()
 Route::filter('no-description',function()
 {
 
-    if(Auth::guest())
-    {
-        return Response::make('Unauthorized', 401);
-    }
-    if(Auth::user()->noDescription())
-    {
-        return Redirect::to('profile/fill');
-    }
+    // if(Auth::guest())
+    // {
+    //     return Response::make('Unauthorized', 401);
+    // }
+    // if(Auth::user()->noDescription())
+    // {
+    //     return Redirect::to('profile/fill');
+    // }
 });
 /*
 |--------------------------------------------------------------------------
