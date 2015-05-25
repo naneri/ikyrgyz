@@ -9,20 +9,20 @@
 		<div class="b-topic-navigation__left">
 			<div class="b-topic-navigation-menu">
 				<div class="b-topic-navigation-menu__list">
-					<a href="#" class="arrow">Я-КЫРГЫЗ</a>
+					<a style="text-transform: uppercase;" href="#" class="arrow">Я-{{trans('nation.'.Config::get('app.nation_name'))}}</a>
 					<dl class="dropdown-list">
 						<dt><a href="{{URL::to('profile')}}">Мой профиль</a></dt>
 							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">{{$topic_number}}</span></dd>
 							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
 							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">{{$friend_number}}</span></dd>
-							<dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd>
+							<!-- <dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd> -->
 							<dd><a href="#">{{ trans('network.favorite') }}</a><span class="raiting">143</span></dd>
-						<dt><a href="">Энкиклопедия</a></dt>
+						<dt>Энкиклопедия</dt>
 							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></dd>
-						<dt>Помощь</dt>
-							<dd><a href="">Сообщить о проблеме</a></dd>
+						<!-- <dt>Помощь</dt>
+							<dd><a href="">Сообщить о проблеме</a></dd> -->
 						<!-- 	<dd><a href="">Истоиря действии</a></dd>	 -->
 						<dt>Настройки</dt>
 							<dd>Выберите язык
