@@ -18,32 +18,32 @@
 						<div class="b-topic-navigation-menu">
 				<div class="b-topic-navigation-menu__list">				
 					<dl class="dropdown-list">
-						<dt class="title">Я-Кыргыз</dt>
-						<dt class="user-name"><img src="{{ asset('img/48.png') }}" alt="">Имя пользователя</dt>
-						<dt>Мой профиль</dt>
-							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">143</span></dd>
-							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">143</span></dd>
-							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">143</span></dd>
-							<dd><a href="">Подписки</a><span class="raiting">143</span></dd>
+						<dt class="title"><a href="{{ URL::to('/') }}" class="soc-name">Я-Кыргыз</a></dt>
+						<dt class="user-name"><a href="{{URL::to('profile')}}"><img src="{{ asset('img/48.png') }}" alt="">Имя пользователя</a></dt>
+						<dt><a href="{{URL::to('profile')}} " class="my-profile">Мой профиль</a></dt>
+							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">{{$topic_number}}</span></dd>
+							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
+							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">{{$friend_number}}</span></dd>
+							<!-- <dd><a href="">Подписки</a><span class="raiting">143</span></dd> -->
 							<dd><a href="#">{{ trans('network.favorite') }}</a><span class="raiting">143</span></dd>
 						<dt>Энкиклопедия</dt>
 							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></dd>
-						<dt>Помощь</dt>
+						<!-- <dt>Помощь</dt>
 							<dd><a href="">Сообщить о проблеме</a></dd>
-							<dd><a href="">Истоиря действии</a></dd>	
+							<dd><a href="">Истоиря действии</a></dd> -->	
 						<dt>Настройки</dt>
 							<dd>Выберите язык
-							<a href="">
+							<a href="{{ URL::to('locale/ru') }}">
 								<img src="{{ asset('img/103.png') }}" alt=""/>
 							</a>
-							<a href="">
+							<a href="{{ URL::to('locale/en') }}">
 								<img src="{{ asset('img/104.png') }}" alt=""/>
 							</a>
 							
 							</dd>
-						<dt><a href="">Выход</a></dt>	
+						<dt><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a></dt>	
 					</dl>
 
 				</div>

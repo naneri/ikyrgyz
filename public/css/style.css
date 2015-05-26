@@ -1660,6 +1660,14 @@ input[type='checkbox'].choose-list {
 	float: right;
 }
 
+.dropdown-list .my-profile {
+	color: #e16549;
+}
+
+.dropdown-list .soc-name {
+	color: #fff;
+}
+
 .b-topic-navigation__create,
 .b-topic-navigation-create-dropdown {
 	width: 165px;
