@@ -348,6 +348,10 @@ body {
 	.b-topic-navigation__right {
 		padding-right: 20px;
 	}
+
+	.b-topic-navigation-choose {
+		display: none;
+	}
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 570px) {
@@ -1209,8 +1213,8 @@ body {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
 	.b-user-wall-495 {
-		width: 95%;
-		margin-left: 20px;
+		width: 90%;
+		margin-left: 30px;
 		margin-right: 20px;
 	}
 
@@ -1224,6 +1228,12 @@ body {
 		width: 95%;
 		margin-left: 20px;
 		margin-right: 20px;
+	}
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+	.b-user-wall-495 {
+		width: 86%;
 	}
 }
 
@@ -1307,112 +1317,6 @@ body {
 Topic
 ===========================
 */
-.b-topic-navigation-create {
-	display: none;
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 1000;
-	width: 100px;
-	background: #fff;
-	overflow: hidden;
-}
-
-.b-topic-navigation-create__list span {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.b-topic-navigation-create__list a {
-	display: inline-block;
-	width: 22px;
-	height: 24px;
-	background: url("../img/13.png") no-repeat;
-	vertical-align: middle;
-	padding-left: 30px;
-}
-
-.b-topic-navigation-create__list:nth-child(1) a {
-	background-position: 0 0;
-}
-
-.b-topic-navigation-create__list:nth-child(2) a {
-	background-position: 0 -31px;
-}
-
-.b-topic-navigation-create__list:nth-child(3) a {
-	background-position: 0 -61px;
-}
-
-.b-topic-navigation-create__list:nth-child(4) a {
-	background-position: 0 -84px;
-}
-
-.b-topic-navigation-create__list:nth-child(5) a {
-	background-position: 0 -121px;
-}
-
-.b-topic-navigation-create__list:nth-child(6) a {
-	background-position: 0 -153px;
-}
-
-.b-topic-navigation-create__list:nth-child(7) a {
-	background-position: 0 -184px;
-}
-
-.b-topic-navigation-list {
-	position: relative;
-}
-
-.b-topic-navigation__create {
-	padding: 4px;
-	float: left;
-	height: 32px;
-	display: inline-block;
-	width: 13%;
-}
-
-.b-topic-navigation__create a.b-topic-navigation__item {
-	color: #676767;
-	font-size: 15px;
-	font-family: 'PT Sans Caption';
-	width: 120px;
-	height: 32px;
-	border: 1px solid #dbdbdb;
-	display: block;
-	text-align: center;
-	line-height: 32px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	position: relative;
-}
-
-.b-topic-navigation__create a.b-topic-navigation__item:before {
-	display: inline-block;
-	content: '';
-	background: url("../img/31.png") no-repeat;
-	width: 12px;
-	height: 12px;
-	vertical-align: middle;
-	margin-right: 5px;
-	position: absolute;
-	top: 11px;
-	left: 10px;
-}
-
-.b-topic-navigation__create a.b-topic-navigation__item:after {
-	display: inline-block;
-	content: '';
-	background: url("../img/40.png") no-repeat;
-	width: 12px;
-	height: 12px;
-	vertical-align: middle;
-	margin-right: 5px;
-	position: absolute;
-	right: 0;
-	top: 14px;
-}
-
 .b-topic-navigation__inner {
 	max-width: 1000px;
 	width: 100%;
@@ -1492,7 +1396,7 @@ Topic
 
 .b-topic-navigation-category {
 	float: left;
-	width: 240px;
+	width: 180px;
 }
 
 .b-topic-navigation-category__item {
@@ -2981,12 +2885,12 @@ about profile Style
 
 .b-profile-about-title__right .btn-edit {
 	display: inline-block;
-	font: 10px 'PT Sans Caption Bold';
+	font: 10px 'PT Sans Caption';
 	color: #999;
 }
 
 .b-profile-about-title__right .btn-delete {
-	font: 10px 'PT Sans Caption Bold';
+	font: 10px 'PT Sans Caption';
 	color: #999;
 	margin-right: 5px;
 }
@@ -3409,7 +3313,7 @@ p.b-profile-about-topics__title {
 	background-image: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background-image: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background-image: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
-	font: 12px 'PT Sans Caption Bold';
+	font: 12px 'PT Sans Caption';
 	color: #999;
 }
 
@@ -3429,76 +3333,39 @@ p.b-profile-about-topics__title {
 	margin-right: 5px;
 }
 
-ul.b-profile-about-tags-user-list-dropdown {
-	display: none;
-	position: absolute;
-	padding: 10px 8px 8px 8px;
-	z-index: 1000;
-	width: 112px;
-	height: 157px;
-	border: 1px solid #dbdbdb;
-	background-color: #feffff;
+.b-profile-about-tags-user-social__list {
+	float: left;
 }
 
-ul.b-profile-about-tags-user-list-dropdown a {
-	color: #999;
-	font: 12px 'PT Sans Caption';
-}
-
-ul.b-profile-about-tags-user-list {
-	display: inline-block;
-	text-align: center;
-	border: 1px solid #d5d5d5;
-	background-image: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background-image: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background-image: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background-image: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
-	background-image: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
-	margin-right: 20px;
-}
-
-ul.b-profile-about-tags-user-list li a {
-	display: inline-block;
-	background: url("../img/29.png") no-repeat;
-	background-position: 50% 50%;
-	width: 32px;
-	height: 32px;
-	vertical-align: middle;
-}
-
-ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li {
-	padding-top: 1px;
-}
-
-ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li a {
+.b-profile-about-tags-user-social__list a {
 	display: block;
-	background: url("../img/social.png") no-repeat;
-	width: 20px;
-	height: 20px;
-	margin: 5px 5px;
-	padding-left: 30px;
-	vertical-align: middle;
-	white-space: nowrap;
+	width: 25px;
+	height: 25px;
+	background: url("../img/98.png") no-repeat;
 }
 
-ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li:nth-child(1) a {
+.b-profile-about-tags-user-social__list:nth-child(1) a {
 	background-position: 0 0;
 }
 
-ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li:nth-child(2) a {
-	background-position: 0 -26px;
+.b-profile-about-tags-user-social__list:nth-child(2) a {
+	background-position: -25px 0;
 }
 
-ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li:nth-child(3) a {
-	background-position: 0 -52px;
+.b-profile-about-tags-user-social__list:nth-child(3) a {
+	background-position: -50px 0;
 }
 
-ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li:nth-child(4) a {
-	background-position: 0 -78px;
+.b-profile-about-tags-user-social__list:nth-child(4) a {
+	background-position: -75px 0;
 }
 
-ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li:nth-child(5) a {
-	background-position: 0 -104px;
+.b-profile-about-tags-user-social__list:nth-child(5) a {
+	background-position: -100px 0;
+}
+
+.b-profile-about-tags-user-social__list:nth-child(6) a {
+	background-position: -125px 0;
 }
 
 .b-profile-about-form__image {
@@ -3725,6 +3592,32 @@ ul.b-profile-about-tags-user-list .b-profile-about-tags-user-list-dropdown li:nt
 p.b-profile-about-message-button__raiting {
 	color: #26ad85;
 	font: 15px 'PT Sans Caption Bold';
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 760px) {
+	.b-profile-about-tags-user__right {
+		float: none;
+	}
+
+	.b-profile-about-tags-user__left {
+		float: none;
+	}
+
+	.b-profile-about-tags-user-social {
+		padding-top: 10px;
+	}
+
+	.b-user-wall-footer-raiting {
+		border: none;
+	}
+
+	.count-topic {
+		display: block;
+	}
+
+	.count-followers {
+		display: block;
+	}
 }
 /*
 ===========================
