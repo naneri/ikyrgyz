@@ -42,20 +42,21 @@
 						<div class="b-user-info-title">
 							<p class="b-user-info-title__title">Информация о Вас</p>
 						</div>
-					<div class="b-user-info-block">
-						<div class="b-user-info-block__left">
-							<div class="b-user-info-block-photo">
-								<div class="b-user-info-block-photo__image">
-									<a href=""><img src="{{ asset('img/106.png') }}" alt=""></a>
-								</div>
-								
-								<input type="submit" value="Загрузить фото" class="b-user-info-block-photo__button">
-								
-								<div class="b-user-info-block-photo__desc">
-									Поля отмеченные <b>*</b> (звездочкой) обязательный  к заполению
-								</div>
-							</div>
-						</div>
+                                            <div class="b-user-info-block">
+                                                <div class="b-user-info-block__left">
+                                                    <div class="b-user-info-block-photo">
+                                                        <div class="b-user-info-block-photo__image">
+                                                            @include('profile.edit.set-avatar')
+                                                                    <!--a href=""><img src="{{ asset('img/106.png') }}" alt=""></a-->
+                                                        </div>
+
+                                                        <input type="button" value="Загрузить фото" class="b-user-info-block-photo__button" onclick="javascript: $('div.avatar-view.user-image').click();">
+
+                                                        <div class="b-user-info-block-photo__desc">
+                                                            Поля отмеченные <b>*</b> (звездочкой) обязательный  к заполению
+                                                        </div>
+                                                    </div>
+                                                </div>
 						<div class="b-user-info-block__right">
 							<div class="b-user-info-block-label">
 								<div class="b-user-info-block-label__item">
