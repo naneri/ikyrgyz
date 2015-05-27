@@ -85,4 +85,18 @@ class User_Description extends Eloquent{
 
         return True;
     }
+    
+    public function getLiveplace(){
+        $result = false;
+        if($this->liveplace_country_id){
+            $result = Country::find($this->liveplace_country_id)->name_ru;
+        }
+        if ($this->liveplace_city_id) {
+            if($result){
+                $result .= ', ';
+            }
+            $result .= City::find($this->liveplace_city_id)->name_ru;;
+        }
+        return $result;
+    }
 }

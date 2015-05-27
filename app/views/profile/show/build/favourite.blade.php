@@ -1,8 +1,13 @@
-<ul id="filters">
-    <li><a href="#" data-filter="*">Все</a></li>
-    <li><a href="#" data-filter=".blog">Блоги</a></li>
-    <li><a href="#" data-filter=".topic">Топики</a></li>
-</ul>
+<div class="b-publication-sort" style="margin-bottom: 20px;">
+    <ul id="filters">
+        <li class="b-publication-sort__list">Сортировать:</li>
+        <li class="b-publication-sort__list"><a href="#" data-filter=".topic">Топики</a></li>
+        <li class="b-publication-sort__list"><a href="#" data-filter=".blog">Блоги</a></li>
+        <li class="b-publication-sort__list"><a href="#" data-filter=".group">Группы</a></li>
+        <li class="b-publication-sort__list"><a href="#" data-filter="*">Все</a></li>
+        <div class="clear"></div>
+    </ul>
+</div>
 <div id="masonry">
 @foreach($items as $item)
     <?php $target = $item->target; ?>
@@ -58,9 +63,5 @@
     }
     #filters{
         height: 40px;
-    }
-    #filters li{
-        float: left;
-        margin: 0 20px 20px;
     }
 </style>

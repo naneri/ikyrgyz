@@ -208,7 +208,7 @@ body
 			vertical-align middle
 .b-header-nav-icon-search
 	display none
-	float right
+	float left
 	width 20%
 	line-height 80px
 	&__item
@@ -262,7 +262,7 @@ body
 	}
 	.b-header-nav-menu {
 		display block
-		width 25%
+		width 20%
 		padding-left 5%
 	}
 	.b-header-nav__middle {
@@ -270,6 +270,7 @@ body
 	}
 	.b-header-nav__middle .b-header-nav-button__item {
 		line-height 72px
+		
 		
 	}
 	.b-header-nav__right  {
@@ -298,14 +299,28 @@ body
 	.b-topic-navigation__right {
 		padding-right 20px
 	}
-	
-	
-	
+	.b-topic-navigation-choose {
+		display none
+	}
 	
 
 }
 
 
+@media only screen and (min-device-width: 320px) and (max-device-width: 570px) {
+	.b-header-nav-menu {
+		display block
+		width 10%
+		padding-left 5%
+	}
+	.b-header-nav__middle {
+		width 65%
+	}
+	.b-header-nav__middle .b-header-nav-button__item {
+		padding 0
+	}
+	
+}
 
 
 	
@@ -1178,8 +1193,8 @@ body
 
 @media only screen and (min-device-width: 320px) and (max-device-width : 768px) {
 	.b-user-wall-495 {
-		width 95%
-		margin-left 20px
+		width 90%
+		margin-left 30px
 		margin-right 20px
 
 	}
@@ -1198,10 +1213,15 @@ body
 	}
 
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px)  {
+	.b-user-wall-495 {
+		width 86%
+	}
+}
 
 .b-user-wall    
 	margin-bottom 10px
-  		
+		
 .b-user-media
 	width 40%
 	float right
@@ -1253,55 +1273,55 @@ Topic
 ===========================
 */
 
-.b-topic-navigation-create
-	display none
-	position absolute
-	top 100%
-	left 0
-	z-index 1000
-	width 100px
-	background #fff
-	overflow hidden
-	&__list
-		span 
-			display inline-block
-			vertical-align middle
-		a
-			display inline-block
-			width 22px
-			height 24px
-			background url(../img/13.png) no-repeat
-			vertical-align middle
-			padding-left 30px
-		&:nth-child(1)
-			a
-				background-position 0 0
-		&:nth-child(2)
-			a
-				background-position 0 -31px
-		&:nth-child(3)
-			a
-				background-position 0 -61px
-		&:nth-child(4)
-			a
-				background-position 0 -84px 
-		&:nth-child(5)
-			a
-				background-position 0 -121px
-		&:nth-child(6)
-			a
-				background-position 0 -153px
-		&:nth-child(7)
-			a
-				background-position 0 -184px
-.b-topic-navigation-list
-	position relative
-.b-topic-navigation__create
-	padding 4px
-	float left
-	height 32px
-	display inline-block
-	width 13%
+// .b-topic-navigation-create
+// 	display none
+// 	position absolute
+// 	top 100%
+// 	left 0
+// 	z-index 1000
+// 	width 100px
+// 	background #fff
+// 	overflow hidden
+// 	&__list
+// 		span 
+// 			display inline-block
+// 			vertical-align middle
+// 		a
+// 			display inline-block
+// 			width 22px
+// 			height 24px
+// 			background url(../img/13.png) no-repeat
+// 			vertical-align middle
+// 			padding-left 30px
+// 		&:nth-child(1)
+// 			a
+// 				background-position 0 0
+// 		&:nth-child(2)
+// 			a
+// 				background-position 0 -31px
+// 		&:nth-child(3)
+// 			a
+// 				background-position 0 -61px
+// 		&:nth-child(4)
+// 			a
+// 				background-position 0 -84px 
+// 		&:nth-child(5)
+// 			a
+// 				background-position 0 -121px
+// 		&:nth-child(6)
+// 			a
+// 				background-position 0 -153px
+// 		&:nth-child(7)
+// 			a
+// 				background-position 0 -184px
+// .b-topic-navigation-list
+// 	position relative
+// .b-topic-navigation__create
+// 	padding 4px
+// 	float left
+// 	height 32px
+// 	display inline-block
+// 	width 13%
 	
 	
 	
@@ -1309,52 +1329,51 @@ Topic
 	
 	
 	
-	a.b-topic-navigation__item
-		color #676767
-		font-size 15px
-		font-family 'PT Sans Caption'
-		width 120px
-		height 32px
-		border 1px solid #dbdbdb
-		display block
-		text-align center
-		line-height 32px
-		border-radius 5px
-		position relative
+// 	a.b-topic-navigation__item
+// 		color #676767
+// 		font-size 15px
+// 		font-family 'PT Sans Caption'
+// 		width 120px
+// 		height 32px
+// 		border 1px solid #dbdbdb
+// 		display block
+// 		text-align center
+// 		line-height 32px
+// 		border-radius 5px
+// 		position relative
 		
 		
 		
 		
-		&:before
-			display inline-block
-			content ''
-			background url(../img/31.png) no-repeat
-			width 12px
-			height 12px
-			vertical-align middle
-			margin-right 5px
-			position absolute
-			top 11px
-			left 10px
+// 		&:before
+// 			display inline-block
+// 			content ''
+// 			background url(../img/31.png) no-repeat
+// 			width 12px
+// 			height 12px
+// 			vertical-align middle
+// 			margin-right 5px
+// 			position absolute
+// 			top 11px
+// 			left 10px
 			
 			
-		&:after
-			display inline-block
-			content ''
-			background url(../img/40.png) no-repeat
-			width 12px
-			height 12px
-			vertical-align middle
-			margin-right 5px
-			position absolute
-			right 0
-			top 14px
+// 		&:after
+// 			display inline-block
+// 			content ''
+// 			background url(../img/40.png) no-repeat
+// 			width 12px
+// 			height 12px
+// 			vertical-align middle
+// 			margin-right 5px
+// 			position absolute
+// 			right 0
+// 			top 14px
 .b-topic-navigation__inner
 	max-width 1000px
 	width 100%
 	margin 0 auto
-	border-left $baseBorder
-	
+	border-left $baseBorder	
 	height 40px
 	
 	
@@ -1424,7 +1443,7 @@ Topic
 				background-position -76px 10px
 .b-topic-navigation-category
 	float left
-	width 240px
+	width 180px
 	
 	
 	&__item
@@ -1661,6 +1680,10 @@ div.choose-list
 		img
 			vertical-align middle
 			float right
+	.my-profile
+		color $orangeFontColor
+	.soc-name
+		color #fff
 		
 .b-topic-navigation__create
 
@@ -2606,13 +2629,14 @@ about profile Style
 			&:hover
 				background $orangeGradient
 				color #fff
+				
 		.btn-edit
 			
 			display inline-block
-			font 10px $baseFontFamilyBold           
+			font 10px $baseFontFamily         
 			color $baseFontColor
 		.btn-delete         
-			font 10px $baseFontFamilyBold           
+			font 10px $baseFontFamily        
 			color $baseFontColor
 			margin-right 5px
 		.count
@@ -2908,7 +2932,7 @@ p.b-profile-about-topics__title
 		width 500px
 		.btn-default
 			button-default()
-			font 12px $baseFontFamilyBold
+			font 12px $baseFontFamily
 			color $baseFontColor
 			
 			&:hover
@@ -2919,69 +2943,96 @@ p.b-profile-about-topics__title
 			font 12px $baseFontFamily
 		.btn-follow, .count-topic
 			margin-right 5px
-ul.b-profile-about-tags-user-list-dropdown  
-	dropdown()  
-	padding 10px 8px 8px 8px
-	z-index 1000
-	width 112px
-	height 157px
-	border 1px solid #dbdbdb
-	background-color #feffff
+// ul.b-profile-about-tags-user-list-dropdown  
+// 	dropdown()  
+// 	padding 10px 8px 8px 8px
+// 	z-index 1000
+// 	width 112px
+// 	height 157px
+// 	border 1px solid #dbdbdb
+// 	background-color #feffff
 	
-	a
-		color $baseFontColor
-		font 12px $baseFontFamily
+// 	a
+// 		color $baseFontColor
+// 		font 12px $baseFontFamily
 	
-ul.b-profile-about-tags-user-list
-	display inline-block
-	text-align center   
-	button-default()
-	margin-right 20px
+// ul.b-profile-about-tags-user-list
+// 	display inline-block
+// 	text-align center   
+// 	button-default()
+// 	margin-right 20px
 	
-	li
-		//
-		a
-			display inline-block
-			background url(../img/29.png) no-repeat
-			background-position 50% 50%
-			width 32px
-			height 32px
-			vertical-align middle
+// 	li
+// 		//
+// 		a
+// 			display inline-block
+// 			background url(../img/29.png) no-repeat
+// 			background-position 50% 50%
+// 			width 32px
+// 			height 32px
+// 			vertical-align middle
 			
 	
 	
 			
 			
 			
-	.b-profile-about-tags-user-list-dropdown
-		li
-			padding-top 1px
-			a
-				display block
-				background url(../img/social.png) no-repeat
-				width 20px
-				height 20px
-				margin 5px 5px
-				padding-left 30px           
-				vertical-align middle           
-				white-space nowrap
+// 	.b-profile-about-tags-user-list-dropdown
+// 		li
+// 			padding-top 1px
+// 			a
+// 				display block
+// 				background url(../img/social.png) no-repeat
+// 				width 20px
+// 				height 20px
+// 				margin 5px 5px
+// 				padding-left 30px           
+// 				vertical-align middle           
+// 				white-space nowrap
 				
-		li:nth-child(1)
+// 		li:nth-child(1)
+// 			a
+// 				background-position 0 0
+// 		li:nth-child(2)
+// 			a
+// 				background-position 0 -26px
+// 		li:nth-child(3)
+// 			a
+// 				background-position 0 -52px 
+// 		li:nth-child(4)
+// 			a
+// 				background-position 0 -78px 
+// 		li:nth-child(5)
+// 			a
+// 				background-position 0 -104px    
+.b-profile-about-tags-user-social
+	//
+	&__list
+		float left
+		a
+			display block
+			width 25px
+			height 25px
+			background url(../img/98.png) no-repeat
+		&:nth-child(1)
 			a
 				background-position 0 0
-		li:nth-child(2)
+		&:nth-child(2)			
 			a
-				background-position 0 -26px
-		li:nth-child(3)
+				background-position -25px 0
+		&:nth-child(3)			
 			a
-				background-position 0 -52px 
-		li:nth-child(4)
+				background-position -50px 0	
+		&:nth-child(4)			
 			a
-				background-position 0 -78px 
-		li:nth-child(5)
+				background-position -75px 0
+		&:nth-child(5)			
 			a
-				background-position 0 -104px    
-		
+				background-position -100px 0
+		&:nth-child(6)			
+			a
+				background-position -125px 0
+					
 
 .b-profile-about-form
 	//
@@ -3127,6 +3178,27 @@ ul.b-profile-about-tags-user-list
 p.b-profile-about-message-button__raiting
 	color #26ad85
 	font 15px $baseFontFamilyBold
+@media only screen and (min-device-width: 320px) and (max-device-width:760px) {
+	.b-profile-about-tags-user__right {
+		float none
+		
+	}
+	.b-profile-about-tags-user__left {
+		float none
+	}
+	.b-profile-about-tags-user-social {
+		padding-top 10px
+	}
+	.b-user-wall-footer-raiting {
+		border none
+	}
+	.count-topic {
+		display block
+	}
+	.count-followers {
+		display block
+	}
+}
 /*
 ===========================
 ===========================
@@ -3781,7 +3853,7 @@ music player style
 	
 
 .b-user-info-block
-	
+	//
 	&__left
 		float left
 		max-width 305px
@@ -3817,6 +3889,8 @@ music player style
 
 .b-user-info-block-label-item
 	padding-bottom 20px
+	
+	
 	&__labels
 		display inline-block
 		padding-right 20px
@@ -3827,6 +3901,8 @@ music player style
 			border 1px solid rgba(169,169,169,.4)
 			width 250px
 			height 30px
+			font 16px 'pt sans caption', sans-serif
+			color $baseFontColorLight
 			
 		
 		
@@ -3864,6 +3940,42 @@ music player style
 	outline none
 	cursor pointer
 
+
+.ui-autocomplete 
+	background #fff
+	width 160px
+	
+	color $baseFontColorLight
+	font 16px 'pt sans caption', sans-serif
+	border $baseBorder
+	border-bottom 4px solid #676767
+	border-top none
+
+   
+   
+@media only screen and (min-device-width: 320px) and (max-device-width: 960px) {
+	.b-user-info-block__left {
+		float none
+		padding-left 70px
+	}
+	.b-user-info-block__right {
+		float none
+		padding-right 0
+		padding-left 70px
+	}
+	
+	.b-user-info {
+		
+		width 400px
+		position static
+		margin 0 auto
+		
+		height 100%
+		
+		
+	}
+}
+	
 
 
 /*
@@ -4383,3 +4495,6 @@ music player style
 		width 45px
 		height 45px
 		text-align center	
+		
+
+
