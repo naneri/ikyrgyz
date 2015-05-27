@@ -31,6 +31,8 @@ class ProfileController extends BaseController {
         switch($page){
             case 'publications':
                 $items = $user->publications($topicsLimit);
+                $videos = $user->topicsWithVideo()->take(6)->get();
+                $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
                 break;
             case 'friends':
                 $items = $user->friends();

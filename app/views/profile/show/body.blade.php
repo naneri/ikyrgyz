@@ -2,7 +2,7 @@
 
 @if($page == 'newsline')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => false))
-    @include('topic.build', array('topics' => $items))
+    @include('topic.build', array('topics' => $items, 'showCreatePanel' => $user->id == Auth::id()))
 @elseif($page == 'publications' || $page == 'videos')
     @include('scripts.script-topic', array('page' => '/profile/'.$user->id.'/ajaxTopics/', 'columnN' => 2))
     @include('topic.build', array('topics' => $items))
@@ -34,7 +34,7 @@
     </div>
 @endif
 
-@if($page == 'newsline')
+@if($page == 'newsline' || $page == 'publications')
     <script>
         $(document).ready(function() {
             //$('.b-user-media').prependTo(".masonry");
@@ -70,6 +70,9 @@
         }
         .b-user-media-video-top__btn a{
             float: right;
+        }
+        .b-user-wall{
+            width: 590px;
         }
     </style>
     <div class="b-user-media" style="right: 0px; padding-bottom: 100px;">

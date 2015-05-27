@@ -5,10 +5,10 @@
 	<div class="b-profile">
 		<div class="b-profile__left">
 			<div class="b-profile-photo">
-				<div class="b-profile-photo__image">
-					<a href=""><img src="{{ asset('img/107.png') }} " alt=""></a>
+                                <div class="b-profile-photo__image">
+                                    @include('profile.edit.set-avatar', array('reloadConfirm' => true))
 				</div>
-				<a href="" class="b-profile-photo__button">Загрузить фото</a>
+                            <a href="" class="b-profile-photo__button" onclick="javascript: $('div.avatar-view.user-image').click();">Загрузить фото</a>
 
 			</div>
 		</div>
@@ -16,16 +16,16 @@
 			<div class="b-profile-top">
 				<div class="b-profile-top__left">
 					<div class="b-profile-top-information">
-						<div class="b-profile-top-information__top"><span class="raiting-text">Рейтинг:</span><span class="raiting-num">+0.00</span></div>
-						<div class="b-profile-top-information__name">Ярослав Александрович <p> Маркин</p></div>
-						<div class="b-profile-top-information__status">Статус которые поставил пользователь, это может быть цитата или еще какие нибудь умные слова скопипастенные в сети</div>
+						<div class="b-profile-top-information__top"><span class="raiting-text">Рейтинг:</span><span class="raiting-num">+{{$user->rating}}</span></div>
+						<div class="b-profile-top-information__name">{{$user->getNames()}}</div>
+						<div class="b-profile-top-information__status"></div>
 					</div>
 
 				</div>
 
 				<div class="b-profile-top__right">
 					<div class="b-profile-top-button">
-						<a href="" class="b-profile-top-button__button">Случайный профиль</a>
+						<a href="{{URL::to('profile/random')}}" class="b-profile-top-button__button">Случайный профиль</a>
 						
 					</div>
 				</div>
@@ -37,12 +37,21 @@
 					<li class="b-profile-middle__left">
 						<p>День рождения:</p>
 						<p>Живет:</p>
+                                                <?php $jobs = $user->profileItemsGetValues('job'); ?>
+                                                @if(count($jobs) > 0)
 						<p>Работает</p>
+                                                @endif
 					</li>
 					<li class="b-profile-middle__right">
-						<p>10 декабря 1990</p>
-						<p>Бишкек, Кыргызстан</p>
-						<p>ООО “Души диван”, Тунеядец I категории</p>
+						<p>{{$user->description->birthday}}</p>
+                                                <p>{{City::find($user->description->liveplace_city_id)->name_ru}}, {{Country::find($user->description->liveplace_country_id)->name_ru}}</p>
+                                                @if(count($jobs) > 0)
+                                                    <p>
+                                                        @foreach($jobs as $job)
+                                                        {{$job}}
+                                                        @endforeach
+                                                    </p>
+                                                @endif
 					</li>
 
 					<div class="clear"></div>
@@ -51,26 +60,38 @@
 			</div>
 			<div class="b-profile-counters">
 				<ul>
-					<li><a href="">
-							<p>382</p>
-							<p>Друзей</p>
-						</a></li>
-					<li><a href="">
-							<p>120</p>
-							<p>Общих</p>
-						</a></li>
-					<li><a href="">
-							<p>170</p>
+                                            @if($friends->count() > 0)
+                                                <li>
+                                                    <a href="{{URL::to('profile/'.$user->id.'/friends')}}">
+                                                        <p>{{$friends->count()}}</p>
+                                                        <p>Друзей</p>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                            @if($user->id != Auth::id() && $mutualFriends->count() > 0)
+                                                <li><a href="{{URL::to('profile/'.$user->id.'/mutualFriends')}}">
+                                                        <p>{{$mutualFriends->count()}}</p>
+                                                        <p>Общих</p>
+                                                </a></li>
+                                            @endif
+                                            @if($subscribers->count() > 0)
+                                            <li><a href="{{URL::to('profile/'.$user->id.'/subscribers')}}">
+                                                <p>{{$subscribers->count()}}</p>
 							<p>Подписчиков</p>
-						</a></li>
-					<li><a href="">
-							<p>897</p>
+                                            </a></li>
+                                        @endif
+                                        @if($photos->count() > 0)
+                                        <li><a href="{{URL::to('profile/'.$user->id.'/photos')}}">
+                                                <p>{{$photos->count()}}</p>
 							<p>Фотографии</p>
-						</a></li>
-					<li><a href="">
-							<p>5</p>
-							<p>Группы</p>
-						</a></li>
+                                            </a></li>
+                                        @endif
+                                        @if($videos->count() > 0)
+                                        <li><a href="{{URL::to('profile/'.$user->id.'/videos')}}">
+                                                <p>{{$videos->count()}}</p>
+							<p>Видео</p>
+                                            </a></li>
+                                        @endif
 					<div class="clear"></div>
 				</ul>
 			</div>
@@ -81,18 +102,20 @@
 	<div class="b-user-navigation">
 		<div class="b-user-navigation-list">
 			<ul class="tabs">
-				<li class="b-user-navigation-list__list tab-link current" data-tab="tab-1" ><a href="#">Лента</a></li>
-				<li class="b-user-navigation-list__list" data-tab="tab-2"><a href="#">Сообщения</a><span>999</span></li>
-				<li class="b-user-navigation-list__list" data-tab="tab-4"><a href="#">Публикации</a></li>
-				<li class="b-user-navigation-list__list" data-tab="tab-3"><a href="#">Друзья</a></li>
-				<li class="b-user-navigation-list__list"><a href="">Подписано</a></li>
-				<li class="b-user-navigation-list__list"><a href="">Избранное</a></li>
-				<li class="b-user-navigation-list__list"><a href="">Настройки</a></li>
+                            <li class="b-user-navigation-list__list tab-link current" data-tab="tab-1" ><a href="{{URL::to('profile')}}">Лента</a></li>
+                            <li class="b-user-navigation-list__list" data-tab="tab-2"><a href="{{URL::to('profile/messages')}}">Сообщения</a>@if(count(@$new_messages))<span>{{count($new_messages)}}</span>@endif</li>
+                            <li class="b-user-navigation-list__list" data-tab="tab-4"><a href="{{URL::to('profile/publications')}}">Публикации</a><span>{{$user->publications(10000)->count()}}</span></li>
+                            <li class="b-user-navigation-list__list" data-tab="tab-3"><a href="{{URL::to('profile/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
+				<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscribtions')}}">Подписано</a></li>
+                                <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/favourites')}}">Избранное</a><span>{{$user->favourites()->count()}}</span></li>
+				<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/edit/main')}}">Настройки</a></li>
 				<div class="clear"></div>
 			</ul>
 		</div>
 	</div>
-	<div class="b-publication tab-content current " id="tab-1">
+
+    @include('profile.show.body', compact('items', 'page'))
+	<div class="b-publication tab-content nocurrent " id="tab-1">
 		<div class="b-publication-sort b-user-wall">
 			<ul>
 				<li class="b-publication-sort__list">Сортировать:</li>
