@@ -30,7 +30,7 @@
 				<p class="b-user-wall-header__date">
                                     <span class="moment-time"></span>
                                     <span class="moment-time-hover"></span>
-                                    <span class="original-time">{{$topic->created_at}}</span>
+                                    <span class="original-time">{{Date::parse($topic->created_at)->format('j F Y')}}</span>
 					<div class="clear"></div>
 				</p>
 				</div>

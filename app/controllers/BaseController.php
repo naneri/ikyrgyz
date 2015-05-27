@@ -39,13 +39,18 @@ class BaseController extends Controller {
 
             View::share('friend_number', $friend_number);
 
+            $favorites = Favourite::where('user_id', Auth::user()->id)->where('target_type', 'topic')->count();
+
+            View::share('favorites', $favorites);
 		}
+
         // отправляет в шаблон базовый УРЛ сайта
         JavaScript::put(['base_url' => URL::to('/')]);
+
 		// отправляет в шаблон базовый УРЛ сайта
 		$base_config = array('base_url' => URL::to('/'));
-		View::share('base_config', $base_config);
 
+		View::share('base_config', $base_config);
 
 	}
 

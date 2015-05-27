@@ -2,7 +2,7 @@
 
 @section('content')
 
-	@include('blog.scripts', array('page' => 'blog'))
+	@include('scripts.script-topic', array('page' => 'blog'))
    	<div class="b-content">
     	@include('misc.createnav')
     	@include('blog.build', array('blogs' => $blogs))

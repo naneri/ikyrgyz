@@ -1,12 +1,14 @@
 @include('scripts.convert-times')
 <script>
 	
-    function timesConvert(){
+/*    function timesConvert(){
         times.init('.b-user-wall-header__date');
         times.eachConvert('.b-user-wall');
-    }
+    }*/
 	
-    settings = {
+    
+    var ColumnVal;
+    var options = { 
         '1' : {
             columnWidth : 650,
             masonryClass: 'b-user-wall-1000'
@@ -20,81 +22,85 @@
             masonryClass: 'b-user-wall-325'
         }
     }
-    
+
 	$(document).ready(function(){
-            timesConvert();
-            var page = 1;
-            $( function() {
+
+        var settings = {
+            parentEl    : $('.masonry'),
+            childEl     : $('.b-user-wall')
+        }
+
+        
+       /* timesConvert();*/
+        var page = 1;
+      
              
-            // defining the container for the Masonry         
-            var $container = $('.masonry');
-           
-            var columnWidth, masonryClass;
+        // defining the container for the Masonry         
+        var $container = $('.masonry');
+       
+        var masonryClass;
 
-            columnWidth     = settings[niamiko.column].columnWidth;
-            masonryClass    = settings[niamiko.column].masonryClass;
-            $container.find('.b-user-wall').removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
-          
-            
-            $container.imagesLoaded(function(){
-                    $container.masonry({
-                    columnWidth: columnWidth,
-                    'gutter': 10,
-                    stamp: '.b-user-media'
-                    });	
-            });
+        masonryClass    = options[niamiko.column].masonryClass;
+        $container.find('.b-user-wall').removeClass('b-user-wall-325').removeClass('b-user-wall-495').removeClass('b-user-wall-1000').addClass(masonryClass);
+      
+        
+        $container.imagesLoaded(function(){
+                $container.masonry({
+                columnWidth: options[niamiko.column].columnWidth,
+                'gutter': 10,
+                stamp: '.b-user-media'
+                });	
+        });
 
-            var inProgress = false;
+        var inProgress = false;
 
-            $(window).scroll(function() {
-                if($(window).scrollTop() + $(window).height() > $(document).height() - 100 && !inProgress) {
-                    inProgress = true;
-                   
-                    //console.log(sort);
-                    var parameters = {
-                        sort : niamiko.sort || '',
-                        page : page
-                    }
-                    
-                    $.get(niamiko.base_url + '{{$page}}', parameters).done(function(data){
-                        
-                        // находим все блоки с классом .b-user-wall и добавляем в массив elements
-                        var elements = $(data).find(".b-user-wall");
-                        
-                        var ColumnN = $('#ColumnN').val() || niamiko.column;
-                        elements.addClass(settings[ColumnN].masonryClass);
-
-                        // крепим новые элементы к контейнеру
-                        $container.append(elements).masonry( 'appended', elements );
-
-                        // располагаем новые элементы плиткой
-                        $container.imagesLoaded( function() {
-                            $container.masonry('layout');
-                        });
-                        
-                        timesConvert();
-
-                        // увеличиваем страничку на одну
-                        page += 1;
-                        inProgress = false;
-                    });
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() > $(document).height() - 100 && !inProgress) {
+                inProgress = true;
+               
+                //console.log(sort);
+                var parameters = {
+                    sort : niamiko.sort || '',
+                    page : page
                 }
-            });
+                
+                $.get(niamiko.ajaxPage, parameters).done(function(data){
+                    
+                    // находим все блоки (среди шаблона подгруженного аяксом) с классом .b-user-wall и добавляем в массив elements
+                    var elements = $(data).find(".b-user-wall");
+                    
+                    // узнаём количество колонок
+                    var ColumnN = ColumnVal || niamiko.column;
+                    elements.addClass(options[ColumnN].masonryClass);
+
+                    // крепим новые элементы к контейнеру
+                    $container.append(elements).masonry( 'appended', elements );
+
+                    // располагаем новые элементы плиткой
+                    $container.imagesLoaded( function() {
+                        $container.masonry('layout');
+                    });
+                    
+                  /*  timesConvert();*/
+
+                    // увеличиваем страничку на одну
+                    page += 1;
+                    inProgress = false;
+                });
+            }
         });
     })
     
     function makeColumnN(column){
-        var columnWidth;
         var masonryClass;
 
-        columnWidth     = settings[column].columnWidth;
-        masonryClass    = settings[column].masonryClass;
+        masonryClass    = options[column].masonryClass;
         document.cookie = 'ColumnN = ' + column;
-        $('#ColumnN').val(column);    
+        ColumnVal = column;    
         
         var $container = $('.masonry');
         $container.masonry({
-            columnWidth: columnWidth,
+            columnWidth: options[column].columnWidth,
             'gutter': 10,
             stamp: '.b-user-media'
         });

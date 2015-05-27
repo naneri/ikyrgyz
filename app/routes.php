@@ -72,7 +72,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
         Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
         Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
-        Route::get('blog/ajaxBlogs/{page}', 'BlogController@ajaxBlogs');
+        Route::get('blog/ajaxBlogs', 'BlogController@ajaxBlogs');
 
         Route::get('group', 'GroupController@index');
         Route::get('group/show/{id}', 'GroupController@show');
@@ -138,6 +138,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
     Route::get('profile/{id}/subscriptions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscriptionBlogs');
 
+    Route::get('topic/favorites', 'TopicController@getFavorites');
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');

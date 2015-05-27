@@ -38,35 +38,38 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), PhotoAlbum::$rules);
+	   $validator = Validator::make($data = Input::all(), PhotoAlbum::$rules);
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+    	if ($validator->fails())
+    	{
+    		return Redirect::back()->withErrors($validator)->withInput();
+    	}
 
 
-		if (Input::file('image')) {
-                    $data['cover'] = $this->saveImage();
-                }
-                $data['user_id'] = Auth::id();
-                PhotoAlbum::create($data);
-
-                return Redirect::to('profile/' . Auth::id() . '/photos');
+    	if (Input::file('image')) 
+        {
+            $data['cover'] = $this->saveImage();
         }
 
-        private function saveImage() {
-            $file = Input::file('image');
-            $destinationPath = 'images/user/' . Auth::id() . '/photos';
-            if (!file_exists($destinationPath)) {
-                File::makeDirectory($destinationPath);
-            }
-            $extension = Input::file('image')->getClientOriginalExtension();
-            $fileName = time() . rand(1, 100) . '.' . $extension;
-            $file->move($destinationPath, $fileName);
-            $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
-            return $avapath;
+        $data['user_id'] = Auth::id();
+
+        PhotoAlbum::create($data);
+
+        return Redirect::to('profile/' . Auth::id() . '/photos');
+    }
+
+    private function saveImage() {
+        $file = Input::file('image');
+        $destinationPath = 'images/user/' . Auth::id() . '/photos';
+        if (!file_exists($destinationPath)) {
+            File::makeDirectory($destinationPath);
         }
+        $extension = Input::file('image')->getClientOriginalExtension();
+        $fileName = time() . rand(1, 100) . '.' . $extension;
+        $file->move($destinationPath, $fileName);
+        $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
+        return $avapath;
+    }
 
         /**
 	 * Display the specified photoalbum.

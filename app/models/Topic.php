@@ -203,4 +203,16 @@ class Topic extends Eloquent {
         return $this->morphMany('Favourite', 'target');
     }
 
+    static function favoriteTopics($user_id, $offset = 0){
+
+        $topicLimit = Config::get('topic.topics_per_page');
+
+        return Topic::join('favourites', 'topics.id', '=', 'favourites.target_id')
+                        ->where('favourites.user_id', $user_id)
+                        ->where('target_type', 'topic')
+                        ->skip( $offset * $topicLimit ) 
+                        ->take($topicLimit)
+                        ->get();
+    }
+
 }

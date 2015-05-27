@@ -16,16 +16,18 @@ class MainController extends BaseController {
 	*/
 
 	public function index($sort = 'id'){
+
         $rating = Config::get('topic.index_good_topic_rating');
 
 		$topics = Topic::getMainTopics($rating, $sort);
 
         JavaScript::put([
             'sort'      => $sort,
-            'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count')
+            'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count'),
+            'ajaxPage'  => URL::to('main/ajaxTopics'),
             ]);
 
-        return View::make('main.index', compact('topics', 'topic_number', 'friend_number'));
+        return View::make('main.index', compact('topics'));
 	}
 
 	public function ajaxTopics(){

@@ -81,6 +81,12 @@ class BlogController extends BaseController {
 	public function getAll(){
 		$blogs = Blog::getMainBlogs();
 
+        JavaScript::put([
+            'sort'      => null,
+            'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count'),
+            'ajaxPage'  => URL::to('blog/ajaxBlogs'),
+            ]);
+
 		return View::make('blog.all',array('blogs' => $blogs));
 	}
 
@@ -89,9 +95,12 @@ class BlogController extends BaseController {
      * @param  [int] $page страница
      * @return [html]      
      */
-    public function ajaxBlogs($page){
-        $blogs = Blog::getMainBlogs($page);
+    public function ajaxBlogs(){
+
+        $blogs = Blog::getMainBlogs(Input::get('page'));
+
         return View::make('blog.build', array('blogs' => $blogs));
+
     }
     /**
      * Показывает страницу с описанием блога

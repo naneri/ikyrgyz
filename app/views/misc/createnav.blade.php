@@ -16,7 +16,7 @@
 							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
 							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">{{$friend_number}}</span></dd>
 							<!-- <dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd> -->
-							<dd><a href="#">{{ trans('network.favorite') }}</a><span class="raiting">143</span></dd>
+							<dd><a href="{{URL::to('topic/favorites')}}">{{ trans('network.favorite') }}</a><span class="raiting">{{$favorites}}</span></dd>
 						<dt>Энкиклопедия</dt>
 							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
@@ -75,7 +75,7 @@
 					<li class="b-topic-navigation-category__item item4">
 						<a href="#"></a>
 					</li>
-					<li class="b-topic-navigation-category__item item5">
+					<li style="display:none" class="b-topic-navigation-category__item item5">
 						<a href="#"></a>
 					</li>
 					<li style="display:none" class="b-topic-navigation-category__item item6">
@@ -136,18 +136,18 @@
     					</label>
 						</div>
 					</li>
-					<li class="dropdown-list__item">
+					<!-- <li class="dropdown-list__item">
 						<div class="choose-list">
 						
-    					<label class="choose-list">
-    					<img src="{{ asset('img/91.png') }}" alt="">
-    					<span>Видео</span>
+					    					<label class="choose-list">
+					    					<img src="{{ asset('img/91.png') }}" alt="">
+					    					<span>Видео</span>
 						
-       					 <input type="checkbox" class="bigcheck bigcheck5" name="cheese" value="yes"/ checked="checked">
-        				<span class="choose-list-target"></span>
-    					</label>
+					       					 <input type="checkbox" class="bigcheck bigcheck5" name="cheese" value="yes"/ checked="checked">
+					        				<span class="choose-list-target"></span>
+					    					</label>
 						</div>
-					</li>
+					</li> -->
 					<!-- <li class="dropdown-list__item">
 						<div class="choose-list">
 						
