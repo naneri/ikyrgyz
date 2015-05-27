@@ -28,6 +28,8 @@
 	    <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
 	    <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
 	    {{HTML::style('css/jquery.formstyler.css')}}
+        {{HTML::style('css/bootstrap.css')}}
+        {{HTML::style('css/bootstrap-select.css')}}
 	    <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
 	    <style>
 			.ui-helper-hidden-accessible { display:none; }
@@ -71,35 +73,6 @@
 											{{Form::text('last_name', $user['description']->last_name, array('class' => 'form-control', 'placeholder' => 'Фамилия'))}}
 										</div>
 									</div>
-<script>
-	$(document).ready(function(){
-
-		$.get( "{{URL::to('/country-list')}}", function( data ) {
-			$( ".live_country" ).autocomplete({
-		      	source: data,
-		      	select: function( event, ui ){
-					$.get( "{{URL::to('/city-list')}}/" + ui.item.value, function( data ) {
-						$( ".live_city" ).autocomplete({
-					      	source: data
-					    });
-					});
-			    }
-			});
-
-			$( ".birth_country" ).autocomplete({
-		      	source: data,
-		      	select: function( event, ui ){
-					$.get( "{{URL::to('/city-list')}}/" + ui.item.value, function( data ) {
-						$( ".birth_city" ).autocomplete({
-					      	source: data
-					    });
-					});
-			    }
-			});
-		});
-
-	});
-</script>
 								</div>
 
 								<div class="b-user-infro-block-label__item">
@@ -129,11 +102,11 @@
 										<div class="b-user-info-block-label-item__title">Вы проживаете?<b>*</b></div>
 										<div class="b-user-info-block-label-item__labels">
 											<p class="b-user-info-block-label-item__desc">Страна</p>
-											{{Form::text('live_country', null, ['class' => 'live_country'])}}
+                                            {{Form::select('live_country', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
 										</div>
 										<div class="b-user-info-block-label-item__labels">
 											<p class="b-user-info-block-label-item__desc">Город</p>
-											{{Form::text('live_city', null, ['class' => 'live_city'])}}
+                                            {{Form::select('live_city', City::getCitiesByCountryId($user['description']->liveplace_country_id), $user['description']->liveplace_city_id, array('class' => 'selectpicker select-city form-control'))}}
 										</div>
 									</div>
 
@@ -146,11 +119,12 @@
 										<div class="b-user-info-block-label-item__title">Ваша родина?</div>
 										<div class="b-user-info-block-label-item__labels">
 											<p  class="b-user-info-block-label-item__desc">Страна</p>
-											{{Form::text('birth_country', null, ['class' => 'birth_country'])}}
+                                            {{Form::select('birth_country', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
+
 										</div>
 										<div class="b-user-info-block-label-item__labels">
 											<p  class="b-user-info-block-label-item__desc">Город</p>
-											{{Form::text('birth_city', null, ['class' => 'birth_city'])}}
+                                            {{Form::select('birth_city', City::getCitiesByCountryId($user['description']->birthplace_country_id), $user['description']->birthplace_city_id, array('class' => 'selectpicker select-city form-control'))}}
 										</div>
 									</div>
 

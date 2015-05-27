@@ -164,7 +164,11 @@ class ProfileController extends BaseController {
         $rules = array(
             'first_name' => 'required',
             'gender' => 'required',
-            'live_country' => 'required');
+            'live_country' => 'required',
+            'live_city' => 'required',
+            'birth_country' => 'required',
+            'birth_city' => 'required'
+        );
 
         $validator = Validator::make(Input::all(), $rules);
 
@@ -176,8 +180,14 @@ class ProfileController extends BaseController {
 
         $description_data['birthday'] = ((Input::has('year')) ? Input::get('year') : '0000') . '-' . (Input::has('month') ? Input::get('month') : '00') . '-' . (Input::has('day') ? Input::get('day') : '00');
 
+        $description_data['live_country'] = Input::get('live_country');
+        $description_data['live_city'] = Input::get('live_city');
+        $description_data['birth_country'] = Input::get('birth_country');
+        $description_data['birth_city'] = Input::get('birth_city');
+
         User_Description::updateProfile($description_data, Auth::user()->id);
-        
+        User_Description::updateProfileLocationDataByIds($description_data, Auth::user()->id);
+
         return Redirect::to('main/index');
     }
 

@@ -85,6 +85,19 @@ class User_Description extends Eloquent{
 
         return True;
     }
+
+    public static function updateProfileLocationDataByIds($data, $user_id){
+
+        $user['liveplace_country_id']   = @Country::where('id', $data['live_country'])->first()->id ?: null;
+        $user['liveplace_city_id']      = @City::where('id', $data['live_city'])->first()->id ?: null;
+        $user['birthplace_country_id']  = @Country::where('id', $data['birth_country'])->first()->id ?: null;
+        $user['birthplace_city_id']     = @City::where('id', $data['birth_city'])->first()->id ?: null;
+
+
+        User_Description::where('user_id', $user_id)->update($user);
+
+        return True;
+    }
     
     public function getLiveplace(){
         $result = false;
