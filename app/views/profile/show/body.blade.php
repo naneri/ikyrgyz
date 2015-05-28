@@ -31,6 +31,18 @@
 					</ul>
 				
 				</div>
+				<div class="js-simple-modal">
+								<div class="b-friends-category">
+									<div class="b-friends-category__title">Добавить категорию друзей</div>
+									<div class="b-friends-category__new">
+										<input type="text" value="Введите новую категорию" class="simple-input">
+									</div>
+									<div class="b-friends-category__button">
+										<input type="button" value="Отмена" class="cancel-button"><input type="button" value="Добавить" class="submit-button">
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
 			</div>
 		</div>
 		<div class="b-friends-sort__right">
@@ -90,9 +102,6 @@
 									</ul>
 										
 				</div>
-
-							</div>
-							<div class="clear"></div>
 							<div class="js-simple-modal">
 								<div class="b-friends-category">
 									<div class="b-friends-category__title">Добавить категорию друзей</div>
@@ -105,6 +114,9 @@
 									<div class="clear"></div>
 								</div>
 							</div>
+							</div>
+							<div class="clear"></div>
+							
 						</div>
 					</div>
 					<div class="clear"></div>

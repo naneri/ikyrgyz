@@ -161,10 +161,22 @@ $(function(){
 
 $(function(){
 	
-		$('.b-friends-block-info-list__list_modal').click(function(event){
+		$(' .b-friends-block-info-list__list_modal').click(function(event){
 		
 
-			$('.js-simple-modal').modal();
+			$('.b-friends-block-info__edit .js-simple-modal').modal();
+			event.preventDefault();
+
+		});
+
+});
+
+$(function(){
+	
+		$('.b-friends-sort-list__list_modal').click(function(event){
+		
+
+			$('.b-friends-sort__sort .js-simple-modal').modal();
 			event.preventDefault();
 
 		});
