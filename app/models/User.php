@@ -177,7 +177,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                 ->get();
     }
     
-    public function publications($topicsLimit, $page=0){
+    public function publications($topicsLimit=10000, $page=0){
         return $this->topics()
                 ->with('blog', 'blog.topics', 'user', 'comments', 'user.description')
                 ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
