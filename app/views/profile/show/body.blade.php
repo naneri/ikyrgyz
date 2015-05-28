@@ -180,7 +180,7 @@
             <div class="b-message-ls-list">
                 <ul>
                     <li class="b-message-ls-list__list"><a href="">Контакты</a><span>0</span></li>
-                    <li class="b-message-ls-list__list"><a href="">Входящие</a><span>6</span></li>
+                    <li class="b-message-ls-list__list"><a href="">Входящие</a><span>{{$new_messages->count()}}</span></li>
                     <li class="b-message-ls-list__list"><a href="">Отправленные</a></li>
                     <li class="b-message-ls-list__list"><a href="">Черный список</a></li>
                     <li class="b-message-ls-list__list"><a href="">Удаленные</a></li>
@@ -227,39 +227,39 @@
                         </td>
 
                     </tr>
+                    @foreach($items as $message)
                     <tr>
                         <td>
                             <ul>
                                 <li class="b-message-ls-mark__list b-message-ls-mark__list_second">
                                     <div class="b-message-ls-mark__checkbox b-message-ls-mark__checkbox_second">
-                                        <input type="checkbox">
+                                        {{Form::checkbox('messages[]', $message->id)}}
                                     </div>
                                 </li>
                                 <li class="b-message-ls-mark__list">
                                     <div class="b-message-ls-mark__image">
-                                        <img src="{{asset('img/118.png')}}" alt="">
+                                        <img style="width: 50px;height:50px;" src="{{($message->sender_id == Auth::id())?$message->receiver->avatar():$message->sender->avatar()}}" alt="">
                                     </div>
                                 </li>
                                 <li class="b-message-ls-mark__list">
                                     <div class="b-message-ls-mark-desc">
-                                        <div class="b-message-ls-mark-desc__title">Привет как дела! Дамир заголовок оканчиваеться троечием до ...</div>
-                                        <div class="b-message-ls-mark-desc__name">Имя пользователя</div>
+                                        <a href="{{URL::to('message/show/' . $message->id)}}">
+                                        <div class="b-message-ls-mark-desc__title">{{mb_substr(strip_tags($message->text), 0, 200, 'UTF-8') }}</div>
+                                        </a>
+                                        <div class="b-message-ls-mark-desc__name">
+                                            {{($message->sender_id == Auth::id())?$message->receiver->getNames():$message->sender->getNames()}}</div>
                                     </div>	
                                 </li>
                                 <li class="b-message-ls-mark__list">
                                     <div class="b-message-ls-mark-num">
-                                        <div class="b-message-ls-mark-num__image"><img src="{{asset('img/119.png')}}" alt=""></div>
-                                        <span>12 
-                                            декабря</span>
+                                        <div class="b-message-ls-mark-num__image" style="height: auto;"><img src="{{asset('img/119.png')}}" alt=""></div>
+                                        <span>{{date_format($message->created_at, 'd M')}}</span>
                                     </div>
                                 </li>
-
                             </ul>
                         </td>
-
                     </tr>
-
-
+                    @endforeach
                 </table>
 
             </div>

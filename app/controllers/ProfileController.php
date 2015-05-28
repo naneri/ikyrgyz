@@ -56,6 +56,9 @@ class ProfileController extends BaseController {
                 $items = Favourite::where('user_id', Auth::id())->get();
                 //dd($items);
                 break;
+            case 'messages':
+                $items = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
+                break;
             case 'newsline':
             default:
                 $items = $user->newsline($topicsLimit);
