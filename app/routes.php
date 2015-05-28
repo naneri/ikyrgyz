@@ -139,6 +139,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('profile/{id}/subscriptions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscriptionBlogs');
 
     Route::get('topic/favorites', 'TopicController@getFavorites');
+    Route::get('topic/ajaxFavorites', 'TopicController@ajaxFavorites');
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');

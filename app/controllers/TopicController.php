@@ -373,9 +373,16 @@ class TopicController extends BaseController {
         
         JavaScript::put([
             'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count'),
-            'ajaxPage'  => URL::to('main/ajaxTopics'),
+            'ajaxPage'  => URL::to('topic/ajaxFavorites'),
             ]);
 
         return View::make('main.index', compact('topics'));
+    }
+
+    public function ajaxFavorites(){
+
+        $topics = Topic::favoriteTopics(Auth::user()->id, Input::get('page'));
+
+        return View::make('topic.build', array('topics' => $topics));
     }
 }
