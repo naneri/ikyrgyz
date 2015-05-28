@@ -98,6 +98,16 @@ body {
 	padding-left: 10px;
 	width: 100%;
 }
+.b-header-nav__right .b-header-nav-search-results {
+    z-index: 2;
+    position: absolute;
+	padding-left: 10px;
+	width: 300px;
+}
+
+.b-header-nav-search-results-people,#show-all-results,.b-header-nav-search-results-content {
+    display: none;
+}
 
 .b-header-nav__right img {
 	vertical-align: middle;

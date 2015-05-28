@@ -118,7 +118,7 @@ class SearchController extends \BaseController {
             $result['entries'] = View::make('search.build.content', array('content' => $content))->render();//$stemmer->getArrayStemmedWords($search);
             return $result;
         }
-        
+
         private function getContent(){
             $blogsWhere = " WHERE 1=1 ";
             $topicsWhere = " WHERE `topics`.`draft` = 0 ";
@@ -160,7 +160,7 @@ class SearchController extends \BaseController {
                             . $topicsWhere
                             . " GROUP BY `topic_comments`.`topic_id` ");
             }
-            
+
 //            dd(DB::getQueryLog());
 
             $content = array_merge($blogs, $topics);
@@ -184,6 +184,82 @@ class SearchController extends \BaseController {
             $content = array_reverse($content);
             return $content;
         }
+
+    public function postSearchContentAjax(){
+        $blogsWhere = " WHERE 1=1 ";
+        $topicsWhere = " WHERE `topics`.`draft` = 0 ";
+        $blogs = array();
+        $topics = array();
+        $blogsAdditionalColumns = ' , 0 as `is_topic` ';
+        $topicsAdditionalColumns = ' , 1 as `is_topic` ';
+        $isRelevantRight = false;
+
+        if (Input::has('search-text')) {
+            $searchText = Input::get('search-text');
+            if(Input::get('sort') == 'relevant'){
+                $relevant = "MATCH (`title`,`description`) AGAINST ('$searchText' IN BOOLEAN MODE)";
+                $topicsAdditionalColumns .= ", $relevant as `relevant` ";
+                $blogsAdditionalColumns .= ", $relevant as `relevant` ";
+                $blogsWhere .= " AND " . $relevant;
+                $topicsWhere .= " AND " . $relevant;
+                $isRelevantRight = true;
+            } else {
+                $blogsWhere .= " AND (`blogs`.`title` LIKE '%" . Input::get('search-text') . "%' OR `blogs`.`description` LIKE '%" . Input::get('search-text') . "%')";
+                $topicsWhere .= " AND (`topics`.`title` LIKE '%" . Input::get('search-text') . "%' OR `topics`.`description` LIKE '%" . Input::get('search-text') . "%')";
+            }
+
+            $blogs = DB::select(" select `blogs`.*, `user_description`.* "
+                . $blogsAdditionalColumns
+                . " from `blogs` "
+                . " inner join `" . Config::get('database.connections.mysql_users.database') . "`.`user_description` on `user_description`.`user_id` = `blogs`.`user_id` "
+                . $blogsWhere
+                . " LIMIT 5");
+
+            $topics = DB::select("select `topics`.*, `user_description`.*, COUNT(`topic_comments`.`id`) AS `comments_count`, `blogs`.`title` as `blog_name` "
+                . $topicsAdditionalColumns
+                . "from `topics` "
+                . "inner join `blogs` on `blogs`.`id` = `topics`.`blog_id` "
+                . "left outer join `topic_comments` on `topic_comments`.`topic_id` = `topics`.`id` "
+                . "inner join `".Config::get('database.connections.mysql_users.database')."`.`user_description` on `user_description`.`user_id` = `topics`.`user_id` "
+                . $topicsWhere
+                . " GROUP BY `topic_comments`.`topic_id` "
+                . " LIMIT 5");
+        }
+
+        $content = array_merge($blogs, $topics);
+        usort($content, function($a, $b) {
+            return strtotime($a->created_at) - strtotime($b->created_at);
+        });
+        if (count($content)==0) return "";
+        return View::make('search.build.ajax-content', array('content' => array_reverse($content)))->render();
+    }
+
+    public function postSearchPeopleAjax(){
+        $where = "WHERE `users`.`id` != ".Auth::id()." ";
+
+        if (Input::has('search-text')) {
+            $searchText = Input::get('search-text');
+            $searchTextConcat = str_replace(' ', '',$searchText);
+            $where .= " AND (`user_description`.`first_name` LIKE '%$searchText%' "
+                . "OR `user_description`.`last_name` LIKE '%$searchText%' "
+                . "OR CONCAT(`last_name`, `first_name`) LIKE '%$searchTextConcat%' "
+                . "OR CONCAT(`first_name`, `last_name`) LIKE '%$searchTextConcat%') "
+                . " LIMIT 5";
+        }
+
+        $users = DB::connection('mysql_users')
+            ->select("select distinct `users`.*, `user_description`.*, `cities`.`name_ru` as `city`, `countries`.`name_ru` as `country`, `friends`.`status` as `friendStatus`, TIMESTAMPDIFF(YEAR, `birthday`, CURDATE()) AS `age` "
+                . "from `users` "
+                . "inner join `user_description` on `user_description`.`user_id` = `users`.`id` "
+                . "left outer join `countries` on `user_description`.`liveplace_country_id` = `countries`.`id` "
+                . "left outer join `cities` on `user_description`.`liveplace_city_id` = `cities`.`id` "
+                . "left outer join `profile_items` on `profile_items`.`user_id` = `users`.`id` "
+                . "left outer join `friends` on `user_one` = ".Auth::id()." and  `user_two` = `users`.`id` "
+                . $where);
+
+        if (count($users)==0) return "";
+        return View::make('search.build.ajax-users', array('users' => $users))->render();
+    }
 
 }
 
