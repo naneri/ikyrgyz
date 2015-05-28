@@ -594,3 +594,10 @@ $(function() {
 });
 
 });
+
+
+$(document).ready(function(){
+	if($('.number-raiting').text() == 0 )
+		$('.number-raiting').addClass('number-raiting_gray')
+	
+});

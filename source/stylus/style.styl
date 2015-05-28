@@ -226,10 +226,10 @@ body
 	&__item
 		border 1px solid #899599
 		box-shadow $baseBoxShadow
-		width 93%
+		width 90%
 		background #fff
 		input[type="text"]
-			width 92.3%
+			width 80%
 			height 27px
 			border 0
 			outline none
@@ -241,7 +241,7 @@ body
 			
 			
 		input[type="submit"]
-			width 5.1%
+			width 5%
 			height 27px			
 			border 0
 			outline none
@@ -253,6 +253,7 @@ body
 			background-position 50% 50%
 			padding 0
 			margin 0
+			float right
 			
 			
 @media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
@@ -866,19 +867,17 @@ body
 .b-section-wrapper
 	width 100%
 	max-width 1000px
-.b-user-wall-1000
-	width 650px !important
 	
-	margin-left 150px !important
-
+.b-user-wall-1000
+	width 495px !important	
+	margin-left 250px !important
 	
 .b-user-wall-325
 	width 325px
 	.b-user-wall-footer-raiting__right
 		float left
 		padding-top 10px
-.b-user-wall-495
-	
+.b-user-wall-495	
 	width 495px
 	.b-user-wall-footer-btn__about
 		padding-right 150px
@@ -1068,8 +1067,7 @@ body
 		a
 			background-position -125px 0													
 .b-user-wall-footer-raiting
-	border-top $baseBorder
-	
+	border-top $baseBorder	
 	padding 10px 10px 10px
 	&__left
 		max-width 360px
@@ -1116,8 +1114,12 @@ body
 	font 15px 'PT Sans Caption Bold'
 	
 
+
+.number-raiting_red
+	color #e8534f
 	
-	
+.number-raiting_gray
+	color $baseFontColorLight
 	
 			
 .b-user-wall-footer-list
@@ -1638,6 +1640,7 @@ div.choose-list
 		background url(../img/85.png) no-repeat
 		width 40px
 		height 30px
+		margin 0 auto
 		
 	&:nth-child(1)
 		a

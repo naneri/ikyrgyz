@@ -265,12 +265,12 @@ body {
 	border: 1px solid #899599;
 	-webkit-box-shadow: 0 1px 1px rgba(127,127,127,0.3);
 	box-shadow: 0 1px 1px rgba(127,127,127,0.3);
-	width: 93%;
+	width: 90%;
 	background: #fff;
 }
 
 .b-search__item input[type="text"] {
-	width: 92.3%;
+	width: 80%;
 	height: 27px;
 	border: 0;
 	outline: none;
@@ -282,7 +282,7 @@ body {
 }
 
 .b-search__item input[type="submit"] {
-	width: 5.1%;
+	width: 5%;
 	height: 27px;
 	border: 0;
 	outline: none;
@@ -294,6 +294,7 @@ body {
 	background-position: 50% 50%;
 	padding: 0;
 	margin: 0;
+	float: right;
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
@@ -829,8 +830,8 @@ body {
 }
 
 .b-user-wall-1000 {
-	width: 650px !important;
-	margin-left: 150px !important;
+	width: 495px !important;
+	margin-left: 250px !important;
 }
 
 .b-user-wall-325 {
@@ -1133,6 +1134,14 @@ body {
 .number-raiting {
 	color: #26ad85;
 	font: 15px 'PT Sans Caption Bold';
+}
+
+.number-raiting_red {
+	color: #e8534f;
+}
+
+.number-raiting_gray {
+	color: #676767;
 }
 
 .b-user-wall-footer-list {
@@ -1597,6 +1606,7 @@ input[type='checkbox'].choose-list {
 	background: url("../img/85.png") no-repeat;
 	width: 40px;
 	height: 30px;
+	margin: 0 auto;
 }
 
 .format-list:nth-child(1) a {
