@@ -44,12 +44,6 @@ $(document).ready(function(){
             startSearch();
         });
 
-    var trimmedHashSearchText = $.trim(location.hash.replace('#', ""));
-    if (trimmedHashSearchText != "") {
-        $('input[name="search-text"]').val(trimmedHashSearchText);
-        setSearchTimeout();
-    }
-        
         $('select[name=age-from]').change(function(){
             var beginNum = $(this).val();
             var items = '<option value=""></option>';

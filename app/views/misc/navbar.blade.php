@@ -155,18 +155,18 @@
 
 					<li class="b-header-nav__right">
 						<div class="b-header-nav-search">
-							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="Поиск">
+							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
 						</div>
                         <div class="b-header-nav-search-results">
                             <div class="b-header-nav-search-results-people">
-                                <h3 style="background: #cfcfcf">Люди</h3>
+                                <h3 style="background: #cfcfcf">{{ trans('network.people') }}</h3>
                                 <div style="background: #cacaca"></div>
                             </div>
                             <div class="b-header-nav-search-results-content">
-                                <h3 style="background: #cacaca">Контент</h3>
+                                <h3 style="background: #cacaca">{{ trans('network.content') }}</h3>
                                 <div style="background: #cacaca"></div>
                             </div>
-                            <button id="show-all-results">Показать все результаты</button>
+                            <button id="show-all-results">{{ trans('network.show-all-results') }}</button>
                         </div>
 					<!-- 	<div class="b-header-nav-search">
 							<div class="b-header-nav-search__item"><a href="{{ URL::to('search/people') }}">
@@ -259,13 +259,7 @@
             setNavSearchTimeout();
         });
         $('#show-all-results').on('click', function () {
-            alert(typeof(startSearch))
-            if (typeof(startSearch) == 'function') {
-                startSearch();
-                location.hash = $searchField.val();
-            } else {
-                location.href = "{{$base_config['base_url']}}/search/content#"+$searchField.val();
-            }
+            location.href = "{{$base_config['base_url']}}/search/content/?search-text="+$searchField.val();
         });
 
         function setNavSearchTimeout(){
@@ -313,6 +307,8 @@
                         $('#show-all-results').css("display", 'block');
                     }
                 });
+            } else {
+
             }
         }
     </script>

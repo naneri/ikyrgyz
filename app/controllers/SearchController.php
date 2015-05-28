@@ -108,7 +108,7 @@ class SearchController extends \BaseController {
         
         public function searchContent(){
             $content = $this->getContent();
-            return View::make('search.content', array('content' => $content));
+            return View::make('search.content', array('content' => $content, 'search_text' => Input::get('search-text')));
         }
         
         public function postSearchContent(){
