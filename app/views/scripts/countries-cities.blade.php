@@ -4,6 +4,8 @@
 $(document).ready(function(){
     var selects = {
         'liveplace_country_id': 'liveplace_city_id',
+        'live_country': 'live_city',
+        'birth_country': 'birth_city',
         'birthplace_country_id': 'birthplace_city_id',
         'country': 'city'
     }
