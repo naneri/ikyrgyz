@@ -34,26 +34,7 @@
 			<div class="b-profile-middle">
 
 				<ul>
-					<li class="b-profile-middle__left">
-						<p>День рождения:</p>
-						<p>Живет:</p>
-                                                <?php $jobs = $user->profileItemsGetValues('job'); ?>
-                                                @if(count($jobs) > 0)
-						<p>Работает</p>
-                                                @endif
-					</li>
-					<li class="b-profile-middle__right">
-						<p>{{$user->description->birthday}}</p>
-                                                <p>{{City::find($user->description->liveplace_city_id)->name_ru}}, {{Country::find($user->description->liveplace_country_id)->name_ru}}</p>
-                                                @if(count($jobs) > 0)
-                                                    <p>
-                                                        @foreach($jobs as $job)
-                                                        {{$job}}
-                                                        @endforeach
-                                                    </p>
-                                                @endif
-					</li>
-
+				
 					<div class="clear"></div>
 				</ul>
 				<div class="b-profile-middle__button">Показать полную информацию</div>

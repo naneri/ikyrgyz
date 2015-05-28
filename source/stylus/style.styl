@@ -4072,9 +4072,9 @@ music player style
 .b-friends-block-info
 	//
 	&__edit
-		
+		position relative
 		width 200px
-		a
+		.button-select
 			float right
 	&__name
 		font 16px 'pt sans caption bold', sans-serif
@@ -4109,32 +4109,58 @@ music player style
 
 
 	
-.dropdown
-	display none
-	position absolute
-	z-index 5000
-	top 0
-	left 0
+
 	
 .b-friends-sort-list
 	width 220px
 	background #fff
 	height 172px
 	top 20px
-	padding 20px
+	
 	border $baseBorder
 	border-bottom 4px solid #676767
 	
 	ul
-		padding 20px
+		//
 	&__list
 		font 13px 'pt sans caption', sans-serif
 		color $baseFontColorLight
-		padding-bottom 15px
+		padding 10px 10px 0 10px
+		&:last-child
+			background $lightGradient
+			border-top $baseBorder
+			padding-bottom 9px
 		span
 			float right
-			padding-left 85px
+			padding-left 85px	
+		a
+			font 13px 'pt sans caption', sans-serif
+			color $baseFontColorLight	
+			
+.b-friends-block-info-list
+	width 220px
+	background #fff
+	height 172px
+	top 20px
 	
+	border $baseBorder
+	border-bottom 4px solid #676767
+	
+	ul
+		//
+	&__list
+		
+		padding 10px 10px 0 10px
+		&:last-child
+			background $lightGradient
+			border-top $baseBorder
+			padding-bottom 9px
+		span
+			float right
+			padding-left 85px			
+		a
+			font 13px 'pt sans caption', sans-serif
+			color $baseFontColorLight
 
 .b-friends-inner
 	//
@@ -4498,6 +4524,47 @@ music player style
 		width 45px
 		height 45px
 		text-align center	
+.js-simple-modal
+	display none	
+
+
+.b-friends-category
+	width 316px
+	height 166px
+	background #fff
+	&__title
+		background $lightGradient
+		color #999
+		font 16px 'pt sans caption bold', sans-serif
+		padding 10px
+		margin-bottom 10px
+	&__new
+		padding 0 0 20px 18px
 		
-
-
+		.simple-input
+			width 276px
+			height 30px
+			border-radius 5px
+			border $baseBorder
+	&__button
+		float right
+		.cancel-button
+			width 70px
+			height 30px
+			border $baseBorder
+			background $lightGradient
+			color $baseFontColorLight
+			font 13px 'pt sans caption'
+			cursor pointer
+		.submit-button
+			width 108px
+			height 30px
+			background $orangeGradient
+			color #fff
+			font 13px 'pt sans caption'
+			border 0
+			margin-left 20px
+			cursor pointer
+			margin-right 20px
+			
+		

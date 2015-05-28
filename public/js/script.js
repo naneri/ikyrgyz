@@ -160,16 +160,12 @@ $(function(){
 
 
 $(function(){
-	$('.b-topic-create__music').hide();
-		$('.input-default.add-music-btn').click(function(){
+	
+		$('.b-friends-block-info-list__list_modal').click(function(event){
+		
 
-
-			$('.b-topic-create__music').modal({
-				opacity: 80,
-				overlayCss: {backgroundColor: "#000"}
-
-
-			});
+			$('.js-simple-modal').modal();
+			event.preventDefault();
 
 		});
 
@@ -177,7 +173,7 @@ $(function(){
 
 $(function(){
 	$('.b-topic-create__skin').hide();
-		$('a.input-default.change-skin').click(function(){
+		$('b-friends-sort-list__list:last-child').click(function(){
 
 
 			$('.b-topic-create__skin').modal({
@@ -588,12 +584,27 @@ $(document).ready(function(){
 
 
 
+
+
+
 $(function() {
-	$('.button-select').click(function(){
-	$('.dropdown').toggle();
+	$('.b-friends-sort__sort .button-select').click(function(event){
+		event.preventDefault();
+	$('.b-friends-sort-list ').toggle();
 });
 
 });
+
+$(function() {
+	$('.b-friends-block-info__edit .button-select').click(function(event){
+		event.preventDefault();
+	$('.b-friends-block-info-list').toggle();
+});
+
+});
+
+
+
 
 
 $(document).ready(function(){
