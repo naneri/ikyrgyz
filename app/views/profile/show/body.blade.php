@@ -240,7 +240,7 @@
 								<li class="b-message-ls-mark__list b-message-ls-mark__list_border-right">
 									<div class="b-message-ls-mark-button">
 										<a href="#" class="b-message-ls-mark-button__item button-select">Прочитанное</a>
-										<div class="b-message-ls-mark-button-list dropdown">
+										<div class="b-message-ls-mark-button-list dropdown-list">
 											<ul>
 												<li class="b-message-ls-mark-button-list__item"><a href="">Все прочитанны</a></li>
 												<li class="b-message-ls-mark-button-list__item"><a href="">Все непрочитанны</a></li>

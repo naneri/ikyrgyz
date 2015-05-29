@@ -615,6 +615,14 @@ $(function() {
 
 });
 
+$(function() {
+	$('.b-message-ls-mark-button .button-select').click(function(event){
+		event.preventDefault();
+	$('.b-message-ls-mark-button-list').toggle();
+});
+
+});
+
 
 
 
