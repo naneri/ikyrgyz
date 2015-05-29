@@ -385,4 +385,44 @@ class TopicController extends BaseController {
 
         return View::make('topic.build', array('topics' => $topics));
     }
+
+    public function getTopicVideos(){
+
+        $topics = Topic::videoTopics(Auth::user()->id);
+
+        JavaScript::put([
+            'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count'),
+            'ajaxPage'  => URL::to('topic/ajaxVideos'),
+            ]);
+    
+        return View::make('main.index', compact('topics'));
+
+    }
+
+    public function getAjaxVideos(){
+
+        $topics = Topic::videoTopics(Auth::user()->id, Input::get('page'));
+    
+        return View::make('topic.build', compact('topics'));
+
+    }
+
+    public function getMyTopics(){
+        $topics = Topic::userTopics(Auth::user()->id);
+
+        JavaScript::put([
+            'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count'),
+            'ajaxPage'  => URL::to('topic/ajaxMyTopics'),
+            ]);
+    
+        return View::make('main.index', compact('topics'));
+    }
+
+    public function ajaxMyTopics(){
+
+        $topics = Topic::userTopics(Auth::user()->id, Input::get('page'));
+    
+        return View::make('topic.build', compact('topics'));
+
+    }
 }

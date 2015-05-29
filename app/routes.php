@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::get('email', 'MainController@getEmailTemplate');
 Route::get('locale/{locale}', 'BaseController@setLocale' );
 
 Route::get('country-list', function(){
@@ -140,6 +140,10 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
 
     Route::get('topic/favorites', 'TopicController@getFavorites');
     Route::get('topic/ajaxFavorites', 'TopicController@ajaxFavorites');
+    Route::get('topic/videos', 'TopicController@getTopicVideos');
+    Route::get('topic/ajaxVideos', 'TopicController@getAjaxVideos');
+    Route::get('topic/myTopics', 'TopicController@getMyTopics');
+    Route::get('topic/ajaxMyTopics', 'TopicController@ajaxMyTopics');
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');
