@@ -155,8 +155,19 @@
 
 					<li class="b-header-nav__right">
 						<div class="b-header-nav-search">
-							<input type="text" class="b-header-nav-search__item" value="Поиск">
+							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
 						</div>
+                        <div class="b-header-nav-search-results">
+                            <div class="b-header-nav-search-results-people">
+                                <h3 style="background: #cfcfcf">{{ trans('network.people') }}</h3>
+                                <div style="background: #cacaca"></div>
+                            </div>
+                            <div class="b-header-nav-search-results-content">
+                                <h3 style="background: #cacaca">{{ trans('network.content') }}</h3>
+                                <div style="background: #cacaca"></div>
+                            </div>
+                            <button id="show-all-results">{{ trans('network.show-all-results') }}</button>
+                        </div>
 					<!-- 	<div class="b-header-nav-search">
 							<div class="b-header-nav-search__item"><a href="{{ URL::to('search/people') }}">
 							<img src="{{ asset('img/navbar/friend_search.png') }}" alt="search"/>
@@ -230,3 +241,80 @@
 		@endif
 	</div>
 </div>
+
+
+@if(isset($base_config))
+    <script type="text/javascript">
+        var timer = null;
+        var $searchField = $('#nav-bar-search-field');
+        $('html').click(function() {
+            $('.b-header-nav-search-results-content').css("display", "none");
+            $('.b-header-nav-search-results-people').css("display", 'none');
+            $('#show-all-results').css("display", 'none');
+        });
+        $searchField.on('focus', function () {
+            setNavSearchTimeout();
+        });
+        $searchField.on('keyup', function(){
+            setNavSearchTimeout();
+        });
+        $('#show-all-results').on('click', function () {
+            location.href = "{{$base_config['base_url']}}/search/content/?search-text="+$searchField.val();
+        });
+
+        function setNavSearchTimeout(){
+            if (timer) {
+                clearTimeout(timer); //cancel the previous timer.
+                timer = null;
+            }
+            timer = setTimeout(updateSearchResults, 500);
+        }
+
+        function updateSearchResults()
+        {
+            if ($searchField.val().trim() != "") {
+                $.ajax({
+                    method: "POST",
+                    url: "{{$base_config['base_url']}}/search/ajax-people/",
+                    data: {
+                        'search-text': $searchField.val()
+                    },
+                    success: function(html) {
+                        if (html.length > 0) {
+                            $('.b-header-nav-search-results-people').css("display", 'block');
+                            $('.b-header-nav-search-results-people div').html(html);
+                        } else {
+                            $('.b-header-nav-search-results-people').css("display", 'none');
+                            $('.b-header-nav-search-results-people div').html("");
+                        }
+                        $('#show-all-results').css("display", 'block');
+                    }
+                });
+                $.ajax({
+                    method: "POST",
+                    url: "{{$base_config['base_url']}}/search/ajax-content/",
+                    data: {
+                        'search-text': $searchField.val()
+                    },
+                    success: function(html) {
+                        if (html.length > 0) {
+                            $('.b-header-nav-search-results-content').css("display", "block");
+                            $('.b-header-nav-search-results-content div').html(html);
+                        } else {
+                            $('.b-header-nav-search-results-content').css("display", "none");
+                            $('.b-header-nav-search-results-content div').html("");
+                        }
+                        $('#show-all-results').css("display", 'block');
+                    }
+                });
+            } else {
+
+            }
+        }
+    </script>
+    <style>
+        .b-profile-about-tags-user__right .btn.favourite{
+            background: #FFCC79;
+        }
+    </style>
+@endif

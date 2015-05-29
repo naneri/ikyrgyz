@@ -199,6 +199,8 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::resource('tags', 'TagsController');
         Route::resource('photos', 'PhotosController');
 
+    Route::post('search/ajax-people', 'SearchController@postSearchPeopleAjax');
+    Route::post('search/ajax-content', 'SearchController@postSearchContentAjax');
 	
     
     if(Request::ajax()){

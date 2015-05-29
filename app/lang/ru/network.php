@@ -174,9 +174,10 @@ return array(
 
 
 	//search
-	'search'			=> 'поиск',
-	'people'			=> 'люди',
-	'content'			=> 'контент',
+	'search'			=> 'Поиск',
+	'people'			=> 'Люди',
+	'show-all-results'			=> 'Показать все результаты',
+	'content'			=> 'Контент',
 	'topic-of-blog'		=> 'Блог топика',
 	'profile'			=> 'Профиль',
 	'become-friend'		=> 'Дружить',

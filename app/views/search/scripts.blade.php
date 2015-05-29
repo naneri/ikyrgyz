@@ -43,7 +43,7 @@ $(document).ready(function(){
         $('#btn-search').click(function() {
             startSearch();
         });
-        
+
         $('select[name=age-from]').change(function(){
             var beginNum = $(this).val();
             var items = '<option value=""></option>';
