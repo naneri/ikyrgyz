@@ -167,7 +167,8 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
 
         Route::get('message/all', 'MessageController@getAll');
-        Route::get('message/show/{id}', 'MessageController@show');
+        Route::get('messages/show/{id}', 'MessageController@show');
+        Route::get('messages/inbox', 'MessageController@inbox');
         Route::get('messages/inbox/{filter}', 'MessageController@inbox');
         Route::get('messages/outbox', 'MessageController@outbox');
         Route::get('messages/contacts', 'MessageController@contacts');

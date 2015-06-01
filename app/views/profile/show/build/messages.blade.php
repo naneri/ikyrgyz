@@ -10,98 +10,28 @@
         </div>
     </div>
     <div class="b-message-ls tab-contents currents" id="tabs-1">
+        @include('scripts.messages')
+        {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
         <div class="b-message-ls__left">
             <div class="b-message-ls-button">
-                <input type="submit" class="b-message-ls-button__item" value="Новое сообщение">
+                <input type="button" class="b-message-ls-button__item" value="Новое сообщение" onclick="message.update('new');">
             </div>
             <div class="b-message-ls-list">
                 <ul>
-                    <li class="b-message-ls-list__list"><a href="">Контакты</a><span>0</span></li>
-                    <li class="b-message-ls-list__list"><a href="">Входящие</a><span>{{$new_messages->count()}}</span></li>
-                    <li class="b-message-ls-list__list"><a href="">Отправленные</a></li>
-                    <li class="b-message-ls-list__list"><a href="">Черный список</a></li>
-                    <li class="b-message-ls-list__list"><a href="">Удаленные</a></li>
+                    <li class="b-message-ls-list__list"><a href="#" data-page="contacts">Контакты</a><span>0</span></li>
+                    <li class="b-message-ls-list__list"><a href="#" data-page="inbox">Входящие</a><span>{{$new_messages->count()}}</span></li>
+                    <li class="b-message-ls-list__list"><a href="#" data-page="outbox">Отправленные</a></li>
+                    <li class="b-message-ls-list__list"><a href="#" data-page="blacklist">Черный список</a></li>
+                    <li class="b-message-ls-list__list"><a href="#" data-page="trash">Удаленные</a></li>
                     <li class="clear"></li>
                 </ul>
             </div>
         </div>
-        <div class="b-message-ls__right">
-            <div class="b-message-ls-mark">
-                <table>
-                    <tr>
-                        <td>
-                            <ul>
-                                <li class="b-message-ls-mark__list">
-                                    <div class="b-message-ls-mark__checkbox">
-                                        <input type="checkbox" >
-                                    </div>
-                                </li>
-                                <li class="b-message-ls-mark__list b-message-ls-mark__list_border-right">
-                                    <div class="b-message-ls-mark-button">
-                                        <a href="#" class="b-message-ls-mark-button__item button-select">Прочитанное</a>
-                                        <div class="b-message-ls-mark-button-list dropdown-list">
-                                            <ul>
-                                                <li class="b-message-ls-mark-button-list__item"><a href="">Все прочитанны</a></li>
-                                                <li class="b-message-ls-mark-button-list__item"><a href="">Все непрочитанны</a></li>
-                                                <li class="b-message-ls-mark-button-list__item"><a href="">Черный список</a></li>
-                                                <li class="b-message-ls-mark-button-list__item"><a href="">Удаленные</a></li>
-                                            </ul>
-                                        </div>
-                                        <input type="submit" class="b-message-ls-mark-button__item button-make" value="Выполнить">
-                                    </div>
-                                </li>
-                                <li class="b-message-ls-mark__list b-message-ls-mark__list_sort">
-                                    <a href="">Все</a>
-                                    <a href="">Друзья</a>
-                                    <a href="">Группы</a>
-                                    <a href="">События</a>
-                                </li>
-                                <li class="b-message-ls-mark__list b-message-ls-mark__list_last">
-                                    <a href=""><img src="{{asset('img/refresh-icon.png')}}" alt=""></a>
-                                </li>
-                                <div class="clear"></div>
-                            </ul>
-                        </td>
-
-                    </tr>
-                    @foreach($items as $message)
-                    <tr>
-                        <td>
-                            <ul>
-                                <li class="b-message-ls-mark__list b-message-ls-mark__list_second">
-                                    <div class="b-message-ls-mark__checkbox b-message-ls-mark__checkbox_second">
-                                        {{Form::checkbox('messages[]', $message->id)}}
-                                    </div>
-                                </li>
-                                <li class="b-message-ls-mark__list">
-                                    <div class="b-message-ls-mark__image">
-                                        <img style="width: 50px;height:50px;" src="{{($message->sender_id == Auth::id())?$message->receiver->avatar():$message->sender->avatar()}}" alt="">
-                                    </div>
-                                </li>
-                                <li class="b-message-ls-mark__list">
-                                    <div class="b-message-ls-mark-desc">
-                                        <a href="{{URL::to('message/show/' . $message->id)}}">
-                                            <div class="b-message-ls-mark-desc__title">{{mb_substr(strip_tags($message->text), 0, 200, 'UTF-8') }}</div>
-                                        </a>
-                                        <div class="b-message-ls-mark-desc__name">
-                                            {{($message->sender_id == Auth::id())?$message->receiver->getNames():$message->sender->getNames()}}</div>
-                                    </div>	
-                                </li>
-                                <li class="b-message-ls-mark__list">
-                                    <div class="b-message-ls-mark-num">
-                                        <div class="b-message-ls-mark-num__image" style="height: auto;"><img src="{{asset('img/119.png')}}" alt=""></div>
-                                        <span>{{date_format($message->created_at, 'd M')}}</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
-
-            </div>
+        <div class="b-message-ls__right" id="messages">
+            @include('message.inbox', array('messages' => $items))
         </div>
         <div class="clear"></div>
+        {{Form::close()}}
     </div>
     <div class="b-message-friends tab-contents" id="tabs-2" >
         <div class="b-message-friends__left">

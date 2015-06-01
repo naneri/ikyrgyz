@@ -65,7 +65,11 @@ class ProfileController extends BaseController {
                 //dd($items);
                 break;
             case 'messages':
-                $items = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
+                if(Input::has('page') && Input::get('page') == 'outbox'){
+                    $items = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+                }else{
+                    $items = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
+                }
                 break;
             case 'newsline':
             default:

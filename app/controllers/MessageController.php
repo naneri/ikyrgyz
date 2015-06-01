@@ -39,7 +39,7 @@ class MessageController extends BaseController{
      * @param  [type] $filter [description]
      * @return [type]         [description]
      */
-    public function inbox($filter = NULL){
+    public function inbox($filter = 'all'){
         $messages = array();
         switch($filter){
             case 'friend':
@@ -49,8 +49,9 @@ class MessageController extends BaseController{
                 break;
             case 'event':
                 break;
+            case 'all':
             default:
-                $messages = Message::where('receiver_id', Auth::id())->orderBy('id', 'DESC')->paginate(20);
+                $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
         }
 
         return View::make('message.inbox', array('messages' => $messages));
@@ -125,7 +126,7 @@ class MessageController extends BaseController{
 
 
 
-        return Redirect::to('message/show/'.$message->id)->with('message', [
+        return Redirect::to('profile/messages?page=outbox')->with('message', [
             'type' => 'success',
             'text' => 'Сообщение отправлено'
         ]);
@@ -148,11 +149,13 @@ class MessageController extends BaseController{
     }
 
     public function outbox(){
-        return View::make('message.outbox');
+        $messages = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+        return View::make('message.outbox', compact('messages'));
     }
 
     public function trash(){
-        return View::make('message.trash');
+        $messages = Auth::user()->messagesTrashed()->orderBy('id', 'DESC')->paginate(20);
+        return View::make('message.trash', compact('messages'));
     }
 
     public function contacts() {
@@ -164,7 +167,8 @@ class MessageController extends BaseController{
     }
 
     public function blacklist() {
-        return View::make('message.blacklist');
+        $bannedUsers = Auth::user()->bannedUsers();
+        return View::make('message.blacklist', compact('bannedUsers'));
     }
     
     public function postBlacklist() {
@@ -217,8 +221,9 @@ class MessageController extends BaseController{
     }
     
     public function postAction(){
-        if(!in_array(Input::get('action'), array('set_watch', 'set_notwatch', 'blacklist', 'delete', 'restore', 'force_delete'))){
-            $result['error'] = 'error action!';
+        if(!in_array(Input::get('action'), array('set_watch', 'set_notwatch', 'blacklist', 'delete', 'restore', 'force_delete', 'unblack'))){
+            $result['message'] = 'Ошибка действия';
+            $result['status'] = 'error';
             return Response::json($result);
         }
         $messageIds = Input::get('messages');
@@ -231,6 +236,10 @@ class MessageController extends BaseController{
             foreach(Message::whereIn('id', $messageIds)->get() as $message){
                 Friend::toBan($message->sender_id);
             }
+        }elseif($action == 'unblack') {
+            foreach (Message::whereIn('id', $messageIds)->get() as $message) {
+                Friend::fromBan($message->sender_id);
+            }
         }elseif($action == 'delete'){
             Message::whereIn('id', $messageIds)->delete();
         }elseif($action == 'restore'){
@@ -242,20 +251,30 @@ class MessageController extends BaseController{
         $renderMessages = null;
         switch(Input::get('page')){
             case 'inbox':
-                $renderMessages = Auth::user()->messagesInbox;
+                $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
+                $result['content'] = View::make('message.inbox', compact('messages'))->render();
                 break;
             case 'outbox':
-                $renderMessages = Auth::user()->messagesOutbox;
+                $messages = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+                $result['content'] = View::make('message.outbox', compact('messages'))->render();
                 break;
             case 'draft':
-                $renderMessages = Auth::user()->messagesDraft;
+                $messages = Auth::user()->messagesDraft()->orderBy('id', 'DESC')->paginate(20);
+                $result['content'] = View::make('message.blacklist', compact('messages'))->render();
                 break;
             case 'trash':
-                $renderMessages = Auth::user()->messagesTrashed()->get();
+                $messages = Auth::user()->messagesTrashed()->orderBy('id', 'DESC')->paginate(20);
+                $result['content'] = View::make('message.trash', compact('messages'))->render();
+                break;
+            case 'blacklist':
+                $bannedUsers = Auth::user()->bannedUsers();
+                $result['content'] = View::make('message.blacklist', compact('bannedUsers'))->render();
                 break;
         }
         
-        $result['messages'] = View::make('message.build.messages', array('messages' => $renderMessages))->render();            
+        //$result['content'] = View::make('message.build.messages', array('messages' => $renderMessages))->render();
+        $result['message'] = 'Действие успешно выполнено';
+        $result['status'] = 'success';
         return Response::json($result);
     }
     

@@ -1,6 +1,3 @@
-@extends('misc.layout')
-@extends('message.layout')
-@section('form')
 <div class="panel panel-default">
         @foreach ($errors->all() as $error)
             <div class="b-message b-message-error">
@@ -12,10 +9,8 @@
             </div>
         @endforeach
     @if($message->sender_id == Auth::id() || $message->receiver_id == Auth::id())
-    <div class="panel-heading">
         <h4>Отправитель: {{$message->sender->getNames()}}</h4>
         <h5>Получатель: {{$message->receiver->getNames()}}</h5>
-    </div>
     <div class="panel-body">
         <b>Тема: {{$message->title}}</b><br>
         Сообщение: {{$message->text}}<br>
@@ -46,4 +41,3 @@
         </div>
     @endif
 </div>
-@stop
