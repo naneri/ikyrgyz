@@ -35,51 +35,60 @@
     </div>
     <div class="b-message-friends tab-contents" id="tabs-2" >
         <div class="b-message-friends__left">
+            @foreach($friend_requests as $friend)
+            <?php $friend = User::find($friend->id); ?>
             <div class="b-message-friends-block">
                 <div class="b-message-friends-block__left">
                     <div class="b-message-friends-block-image">
-                        <img src="{{asset('img/107.png')}}" alt="" class="b-message-friends-block-image__image">
-                        <input type="submit" value="Сообщение" class="b-message-friends-block-image__button btn-gray" >
+                        <img src="{{$friend->avatar()}}" alt="" class="b-message-friends-block-image__image">
+                        <!--a href="{{URL::to('messages?page=new&receiver='.$friend->description->first_name.' '.$friend->description->last_name)}}">
+                            <input type="button" value="Сообщение" class="b-message-friends-block-image__button btn-gray" >
+                        </a-->
                     </div>
                 </div>
                 <div class="b-message-friends-block__right">
                     <div class="b-message-friends-info">
-                        <div class="b-message-friends-info__name">Бобровский Сергей</div>
+                        <div class="b-message-friends-info__name">{{$friend->description->first_name . ' ' . $friend->description->last_name }}</div>
                         <div class="b-message-friends-info__notification">Предлагает вам дружбу</div>
                         <div class="b-message-friends-info__counts">
                             <ul>
                                 <li class="b-message-friends-info-counts__list">
-                                    <span>58</span>
+                                    <span>{{$friend->friends()->count()}}</span>
                                     <span>Друзей</span>
                                 </li>
-                                <li class="b-message-friends-info-counts__list"><span>8</span><span>друзей</span></li>
+                                <li class="b-message-friends-info-counts__list"><span>{{$friend->mutualFriends()->count()}}</span><span>общих друзей</span></li>
                                 <li class="b-message-friends-info-counts__list">
                                     <img src="{{asset('img/110.png')}}" alt="">
-                                    <span class="red-counter">999</span>
+                                    <span class="red-counter">{{$friend->publications()->count()}}</span>
                                 </li>
                                 <li class="b-message-friends-info-counts__list">
                                     <img src="{{asset('img/111.png')}}" alt="">
-                                    <span class="red-counter">999</span>
+                                    <span class="red-counter">{{$friend->canPublishBlogs()->count()}}</span>
                                 </li>
                                 <li class="b-message-friends-info-counts__list">
                                     <img src="{{asset('img/112.png')}}" alt="">
-                                    <span class="red-counter">999</span>
+                                    <span class="red-counter">{{$friend->photos()->count()}}</span>
                                 </li>
-                                <li class="b-message-friends-info-counts__list">
+                                <!--li class="b-message-friends-info-counts__list">
                                     <img src="{{asset('img/114.png')}}" alt="">
                                     <span class="red-counter">999</span>
-                                </li>
+                                </li-->
                                 <div class="clear"></div>
                             </ul>
                         </div>
                         <div class="b-message-friends-info-button">
-                            <input type="submit" value="Отклонить" class="b-message-friends-info-button__button btn-gray">
-                            <input type="submit" value="Принять" class="b-message-friends-info-button__button btn-gray">
+                            <a  href="{{ URL::to('people/removeFriend'). '/' . $friend->id }}">
+                            <input type="button" value="Отклонить" class="b-message-friends-info-button__button btn-gray">
+                            </a>
+                            <a  href="{{ URL::to('people/submitFriend'). '/' . $friend->id }}">
+                            <input type="button" value="Принять" class="b-message-friends-info-button__button btn-gray">
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="clear"></div>
             </div>
+            @endforeach
         </div>
         <div class="b-message-friends__right">
             <div class="b-message-friends-search">

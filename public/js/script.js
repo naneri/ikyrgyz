@@ -579,7 +579,8 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	
-	$('ul.tab li').click(function(){
+	$('ul.tab li').click(function(e){
+            e.preventDefault();
 		var tab_id = $(this).attr('data-tab');
 
 		$('ul.tab li').removeClass('currents');
