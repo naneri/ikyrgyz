@@ -30,7 +30,7 @@ class ProfileController extends BaseController {
         $topicsLimit = Config::get('topic.topics_per_page');
         $masonrySettings = array(
                 'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
-                'ajaxPage' => URL::to('topic/ajaxFavorites'),
+                'ajaxPage' => URL::to('/'),
         );
         
         switch($page){

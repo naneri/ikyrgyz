@@ -87,7 +87,7 @@
                             <li class="b-user-navigation-list__list" data-tab="tab-2"><a href="{{URL::to('profile/messages')}}">Сообщения</a>@if(count(@$new_messages))<span>{{count($new_messages)}}</span>@endif</li>
                             <li class="b-user-navigation-list__list" data-tab="tab-4"><a href="{{URL::to('profile/publications')}}">Публикации</a><span>{{$user->publications(10000)->count()}}</span></li>
                             <li class="b-user-navigation-list__list" data-tab="tab-3"><a href="{{URL::to('profile/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
-				<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscribtions')}}">Подписано</a></li>
+                            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscriptions')}}">Подписано</a><span>{{$user->subscriptions()->count()}}</span></li>
                                 <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/favourites')}}">Избранное</a><span>{{$user->favourites()->count()}}</span></li>
 				<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/edit/main')}}">Настройки</a></li>
 				<div class="clear"></div>
