@@ -28,11 +28,19 @@ class ProfileController extends BaseController {
         $photoAlbums = array();
         $videoIds = array();
         $topicsLimit = Config::get('topic.topics_per_page');
+        $masonrySettings = array(
+                'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
+                'ajaxPage' => URL::to('topic/ajaxFavorites'),
+        );
+        
         switch($page){
             case 'publications':
                 $items = $user->publications($topicsLimit);
                 $videos = $user->topicsWithVideo()->take(6)->get();
                 $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
+                $masonrySettings['column'] = 'custom';
+                $masonrySettings['columnWidth'] = 590;
+                $masonrySettings['ajaxPage'] = URL::to('profile/'.$user->id.'/ajaxTopics/publications');
                 break;
             case 'friends':
                 $items = $user->friends();
@@ -64,6 +72,7 @@ class ProfileController extends BaseController {
                 $items = $user->newsline($topicsLimit);
                 $videos = $user->topicsWithVideo()->take(6)->get();
                 $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
+                $masonrySettings['ajaxPage'] = URL::to('profile/'.$user->id.'/ajaxTopics/newsline');
                 break;
         }
         
@@ -81,6 +90,8 @@ class ProfileController extends BaseController {
         $photos = $user->photos();
         $videos = $user->topicsWithVideo;
         
+        JavaScript::put($masonrySettings);
+
         if($user->id == Auth::id()){
             return View::make('profile.show.my', 
                     compact(
@@ -128,6 +139,10 @@ class ProfileController extends BaseController {
         $user = User::find($userId);
         $topicsLimit = Config::get('topic.topics_per_page');
         $topics = array();
+        if(!$pageNumber){
+            $pageNumber = Input::get('page');
+        }
+        
         switch ($pageName) {
             case 'newsline':
             case 'profile':

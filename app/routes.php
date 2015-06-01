@@ -108,7 +108,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
 
         Route::get('profile/random', 'ProfileController@getRandom');
         Route::get('profile', 'ProfileController@showMyProfile');
-        Route::get('profile/{userId}/ajaxTopics/{pageName}/{pageNumber}', 'ProfileController@ajaxTopics');
+        Route::get('profile/{userId}/ajaxTopics/{pageName}', 'ProfileController@ajaxTopics');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
         Route::get('profile/{page}', 'ProfileController@showMyProfile');
         Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');

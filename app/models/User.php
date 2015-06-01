@@ -454,4 +454,28 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $topics;
 
     }
+    
+    public function friendsOfFriends(){
+        $friendsIds = $this->friends()->lists('id');
+        $friendsOfFriends = User::with('description')
+                ->join('friends', 'friends.user_one', '=', 'users.id')
+                ->join('user_description', 'user_description.user_id', '=', 'users.id')
+                ->where('friends.status', Config::get('social.friend_status.friends'))
+                ->whereIn('friends.user_two', $friendsIds)
+                ->whereNotIn('friends.user_one', $friendsIds)
+                ->orderByRaw('RAND()')
+                ->select('users.*')
+                ->distinct()
+                ->get();
+        return $friendsOfFriends;
+    }
+    
+    public function recommendFriends(){
+        $friendsIds = $this->friends()->lists('id');
+        return User::with('description')
+                ->whereNotIn('id', $friendsIds)
+                ->orderByRaw('RAND()')
+                ->take(9)
+                ->get();
+    }
 }
