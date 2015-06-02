@@ -611,7 +611,8 @@ $(function() {
 $(function() {
 	$('.b-friends-block-info__edit .button-select').click(function(event){
 		event.preventDefault();
-	$('.b-friends-block-info-list').toggle();
+
+	$(this).next('.b-friends-block-info-list').toggle();
 });
 
 });
@@ -628,8 +629,5 @@ $(function() {
 
 
 
-$(document).ready(function(){
-	if($('.number-raiting').text() == 0 )
-		$('.number-raiting').addClass('number-raiting_gray')
-	
-});
+
+

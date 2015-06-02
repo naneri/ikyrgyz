@@ -107,6 +107,66 @@
                 </div>
                 <div class="clear"></div>
             </div>
+            <div class="b-friends-block">
+                <div class="b-friends-block__left">
+                    <div class="b-friends-block-image">
+                        <img src="{{asset(($friend->user_profile_avatar) ? $friend->user_profile_avatar : asset('img/106.png'))}} " alt="" class="b-friends-block-image__image">
+                        <a href="{{URL::to('messages/new?receiver='.$friend->first_name.'+'.$friend->last_name)}}" class="b-friends-block-image__button ">Сообщение</a>
+                    </div>
+                </div>
+                <div class="b-friends-block__right">
+                    <div class="b-friends-block-info"><a href="{{URL::to('profile/'.$friend->id)}}">
+                            <div class="b-friends-block-info__name">{{$friend->first_name}} <p>{{$friend->last_name}}</p></div></a>
+                        <div class="b-friends-block-info__amount">{{$friend->friends()->count()}} друзей</div>
+                        <div class="b-friends-block-info__counter">
+                            <ul class="b-friends-block-info-counters-list">
+                                <li class="b-friends-block-info-counters-list__list">
+                                    <img src="{{asset('img/110.png') }}" alt=""><span>{{$friend->publications()->count()}}</span>
+                                </li>
+                                <li class="b-friends-block-info-counters-list__list">
+                                    <img src="{{asset('img/111.png') }}" alt=""><span>{{$friend->canPublishBlogs()->count()}}</span></li>
+                                <li class="b-friends-block-info-counters-list__list">
+                                    <img src="{{asset('img/112.png') }}" alt=""><span>{{$friend->photos()->count()}}</span>
+                                </li>
+                                <!--li class="b-friends-block-info-counters-list__list">
+                                        <img src="{{asset('img/114.png') }}" alt=""><span>999</span>
+                                </li-->
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                        <div class="b-friends-block-info__edit">
+                            <a href="" class="button-select ">Редактировать</a>
+                            <div class="b-friends-block-info-list dropdown-list">
+                                <ul>
+                                    <li class="b-friends-block-info-list__list"><a href="">Семья <span>0</span></a></li>
+                                    <li class="b-friends-block-info-list__list"><a href="">Лучшие друзья <span>0</span></a></li>
+                                    <li class="b-friends-block-info-list__list"><a href="">Коллеги <span>0</span></a></li>
+                                    <li class="b-friends-block-info-list__list"><a href="">Знакомые <span>0</span></a></li>
+                                    <li class="b-friends-block-info-list__list"><a href="">Все <span>0</span></a></li>
+                                    <li class="b-friends-block-info-list__list b-friends-block-info-list__list_modal"> <a href="">Добавить категорию</a></li>
+
+                                </ul>
+
+                            </div>
+                            <div class="js-simple-modal">
+                                <div class="b-friends-category">
+                                    <div class="b-friends-category__title">Добавить категорию друзей</div>
+                                    <div class="b-friends-category__new">
+                                        <input type="text" value="Введите новую категорию" class="simple-input">
+                                    </div>
+                                    <div class="b-friends-category__button">
+                                        <input type="button" value="Отмена" class="cancel-button"><input type="button" value="Добавить" class="submit-button">
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
             @endforeach
             <?php
 //                $i = $i + 1;
