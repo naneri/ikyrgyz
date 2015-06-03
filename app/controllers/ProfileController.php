@@ -9,6 +9,8 @@ class ProfileController extends BaseController {
         var $maritalStatuses = array('' => 'Семейное положение', 'single' => 'Без пары', 'married' => 'Женат/Замужем', 'separated' => 'В разводе', 'widowed' => 'Вдовец/Вдова');
         var $month =  array("0" => "Месяц", "1" => "Январь", "2" => "Февраль", "3" => "Март", "4" => "Апрель", "5" => "Май", "6" => "Июнь", "7" => "Июль", "8" => "Август", "9" => "Сентябрь", "10" => "Октябрь", "11" => "Ноябрь", "12" => "Декабрь");
     protected $genders = array('male' => 'Мужской', 'female' => 'Женский');
+    
+        var $friendStableCategories = ['Семья', 'Лучшие друзья', 'Коллеги', 'Знакомые'];
 
     /**
 	 * Страница с профилем пользователя
@@ -32,6 +34,7 @@ class ProfileController extends BaseController {
                 'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
                 'ajaxPage' => URL::to('/'),
         );
+        $friendCategories = array();
         
         switch($page){
             case 'publications':
@@ -44,6 +47,7 @@ class ProfileController extends BaseController {
                 break;
             case 'friends':
                 $items = $user->friends();
+                $friendCategories = array_unique(array_merge($this->friendStableCategories, $user->getFriendCategories()->lists('category')));
                 break;
             case 'mutualFriends':
                 $items = $user->mutualFriends();
@@ -109,7 +113,8 @@ class ProfileController extends BaseController {
                             'friends',
                             'subscribers',
                             'photos',
-                            'videos'
+                            'videos',
+                            'friendCategories'
                             )
                     );
         }else{
@@ -127,11 +132,42 @@ class ProfileController extends BaseController {
                             'subscribers', 
                             'photos',
                             'videos',
-                            'mutualFriends'
+                            'mutualFriends',
+                            'friendCategories'
                         )
                     );
         }
 	}
+        
+    public function postEditFriends(){
+        $result = array();
+        $friendId = Input::get('friendId');
+        switch(Input::get('action')){
+            case 'setCategory':
+                if(Friend::setCategory($friendId, Input::get('categoryName'))){
+                    $result['status'] = 'success';
+                    $result['message'] = 'Пользователь успешно перемещен в категорию '.Input::get('categoryName');
+                }
+                break;
+            case 'removeFriend':
+                if(Friend::removeFriend(Auth::id(), Input::get('friendId'))){
+                    $result['status'] = 'success';
+                    $result['message'] = 'Пользователь успешно удален из списка ваших друзей';
+                }
+                break;
+            default:
+                $result['status'] = 'error';
+                $result['message'] = 'Ошибка!';
+                break;
+        }
+        if($result['status'] != 'error'){
+            $user = Auth::user();
+            $friendCategories = array_unique(array_merge($this->friendStableCategories, $user->getFriendCategories()->lists('category')));
+            $items = Auth::user()->friends();
+            $result['content'] = View::make('profile.show.build.friends', compact('friendCategories', 'items', 'user'))->render();
+        }
+        return Response::json($result);
+    }
         
     public function getAjaxsubscriptionBlogs($userId, $pageNum){
         $user = User::findOrFail($userId);

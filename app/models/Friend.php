@@ -186,4 +186,16 @@ class Friend extends Eloquent{
        		return False;
 	}
 	
+        public static function addCategory($categoryName){
+            Friend::insert(
+                array('user_one' => Auth::id(), 'user_two' => Auth::id(), 'category' => $categoryName)
+            );
+        }
+        
+        public static function setCategory($friendId, $categoryName){
+            return Friend::where('user_one', Auth::id())
+                    ->where('user_two', $friendId)
+                    ->update(['category' => $categoryName]);
+        }
+        
 }

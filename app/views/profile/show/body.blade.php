@@ -12,6 +12,7 @@
         @include('scripts.script-topic')
 	@include('blog.build', array('blogs' => $items))
 @elseif($page == 'friends')
+        @include('scripts.friends')
         @include('profile.show.build.friends', compact('user', 'items'))
 @elseif($page == 'mutualFriends' || $page == 'subscribers')
 	@include('scripts.script-topic')

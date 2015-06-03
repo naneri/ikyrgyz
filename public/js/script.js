@@ -593,40 +593,6 @@ $(document).ready(function(){
 })
 
 
-
-
-
-
-
-
-
-$(function() {
-	$('.b-friends-sort__sort .button-select').click(function(event){
-		event.preventDefault();
-	$('.b-friends-sort-list ').toggle();
-});
-
-});
-
-$(function() {
-	$('.b-friends-block-info__edit .button-select').click(function(event){
-		event.preventDefault();
-
-	$(this).next('.b-friends-block-info-list').toggle();
-});
-
-});
-
-$(function() {
-//	$('.b-message-ls-mark-button .button-select').click(function(event){
-//		event.preventDefault();
-//	$('.b-message-ls-mark-button-list a').toggle();
-//});
-
-});
-
-
-
 $(function() {
 	$('.b-profile-middle__button').click(function(event){
 		event.preventDefault();

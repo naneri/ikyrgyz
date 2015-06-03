@@ -137,6 +137,8 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::post('profile/edit/access', 'ProfileController@postAccess');
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
     Route::get('profile/{id}/subscriptions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscriptionBlogs');
+    
+    Route::post('profile/friends', 'ProfileController@postEditFriends');
 
     Route::get('topic/favorites', 'TopicController@getFavorites');
     Route::get('topic/ajaxFavorites', 'TopicController@ajaxFavorites');
