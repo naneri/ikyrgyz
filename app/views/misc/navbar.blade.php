@@ -259,7 +259,7 @@
             setNavSearchTimeout();
         });
         $('#show-all-results').on('click', function () {
-            location.href = "{{$base_config['base_url']}}/search/content/?search-text="+$searchField.val();
+            location.href = "{{$base_config['base_url']}}/search/?search-text="+$searchField.val();
         });
 
         function setNavSearchTimeout(){

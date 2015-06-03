@@ -1,8 +1,8 @@
 @extends('misc.layout')
 
 @section('content')
-{{--HTML::style('css/bootstrap.css')--}}
-@include('scripts.countries-cities')
+    {{HTML::style('css/bootstrap.css')}}
+    {{HTML::style('css/bootstrap-select.css')}}
 <div class="b-content">
     <div class="b-user-interface">
         <div class="b-user-interface__header">
@@ -16,20 +16,21 @@
                     <div class="b-user-interface-content-wrapper">
                         <div class="b-user-interface-content-nav">
                             <ul class="tabs">
-                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link current"><a href="#">{{ trans('network.people') }}</a></li>
-                                <li data-tab="tab-2" class="b-user-interface-content-nav__list tab-link"><a href="{{URL::to('search/content')}}">{{ trans('network.content') }}</a></li>
-                                <!--li data-tab="tab-3" class="b-user-interface-content-nav__list tab-link"><a href="#">Группы</a></li>
-                                <li data-tab="tab-4" class="b-user-interface-content-nav__list tab-link"><a href="#">Медиа</a></li-->
+                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link"><a href="{{URL::to('search/')}}@if($search_text){{'?search-text='.$search_text}}@endif">{{ trans('network.all') }}</a></li>
+                                <li data-tab="tab-2" class="b-user-interface-content-nav__list tab-link current"><a href="#">{{ trans('network.people') }}</a></li>
+                                <li data-tab="tab-3" class="b-user-interface-content-nav__list tab-link"><a href="{{URL::to('search/content')}}@if($search_text){{'?search-text='.$search_text}}@endif">{{ trans('network.content') }}</a></li>
+                                <!--li data-tab="tab-4" class="b-user-interface-content-nav__list tab-link"><a href="#">Группы</a></li>
+                                <li data-tab="tab-5" class="b-user-interface-content-nav__list tab-link"><a href="#">Медиа</a></li-->
                                 <div class="clear"></div>
                             </ul>
                         </div>
                         <div class="b-user-interface-content-item">
                             <p class="b-user-interface-content-item__place">{{ trans('network.place-to-search') }}</p>
                             <div class="b-user-interface-content-item__country">
-                                {{Form::select('country', Country::getAllForView(), null, array('class' => 'form-control select-country select-default'))}}
+                                {{Form::select('country', Country::getAllForView(), null, array('class' => 'selectpicker select-country form-control'))}}
                             </div>
                             <div class="b-user-interface-content-item__city">
-                                {{Form::select('city', array('0' => trans("network.city")), null, array('class' => 'form-control select-city select-default'))}}
+                                {{Form::select('city', array('0' => trans("network.city")), null, array('class' => 'selectpicker select-city form-control'))}}
                             </div>
                              <div class="b-user-interface-content-item__nolist">
                                 <input type="text" class="noinlist" value="Нет в списке">
@@ -75,7 +76,7 @@
                 <div class="b-user-interface-content__right">
                     <div class="b-user-interface-content-search">
                         <div class="b-user-interface-content-search__search">
-                            {{Form::text('search-text', null, array('class' => 'input-default'))}}
+                            {{Form::text('search-text', $search_text, array('class' => 'input-default'))}}
                             {{Form::submit(null, array('onclick' => 'return false;', 'id' => 'btn-search', 'class' => 'button-default'))}}
                         </div>
                     </div>
@@ -86,6 +87,7 @@
             </div>
             {{Form::close()}}
         </div>
+        @include('scripts.countries-cities')
     </div>
 </div>
 @stop

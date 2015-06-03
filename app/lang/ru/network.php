@@ -175,6 +175,7 @@ return array(
 
 	//search
 	'search'			=> 'Поиск',
+	'all'			    => 'Все',
 	'people'			=> 'Люди',
 	'show-all-results'			=> 'Показать все результаты',
 	'content'			=> 'Контент',
