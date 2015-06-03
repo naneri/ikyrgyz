@@ -52,7 +52,7 @@
                                                                     <!--a href=""><img src="{{ asset('img/106.png') }}" alt=""></a-->
                                                         </div>
 
-                                                        <input type="button" value="Загрузить фото" class="b-user-info-block-photo__button" onclick="javascript: $('div.avatar-view.user-image').click();">
+                                                        <input type="button" value="Загрузить фото" class="b-user-info-block-photo__button" onclick="javascript: $('div.avatar-view.user-image').click(); return false;">
 
                                                         <div class="b-user-info-block-photo__desc">
                                                             Поля отмеченные <b>*</b> (звездочкой) обязательный  к заполению

@@ -8,7 +8,7 @@
                                 <div class="b-profile-photo__image">
                                     @include('profile.edit.set-avatar', array('reloadConfirm' => true))
 				</div>
-                            <a href="" class="b-profile-photo__button" onclick="javascript: $('div.avatar-view.user-image').click();">Загрузить фото</a>
+                            <a href="" class="b-profile-photo__button" onclick="javascript: $('div.avatar-view.user-image').click(); return false;">Загрузить фото</a>
 
 			</div>
 		</div>
