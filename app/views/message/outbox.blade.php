@@ -1,17 +1,41 @@
-@extends('misc.layout')
-@extends('message.layout')
-@section('form')
-{{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4>Исходящие</h4>
-        {{Form::checkbox('check-all')}}
-        {{Form::select('action', array('' => trans('network.choose-action'), 'delete' => trans('network.delete')))}}
-        {{Form::hidden('page', 'outbox')}}
-    </div>
-    <div class="panel-body" id="messages">
-        @include('message.build.messages', array('messages' => Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20)))
-    </div>
+<div class="b-message-ls-mark">
+    {{Form::open(array('url' => 'messages/action', 'name' => 'messages'))}}
+    <table>
+        <tr>
+            <td>
+                <ul>
+                    <li class="b-message-ls-mark__list">
+                        <div class="b-message-ls-mark__checkbox">
+                            <input type="checkbox" onclick="message.checkAll(this);" />
+                        </div>
+                    </li>
+                    <li class="b-message-ls-mark__list b-message-ls-mark__list_border-right">
+                        <div class="b-message-ls-mark-button">
+                            <a class="b-message-ls-mark-button__item button-select" style="width: 160px;cursor:pointer;" onclick="message.toggleActionList();">Выберите действие</a>
+                            <div class="b-message-ls-mark-button-list dropdown-list">
+                                <ul>
+                                    <!--li class="b-message-ls-mark-button-list__item"><a onclick="message.setAction('set_watch', this);">Все прочитанны</a></li-->
+                                    <li class="b-message-ls-mark-button-list__item"><a onclick="message.setAction('delete', this);" style="cursor: pointer;">Удалить</a></li>
+                                </ul>
+                            </div>
+                            <input type="button" class="b-message-ls-mark-button__item button-make" value="Выполнить" onclick="message.doAction();">
+                        </div>
+                    </li>
+                    <!--li class="b-message-ls-mark__list b-message-ls-mark__list_sort">
+                        <a href="">Все</a>
+                        <a href="">Друзья</a>
+                        <a href="">Группы</a>
+                        <a href="">События</a>
+                    </li-->
+                    <li class="b-message-ls-mark__list b-message-ls-mark__list_last">
+                        <a onclick="message.update('outbox')" style="cursor:pointer;"><img src="{{asset('img/refresh-icon.png')}}" alt=""></a>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+            </td>
+
+        </tr>
+        @include('message.build.messages', array('messages' => $messages))
+    </table>
+    {{Form::close()}}
 </div>
-{{Form::close()}}
-@stop

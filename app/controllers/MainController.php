@@ -40,6 +40,8 @@ class MainController extends BaseController {
 
 	}
 
-    
+    public function getEmailTemplate(){
+        return View::make('emails.layout');
+    }
 
 }

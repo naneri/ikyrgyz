@@ -1,10 +1,4 @@
-@extends('misc.layout')
-@extends('message.layout')
-@section('form')
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h4>{{ trans('network.new-message') }}</h4>
-    </div>
     <div class="panel-body">
         @foreach ($errors->all() as $error)
             <div class="b-message b-message-error">
@@ -15,7 +9,9 @@
                 </p>
             </div>
         @endforeach
-        <fieldset>
+        <fieldset style="padding: 0 20px;">
+
+            <h4>{{ trans('network.new-message') }}</h4>
         {{Form::open(array('files' => true))}}
             <div class="form-group">
                 <div id="contacts-list">
@@ -30,10 +26,10 @@
                 </div>
             </div>
             <div class="form-group">
-                {{Form::text('title', trans('network.message-topic'), array('class' => 'form-control'))}}
+                {{Form::text('title', '', array('class' => 'form-control', 'placeholder' => trans('network.message-topic')))}}
             </div>
             <div class="form-group">
-                {{Form::textarea('text', trans('network.message'), array('class' => 'form-control'))}}
+                {{Form::textarea('text', '', array('class' => 'form-control', 'placeholder' =>  trans('network.message')))}}
             </div>
             <div class="form-group">
                 {{Form::file('attachments[]', array('multiple' => true, 'class' => 'form-control'))}}
@@ -63,4 +59,3 @@
             $('form input[name="title"]').val('Без темы');
     });
 </script>
-@stop

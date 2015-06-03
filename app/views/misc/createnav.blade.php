@@ -12,7 +12,7 @@
 					<a style="text-transform: uppercase;" href="#" class="arrow">Я-{{trans('nation.'.Config::get('app.nation_name'))}}</a>
 					<dl class="dropdown-list">
 						<dt><a href="{{URL::to('profile')}}" class="my-profile">Мой профиль</a></dt>
-							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">{{$topic_number}}</span></dd>
+							<dd><a href="{{URL::to('topic/myTopics')}}">{{ trans('network.publications') }}</a> <span class="raiting">{{$topic_number}}</span></dd>
 							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
 							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">{{$friend_number}}</span></dd>
 							<!-- <dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd> -->
@@ -64,7 +64,7 @@
 			<div class="b-topic-navigation-category">
 				<ul>
 					<li class="b-topic-navigation-category__item item1">
-						<a href="#"></a>
+						<a href="{{URL::to('topic/videos')}}"></a>
 					</li>
 					<li class="b-topic-navigation-category__item item2">
 						<a href="#"></a>

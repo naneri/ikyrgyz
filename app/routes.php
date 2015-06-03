@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::get('email', 'MainController@getEmailTemplate');
 Route::get('locale/{locale}', 'BaseController@setLocale' );
 
 Route::get('country-list', function(){
@@ -108,7 +108,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
 
         Route::get('profile/random', 'ProfileController@getRandom');
         Route::get('profile', 'ProfileController@showMyProfile');
-        Route::get('profile/{userId}/ajaxTopics/{pageName}/{pageNumber}', 'ProfileController@ajaxTopics');
+        Route::get('profile/{userId}/ajaxTopics/{pageName}', 'ProfileController@ajaxTopics');
         Route::get('profile/{id}', 'ProfileController@getShow')->where('id', '[0-9]+');
         Route::get('profile/{page}', 'ProfileController@showMyProfile');
         Route::get('profile/{id}/{page}', 'ProfileController@getShow')->where('id', '[0-9]+');
@@ -140,6 +140,10 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
 
     Route::get('topic/favorites', 'TopicController@getFavorites');
     Route::get('topic/ajaxFavorites', 'TopicController@ajaxFavorites');
+    Route::get('topic/videos', 'TopicController@getTopicVideos');
+    Route::get('topic/ajaxVideos', 'TopicController@getAjaxVideos');
+    Route::get('topic/myTopics', 'TopicController@getMyTopics');
+    Route::get('topic/ajaxMyTopics', 'TopicController@ajaxMyTopics');
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');
@@ -163,7 +167,8 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::get('people/submitFriend/{id}', 'PeopleController@submitFriend');
 
         Route::get('message/all', 'MessageController@getAll');
-        Route::get('message/show/{id}', 'MessageController@show');
+        Route::get('messages/show/{id}', 'MessageController@show');
+        Route::get('messages/inbox', 'MessageController@inbox');
         Route::get('messages/inbox/{filter}', 'MessageController@inbox');
         Route::get('messages/outbox', 'MessageController@outbox');
         Route::get('messages/contacts', 'MessageController@contacts');

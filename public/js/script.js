@@ -579,7 +579,8 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	
-	$('ul.tab li').click(function(){
+	$('ul.tab li').click(function(e){
+            e.preventDefault();
 		var tab_id = $(this).attr('data-tab');
 
 		$('ul.tab li').removeClass('currents');
@@ -610,17 +611,23 @@ $(function() {
 $(function() {
 	$('.b-friends-block-info__edit .button-select').click(function(event){
 		event.preventDefault();
-	$('.b-friends-block-info-list').toggle();
+
+	$(this).next('.b-friends-block-info-list').toggle();
 });
 
 });
 
+$(function() {
+//	$('.b-message-ls-mark-button .button-select').click(function(event){
+//		event.preventDefault();
+//	$('.b-message-ls-mark-button-list a').toggle();
+//});
 
-
-
-
-$(document).ready(function(){
-	if($('.number-raiting').text() == 0 )
-		$('.number-raiting').addClass('number-raiting_gray')
-	
 });
+
+
+
+
+
+
+

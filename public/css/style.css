@@ -98,16 +98,6 @@ body {
 	padding-left: 10px;
 	width: 100%;
 }
-.b-header-nav__right .b-header-nav-search-results {
-    z-index: 2;
-    position: absolute;
-	padding-left: 10px;
-	width: 300px;
-}
-
-.b-header-nav-search-results-people,#show-all-results,.b-header-nav-search-results-content {
-    display: none;
-}
 
 .b-header-nav__right img {
 	vertical-align: middle;
@@ -779,7 +769,7 @@ body {
 
 .b-widget-list__list {
 	float: left;
-	padding: 25px 0 40px 0;
+	padding: 15px 10px;
 	text-align: center;
 }
 
@@ -791,14 +781,10 @@ body {
 	display: block;
 	background: url("../img/86.png") no-repeat;
 	width: 61px;
-	height: 32px;
+	height: 42px;
 	font: 14px 'PT Sans Caption', sans-serif;
 	color: #fff;
 	line-height: 90px;
-}
-
-.b-widget-list__list:nth-child(1) {
-	padding-left: 10px;
 }
 
 .b-widget-list__list:nth-child(1) a {
@@ -923,6 +909,10 @@ body {
 
 .b-user-wall-header__vision span {
 	padding: 0 5px;
+}
+
+.b-user-wall-image {
+	margin-top: 10px;
 }
 
 .b-user-wall-image img {
@@ -1106,7 +1096,12 @@ body {
 }
 
 .b-user-wall-footer-raiting__arrow-down input {
-	background: url("../img/96.png") no-repeat;
+	background: url("../img/222.png") no-repeat;
+	background-position: 50% 50%;
+}
+
+.b-user-wall-footer-raiting__arrow-down input:hover {
+	background: url("../img/224.png") no-repeat;
 	background-position: 50% 50%;
 }
 
@@ -1125,7 +1120,12 @@ body {
 }
 
 .b-user-wall-footer-raiting__arrow-up input {
-	background: url("../img/97.png") no-repeat;
+	background: url("../img/223.png") no-repeat;
+	background-position: 50% 50%;
+}
+
+.b-user-wall-footer-raiting__arrow-up input:hover {
+	background: url("../img/225.png") no-repeat;
 	background-position: 50% 50%;
 }
 
@@ -5111,6 +5111,11 @@ music player style
 	border-right: 1px solid #d5d5d5;
 }
 
+.b-message-ls__right {
+	float: left;
+	width: 786px;
+}
+
 .b-message-ls-button {
 	padding: 10px;
 }
@@ -5151,6 +5156,11 @@ music player style
 	color: #676767;
 }
 
+.b-message-ls-mark {
+	width: 785px;
+	border: 1px solid #d5d5d5;
+}
+
 .b-message-ls-mark__list {
 	float: left;
 	padding: 10px;
@@ -5188,10 +5198,6 @@ music player style
 	width: 456px;
 }
 
-.b-message-ls-mark td {
-	border: 1px solid #d5d5d5;
-}
-
 .b-message-ls-mark__checkbox_second {
 	line-height: 51px;
 }
@@ -5211,6 +5217,10 @@ music player style
 .b-message-ls-mark-num img {
 	vertical-align: middle;
 	text-align: center;
+}
+
+.b-message-ls-mark table {
+	width: 100%;
 }
 
 .b-message-ls-mark-button-list {
@@ -5294,6 +5304,8 @@ music player style
 	width: 316px;
 	height: 166px;
 	background: #fff;
+	position: absolute;
+	left: 222px;
 }
 
 .b-friends-category__title {

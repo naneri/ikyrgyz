@@ -215,4 +215,24 @@ class Topic extends Eloquent {
                         ->get();
     }
 
+    static function videoTopics($user_id, $offset = 0){
+
+        $topicLimit = Config::get('topic.topics_per_page');
+
+        return Topic::where('description', 'like', '%x-shockwave-flash%')
+                        ->skip( $offset * $topicLimit ) 
+                        ->take($topicLimit)
+                        ->get();
+    }
+
+    static function userTopics($user_id, $offset = 0){
+
+        $topicLimit = Config::get('topic.topics_per_page');
+
+        return Topic::where('user_id', $user_id)
+                        ->skip( $offset * $topicLimit ) 
+                        ->take($topicLimit)
+                        ->get();
+    }
+
 }

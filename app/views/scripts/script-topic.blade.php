@@ -9,6 +9,10 @@
     
     var ColumnVal;
     var options = { 
+        'custom' : {
+            columnWidth : niamiko.columnWidth,
+            masonryClass: ''
+        },
         '1' : {
             columnWidth : 650,
             masonryClass: 'b-user-wall-1000'

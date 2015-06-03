@@ -820,15 +820,17 @@ body
 	
 	&__list
 		float left
-		padding 25px 0 40px 0
+		padding 15px 10px
 		text-align center
 		&:hover
-			background #f67457
+				background #f67457
+		
+		
 		a
 			display block
 			background url(../img/86.png) no-repeat
 			width 61px
-			height 32px
+			height 42px
 			font 14px 'PT Sans Caption', sans-serif
 			color #fff
 			line-height 90px
@@ -837,8 +839,8 @@ body
 			
 			
 			
-		&:nth-child(1)
-			padding-left 10px
+			
+		&:nth-child(1)			
 			a
 				background-position 13px 0
 				
@@ -947,6 +949,7 @@ body
 			span
 				padding 0 5px
 	&-image
+		margin-top 10px
 		img
 			width 100%      
 			overflow hidden
@@ -1085,9 +1088,13 @@ body
 	&__arrow-down
 		float left
 		
+		
 		input
-			background url(../img/96.png) no-repeat
+			background url(../img/222.png) no-repeat
 			background-position 50% 50%
+			&:hover
+				background url(../img/224.png) no-repeat
+				background-position 50% 50%
 			
 	&__number
 		float left
@@ -1100,8 +1107,11 @@ body
 		padding-left 10px
 		
 		input
-			background url(../img/97.png) no-repeat
+			background url(../img/223.png) no-repeat
 			background-position 50% 50%
+			&:hover
+				background url(../img/225.png) no-repeat
+				background-position 50% 50%
 	
 .btn-raiting
 	border $baseBorder
@@ -4386,6 +4396,9 @@ music player style
 		float left
 		width 213px
 		border-right $baseBorder
+	&__right
+		float left
+		width 786px
 .b-message-ls-button
 	padding 10px
 	&__item
@@ -4421,7 +4434,8 @@ music player style
 
 
 .b-message-ls-mark
-	//
+	width 785px
+	border $baseBorder
 	&__list
 		float left
 		padding 10px
@@ -4447,8 +4461,8 @@ music player style
 			vertical-align middle
 	&-desc
 		width 456px
-	td
-		border $baseBorder
+	
+		
 	&__checkbox_second
 		line-height 51px
 	
@@ -4461,6 +4475,8 @@ music player style
 		img
 			vertical-align middle
 			text-align center
+	table
+		width 100%
 	
 	
 
@@ -4532,6 +4548,8 @@ music player style
 	width 316px
 	height 166px
 	background #fff
+	position absolute
+	left 222px
 	&__title
 		background $lightGradient
 		color #999
