@@ -196,9 +196,9 @@
 				<div class="b-topic-navigation-format">
 					<a href="#" class="b-topic-navigation-format__item"></a>
 					<ul class="dropdown-list">
-						<li class="format-list"><a href="javascript: makeColumnN('1')"></a></li>
-						<li class="format-list"><a href="javascript: makeColumnN('2')"></a></li>
-						<li class="format-list"><a href="javascript: makeColumnN('3')"></a></li>
+						<li class="format-list"><a href="javascript: makeColumnN('1')" title="одна колонка"></a></li>
+						<li class="format-list"><a href="javascript: makeColumnN('2')" title="две колонки"></a></li>
+						<li class="format-list"><a href="javascript: makeColumnN('3')" title="три колонки"></a></li>
 					</ul>
 				</div>
 		</div>

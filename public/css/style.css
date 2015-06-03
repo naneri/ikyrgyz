@@ -1177,7 +1177,7 @@ body {
 
 .number-raiting {
 	color: #26ad85;
-	font: 15px 'PT Sans Caption Bold';
+	font: 18px 'PT Sans Caption Bold';
 }
 
 .number-raiting_red {
@@ -5414,4 +5414,12 @@ music player style
 
 .full-information {
 	display: none;
+}
+
+.active {
+	background-image: -webkit-linear-gradient(top, #fff 0%, #d5d5d5 100%);
+	background-image: -moz-linear-gradient(top, #fff 0%, #d5d5d5 100%);
+	background-image: -o-linear-gradient(top, #fff 0%, #d5d5d5 100%);
+	background-image: -ms-linear-gradient(top, #fff 0%, #d5d5d5 100%);
+	background-image: linear-gradient(to bottom, #fff 0%, #d5d5d5 100%);
 }

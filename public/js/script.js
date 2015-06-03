@@ -637,4 +637,18 @@ $(function() {
 });
 
 
+$(document).ready(function () {
+    $('.b-message-tabs-list__list').click(function(e) {
+
+        $('.b-message-tabs-list__list').removeClass('active');
+
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+        //e.preventDefault();
+    });
+});
+
+
 
