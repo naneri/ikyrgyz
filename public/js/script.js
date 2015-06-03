@@ -627,7 +627,14 @@ $(function() {
 
 
 
+$(function() {
+	$('.b-profile-middle__button').click(function(event){
+		event.preventDefault();
 
+	$('.full-information').toggle();
+});
+
+});
 
 
 

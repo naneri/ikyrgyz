@@ -51,6 +51,7 @@
                     @if(count($jobs) > 0)
                     <p>Работает</p>
                     @endif
+                    <div class="full-information">asdasdsad</div>
                 </li>
                 <li class="b-profile-middle__right">
                     @if($user->description->age())
@@ -66,11 +67,14 @@
                         @endforeach
                     </p>
                     @endif
+                    <div class="full-information">asdasdsad</div>
                 </li>
 
                 <div class="clear"></div>
             </ul>
-            <div class="b-profile-middle__button">Показать полную информацию</div>
+            <div class="b-profile-middle__button">Показать полную информацию
+                
+            </div>
         </div>
         <div class="b-profile-counters">
             <ul>
@@ -106,6 +110,7 @@
                         <p>Видео</p>
                     </a></li>
                 @endif
+
                 <div class="clear"></div>
             </ul>
         </div>

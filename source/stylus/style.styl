@@ -820,7 +820,7 @@ body
 	
 	&__list
 		float left
-		padding 15px 10px
+		padding 15px 10px 20px
 		text-align center
 		&:hover
 				background #f67457
@@ -877,7 +877,7 @@ body
 .b-user-wall-325
 	width 325px
 	.b-user-wall-footer-raiting__right
-		float left
+		float right
 		padding-top 10px
 .b-user-wall-495	
 	width 495px
@@ -885,6 +885,8 @@ body
 		padding-right 150px
 	.b-user-wall-footer-btn__share
 		padding-right 20px
+	.b-user-wall-header__text
+		width 70%	
 
 
 .b-user-wall
@@ -1051,24 +1053,43 @@ body
 		width 25px
 		height 25px
 		background url(../img/98.png) no-repeat
+		
 	&:nth-child(1)
 		a
 			background-position 0 0
+			&:hover
+				background url(../img/226.png) no-repeat
+				background-position 0 0
 	&:nth-child(2)			
 		a
 			background-position -25px 0
+			&:hover
+				background url(../img/226.png) no-repeat
+				background-position -25px 0
 	&:nth-child(3)			
 		a
-			background-position -50px 0	
+			background-position -50px 0
+			&:hover
+				background url(../img/226.png) no-repeat
+				background-position -50px 0	
 	&:nth-child(4)			
 		a
 			background-position -75px 0
+			&:hover
+				background url(../img/226.png) no-repeat
+				background-position -75px 0
 	&:nth-child(5)			
 		a
 			background-position -100px 0
+			&:hover
+				background url(../img/226.png) no-repeat
+				background-position -100px 0
 	&:nth-child(6)			
 		a
-			background-position -125px 0													
+			background-position -125px 0
+			&:hover
+				background url(../img/226.png) no-repeat
+				background-position -125px 0													
 .b-user-wall-footer-raiting
 	border-top $baseBorder	
 	padding 10px 10px 10px
@@ -1427,7 +1448,8 @@ Topic
 .b-topic-navigation-menu__list
 	//
 	.raiting
-		float right 
+		float right
+		display block
 	
 .b-topic-navigation-sort
 	float left
@@ -1649,7 +1671,7 @@ div.choose-list
 		display block
 		background url(../img/85.png) no-repeat
 		width 40px
-		height 30px
+		height 33px
 		margin 0 auto
 		
 	&:nth-child(1)
@@ -1683,20 +1705,28 @@ div.choose-list
 	dd
 		background #fff
 		color $baseFontColorLight
-		padding 0 22px 0 20px
+		
 		font 13px 'PT Sans', sans-serif
 		line-height 30px
-		&:hover
-			background #edebeb
+		
 		a
 			color $baseFontColorLight
+			display block
+			padding 0 22px 0 20px
+			&:hover
+				background #edebeb
 		img
 			vertical-align middle
 			float right
+			padding-top 3px
+		
 	.my-profile
 		color $orangeFontColor
 	.soc-name
 		color #fff
+.lang-text
+	float left
+	padding-left 13px
 		
 .b-topic-navigation__create
 
@@ -4100,13 +4130,14 @@ music player style
 
 
 .button-select
-	
+	padding-left 10px
 	display block
-	width 140px
+	width 150px
 	height 20px
 	border $baseBorder
 	color #999
 	font 14px 'pt sans caption', sans-serif
+	cursor pointer
 	&:after
 		display block
 		float right
@@ -4152,7 +4183,7 @@ music player style
 	background #fff
 	height 172px
 	top 20px
-	
+	left -22px
 	border $baseBorder
 	border-bottom 4px solid #676767
 	
@@ -4449,9 +4480,9 @@ music player style
 		text-align center
 		
 	&-button
-		width 275px
-		padding-left 20px
+		width 300px		
 		position relative
+		padding-left 10px
 		
 	&__image
 		width 62px
@@ -4481,8 +4512,8 @@ music player style
 	
 
 .b-message-ls-mark-button-list 
-	top 23px
-	left 20px
+	top 21px
+	left 10px
 	width 151px
 	background #fff
 	height 113px	
@@ -4513,6 +4544,7 @@ music player style
 	color #999
 	font 13px 'pt sans caption'
 	cursor pointer
+	margin-left 5px
 	
 .b-message-ls-mark__list_sort
 	padding-top 13px
@@ -4585,4 +4617,5 @@ music player style
 			cursor pointer
 			margin-right 20px
 			
-		
+.full-information
+	display none

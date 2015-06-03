@@ -12,11 +12,19 @@
 					<a style="text-transform: uppercase;" href="#" class="arrow">Я-{{trans('nation.'.Config::get('app.nation_name'))}}</a>
 					<dl class="dropdown-list">
 						<dt><a href="{{URL::to('profile')}}" class="my-profile">Мой профиль</a></dt>
-							<dd><a href="{{URL::to('topic/myTopics')}}">{{ trans('network.publications') }}</a> <span class="raiting">{{$topic_number}}</span></dd>
-							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
-							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">{{$friend_number}}</span></dd>
+							<dd><a href="{{URL::to('topic/myTopics')}}">{{ trans('network.publications') }}
+							<span class="raiting">{{$topic_number}}</span>
+							</a> </dd>
+							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}
+							<span class="raiting">{{count($new_messages)}}</span>
+							</a></dd>
+							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}
+							<span class="raiting">{{$friend_number}}</span>
+							</a></dd>
 							<!-- <dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd> -->
-							<dd><a href="{{URL::to('topic/favorites')}}">{{ trans('network.favorite') }}</a><span class="raiting">{{$favorites}}</span></dd>
+							<dd><a href="{{URL::to('topic/favorites')}}">{{ trans('network.favorite') }}
+							<span class="raiting">{{$favorites}}</span>
+							</a></dd>
 						<dt>Энкиклопедия</dt>
 							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
@@ -25,14 +33,15 @@
 							<dd><a href="">Сообщить о проблеме</a></dd> -->
 						<!-- 	<dd><a href="">Истоиря действии</a></dd>	 -->
 						<dt>Настройки</dt>
-							<dd>Выберите язык
+							<dd>
+							<span class="lang-text">Выберите язык</span>
 							<a href="{{ URL::to('locale/ru') }}">
 								<img src="{{ asset('img/103.png') }}" alt=""/>
 							</a>
 							<a href="{{ URL::to('locale/en') }}">
 								<img src="{{ asset('img/104.png') }}" alt=""/>
 							</a>
-							
+							<div class="clear"></div>
 							</dd>
 
 						<dt><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a>
