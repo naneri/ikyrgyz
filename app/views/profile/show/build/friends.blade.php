@@ -12,7 +12,7 @@
                         @endforeach
                         <li class="b-friends-sort-list__list"><a onclick="friend.filter('Все')">Все</a></li>
                         @if($isOwner)
-                        <li class="b-friends-sort-list__list b-friends-sort-list__list_modal"> <a href="#">Добавить категорию</a></li>\
+                        <li class="b-friends-sort-list__list b-friends-sort-list__list_modal"> <a onclick="friend.addCategoryForm()">Добавить категорию</a></li>\
                         @else
                         <li class="b-friends-sort-list__list" style="display: none;"></li>
                         @endif
@@ -21,13 +21,14 @@
                 </div>
                 @if($isOwner)
                 <div class="js-simple-modal">
-                    <div class="b-friends-category">
+                    <div style="position: fixed; width: 100%; height: 100%; background-color: #000; top: 0; left: 0; opacity: 0.6; z-index: 95;"></div>
+                    <div class="b-friends-category" style="z-index: 99;">
                         <div class="b-friends-category__title">Добавить категорию друзей</div>
                         <div class="b-friends-category__new">
-                            <input type="text" value="Введите новую категорию" class="simple-input">
+                            <input type="text" placeholder="Введите новую категорию" class="simple-input">
                         </div>
                         <div class="b-friends-category__button">
-                            <input type="button" value="Отмена" class="cancel-button"><input type="button" value="Добавить" class="submit-button">
+                            <input type="button" value="Отмена" class="cancel-button" onclick="friend.addCategoryForm()"><input type="button" value="Добавить" class="submit-button" onclick="friend.submitAddCategory()">
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -103,7 +104,8 @@
                 <div class="b-friends-common-wrapper__inner">
                     <div class="b-friends-common">
                         <div class="b-friends-common-top">
-                            <div class="b-friends-common-top__title">Общие друзья <span>999</span></div>
+                            <?php $friendsOfFriends = (Auth::id() == $user->id) ? Auth::user()->friendsOfFriends() : $user->mutualFriends(); ?>
+                            <div class="b-friends-common-top__title">{{(Auth::id() == $user->id) ?'Друзья друзей':'Общие друзья'}} <span>{{$friendsOfFriends->count()}}</span></div>
                             <div class="b-friends-common-top__button">
                                 <input type="submit" value="Все" class="button-all">
                             </div>
@@ -111,7 +113,7 @@
                         </div>
                         <div class="b-friends-common-list">
                             <ul>
-                                @foreach((Auth::id() == $user->id)?Auth::user()->friendsOfFriends():$user->mutualFriends() as $friend)
+                                @foreach($friendsOfFriends->take(6) as $friend)
                                 <li class="b-friends-common-list__list"><a href="{{URL::to('profile/'.$friend->id)}}"><img src="{{asset($friend->avatar()) }}" alt=""></a></li>
                                 @endforeach
                                 <div class="clear"></div>

@@ -141,10 +141,10 @@ class ProfileController extends BaseController {
         
     public function postEditFriends(){
         $result = array();
-        $friendId = Input::get('friendId');
+        
         switch(Input::get('action')){
             case 'setCategory':
-                if(Friend::setCategory($friendId, Input::get('categoryName'))){
+                if(Friend::setCategory(Input::get('friendId'), Input::get('categoryName'))){
                     $result['status'] = 'success';
                     $result['message'] = 'Пользователь успешно перемещен в категорию '.Input::get('categoryName');
                 }
@@ -155,16 +155,28 @@ class ProfileController extends BaseController {
                     $result['message'] = 'Пользователь успешно удален из списка ваших друзей';
                 }
                 break;
+            case 'addCategory':
+                $categoryName = Input::get('categoryName');
+                $friendCategories = array_unique(array_merge($this->friendStableCategories, Auth::user()->getFriendCategories()->lists('category')));
+                if(!in_array($categoryName, $friendCategories) 
+                        && strlen($categoryName) > 3 
+                        && Friend::addCategory($categoryName)){
+                    $result['status'] = 'success';
+                    $result['message'] = 'Категория успешно добавлена';                    
+                }
+                break;
             default:
                 $result['status'] = 'error';
-                $result['message'] = 'Ошибка!';
                 break;
         }
-        if($result['status'] != 'error'){
+        if($result['status'] == 'success'){
             $user = Auth::user();
-            $friendCategories = array_unique(array_merge($this->friendStableCategories, $user->getFriendCategories()->lists('category')));
+            $friendCategories = array_unique(array_merge($this->friendStableCategories, Auth::user()->getFriendCategories()->lists('category')));
             $items = Auth::user()->friends();
             $result['content'] = View::make('profile.show.build.friends', compact('friendCategories', 'items', 'user'))->render();
+        }else{
+            $result['status'] = 'error';
+            $result['message'] = 'Ошибка!';
         }
         return Response::json($result);
     }

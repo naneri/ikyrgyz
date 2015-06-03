@@ -16,19 +16,6 @@
                 }
             });
         },
-        addCategory:function(categoryName){
-            $.ajax({
-                method: "POST",
-                url: friendUrl,
-                data: {
-                    'action': 'addCategory',
-                    'categoryName': categoryName
-                },
-                success: function($result) {
-                    friend.notify($result);
-                }
-            });
-        },
         editCategory:function(element){
             $(element).next().toggle();
         },
@@ -63,6 +50,28 @@
             $block.find('.dropdown-list').toggle();
             $block.find('.button-select').text($category);
         },
+        addCategoryForm: function(){
+            $('.b-friends-sort-list.dropdown-list').hide();
+            $('.js-simple-modal').toggle();
+        },
+        submitAddCategory: function() {
+            var categoryName = $('.b-friends-category__new input').val();
+            if(categoryName == ''){
+                return;
+            }
+            $.ajax({
+                method: "POST",
+                url: friendUrl,
+                data: {
+                    'action': 'addCategory',
+                    'categoryName': categoryName
+                },
+                success: function($result) {
+                    friend.notify($result);
+                }
+            });
+            friend.addCategoryForm();
+        },        
     }
 </script>
 <style>
