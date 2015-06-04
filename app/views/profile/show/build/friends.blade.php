@@ -1,34 +1,39 @@
-<div class="b-friends tab-content current" id="tab-4" class="tab-content">
-
+<div class="b-friends tab-content current" class="tab-content">
+    <?php $isOwner = $user->id == Auth::id(); ?>
     <div class="b-friends-sort">
         <div class="b-friends-sort__left">			
             <span class="b-friends-sort__text">Сортировать</span>
             <div class="b-friends-sort__sort">
-                <a href="#" class="button-select">Все</a>
+                <a onclick="friend.editCategory(this)" class="button-select">Все</a>
                 <div class="b-friends-sort-list dropdown-list">
                     <ul>
-                        <li class="b-friends-sort-list__list"><a href="">Семья <span>0</span></a></li>
-                        <li class="b-friends-sort-list__list"><a href="">Лучшие друзья <span>0</span></a></li>
-                        <li class="b-friends-sort-list__list"><a href="">Коллеги <span>0</span></a></li>
-                        <li class="b-friends-sort-list__list"><a href="">Знакомые <span>0</span></a></li>
-                        <li class="b-friends-sort-list__list"><a href="">Все <span>0</span></a></li>
-                        <li class="b-friends-sort-list__list b-friends-sort-list__list_modal"> <a href="#">Добавить категорию</a></li>
-
+                        @foreach($friendCategories as $category)
+                            <li class="b-friends-sort-list__list"><a onclick="friend.filter('{{$category}}')">{{$category}} <span>{{$user->friendsOfCategory($category)->count()}}</span></a></li>
+                        @endforeach
+                        <li class="b-friends-sort-list__list"><a onclick="friend.filter('Все')">Все</a></li>
+                        @if($isOwner)
+                        <li class="b-friends-sort-list__list b-friends-sort-list__list_modal"> <a onclick="friend.addCategoryForm()">Добавить категорию</a></li>\
+                        @else
+                        <li class="b-friends-sort-list__list" style="display: none;"></li>
+                        @endif
                     </ul>
 
                 </div>
+                @if($isOwner)
                 <div class="js-simple-modal">
-                    <div class="b-friends-category">
+                    <div style="position: fixed; width: 100%; height: 100%; background-color: #000; top: 0; left: 0; opacity: 0.6; z-index: 95;"></div>
+                    <div class="b-friends-category" style="z-index: 99;">
                         <div class="b-friends-category__title">Добавить категорию друзей</div>
                         <div class="b-friends-category__new">
-                            <input type="text" value="Введите новую категорию" class="simple-input">
+                            <input type="text" placeholder="Введите новую категорию" class="simple-input">
                         </div>
                         <div class="b-friends-category__button">
-                            <input type="button" value="Отмена" class="cancel-button"><input type="button" value="Добавить" class="submit-button">
+                            <input type="button" value="Отмена" class="cancel-button" onclick="friend.addCategoryForm()"><input type="button" value="Добавить" class="submit-button" onclick="friend.submitAddCategory()">
                         </div>
                         <div class="clear"></div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
         <div class="b-friends-sort__right">
@@ -42,16 +47,14 @@
     <div class="b-friends-inner">
 
         <div class="b-friends-inner__left">
-            <?php
-            $i = 1;
-            //while ($i <= 4) {
-            ?>
             @foreach($items as $friend)
-            <div class="b-friends-block">
+            <div class="b-friends-block" data-category="{{$friend->category}}">
                 <div class="b-friends-block__left">
                     <div class="b-friends-block-image">
                         <img src="{{asset(($friend->user_profile_avatar) ? $friend->user_profile_avatar : asset('img/106.png'))}} " alt="" class="b-friends-block-image__image">
+                        @if($isOwner)
                         <a href="{{URL::to('messages/new?receiver='.$friend->first_name.'+'.$friend->last_name)}}" class="b-friends-block-image__button ">Сообщение</a>
+                        @endif
                     </div>
                 </div>
                 <div class="b-friends-block__right">
@@ -74,33 +77,19 @@
                                 <div class="clear"></div>
                             </ul>
                         </div>
+                        @if($isOwner)
                         <div class="b-friends-block-info__edit">
-                            <a href="" class="button-select ">Редактировать</a>
+                            <a class="button-select" onclick="friend.editCategory(this)">{{($friend->category != '')?$friend->category:'Редактировать'}}</a>
                             <div class="b-friends-block-info-list dropdown-list">
                                 <ul>
-                                    <li class="b-friends-block-info-list__list"><a href="">Семья <span>0</span></a></li>
-                                    <li class="b-friends-block-info-list__list"><a href="">Лучшие друзья <span>0</span></a></li>
-                                    <li class="b-friends-block-info-list__list"><a href="">Коллеги <span>0</span></a></li>
-                                    <li class="b-friends-block-info-list__list"><a href="">Знакомые <span>0</span></a></li>
-                                    <li class="b-friends-block-info-list__list"><a href="">Все <span>0</span></a></li>
-                                    <li class="b-friends-block-info-list__list b-friends-block-info-list__list_modal"> <a href="">Добавить категорию</a></li>
-
+                                    @foreach($friendCategories as $category)
+                                    <li class="b-friends-sort-list__list"><a onclick="friend.setCategory({{$friend->id}}, '{{$category}}')">{{$category}}<span></span></a></li>
+                                    @endforeach
+                                    <li class="b-friends-sort-list__list"> <a onclick="friend.remove({{$friend->id}})">Удалить из друзей</a></li>
                                 </ul>
-
-                            </div>
-                            <div class="js-simple-modal">
-                                <div class="b-friends-category">
-                                    <div class="b-friends-category__title">Добавить категорию друзей</div>
-                                    <div class="b-friends-category__new">
-                                        <input type="text" value="Введите новую категорию" class="simple-input">
-                                    </div>
-                                    <div class="b-friends-category__button">
-                                        <input type="button" value="Отмена" class="cancel-button"><input type="button" value="Добавить" class="submit-button">
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
                             </div>
                         </div>
+                        @endif
                         <div class="clear"></div>
 
                     </div>
@@ -108,10 +97,6 @@
                 <div class="clear"></div>
             </div>
             @endforeach
-            <?php
-//                $i = $i + 1;
-//            }
-            ?>	
         </div>
 
         <div class="b-friends-inner__right">
@@ -119,7 +104,8 @@
                 <div class="b-friends-common-wrapper__inner">
                     <div class="b-friends-common">
                         <div class="b-friends-common-top">
-                            <div class="b-friends-common-top__title">Общие друзья <span>999</span></div>
+                            <?php $friendsOfFriends = (Auth::id() == $user->id) ? Auth::user()->friendsOfFriends() : $user->mutualFriends(); ?>
+                            <div class="b-friends-common-top__title">{{(Auth::id() == $user->id) ?'Друзья друзей':'Общие друзья'}} <span>{{$friendsOfFriends->count()}}</span></div>
                             <div class="b-friends-common-top__button">
                                 <input type="submit" value="Все" class="button-all">
                             </div>
@@ -127,7 +113,7 @@
                         </div>
                         <div class="b-friends-common-list">
                             <ul>
-                                @foreach((Auth::id() == $user->id)?Auth::user()->friendsOfFriends():$user->mutualFriends() as $friend)
+                                @foreach($friendsOfFriends->take(6) as $friend)
                                 <li class="b-friends-common-list__list"><a href="{{URL::to('profile/'.$friend->id)}}"><img src="{{asset($friend->avatar()) }}" alt=""></a></li>
                                 @endforeach
                                 <div class="clear"></div>
@@ -139,7 +125,7 @@
                 <div class="b-friends-common-wrapper__inner">
                     <div class="b-friends-common">
                         <div class="b-friends-common-top">
-                            <div class="b-friends-common-top__title">Возможно вы их знаете <span>999</span></div>
+                            <div class="b-friends-common-top__title">Возможно вы их знаете <span></span></div>
                             <div class="b-friends-common-top__button"><input type="submit" value="Все" class="button-all"></div>
 
                             <div class="clear"></div>

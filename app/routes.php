@@ -137,6 +137,8 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::post('profile/edit/access', 'ProfileController@postAccess');
     Route::post('profile/uploadAvatar', 'ProfileController@uploadAvatar');
     Route::get('profile/{id}/subscriptions/ajaxBlogs/{pageNum}', 'ProfileController@getAjaxSubscriptionBlogs');
+    
+    Route::post('profile/friends', 'ProfileController@postEditFriends');
 
     Route::get('topic/favorites', 'TopicController@getFavorites');
     Route::get('topic/ajaxFavorites', 'TopicController@ajaxFavorites');
@@ -194,6 +196,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::get('custom/problem', 'CustomController@showProblem');
         Route::get('custom/action_history', 'CustomController@showActionHistory');
 
+        Route::get('search', 'SearchController@index');
         Route::get('search/people', 'SearchController@searchPeople');
         Route::post('search/people', 'SearchController@postSearchPeople');
         Route::get('search/content', 'SearchController@searchContent');

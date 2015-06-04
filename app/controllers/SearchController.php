@@ -10,7 +10,8 @@ class SearchController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+        $search_text = Input::has('search-text')? Input::get('search-text') : "";
+        return View::make('search.all', array('search_text' => $search_text))->render();
 	}
         
         public function searchPeople(){
@@ -21,7 +22,8 @@ class SearchController extends \BaseController {
                 $ageFrom[$i] = $i;
                 $ageTo[$i] = $i;
             }
-            return View::make('search.people', compact('users', 'ageFrom', 'ageTo'));
+            $search_text = Input::has('search-text')? Input::get('search-text') : "";
+            return View::make('search.people', array_merge(array('search_text' => $search_text), compact('users', 'ageFrom', 'ageTo')));
         }
         
         public function postSearchPeople(){
@@ -108,7 +110,8 @@ class SearchController extends \BaseController {
         
         public function searchContent(){
             $content = $this->getContent();
-            return View::make('search.content', array('content' => $content, 'search_text' => Input::get('search-text')));
+            $search_text = Input::has('search-text')? Input::get('search-text') : "";
+            return View::make('search.content', array('content' => $content, 'search_text' => $search_text));
         }
         
         public function postSearchContent(){

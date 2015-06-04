@@ -136,11 +136,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function friends(){
-        return User::join('friends', 'friends.user_one', '=', 'users.id')
+        return User::join('friends', 'friends.user_two', '=', 'users.id')
                 ->join('user_description', 'user_description.user_id', '=', 'users.id')
                 ->where('friends.status', Config::get('social.friend_status.friends'))
-                ->where('friends.user_two', $this->id)
-                ->select('users.*', 'user_description.*')
+                ->where('friends.user_one', $this->id)
+                ->select('users.*', 'user_description.*', 'friends.category')
                 ->get();
     }
 
@@ -483,4 +483,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $user =  User::find(Auth::id())->with('description')->first();
         return $user->description->first_name . ' ' . $user->description->last_name;
     }
+    
+    public function getFriendCategories(){
+        return Friend::where('user_one', $this->id)->where('category', '!=', '')->select('category')->distinct();
+    }
+    
+    public function friendsOfCategory($categoryName) {
+        return Friend::where('user_one', $this->id)
+                        ->where('status', Config::get('social.friend_status.friends'))
+                        ->where('category', $categoryName)
+                        ->get();
+    }
+
 }

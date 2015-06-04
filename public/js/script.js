@@ -593,43 +593,28 @@ $(document).ready(function(){
 })
 
 
-
-
-
-
-
-
-
 $(function() {
-	$('.b-friends-sort__sort .button-select').click(function(event){
+	$('.b-profile-middle-title__button').click(function(event){
 		event.preventDefault();
-	$('.b-friends-sort-list ').toggle();
+
+	$(this).parent().next().toggle();
 });
 
 });
 
-$(function() {
-	$('.b-friends-block-info__edit .button-select').click(function(event){
-		event.preventDefault();
-	$('.b-friends-block-info-list').toggle();
+
+$(document).ready(function () {
+    $('.b-message-tabs-list__list').click(function(e) {
+
+        $('.b-message-tabs-list__list').removeClass('active');
+
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+        //e.preventDefault();
+    });
 });
 
-});
-
-$(function() {
-//	$('.b-message-ls-mark-button .button-select').click(function(event){
-//		event.preventDefault();
-//	$('.b-message-ls-mark-button-list a').toggle();
-//});
-
-});
 
 
-
-
-
-$(document).ready(function(){
-	if($('.number-raiting').text() == 0 )
-		$('.number-raiting').addClass('number-raiting_gray')
-	
-});
