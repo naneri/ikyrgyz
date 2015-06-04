@@ -530,30 +530,52 @@ body
 		
 .b-profile-middle
 	border-top $baseBorder
-	ul
-		width 420px
-		padding-left 20px
-	&__left
-		float left
-		p
-			font 12px 'PT Sans Caption', sans-serif
-			color #999
-			padding 3px 0
-	&__right
-		float right
-		p
-			font 12px 'PT Sans Caption', sans-serif
-			color #676767
-			padding 3px 0
-	&__button
-		text-align center
-		font 12px 'PT Sans Caption', sans-serif
-		color #999
+	padding-top 10px
+	&-title
 		background $lightGradient
-		padding 5px 0
-		border-top $baseBorder
-		border-bottom $baseBorder
-		cursor pointer
+		border $baseBorder
+		&__title
+			float left
+			font 14px 'pt sans caption', sans-serif
+			color $orangeFontColor
+		&__button
+			float right
+			font 14px 'pt sans caption', sans-serif
+			color #676767
+			cursor pointer
+			&:after
+				display block
+				content ''
+				background url('../img/109.png') no-repeat
+				width 6px
+				height 12px
+				float right
+				margin 3px
+	&-list
+		width 300px
+		&__left
+			float left
+			p
+				font 12px 'pt sans caption', sans-serif
+				color #999
+		&__right
+			float right
+			p
+				font 12px 'pt sans caption', sans-serif
+				color #676767
+			
+		&_invisible
+			display none
+		
+			
+	&-button
+		float right
+	&-wrapper__inner
+		padding-bottom 10px
+		
+			
+			
+	
 		
 .b-profile-counters
 	border-bottom $baseBorder

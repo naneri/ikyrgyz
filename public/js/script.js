@@ -594,10 +594,10 @@ $(document).ready(function(){
 
 
 $(function() {
-	$('.b-profile-middle__button').click(function(event){
+	$('.b-profile-middle-title__button').click(function(event){
 		event.preventDefault();
 
-	$('.full-information').toggle();
+	$(this).parent().next().toggle();
 });
 
 });

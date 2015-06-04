@@ -38,20 +38,203 @@
             <div class="clear"></div>
         </div>
         <div class="b-profile-middle">
+            <div class="b-profile-middle-wrapper">
+                <div class="b-profile-middle-wrapper__inner">
+                      <div class="b-profile-middle-title">
+                <div class="b-profile-middle-title__title">
+                    Основная информация
+                </div>
+                <div class="b-profile-middle-title__button">
+                    Изменить
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="b-profile-middle-list">
+                <ul>
+                <li class="b-profile-middle-list__left">
+                    <p class="b-profile-middle-list__item">День рождения</p>
+                    <p class="b-profile-middle-list__item">Пол:</p>
+                    <p class="b-profile-middle-list__item">Живет:</p>
+                    <p class="b-profile-middle-list__item">Родился:</p>
+                </li>
+                <li class="b-profile-middle-list__right">
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                </li>
+                <div class="clear"></div>
+                </ul>
+            </div>
 
-            <ul>
+                </div>
+                <div class="b-profile-middle-wrapper__inner">
+                      <div class="b-profile-middle-title">
+                <div class="b-profile-middle-title__title">
+                    Контакты
+                </div>
+                <div class="b-profile-middle-title__button">
+                    Изменить
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="b-profile-middle-list b-profile-middle-list_invisible">
+                <ul>
+                <li class="b-profile-middle-list__left">
+                    <p class="b-profile-middle-list__item">День рождения</p>
+                    <p class="b-profile-middle-list__item">Пол:</p>
+                    <p class="b-profile-middle-list__item">Живет:</p>
+                    <p class="b-profile-middle-list__item">Родился:</p>
+                </li>
+                <li class="b-profile-middle-list__right">
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                </li>
+                <div class="clear"></div>
+                </ul>
+            </div>
+                
+                </div>
+                 <div class="b-profile-middle-wrapper__inner">
+                      <div class="b-profile-middle-title">
+                <div class="b-profile-middle-title__title">
+                    Образование
+                </div>
+                <div class="b-profile-middle-title__button">
+                    Изменить
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="b-profile-middle-list b-profile-middle-list_invisible">
+                <ul>
+                <li class="b-profile-middle-list__left">
+                    <p class="b-profile-middle-list__item">День рождения</p>
+                    <p class="b-profile-middle-list__item">Пол:</p>
+                    <p class="b-profile-middle-list__item">Живет:</p>
+                    <p class="b-profile-middle-list__item">Родился:</p>
+                </li>
+                <li class="b-profile-middle-list__right">
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                </li>
+                <div class="clear"></div>
+                </ul>
+            </div>
+                
+                </div>
+                 <div class="b-profile-middle-wrapper__inner">
+                      <div class="b-profile-middle-title">
+                <div class="b-profile-middle-title__title">
+                    Работа
+                </div>
+                <div class="b-profile-middle-title__button">
+                    Изменить
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="b-profile-middle-list b-profile-middle-list_invisible">
+                <ul>
+                <li class="b-profile-middle-list__left">
+                    <p class="b-profile-middle-list__item">День рождения</p>
+                    <p class="b-profile-middle-list__item">Пол:</p>
+                    <p class="b-profile-middle-list__item">Живет:</p>
+                    <p class="b-profile-middle-list__item">Родился:</p>
+                </li>
+                <li class="b-profile-middle-list__right">
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                </li>
+                <div class="clear"></div>
+                </ul>
+            </div>
+               
+                </div>
+                 <div class="b-profile-middle-wrapper__inner">
+                      <div class="b-profile-middle-title">
+                <div class="b-profile-middle-title__title">
+                    Семья
+                </div>
+                <div class="b-profile-middle-title__button">
+                    Изменить
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="b-profile-middle-list b-profile-middle-list_invisible">
+                <ul>
+                <li class="b-profile-middle-list__left">
+                    <p class="b-profile-middle-list__item">День рождения</p>
+                    <p class="b-profile-middle-list__item">Пол:</p>
+                    <p class="b-profile-middle-list__item">Живет:</p>
+                    <p class="b-profile-middle-list__item">Родился:</p>
+                </li>
+                <li class="b-profile-middle-list__right">
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                </li>
+                <div class="clear"></div>
+                </ul>
+            </div>
+                
+                </div>
+                 <div class="b-profile-middle-wrapper__inner">
+                      <div class="b-profile-middle-title">
+                <div class="b-profile-middle-title__title">
+                    Допольнительно
+                </div>
+                <div class="b-profile-middle-title__button">
+                    Изменить
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="b-profile-middle-list b-profile-middle-list_invisible">
+                <ul>
+                <li class="b-profile-middle-list__left">
+                    <p class="b-profile-middle-list__item">День рождения</p>
+                    <p class="b-profile-middle-list__item">Пол:</p>
+                    <p class="b-profile-middle-list__item">Живет:</p>
+                    <p class="b-profile-middle-list__item">Родился:</p>
+                </li>
+                <li class="b-profile-middle-list__right">
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                    <p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                </li>
+                <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="b-profile-middle-button">
+                <input type="submit" value="Закрыть" class="b-profile-middle-button__item">
+            </div>
+                
+                </div>
+               
+            </div>
+          
+           <!--  <ul>
+
                 <li class="b-profile-middle__left">
                     @if($user->description->age())
                     <p>День рождения:</p>
                     @endif
                     @if($user->description->getLiveplace())
                     <p>Живет:</p>
-                    @endif
-                    <?php $jobs = $user->profileItemsGetValues('job'); ?>
-                    @if(count($jobs) > 0)
+                    @endif -->
+                   <!--  <?php $jobs = $user->profileItemsGetValues('job'); ?> -->
+               <!--      @if(count($jobs) > 0)
                     <p>Работает</p>
                     @endif
-                    <div class="full-information">asdasdsad</div>
+                    <div class="full-information">
+                        
+                    </div>
                 </li>
                 <li class="b-profile-middle__right">
                     @if($user->description->age())
@@ -74,7 +257,7 @@
             </ul>
             <div class="b-profile-middle__button">Показать полную информацию
                 
-            </div>
+            </div> -->
         </div>
         <div class="b-profile-counters">
             <ul>
