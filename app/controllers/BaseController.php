@@ -16,6 +16,7 @@ class BaseController extends Controller {
 	}
 
 	public function __construct(){
+
 		if(Auth::check() && !Request::ajax()){
 			Session::put('verify', 'FileManager4TinyMCE');
 			// Отправляет в шаблон все запросы о добавлении в друзья

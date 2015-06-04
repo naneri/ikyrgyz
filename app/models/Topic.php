@@ -235,4 +235,16 @@ class Topic extends Eloquent {
                         ->get();
     }
 
+    static function linkTopics($offset = 0){
+
+        $topicLimit = Config::get('topic.topics_per_page');
+
+        return Topic::join('topic_types', 'topics.type_id', '=', 'topic_types.id')
+                        ->where('topic_types.id', 4)
+                        ->skip( $offset * $topicLimit ) 
+                        ->take($topicLimit)
+                        ->get();
+    }
+
+
 }

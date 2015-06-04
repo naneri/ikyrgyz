@@ -73,7 +73,7 @@
 						<a href="#"></a>
 					</li>
 					<li class="b-topic-navigation-category__item item4">
-						<a href="#"></a>
+						<a href="{{URL::to('topic/linkTopics')}}"></a>
 					</li>
 					<li style="display:none" class="b-topic-navigation-category__item item5">
 						<a href="#"></a>

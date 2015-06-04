@@ -425,4 +425,23 @@ class TopicController extends BaseController {
         return View::make('topic.build', compact('topics'));
 
     }
+
+    public function getLinkTopics(){
+
+        $topics = Topic::linkTopics();
+        JavaScript::put([
+            'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count'),
+            'ajaxPage'  => URL::to('topic/ajaxLinkTopics'),
+            ]);
+    
+        return View::make('main.index', compact('topics'));
+    }
+
+    public function ajaxLinkTopics(){
+
+        $topics = Topic::userTopics(Input::get('page'));
+    
+        return View::make('topic.build', compact('topics'));
+
+    }
 }

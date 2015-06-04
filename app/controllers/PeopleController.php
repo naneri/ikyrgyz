@@ -2,6 +2,14 @@
 
 class PeopleController extends BaseController{
 
+
+	public function __construct( NotificationRepository $notification){
+
+		parent::__construct();
+
+		$this->notification = $notification;
+
+	}
 	/**
 	 * Список всех пользователей соц.сети
 	 * @return [type] [description]
@@ -38,6 +46,7 @@ class PeopleController extends BaseController{
 				]);
 		}
 		
+		$this->notification->newFriend(Auth::id(), $id);
 		return Redirect::back()->with('message', [
 				'type' => 'success', 
 				'text' => 'Ваш запрос на дружбу отправлен'

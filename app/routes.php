@@ -144,6 +144,8 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('topic/ajaxVideos', 'TopicController@getAjaxVideos');
     Route::get('topic/myTopics', 'TopicController@getMyTopics');
     Route::get('topic/ajaxMyTopics', 'TopicController@ajaxMyTopics');
+    Route::get('topic/linkTopics', 'TopicController@getLinkTopics');
+    Route::get('topic/ajaxLinkTopics', 'TopicController@ajaxLinkTopics');
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');
