@@ -187,9 +187,9 @@ class Friend extends Eloquent{
 	}
 	
         public static function addCategory($categoryName){
-            Friend::insert(
-                array('user_one' => Auth::id(), 'user_two' => Auth::id(), 'category' => $categoryName)
-            );
+            return Friend::insert(
+                        array('user_one' => Auth::id(), 'user_two' => Auth::id(), 'category' => $categoryName)
+                    );
         }
         
         public static function setCategory($friendId, $categoryName){

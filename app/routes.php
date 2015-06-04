@@ -194,6 +194,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::get('custom/problem', 'CustomController@showProblem');
         Route::get('custom/action_history', 'CustomController@showActionHistory');
 
+        Route::get('search', 'SearchController@index');
         Route::get('search/people', 'SearchController@searchPeople');
         Route::post('search/people', 'SearchController@postSearchPeople');
         Route::get('search/content', 'SearchController@searchContent');
