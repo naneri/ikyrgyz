@@ -159,12 +159,10 @@
 						</div>
                         <div class="b-header-nav-search-results">
                             <div class="b-header-nav-search-results-people">
-                                <h3 style="background: #cfcfcf">{{ trans('network.people') }}</h3>
-                                <div style="background: #cacaca"></div>
+                                <div style="background: #cacaca; position:absolute; z-index: 3;"></div>
                             </div>
                             <div class="b-header-nav-search-results-content">
-                                <h3 style="background: #cacaca">{{ trans('network.content') }}</h3>
-                                <div style="background: #cacaca"></div>
+                                <div style="background: #cacaca; position:absolute; z-index: 3;"></div>
                             </div>
                             <button id="show-all-results">{{ trans('network.show-all-results') }}</button>
                         </div>
