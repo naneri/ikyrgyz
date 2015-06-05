@@ -157,12 +157,12 @@
 						<div class="b-header-nav-search">
 							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
 						</div>
-                        <div class="b-header-nav-search-results">
+                        <div class="b-header-nav-search-results" style="background: #cacaca; position:absolute; z-index: 3; margin-top: 10px;">
                             <div class="b-header-nav-search-results-people">
-                                <div style="background: #cacaca; position:absolute; z-index: 3;"></div>
+                                <div></div>
                             </div>
                             <div class="b-header-nav-search-results-content">
-                                <div style="background: #cacaca; position:absolute; z-index: 3;"></div>
+                                <div></div>
                             </div>
                             <button id="show-all-results">{{ trans('network.show-all-results') }}</button>
                         </div>
