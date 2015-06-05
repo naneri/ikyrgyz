@@ -48,8 +48,13 @@ $(document).ready(function(){
             var beginNum = $(this).val();
             var items = '<option value=""></option>';
             for(var i=beginNum;i<100;i++){
-                 items += '<option value="' + i + '">' + i + '</option>';
+                items += '<option value="' + i + '"';
+                if ($('select[name=age-to]').val()!=0 && i==$('select[name=age-to]').val()) {
+                    items += 'selected="selected"';
+                }
+                items += '>' + i + '</option>';
             }
+
             $('select[name=age-to]').html( items);
         });
         

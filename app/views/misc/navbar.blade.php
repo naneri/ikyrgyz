@@ -255,7 +255,9 @@
         $searchField.on('focus', function () {
             setNavSearchTimeout();
         });
-        $searchField.on('keyup', function(){
+        $searchField.on('keyup', function(event){
+            if(event.keyCode == 13)
+                $("#show-all-results").click()
             setNavSearchTimeout();
         });
         $('#show-all-results').on('click', function () {

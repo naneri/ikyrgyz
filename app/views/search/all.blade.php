@@ -16,7 +16,7 @@
                     <div class="b-user-interface-content-wrapper">
                         <div class="b-user-interface-content-nav">
                             <ul class="tabs">
-                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link current"><a href="#">{{ trans('network.all') }}</a></li>
+                                <li data-tab="tab-1" class="b-user-interface-content-nav__list tab-link current"><a class="tabCurrentLink" href="{{URL::to('search/')}}@if($search_text){{'?search-text='.$search_text}}@endif">{{ trans('network.all') }}</a></li>
                                 <li data-tab="tab-2" class="b-user-interface-content-nav__list tab-link"><a href="{{URL::to('search/people')}}@if($search_text){{'?search-text='.$search_text}}@endif">{{ trans('network.people') }}</a></li>
                                 <li data-tab="tab-3" class="b-user-interface-content-nav__list tab-link"><a href="{{URL::to('search/content')}}@if($search_text){{'?search-text='.$search_text}}@endif">{{ trans('network.content') }}</a></li>
                                 <!--li data-tab="tab-4" class="b-user-interface-content-nav__list tab-link"><a href="#">Группы</a></li>

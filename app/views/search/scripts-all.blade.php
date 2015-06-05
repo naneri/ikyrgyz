@@ -29,9 +29,9 @@ $(document).ready(function(){
             url: "{{$base_config['base_url']}}/search/people",
             data: data,
             success: function(result) {
-                if(!result['errors']){
+                if(!result['errors'] && $.trim(result.entries) != "По данным критериям пользователей не найдено"){
                     $('#search-result-people').css("display", 'block');
-                    $('#search-result-people').html("<div><h3>Люди</h3></div>"+result.entries);
+                    $('#search-result-people').html(result.entries);
                 } else {
                     $('#search-result-people').css("display", 'none');
                     $('#search-result-people').html("");
@@ -45,7 +45,7 @@ $(document).ready(function(){
             success: function(result) {
                 if(!result['errors']){
                     $('#search-result-content').css("display", "block");
-                    $('#search-result-content').html("<div><h3>Контент</h3></div>"+result.entries);
+                    $('#search-result-content').html(result.entries);
                 } else {
                     $('#search-result-content').css("display", "none");
                     $('#search-result-content').html("");
