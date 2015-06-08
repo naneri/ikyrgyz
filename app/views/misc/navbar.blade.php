@@ -256,7 +256,8 @@
         $searchField.on('keyup', function(event){
             if(event.keyCode == 13)
                 $("#show-all-results").click()
-            setNavSearchTimeout();
+            else
+                setNavSearchTimeout();
         });
         $('#show-all-results').on('click', function () {
             location.href = "{{$base_config['base_url']}}/search/?search-text="+$searchField.val();

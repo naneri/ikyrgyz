@@ -76,7 +76,7 @@
                 <div class="b-user-interface-content__right">
                     <div class="b-user-interface-content-search">
                         <div class="b-user-interface-content-search__search">
-                            {{Form::text('search-text', $search_text, array('class' => 'input-default'))}}
+                            {{Form::text('search-text', $search_text, array('class' => 'input-default', 'placeholder'=>'Поиск'))}}
                             {{Form::submit(null, array('onclick' => 'return false;', 'id' => 'btn-search', 'class' => 'button-default'))}}
                         </div>
                     </div>

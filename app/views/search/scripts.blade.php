@@ -22,7 +22,13 @@ $(document).ready(function(){
         }
         
         function startSearch(){
-            
+
+            $('li[data-tab="tab-1"] a').attr('href', $('li[data-tab="tab-1"] a').attr('href').split('?')[0]+"?search-text="+$('input[name="search-text"]').val())
+            $('li[data-tab="tab-2"] a').attr('href', $('li[data-tab="tab-2"] a').attr('href').split('?')[0]+"?search-text="+$('input[name="search-text"]').val())
+            $('li[data-tab="tab-3"] a').attr('href', $('li[data-tab="tab-3"] a').attr('href').split('?')[0]+"?search-text="+$('input[name="search-text"]').val())
+
+            changeUrlPath((window.location+"").split('?')[0]+"?search-text="+$('input[name="search-text"]').val());
+
             data = $('form').serialize();
             
             $.ajax({
@@ -59,5 +65,9 @@ $(document).ready(function(){
         });
         
         $('.select-default').styler();
+
+    function changeUrlPath(urlPath){
+        window.history.pushState({}, "", urlPath);
+    }
 });
 </script>
