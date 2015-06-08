@@ -81,7 +81,7 @@
 				<div class="b-profile-middle-info-full">
 					<div class="b-profile-middle-info-full-wrapper">
 						<div class="b-profile-middle-info-full-wrapper__inner">
-							<div class="b-profile-title">asdasdasd</div>
+							<div class="b-profile-title">Полная информация</div>
 							<div class="b-profile__left">
 								<div class="b-profile-photo">
 									<div class="b-profile-photo__image">
@@ -167,7 +167,7 @@
 													<ul>
 													<li class="b-profile-middle-list__left">
                                                                                                             @foreach($contacts as $contact)
-														<p class="b-profile-middle-list__item">{{$contact->subtype}}</p>
+														<p class="b-profile-middle-list__item">{{trans('profile.contacts')[$contact->subtype]}}</p>
                                                                                                             @endforeach
 													</li>
                                                                                                         <li class="b-profile-middle-list__right">
@@ -197,7 +197,7 @@
                                                                                                         <ul>
                                                                                                             <li class="b-profile-middle-list__left">
                                                                                                                 @foreach($studies as $study)
-                                                                                                                    <p class="b-profile-middle-list__item">{{$study->subtype}}</p>
+                                                                                                                    <p class="b-profile-middle-list__item">{{trans('profile.study')[$study->subtype]}}</p>
                                                                                                                     @if($study->subtype == 'university')
                                                                                                                         <p class="b-profile-middle-list__item">Специальность</p>
                                                                                                                     @endif
@@ -263,13 +263,17 @@
                                                                                                     <?php $members = $user->getProfileItems('family'); ?>
 													<ul>
 													<li class="b-profile-middle-list__left">
+                                                                                                            @if($user->description->marital_status)
 														<p class="b-profile-middle-list__item">Семейное положение:</p>
+                                                                                                            @endif
                                                                                                                 @foreach($members as $member)
-														<p class="b-profile-middle-list__item">{{$member->subtype}}</p>
+														<p class="b-profile-middle-list__item">{{trans('profile.family')[$member->subtype]}}</p>
                                                                                                                 @endforeach
 													</li>
-													<li class="b-profile-middle-list__right">
+                                                                                                        <li class="b-profile-middle-list__right">
+                                                                                                            @if($user->description->marital_status)
 														<p class="b-profile-middle-list__item">{{$maritalStatus}}</p>
+                                                                                                            @endif
                                                                                                                 @foreach($members as $member)
 														<p class="b-profile-middle-list__item">{{$member->value}}</p>
                                                                                                                 @endforeach
@@ -298,7 +302,7 @@
                                                                                                     @if($user->description->about_me)
                                                                                                     <p class="b-profile-middle-list__item">О себе:</p>
                                                                                                     @endif
-                                                                                                    @if($nicknames)
+                                                                                                    @if($nicknames->count() > 0)
                                                                                                     <p class="b-profile-middle-list__item">Другие имена, прозвища:</p>
                                                                                                     @endif
                                                                                                 </li>
@@ -309,7 +313,7 @@
                                                                                                     @if($user->description->about_me)
                                                                                                     <p class="b-profile-middle-list__item">{{($user->description->about_me)?$user->description->about_me:'-'}}</p>
                                                                                                     @endif
-                                                                                                    @if($nicknames)
+                                                                                                    @if($nicknames->count() > 0)
                                                                                                     <p class="b-profile-middle-list__item">@foreach($nicknames as $nickname) {{$nickname->value}}, @endforeach</p>
                                                                                                     @endif
                                                                                                 </li>
