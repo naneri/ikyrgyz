@@ -456,6 +456,15 @@ body
 	&__right 
 		float right
 		width 745px
+	&-title
+		background $lightGradient		
+		
+		padding 10px
+		position relative
+		font 16px 'PT Sans Caption Bold'
+		box-shadow 0 1px 1px rgba(127,127,127,.3)
+		color #999
+		margin-bottom 20px
 .b-profile-photo
 	max-width 252px
 	border $baseBorder
@@ -472,6 +481,7 @@ body
 		padding 5px
 		background #fff
 		border-bottom 5px solid #a5c04d
+	
 			
 		
 .b-profile-top
@@ -531,6 +541,17 @@ body
 .b-profile-middle
 	border-top $baseBorder
 	padding-top 10px
+	&-info
+		//
+		&__item
+			text-align center
+			background $lightGradient
+			font 12px 'pt sans caption', sans-serif
+			color #999
+			padding 2px 0
+			border $baseBorder
+			cursor pointer
+			
 	&-title
 		background $lightGradient
 		border $baseBorder
@@ -553,16 +574,19 @@ body
 				margin 3px
 	&-list
 		width 300px
+		padding 8px 0 8px 20px
 		&__left
 			float left
 			p
 				font 12px 'pt sans caption', sans-serif
 				color #999
+				padding-bottom 15px
 		&__right
 			float right
 			p
 				font 12px 'pt sans caption', sans-serif
 				color #676767
+				padding-bottom 15px
 			
 		&_invisible
 			display none
@@ -574,9 +598,24 @@ body
 		padding-bottom 10px
 		
 			
-			
+.b-profile-middle-info-full-wrapper__inner
+	width 1000px
+	background #fff
+	.b-profile__left
+		padding-left 20px
+	.b-profile__right
+		width 709px
+		float left
+	.b-profile-middle-title
+		padding-left 20px
+	.b-profile-top
+		padding-left 20px
+	.b-profile-middle
+		border-top none
+
 	
-		
+.b-profile-middle-info-full
+	display none
 .b-profile-counters
 	border-bottom $baseBorder
 	li
