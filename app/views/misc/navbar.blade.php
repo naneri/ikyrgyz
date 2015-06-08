@@ -181,14 +181,12 @@
 						<div class="b-header-nav-search">
 							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
 						</div>
-                        <div class="b-header-nav-search-results">
+                        <div class="b-header-nav-search-results" style="background: #cacaca; position:absolute; z-index: 3; margin-top: 10px;">
                             <div class="b-header-nav-search-results-people">
-                                <h3 style="background: #cfcfcf">{{ trans('network.people') }}</h3>
-                                <div style="background: #cacaca"></div>
+                                <div></div>
                             </div>
                             <div class="b-header-nav-search-results-content">
-                                <h3 style="background: #cacaca">{{ trans('network.content') }}</h3>
-                                <div style="background: #cacaca"></div>
+                                <div></div>
                             </div>
                             <button id="show-all-results">{{ trans('network.show-all-results') }}</button>
                         </div>
@@ -279,7 +277,9 @@
         $searchField.on('focus', function () {
             setNavSearchTimeout();
         });
-        $searchField.on('keyup', function(){
+        $searchField.on('keyup', function(event){
+            if(event.keyCode == 13)
+                $("#show-all-results").click()
             setNavSearchTimeout();
         });
         $('#show-all-results').on('click', function () {

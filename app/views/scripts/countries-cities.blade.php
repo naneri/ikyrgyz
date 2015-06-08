@@ -1,3 +1,4 @@
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap-select.js') }}"></script>
 
 <script>

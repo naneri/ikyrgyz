@@ -28,13 +28,14 @@ class ProfileController extends BaseController {
         $items = null;
         $videos = array();
         $photoAlbums = array();
-        $videoIds = array();
+        $videoEmbedCodes = array();
         $topicsLimit = Config::get('topic.topics_per_page');
         $masonrySettings = array(
                 'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
                 'ajaxPage' => URL::to('/'),
         );
         $friendCategories = array();
+        $subpage = '';
         
         switch($page){
             case 'publications':
@@ -69,8 +70,12 @@ class ProfileController extends BaseController {
                 //dd($items);
                 break;
             case 'messages':
-                if(Input::has('page') && Input::get('page') == 'outbox'){
-                    $items = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+                $subpage = 'inbox';
+                if(Input::has('page')){
+                    $subpage = Input::get('page');
+                    if(Input::get('page') == 'outbox'){
+                        $items = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+                    }
                 }else{
                     $items = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
                 }
@@ -89,7 +94,7 @@ class ProfileController extends BaseController {
         
         foreach ($videos as $video) {
             preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
-            $videoIds[] = end($matches);
+            $videoEmbedCodes[] = array('code' => end($matches), 'cover' => $video->image_url);
         }
     
         
@@ -106,7 +111,7 @@ class ProfileController extends BaseController {
                             'user', 
                             'items', 
                             'page', 
-                            'videoIds', 
+                            'videoEmbedCodes', 
                             'maritalStatus', 
                             'gender', 
                             'photoAlbums',
@@ -114,7 +119,8 @@ class ProfileController extends BaseController {
                             'subscribers',
                             'photos',
                             'videos',
-                            'friendCategories'
+                            'friendCategories',
+                            'subpage'
                             )
                     );
         }else{
@@ -124,7 +130,7 @@ class ProfileController extends BaseController {
                             'user', 
                             'friend_status', 
                             'items', 'page', 
-                            'videoIds', 
+                            'videoEmbedCodes', 
                             'maritalStatus', 
                             'gender', 
                             'photoAlbums', 
