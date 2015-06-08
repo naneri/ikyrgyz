@@ -112,4 +112,20 @@ class User_Description extends Eloquent{
         }
         return $result;
     }
+
+    public function getBirthplace() {
+        $result = false;
+        if ($this->birthplace_country_id) {
+            $result = Country::find($this->birthplace_country_id)->name_ru;
+        }
+        if ($this->birthplace_city_id) {
+            if ($result) {
+                $result .= ', ';
+            }
+            $result .= City::find($this->birthplace_city_id)->name_ru;
+            ;
+        }
+        return $result;
+    }
+
 }

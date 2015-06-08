@@ -35,6 +35,7 @@ class ProfileController extends BaseController {
                 'ajaxPage' => URL::to('/'),
         );
         $friendCategories = array();
+        $subpage = '';
         
         switch($page){
             case 'publications':
@@ -69,8 +70,12 @@ class ProfileController extends BaseController {
                 //dd($items);
                 break;
             case 'messages':
-                if(Input::has('page') && Input::get('page') == 'outbox'){
-                    $items = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+                $subpage = 'inbox';
+                if(Input::has('page')){
+                    $subpage = Input::get('page');
+                    if(Input::get('page') == 'outbox'){
+                        $items = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+                    }
                 }else{
                     $items = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
                 }
@@ -114,7 +119,8 @@ class ProfileController extends BaseController {
                             'subscribers',
                             'photos',
                             'videos',
-                            'friendCategories'
+                            'friendCategories',
+                            'subpage'
                             )
                     );
         }else{

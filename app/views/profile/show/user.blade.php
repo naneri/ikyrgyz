@@ -41,28 +41,35 @@
 		<div class="b-profile-middle">
 			<div class="b-profile-middle-wrapper">
 				<div class="b-profile-middle-wrapper__inner">
-				   <!--    <div class="b-profile-middle-title">
-				<div class="b-profile-middle-title__title">
-					Основная информация
-				</div>
-				<div class="b-profile-middle-title__button">
-					Изменить
-				</div>
-				<div class="clear"></div>
-			</div> -->
 			<div class="b-profile-middle-list">
 				<ul>
-				<li class="b-profile-middle-list__left">
+                                    <li class="b-profile-middle-list__left">
+                                        @if($user->description->age())
 					<p class="b-profile-middle-list__item">День рождения</p>
+                                        @endif
+                                        @if($user->description->gender)
 					<p class="b-profile-middle-list__item">Пол:</p>
+                                        @endif
+                                        @if($user->description->getLiveplace())
 					<p class="b-profile-middle-list__item">Живет:</p>
+                                        @endif
+                                        @if($user->description->getBirthplace())
 					<p class="b-profile-middle-list__item">Родился:</p>
+                                        @endif
 				</li>
-				<li class="b-profile-middle-list__right">
-					<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-					<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-					<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-					<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                                <li class="b-profile-middle-list__right">
+                                    @if($user->description->age())
+                                        <p class="b-profile-middle-list__item">{{Date::parse($user->description->birthday)->format('j F Y')}}</p>
+                                        @endif
+                                        @if($user->description->gender)
+					<p class="b-profile-middle-list__item">{{$user->description->gender}}</p>
+                                        @endif
+                                        @if($user->description->getLiveplace())
+					<p class="b-profile-middle-list__item">{{$user->description->getLiveplace()}}</p>
+                                        @endif
+                                        @if($user->description->getBirthplace())
+                                        <p class="b-profile-middle-list__item">{{$user->description->getBirthplace()}}</p>
+                                        @endif
 				</li>
 				<div class="clear"></div>
 				</ul>
@@ -110,24 +117,37 @@
 													<div class="b-profile-middle-title__title">
 														Основная информация
 													</div>
-													<div class="b-profile-middle-title__button">
-														Изменить
-													</div>
 													<div class="clear"></div>
 												</div>
 												<div class="b-profile-middle-list">
 													<ul>
 													<li class="b-profile-middle-list__left">
-														<p class="b-profile-middle-list__item">День рождения</p>
-														<p class="b-profile-middle-list__item">Пол:</p>
-														<p class="b-profile-middle-list__item">Живет:</p>
-														<p class="b-profile-middle-list__item">Родился:</p>
+                                                                                                                @if($user->description->age())
+                                                                                                                <p class="b-profile-middle-list__item">День рождения</p>
+                                                                                                                @endif
+                                                                                                                @if($user->description->gender)
+                                                                                                                <p class="b-profile-middle-list__item">Пол:</p>
+                                                                                                                @endif
+                                                                                                                @if($user->description->getLiveplace())
+                                                                                                                <p class="b-profile-middle-list__item">Живет:</p>
+                                                                                                                @endif
+                                                                                                                @if($user->description->getBirthplace())
+                                                                                                                <p class="b-profile-middle-list__item">Родился:</p>
+                                                                                                                @endif
 													</li>
-													<li class="b-profile-middle-list__right">
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                                                                                                        <li class="b-profile-middle-list__right">
+                                                                                                            @if($user->description->age())
+                                                                                                            <p class="b-profile-middle-list__item">{{Date::parse($user->description->birthday)->format('j F Y')}}</p>
+                                                                                                            @endif
+                                                                                                            @if($user->description->gender)
+                                                                                                            <p class="b-profile-middle-list__item">{{$user->description->gender}}</p>
+                                                                                                            @endif
+                                                                                                            @if($user->description->getLiveplace())
+                                                                                                            <p class="b-profile-middle-list__item">{{$user->description->getLiveplace()}}</p>
+                                                                                                            @endif
+                                                                                                            @if($user->description->getBirthplace())
+                                                                                                            <p class="b-profile-middle-list__item">{{$user->description->getBirthplace()}}</p>
+                                                                                                            @endif
 													</li>
 													<div class="clear"></div>
 													</ul>
@@ -136,118 +156,167 @@
 										<div class="b-profile-middle-wrapper__inner">
 											     <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
-														Основная информация
-													</div>
-													<div class="b-profile-middle-title__button">
-														Изменить
+														Контакты
 													</div>
 													<div class="clear"></div>
 												</div>
 												<div class="b-profile-middle-list">
+                                                                                                    <?php $contacts = $user->getProfileItems('contact');
+                                                                                                        if($contacts):
+                                                                                                    ?>
 													<ul>
 													<li class="b-profile-middle-list__left">
-														<p class="b-profile-middle-list__item">День рождения</p>
-														<p class="b-profile-middle-list__item">Пол:</p>
-														<p class="b-profile-middle-list__item">Живет:</p>
-														<p class="b-profile-middle-list__item">Родился:</p>
+                                                                                                            @foreach($contacts as $contact)
+														<p class="b-profile-middle-list__item">{{$contact->subtype}}</p>
+                                                                                                            @endforeach
 													</li>
-													<li class="b-profile-middle-list__right">
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+                                                                                                        <li class="b-profile-middle-list__right">
+                                                                                                            @foreach($contacts as $contact)
+                                                                                                                <p class="b-profile-middle-list__item">{{$contact->value}}</p>
+                                                                                                            @endforeach
 													</li>
 													<div class="clear"></div>
 													</ul>
+                                                                                                    <?php
+                                                                                                        endif
+                                                                                                    ?>
 												</div>
 										</div>
 										<div class="b-profile-middle-wrapper__inner">
 											     <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
-														Основная информация
-													</div>
-													<div class="b-profile-middle-title__button">
-														Изменить
+														Образование
 													</div>
 													<div class="clear"></div>
 												</div>
-												<div class="b-profile-middle-list">
-													<ul>
-													<li class="b-profile-middle-list__left">
-														<p class="b-profile-middle-list__item">День рождения</p>
-														<p class="b-profile-middle-list__item">Пол:</p>
-														<p class="b-profile-middle-list__item">Живет:</p>
-														<p class="b-profile-middle-list__item">Родился:</p>
-													</li>
-													<li class="b-profile-middle-list__right">
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-													</li>
-													<div class="clear"></div>
-													</ul>
+                                                                                                <div class="b-profile-middle-list" style="width: 400px;">
+                                                                                                    <?php
+                                                                                                    $studies = $user->getProfileItems('study');
+                                                                                                    if ($studies):
+                                                                                                        ?>
+                                                                                                        <ul>
+                                                                                                            <li class="b-profile-middle-list__left">
+                                                                                                                @foreach($studies as $study)
+                                                                                                                    <p class="b-profile-middle-list__item">{{$study->subtype}}</p>
+                                                                                                                    @if($study->subtype == 'university')
+                                                                                                                        <p class="b-profile-middle-list__item">Специальность</p>
+                                                                                                                    @endif
+                                                                                                                @endforeach
+                                                                                                            </li>
+                                                                                                            <li class="b-profile-middle-list__right">
+                                                                                                                @foreach($studies as $study)
+                                                                                                                    <p class="b-profile-middle-list__item">{{$study->value}} ({{Date::parse($study->date_begin)->format('Y').' - '.Date::parse($study->date_end)->format('Y')}})</p>
+                                                                                                                    @if($study->subtype == 'university')
+                                                                                                                        <p class="b-profile-middle-list__item">{{($study->meta_1)?$study->meta_1:'-'}}</p>
+                                                                                                                    @endif
+                                                                                                                @endforeach
+                                                                                                            </li>
+                                                                                                            <div class="clear"></div>
+                                                                                                        </ul>
+                                                                                                        <?php
+                                                                                                    endif
+                                                                                                    ?>
 												</div>
 										</div>
 										<div class="b-profile-middle-wrapper__inner">
 											     <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
-														Основная информация
-													</div>
-													<div class="b-profile-middle-title__button">
-														Изменить
+														Работа
 													</div>
 													<div class="clear"></div>
 												</div>
-												<div class="b-profile-middle-list">
-													<ul>
-													<li class="b-profile-middle-list__left">
-														<p class="b-profile-middle-list__item">День рождения</p>
-														<p class="b-profile-middle-list__item">Пол:</p>
-														<p class="b-profile-middle-list__item">Живет:</p>
-														<p class="b-profile-middle-list__item">Родился:</p>
-													</li>
-													<li class="b-profile-middle-list__right">
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-													</li>
-													<div class="clear"></div>
-													</ul>
+                                                                                    <div class="b-profile-middle-list">
+                                                                                        <?php
+                                                                                        $jobs = $user->getProfileItems('job');
+                                                                                        if ($jobs):
+                                                                                            ?>
+                                                                                            <ul>
+                                                                                                <li class="b-profile-middle-list__left">
+                                                                                                    @foreach($jobs as $job)
+                                                                                                    <p class="b-profile-middle-list__item">Компания</p>
+                                                                                                    <p class="b-profile-middle-list__item">Должность</p>
+                                                                                                    <p class="b-profile-middle-list__item">Дополнительно</p>
+                                                                                                    @endforeach
+                                                                                                </li>
+                                                                                                <li class="b-profile-middle-list__right">
+                                                                                                    @foreach($jobs as $job)
+                                                                                                    <p class="b-profile-middle-list__item">{{$job->value}}</p>
+                                                                                                    <p class="b-profile-middle-list__item">{{($job->meta_1)?$job->meta_1:'-'}}</p>
+                                                                                                    <p class="b-profile-middle-list__item">{{($job->description)?$job->description:'-'}}</p>
+                                                                                                    @endforeach
+                                                                                                </li>
+                                                                                                <div class="clear"></div>
+                                                                                            </ul>
+                                                                                            <?php
+                                                                                        endif
+                                                                                        ?>
 												</div>
 										</div>
 										<div class="b-profile-middle-wrapper__inner">
 											     <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
-														Основная информация
-													</div>
-													<div class="b-profile-middle-title__button">
-														Изменить
+														Семья
 													</div>
 													<div class="clear"></div>
 												</div>
-												<div class="b-profile-middle-list">
+                                                                                                <div class="b-profile-middle-list">
+                                                                                                    <?php $members = $user->getProfileItems('family'); ?>
 													<ul>
 													<li class="b-profile-middle-list__left">
-														<p class="b-profile-middle-list__item">День рождения</p>
-														<p class="b-profile-middle-list__item">Пол:</p>
-														<p class="b-profile-middle-list__item">Живет:</p>
-														<p class="b-profile-middle-list__item">Родился:</p>
+														<p class="b-profile-middle-list__item">Семейное положение:</p>
+                                                                                                                @foreach($members as $member)
+														<p class="b-profile-middle-list__item">{{$member->subtype}}</p>
+                                                                                                                @endforeach
 													</li>
 													<li class="b-profile-middle-list__right">
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
-														<p class="b-profile-middle-list__item">Lorem ipsum dolor sit amet.</p>
+														<p class="b-profile-middle-list__item">{{$maritalStatus}}</p>
+                                                                                                                @foreach($members as $member)
+														<p class="b-profile-middle-list__item">{{$member->value}}</p>
+                                                                                                                @endforeach
 													</li>
 													<div class="clear"></div>
 													</ul>
 												</div>
-												<div class="b-profile-middle-button">
-													<input type="submit" class="b-profile-middle-button__item" value="Закрыть">
-												</div>
-										</div>
+                                                                                </div>
+                                                                                <div class="b-profile-middle-wrapper__inner">
+                                                                                    <div class="b-profile-middle-title">
+                                                                                        <div class="b-profile-middle-title__title">
+                                                                                            Дополнительно
+                                                                                        </div>
+                                                                                        <div class="clear"></div>
+                                                                                    </div>
+                                                                                    <div class="b-profile-middle-list">
+                                                                                        <?php
+                                                                                        $passions = $user->getProfileItems('passion');
+                                                                                        $nicknames = $user->getProfileItems('nickname');
+                                                                                            ?>
+                                                                                            <ul>
+                                                                                                <li class="b-profile-middle-list__left">
+                                                                                                    @if($passions->count() > 0)
+                                                                                                    <p class="b-profile-middle-list__item">Увлечения:</p>
+                                                                                                    @endif
+                                                                                                    @if($user->description->about_me)
+                                                                                                    <p class="b-profile-middle-list__item">О себе:</p>
+                                                                                                    @endif
+                                                                                                    @if($nicknames)
+                                                                                                    <p class="b-profile-middle-list__item">Другие имена, прозвища:</p>
+                                                                                                    @endif
+                                                                                                </li>
+                                                                                                <li class="b-profile-middle-list__right">
+                                                                                                    @if($passions->count() > 0)
+                                                                                                    <p class="b-profile-middle-list__item">@foreach($passions as $passion) {{$passion->value}}, @endforeach</p>
+                                                                                                    @endif
+                                                                                                    @if($user->description->about_me)
+                                                                                                    <p class="b-profile-middle-list__item">{{($user->description->about_me)?$user->description->about_me:'-'}}</p>
+                                                                                                    @endif
+                                                                                                    @if($nicknames)
+                                                                                                    <p class="b-profile-middle-list__item">@foreach($nicknames as $nickname) {{$nickname->value}}, @endforeach</p>
+                                                                                                    @endif
+                                                                                                </li>
+                                                                                                <div class="clear"></div>
+                                                                                            </ul>
+                                                                                    </div>
+                                                                                </div>
 									</div>
 								</div>
 

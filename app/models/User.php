@@ -398,6 +398,24 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         }
         return $values;
     }
+    
+    public function getProfileItems($type){
+        $accesses = array('all');
+        if(Friend::checkIfFriend($this->id, Auth::id())){
+            $accesses[] = 'friend';
+        }
+        if(Auth::id() == $this->id){
+            $accesses[] = 'me';
+        }
+        return $this->profileItems()
+                ->where(function($query) use($type){
+                    $query->where('type', $type)
+                          ->orWhere('subtype', $type);
+                })
+                ->whereIn('access', $accesses)
+                ->orderBy('subtype')
+                ->get();
+    }
 
     public static function getRandomUser($friendIds){
         return User::whereHas('description', function($query){
