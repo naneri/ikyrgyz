@@ -211,5 +211,6 @@ return array(
 	'rating'			=> 'Рейтинг',
 	'watch'				=> 'Просмотреть',
 	
-	'notification.new_friends'	=> ':name has sent you a request to become friend | You have :count requests to become friends | You have :count requests to become friends',
+	'notification.new_friends'	=> 'You have a new request to become friends | You have :count requests to become friends | You have :count requests to become friends',
+	'notification.topicComment'	=> 'You have a new comment in your topic | You have :count new comments in your topics | You have :count new comments in your topics'
 	);				

@@ -10,7 +10,17 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get('develop', function(){
 
+   /* NotificationRepository::newTopicComment(Auth::id(), 55,'wampserver');
+    exit;*/
+   /* NotificationRepository::newTopicComment(Auth::id(), 55,'wampserver');*/
+
+    $notes = NotificationRepository::getAllNotifications(Auth::id());
+
+    echo "<pre>"; print_r($notes); echo "</pre>";exit;
+    return Redirect::to('/');
+});
 Route::get('email', 'MainController@getEmailTemplate');
 Route::get('locale/{locale}', 'BaseController@setLocale' );
 
@@ -148,7 +158,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('topic/ajaxMyTopics', 'TopicController@ajaxMyTopics');
     Route::get('topic/linkTopics', 'TopicController@getLinkTopics');
     Route::get('topic/ajaxLinkTopics', 'TopicController@ajaxLinkTopics');
-    Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show'));
+    Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show', 'as'=> 'showTopic'));
     Route::get('topic/create', 'TopicController@create');
     Route::get('topic/create/link', 'TopicController@createLink');
     Route::get('topic/create/fetch_og', 'TopicController@fetchOG');
@@ -224,6 +234,8 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::post('favourite/topic', 'TopicController@postFavourite');
         Route::post('favourite/blog', 'BlogController@postFavourite');
     }
+
+    Route::get('notifications/all', 'NotificationController@getAll');
 });
 
 Route::filter('blog_edit_permission', function($route){

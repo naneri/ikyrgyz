@@ -91,7 +91,7 @@
 									<ul class="b-header-nav-dropdown b-header-nav-dropdown-message">
 									@foreach($new_messages as $message)
 									<li>
-										<a href="{{ URL::to('message/show'). '/' . $message->id }}">
+										<a href="{{ URL::to('messages/show'). '/' . $message->id }}">
 										<div class="b-header-nav-dropdown__message">
 											@if(isset($message->user_profile_avatar))
 												<img src="{{$message->user_profile_avatar}}" alt="" class="header-dropdown-image"/>
@@ -144,11 +144,35 @@
 								 </a>
 							@endif
 							</div>
+
 							<div class="b-header-nav-button__item">
+                            @if(count(@$notes))
+                            <a class="counter-block">
+                                <img src="{{ asset('img/navbar/setting_act.png') }}" alt="msg"/>
+                                <span class="counter">{{count($notes)}}</span>
+                            </a> 
+                            <ul class="b-header-nav-dropdown b-header-nav-dropdown_add-btn">
+                                @foreach($notes as $note)
+                                    <li>
+                                        <div class="b-header-nav-dropdown__wrapper">
+                                            <div class="b-header-nav-dropdown__item">
+                                                <span>
+                                                    <a href="{{URL::to('notifications/all')}}">
+                                                        {{Lang::choice($note->lang_message, $note->total, [$note->total])}}
+                                                    </a>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                    
+                                @endforeach
+                            </ul>  
+                            @else
 							<a class="counter-block">
-							<img src="{{ asset('img/navbar/setting_inact.png') }}" alt="msg"/>
-							<span style="opacity:0" class="counter">25</span>
-						</a>
+    							<img src="{{ asset('img/navbar/setting_inact.png') }}" alt="msg"/>
+    							<span style="opacity:0" class="counter">25</span>
+    						</a>
+                            @endif
 							</div>
 						</div>
 					</li>

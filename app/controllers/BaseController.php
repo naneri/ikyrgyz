@@ -17,6 +17,8 @@ class BaseController extends Controller {
 
 	public function __construct(){
 
+/* echo "<pre>"; print_r(NotificationRepository::getAllNotifications()); echo "</pre>";exit;*/
+
 		if(Auth::check() && !Request::ajax()){
 			Session::put('verify', 'FileManager4TinyMCE');
 			// Отправляет в шаблон все запросы о добавлении в друзья
@@ -43,6 +45,16 @@ class BaseController extends Controller {
             $favorites = Favourite::where('user_id', Auth::user()->id)->where('target_type', 'topic')->count();
 
             View::share('favorites', $favorites);
+
+            $notes = null; /*NotificationRepository::getAllByType();*/
+/*
+            echo "<pre>"; print_r($notes); echo "</pre>";exit;*/
+            /*foreach($notes as $note){
+                echo Lang::choice($note->lang_message, $note->total) . '|' . $note->column . '<br>';
+            }
+            exit;*/
+
+            View::share('notes', $notes);
 		}
 
         // отправляет в шаблон базовый УРЛ сайта
