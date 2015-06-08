@@ -28,7 +28,7 @@ class ProfileController extends BaseController {
         $items = null;
         $videos = array();
         $photoAlbums = array();
-        $videoIds = array();
+        $videoEmbedCodes = array();
         $topicsLimit = Config::get('topic.topics_per_page');
         $masonrySettings = array(
                 'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
@@ -94,7 +94,7 @@ class ProfileController extends BaseController {
         
         foreach ($videos as $video) {
             preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
-            $videoIds[] = end($matches);
+            $videoEmbedCodes[] = array('code' => end($matches), 'cover' => $video->image_url);
         }
     
         
@@ -111,7 +111,7 @@ class ProfileController extends BaseController {
                             'user', 
                             'items', 
                             'page', 
-                            'videoIds', 
+                            'videoEmbedCodes', 
                             'maritalStatus', 
                             'gender', 
                             'photoAlbums',
@@ -130,7 +130,7 @@ class ProfileController extends BaseController {
                             'user', 
                             'friend_status', 
                             'items', 'page', 
-                            'videoIds', 
+                            'videoEmbedCodes', 
                             'maritalStatus', 
                             'gender', 
                             'photoAlbums', 
