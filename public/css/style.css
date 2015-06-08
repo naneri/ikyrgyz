@@ -5512,3 +5512,13 @@ music player style
 	background-image: -ms-linear-gradient(top, #fff 0%, #d5d5d5 100%);
 	background-image: linear-gradient(to bottom, #fff 0%, #d5d5d5 100%);
 }
+
+.b-header-nav-search-results-content {
+    display: none;
+}
+.b-header-nav-search-results-people {
+    display: none;
+}
+#show-all-results {
+    display: none;
+}
