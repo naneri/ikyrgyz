@@ -82,7 +82,7 @@
 	</style>
 	<div class="b-user-media" style="right: 0px; padding-bottom: 100px;">
 		<div class="sticky-box">
-		@if(count($videoIds) > 0)
+		@if(count($videoEmbedCodes) > 0)
 		<div class="b-user-media__video">
 			<div class="b-user-media-video-top">
 				<p class="b-user-media-video-top__title">{{ trans('network.video') }}</p>
@@ -91,11 +91,15 @@
 				</div>
 			</div>
 			<ul class="b-user-media-video-gallery">
-				@if(count($videoIds) > 0)
+                            @if(count($videoEmbedCodes) > 0)
 					<div id="video-gallery">
-						@foreach($videoIds as $videoId)
-							<a href="http://www.youtube.com/embed/{{$videoId}}" rel="video">
-								<img src="http://img.youtube.com/vi/{{$videoId}}/0.jpg" style="width:120px; margin: 5px;">
+                                            @foreach($videoEmbedCodes as $video)
+							<a href="http://www.youtube.com/embed/{{$video['code']}}" rel="video">
+                                                            @if($video['cover'])
+                                                                <img style="width:120px; margin: 5px; height: 90px; background: url({{asset($video['cover'])}}); background-size: cover;">
+                                                            @else
+                                                                <img src="http://img.youtube.com/vi/{{$video['code']}}/0.jpg" style="width:120px; margin: 5px;">
+                                                            @endif
 							</a>
 						@endforeach
 						<script>

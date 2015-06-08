@@ -618,3 +618,21 @@ $(document).ready(function () {
 
 
 
+$(function(){
+	
+		$('.b-profile-middle-info__item').click(function(){
+
+
+			$('.b-profile-middle-info-full').modal({
+				opacity: 80,
+				overlayCss: {backgroundColor: "#000"}
+
+
+			});
+
+		});
+
+});
+
+
+

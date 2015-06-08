@@ -4,7 +4,7 @@
 class Notification extends \Eloquent 
 {
 
-    protected $fillable = ['body', 'type_id', 'reciever_id', 'notified'];
+    protected $fillable = ['body', 'type_id', 'reciever_id', 'notified', 'link'];
     protected $connection = 'mysql_users';
 
     public function type() {

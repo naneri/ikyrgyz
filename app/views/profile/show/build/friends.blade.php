@@ -53,7 +53,7 @@
                     <div class="b-friends-block-image">
                         <img src="{{asset(($friend->user_profile_avatar) ? $friend->user_profile_avatar : asset('img/106.png'))}} " alt="" class="b-friends-block-image__image">
                         @if($isOwner)
-                        <a href="{{URL::to('messages/new?receiver='.$friend->first_name.'+'.$friend->last_name)}}" class="b-friends-block-image__button ">Сообщение</a>
+                        <a href="{{URL::to('profile/messages?page=new&receiver='.$friend->first_name.'+'.$friend->last_name)}}" class="b-friends-block-image__button ">Сообщение</a>
                         @endif
                     </div>
                 </div>

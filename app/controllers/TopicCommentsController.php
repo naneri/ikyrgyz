@@ -35,6 +35,9 @@ class TopicCommentsController extends \BaseController {
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";
+                $topic = Topic::find($data['topic_id']);
+                NotificationRepository::newTopicComment($topic->user_id, $data['topic_id'], $topic->title);
+
             }
 
             if(Request::ajax()){
