@@ -15,7 +15,7 @@
 							<dd><a href="{{URL::to('topic/myTopics')}}">{{ trans('network.publications') }}
 							<span class="raiting">{{$topic_number}}</span>
 							</a> </dd>
-							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}
+							<dd><a href="{{ URL::to('profile/messages') }}">{{ trans('network.personal-messages') }}
 							<span class="raiting">{{count($new_messages)}}</span>
 							</a></dd>
 							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}

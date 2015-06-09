@@ -11,10 +11,10 @@
 @elseif($page == 'subscriptions')
         @include('scripts.script-topic')
 	@include('blog.build', array('blogs' => $items))
-@elseif($page == 'friends')
+@elseif($page == 'friends' || $page == 'mutualFriends')
         @include('scripts.friends')
         @include('profile.show.build.friends', compact('user', 'items'))
-@elseif($page == 'mutualFriends' || $page == 'subscribers')
+@elseif($page == 'subscribers')
 	@include('scripts.script-topic')
 	<div class="masonry">
 		@foreach($items as $user)
@@ -40,46 +40,6 @@
 @endif
 
 @if($page == 'newsline' || $page == 'publications')
-	<script>
-		$(document).ready(function() {
-			//$('.b-user-media').prependTo(".masonry");
-			$('.masonry').css({'width': '495px', 'float': 'left'});
-			$('.video-item').each(function(){
-				var $video = $(this).find('div.youtube');
-				$video = $video.find('object').attr('width', '120').attr('height', '120');
-				$(this).html($video);
-			});
-		});
-		
-		$(function(){
-			var $stickBox = $('.sticky-box');
-			var mediaTop = $stickBox.offset().top;
-			$(window).scroll(function(){
-				var scroll = $(window).scrollTop();
-				if(scroll>mediaTop){
-					$stickBox.addClass('sticky');
-				}else{
-					$stickBox.removeClass('sticky');
-				}
-			});
-		});
-	</script>
-	<style>
-		.sticky{
-			position: fixed !important;
-			top: 10px;
-			padding: 0;
-		}
-		.b-user-media .sticky-box{
-			width: 400px;
-		}
-		.b-user-media-video-top__btn a{
-			float: right;
-		}
-		.b-user-wall{
-			width: 590px;
-		}
-	</style>
 	<div class="b-user-media" style="right: 0px; padding-bottom: 100px;">
 		<div class="sticky-box">
 		@if(count($videoEmbedCodes) > 0)
@@ -184,4 +144,47 @@
 		@endif
 		</div>
 	</div>
+@endif
+
+@if($page == 'newsline' || $page == 'publications' || $page == 'friends')
+<script>
+        $(document).ready(function() {
+                //$('.b-user-media').prependTo(".masonry");
+                $('.masonry').css({'width': '495px', 'float': 'left'});
+                $('.video-item').each(function(){
+                        var $video = $(this).find('div.youtube');
+                        $video = $video.find('object').attr('width', '120').attr('height', '120');
+                        $(this).html($video);
+                });
+        });
+		
+        $(function(){
+                var $stickBox = $('.sticky-box');
+                var mediaTop = $stickBox.offset().top;
+                $(window).scroll(function(){
+                        var scroll = $(window).scrollTop();
+                        if(scroll>mediaTop){
+                                $stickBox.addClass('sticky');
+                        }else{
+                                $stickBox.removeClass('sticky');
+                        }
+                });
+        });
+</script>
+<style>
+        .sticky{
+                position: fixed !important;
+                top: 10px;
+                padding: 0;
+        }
+        .b-user-media .sticky-box{
+                width: 400px;
+        }
+        .b-user-media-video-top__btn a{
+                float: right;
+        }
+        .b-user-wall{
+                width: 590px;
+        }
+</style>
 @endif

@@ -38,7 +38,7 @@ class BaseController extends Controller {
 
             View::share('topic_number', $topic_number);
 
-            $friend_number = Friend::where('user_one', Auth::user()->id)->count();
+            $friend_number = Auth::user()->friends()->count();
 
             View::share('friend_number', $friend_number);
 

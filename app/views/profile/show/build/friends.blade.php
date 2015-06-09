@@ -100,6 +100,7 @@
         </div>
 
         <div class="b-friends-inner__right">
+            <div class="sticky-box" style="width: 330px;">
             <div class="b-friends-common-wrapper">
                 <div class="b-friends-common-wrapper__inner">
                     <div class="b-friends-common">
@@ -146,6 +147,7 @@
 
         </div>
         <div class="clear"></div>
+        </div>
     </div>
 
 </div>
