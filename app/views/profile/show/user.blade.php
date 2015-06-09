@@ -47,9 +47,6 @@
                                         @if($user->description->age())
 					<p class="b-profile-middle-list__item">День рождения</p>
                                         @endif
-                                        @if($user->description->gender)
-					<p class="b-profile-middle-list__item">Пол:</p>
-                                        @endif
                                         @if($user->description->getLiveplace())
 					<p class="b-profile-middle-list__item">Живет:</p>
                                         @endif
@@ -60,9 +57,6 @@
                                 <li class="b-profile-middle-list__right">
                                     @if($user->description->age())
                                         <p class="b-profile-middle-list__item">{{Date::parse($user->description->birthday)->format('j F Y')}}</p>
-                                        @endif
-                                        @if($user->description->gender)
-					<p class="b-profile-middle-list__item">{{$user->description->gender}}</p>
                                         @endif
                                         @if($user->description->getLiveplace())
 					<p class="b-profile-middle-list__item">{{$user->description->getLiveplace()}}</p>
@@ -125,7 +119,7 @@
                                                                                                                 @if($user->description->age())
                                                                                                                 <p class="b-profile-middle-list__item">День рождения</p>
                                                                                                                 @endif
-                                                                                                                @if($user->description->gender)
+                                                                                                                @if(isset($gender) && $user->description->checkAccess('gender_access'))
                                                                                                                 <p class="b-profile-middle-list__item">Пол:</p>
                                                                                                                 @endif
                                                                                                                 @if($user->description->getLiveplace())
@@ -139,8 +133,8 @@
                                                                                                             @if($user->description->age())
                                                                                                             <p class="b-profile-middle-list__item">{{Date::parse($user->description->birthday)->format('j F Y')}}</p>
                                                                                                             @endif
-                                                                                                            @if($user->description->gender)
-                                                                                                            <p class="b-profile-middle-list__item">{{$user->description->gender}}</p>
+                                                                                                            @if(isset($gender) && $user->description->checkAccess('gender_access'))
+                                                                                                            <p class="b-profile-middle-list__item">{{$gender}}</p>
                                                                                                             @endif
                                                                                                             @if($user->description->getLiveplace())
                                                                                                             <p class="b-profile-middle-list__item">{{$user->description->getLiveplace()}}</p>
