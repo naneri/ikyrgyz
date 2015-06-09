@@ -22,10 +22,10 @@
 						<dt class="user-name"><a href="{{URL::to('profile')}}"><img src="{{ asset('img/48.png') }}" alt="">Имя пользователя</a></dt>
 						<dt><a href="{{URL::to('profile')}} " class="my-profile">Мой профиль</a></dt>
 							<dd><a href="#">{{ trans('network.publications') }}</a> <span class="raiting">{{$topic_number}}</span></dd>
-							<dd><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
+							<dd><a href="{{ URL::to('profile/messages') }}">{{ trans('network.personal-messages') }}</a><span class="raiting">{{count($new_messages)}}</span></dd>
 							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a><span class="raiting">{{$friend_number}}</span></dd>
 							<!-- <dd><a href="">Подписки</a><span class="raiting">143</span></dd> -->
-							<dd><a href="#">{{ trans('network.favorite') }}</a><span class="raiting">143</span></dd>
+							<dd><a href="#">{{ trans('network.favorite') }}</a><span class="raiting"></span></dd>
 						<dt>Энкиклопедия</dt>
 							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
@@ -84,14 +84,14 @@
 						<div class="b-header-nav-button">
 							<div class="b-header-nav-button__item">
 								@if(count(@$new_messages))
-								<a href="messages/inbox/all" class="counter-block">
+								<a href="{{URL::to('profile/messages')}}" class="counter-block">
 									<img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
 									<span class="counter">{{count($new_messages)}}</span>
 								</a>
 									<ul class="b-header-nav-dropdown b-header-nav-dropdown-message">
 									@foreach($new_messages as $message)
 									<li>
-										<a href="{{ URL::to('messages/show'). '/' . $message->id }}">
+										<a href="{{ URL::to('profile/messages'). '?message:' . $message->id }}">
 										<div class="b-header-nav-dropdown__message">
 											@if(isset($message->user_profile_avatar))
 												<img src="{{$message->user_profile_avatar}}" alt="" class="header-dropdown-image"/>

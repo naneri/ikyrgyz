@@ -1,5 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="UTF-8"/>
+        <title>{{Config::get('app.network_name')}}</title>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/style-login.css"/>
+        <link rel="stylesheet" href="css/fonts-login.css"/>
+        <link rel="stylesheet" href="css/rangeslider.css"/>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/rangeslider.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+    </head>
+    <body>
+        <div class="b-wrapper">
+            <div class="b-page">
+                <div class="b-header">
+                    <div class="b-header__inner">
+                        <div class="b-header__left">
+                            <div class="b-header-logo"><a href="#">
+                                    <div class="b-header-logo__image"><img src="img/login/1.png" alt=""/></div>
+                                    <div class="b-header-logo__title">
+                                        <div class="b-header-logo-title"><span class="b-header-logo-title__item">Национальные</span>
+                                            <div class="b-header-logo-title__title">Я Кыргыз</div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
+                                        </div>
+                                    </div></a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="b-header-title">
+                                <div class="b-header-title__title">Мы все разные, но мы одна семья!</div>
+                            </div>
+                            <div class="b-header-tags">
+                                Создай свой блог. Делись с друзьями фото, видео, музыкой 
+                                Узнай больше о традициях и обычаях твоего народа		
+                            </div>
+                        </div>
+                        <div class="b-header__right">
+                            <div class="b-header-registration">
+                                <div class="b-header-registration__top">
+                                    <p>Еще не зарегистрировались?</p>
+                                    <p>Присоединяйтесь к нам</p>
+                                </div>
+                                <div class="b-header-registration-button">
+                                    <a href="{{URL::to('register')}}">
+                                        <input type="button" value="Регистрация" class="b-header-registration-button__button button-default"/>
+                                    </a>
+                                </div>
+                                <div class="b-header-registration__social"><span>Войти через</span><img src="img/login/5.png" alt=""/><img src="img/login/4.png" alt=""/><img src="img/login/3.png" alt=""/></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="b-content">
+                    <div class="b-authorization">
+                        <div class="b-authorization-inner">
+                            <div class="b-authorization-inner-block">
+                                <div class="b-authorization-inner-block__title">Авторизация</div>
+                                <div class="b-authorization-inner-block-list">
+                                    <ul>
+                                        {{Form::open(array('url' => 'login'))}}
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-login">
+                                                    <p>Логин(email адрес)</p>
+                                                    <input type="text" class="login registration-input" name="email"/>
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-pass">
+                                                    <p>Ваш пароль</p>
+                                                    <input type="password" class="pass registration-input" name="password"/>
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list third-child">
+                                                <div class="b-authorization-inner-block-list-remember-me">
+                                                    <input type="checkbox" name="remember"/><span class="remember-me">Запомнить меня</span>
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-forget-pass">
+                                                    <input type="submit" value="Войти" class="join-button button-default"/><a href="" class="forget-pass">Забыли пароль?</a>
+                                                </div>
+                                            </li>
+                                        {{Form::close()}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="b-footer"></div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<!--<!DOCTYPE html>
+<html lang="en">
 	<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8"/>
@@ -110,4 +207,4 @@
             </section>
         </div>
     </body>
-</html>
+</html>-->
