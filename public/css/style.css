@@ -3836,7 +3836,7 @@ interface
 
 .b-user-interface-content__left {
 	float: left;
-	width: 31.22222222222222%;
+	width: 300px;
 }
 
 .b-user-interface-content-wrapper {
@@ -3846,7 +3846,7 @@ interface
 .b-user-interface-content__right {
 	float: right;
 	padding-right: 20px;
-	width: 64.33333333333333%;
+	width: 500px;
 }
 
 .b-user-interface-content-nav {
@@ -4005,16 +4005,24 @@ interface
 .b-user-interface-content-search__search {
 	border: 1px solid #d5d5d5;
 	margin-bottom: 10px;
-	width: 100%;
+	width: 507px;
 }
 
 .b-user-interface-content-search .input-default {
-	width: 70%;
+	width: 440px;
 	height: 26px;
 	border: 0;
 	padding-left: 10px;
 	color: #999;
 	font: 15px 'PT Sans Caption';
+	float: left;
+}
+
+.b-user-interface-content-search .input-default:focus {
+	border: 0;
+	outline: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .b-user-interface-content-search .button-default {
@@ -5511,14 +5519,4 @@ music player style
 	background-image: -o-linear-gradient(top, #fff 0%, #d5d5d5 100%);
 	background-image: -ms-linear-gradient(top, #fff 0%, #d5d5d5 100%);
 	background-image: linear-gradient(to bottom, #fff 0%, #d5d5d5 100%);
-}
-
-.b-header-nav-search-results-content {
-    display: none;
-}
-.b-header-nav-search-results-people {
-    display: none;
-}
-#show-all-results {
-    display: none;
 }
