@@ -42,9 +42,20 @@ $(document).ready(function() {
     </td>
 </tr>
 @endforeach
-<div style="width: 100%; text-align: center">
+<tr class="links" style="margin-right: 20px; color: #e16549; float: right;">
+    <td>
         <?php echo $messages->links(); ?>
-    </div>
-
+    </td>
+</tr>
+<style>
+    .links .pagination > li > a{
+        color: #e16549;
+    }
+    .links .pagination > .active > span,
+    .links .pagination > .active > span:hover{
+        background-color: #e16549;
+        border-color: #e16549;
+    }
+</style>
 
    {{-- trans('network.mess-not-found') --}}

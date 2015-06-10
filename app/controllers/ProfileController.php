@@ -71,9 +71,9 @@ class ProfileController extends BaseController {
                 break;
             case 'messages':
                 $subpage = 'inbox';
-                if(Input::has('page')){
-                    $subpage = Input::get('page');
-                    if(Input::get('page') == 'outbox'){
+                if(Input::has('subpage')){
+                    $subpage = Input::get('subpage');
+                    if(Input::get('subpage') == 'outbox'){
                         $items = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
                     }
                 }else{

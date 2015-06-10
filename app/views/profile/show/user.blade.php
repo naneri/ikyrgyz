@@ -23,7 +23,7 @@
 		<div class="b-profile-top">
 			<div class="b-profile-top__left">
 				<div class="b-profile-top-information">
-					<div class="b-profile-top-information__top"><span class="raiting-text">Рейтинг:</span><span class="raiting-num">+{{$user->rating}}</span></div>
+                                    <div class="b-profile-top-information__top"><span class="raiting-text">Рейтинг:</span><span class="raiting-num" @if($user->rating<0) style="color: #d11;" @endif>{{(($user->rating>0)?'+':'').$user->rating}}</span></div>
 					<div class="b-profile-top-information__name">{{$user->getNames()}}</div>
 					<div class="b-profile-top-information__status"></div>
 				</div>
