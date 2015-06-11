@@ -115,6 +115,14 @@ class BlogController extends BaseController {
                 $topics = Blog::getTopics($id);
             }
             $userRole = $blog->getUserRole();
+            
+            
+            JavaScript::put([
+                'sort' => null,
+                'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
+                'ajaxPage' => URL::to("blog/showAjax/$id"),
+            ]);
+
             return View::make('blog.show', compact('blog', 'topics', 'userRole'));
 	}
     
@@ -124,12 +132,13 @@ class BlogController extends BaseController {
      * @param  [type] $page страница
      * @return [type]       [description]
      */
-    public function showAjax($id,$page){
+    public function showAjax($id){
+        $page = Input::get('page');
         $topics = Blog::getTopics($id, $page);
         return View::make('topic.build', compact('topics'));
     }
 
-	public function showPersonal($email) {
+    public function showPersonal($email) {
         $user = User::whereEmail($email)->get();
         $blog = $user->getPersonalBlog();
         return View::make('blog.show', array('blog' => $blog));

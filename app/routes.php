@@ -70,7 +70,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');
         Route::get('blog/show/{id}', 'BlogController@show');
-        Route::get('blog/showAjax/{id}/{page}', 'BlogController@showAjax');
+        Route::get('blog/showAjax/{id}', 'BlogController@showAjax');
         Route::group(array('before' => 'blog_edit_permission'), function(){
             Route::get('blog/edit/{id}', 'BlogController@getEdit');
             Route::post('blog/edit/{id}', 'BlogController@postEdit');
