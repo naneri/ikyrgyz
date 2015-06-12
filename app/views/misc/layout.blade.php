@@ -18,6 +18,7 @@
     <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script>
     @include('misc.js')
+    @include('scripts.convert-times')
   </head>
   <body>
     <div class="b-wrapper">

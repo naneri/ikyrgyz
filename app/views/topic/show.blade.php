@@ -44,10 +44,8 @@
 			  </div>
 			  <div class="b-profile-about__text">
 				<div class="b-profile-about-text topic-description">
-					@if(isset($topic->image_url))
+					@if($topic->image_url != '')
 						<img src="{{$topic->image_url}}" alt="" class="b-profile-about-text__image"/>
-					@else
-						<img src="{{ asset('img/55.png') }}" alt="" class="b-profile-about-text__image"/>
 					@endif
 				  <p class="b-profile-about-text__text">
 					{{$topic->description}}
