@@ -22,7 +22,7 @@
                                     <div class="b-header-logo__image"><img src="img/login/1.png" alt=""/></div>
                                     <div class="b-header-logo__title">
                                         <div class="b-header-logo-title"><span class="b-header-logo-title__item">Национальные</span>
-                                            <div class="b-header-logo-title__title">Я Кыргыз</div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
+                                            <div class="b-header-logo-title__title">{{Config::get('app.network_name')}}</div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
                                         </div>
                                     </div></a>
                                 <div class="clear"></div>
@@ -42,7 +42,7 @@
                                     <p>Присоединяйтесь к нам</p>
                                 </div>
                                 <div class="b-header-registration-button">
-                                    <a href="{{URL::to('register')}}">
+                                    <a href="{{URL::to('register')}}" style="text-decoration: none;">
                                         <input type="button" value="Регистрация" class="b-header-registration-button__button button-default"/>
                                     </a>
                                 </div>
