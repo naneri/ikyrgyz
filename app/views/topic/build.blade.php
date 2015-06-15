@@ -40,14 +40,18 @@
 				</p>
 			</div>
 			<div class="clear"></div>
+			
 			<div class="b-user-wall-image">
 				@if($topic->image_url)
 					<a href="{{ URL::to('topic/show/'. $topic->id) }}"><img src="{{$topic->image_url}}" alt=""></a>
 				@endif
 				<div class="topic-preview-text">
+				<a href="{{ URL::to('topic/show/'. $topic->id) }}">
 					{{mb_substr(strip_tags($topic->description), 0 ,200, 'UTF-8') }}
+					</a>
 				</div>
 			</div>
+			
 			<div class="b-user-wall-footer">
 				<div class="b-user-wall-footer-header">
 				<div class="b-user-wall-footer__image b-user-wall-header__image"><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" class="blog-avatar" alt=""/></div>

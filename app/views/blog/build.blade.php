@@ -1,6 +1,6 @@
 <div class="masonry blog">
 	@foreach($blogs as $blog)
-	<div class="b-user-wall">
+	<div class="b-user-wall item">
             <div class="b-user-blog__inner">
               <div class="b-user-blog-header">
                 <div class="b-user-blog-header__top">
@@ -46,3 +46,4 @@
           </div>
 	@endforeach
 </div>
+
