@@ -1,10 +1,9 @@
-@include('scripts.convert-times')
 <script>
 	
-/*    function timesConvert(){
+    function timesConvert(){
         times.init('.b-user-wall-header__date');
         times.eachConvert('.b-user-wall');
-    }*/
+    }
 	
     
     var ColumnVal;
@@ -35,7 +34,7 @@
         }
 
         
-       /* timesConvert();*/
+        timesConvert();
         var page = 1;
       
              
@@ -85,7 +84,7 @@
                         $container.masonry('layout');
                     });
                     
-                  /*  timesConvert();*/
+                    timesConvert();
 
                     // увеличиваем страничку на одну
                     page += 1;
