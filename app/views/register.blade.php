@@ -85,7 +85,7 @@
                                             <li class="b-authorization-inner-block-list__list">
                                                 <div class="b-authorization-inner-block-list-country"><img src="img/login/8.png" alt="" class="ya-img"/>
                                                     <select name="" class="select-country">
-                                                        <option value="">{{Config::get('app.network_name')}}</option>
+                                                        <option value="">{{trans('nation.'.Config::get('app.nation_name'))}}</option>
                                                     </select>
                                                 </div>
                                             </li>

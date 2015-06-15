@@ -22,7 +22,7 @@
                                     <div class="b-header-logo__image"><img src="img/login/1.png" alt=""/></div>
                                     <div class="b-header-logo__title">
                                         <div class="b-header-logo-title"><span class="b-header-logo-title__item">Национальные</span>
-                                            <div class="b-header-logo-title__title">{{Config::get('app.network_name')}}</div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
+                                            <div class="b-header-logo-title__title">Я <span style="text-transform: capitalize;">{{trans('nation.'.Config::get('app.nation_name'))}}</span></div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
                                         </div>
                                     </div></a>
                                 <div class="clear"></div>
