@@ -96,6 +96,9 @@
 													<div class="b-profile-middle-title__title">
 														Основная информация
 													</div>
+                                                                                                        <div class="b-profile-middle-title__button-edit">
+                                                                                                            <a href="{{URL::to('profile/edit/main')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
+                                                                                                        </div>
 													<div class="clear"></div>
 												</div>
 												<div class="b-profile-middle-list">
@@ -136,7 +139,10 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Контакты
-													</div>
+                                                                                                        </div>
+                                                                                                        <div class="b-profile-middle-title__button-edit">
+                                                                                                            <a href="{{URL::to('profile/edit/contact')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
+                                                                                                        </div>
 													<div class="clear"></div>
 												</div>
 												<div class="b-profile-middle-list">
@@ -165,7 +171,10 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Образование
-													</div>
+                                                                                                        </div>
+                                                                                                        <div class="b-profile-middle-title__button-edit">
+                                                                                                            <a href="{{URL::to('profile/edit/study')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
+                                                                                                        </div>
 													<div class="clear"></div>
 												</div>
 										<div class="b-profile-middle-list" style="width: 400px;">
@@ -201,7 +210,10 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Работа
-													</div>
+                                                                                                        </div>
+                                                                                                        <div class="b-profile-middle-title__button-edit">
+                                                                                                            <a href="{{URL::to('profile/edit/job')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
+                                                                                                        </div>
 													<div class="clear"></div>
 												</div>
 							<div class="b-profile-middle-list">
@@ -235,7 +247,10 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Семья
-													</div>
+                                                                                                        </div>
+                                                                                                        <div class="b-profile-middle-title__button-edit">
+                                                                                                            <a href="{{URL::to('profile/edit/family')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
+                                                                                                        </div>
 													<div class="clear"></div>
 												</div>
 																								<div class="b-profile-middle-list">
@@ -265,7 +280,10 @@
 													<div class="b-profile-middle-title">
 														<div class="b-profile-middle-title__title">
 															Дополнительно
-														</div>
+                                                                                                                </div>
+                                                                                                                <div class="b-profile-middle-title__button-edit">
+                                                                                                                    <a href="{{URL::to('profile/edit/additional')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
+                                                                                                                </div>
 														<div class="clear"></div>
 													</div>
 													<div class="b-profile-middle-list">
