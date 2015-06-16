@@ -27,6 +27,7 @@
                         <div class="b-user-interface-content-item">
                             <p class="b-user-interface-content-item__place">{{ trans('network.place-to-search') }}</p>
                             <div class="b-user-interface-content-item__country">
+                                
                                 {{Form::select('country', Country::getAllForView(), null, array('class' => 'selectpicker select-country form-control'))}}
                             </div>
                             <div class="b-user-interface-content-item__city">

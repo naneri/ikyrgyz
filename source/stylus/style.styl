@@ -1737,12 +1737,14 @@ div.choose-list
 		a
 			background-position 0 -166px
 
-.topic-preview-text
+.topic-preview-text 
 	margin 15px 25px 10px
-	color #3f4242
-	font 15px 'PT Sans'
-	line-height 23px
-	word-wrap break-word
+	a
+		color #3f4242
+		font 15px 'PT Sans'
+		line-height 23px
+		word-wrap break-word
+	
 
 .topic-description 
 	color #3f4242
@@ -1761,7 +1763,7 @@ div.choose-list
 //  padding 2px 0 0 0
 //  max-width 253px
 	
-	
+
 	
 
 .b-topic-navigation-format-dropdown
@@ -3246,9 +3248,9 @@ interface
 		color $baseFontColorLight
 		padding-bottom 14px
 	&__country
-		padding-bottom 9px
+		margin-bottom 20px
 	&__city
-		padding-bottom 9px
+		margin-bottom 20px
 	&__nolist
 		padding-bottom 21px
 		border-bottom $baseBorder
@@ -3290,15 +3292,24 @@ interface
 		padding-bottom 14px
 		font 15px $baseFontFamily
 		color $baseFontColorLight
+		
+.b-user-interface-content-item__country
+	.btn
+		border $baseBorder
+		color $baseFontColor
+		font 14px $baseFontFamily
+	
+		
+		
 .b-user-interface-content-search
 	//
 	&__search
 		border $baseBorder
 		margin-bottom 10px
-		width 507px
+		width 482px
 		
 	.input-default
-		width 440px
+		width 430px
 		height 26px
 		border 0
 		padding-left 10px
@@ -3339,6 +3350,7 @@ interface
 	&__left
 		float left
 		width 60px
+		padding 5px
 	&__name
 		font 14px $baseFontFamily
 		color $baseFontColorLight
@@ -4527,5 +4539,57 @@ music player style
 
 #show-all-results 
 	display none
-
 	
+	
+	
+	color $baseFontColor
+	font 14px 'PT Sans', sans-serif
+	border none
+	background transparent
+	margin 0 auto
+	cursor pointer
+	padding 5px 0
+	
+/*
+==============================
+==============================
+header search
+==============================
+==============================
+*/
+.b-header-nav-search-results-people
+	//
+	.b-user-interface-content-profile
+		margin 0
+		border $baseBorder
+		padding 0
+		&__center
+			width 150px
+		&-title
+			background $lightGradient
+			font 14px 'pt sans caption',sans-serif
+			padding 3px 8px
+.b-header-nav-search-results-content
+	//
+	.b-user-interface-content-block__text
+		width 150px
+	.b-user-interface-content-block
+		padding 0
+		margin 0
+	.b-user-interface-content-block__image
+		padding 5px
+	
+.b-header-nav-search-results
+	position absolute
+	top 58px
+	background #fff
+	width 328px
+	right 0
+	z-index 1000
+.b-user-interface-content-block__title
+	background $lightGradient
+	font 14px 'pt sans caption',sans-serif
+	padding 3px 8px
+
+.b-header-nav-search-results__button
+	border $baseBorder

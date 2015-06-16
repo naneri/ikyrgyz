@@ -619,6 +619,11 @@ $(document).ready(function () {
 
 
 
+$(document).ready(function(){
+$('span.filter-option').each(function(){
+    $(this).html($(this).html().replace(/&nbsp;/gi,''));
+});
+});
 
 
 

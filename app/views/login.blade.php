@@ -18,13 +18,16 @@
                 <div class="b-header">
                     <div class="b-header__inner">
                         <div class="b-header__left">
-                            <div class="b-header-logo"><a href="#">
+                            <div class="b-header-logo">
                                     <div class="b-header-logo__image"><img src="img/login/1.png" alt=""/></div>
                                     <div class="b-header-logo__title">
                                         <div class="b-header-logo-title"><span class="b-header-logo-title__item">Национальные</span>
-                                            <div class="b-header-logo-title__title">{{Config::get('app.network_name')}}</div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
+                                            <div class="b-header-logo-title__title">Я <span style="text-transform: capitalize;">{{trans('nation.'.Config::get('app.nation_name'))}}</span></div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
+                                            <p class="b-header-logo-title__link">
+                                                Проект: <a href="">Niamiko.com</a>
+                                            </p>
                                         </div>
-                                    </div></a>
+                                    </div>
                                 <div class="clear"></div>
                             </div>
                             <div class="b-header-title">

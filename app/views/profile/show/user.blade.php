@@ -1,3 +1,4 @@
+
 @extends('misc.layout')
 
 @section('content')
@@ -69,10 +70,10 @@
 				</ul>
 			</div>
 			<div class="b-profile-middle-info">
-				<button type="button" class="b-profile-middle-info__button" data-toggle="modal" data-target=".bs-example-modal-sm">показать полную информацию</button>
-					<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<button type="button" class="b-profile-middle-info__button" data-toggle="modal" data-target=".bs-example-modal-lg">показать полную информацию</button>
+					<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  style="display:none">
 					
-						 <div class="modal-dialog modal-lg">
+						 <div class="modal-dialog modal-lg" >
 		    				<div class="modal-content">
 
 		    					<div class="b-profile-title">Полная информация</div>
@@ -321,6 +322,13 @@
 			 <!--   <div class="b-profile-middle-button">
 				<input type="submit" value="Закрыть" class="b-profile-middle-button__item">
 			</div> -->
+				{{HTML::style('css/bootstrap.mod.css')}}
+{{HTML::style('css/cropper.min.css')}}
+{{HTML::style('css/cropper-main.css')}}
+{{HTML::script('js/bootstrap.min.js')}}
+{{HTML::script('js/cropper.min.js')}}
+{{HTML::script('js/cropper-main.js')}}
+
 
 				</div>
 				
@@ -426,11 +434,7 @@
 </div>
 
 @include('profile.show.body', compact('items', 'page'))
- {{HTML::style('css/bootstrap.mod.css')}}
-    {{HTML::style('css/cropper.min.css')}}
-    {{HTML::style('css/cropper-main.css')}}
-    {{HTML::script('js/bootstrap.min.js')}}
-    {{HTML::script('js/cropper.min.js')}}
-    {{HTML::script('js/cropper-main.js')}}
+
 </div>
 @stop
+
