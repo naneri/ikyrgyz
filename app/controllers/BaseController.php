@@ -17,10 +17,12 @@ class BaseController extends Controller {
 
 	public function __construct(){
 
-/* echo "<pre>"; print_r(NotificationRepository::getAllNotifications()); echo "</pre>";exit;*/
 
 		if(Auth::check() && !Request::ajax()){
 			Session::put('verify', 'FileManager4TinyMCE');
+
+            
+
 			// Отправляет в шаблон все запросы о добавлении в друзья
 			$friend_requests = Friend::getFriendRequests(Auth::id());
 
@@ -46,15 +48,19 @@ class BaseController extends Controller {
 
             View::share('favorites', $favorites);
 
-            $notes = null; /*NotificationRepository::getAllByType();*/
+           /* $notes =  NotificationRepository::getAllNotifications(Auth::id());*/
+
+
+          /*  echo "<pre>"; print_r(NotificationRepository::getAllNotifications(Auth::id())); echo "</pre>";exit;*/
 /*
-            echo "<pre>"; print_r($notes); echo "</pre>";exit;*/
-            /*foreach($notes as $note){
+echo "<pre>"; print_r($notes); echo "</pre>";exit;*/
+          /*  View::share('notes', $notes);*/
+
+            /*echo "<pre>"; print_r($notes); echo "</pre>";exit;
+            foreach($notes as $note){
                 echo Lang::choice($note->lang_message, $note->total) . '|' . $note->column . '<br>';
             }
             exit;*/
-
-            View::share('notes', $notes);
 		}
 
         // отправляет в шаблон базовый УРЛ сайта
