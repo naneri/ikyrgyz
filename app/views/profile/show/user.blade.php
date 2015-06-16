@@ -71,9 +71,9 @@
 			</div>
 			<div class="b-profile-middle-info">
 				<button type="button" class="b-profile-middle-info__button" data-toggle="modal" data-target=".bs-example-modal-lg">показать полную информацию</button>
-					<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  style="display:none">
 					
-						 <div class="modal-dialog modal-lg">
+						 <div class="modal-dialog modal-lg" >
 		    				<div class="modal-content">
 
 		    					<div class="b-profile-title">Полная информация</div>

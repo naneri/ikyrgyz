@@ -149,6 +149,15 @@ a img {
   font-size: 30px;
   top: -14px;
 }
+.b-header-logo-title__link  {
+  font: 12px 'pt sans caption';
+  color: #b3b0b0;
+}
+.b-header-logo-title__link a {
+  font: 12px 'pt sans caption';
+  color: #e16549;
+}
+
 .b-header__right {
   float: right;
   width: 242px;
