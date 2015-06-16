@@ -9,4 +9,9 @@ class NotificationController extends BaseController{
         return View::make('notification.list', compact('notes'));
         
     }
+
+    public function markNotification()
+    {
+        
+    }
 }

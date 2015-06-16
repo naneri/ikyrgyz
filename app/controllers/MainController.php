@@ -15,7 +15,13 @@ class MainController extends BaseController {
 	|
 	*/
 
-	public function index($sort = 'id'){
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+	public function index($sort = 'id')
+    {
 
         $rating = Config::get('topic.index_good_topic_rating');
 

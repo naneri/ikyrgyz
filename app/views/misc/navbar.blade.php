@@ -152,11 +152,22 @@
                                 <span class="counter">{{count($notes)}}</span>
                             </a> 
                             <ul class="b-header-nav-dropdown b-header-nav-dropdown_add-btn">
+                                <li>
+                                        <div class="b-header-nav-dropdown__wrapper">
+                                            <div class="b-header-nav-dropdown__item">
+                                               
+                                                    <a href="{{URL::to('notifications/all')}}">
+                                                        Просмотреть все уведомления
+                                                    </a>
+
+                                            </div>
+                                        </div>
+                                    </li>
                                 @foreach($notes as $note)
                                     <li>
                                         <div class="b-header-nav-dropdown__wrapper">
                                             <div class="b-header-nav-dropdown__item">
-                                                <span>
+                                               
                                                     <a href="{{URL::to('notifications/all')}}">
                                                         {{Lang::choice($note->lang_message, $note->total, [$note->total])}}
                                                     </a>
