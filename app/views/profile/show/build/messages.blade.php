@@ -1,4 +1,4 @@
-<div class="b-message tab-content current">
+<div class="b-message-main tab-content current">
     <div class="b-message-tabs">
         <div class="b-message-tabs-list">
             <ul class="tab">

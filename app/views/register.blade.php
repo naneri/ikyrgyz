@@ -75,7 +75,17 @@
                     </div>
                 </div>
                 <div class="b-content">
+
                     <div class="b-authorization">
+                        @foreach ($errors->all() as $error)
+                <div class="b-message b-message-error">
+                    <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+                    <div class="b-message-icon b-message-error-icon"></div>
+                    <p class="b-message-p">
+                        {{$error}}
+                    </p>
+                </div>
+            @endforeach
                         <div class="b-authorization-inner">
                             <div class="b-authorization-inner-block">
                                 <div class="b-authorization-inner-block__title">Регистрация</div>
@@ -119,6 +129,7 @@
                                             </li>
                                         {{Form::close()}}
                                     </ul>
+
                                 </div>
                             </div>
                         </div>

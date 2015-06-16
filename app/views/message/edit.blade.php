@@ -45,7 +45,7 @@
             <div class="form-group">
                 {{Form::hidden('is_draft', '0')}}
                 {{Form::hidden('message_id', $message->id)}}
-                {{Form::submit(trans('network.draft), array('name' => 'draft'))}}
+                {{Form::submit(trans('network.draft'), array('name' => 'draft'))}}
                 {{Form::submit('Отправить', array('name' => 'publish'))}}
             </div>
         {{Form::close()}}

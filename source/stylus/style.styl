@@ -171,9 +171,13 @@ body
 	.dropdown-list
 		display block
 		z-index 2000
+		dd
+			a
+				line-height 30px
 		
 	.b-topic-navigation-menu__list
 		border 0
+		
 		.title
 			background $orangeGradient
 			color #fff
@@ -3717,64 +3721,64 @@ music player style
 ============================================
 ============================================
 */
-// .b-message
-// 	padding 10px
-// 	position fixed
-// 	right 0
-// 	margin 20px
-// 	width 400px
-// 	height auto
-// 	border-radius 10px
+.b-message
+	padding 10px
+	position fixed
+	right 0
+	margin 20px
+	width 400px
+	height auto
+	border-radius 10px
 
-// .b-message-icon
-// 	width 60px
-// 	height 60px
-// 	float left
+.b-message-icon
+	width 60px
+	height 60px
+	float left
 
-// .b-message-p
-// 	width 300px
-// 	float left
-// 	padding 10px
-// 	font-size 17px
+.b-message-p
+	width 300px
+	float left
+	padding 10px
+	font-size 17px
 
-// .b-message-close
-// 	background url("../img/icons/icon_close.png") no-repeat
-// 	background-position 50%
-// 	width 12px
-// 	height 12px
-// 	float right
+.b-message-close
+	background url("../img/icons/icon_close.png") no-repeat
+	background-position 50%
+	width 12px
+	height 12px
+	float right
 
-// .b-message-success
-// 	background #a4eed2
-// 	color #78a68d
+.b-message-success
+	background #a4eed2
+	color #78a68d
 
-// .b-message-success-icon
-// 	background url("../img/icons/icon_alert.png") no-repeat
-// 	background-position 50%
+.b-message-success-icon
+	background url("../img/icons/icon_alert.png") no-repeat
+	background-position 50%
 
-// .b-message-error
-// 	background #efa3a3
-// 	color #ae5a5a
+.b-message-error
+	background #efa3a3
+	color #ae5a5a
 
-// .b-message-error-icon
-// 	background url("../img/icons/icon_alert.png") no-repeat
-// 	background-position 50%
+.b-message-error-icon
+	background url("../img/icons/icon_alert.png") no-repeat
+	background-position 50%
 
-// .b-message-warning
-// 	background #f8f7d3
-// 	color #8f8d5d
+.b-message-warning
+	background #f8f7d3
+	color #8f8d5d
 
-// .b-message-warning-icon
-// 	background url("../img/icons/icon_warning.png") no-repeat
-// 	background-position 50%
+.b-message-warning-icon
+	background url("../img/icons/icon_warning.png") no-repeat
+	background-position 50%
 
-// .b-message-info
-// 	background #9dd7e6
-// 	color #3c7889
+.b-message-info
+	background #9dd7e6
+	color #3c7889
 
-// .b-message-info-icon
-// 	background url("../img/icons/icon_info.png") no-repeat
-// 	background-position 50%
+.b-message-info-icon
+	background url("../img/icons/icon_info.png") no-repeat
+	background-position 50%
 
 
 
@@ -4160,7 +4164,7 @@ music player style
 	background $lightGradient
 	color #999
 	cursor pointer			
-.b-message
+.b-message-main
 	height 100%
 .b-message-tabs
 	padding-bottom 15px
@@ -4593,3 +4597,17 @@ header search
 
 .b-header-nav-search-results__button
 	border $baseBorder
+	
+
+
+#overlay 
+	display none
+	width 100%
+	background-color black
+	position absolute
+	top 0
+	left 0
+	opacity 0.4
+	z-index 1000
+	
+	

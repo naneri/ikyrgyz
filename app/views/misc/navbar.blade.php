@@ -1,4 +1,5 @@
 @if(Auth::check())
+<div id="overlay"></div>
 <div class="b-header">
 		<div class="b-header__inner">
 			<div class="b-header-nav">
@@ -13,7 +14,7 @@
 				</ul> -->
 				<div class="b-header-nav-menu">
 					<div class="b-header-nav-menu__item">
-						<a href="#"></a>
+						<a href=""></a>
 					</div>	
 						<div class="b-topic-navigation-menu">
 				<div class="b-topic-navigation-menu__list">				
@@ -190,7 +191,7 @@
 
 					<li class="b-header-nav__right">
 						<div class="b-header-nav-search">
-							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
+							<input type="text" class="b-header-nav-search__item" id="nav-	bar-search-field" placeholder="{{ trans('network.search') }}">
 						</div>
                         <div class="b-header-nav-search-results" >
                         	<button id="show-all-results">{{ trans('network.show-all-results') }}</button>
