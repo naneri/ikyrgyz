@@ -141,8 +141,26 @@
 				<div class="clear"></div>
 			</ul>
 		</div>
-		@endif
-		</div>
+                @endif
+                @if(isset($news) && $news)
+                <div class="b-user-media__music">
+                    <div class="b-user-media-video-top">
+                        <p class="b-user-media-video-top__title">Новости</p>
+                        <!--div class="b-user-media-video-top__btn">
+                            <input type="submit" value="Все" class="btn btn-all"/>
+                        </div-->
+                    </div>
+                    <ul class="b-user-media-video-gallery" style="height: 500px; overflow: scroll;">
+                            @foreach($news as $newsElement)
+                            <li class="b-user-media-video-gallery__list" style="width:90%;">
+                                <p class="b-user-media-video-top__title">{{$newsElement->source}} [{{$newsElement->views}}] - <a href="{{$newsElement->href}}" target="_blank">{{$newsElement->title}}</a></p>
+                            </li>
+                            @endforeach
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+                @endif
+            </div>
 	</div>
 @endif
 

@@ -1,5 +1,7 @@
 <?php
 
+require app_path() . '/libraries/simple_html_dom.php';
+
 class ProfileController extends BaseController {
     
         
@@ -36,6 +38,8 @@ class ProfileController extends BaseController {
         );
         $friendCategories = array();
         $subpage = '';
+        
+        $news = array();//file_get_html('http://www.vb.kg/?lable=8&order=popular&date=' . date('Y-m-d'));
         
         switch($page){
             case 'publications':
@@ -86,6 +90,9 @@ class ProfileController extends BaseController {
                 $videos = $user->topicsWithVideo()->take(6)->get();
                 $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
                 $masonrySettings['ajaxPage'] = URL::to('profile/'.$user->id.'/ajaxTopics/newsline');
+                if($user->id == Auth::id() && Auth::user()->is_admin){
+                    $news = $this->getNews();
+                }
                 break;
         }
         
@@ -120,7 +127,8 @@ class ProfileController extends BaseController {
                             'photos',
                             'videos',
                             'friendCategories',
-                            'subpage'
+                            'subpage',
+                            'news'
                             )
                     );
         }else{
@@ -653,6 +661,37 @@ class ProfileController extends BaseController {
 
         return Response::json($response);
     }
-
+    
+    private function getNews(){
+        $newsFeeds = Config::get('social.news_feed');
+        if(!$newsFeeds){
+            return false;
+        }
+        $newsElements = null;
+        foreach ($newsFeeds as $newsFeed){
+            $html = file_get_html($newsFeed['url']);
+            $i = 1;
+            $offset = 0;
+            foreach ($html->find($newsFeed['elements']) as $newsElement){
+                if(isset($newsFeed['offset']) && ($offset < $newsFeed['offset'])){
+                    $offset++;
+                    continue;
+                }
+                $element = new stdClass();
+                $element->source = $newsFeed['name'];
+                $element->href = $newsElement->find($newsFeed['link'], 0)->href;
+                $element->title = $newsElement->find($newsFeed['title'], 0)->innertext;
+                $element->views = (int)$newsElement->find($newsFeed['views'], 0)->innertext;
+                $newsElements[] = $element;
+                if(++$i > $newsFeed['limit']){
+                    break;
+                }
+            }
+        }
+        usort($newsElements, function($a, $b) {
+            return $b->views - $a->views;
+        });
+        return $newsElements;
+    }
 
 }
