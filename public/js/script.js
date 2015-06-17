@@ -534,19 +534,19 @@ $(document).ready(function() {
 		 
 	 // $("#overlay").height(docHeight).fadeIn();
 	
-	$(function() {
-	$('.b-header-nav-menu__item').click(function(e){
-		
-		 
-	
-		$(this).next('.b-topic-navigation-menu').stop(false, true ).fadeIn();
-	}, function() {
-		$(this).next('.b-topic-navigation-menu').stop(false, true).fadeOut();
-
-	});
-	  e.stopPropagation();
-	
-});
+//	$(function() {
+//	$('.b-header-nav-menu__item').click(function(e){
+//		
+//		 
+//	
+//		$(this).next('.b-topic-navigation-menu').stop(false, true ).fadeIn();
+//	}, function() {
+//		$(this).next('.b-topic-navigation-menu').stop(false, true).fadeOut();
+//
+//	});
+//	  e.stopPropagation();
+//	
+//});
 
 	
 
