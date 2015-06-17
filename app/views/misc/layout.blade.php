@@ -33,6 +33,7 @@
 
   @if(isset(Config::get('social.yandex-metrika')[Config::get('app.nation_name')]))
     {{Config::get('social.yandex-metrika')[Config::get('app.nation_name')]}}
+    
   @endif  
   </body>
 </html>
