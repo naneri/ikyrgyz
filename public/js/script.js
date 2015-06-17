@@ -534,19 +534,7 @@ $(document).ready(function() {
 		 
 	 // $("#overlay").height(docHeight).fadeIn();
 	
-$(document).ready(function(){
-	$('.b-header-nav-menu__item').click(function(e){
-		e.stopPropagation();
-		e.preventDefault(); 
 
-		$('.b-header-nav-menu .b-topic-navigation-menu').toggle();
-	});
-
-});
-
-$(document).on("click", function () {
-    $(".b-header-nav-menu .b-topic-navigation-menu").hide();
-});
 
 	
 
