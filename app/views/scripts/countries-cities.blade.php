@@ -21,11 +21,13 @@ $(document).ready(function(){
             $selectCity.html(cb);
         }).success(function(){
             $selectCity.trigger('refresh');
-            $selectCity.selectpicker({
-                liveSearch: true,
-                maxOptions: 1
-            });
-            $selectCity.selectpicker('refresh');
+            if($selectCity.hasClass('selectpicker')){
+                $selectCity.selectpicker({
+                    liveSearch: true,
+                    maxOptions: 1
+                });
+                $selectCity.selectpicker('refresh');
+            }
         });
     });
 

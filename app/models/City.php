@@ -24,4 +24,18 @@ class City extends \Eloquent {
             }
             return $citiesForView;
         }
+
+        public static function getCitiesForView($countryId) {
+            $cities = City::where('country_id', $countryId)
+                    ->orderBy('name_ru', 'ASC')
+                    ->get();
+            //print_r($cities);
+            $citiesForView = array();
+            $citiesForView = array('0' => 'Город');
+            foreach ($cities as $city) {
+                $citiesForView[$city->id] = $city->name_ru;
+            }
+            return $citiesForView;
+        }
+
 }
