@@ -534,18 +534,18 @@ $(document).ready(function() {
 		 
 	 // $("#overlay").height(docHeight).fadeIn();
 	
-	$(function() {
+$(document).ready(function(){
 	$('.b-header-nav-menu__item').click(function(e){
-		
-		 
-	
-		$(this).next('.b-topic-navigation-menu').stop(false, true ).fadeIn();
-	}, function() {
-		$(this).next('.b-topic-navigation-menu').stop(false, true).fadeOut();
+		e.stopPropagation();
+		e.preventDefault(); 
 
+		$('.b-header-nav-menu .b-topic-navigation-menu').toggle();
 	});
-	  e.stopPropagation();
-	
+
+});
+
+$(document).on("click", function () {
+    $(".b-header-nav-menu .b-topic-navigation-menu").hide();
 });
 
 	

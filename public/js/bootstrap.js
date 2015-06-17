@@ -592,6 +592,7 @@ if (typeof jQuery === 'undefined') {
 
     var dimension = this.dimension()
 
+
     this.$element
       .removeClass('collapse')
       .addClass('collapsing')[dimension](0)
