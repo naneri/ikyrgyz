@@ -47,6 +47,10 @@ body {
 	position: relative;
 }
 
+.b-header-nav__left .b-header-nav-logo__item {
+	position: relative;
+}
+
 .b-header-nav__middle {
 	float: left;
 	width: 30%;
@@ -126,6 +130,13 @@ body {
 	box-shadow: 0 1px 1px rgba(127,127,127,0.3);
 	-webkit-border-radius: 4px/2px;
 	border-radius: 4px/2px;
+}
+
+.beta {
+	font: 20px 'gabriola';
+	color: #4ca6d2;
+	top: -16px;
+	position: relative;
 }
 
 .online-icon {
@@ -785,6 +796,40 @@ body {
 .b-profile-counters li p:last-child {
 	font: 12px 'PT Sans Caption', sans-serif;
 	color: #676767;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
+	.b-profile__right {
+		float: right;
+		max-width: 300px;
+		width: 100%;
+	}
+
+	.b-profile-top {
+		width: 100%;
+	}
+
+	.b-profile-top__right {
+		width: 100%;
+		float: left;
+	}
+
+	.b-profile-top__left {
+		width: 100%;
+		float: left;
+	}
+
+	.b-profile-middle {
+		border: none;
+	}
+
+	.b-profile-middle-list {
+		display: none;
+	}
+
+	.b-profile-middle .b-profile-counters {
+		border: none;
+	}
 }
 
 .b-user-navigation {

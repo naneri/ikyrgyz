@@ -42,3 +42,18 @@
 		src: url("../fonts/pt-sans-regular.svg#PT Sans") format('svg');
 	}
 }
+
+@font-face {
+	font-family: 'gabriola';
+  src: url("../fonts/gabriola.eot");
+  src: url("../fonts/gabriola.eot?#iefix") format('embedded-opentype'), url("../fonts/gabriola.woff") format('woff'), url("../fonts/gabriola.ttf") format('truetype'), url("../fonts/gabriola.svg#gabriola") format('svg');
+  font-weight: 'normal';
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @	font-face {
+		font-family: 'gabriola';
+		src: url("../fonts/gabriola.svg#gabriola") format('svg');
+	}
+}
