@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}"/>
+    @yield('styles')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('jquery/jquery-ui.js') }}">		</script>
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>

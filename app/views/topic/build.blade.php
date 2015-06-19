@@ -5,7 +5,7 @@
                     <div class="b-widget__inner">
                             <div class="b-widget-list">
                                     <ul>
-                                            <li class="b-widget-list__list"><a href="{{URL::to('topic/create')}}">Топик</a></li>
+                                            <li class="b-widget-list__list topic-icon"><a href="{{URL::to('topic/create')}}">Топик</a></li>
                                            <li style="display:none" class="b-widget-list__list"><a href="">Видео</a></li>
                                            <li style="display:none" class="b-widget-list__list"><a href="">Фото</a></li>
                                            <li style="display:none" class="b-widget-list__list"><a href="">Музыка</a></li>

@@ -540,11 +540,11 @@ $(document).ready(function() {
 		 
 	
 		$(this).next('.b-topic-navigation-menu').stop(false, true ).fadeIn();
-	}, function() {
+	}, function(e) {
 		$(this).next('.b-topic-navigation-menu').stop(false, true).fadeOut();
 
 	});
-	  e.stopPropagation();
+	  
 	
 });
 
