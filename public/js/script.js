@@ -533,12 +533,12 @@ $(document).ready(function() {
 	});
 });
 
-$(document).ready(function(){
-	$(document).click(function(){
+// $(document).ready(function(){
+// 	$(document).click(function(){
 		
-	})
+// 	})
 
-});
+// });
 
 
 
