@@ -39,7 +39,7 @@ class VoteController extends \BaseController {
             if($oComment->user_id == Auth::user()->id){
                 return Response::json(array('error' => 'Вы не можете проголосовать за свой комментарий'));
             }
-            
+
             $voteExists = Vote::where('target_type', 'comment')
                     ->where('user_id', Auth::user()->id)
                     ->where('target_id', $oComment->id)
@@ -83,7 +83,13 @@ class VoteController extends \BaseController {
             
             $oTopic->vote($iValue);
             $oTopic->save();
-            
+
+            BonusRating::addBonusRating('like_dislike_topic', $oTopic->id, Config::get('bonus_rating.like_dislike_topic'));
+            if ($iValue==-1) {
+                BonusRating::addBonusRating('someones_topic_liked_disliked', $oTopic->id, Config::get('bonus_rating.someones_topic_disliked'));
+            } else {
+                BonusRating::addBonusRating('someones_topic_liked_disliked', $oTopic->id, Config::get('bonus_rating.someones_topic_liked'));
+            }
             $this->createVote('topic', $oTopic->id, $iValue, $oTopic->rating);
             $this->setSkillTopicAuthor($oTopic->user_id, $iValue);
             

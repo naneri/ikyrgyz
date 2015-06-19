@@ -65,7 +65,14 @@ class BlogController extends BaseController {
         }
         
         if($blog->save()){
-
+            $anyBlogCreated = BonusRating::where('target_type', "blog_create")
+                            ->where('user_id', Auth::user()->id)
+                            ->exists();
+            if ($anyBlogCreated) {
+                BonusRating::addBonusRating('blog_create', $blog->id, Config::get('bonus_rating.blog_create'));
+            } else {
+                BonusRating::addBonusRating('blog_create', $blog->id, Config::get('bonus_rating.first_blog_create'));
+            }
             BlogRole::createOwner($blog->id, Auth::id());
             
         }

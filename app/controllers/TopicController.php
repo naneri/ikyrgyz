@@ -81,6 +81,12 @@ class TopicController extends BaseController {
         $topic = Topic::find(Input::get('topic_id'));
         if(!$topic || !$topic->canEdit()){
             $topic = $this->createNewTopic();
+            $anyTopicCreated = BonusRating::where('target_type', 'topic_create')
+                ->where('user_id', Auth::user()->id)
+                ->exists();
+            if (!$anyTopicCreated) {
+                BonusRating::addBonusRating('topic_create', $topic->id, Config::get('bonus_rating.first_topic_create'));
+            }
         }
         return $topic;
     }

@@ -30,14 +30,21 @@ class TopicCommentsController extends \BaseController {
                 $result['message'] = $validator;
             } else {
                 $data['user_id'] = Auth::user()->id;
-                $comment = Topiccomment::create($data);
+                $comment = TopicComment::create($data);
                 $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => false))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";
                 $topic = Topic::find($data['topic_id']);
                 NotificationRepository::newTopicComment($topic->user_id, $data['topic_id'], $topic->title);
-
+                $anyCommentCreated = BonusRating::where('target_type', 'comment')
+                                                ->where('user_id', Auth::user()->id)
+                                                ->exists();
+                if ($anyCommentCreated) {
+                    BonusRating::addBonusRating('comment', $topic->id, Config::get('bonus_rating.comment'));
+                } else {
+                    BonusRating::addBonusRating('comment', $topic->id, Config::get('bonus_rating.first_comment'));
+                }
             }
 
             if(Request::ajax()){

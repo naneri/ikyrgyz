@@ -43,7 +43,9 @@ class PhotosController extends \BaseController {
                         $data['user_id'] = Auth::id();
                         $data['album_id'] = $albumId;
                         $data['name'] = $file_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                        $photos[] = Photo::create($data);
+                        $photo = Photo::create($data);
+                        BonusRating::addBonusRating('upload_photo', $photo->id, Config::get('bonus_rating.upload_photo'));
+                        $photos[] = $photo;
                     }
                 }
                 
