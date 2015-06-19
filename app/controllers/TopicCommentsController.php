@@ -31,7 +31,10 @@ class TopicCommentsController extends \BaseController {
             } else {
                 $data['user_id'] = Auth::user()->id;
                 $comment = TopicComment::create($data);
-                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => false))->render();
+                $commentWithUserData = $comment->withUserData();
+                $bonusRating = new BonusRating();
+                $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
+                $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => null, 'with_child' => false))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";
@@ -135,7 +138,10 @@ class TopicCommentsController extends \BaseController {
                 if($comment->canDelete()){
                     $comment->trash = true;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                    $commentWithUserData = $comment->withUserData();
+                    $bonusRating = new BonusRating();
+                    $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
+                    $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['message'] = "Комментарий удален";
                     $result['status'] = "success";
                 } else {
@@ -157,7 +163,10 @@ class TopicCommentsController extends \BaseController {
                 if ($comment->canRestore()) {
                     $comment->trash = false;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                    $commentWithUserData = $comment->withUserData();
+                    $bonusRating = new BonusRating();
+                    $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
+                    $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['comment_id'] = $comment->id;
                     $result['message'] = "Комментарий восстановлен";
                     $result['status'] = "success";
