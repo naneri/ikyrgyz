@@ -14,8 +14,8 @@
 			</div>
 			<div class="b-profile-photo__add">
 				<div class="b-profile-photo-button">
-					<input type="submit" class="b-profile-photo-button__msg user-button " value="Сообщение">
-					<input type="submit" class="b-profile-photo-button__friend" value="Дружить">
+					<a href="{{URL::to('messages/new?reciever=' .  $user->id)}}"><input type="submit" class="b-profile-photo-button__msg user-button " value="Сообщение"></a>
+					<a href="{{URL::to('people/friendRequest/' . $user->id)}}"><input type="submit" class="b-profile-photo-button__friend" value="Дружить"></a>
 					<div class="clear"></div>
 				</div>
 			</div>

@@ -1,6 +1,7 @@
 @import 'nib'
 @import 'nib/normalize'
 @import 'lib/*.styl'
+// @import '../../jeet/stylus/jeet/*.styl'
 
 body
 	width 100%
@@ -44,6 +45,7 @@ body
 				position relative
 			.b-header-nav-logo__item
 				position relative
+			
 
 		&__middle
 			float left
@@ -109,11 +111,11 @@ body
 				border-radius 4px / 2px
 
 .beta
-	font 20px 'gabriola'
+	font 18px 'gabriola'
 	color #4ca6d2
-	top -16px
-	position relative
-	
+	top -3px
+	position absolute
+	left 50px
 	
 
 // .b-header-nav__icon
@@ -654,6 +656,7 @@ body
 
 .b-profile-counters
 	border-bottom $baseBorder
+	padding-top 46px
 	li
 		float left
 		padding 2px 45px
@@ -669,43 +672,26 @@ body
 			
 				font 12px 'PT Sans Caption', sans-serif
 				color $baseFontColorLight
-@media only screen and (min-device-width : 320px) and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 640px) and (max-device-width : 1000px) {
 	.b-profile {
-	
-		// &__left{
-		// 	float none
-		// 	width 50%
-		// 	margin auto
-		// }
-		&__right {
-			
-			float right
-			max-width 300px
-			width 100%
-		}
-	}
-	.b-profile-top {
-		width 100%
 		
-		&__right {
-			width 100%
-			float left
-		}
 		&__left {
-			width 100%
+			
+			
+
+		}
+		&__right {
+			width 50%
 			float left
 		}
+		
 	}
-	.b-profile-middle {
-		border none
-		&-list {
-			display none
-		}
-	.b-profile-counters {
-		border none
+	.b-profile-top{
+		//
 	}
-	}
-}
+	
+		
+}	
 .b-user-navigation
 	padding-bottom 2%
 .b-user-navigation-list
