@@ -12,6 +12,13 @@
 					<img src="{{asset($user->avatar())}}" style="width: 244px; height: 244px;" />
 				</a>
 			</div>
+			<div class="b-profile-photo__add">
+				<div class="b-profile-photo-button">
+					<input type="submit" class="b-profile-photo-button__msg user-button " value="Сообщение">
+					<input type="submit" class="b-profile-photo-button__friend" value="Дружить">
+					<div class="clear"></div>
+				</div>
+			</div>
 			<script>
 				$(document).ready(function(){
 					$('.b-user-profile .b-user-profile__left').photobox('a', {thumbs: false, autoplayBtn: false,});
