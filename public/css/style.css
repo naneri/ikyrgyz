@@ -2434,8 +2434,7 @@ Form Style
 }
 
 .b-topic-create-modal-content__item .b-topic-create-modal-content__btns {
-	display: inline-block;
-	margin-left: 260px;
+	float: right;
 }
 
 .b-topic-create-modal-content__item .change-skin-title {
@@ -2606,6 +2605,27 @@ Form Style
 
 .b-topic-create-gallery-content-table__item:nth-child(even) {
 	background: #fff;
+}
+
+.topic-skin {
+	display: block;
+	width: 134px;
+	height: 34px;
+	opacity: 0;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	overflow: hidden;
+	-webkit-box-shadow: #bababa seBoxShadow;
+	box-shadow: #bababa seBoxShadow;
+	cursor: pointer;
+}
+
+.b-topic-create-modal-content-skin {
+	float: right;
+	height: 34px;
+	width: 134px;
+	overflow: hidden;
+	background: url("../img/227.png") no-repeat;
 }
 
 .b-topic-create-music {
