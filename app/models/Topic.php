@@ -6,8 +6,7 @@ class Topic extends Eloquent {
         
     public static $rules = array(
         'title' => 'required|min:3',
-        'description' => 'required',
-        'blog_id' => 'required'
+        'blog_id' => 'required',
     );
 
     protected static $orderType = [

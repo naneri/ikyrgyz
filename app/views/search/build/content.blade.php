@@ -2,10 +2,16 @@
     @foreach($content as $entry)
         @if($entry->is_topic)
             <div class="b-user-interface-content-block">
-                <div class="b-user-interface-content-block__image"><img src="{{asset(($entry->image_url)?$entry->image_url:'img/56.png')}}" alt=""/></div>
+                <div class="b-user-interface-content-block__image">
+                    <a href="{{URL::to('topic/show/'.$entry->id)}}">
+                        <img src="{{asset(($entry->image_url)?$entry->image_url:'img/56.png')}}" alt=""/>
+                    </a>
+                </div>
                 <div class="b-user-interface-content-block__text">
                     <div class="b-user-interface-content-block-text">
-                        <p class="b-user-interface-content-block-text__title" style="max-width: 500px;">{{$entry->title}}</p>
+                        <a href="{{URL::to('topic/show/'.$entry->id)}}">
+                            <p class="b-user-interface-content-block-text__title" style="max-width: 500px;">{{$entry->title}}</p>
+                        </a>
                         <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}, {{ $entry->blog_name }}</p>
                         <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
                         <p class="b-user-interface-content-block-text__desc">{{ trans('network.topic') }}</p>
@@ -25,10 +31,16 @@
             </div>
         @elseif($entry->is_topic == 0)
             <div class="b-user-interface-content-block">
-                <div class="b-user-interface-content-block__image"><img src="{{asset(($entry->avatar)?$entry->avatar:'img/56.png')}}" alt=""/></div>
+                <div class="b-user-interface-content-block__image">
+                    <a href="{{URL::to('blog/show/'.$entry->id)}}">
+                        <img src="{{asset(($entry->avatar)?$entry->avatar:'img/56.png')}}" alt=""/>
+                    </a>
+                </div>
                 <div class="b-user-interface-content-block__text">
                     <div class="b-user-interface-content-block-text">
-                        <p class="b-user-interface-content-block-text__title" style="max-width: 500px;">{{$entry->title}}</p>
+                        <a href="{{URL::to('blog/show/'.$entry->id)}}">
+                            <p class="b-user-interface-content-block-text__title" style="max-width: 500px;">{{$entry->title}}</p>
+                        </a>
                         <p class="b-user-interface-content-block-text__date">{{$entry->created_at}}</p>
                         <p class="b-user-interface-content-block-text__name">{{$entry->first_name.' '.$entry->last_name}}</p>
                         <p class="b-user-interface-content-block-text__desc">{{ trans('network.blog') }}</p>
