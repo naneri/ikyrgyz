@@ -15,6 +15,8 @@ return array(
 
 	'user_site'								=> URL::to('/'),
         'topic_comment.hide_comment_rating' => -5,
+    
+        'google-recaptcha-secret-key' => '6LdL0wgTAAAAABq1MJ_xxxxlvSmhIgKm3kPSLpvU',
       
       'yandex-metrika' => array(
             'kyrgyz' => '<script type="text/javascript">
