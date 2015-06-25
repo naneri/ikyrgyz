@@ -538,11 +538,14 @@ body {
 .b-profile__left {
 	float: left;
 	width: 255px;
+	padding-left: 15px;
+	padding-top: 15px;
 }
 
 .b-profile__right {
 	float: right;
-	width: 745px;
+	width: 730px;
+	padding-top: 15px;
 }
 
 .b-profile-title {
@@ -713,6 +716,8 @@ body {
 	padding: 2px 0;
 	border: 1px solid #d5d5d5;
 	cursor: pointer;
+	border-left: none;
+	border-right: none;
 }
 
 .b-profile-middle-info .modal-lg {
@@ -769,7 +774,7 @@ body {
 
 .b-profile-middle-list {
 	width: 300px;
-	padding: 8px 0 8px 20px;
+	padding: 8px 0 59px 20px;
 }
 
 .b-profile-middle-list__left {
@@ -806,7 +811,6 @@ body {
 
 .b-profile-counters {
 	border-bottom: 1px solid #d5d5d5;
-	padding-top: 46px;
 }
 
 .b-profile-counters li {
@@ -833,9 +837,69 @@ body {
 }
 
 @media only screen and (min-device-width: 640px) and (max-device-width: 1000px) {
+	.b-profile__left {
+		padding-left: 30px;
+	}
+
 	.b-profile__right {
 		width: 50%;
 		float: left;
+	}
+
+	.b-profile-top__right {
+		float: none;
+		width: 100%;
+	}
+
+	.b-profile-top__left {
+		float: none;
+		width: 100%;
+	}
+
+	.b-profile-middle {
+		width: 100%;
+	}
+
+	.b-profile-top-button {
+		padding-left: 20px;
+	}
+
+	.b-profile-counters {
+		display: none;
+	}
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 640px) {
+	.b-profile__left {
+		float: none;
+		width: 100%;
+		margin: auto;
+		padding-left: 30px;
+	}
+
+	.b-profile__right {
+		width: 100%;
+		float: none;
+		margin: auto;
+		padding-left: 30px;
+	}
+
+	.b-profile-top__left {
+		float: none;
+		width: 100%;
+	}
+
+	.b-profile-top__right {
+		float: none;
+		width: 100%;
+	}
+
+	.b-profile-counters {
+		display: none;
+	}
+
+	.b-profile-top-button {
+		padding-left: 30px;
 	}
 }
 
@@ -968,6 +1032,21 @@ body {
 .b-widget-list__list:nth-child(8) a {
 	background-position: -514px 0;
 	width: 40px;
+}
+
+@media only screen and (max-device-width: 1000px) {
+	.b-user-navigation {
+		width: 100%;
+	}
+
+	.b-user-navigation-list__list {
+		width: 100%;
+		padding-left: 10px;
+	}
+
+	.b-user-navigation-list__list span {
+		display: none;
+	}
 }
 
 .b-section-wrapper {

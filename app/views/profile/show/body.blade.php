@@ -168,7 +168,7 @@
 <script>
         $(document).ready(function() {
                 //$('.b-user-media').prependTo(".masonry");
-                $('.masonry').css({'width': '495px', 'float': 'left'});
+                $('.masonry').addClass('b-user-wall-495')
                 $('.video-item').each(function(){
                         var $video = $(this).find('div.youtube');
                         $video = $video.find('object').attr('width', '120').attr('height', '120');
@@ -201,8 +201,6 @@
         .b-user-media-video-top__btn a{
                 float: right;
         }
-        .b-user-wall{
-                width: 590px;
-        }
+       
 </style>
 @endif

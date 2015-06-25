@@ -15,7 +15,7 @@
 		  <div class="b-topic-create-modal">
 			<div class="b-topic-create-modal__inner">
 			  <div class="b-topic-create-modal__title">{{ trans('network.create-topic') }}
-				<button class="btn-close"></button>
+				<!-- <button class="btn-close"></button> -->
 			  </div>
 			  <div class="b-topic-create-modal__content">
 				  <div class="b-topic-create-modal-content">
