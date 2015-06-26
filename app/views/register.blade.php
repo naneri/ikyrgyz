@@ -108,13 +108,13 @@
                                             <li class="b-authorization-inner-block-list__list">
                                                 <div class="b-authorization-inner-block-list-pass">
                                                     <p>Ваш пароль</p>
-                                                    <input name="password" type="text" class="pass registration-input"/>
+                                                    <input name="password" type="password" class="pass registration-input"/>
                                                 </div>
                                             </li>
                                             <li class="b-authorization-inner-block-list__list">
                                                 <div class="b-authorization-inner-block-list-repeat">
                                                     <p>Повторите пароль</p>
-                                                    <input name="" type="text" class="pass registration-input"/>
+                                                    <input name="password_confirmation" type="password" class="pass registration-input"/>
                                                 </div>
                                             </li>
                                             <li class="b-authorization-inner-block-list__list">

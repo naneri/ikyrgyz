@@ -44,6 +44,7 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('register', 'AuthController@getRegister');
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
+    Route::post('register-remote', 'AuthController@postRegisterRemote');
 });
 Route::group(array('before' => 'notauth'), function(){
     Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');

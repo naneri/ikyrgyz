@@ -73,25 +73,41 @@ class AuthController extends BaseController {
     public function getRegister(){
         return View::make('register');
     }
+    
+    public function postRegisterRemote(){
+        return $this->postRegister(true);
+    }
 
     /**
      * Обработка post запроса с данными 
      * @return [type] [description]
      */
-    public function postRegister(){
+    public function postRegister($remote = false){
 
         // вытаскиваем правила для валидации
         $rules = User::$rules;
+        
+        if($remote){
+            $rules['g-recaptcha-response'] = 'required|gRecaptchaVerify';
+            Validator::extend('gRecaptchaVerify', function ($attribute, $captchaValue, $parameters) {
+                $secretKey = Config::get('social.google-recaptcha-secret-key');
+                $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&response=" . $captchaValue . "&remoteip=" . $_SERVER['REMOTE_ADDR']), true);
+                return $response['success'] == true;
+            });
+        } else {
+            $rules['recaptcha_response_field'] = 'required|recaptcha';
+        }
+        $messages = array('gRecaptchaVerify' => 'Incorrect captcha form!');
 
         // указываем валидатору какую БД использовать 
         $verifier = App::make('validation.presence');
         $verifier->setConnection('mysql_users');
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules, $messages);
         $validator->setPresenceVerifier($verifier);
 
         // проводим валидацию
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator);
+            return View::make('register');
         }
 
         // создаём нового юзера и сохраняем данные

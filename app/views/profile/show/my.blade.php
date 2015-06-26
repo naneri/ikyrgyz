@@ -410,7 +410,35 @@
 		</div>
 	</div>
 </div>
+
+<ol id="outline">
+
+  	<li data-class="b-profile-top-button__button" data-options="tipLocation:top;tipAnimation:fade" data-button="Далее:создать топик">
+	<p>Посмотрите случайные профили.</p>
+	</li>
+
+  	<li data-class="topic-icon" data-button="Закрыть">
+	<p>Создайте топик</p>
+	</li>
+
+</ol>
+
+<script>
+ $(window).load(function(){
+	console.log('started');
+	$("#outline").joyride({
+		'tipLocation': 'bottom',         // 'top' or 'bottom' in relation to parent
+		'nubPosition': 'auto',           // override on a per tooltip bases
+		'scrollSpeed': 300               // Page scrolling speed in ms
+	});
+ })
+</script>
+
+
 @stop
+
+
+
 <?php /*
 <div class="b-content">
 	<div class="b-user-profile">
@@ -464,3 +492,11 @@
 @stop
 
 */?>
+@section('styles')
+	<link rel="stylesheet" href="{{ asset('css/joyride-2.1.css') }}">
+@stop
+
+@section('scripts')
+
+  <script src="{{ asset('js/jquery.joyride-2.1.js') }}"></script>
+@stop

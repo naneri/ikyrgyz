@@ -156,3 +156,8 @@
 	</div>
 @stop
 
+
+@section('scripts')
+
+  <script src="{{ asset('jquery.joyride-2.1') }}"></script>
+@stop
