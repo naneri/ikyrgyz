@@ -670,6 +670,7 @@ body {
 	font: 18px 'PT Sans Capion Bold', sans-serif;
 	color: #25ad85;
 	padding-left: 10px;
+	font-weight: bold;
 }
 
 .b-profile-top-information__name {
@@ -746,35 +747,32 @@ body {
 	background: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
-	border: 1px solid #d5d5d5;
+	border-top: 1px solid #d5d5d5;
+	border-bottom: 1px solid #d5d5d5;
 }
 
 .b-profile-middle-title__title {
 	float: left;
 	font: 14px 'pt sans caption', sans-serif;
 	color: #e16549;
+	padding-left: 20px;
 }
 
 .b-profile-middle-title__button {
 	float: right;
+	padding-right: 20px;
+}
+
+.b-profile-middle-title__button a:link,
+.b-profile-middle-title__button a:visited {
 	font: 14px 'pt sans caption', sans-serif;
 	color: #676767;
 	cursor: pointer;
 }
 
-.b-profile-middle-title__button:after {
-	display: block;
-	content: '';
-	background: url("../img/109.png") no-repeat;
-	width: 6px;
-	height: 12px;
-	float: right;
-	margin: 3px;
-}
-
 .b-profile-middle-list {
 	width: 300px;
-	padding: 8px 0 59px 20px;
+	padding: 8px 0 60px 20px;
 }
 
 .b-profile-middle-list__left {
@@ -807,6 +805,17 @@ body {
 
 .b-profile-middle-wrapper__inner {
 	padding-bottom: 10px;
+}
+
+.btn-disappear {
+	display: block;
+	content: '';
+	background: url("../img/109.png") no-repeat;
+	width: 6px;
+	height: 12px;
+	float: right;
+	margin: 3px;
+	padding-left: 5px;
 }
 
 .b-profile-counters {
@@ -896,10 +905,6 @@ body {
 
 	.b-profile-counters {
 		display: none;
-	}
-
-	.b-profile-top-button {
-		padding-left: 30px;
 	}
 }
 

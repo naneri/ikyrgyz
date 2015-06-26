@@ -625,10 +625,10 @@ $(document).ready(function(){
 
 
 $(function() {
-	$('.b-profile-middle-title__button').click(function(event){
+	$('.b-profile-middle-title__button .btn').click(function(event){
 		event.preventDefault();
 
-	$(this).parent().next().toggle();
+	$(this).parent().parent().next().toggle();
 });
 
 });

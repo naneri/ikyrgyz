@@ -5,10 +5,10 @@
 	<div class="b-profile">
 		<div class="b-profile__left">
 			<div class="b-profile-photo">
-                                <div class="b-profile-photo__image">
-                                    @include('profile.edit.set-avatar', array('reloadConfirm' => true))
+								<div class="b-profile-photo__image">
+									@include('profile.edit.set-avatar', array('reloadConfirm' => true))
 				</div>
-                            <a href="" class="b-profile-photo__button" onclick="javascript: $('div.avatar-view.user-image').click(); return false;">Загрузить фото</a>
+							<a href="" class="b-profile-photo__button" onclick="javascript: $('div.avatar-view.user-image').click(); return false;">Загрузить фото</a>
 
 			</div>
 		</div>
@@ -64,11 +64,11 @@
 					<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 					
 						 <div class="modal-dialog modal-lg">
-		    				<div class="modal-content">
+							<div class="modal-content">
 
-		    					<div class="b-profile-title">Полная информация</div>
-		    					<div class="b-profile__left">
-		    						<div class="b-profile-photo">
+								<div class="b-profile-title">Полная информация</div>
+								<div class="b-profile__left">
+									<div class="b-profile-photo">
 										<div class="b-profile-photo__image">
 											<a href="{{asset($user->avatar())}}" class="user-image">
 												<img src="{{asset($user->avatar())}}" style="width: 244px; height: 244px;" />
@@ -96,9 +96,10 @@
 													<div class="b-profile-middle-title__title">
 														Основная информация
 													</div>
-                                                                                                        <div class="b-profile-middle-title__button-edit">
-                                                                                                            <a href="{{URL::to('profile/edit/main')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
-                                                                                                        </div>
+										<div class="b-profile-middle-title__button">
+											<a href="{{URL::to('profile/edit/main')}}" >Изменить</a>
+											<a href="" class="btn btn-disappear"></a>
+										</div>
 													<div class="clear"></div>
 												</div>
 												<div class="b-profile-middle-list">
@@ -139,10 +140,11 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Контакты
-                                                                                                        </div>
-                                                                                                        <div class="b-profile-middle-title__button-edit">
-                                                                                                            <a href="{{URL::to('profile/edit/contact')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
-                                                                                                        </div>
+															</div>
+											<div class="b-profile-middle-title__button">
+												<a href="{{URL::to('profile/edit/contact')}}" >Изменить</a>
+												<a href="" class="btn btn-disappear"></a>
+											</div>
 													<div class="clear"></div>
 												</div>
 												<div class="b-profile-middle-list">
@@ -171,10 +173,11 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Образование
-                                                                                                        </div>
-                                                                                                        <div class="b-profile-middle-title__button-edit">
-                                                                                                            <a href="{{URL::to('profile/edit/study')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
-                                                                                                        </div>
+																										</div>
+										<div class="b-profile-middle-title__button">
+											<a href="{{URL::to('profile/edit/study')}}"  >Изменить</a>
+											<a href="" class="btn btn-disappear"></a>
+										</div>
 													<div class="clear"></div>
 												</div>
 										<div class="b-profile-middle-list" style="width: 400px;">
@@ -210,10 +213,11 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Работа
-                                                                                                        </div>
-                                                                                                        <div class="b-profile-middle-title__button-edit">
-                                                                                                            <a href="{{URL::to('profile/edit/job')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
-                                                                                                        </div>
+																										</div>
+							<div class="b-profile-middle-title__button">
+								<a href="{{URL::to('profile/edit/job')}}"  >Изменить</a>
+								<a href="" class="btn btn-disappear"></a>
+							</div>
 													<div class="clear"></div>
 												</div>
 							<div class="b-profile-middle-list">
@@ -247,43 +251,45 @@
 												 <div class="b-profile-middle-title">
 													<div class="b-profile-middle-title__title">
 														Семья
-                                                                                                        </div>
-                                                                                                        <div class="b-profile-middle-title__button-edit">
-                                                                                                            <a href="{{URL::to('profile/edit/family')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
-                                                                                                        </div>
+													</div>
+									<div class="b-profile-middle-title__button">
+										<a href="{{URL::to('profile/edit/family')}}"  >Изменить</a>
+										<a href="" class="btn btn-disappear"></a>
+									</div>
 													<div class="clear"></div>
 												</div>
-																								<div class="b-profile-middle-list">
-																									<?php $members = $user->getProfileItems('family'); ?>
+											<div class="b-profile-middle-list">
+												<?php $members = $user->getProfileItems('family'); ?>
 													<ul>
 													<li class="b-profile-middle-list__left">
-																											@if($user->description->marital_status)
+														@if($user->description->marital_status)
 														<p class="b-profile-middle-list__item">Семейное положение:</p>
-																											@endif
-																												@foreach($members as $member)
+														@endif
+															@foreach($members as $member)
 														<p class="b-profile-middle-list__item">{{trans('profile.family')[$member->subtype]}}</p>
-																												@endforeach
+															@endforeach
 													</li>
-																										<li class="b-profile-middle-list__right">
-																											@if($user->description->marital_status)
+														<li class="b-profile-middle-list__right">
+														@if($user->description->marital_status)
 														<p class="b-profile-middle-list__item">{{$maritalStatus}}</p>
-																											@endif
-																												@foreach($members as $member)
+														@endif
+														@foreach($members as $member)
 														<p class="b-profile-middle-list__item">{{$member->value}}</p>
-																												@endforeach
+														@endforeach
 													</li>
 													<div class="clear"></div>
 													</ul>
 												</div>
-																				</div>
+												</div>
 												<div class="b-profile-middle-wrapper__inner">
 													<div class="b-profile-middle-title">
 														<div class="b-profile-middle-title__title">
 															Дополнительно
-                                                                                                                </div>
-                                                                                                                <div class="b-profile-middle-title__button-edit">
-                                                                                                                    <a href="{{URL::to('profile/edit/additional')}}"  style="float: right; font: 14px 'pt sans caption', sans-serif; color: #676767;">Изменить</a>
-                                                                                                                </div>
+														</div>
+														<div class="b-profile-middle-title__button">
+															<a href="{{URL::to('profile/edit/additional')}}"  >Изменить</a>
+															<a href="" class="btn btn-disappear"></a>
+														</div>
 														<div class="clear"></div>
 													</div>
 													<div class="b-profile-middle-list">
@@ -321,10 +327,10 @@
 									</div>
 								</div>
 								</div>
-		    					
-		    					<div class="clear"></div>
-		    				</div>
-  						</div>
+								
+								<div class="clear"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -334,38 +340,38 @@
 
 			<div class="b-profile-counters">
 				<ul>
-                                            @if($friends->count() > 0)
-                                                <li>
-                                                    <a href="{{URL::to('profile/'.$user->id.'/friends')}}">
-                                                        <p>{{$friends->count()}}</p>
-                                                        <p>Друзей</p>
-                                                    </a>
-                                                </li>
-                                            @endif
-                                            @if($user->id != Auth::id() && $mutualFriends->count() > 0)
-                                                <li><a href="{{URL::to('profile/'.$user->id.'/mutualFriends')}}">
-                                                        <p>{{$mutualFriends->count()}}</p>
-                                                        <p>Общих</p>
-                                                </a></li>
-                                            @endif
-                                            @if($subscribers->count() > 0)
-                                            <li><a href="{{URL::to('profile/'.$user->id.'/subscribers')}}">
-                                                <p>{{$subscribers->count()}}</p>
-							<p>Подписчиков</p>
-                                            </a></li>
-                                        @endif
-                                        @if($photos->count() > 0)
-                                        <li><a href="{{URL::to('profile/'.$user->id.'/photos')}}">
-                                                <p>{{$photos->count()}}</p>
-							<p>Фотографии</p>
-                                            </a></li>
-                                        @endif
-                                        @if($videos->count() > 0)
-                                        <li><a href="{{URL::to('profile/'.$user->id.'/videos')}}">
-                                                <p>{{$videos->count()}}</p>
-							<p>Видео</p>
-                                            </a></li>
-                                        @endif
+						@if($friends->count() > 0)
+							<li>
+								<a href="{{URL::to('profile/'.$user->id.'/friends')}}">
+									<p>{{$friends->count()}}</p>
+									<p>Друзей</p>
+								</a>
+							</li>
+						@endif
+						@if($user->id != Auth::id() && $mutualFriends->count() > 0)
+							<li><a href="{{URL::to('profile/'.$user->id.'/mutualFriends')}}">
+									<p>{{$mutualFriends->count()}}</p>
+									<p>Общих</p>
+							</a></li>
+						@endif
+						@if($subscribers->count() > 0)
+						<li><a href="{{URL::to('profile/'.$user->id.'/subscribers')}}">
+							<p>{{$subscribers->count()}}</p>
+		<p>Подписчиков</p>
+						</a></li>
+					@endif
+					@if($photos->count() > 0)
+					<li><a href="{{URL::to('profile/'.$user->id.'/photos')}}">
+							<p>{{$photos->count()}}</p>
+		<p>Фотографии</p>
+						</a></li>
+					@endif
+					@if($videos->count() > 0)
+					<li><a href="{{URL::to('profile/'.$user->id.'/videos')}}">
+							<p>{{$videos->count()}}</p>
+		<p>Видео</p>
+						</a></li>
+					@endif
 					<div class="clear"></div>
 				</ul>
 			</div>
@@ -376,19 +382,19 @@
 	<div class="b-user-navigation">
 		<div class="b-user-navigation-list">
 			<ul class="">
-                            <li class="b-user-navigation-list__list tab-link current" data-tab="tab-1" ><a href="{{URL::to('profile')}}">Лента</a></li>
-                            <li class="b-user-navigation-list__list" data-tab="tab-2"><a href="{{URL::to('profile/messages')}}">Сообщения</a>@if(count(@$new_messages))<span>{{count($new_messages)}}</span>@endif</li>
-                            <li class="b-user-navigation-list__list" data-tab="tab-4"><a href="{{URL::to('profile/publications')}}">Публикации</a><span>{{$user->publications(10000)->count()}}</span></li>
-                            <li class="b-user-navigation-list__list" data-tab="tab-3"><a href="{{URL::to('profile/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
-                            <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscriptions')}}">Подписано</a><span>{{$user->subscriptions()->count()}}</span></li>
-                                <li class="b-user-navigation-list__list"><a href="{{URL::to('profile/favourites')}}">Избранное</a><span>{{$user->favourites()->count()}}</span></li>
+							<li class="b-user-navigation-list__list tab-link current" data-tab="tab-1" ><a href="{{URL::to('profile')}}">Лента</a></li>
+							<li class="b-user-navigation-list__list" data-tab="tab-2"><a href="{{URL::to('profile/messages')}}">Сообщения</a>@if(count(@$new_messages))<span>{{count($new_messages)}}</span>@endif</li>
+							<li class="b-user-navigation-list__list" data-tab="tab-4"><a href="{{URL::to('profile/publications')}}">Публикации</a><span>{{$user->publications(10000)->count()}}</span></li>
+							<li class="b-user-navigation-list__list" data-tab="tab-3"><a href="{{URL::to('profile/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
+							<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscriptions')}}">Подписано</a><span>{{$user->subscriptions()->count()}}</span></li>
+								<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/favourites')}}">Избранное</a><span>{{$user->favourites()->count()}}</span></li>
 				<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/edit/main')}}">Настройки</a></li>
 				<div class="clear"></div>
 			</ul>
 		</div>
 	</div>
 
-    @include('profile.show.body', compact('user', 'items', 'page'))
+	@include('profile.show.body', compact('user', 'items', 'page'))
 	<div class="b-publication tab-content">
 		<div class="b-publication-sort b-user-wall">
 			<ul>
