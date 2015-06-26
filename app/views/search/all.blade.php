@@ -1,8 +1,8 @@
 @extends('misc.layout')
 
 @section('content')
-  <!--   {{HTML::style('css/bootstrap.css')}}
-    {{HTML::style('css/bootstrap-select.css')}} -->
+    {{HTML::style('css/bootstrap.css')}}
+    {{HTML::style('css/bootstrap-select.css')}}
 <div class="b-content">
     <div class="b-user-interface">
         <div class="b-user-interface__header">

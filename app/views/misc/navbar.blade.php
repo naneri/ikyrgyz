@@ -66,7 +66,7 @@
 				<ul class="b-header-nav-list">
 					<li class="b-header-nav__left">
 						<div class="b-header-nav-logo">
-							<div class="b-header-nav-logo__item"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}"  alt="logo"/><span class="logo"></span></a></div>
+							<div class="b-header-nav-logo__item"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}"  alt="logo"/><span class="logo beta">Beta</span></a></div>
 						</div>
 						<div class="b-header-nav-user">
 							<div class="b-header-nav-user__item">
@@ -202,7 +202,7 @@
 
 					<li class="b-header-nav__right">
 						<div class="b-header-nav-search">
-							<input type="text" class="b-header-nav-search__item" id="nav-	bar-search-field" placeholder="{{ trans('network.search') }}">
+							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
 						</div>
                         <div class="b-header-nav-search-results" >
                         	<button id="show-all-results">{{ trans('network.show-all-results') }}</button>

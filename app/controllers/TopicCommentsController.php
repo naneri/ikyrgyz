@@ -30,14 +30,24 @@ class TopicCommentsController extends \BaseController {
                 $result['message'] = $validator;
             } else {
                 $data['user_id'] = Auth::user()->id;
-                $comment = Topiccomment::create($data);
-                $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => null, 'with_child' => false))->render();
+                $comment = TopicComment::create($data);
+                $commentWithUserData = $comment->withUserData();
+                $bonusRating = new BonusRating();
+                $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
+                $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => null, 'with_child' => false))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";
                 $topic = Topic::find($data['topic_id']);
                 NotificationRepository::newTopicComment($topic->user_id, $data['topic_id'], $topic->title);
-
+                $anyCommentCreated = BonusRating::where('target_type', 'comment')
+                                                ->where('user_id', Auth::user()->id)
+                                                ->exists();
+                if ($anyCommentCreated) {
+                    BonusRating::addBonusRating('comment', $topic->id, Config::get('bonus_rating.comment'));
+                } else {
+                    BonusRating::addBonusRating('comment', $topic->id, Config::get('bonus_rating.first_comment'));
+                }
             }
 
             if(Request::ajax()){
@@ -128,7 +138,10 @@ class TopicCommentsController extends \BaseController {
                 if($comment->canDelete()){
                     $comment->trash = true;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                    $commentWithUserData = $comment->withUserData();
+                    $bonusRating = new BonusRating();
+                    $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
+                    $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['message'] = "Комментарий удален";
                     $result['status'] = "success";
                 } else {
@@ -150,7 +163,10 @@ class TopicCommentsController extends \BaseController {
                 if ($comment->canRestore()) {
                     $comment->trash = false;
                     $comment->save();
-                    $result['comment'] = View::make('comments.item', array('comment' => $comment->withUserData(), 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                    $commentWithUserData = $comment->withUserData();
+                    $bonusRating = new BonusRating();
+                    $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
+                    $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['comment_id'] = $comment->id;
                     $result['message'] = "Комментарий восстановлен";
                     $result['status'] = "success";

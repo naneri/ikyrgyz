@@ -15,9 +15,9 @@
                 </div>
                 <div class="form-group">
                     Дата рождения:
-                    {{Form::select('day', $days, $birthday['day'], array('class' => 'selectpicker form-control'))}}
-                    {{Form::select('month', $month, $birthday['month'], array('class' => 'selectpicker form-control'))}}
-                    {{Form::select('year', $years, $birthday['year'], ['class' => 'selectpicker form-control'])}}
+                    {{Form::select('day', $days, $birthday['day'], array('class' => 'form-control'))}}
+                    {{Form::select('month', $month, $birthday['month'], array('class' => 'form-control'))}}
+                    {{Form::select('year', $years, $birthday['year'], ['class' => 'form-control'])}}
                     {{Form::select('birthday_access', $access, $user['description']->birthday_access)}}
                 </div>
                 <div class="form-group">
@@ -28,14 +28,14 @@
                 </div>
                 <div class="form-group">
                     Вы проживаете:
-                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
-                    {{Form::select('liveplace_city_id', City::getAllForView(), $user['description']->liveplace_city_id, array('class' => 'select-city form-control'))}}
+                    {{Form::select('liveplace_country_id', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'select-country form-control'))}}
+                    {{Form::select('liveplace_city_id', City::getCitiesForView($user['description']->liveplace_country_id), $user['description']->liveplace_city_id, array('class' => 'select-city form-control'))}}
                     {{Form::select('liveplace_access', $access, $user['description']->liveplace_access)}}
                 </div>
                 <div class="form-group">
                     Ваша родина:
-                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
-                    {{Form::select('birthplace_city_id', City::getAllForView(), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
+                    {{Form::select('birthplace_country_id', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'select-country form-control'))}}
+                    {{Form::select('birthplace_city_id', City::getCitiesForView($user['description']->birthplace_country_id), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
                     {{Form::select('birthplace_access', $access, $user['description']->birthplace_access)}}
                 </div>
                 {{Form::submit('Сохранить')}}

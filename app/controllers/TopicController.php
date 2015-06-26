@@ -81,6 +81,12 @@ class TopicController extends BaseController {
         $topic = Topic::find(Input::get('topic_id'));
         if(!$topic || !$topic->canEdit()){
             $topic = $this->createNewTopic();
+            $anyTopicCreated = BonusRating::where('target_type', 'topic_create')
+                ->where('user_id', Auth::user()->id)
+                ->exists();
+            if (!$anyTopicCreated) {
+                BonusRating::addBonusRating('topic_create', $topic->id, Config::get('bonus_rating.first_topic_create'));
+            }
         }
         return $topic;
     }
@@ -131,6 +137,8 @@ class TopicController extends BaseController {
             $comments = $topic->commentsWithDataSortBy('old');
             $commentsSort = 'old';
             $creator = User::findOrFail($topic->user_id);
+            $bonusRating = new BonusRating();
+            $creator->rating += $bonusRating->getUsersBonusRating($creator->id);
             $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
             $topic->increment('count_read');
 

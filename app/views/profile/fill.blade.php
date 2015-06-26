@@ -102,11 +102,11 @@
 										<div class="b-user-info-block-label-item__title">Вы проживаете?<b>*</b></div>
 										<div class="b-user-info-block-label-item__labels">
 											<p class="b-user-info-block-label-item__desc">Страна</p>
-                                            {{Form::select('live_country', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
+                                            {{Form::select('live_country', Country::getAllForView(), $user['description']->liveplace_country_id, array('class' => 'select-country form-control'))}}
 										</div>
 										<div class="b-user-info-block-label-item__labels">
-											<p class="b-user-info-block-label-item__desc">Город</p>
-                                            {{Form::select('live_city', City::getCitiesByCountryId($user['description']->liveplace_country_id), $user['description']->liveplace_city_id, array('class' => 'selectpicker select-city form-control'))}}
+                                                                                    <p class="b-user-info-block-label-item__desc">Город</p>
+                                            {{Form::select('live_city', City::getCitiesForView($user['description']->liveplace_country_id), $user['description']->liveplace_city_id, array('class' => 'select-city form-control'))}}
 										</div>
 									</div>
 
@@ -119,12 +119,12 @@
 										<div class="b-user-info-block-label-item__title">Ваша родина?</div>
 										<div class="b-user-info-block-label-item__labels">
 											<p  class="b-user-info-block-label-item__desc">Страна</p>
-                                            {{Form::select('birth_country', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'selectpicker select-country form-control'))}}
+                                            {{Form::select('birth_country', Country::getAllForView(), $user['description']->birthplace_country_id, array('class' => 'select-country form-control'))}}
 
 										</div>
 										<div class="b-user-info-block-label-item__labels">
 											<p  class="b-user-info-block-label-item__desc">Город</p>
-                                            {{Form::select('birth_city', City::getCitiesByCountryId($user['description']->birthplace_country_id), $user['description']->birthplace_city_id, array('class' => 'selectpicker select-city form-control'))}}
+                                            {{Form::select('birth_city', City::getCitiesForView($user['description']->birthplace_country_id), $user['description']->birthplace_city_id, array('class' => 'select-city form-control'))}}
 										</div>
 									</div>
 

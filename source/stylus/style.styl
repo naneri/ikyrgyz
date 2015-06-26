@@ -1,6 +1,8 @@
 @import 'nib'
 @import 'nib/normalize'
 @import 'lib/*.styl'
+// @import '../../jeet/stylus/jeet/*.styl'
+
 body
 	width 100%
 	background #e5e5e5
@@ -26,6 +28,7 @@ body
 				background
 			span
 				margin-left 10px
+				
 		&__left
 			float left
 			width 35%
@@ -40,7 +43,9 @@ body
 				padding-right 20px
 			.b-header-nav-user
 				position relative
-				
+			.b-header-nav-logo__item
+				position relative
+			
 
 		&__middle
 			float left
@@ -105,7 +110,13 @@ body
 				box-shadow $baseBoxShadow
 				border-radius 4px / 2px
 
-
+.beta
+	font 18px 'gabriola'
+	color #4ca6d2
+	top -3px
+	position absolute
+	left 50px
+	
 
 // .b-header-nav__icon
 // 	border 1px solid #374C77
@@ -168,9 +179,11 @@ body
 		position absolute
 		top 80px
 		left 0
+		
 	.dropdown-list
 		display block
 		z-index 2000
+		box-shadow 1px 1px 10px 2px rgba(0,0,0,0.46)	
 		dd
 			a
 				line-height 30px
@@ -454,12 +467,19 @@ body
 	background #fff
 	padding-bottom 16px
 	
+	
 	&__left
 		float left
 		width 255px
+		padding-left 15px
+		padding-top 15px
+		
+		
+		
 	&__right 
 		float right
-		width 745px
+		width 730px
+		padding-top 15px
 	&-title
 		background $lightGradient		
 		
@@ -485,7 +505,26 @@ body
 		padding 5px
 		background #fff
 		border-bottom 5px solid #a5c04d
-	
+.b-profile-photo-button
+	//
+	&__msg
+		width 130px
+		height 42px
+		background $lightGradient
+		font 16px 'pt-sans-caption-bold',sans-serif
+		border $baseBorder
+		color #676767
+		cursor pointer
+		border none
+		float left
+	&__friend
+		width 122px
+		height 42px
+		background $orangeGradient
+		font 16px 'pt-sans-caption-bold',sans-serif
+		border none
+		color #fff
+		cursor pointer
 			
 		
 .b-profile-top
@@ -564,6 +603,8 @@ body
 			padding 2px 0
 			border $baseBorder
 			cursor pointer
+			border-left none
+			border-right none
 		.modal-lg
 			width 1002px
 		.b-profile__left
@@ -598,7 +639,7 @@ body
 				margin 3px
 	&-list
 		width 300px
-		padding 8px 0 8px 20px
+		padding 8px 0 59px 20px
 		&__left
 			float left
 			p
@@ -622,8 +663,10 @@ body
 		padding-bottom 10px
 	
 
-.b-profile-counters
+.b-profile-counters	
+	
 	border-bottom $baseBorder
+	
 	li
 		float left
 		padding 2px 45px
@@ -639,7 +682,84 @@ body
 			
 				font 12px 'PT Sans Caption', sans-serif
 				color $baseFontColorLight
+@media only screen and (min-device-width : 640px) and (max-device-width : 1000px) {
+	.b-profile {
+		
+		&__left {
+			padding-left 30px
+			
 
+		}
+		&__right {
+			width 50%
+			float left
+		}
+		
+	}
+	.b-profile-top{
+		&__right {
+			float none
+			width 100%
+			
+			
+		}
+		&__left {
+			float none
+			width 100%
+			
+		}
+		//
+	}
+	.b-profile-middle {
+		width 100%
+	}
+	.b-profile-top-button {
+		padding-left 20px
+	}
+	.b-profile-counters {
+		display none
+	}
+	
+		
+}	
+@media only screen and (min-device-width : 320px) and (max-device-width : 640px) {
+	.b-profile {
+		&__left {
+			float none
+			width 100%
+			margin auto
+			padding-left 30px
+			
+		}
+		&__right {
+			width 100%
+			float none
+			margin auto
+			padding-left 30px
+		
+		}
+	}
+	.b-profile-top {
+		&__left {
+			float none
+			width 100%
+			
+			
+		}
+		&__right {
+			float none
+			width 100%
+			
+		}	
+	}
+	.b-profile-counters {
+		display none
+	}
+	.b-profile-top-button {
+		padding-left 30px
+	}
+
+}
 .b-user-navigation
 	padding-bottom 2%
 .b-user-navigation-list
@@ -756,6 +876,25 @@ body
 			a
 				background-position -514px 0
 				width 40px
+// @media only screen and (max-device-width: 640px) }
+			
+@media only screen and (max-device-width:1000px) {
+	.b-user-navigation {
+		width 100%
+	
+		
+	}
+	.b-user-navigation-list {
+		&__list {
+			width 100%
+			padding-left 10px
+			span {
+				display none
+			}
+		}
+	}
+
+}
 .b-section-wrapper
 	width 100%
 	max-width 1000px
@@ -2078,9 +2217,7 @@ Form Style
 			color #fff
 			border-bottom 2px solid #b43b1f
 	.b-topic-create-modal-content__btns
-		display inline-block
-		margin-left 260px
-		
+		float right
 		
 		
 		
@@ -2197,9 +2334,22 @@ Form Style
 		background $lightGradient
 		&:nth-child(even)
 			background #fff
-		
-		
-
+.topic-skin		
+	display block
+	width 134px
+	height 34px
+	opacity 0
+	overflow hidden
+	box-shadow #baseBoxShadow
+	cursor pointer
+.b-topic-create-modal-content-skin
+	float right
+	height 34px
+	width 134px
+	overflow hidden
+	background url(../img/227.png) no-repeat
+	
+	
 .b-topic-create-music
 	height 700px
 	&__title

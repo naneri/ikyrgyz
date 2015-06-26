@@ -1,5 +1,7 @@
 <?php
 
+require app_path() . '/libraries/simple_html_dom.php';
+
 class ProfileController extends BaseController {
     
         
@@ -24,6 +26,9 @@ class ProfileController extends BaseController {
 		if(Friend::checkIfFriend($id, Auth::id())){
 			$friend_status = True;
 		}
+
+        $bonusRating = new BonusRating();
+        $user->rating += $bonusRating->getUsersBonusRating($user->id);
                 
         $items = null;
         $videos = array();
@@ -36,6 +41,8 @@ class ProfileController extends BaseController {
         );
         $friendCategories = array();
         $subpage = '';
+        
+        $news = array();//file_get_html('http://www.vb.kg/?lable=8&order=popular&date=' . date('Y-m-d'));
         
         switch($page){
             case 'publications':
@@ -86,6 +93,9 @@ class ProfileController extends BaseController {
                 $videos = $user->topicsWithVideo()->take(6)->get();
                 $photoAlbums = $user->photoAlbums()->with('photos')->orderBy('access')->take(6)->get();
                 $masonrySettings['ajaxPage'] = URL::to('profile/'.$user->id.'/ajaxTopics/newsline');
+                if($user->id == Auth::id() && Auth::user()->is_admin){
+                    $news = $this->getNews();
+                }
                 break;
         }
         
@@ -106,7 +116,7 @@ class ProfileController extends BaseController {
         JavaScript::put($masonrySettings);
 
         if($user->id == Auth::id()){
-            return View::make('profile.show.my', 
+            return View::make('profile.show.my',
                     compact(
                             'user', 
                             'items', 
@@ -120,7 +130,8 @@ class ProfileController extends BaseController {
                             'photos',
                             'videos',
                             'friendCategories',
-                            'subpage'
+                            'subpage',
+                            'news'
                             )
                     );
         }else{
@@ -224,7 +235,7 @@ class ProfileController extends BaseController {
         array_push($friendIds, Auth::id());
 
         $userId = User::getRandomUser($friendIds);
-
+        BonusRating::addBonusRating('click_random', Auth::id(), Config::get('bonus_rating.click_random'));
         return Redirect::to('profile/'.$userId);
     }
     
@@ -649,10 +660,47 @@ class ProfileController extends BaseController {
         
         if(!$crop->getMsg()){
             User_Description::where('user_id', Auth::id())->update(array('user_profile_avatar' => asset($crop->getResult())));
+            $uploadAvatarExists = BonusRating::where('user_id', Auth::user()->id)
+                ->where('target_type', 'upload_avatar')
+                ->exists();
+            if (!$uploadAvatarExists) {
+                BonusRating::addBonusRating('upload_avatar', Auth::user()->id, Config::get('bonus_rating.upload_avatar'));
+            }
         }
 
         return Response::json($response);
     }
-
+    
+    private function getNews(){
+        $newsFeeds = Config::get('social.news_feed');
+        if(!$newsFeeds){
+            return false;
+        }
+        $newsElements = null;
+        foreach ($newsFeeds as $newsFeed){
+            $html = file_get_html($newsFeed['url']);
+            $i = 1;
+            $offset = 0;
+            foreach ($html->find($newsFeed['elements']) as $newsElement){
+                if(isset($newsFeed['offset']) && ($offset < $newsFeed['offset'])){
+                    $offset++;
+                    continue;
+                }
+                $element = new stdClass();
+                $element->source = $newsFeed['name'];
+                $element->href = $newsElement->find($newsFeed['link'], 0)->href;
+                $element->title = $newsElement->find($newsFeed['title'], 0)->innertext;
+                $element->views = (int)$newsElement->find($newsFeed['views'], 0)->innertext;
+                $newsElements[] = $element;
+                if(++$i > $newsFeed['limit']){
+                    break;
+                }
+            }
+        }
+        usort($newsElements, function($a, $b) {
+            return $b->views - $a->views;
+        });
+        return $newsElements;
+    }
 
 }

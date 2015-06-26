@@ -6,8 +6,7 @@ class Topic extends Eloquent {
         
     public static $rules = array(
         'title' => 'required|min:3',
-        'description' => 'required',
-        'blog_id' => 'required'
+        'blog_id' => 'required',
     );
 
     protected static $orderType = [
@@ -150,7 +149,12 @@ class Topic extends Eloquent {
                 $comments = $this->commentsWithData()->orderBy('created_at', 'ASC');
                 break;
         }
-        return $comments->select('topic_comments.*', 'user_description.*', 'users.rating as author_rating')->get();
+        $commentsSelected = $comments->select('topic_comments.*', 'user_description.*', 'users.rating as author_rating')->get();
+        $bonusRating = new BonusRating();
+        foreach ($commentsSelected as &$v) {
+            $v->author_rating += $bonusRating->getUsersBonusRating($v->user_id);
+        }
+        return $commentsSelected;
     }
 
     public function canEdit(){

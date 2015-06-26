@@ -526,6 +526,26 @@ $(document).ready(function() {
 
 });
 
+$(document).ready(function() {
+	$('.b-header-nav-menu__item').click(function(event){
+		event.preventDefault();
+		$('.b-header-nav-menu .b-topic-navigation-menu').toggle();
+	});
+});
+
+// $(document).ready(function(){
+// 	$(document).click(function(){
+		
+// 	})
+
+// });
+
+
+
+// });
+
+
+
 
 	// var docHeight = $(document).height();
 	

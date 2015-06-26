@@ -25,7 +25,7 @@
                         <div class="b-user-interface-content-sort">
                             <div class="b-user-interface-content-sort__title">{{ trans('network.sorting') }}</div>
                             <ul class="b-user-interface-content-sort-list">
-                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{ trans('network.according-to-rating') }}{Form::radio('sort', 'rating', false)}</a></li>
+                                <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'rating', false)}} {{ trans('network.according-to-rating') }}</a></li>
                                 <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'relevant', false)}} {{ trans('network.according-to-relevance') }}</a></li>
                                 <li class="b-user-interface-content-sort-list__list"><a href=""><label>{{Form::radio('sort', 'date', true)}} {{ trans('network.according-to-date') }}</a></li>
                             </ul>

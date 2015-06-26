@@ -28,7 +28,7 @@ return array(
 	'russian' 				=> 'русский',
 	'uyghur' 				=> 'уйгур',
 	'uzbek' 				=> 'узбек',
-	'chechen' 				=> 'чечен',
+	'chechen' 				=> 'чеченец',
 	'armenian' 				=> 'армянин',
 	'dagestan' 				=> 'дагестанец',
 	'arab'					=> 'араб',
