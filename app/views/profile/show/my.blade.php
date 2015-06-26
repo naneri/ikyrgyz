@@ -405,7 +405,7 @@
 	</div>
 </div>
 
-<ol id="outline">
+<!-- <ol id="outline">
 
   	<li data-class="b-profile-top-button__button" data-options="tipLocation:top;tipAnimation:fade" data-button="Далее:создать топик">
 	<p>Посмотрите случайные профили.</p>
@@ -415,16 +415,40 @@
 	<p>Создайте топик</p>
 	</li>
 
-</ol>
+</ol> -->
 
 <script>
- $(window).load(function(){
+/* $(window).load(function(){
 	console.log('started');
 	$("#outline").joyride({
 		'tipLocation': 'bottom',         // 'top' or 'bottom' in relation to parent
 		'nubPosition': 'auto',           // override on a per tooltip bases
 		'scrollSpeed': 300               // Page scrolling speed in ms
 	});
+ })*/
+
+ $(document).ready(function(){
+ 	var tour = new Tour({
+  steps: [
+  {
+    element: ".b-profile-top-button__button",
+    title: "Нажми кнопку!!!",
+    content: "Кнопку нажми!!!"
+  },
+  {
+    element: ".topic-icon",
+    title: "Топик создай",
+    content: "А ну создай топик!!!"
+  }
+	],
+  storage: false	
+});
+
+// Initialize the tour
+tour.init();
+
+// Start the tour
+tour.start();
  })
 </script>
 
@@ -487,10 +511,10 @@
 
 */?>
 @section('styles')
-	<link rel="stylesheet" href="{{ asset('css/joyride-2.1.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap-tour-standalone.css') }}">
 @stop
 
 @section('scripts')
 
-  <script src="{{ asset('js/jquery.joyride-2.1.js') }}"></script>
+  <script src="{{ asset('js/bootstrap-tour.js') }}"></script>
 @stop

@@ -19,7 +19,7 @@
               </div>
               <div class="b-topic-create-modal__content">
                   <div class="b-topic-create-modal-content">
-                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
+                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form dropzone'))}}
                     @if($type == 'link')
                     <div class="b-topic-create-modal-content__item">
                         {{Form::text('link', '', array('class' => 'input-default add-name', 'placeholder' => trans("network.link-placeholder")))}}
@@ -77,7 +77,7 @@
                         {{ Form::text('tags', null, array('class' => 'input-default add-name', 'id' => 'tags', 'placeholder' => trans("network.tags") )) }}
                     </div>
                     <div class="b-topic-create-modal-content__item image">
-                        <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg">
+                       <!--  <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg"> -->
                           <div class="b-topic-create-modal-content__btns">
                             <input type="hidden" name="image_url" />
                             <input type="submit" value="{{ trans('network.cancel') }}" class="btn btn-cancel input-default"/>
@@ -100,6 +100,8 @@
 
 @section('scripts')
 @include('topic.scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+<script></script>
 @stop
 
 <!--<div class="container" style="margin-top:100px">
