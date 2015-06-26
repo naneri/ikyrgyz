@@ -112,6 +112,7 @@ class AuthController extends BaseController {
 
         // создаём нового юзера и сохраняем данные
         $user = User::newUser(Input::get('email'), Input::get('password'));
+        $user->domain = Config::get('app.base_url');
         
         // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
         if($user->save()){
