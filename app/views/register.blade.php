@@ -136,6 +136,7 @@
                     </div>
                 </div>
             </div>
+            <div class="b-footer"></div>
         </div>
     </body>
 </html>

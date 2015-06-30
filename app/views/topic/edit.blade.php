@@ -6,7 +6,7 @@
           <div class="b-topic-create-modal">
             <div class="b-topic-create-modal__inner">
               <div class="b-topic-create-modal__title">{{ trans('network.edit-topic') }}
-                <button class="btn-close"></button>
+                
               </div>
               <div class="b-topic-create-modal__content">
                   <div class="b-topic-create-modal-content">
@@ -33,7 +33,7 @@
                         <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input">{{$topic->description}}</textarea>
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                        {{ Form::text('tags', $topic->tagsToString(), array('class' => 'input-default add-name', 'id' => 'tags')) }}
+                        {{ Form::text('tags', $topic->tagsToString(), array('class' => 'input-default add-name', 'id' => 'tags', 'placeholder' => 'тэги')) }}
                     </div>
                     <div class="b-topic-create-modal-content__item">
                         <input type="file" name="avatar">

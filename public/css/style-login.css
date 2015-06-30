@@ -241,7 +241,7 @@ a img {
 .b-authorization-inner-block {
   width: 377px;
   margin: 0 auto;
-  padding-top: 204px;
+  padding-top: 150px;
 }
 .b-authorization-inner-block__title {
   background-image: -webkit-linear-gradient(top, #f67658 0%, #c4563c 100%);
@@ -547,4 +547,13 @@ a img {
 .b-message-info-icon {
   background: url("../img/icons/icon_info.png") no-repeat;
   background-position: 50%;
+}
+
+
+#recaptcha_widget_div {
+  margin-left: -42px;
+}
+
+.b-footer  {
+  margin-bottom: -43px;
 }

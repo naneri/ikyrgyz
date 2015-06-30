@@ -1913,6 +1913,7 @@ div.choose-list
 .topic-description 
 	color #3f4242
 	
+	
 .b-topic-navigation__middle > ul li img
 	//
 	&:hover
@@ -2141,6 +2142,10 @@ Form Style
 	
 .b-topic-create-modal-content__item
 	margin-bottom 15px
+	img
+		width 400px
+		height 400px
+		overflow hidden
 	input.add-name
 		width 705px
 		height 40px
@@ -2323,11 +2328,7 @@ Form Style
 					color #fff
 					border-bottom 2px solid #b43b1f 
 			
-.b-topic-create-gallery-content-table
-	
-	
-	
-	
+.b-topic-create-gallery-content-table	
 	.skin
 		vertical-align middle
 		width 75px
@@ -2369,116 +2370,6 @@ Form Style
 	width 134px
 	overflow hidden
 	background url(../img/227.png) no-repeat
-	
-	
-.b-topic-create-music
-	height 700px
-	&__title
-		background-image $lightGradient     
-		padding 10px
-		position relative
-		font 16px 'PT Sans Caption Bold'
-		box-shadow 0 1px 1px rgba(127,127,127,.3)
-		color #676767
-	&-content
-		margin 10px 10px 0
-		padding 10px
-		&-btns
-			float right
-		&__item
-			color #999
-			font-size 12px
-			font-family 'PT Sans Caption'
-			margin-bottom 10px
-			.input-default
-				border-radius 3px
-				border 1px solid rgba(169,169,169,.4)
-				color #999
-				font-size 14px
-				font-family 'PT Sans Caption'
-			input.search-by-name
-				width 220px
-				display inline-block
-				height 28px
-				
-			input.btn-search
-				width 35px
-				height 28px
-				display inline-block
-				background url('../img/53.png') no-repeat
-				background-position 50% 50%
-				background-color #c4573d
-				color transparent
-				cursor pointer
-			input.btn-cancel
-				width 35px
-				height 28px
-				display inline-block
-				background-position 50% 50%
-				color transparent
-				background url('../img/51.png') no-repeat
-				background-position 50% 50%
-				background-color #f2f1f1
-				cursor pointer
-			.sort-select
-				width 220px
-				height 28px
-				margin-left 110px
-				
-			.music-wrapper
-				height 500px
-				overflow-y scroll
-			input[value="РѕС‚РјРµРЅР°"]
-				width 73px
-				height 32px
-				background $lightGradient
-				display inline-block
-				&:hover
-					background url('../img/18.png') repeat-x
-					color #fff
-					border-bottom 2px solid #b43b1f
-			input[value="РґРѕР±Р°РІРёС‚СЊ"]
-				width 106px
-				height 32px
-				background $lightGradient
-				display inline-block
-				&:hover
-					background url('../img/18.png') repeat-x
-					color #fff
-					border-bottom 2px solid #b43b1f 
-			
-.b-topic-create-music-content-table
-	//  
-	
-	
-	
-	.skin
-		vertical-align middle
-		width 75px
-		display inline-block
-			
-	.access
-		width 50px
-		display inline-block
-		margin-left 100px
-	.photo-name
-		display inline-block
-		width 370px 
-		margin-left 10px
-	&__title
-		height 15px
-		border 1px solid rgba(169,169,169,.4)
-		line-height 15px
-		padding 5px 10px
-		background $lightGradient
-		
-	&__item
-		height 75px
-		border 1px solid rgba(169,169,169,.4)
-		padding 5px 10px
-		background $lightGradient
-		&:nth-child(even)
-			background #fff
 			
 .b-topic-create-skin
 	width 403px
@@ -2527,10 +2418,6 @@ Form Style
 		padding-left 15px
 		line-height 28px
 		background #fff
-		
-		
-	
-		
 		
 	
 	.label-it
@@ -2685,6 +2572,19 @@ Form blog Style
 			border-bottom 2px solid #b43b1f
 
 
+
+
+.b-blog-edit
+	//
+	&__title
+		background-image $lightGradient
+		margin 10px 10px 0
+		padding 10px
+		position relative
+		font 16px 'PT Sans Caption Bold'
+		box-shadow 0 1px 1px rgba(127,127,127,.3)
+		color #676767
+		
 // .jq-selectbox .jq-selectbox__trigger-arrow
 //  background url(../img/54.png) no-repeat
 //  background-position 50% 50%
@@ -4804,3 +4704,5 @@ header search
   background: #FFF6BD;
   border-radius: 2px;
 }
+
+

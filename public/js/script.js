@@ -16,7 +16,7 @@ $(function() {
 	$('.b-header-nav-user__item').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -24,7 +24,7 @@ $(function() {
 	$('.b-header-nav-setting__item').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -33,7 +33,7 @@ $(function() {
 	$('.b-header-nav-dropdown li').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -42,7 +42,7 @@ $(function() {
 	$('.b-header-nav-button__item').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -50,7 +50,7 @@ $(function() {
 	$('.b-header-nav-enc__item').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -60,7 +60,7 @@ $(function() {
 	$('.share-dropdown li').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -71,7 +71,7 @@ $(function() {
 	$('.create-dropdown li').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -81,7 +81,7 @@ $(function() {
 	$('.media-dropdown li').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -92,7 +92,7 @@ $(function() {
 	$('.b-user-wall-footer-list li ').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -103,7 +103,7 @@ $(function() {
 	$('.b-topic-navigation__middle li  ').hover(function(){
 		$(this).children('ul').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(500);
+		$(this).children('ul').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -113,7 +113,7 @@ $(function() {
 	$('.dropdown li').hover(function(){
 		$(this).children('.sub-dropdown').stop(false, true ).fadeIn(300);
 	}, function() {
-		$(this).children('.sub-dropdown').stop(false, true).fadeOut(500);
+		$(this).children('.sub-dropdown').stop(false, true).fadeOut(300);
 
 	});
 });
@@ -202,22 +202,22 @@ $(function(){
 
 
 
-$(function(){
-    /* Hide form input values on focus*/ 
-    $('input:text').each(function(){
-        var txtval = $(this).val();
-        $(this).focus(function(){
-            if($(this).val() == txtval){
-                $(this).val('')
-            }
-        });
-        $(this).blur(function(){
-            if($(this).val() == ""){
-                $(this).val(txtval);
-            }
-        });
-    });
-});
+// $(function(){
+//     /* Hide form input values on focus*/ 
+//     $('input:text').each(function(){
+//         var txtval = $(this).val();
+//         $(this).focus(function(){
+//             if($(this).val() == txtval){
+//                 $(this).val('')
+//             }
+//         });
+//         $(this).blur(function(){
+//             if($(this).val() == ""){
+//                 $(this).val(txtval);
+//             }
+//         });
+//     });
+// });
 
 
 $(function(){
