@@ -17,6 +17,7 @@
     <script src="{{ asset('js/jquery.formstyler.js') }}"></script>
     {{HTML::style('css/jquery.formstyler.css')}}
     <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
+    <script src="{{asset('js/tooltip.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script>
     @include('misc.js')
     @include('scripts.convert-times')

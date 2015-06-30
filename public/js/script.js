@@ -670,7 +670,3 @@ $('span.filter-option').each(function(){
 
 
 
-
-
-
-

@@ -70,15 +70,15 @@
 			<div class="b-topic-navigation-sort">
 				<ul>
 					<li class="b-topic-navigation-sort__item">
-						<a href="{{URL::to('main/index')}}"></a>
+						<a href="{{URL::to('main/index')}}" title="Новые топики"></a>
 						
 					</li>
 					<li class="b-topic-navigation-sort__item">
-						<a href="{{URL::to('main/index/top')}}"></a>
+						<a href="{{URL::to('main/index/top')}}" title="По рейтингу"></a>
 					</li>
-					<!-- <li class="b-topic-navigation-sort__item">
-						<a href="#"></a>
-					</li> -->
+					<li class="b-topic-navigation-sort__item">
+						<a href="#" title="В избранном"></a>
+					</li>
 				
 				</ul>
 				
@@ -89,19 +89,19 @@
 			<div class="b-topic-navigation-category">
 				<ul>
 					<li class="b-topic-navigation-category__item item1">
-						<a href="{{URL::to('topic/videos')}}"></a>
+						<a href="{{URL::to('topic/videos')}}" title="Видео"></a>
 					</li>
 					<li class="b-topic-navigation-category__item item2">
-						<a href="#"></a>
+						<a href="#" title="Фото"></a>
 					</li>
 					<li style="display:none" class="b-topic-navigation-category__item item3">
-						<a href="#"></a>
+						<a href="#" ></a>
 					</li>
 					<li class="b-topic-navigation-category__item item4">
-						<a href="{{URL::to('topic/linkTopics')}}"></a>
+						<a href="{{URL::to('topic/linkTopics')}}" title="Ссылки"></a>
 					</li>
 					<li style="display:none" class="b-topic-navigation-category__item item5">
-						<a href="#"></a>
+						<a href="#" ></a>
 					</li>
 					<li style="display:none" class="b-topic-navigation-category__item item6">
 						<a href="#"></a>
@@ -119,22 +119,22 @@
 					<li class="dropdown-list__item">
 					
 						<div class="choose-list">
-    					<label class="choose-list">
+    					
     					<img src="{{ asset('img/87.png') }}" alt="">
-    					<span>Видео</span>
+    					<a href="{{URL::to('topic/videos')}}"><span>Видео</span></a>
        					 <input type="checkbox" class="bigcheck bigcheck1 " name="cheese" value="yes" checked="checked"/>
         				<span class="choose-list-target"></span>
-    					</label>
+    					
 						</div>
 					</li>
 					<li class="dropdown-list__item">
 						<div class="choose-list">
-    					<label class="choose-list">
+    					
     					<img src="{{ asset('img/88.png') }}" alt="">
     					<span>Фото</span>
        					 <input type="checkbox" class="bigcheck bigcheck2" name="cheese" value="yes" checked="checked"/>
         				<span class="choose-list-target"></span>
-    					</label>
+    					
 						</div>
 					</li>
 					<!-- <li class="dropdown-list__item">
@@ -152,13 +152,13 @@
 					<li class="dropdown-list__item">
 						<div class="choose-list">
 						
-    					<label class="choose-list">
+    					
     					<img src="{{ asset('img/90.png') }}" alt="">
-    					<span>Ссылка</span>
+    					<a href="{{URL::to('topic/linkTopics')}}"><span>Ссылка</span></a>
 						
        					 <input type="checkbox" class="bigcheck bigcheck4" name="cheese" value="yes"/ checked="checked">
         				<span class="choose-list-target"></span>
-    					</label>
+    					
 						</div>
 					</li>
 					<!-- <li class="dropdown-list__item">
@@ -193,7 +193,11 @@
 		</div>	
 		<div class="b-topic-navigation__right">
     
-			 	<div class="cube"><a href="{{URL::to('profile/random')}}"></a></div>
+			 	<div class="cube"><a href="{{URL::to('profile/random')}} "  title="Случайный профиль">
+			 	
+			 	</a></div>
+
+			 
 				<!-- <div class="b-topic-navigation-line">
 				
 					<a href="#" class="b-topic-navigation-line__item"></a>
@@ -210,11 +214,11 @@
 					</ul>
 				</div> -->
 				<div class="b-topic-navigation-format">
-					<a href="#" class="b-topic-navigation-format__item"></a>
+					<a href="#" class="b-topic-navigation-format__item "  title="вид ленты"></a>
 					<ul class="dropdown-list">
-						<li class="format-list"><a href="javascript: makeColumnN('1')" title="одна колонка"></a></li>
-						<li class="format-list"><a href="javascript: makeColumnN('2')" title="две колонки"></a></li>
-						<li class="format-list"><a href="javascript: makeColumnN('3')" title="три колонки"></a></li>
+						<li class="format-list"><a href="javascript: makeColumnN('1')" title="в одну колонку"></a></li>
+						<li class="format-list"><a href="javascript: makeColumnN('2')" title="в две колонки"></a></li>
+						<li class="format-list"><a href="javascript: makeColumnN('3')" title="в три колонки"></a></li>
 					</ul>
 				</div>
 		</div>

@@ -1664,27 +1664,32 @@ Topic
 }
 
 .b-topic-navigation-sort__item a {
-	width: 38px;
+	width: 40px;
 	height: 40px;
-	background: url("../img/73.png") no-repeat;
+	background-image: url("../img/73.png");
+	background-repeat: no-repeat;
 	display: block;
 }
 
+.b-topic-navigation-sort__item a:hover {
+	background-image: url("../img/228.png");
+}
+
 .b-topic-navigation-sort__item:nth-child(1) a {
-	background-position: 0 10px;
+	background-position: 0 0;
 }
 
 .b-topic-navigation-sort__item:nth-child(2) a {
-	background-position: -38px 10px;
+	background-position: -40px 0;
 }
 
 .b-topic-navigation-sort__item:nth-child(3) a {
-	background-position: -76px 10px;
+	background-position: -80px 0;
 }
 
 .b-topic-navigation-category {
 	float: left;
-	width: 180px;
+	width: 120px;
 }
 
 .b-topic-navigation-category__item {
@@ -1743,8 +1748,8 @@ Topic
 
 .b-topic-navigation-choose {
 	float: left;
-	padding-top: 20px;
-	padding-left: 8px;
+	padding: 0;
+	width: 40px;
 }
 
 .b-topic-navigation-choose__list {
@@ -1752,16 +1757,18 @@ Topic
 }
 
 .b-topic-navigation-choose__item {
-	width: 20px;
-	height: 20px;
+	width: 40px;
+	height: 40px;
 	background: url("../img/77.png") no-repeat;
 	display: block;
+	cursor: pointer;
+	background-position: center center;
 }
 
 .b-topic-navigation-choose .dropdown-list {
 	background: #fff;
 	width: 203px;
-	left: -10px;
+	left: -2px;
 	-webkit-box-shadow: 0 1px 1px rgba(127,127,127,0.3);
 	box-shadow: 0 1px 1px rgba(127,127,127,0.3);
 	border: 1px solid #d5d5d5;
@@ -5852,4 +5859,28 @@ header search
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
 	filter: alpha(opacity=40);
 	z-index: 1000;
+}
+
+.jQtooltip {
+	position: relative;
+}
+
+.jQtooltip div {
+	display: none;
+	position: absolute;
+	bottom: -1px;
+	left: -1px;
+	z-index: 1000;
+	width: 190px;
+	padding: 8px 12px;
+	text-align: left;
+	font-size: 12px;
+	line-height: 16px;
+	color: #000;
+	-webkit-box-shadow: 0 1px 3px #c4c4c4;
+	box-shadow: 0 1px 3px #c4c4c4;
+	border: 1px solid #dbb779;
+	background: #fff6bd;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 }
