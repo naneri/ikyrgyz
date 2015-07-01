@@ -24,18 +24,18 @@
                     </div>
                     <div class="b-blog-create-modal-content__item">
                       {{ Form::select('type_id', $type_list, null, array('class' => 'input-default select-blog')) }}
-                      <span class="change-skin-title">{{ trans('network.blog-image') }}</span><a href="#" class="input-default change-skin">{{ trans('network.blog-add') }}</a>
-                      <div class="b-topic-create__skin">
+                     <!--  <span class="change-skin-title">{{ trans('network.blog-image') }}</span><a href="#" class="input-default change-skin">{{ trans('network.blog-add') }}</a> -->
+                     <!--  <div class="b-topic-create__skin">
                         <div class="b-topic-create-skin">
                           <div class="b-topic-create-skin__title">{{ trans('network.add-blog-image') }}</div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="b-blog-create-modal-content__item">
                         <textarea name="description" cols="30" rows="10" class="textarea-blog input-default" placeholder="{{ trans('network.blog-description') }}"></textarea>
                     </div>
                     <div class="b-blog-create-modal-content__item">
-                      <input type="file" name="avatar">
+                     <!--  <input type="file" name="avatar"> -->
                       <input type="text" value="Тэги" class="input-tag input-default"/>
                       <div class="button-group">
                         <input type="submit" value="Отмена" class="btn-cancel input-default"/>
