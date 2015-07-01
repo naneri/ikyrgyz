@@ -12,6 +12,7 @@
             }            
         },
         topic: function(topicId, value) {
+
             $rating = $('#rating_topic_' + topicId);
             $.ajax({
                 method: "POST",
@@ -19,11 +20,14 @@
                 data: {
                     'topic_id': topicId,
                     'value': value
+               
                 },
                 success: function($result) {
+                    
                     vote.notify($result);
                 }
             });
+
         },
         comment: function(commentId, value){
             $rating = $('#rating_comment_' + commentId);
@@ -41,6 +45,7 @@
         },
         blog: function(blogId, value) {
             $rating = $('#rating_blog_' + blogId);
+          
             $.ajax({
                 method: "POST",
                 url: voteUrl+"blog",

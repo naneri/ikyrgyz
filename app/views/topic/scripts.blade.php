@@ -22,7 +22,9 @@ $(document).ready(function(){
         });
         
         tinymce.init({
+
                     selector: "textarea",
+                    resize: "both",
                     language: 'ru',
                     menubar: false,
                     statusbar: false,

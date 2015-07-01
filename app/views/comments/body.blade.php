@@ -54,13 +54,28 @@
                 <input type="submit" value="Удалить" class="button-default button-submit" onclick="comment.delete({{$comment->id}}); return false;"/>
             </div>
         @endif
-        <div class="b-profile-about-message-button__minus">
+        <!-- <div class="b-profile-about-message-button__minus">
             <input type="submit" class="button-default button-small" onclick="vote.comment({{$comment->id}}, - 1);"/>
         </div>
         <div class="b-profile-about-message-button__plus">
             <input type="submit" class="button-default button-small" onclick="vote.comment({{$comment->id}}, 1);"/>
         </div>
-        <p class="b-profile-about-message-button__raiting" id="rating_comment_{{$comment->id}}">{{round($comment->rating,2)}}</p>
+        <p class="b-profile-about-message-button__raiting" id="rating_comment_{{$comment->id}}">{{round($comment->rating,2)}}</p> -->
+        <div class="b-user-wall-footer-raiting__right">
+        <div class="b-user-wall-footer-raiting__arrow-down">
+            <input type="button"onclick="vote.comment({{$comment->id}}, - 1);" class="btn-raiting">
+        </div>
+        <div class="b-user-wall-footer-raiting__number">
+            <span class="number-raiting" id="rating_comment_{{$comment->id}}">{{round($comment->rating,2)}}</span>
+        </div>
+        <div class="b-user-wall-footer-raiting__arrow-up">
+            <input type="button" onclick="vote.comment({{$comment->id}}, 1);" class="btn-raiting">
+        </div>
+        </div>
+        <div class="clear"></div>
+        
+
+
     </div>
     @endif
 </div>
