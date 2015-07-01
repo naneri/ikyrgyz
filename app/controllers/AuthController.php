@@ -57,63 +57,55 @@ class AuthController extends BaseController {
     /**
      * Social login from niamiko
      */
-    public function postLoginSocial() {        
-	
+    public function loginSocial() {
+
         $token = Input::get('token');
 
-        $result = false;
+        $result = array();
 
         //проверяем, доступна ли функция file_get_contents. она необходима	для получения данных
-        if (function_exists('file_get_contents') && ini_get('allow_url_fopen')){
+        if (function_exists('file_get_contents') && ini_get('allow_url_fopen')) {
             $result = file_get_contents('http://ulogin.ru/token.php?token=' . $token .
-            '&host=' . $_SERVER['HTTP_HOST']);
+                    '&host=niamiko.com');
 
-        //если недоступна file_get_contents, пробуем использовать curl
-        }elseif(in_array('curl', get_loaded_extensions())){
+            //если недоступна file_get_contents, пробуем использовать curl
+        } elseif (in_array('curl', get_loaded_extensions())) {
             $request = curl_init('http://ulogin.ru/token.php?token=' . $token .
-            '&host=' . $_SERVER['HTTP_HOST']);
+                    '&host=niamiko.com');
             curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec($request);
         }
 
-        $data = $result ? json_decode($result, true) : array();
+        $result = json_decode($result, true);
 
-        //проверяем, чтобы в ответе были данные, и не было ошибки
-        if (!empty($data) and!isset($data['error'])){
-            
-            $email = $data['network'].'-'.$data['uid'];
+        $user = false;
 
-            $user = User::whereEmail($email)->first();
-            
-            if($user){
-                Auth::login($user);
-            }else{
-                //генерируем соль
-                $seed = sha1(mt_rand());
-                //генерируем хеш пароля. паролем служит строка $data['identity'].$seed
-                $password = md5($data['identity'] . $seed);
-                
-                // создаём нового юзера и сохраняем данные
-                $user = $this->createUser($email, $password);
-                
-                Auth::login($user);
-                
-                User_Description::update_data($data);
-                
-                return Redirect::to('profile/fill');
+        $email = $result['email'];
+
+        $user = User::whereEmail($email)->first();
+
+        if (!$user) {
+            // создаём нового юзера и сохраняем данные
+            $user = new User;
+            $user->email = $result['email'];
+            $user->password = Hash::make(str_random(60));
+            $user->activated = true;
+            $user->domain = Config::get('app.base_url');
+
+            // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
+            if ($user->save()) {
+                $description = new User_Description;
+                $description->user_id = $user->id;
+                $description->first_name = $result['first_name'];
+                $description->last_name = $result['last_name'];
+                $description->save();
+
+                // создаём персональный блог пользователя
+                $user->createPersonalBlog();
             }
-            
         }
-        
-        $todayVisitExists = BonusRating::where('target_type', "everyday_visit")
-                ->where('target_id', Auth::user()->id)
-                ->where('created_at', '>', date('Y-m-d 00:00:00'))
-                ->exists();
-        if (!$todayVisitExists) {
-            BonusRating::addBonusRating('everyday_visit', Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
-        }
-        // направляем пользователя по первоначальному маршруту, либо на главную
-        return Redirect::intended('/');
+        Auth::login($user);
+        return Redirect::to('main/index');
     }
 
     /**
@@ -173,15 +165,6 @@ class AuthController extends BaseController {
         }
 
         // создаём нового юзера и сохраняем данные
-        $user = $this->createUser(Input::get('email'), Input::get('password'));
-        
-        // логиним пользователя и отправляем на заполнение профиля
-        Auth::login($user);
-        return Redirect::to('profile/fill');
-    }
-    
-    private function createUser($email, $password){
-        // создаём нового юзера и сохраняем данные
         $user = User::newUser($email, $password);
         $user->domain = Config::get('app.base_url');
 
@@ -199,7 +182,9 @@ class AuthController extends BaseController {
             });
         }
 
-        return $user;
+        // логиним пользователя и отправляем на заполнение профиля
+        Auth::login($user);
+        return Redirect::to('profile/fill');
     }
 
     /**

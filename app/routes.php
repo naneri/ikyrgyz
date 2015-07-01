@@ -33,11 +33,15 @@ Route::get('city-list/{id}', function($name){
     return City::where('country_id',  $country->id)->lists('name_ru');
 });
 
+Route::group(array('before' => 'un_auth'), function(){
+    Route::get('login/social', 'AuthController@loginSocial');
+    Route::post('register-remote', 'AuthController@postRegisterRemote');
+});
+
 Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
     Route::get('login', 'AuthController@getLogin');
     Route::post('login', 'AuthController@postLogin');
-    Route::post('login/social', 'AuthController@postLoginSocial');
     Route::post('login/android', 'AndroidAuthController@postAndroidLogin');
     Route::get('login/fb', 'AuthController@loginWithFacebook');
     Route::get('login/vk', 'AuthController@loginWithVK');
@@ -45,7 +49,6 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('register', 'AuthController@getRegister');
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
-    Route::post('register-remote', 'AuthController@postRegisterRemote');
 });
 Route::group(array('before' => 'notauth'), function(){
     Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');
@@ -302,4 +305,10 @@ Route::filter('topic.canview', function($route){
             'text' => "You don't have enough permissions to do that."
             ]);
    }
+});
+
+Route::filter('un_auth', function(){
+    if(!Auth::guest()){
+        Auth::logout();
+    }
 });
