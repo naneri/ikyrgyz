@@ -53,6 +53,68 @@ class AuthController extends BaseController {
         return Redirect::intended('/');
     }
     
+    
+    /**
+     * Social login from niamiko
+     */
+    public function postLoginSocial() {        
+	
+        $token = Input::get('token');
+
+        $result = false;
+
+        //проверяем, доступна ли функция file_get_contents. она необходима	для получения данных
+        if (function_exists('file_get_contents') && ini_get('allow_url_fopen')){
+            $result = file_get_contents('http://ulogin.ru/token.php?token=' . $token .
+            '&host=' . $_SERVER['HTTP_HOST']);
+
+        //если недоступна file_get_contents, пробуем использовать curl
+        }elseif(in_array('curl', get_loaded_extensions())){
+            $request = curl_init('http://ulogin.ru/token.php?token=' . $token .
+            '&host=' . $_SERVER['HTTP_HOST']);
+            curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+            $result = curl_exec($request);
+        }
+
+        $data = $result ? json_decode($result, true) : array();
+
+        //проверяем, чтобы в ответе были данные, и не было ошибки
+        if (!empty($data) and!isset($data['error'])){
+            
+            $email = $data['network'].'-'.$data['uid'];
+
+            $user = User::whereEmail($email)->first();
+            
+            if($user){
+                Auth::login($user);
+            }else{
+                //генерируем соль
+                $seed = sha1(mt_rand());
+                //генерируем хеш пароля. паролем служит строка $data['identity'].$seed
+                $password = md5($data['identity'] . $seed);
+                
+                // создаём нового юзера и сохраняем данные
+                $user = $this->createUser($email, $password);
+                
+                Auth::login($user);
+                
+                User_Description::update_data($data);
+                
+                return Redirect::to('profile/fill');
+            }
+            
+        }
+        
+        $todayVisitExists = BonusRating::where('target_type', "everyday_visit")
+                ->where('target_id', Auth::user()->id)
+                ->where('created_at', '>', date('Y-m-d 00:00:00'))
+                ->exists();
+        if (!$todayVisitExists) {
+            BonusRating::addBonusRating('everyday_visit', Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
+        }
+        // направляем пользователя по первоначальному маршруту, либо на главную
+        return Redirect::intended('/');
+    }
 
     /**
      * Signs out the user
@@ -111,31 +173,34 @@ class AuthController extends BaseController {
         }
 
         // создаём нового юзера и сохраняем данные
-        $user = User::newUser(Input::get('email'), Input::get('password'));
-        $user->domain = Config::get('app.base_url');
+        $user = $this->createUser(Input::get('email'), Input::get('password'));
         
+        // логиним пользователя и отправляем на заполнение профиля
+        Auth::login($user);
+        return Redirect::to('profile/fill');
+    }
+    
+    private function createUser($email, $password){
+        // создаём нового юзера и сохраняем данные
+        $user = User::newUser($email, $password);
+        $user->domain = Config::get('app.base_url');
+
         // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
-        if($user->save()){
+        if ($user->save()) {
             User_Description::create(['user_id' => $user->id]);
-            
+
             // создаём персональный блог пользователя
             $user->createPersonalBlog();
 
             // отправляем пользователю почту с активацией
-            Mail::send('emails.activate', array('user' => $user), function($message)
-            {
+            Mail::send('emails.activate', array('user' => $user), function($message) {
                 $message->from('noreply@niamiko.com');
                 $message->to(Input::get('email'))->subject('Welcome!');
             });
-
-            // логиним пользователя и отправляем на заполнение профиля
-            Auth::login($user);
-            return Redirect::to('profile/fill');
         }
 
-        return Redirect::back();
+        return $user;
     }
-    
 
     /**
      * Активируем учётную запись пользователя
