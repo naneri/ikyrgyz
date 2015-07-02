@@ -25,10 +25,10 @@
                 @endif
               </div>
               <div class="b-user-blog-footer">
-                <div class="b-user-blog-footer__btn"><a href="{{ URL::to('blog/show') . '/' . $blog->id }}" class="about-btn btn">Подробнее</a>
+                <div class="b-user-blog-footer__btn"><a href="{{ URL::to('blog/show') . '/' . $blog->id }}" class="about-btn btn">{{ trans('network.read-more') }}</a>
                   <input type="submit" value="Подписаться" class="button-default btn-follow"/>
                   <ul class="b-user-wall-footer-list">
-                    <li><a href="" class="share-btn btn">Поделиться</a>
+                    <li><a href="" class="share-btn btn">{{ trans('network.share') }}</a>
                       <ul class="b-user-wall-footer-dropdown">
                         <li><a href="">Facebook</a></li>
                         <li><a href="">Google+</a></li>

@@ -246,5 +246,14 @@ class Topic extends Eloquent {
                         ->get();
     }
 
+    public function rating_value(){
+        if($this->rating < 0){
+            return 'negative';
+        } 
+        if($this->rating > 0){
+            return 'positive';
+        }
 
+        return 'neutral';
+    }
 }

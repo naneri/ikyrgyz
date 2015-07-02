@@ -160,6 +160,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('topic/ajaxLinkTopics', 'TopicController@ajaxLinkTopics');
     Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show', 'as'=> 'showTopic'));
     Route::get('topic/create', 'TopicController@create');
+    Route::post('topic/addCover', 'TopicController@addCover');
     Route::get('topic/create/link', 'TopicController@createLink');
     Route::get('topic/create/fetch_og', 'TopicController@fetchOG');
     Route::get('topic/create/fetch_content', 'TopicController@fetchContent');

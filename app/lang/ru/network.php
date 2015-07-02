@@ -2,6 +2,9 @@
 
 return array(
 
+	'yes' 				=> 'да',
+	'no' 				=> 'нет',
+
 	//login page
 	'social-network' 	=> 'Социальная Сеть',
 	'join-us' 			=> 'ПРИСОЕДИНЯЙСЯ',
@@ -15,6 +18,8 @@ return array(
 	'do-register' 		=> 'Зарегистрироваться',
 
 	//navbar
+	'user-name'			=> 'Имя пользователя',
+	'watch-all-notifications'	=> 'Просмотреть все уведомления',
 	'search-friends' 	=> 'Поиск Друзей',
 	'logout' 			=> 'Выход',
 	'encyclopedia' 		=> 'Энциклопедия',
@@ -29,6 +34,11 @@ return array(
 	'sent-you-message'	=> 'отправил вам сообщение',
 	'accept'			=> 'Принять',
 	'reject'			=> 'Отклонить',
+	'choose-lang-imperative'	=> 'Выберите язык',
+	'sort-topics-by'	=> 'Сортировать топики по',
+	'one-column'		=> 'одна колонка',
+	'two-column'		=> 'две колонки',
+	'three-column'		=> 'три колонки',
 
 	//create nav
 	'create' 			=> 'Создать',
@@ -36,7 +46,7 @@ return array(
 	'blog'				=> 'Блог',
 	'drafts'			=> 'Черновики',
 	'link'				=> 'Ссылка',
-        'photoalbum'                    => 'Фото альбом',
+    'photoalbum'        => 'Фото альбом',
 
 	//topic build
 	'read-more'			=> 'Подробнее',
@@ -53,9 +63,15 @@ return array(
 	'blog-description'	=> 'Описание блога',
 	'edit-blog'			=> 'Редактировать блог',
 	'edit-blog-users'	=> 'Редактировать пользователей блога',
-        'topic-edit'            => 'редактировать',
-        'topic-delete'          => 'удалить',
+    'topic-edit'        => 'редактировать',
+    'topic-delete'      => 'удалить',
 
+    //blog
+    'subscribe-imperative'	=> 'Подпишитесь',
+    'to-have-topic-access'	=> 'чтобы иметь доступ к просмотру топиков'	,
+    'you-have-already-sent-request'	=> 'Вы уже отправили запрос на подписку.',
+    'you-were-invited-to-blog'		=> 'Вас пригласили в этот блог.',
+    'you-are-banned'		=> 'Вы забанены',
 
 	// edit blog users
 	'user' 				=> 'пользователь',
@@ -112,6 +128,16 @@ return array(
 	'reply'				=> 'Ответить',
 	'trash'				=> 'Корзина',
 	'force-delete'		=> 'Удалить без возможности восстановления',
+	'unblock'			=> 'разблокировать',
+	'execute'			=> 'Выполнить',
+	'all-read'			=> 'Все прочитанны',
+	'all-not-read'		=> 'Все непрочитанны',
+	'to-who'			=> 'Кому',
+	'attached-files'	=> 'Прикрепленные файлы',
+	'message-still-in-draft'=> 'Сообщение еще находится в черновиках',
+	'no-message-access' => 'Вы не имеете доступа к данному сообщению',
+	'permanent-delete' 	=> 'Удалить навсегда',
+	'block' 			=> 'Заблокировать',
 
 	//photoalbum
 	'create-photoalbum'	=> 'Создание фотоальбома',
@@ -120,7 +146,14 @@ return array(
 	'user-photoalbums'	=> 'Фото альбомы пользователя',
 	'upload'			=> 'Загрузить',
 	'photoalbum-cover'	=> 'Обложка фотоальбома',
-        'link-placeholder'            => 'Введите URL',
+    'link-placeholder'  => 'Введите URL',
+    'change-photoalbum' => 'Изменить фотоальбом',
+    'delete-photoalbum' => 'Удалить фотоальбом',
+    'upload-photoalbum' => 'Загрузить фотографии',
+    'photoalbum-can-not-be-viewed' => 'Фото альбом не доступен для просмотра',
+    'photo-changing' => 'Изменение фотографии',
+    'change' => 'Изменить',
+
 	
 	//photos
 	'load-photo'		=> 'Загрузка фотографии',
@@ -131,7 +164,7 @@ return array(
 	'notes'				=> 'Примечания',
 	'public-settings'	=> 'Настройка публичности',
 	'main-info'			=> 'Основная информация',
-	'to-all'			=> 'Всем',
+	'to-all'			=> 'всем',
 	'to-friends'		=> 'Друзьям',
 	'to-me'				=> 'Только мне',
 	'education'			=> 'Образование',
@@ -140,7 +173,8 @@ return array(
 	'video'				=> 'видео',
 	'no-available-video'=> 'Нет доступных видео',
 	'photos'			=> 'Фотографии',
-    'photoalbums'          	=> 'Фотоальбомы',
+	'photoalbum'        => 'фотоальбом',
+    'photoalbums'       => 'Фотоальбомы',
 	'no-available-photos'	=> 'Нет доступных фотографии',
 	'music'				=> 'Музыка',
 	'no-available-music'=> 'Нет доступных музыкальных файлов',
@@ -154,8 +188,8 @@ return array(
 	'timeline'			=> 'Лента',
 	'publications'		=> 'Публикации',
 	'subscriptions'		=> 'Подписки',
-        'favourites'            => 'Избранное',
-        'settings'			=> 'Настройки',
+    'favourites'        => 'Избранное',
+    'settings'			=> 'Настройки',
 	'add-to-friends'	=> 'Добавить в друзья',
 	'send-message'		=> 'Отправить сообщение',
 	'random-profile'	=> 'Случайный профиль',
@@ -170,14 +204,20 @@ return array(
 	'rating'			=> 'Рейтинг',
 	'favorite'			=> 'Избранное',
 	'my-video'			=> 'Мое видео',
-
+	'photoalbum-desc'	=> 'Описание фотоальбома',
+	'description'		=> 'Описание',
+	'last-name'			=> 'Фамилия',
+	'default'			=> 'По умолчанию',
+	'middle-schools'	=> 'Средняя школа',
+	'university'		=> 'Высшее учебное заведение',
+	'job'				=> 'Работа',
 
 
 	//search
 	'search'			=> 'Поиск',
 	'all'			    => 'Все',
 	'people'			=> 'Люди',
-	'show-all-results'			=> 'Показать все результаты',
+	'show-all-results'	=> 'Показать все результаты',
 	'content'			=> 'Контент',
 	'topic-of-blog'		=> 'Блог топика',
 	'profile'			=> 'Профиль',

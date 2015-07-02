@@ -46,12 +46,12 @@
     <div class="b-profile-about-message-button">
         @if(Auth::id() != $comment->user_id)
             <div class="b-profile-about-message-button__answer">
-                <input type="submit" value="Ответить" class="button-default button-submit" onclick="comment.replyForm({{$comment->id}}); return false;" />
+                <input type="submit" value="{{ trans('network.reply') }}" class="button-default button-submit" onclick="comment.replyForm({{$comment->id}}); return false;" />
             </div>
         @endif
         @if(Auth::id() == $comment->user_id || $isModerator)
             <div class="b-profile-about-message-button__delete">
-                <input type="submit" value="Удалить" class="button-default button-submit" onclick="comment.delete({{$comment->id}}); return false;"/>
+                <input type="submit" value="{{ trans('network.delete') }}" class="button-default button-submit" onclick="comment.delete({{$comment->id}}); return false;"/>
             </div>
         @endif
         <div class="b-profile-about-message-button__minus">

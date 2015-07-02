@@ -15,12 +15,12 @@
         @endforeach
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>Изменить фотоальбом</legend>
+            <legend>{{ trans('network.change-photoalbum') }}</legend>
             <div class="form-group">
-                {{Form::text('name', $photoAlbum->name, array('class' => 'form-control', 'placeholder' => 'введите название'))}}
+                {{Form::text('name', $photoAlbum->name, array('class' => 'form-control', 'placeholder' => trans('network.choose-name')))}}
             </div>
             <div class="form-group">
-                {{Form::select('access', array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне'), $photoAlbum->access, array('class' => 'form-control'))}}
+                {{Form::select('access', array('all' => trans('network.to-all'), 'friend' => trans('network.to-friends'), 'me' => trans('network.to-me')), $photoAlbum->access, array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
                 {{Form::file('image', array('class' => 'form-control'))}}
@@ -28,10 +28,10 @@
                 {{HTML::image($photoAlbum->cover)}}
             </div>
             <div class="form-group">
-                {{Form::textarea('description', $photoAlbum->description, array('class' => 'form-control', 'placeholder' => 'Описание фотоальбома'))}}
+                {{Form::textarea('description', $photoAlbum->description, array('class' => 'form-control', 'placeholder' => trans('network.photoalbum-desc')))}}
             </div>
             <div class="form-group">
-                {{Form::submit('Сохранить')}}
+                {{Form::submit(trans('network.save'))}}
             </div
             {{Form::close()}}
         </div>

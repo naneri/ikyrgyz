@@ -62,19 +62,19 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
-            $blogIds = Auth::user()->canPublishBlogs()->lists('id');
-            $blogIdsRegex = implode(',', $blogIds);
-            $rules = Topic::$rules;
-            $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
-            $validator = Validator::make(Input::all(), $rules);
+        $blogIds = Auth::user()->canPublishBlogs()->lists('id');
+        $blogIdsRegex = implode(',', $blogIds);
+        $rules = Topic::$rules;
+        $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
+        $validator = Validator::make(Input::all(), $rules);
 
-            if($validator->fails()){
-                return Redirect::back()->withErrors($validator);
-            }
-            $this->topic = $this->getTopic();
-            $this->publishTopic(false);
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator);
+        }
+        $this->topic = $this->getTopic();
+        $this->publishTopic(false);
 
-            return Redirect::to('topic/show/'.$this->topic->id);
+        return Redirect::to('topic/show/'.$this->topic->id);
 	}
         
     private function getTopic(){
@@ -446,5 +446,32 @@ class TopicController extends BaseController {
     
         return View::make('topic.build', compact('topics'));
 
+    }
+
+    public function addCover(){
+        if(Input::get('removePhoto') == 1){
+            Session::forget('topicCover');
+            return Response::json(['status' => 'deleted']);
+        }
+        $input = Input::all();
+        $rules = array(
+            'file' => 'image|max:3000',
+        );
+
+        $validation = Validator::make($input, $rules);
+        if ($validation->fails())
+        {/*
+            return Response::make($validation->errors->first(), 400);*/
+            return Response::json(['error' => $validation->errors->first()]);
+        }
+       
+        $image = Input::file('file');
+        $filename  = time() . '.' . $image->getClientOriginalExtension();
+        $path = public_path('images/temp/' . $filename);
+        Image::make($image->getRealPath())->save($path);
+
+        Session::put('topicCover', $path);
+        return Response::json(['status' => 'success', 'filename' => $filename]);
+        
     }
 }

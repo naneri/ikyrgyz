@@ -18,7 +18,7 @@ return array(
 	'search_friends' 	=> 'Search Friends',
 	'logout' 			=> 'Exit',
 	'encyclopedia' 		=> 'Encyclopedia',
-	'history' 			=> 'Hisotry',
+	'history' 			=> 'History',
 	'customs' 			=> 'Traditions',
 	'culture' 			=> 'Culture',
 	'language-choice' 	=> 'Select language',

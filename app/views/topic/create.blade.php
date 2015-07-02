@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="b-content">
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
     @foreach ($errors->all() as $error)
     <div class="b-message b-message-error">
         <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
@@ -19,10 +20,11 @@
               </div>
               <div class="b-topic-create-modal__content">
                   <div class="b-topic-create-modal-content">
-                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form dropzone'))}}
+                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
                     @if($type == 'link')
                     <div class="b-topic-create-modal-content__item">
                         {{Form::text('link', '', array('class' => 'input-default add-name', 'placeholder' => trans("network.link-placeholder")))}}
+                       
                         {{Form::hidden('image_url')}}
                         {{Form::hidden('link_url')}}
                         <img class="topic-cover" />
@@ -67,6 +69,10 @@
                     <div class="b-topic-create-modal-content__item">
                         {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default sync-input')) }}
                     </div>
+                     <div id="dZUpload" class="dropzone">
+                          <div class="dz-default dz-message">Загрузить обложку</div>
+                    </div>
+                    <br>
                     <!--<div class="b-topic-create-modal-content__item">
                         {{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default sync-input')) }}
                     </div> -->
@@ -101,7 +107,45 @@
 @section('scripts')
 @include('topic.scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
-<script></script>
+<script>
+    
+    $(document).ready(function () {
+        Dropzone.autoDiscover = false;
+        $("#dZUpload").dropzone({
+            url: "{{ URL::to('topic/addCover') }}",
+            addRemoveLinks: true,
+            maxFiles: 1,
+            success: function (file, response) {
+                var imgName = response;
+                file.previewElement.classList.add("dz-success");
+                console.log(response);
+            },
+            removedfile: function(file,response){
+                $.post("{{URL::to('topic/addCover?removePhoto=1')}}", function(data){
+                    console.log(data);
+                });
+                var _ref;
+                (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            error: function (file, response) {
+                file.previewElement.classList.add("dz-error");
+            },
+            init: function() {
+                this.on("maxfilesexceeded", function(file){
+                    this.removeFile(file);
+                });
+            }
+        });
+
+        $("#dZUpload").on("removedfile", function(file) {
+            console.log(file);
+        /*  var server_file = $(file.previewTemplate).children('.server_file').text();
+          alert(server_file);
+          // Do a post request and pass this path and use server-side language to delete the file
+          $.post("delete.php", { file_to_be_deleted: server_file } );*/
+        });
+    });
+</script>
 @stop
 
 <!--<div class="container" style="margin-top:100px">

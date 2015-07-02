@@ -129,6 +129,7 @@
                 tinymce.init({
                     selector: selector,
                     language: 'ru',
+                    resize: "both",
                     menubar: false,
                     statusbar: false,
                     subfolder: "{{Auth::user()->id}}",

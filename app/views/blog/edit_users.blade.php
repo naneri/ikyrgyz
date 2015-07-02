@@ -47,7 +47,7 @@
                                                 </tbody>
                                             </table>
                                             <!-- Change this to a button or input when using this as a form -->
-                                            {{Form::submit('Сохранить')}}
+                                            {{Form::submit(trans('network.save'))}}
                                         </fieldset>
                                     {{Form::close()}}
                                 </div>

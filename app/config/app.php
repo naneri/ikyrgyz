@@ -132,7 +132,8 @@ return array(
         'Greggilbert\Recaptcha\RecaptchaServiceProvider',
         'Thujohn\Share\ShareServiceProvider',
         'Jenssegers\Date\DateServiceProvider',
-        'Laracasts\Utilities\UtilitiesServiceProvider'
+        'Laracasts\Utilities\UtilitiesServiceProvider',
+        'Intervention\Image\ImageServiceProvider'
 	),
 
 	/*
@@ -204,7 +205,7 @@ return array(
 		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',
         'Share' 			=> 'Thujohn\Share\ShareFacade',
         'Date' 				=> 'Jenssegers\Date\Date',
-        
+        'Image' 			=> 'Intervention\Image\Facades\Image'
 	),
 
 );

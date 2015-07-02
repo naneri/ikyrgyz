@@ -46,7 +46,7 @@
                 {{Form::hidden('is_draft', '0')}}
                 {{Form::hidden('message_id', $message->id)}}
                 {{Form::submit(trans('network.draft'), array('name' => 'draft'))}}
-                {{Form::submit('Отправить', array('name' => 'publish'))}}
+                {{Form::submit(trans('network.send'), array('name' => 'publish'))}}
             </div>
         {{Form::close()}}
         </fieldset>

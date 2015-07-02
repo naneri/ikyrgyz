@@ -14,7 +14,7 @@
         @endforeach
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>Изменение фотографии</legend>
+            <legend>{{ trans('network.photo-changing') }}</legend>
             <div class="form-group">
                 {{Form::file('image', null, array('class' => 'form-control'))}}
                 {{HTML::image($photo->url, null, array('style' => 'max-width:700px;'))}}
@@ -25,7 +25,7 @@
             <div class="form-group">
                 {{Form::hidden('photo_album_id', $photo->album->id)}}
                 {{Form::hidden('url', $photo->url)}}
-                {{Form::submit('Сохранить')}}
+                {{Form::submit(trans('network.save'))}}
             </div>
             {{Form::close()}}
         </div>
