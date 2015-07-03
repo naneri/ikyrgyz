@@ -46,7 +46,7 @@
                                     <p>Присоединяйтесь к нам</p>
                                 </div>
                                 <div class="b-header-registration-button">
-                                    <a href="{{URL::to('register')}}" style="text-decoration: none;">
+                                    <a href="{{URL::to('register')}}#bottom" style="text-decoration: none;">
                                         <input type="button" value="Регистрация" class="b-header-registration-button__button button-default"/>
                                     </a>
                                 </div>
