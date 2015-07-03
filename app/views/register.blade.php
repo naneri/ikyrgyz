@@ -132,22 +132,7 @@
 
                                 </div>
                             </div>
-                          <!--   <div class="b-authorization-inner-form">
-                                <div class="b-authorization-inner-form-top">
-                                    <div class="b-authorization-inner-form-top__title">Выберите нацию</div>
-                                    <div class="b-authorization-inner-form-top__button"><button class="btn btn-close"></button></div>
-                                    <div class="clear"></div>
-
-                                </div>
-                                <div class="b-authorization-inner-form-bottom">
-                                    <img src="img/login/8.png" alt="" class="b-authorization-inner-form-bottom__image">
-                                    <select name=""  class="b-authorization-inner-form-bottom__select"></select>
-                                    <div class="b-authorization-inner-form-bottom__button">
-                                        <a href="" class="btn-submit">Выбрать</a>
-                                    </div>
-                                </div>
-                            
-                            </div> -->
+                          
                         </div>
                     </div>
                 </div>
