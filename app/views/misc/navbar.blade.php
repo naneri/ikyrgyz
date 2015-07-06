@@ -14,7 +14,7 @@
 				</ul> -->
 				<div class="b-header-nav-menu">
 					<div class="b-header-nav-menu__item">
-						<a href=""></a>
+						<a href="#"></a>
 					</div>	
 						<div class="b-topic-navigation-menu">
 				<div class="b-topic-navigation-menu__list">				

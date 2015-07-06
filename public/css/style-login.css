@@ -429,15 +429,22 @@ a img {
 .b-authorization-inner-block-list-btn {
 	padding-bottom: 30px;
 }
-@media only screen and (min-device-width: 320px) and (max-device-width: 960px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 	.b-header__left {
 		float: none;
 		margin: 0 auto;
 		padding-bottom: 20px;
+		width:55%;
 	}
 	.b-header__right {
 		float: none;
 		margin: 0 auto;
+		width: 50%;
+	}
+	.b-header-logo__image {
+		float: none;
+		text-align: center;
+		
 	}
 	.b-header__inner {
 		width: 100%;
@@ -469,10 +476,17 @@ a img {
 		width: 100%;
 	}
 	.b-header-title__title {
-		font-size: 2em;
+		font-size: 1.5em;
 	}
 	.b-header-tags {
 		font-size: 0.8em;
+	}
+	.b-header-registration__social span {
+		display: block;
+		padding-bottom: 10px;
+	}
+	.b-authorization-inner-block {
+		width: auto;
 	}
 }
 

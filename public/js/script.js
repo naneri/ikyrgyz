@@ -527,11 +527,31 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$('.b-header-nav-menu__item').click(function(event){
-		event.preventDefault();
-		$('.b-header-nav-menu .b-topic-navigation-menu').toggle();
-	});
+// 	$('.b-header-nav-menu').click(function(event){
+		
+// 		$('.b-header-nav-menu .b-topic-navigation-menu ').toggle();
+// 	});
+
+$(".b-header-nav-menu").click(function(e){
+    $(".b-header-nav-menu .b-topic-navigation-menu").show();
+     e.stopPropagation();
 });
+
+$(".b-header-nav-menu").click(function(e){
+    e.stopPropagation();
+});
+
+$(document).click(function(){
+    $(".b-header-nav-menu .b-topic-navigation-menu").hide();
+});
+
+	
+});
+
+
+
+
+
 
 // $(document).ready(function(){
 // 	$(document).click(function(){
