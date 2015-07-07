@@ -30,7 +30,12 @@
                           <div class="b-topic-create-skin__title">{{ trans('network.add-blog-image') }}</div>
                         </div>
                       </div> -->
+                        <div class="b-blog-create-modal-content-skin">
+              <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg" class="topic-skin">
+              </div>
+              <div class="clear"></div>
                     </div>
+
                     <div class="b-blog-create-modal-content__item">
                         <textarea name="description" cols="30" rows="10" class="textarea-blog input-default" placeholder="{{ trans('network.blog-description') }}"></textarea>
                     </div>
