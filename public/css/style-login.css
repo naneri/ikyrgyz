@@ -429,7 +429,7 @@ a img {
 .b-authorization-inner-block-list-btn {
 	padding-bottom: 30px;
 }
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 479px) {
 	.b-header__left {
 		float: none;
 		margin: 0 auto;
@@ -459,10 +459,16 @@ a img {
 		float: none;
 		margin: 0 auto;
 		padding-bottom: 100px;
+		width: 100%;
 	}
 	.b-header__right_login {
 		float: none;
 		margin: 0 auto;
+		width: 100%;
+	}
+	.b-header-login__top {
+		text-align: center;
+		
 	}
 	.b-header-bottom__left {
 		float: none;
@@ -488,8 +494,94 @@ a img {
 	.b-authorization-inner-block {
 		width: auto;
 	}
+	.b-header-bottom {
+		width: 100%;
+	}
+	.b-header-bottom__left {
+		float: none;
+		width: 50%;
+		margin: 0 auto;
+	}
+	.b-header-bottom__right {
+		float: none;
+		width: 70%;
+		margin: 0 auto;
+	}
+	.b-header-login-join {
+		display: block;
+		width: 50%;
+		margin: 0 auto;
+
+	}
+	.b-header-login-button {
+		float: none;
+		width: 50%;
+		margin: 0 auto;
+	}
 }
 
+
+@media only screen  and (min-device-width: 480px) and (max-device-width: 959px) {
+	.b-header__left {
+		float: none;
+		margin: 0 auto;
+		padding-bottom: 20px;
+		width:80%;
+	}
+	.b-header__right {
+		float: none;
+		margin: 0 auto;
+		width: 100%;
+	}
+	.b-header__inner {
+		width: 100%;
+	}
+	.b-header-tags {
+		width: 100%;
+	}
+	.b-header-logo {
+		width: 100%;
+		margin: 0 auto;
+	}
+	.b-header__left_login {
+		
+		float:none;
+		margin: 0 auto;
+		padding-bottom: 20px;
+	}
+	.b-header__right_login {
+		float: none;
+		margin: 0 auto;
+		
+	}
+	.b-header-login-button {
+		float: none;
+		margin: 0 auto;
+		width: 100%;
+	}
+	.b-header-bottom {
+		width: 100%;
+	}
+	.b-header-bottom__left {
+		float: none;
+		margin: 0 auto;
+		padding-bottom: 20px;
+		width:80%;
+	}
+	.b-header-bottom__right {
+		float: none;
+		margin: 0 auto;
+		padding-bottom: 20px;
+		width:80%;
+	}
+}
+
+@media only screen and (max-device-width: 380px) {
+	.b-authorization-inner-block {
+		width: 100%;
+	}
+
+}
 
 .b-message {
 	padding: 10px;
