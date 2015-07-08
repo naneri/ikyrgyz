@@ -1,7 +1,7 @@
 @extends('misc.layout')
 
 @section('content')
-
+<link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
     <div class="b-content">
           <div class="b-topic-create-modal">
             <div class="b-topic-create-modal__inner">
@@ -26,6 +26,12 @@
                     <div class="b-topic-create-modal-content__item">
                         {{ Form::select('blog_id', $canPublishBlogs, $topic->blog_id, array('class' => 'choose-blog input-default sync-input')) }}
                     </div>
+                     @if($topic->image_url)
+                        <div id="cover-image">
+                          <br><br>{{HTML::image(asset($topic->image_url))}}<br><br>
+                          <button class="delete-cover">Delete</button>
+                        </div>
+                    @endif
                    <!-- <div class="b-topic-create-modal-content__item">
                         {{ Form::select('topic_type', $type_list, $topic->type_id, array('class' => 'choose-blog input-default sync-input')) }}
                     </div> -->
@@ -36,10 +42,8 @@
                         {{ Form::text('tags', $topic->tagsToString(), array('class' => 'input-default add-name', 'id' => 'tags')) }}
                     </div>
                     <div class="b-topic-create-modal-content__item">
-                        <input type="file" name="avatar">
-                        @if($topic->image_url)
-                            <br><br>{{HTML::image(asset($topic->image_url))}}<br><br>
-                        @endif
+                        
+                       
                           <div class="b-topic-create-modal-content__btns">
                             <input type="submit" value="Отмена" class="btn btn-cancel input-default"/>
                             <input type="submit" value="Препросмотр" class="btn btn-preview input-default"/>
@@ -60,6 +64,18 @@
 
 @section('scripts')
 @include('topic.scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+<script src="{{ URL::to('js/utils/dropzone-cover.js') }}"></script>
+<script>
+  
+  $('.delete-cover').click(function(event){
+    event.preventDefault();
+    $('#cover-image').after('<div id="dZUpload" class="dropzone"><div class="dz-default dz-message">Загрузить обложку</div></div>');
+    runDropzone("{{ URL::to('topic/addCover') }}");
+    $('#cover-image').remove();
+
+  })
+</script>
 @stop
 
 <!--<div class="container" style="margin-top:100px">
