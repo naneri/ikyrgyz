@@ -2160,6 +2160,7 @@ input[type='checkbox'].choose-list {
 .topic-description {
 	color: #3f4242;
 	font: 15px 'pt-sans-caption', sans-serif;
+	text-align: center;
 }
 
 .b-topic-navigation__middle > ul li img:hover {
@@ -3263,7 +3264,6 @@ about profile Style
 }
 
 .b-profile-about-text__image {
-	float: left;
 	width: 50%;
 	margin: 0 25px 25px 0;
 	max-width: 100%;
