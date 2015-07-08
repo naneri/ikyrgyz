@@ -22,29 +22,32 @@ $(document).ready(function(){
         });
         
         tinymce.init({
-
-                    selector: "textarea",
-                    resize: "both",
-                    language: 'ru',
-                    menubar: false,
-                    statusbar: false,
-                    subfolder:"{{Auth::user()->id}}",
-                    plugins: [
-                            "advlist autolink lists link image charmap print preview anchor",
-                            "code filemanager",
-                            "insertdatetime table contextmenu paste youtube"
-                            ],
-                    image_advtab: true,
-                    relative_urls: false,
-                    remove_script_host: true,
-                    toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube | code",
-                    setup : function(ed){
-                                    ed.on('keyup', function(e) {
-                                        //console.log('the content ' + ed.getContent());
-                                        setUpdateTimeout();
-                                    });
-                                }
-                });
+            selector: "textarea",
+            language: 'ru',
+            resize : "both",    
+            theme_advanced_resizing : true,
+            theme_advanced_statusbar_location : 'bottom',
+            heme_advanced_resize_horizontal : false,                       
+            menubar: false,
+            statusbar: false,
+            subfolder:"{{Auth::user()->id}}",
+            relative_urls: false,
+            plugins: [
+                    "advlist autolink lists link charmap print preview anchor",
+                    "code filemanager",
+                    "insertdatetime table contextmenu paste youtube jbimages fullscreen"
+                    ],
+            image_advtab: true,
+            relative_urls: false,
+            remove_script_host: true,
+            toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link jbimages youtube | code fullscreen",
+            setup : function(ed){
+                        ed.on('keyup', function(e) {
+                            //console.log('the content ' + ed.getContent());
+                            setUpdateTimeout();
+                        });
+                    }
+        });
                 
         $('.sync-input[type="checkbox"]').change(function(){
             setUpdateTimeout();

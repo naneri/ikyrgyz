@@ -55,7 +55,6 @@
 								</div>
 								<div class="panel-body">
 									{{Form::open(array('url' => 'blog/edit/'.$blog->id))}}
-
 										<fieldset>
 											<div class="form-group">
 												<input class="form-control" name="title" type="text" autofocus="" value="{{$blog->title}}">

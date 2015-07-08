@@ -20,19 +20,19 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Фамилия</td>
+                                    <td>{{ trans('network.last-name') }}</td>
                                     <td>{{Form::radio('names_access', 'all', $user['description']->names_access == 'all')}}</td>
                                     <td>{{Form::radio('names_access', 'friend', $user['description']->names_access == 'friend')}}</td>
                                     <td>{{Form::radio('names_access', 'me', $user['description']->names_access == 'me')}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Дата рождения</td>
+                                    <td>{{ trans('network.birth-date') }}</td>
                                     <td>{{Form::radio('birthday_access', 'all', $user['description']->birthday_access == 'all')}}</td>
                                     <td>{{Form::radio('birthday_access', 'friend', $user['description']->birthday_access == 'friend')}}</td>
                                     <td>{{Form::radio('birthday_access', 'me', $user['description']->birthday_access == 'me')}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Пол</td>
+                                    <td>{{ trans('network.gender') }}</td>
                                     <td>{{Form::radio('gender_access', 'all', $user['description']->gender_access == 'all')}}</td>
                                     <td>{{Form::radio('gender_access', 'friend', $user['description']->gender_access == 'friend')}}</td>
                                     <td>{{Form::radio('gender_access', 'me', $user['description']->gender_access == 'me')}}</td>
@@ -57,21 +57,21 @@
                                 <tr>
                                     <td>{{ trans('network.education') }}:</td>
                                     <td>{{ trans('network.to-all') }}</td>
-                                    <td>Друзьям</td>
-                                    <td>Только мне</td>
-                                    <td>По умолчанию</td>
+                                    <td>{{ trans('network.to-friends') }}</td>
+                                    <td>{{ trans('network.to-me') }}</td>
+                                    <td>{{ trans('network.default') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Средняя школа</td>
+                                    <td>{{ trans('network.middle-schools') }}</td>
                                     <td>{{Form::radio('school_access', 'all')}}</td>
                                     <td>{{Form::radio('school_access', 'friend')}}</td>
                                     <td>{{Form::radio('school_access', 'me')}}</td>
                                     <td>{{Form::radio('school_access', 'default', true)}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Высшее учебное заведение</td>
+                                    <td>{{ trans('network.university') }}</td>
                                     <td>{{Form::radio('university_access', 'all')}}</td>
                                     <td>{{Form::radio('university_access', 'friend')}}</td>
                                     <td>{{Form::radio('university_access', 'me')}}</td>
@@ -83,11 +83,11 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Работа:</td>
-                                    <td>Всем</td>
-                                    <td>Друзьям</td>
-                                    <td>Только мне</td>
-                                    <td>По умолчанию</td>
+                                    <td>{{ trans('network.job') }}:</td>
+                                    <td>{{ trans('network.to-all') }}</td>
+                                    <td>{{ trans('network.to-friends') }}</td>
+                                    <td>{{ trans('network.to-me') }}</td>
+                                    <td>{{ trans('network.default') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,10 +105,10 @@
                             <thead>
                                 <tr>
                                     <td>Контактная информация:</td>
-                                    <td>Всем</td>
-                                    <td>Друзьям</td>
-                                    <td>Только мне</td>
-                                    <td>По умолчанию</td>
+                                    <td>{{ trans('network.to-all') }}</td>
+                                    <td>{{ trans('network.to-friends') }}</td>
+                                    <td>{{ trans('network.to-me') }}</td>
+                                    <td>{{ trans('network.default') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -147,10 +147,10 @@
                             <thead>
                                 <tr>
                                     <td>Семья:</td>
-                                    <td>Всем</td>
-                                    <td>Друзьям</td>
-                                    <td>Только мне</td>
-                                    <td>По умолчанию</td>
+                                    <td>{{ trans('network.to-all') }}</td>
+                                    <td>{{ trans('network.to-friends') }}</td>
+                                    <td>{{ trans('network.to-me') }}</td>
+                                    <td>{{ trans('network.default') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -175,10 +175,10 @@
                             <thead>
                                 <tr>
                                     <td>Дополнительно:</td>
-                                    <td>Всем</td>
-                                    <td>Друзьям</td>
-                                    <td>Только мне</td>
-                                    <td>По умолчанию</td>
+                                    <td>{{ trans('network.to-all') }}</td>
+                                    <td>{{ trans('network.to-friends') }}</td>
+                                    <td>{{ trans('network.to-me') }}</td>
+                                    <td>{{ trans('network.default') }}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -205,7 +205,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        {{Form::submit('Сохранить')}}
+                        {{Form::submit(trans('network.save'))}}
                     </div>
                 </fieldset>
             {{Form::close()}}

@@ -20,29 +20,29 @@
 				<div class="b-topic-navigation-menu__list">				
 					<dl class="dropdown-list">
 						<dt class="title"><a href="{{ URL::to('/') }}" class="soc-name">Я-Кыргыз</a></dt>
-						<dt class="user-name"><a href="{{URL::to('profile')}}"><img src="{{ asset('img/48.png') }}" alt="">Имя пользователя</a></dt>
-						<dt><a href="{{URL::to('profile')}} " class="my-profile">Мой профиль</a></dt>
+						<dt class="user-name"><a href="{{URL::to('profile')}}"><img src="{{ asset('img/48.png') }}" alt="">{{ trans('network.user-name') }}</a></dt>
+						<dt><a href="{{URL::to('profile')}} " class="my-profile">{{ trans('network.my-profile') }}</a></dt>
 							<dd><a href="{{URL::to('topic/myTopics')}}">{{ trans('network.publications') }}
-							<span class="raiting">{{$topic_number}}</span>
+							<span class="raiting">{{@$topic_number}}</span>
 							</a> </dd>
 							<dd><a href="{{ URL::to('profile/messages') }}">{{ trans('network.personal-messages') }}
-							<span class="raiting">{{count($new_messages)}}</span>
+							<span class="raiting">{{count(@$new_messages)}}</span>
 							</a></dd>
 							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}
-							<span class="raiting">{{$friend_number}}</span>
+							<span class="raiting">{{@$friend_number}}</span>
 							</a></dd>
 							<!-- <dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd> -->
 							<dd><a href="{{URL::to('topic/favorites')}}">{{ trans('network.favorite') }}
-							<span class="raiting">{{$favorites}}</span>
+							<span class="raiting">{{@$favorites}}</span>
 							</a></dd>
-						<dt>Энкиклопедия</dt>
+						<dt>{{ trans('network.encyclopedia') }}</dt>
 							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></dd>
 						<!-- <dt>Помощь</dt>
 							<dd><a href="">Сообщить о проблеме</a></dd> -->
 						<!-- 	<dd><a href="">Истоиря действии</a></dd>	 -->
-						<dt>Настройки</dt>
+						<dt>{{ trans('network.settings') }}</dt>
 							<dd>
 							<span class="lang-text">Выберите язык</span>
 							<a href="{{ URL::to('locale/ru') }}">
@@ -98,7 +98,7 @@
 								@if(count(@$new_messages))
 								<a href="{{URL::to('profile/messages')}}" class="counter-block">
 									<img src="{{ asset('img/navbar/mail_act.png') }}" alt="msg"/>
-									<span class="counter">{{count($new_messages)}}</span>
+									<span class="counter">{{count(@$new_messages)}}</span>
 								</a>
 									<ul class="b-header-nav-dropdown b-header-nav-dropdown-message">
 									@foreach($new_messages as $message)
@@ -121,7 +121,7 @@
 							@else
 							<a class="counter-block">
 								<img src="{{ asset('img/navbar/mail_inact.png') }}" alt="msg"/>
-								<span style="opacity:0" class="counter">{{count($new_messages)}}</span>
+								<span style="opacity:0" class="counter">{{count(@$new_messages)}}</span>
 							</a>
 							@endif
 
@@ -130,7 +130,7 @@
 								@if(count(@$friend_requests))
 							<a class="counter-block">
 								<img src="{{ asset('img/navbar/f_req_act.png') }}" alt="msg"/>
-								<span class="counter">{{count($friend_requests)}}</span>
+								<span class="counter">{{count(@$friend_requests)}}</span>
 							</a> 
 								<ul class="b-header-nav-dropdown b-header-nav-dropdown_add-btn">
 									@foreach($friend_requests as $friend)
@@ -152,7 +152,7 @@
 							@else
 							<a class="counter-block">
 								<img src="{{ asset('img/navbar/f_req_inact.png') }}" alt="msg"/>
-								<span style="opacity:0" class="counter">{{count($friend_requests)}}</span>
+								<span style="opacity:0" class="counter">{{count(@$friend_requests)}}</span>
 								 </a>
 							@endif
 							</div>
@@ -169,7 +169,7 @@
                                             <div class="b-header-nav-dropdown__item">
                                                
                                                     <a href="{{URL::to('notifications/all')}}">
-                                                        Просмотреть все уведомления
+                                                        {{ trans('network.watch-all-notification') }}
                                                     </a>
 
                                             </div>

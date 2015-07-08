@@ -3,107 +3,118 @@
 @section('content')
 
 <div class="b-content">
-	@foreach ($errors->all() as $error)
-	<div class="b-message b-message-error">
-		<a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
-		<div class="b-message-icon b-message-error-icon"></div>
-		<p class="b-message-p">
-			{{$error}}
-		</p>
-	</div>
-	@endforeach
-		  <div class="b-topic-create-modal">
-			<div class="b-topic-create-modal__inner">
-			  <div class="b-topic-create-modal__title">{{ trans('network.create-topic') }}
-				<!-- <button class="btn-close"></button> -->
-			  </div>
-			  <div class="b-topic-create-modal__content">
-				  <div class="b-topic-create-modal-content">
-					{{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
-					@if($type == 'link')
-					<div class="b-topic-create-modal-content__item">
-						{{Form::text('link', '', array('class' => 'input-default add-name', 'placeholder' => trans("network.link-placeholder")))}}
-						{{Form::hidden('image_url')}}
-						{{Form::hidden('link_url')}}
-						<img class="topic-cover" />
-					</div>
-					<script>
-						var prevUrl = '';
-						var inProgress = false;
-						$('input[name=link]').on("paste keyup", function() {
-							var url = this.value;
-							if(url != '' && prevUrl != url && isValidURL(url) && !inProgress){
-								inProgress = true;
-								$.get('{{URL::to("topic/create/fetch_content")}}'+'?url='+url, function($urlData){
-								   $('input[name=link_url]').val(url);
-								   $('input[name=title]').val($urlData.title);
-								   tinyMCE.activeEditor.setContent($urlData.content);
-								   if($urlData.lead_image_url){
-									   $('.topic-cover').attr('src', $urlData.lead_image_url);
-									   $('input[name=image_url]').val($urlData.lead_image_url);
-								   }
-								}).always(function(){
-									prevUrl = url;
-									inProgress = false;
-								});
-							}
-						});
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+    @foreach ($errors->all() as $error)
+    <div class="b-message b-message-error">
+        <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+        <div class="b-message-icon b-message-error-icon"></div>
+        <p class="b-message-p">
+            {{$error}}
+        </p>
+    </div>
+    @endforeach
+          <div class="b-topic-create-modal">
+            <div class="b-topic-create-modal__inner">
+              <div class="b-topic-create-modal__title">{{ trans('network.create-topic') }}
+                <button class="btn-close"></button>
+              </div>
+              <div class="b-topic-create-modal__content">
+                  <div class="b-topic-create-modal-content">
+                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
+                    @if($type == 'link')
+                    <div class="b-topic-create-modal-content__item">
+                        {{Form::text('link', '', array('class' => 'input-default add-name', 'placeholder' => trans("network.link-placeholder")))}}
+                       
+                        {{Form::hidden('image_url')}}
+                        {{Form::hidden('link_url')}}
+                        <img class="topic-cover" />
+                    </div>
+                    <script>
+                        var prevUrl = '';
+                        var inProgress = false;
+                        $('input[name=link]').on("paste keyup", function() {
+                            var url = this.value;
+                            if(url != '' && prevUrl != url && isValidURL(url) && !inProgress){
+                                inProgress = true;
+                                $.get('{{URL::to("topic/create/fetch_content")}}'+'?url='+url, function($urlData){
+                                   $('input[name=link_url]').val(url);
+                                   $('input[name=title]').val($urlData.title);
+                                   tinyMCE.activeEditor.setContent($urlData.content);
+                                   if($urlData.lead_image_url){
+                                       $('.topic-cover').attr('src', $urlData.lead_image_url);
+                                       $('input[name=image_url]').val($urlData.lead_image_url);
+                                   }
+                                }).always(function(){
+                                    prevUrl = url;
+                                    inProgress = false;
+                                });
+                            }
+                        });
 
 						function isValidURL(url){
 							var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
-							if(RegExp.test(url)){
-								return true;
-							}else{
-								return false;
-							}
-						} 
-					</script>
-					@endif
-					<div class="b-topic-create-modal-content__item">
-						{{Form::text('title', '', array('class' => 'input-default add-name sync-input', 'placeholder' =>  trans("network.choose-name")))}}
-						<a href="{{asset('topic/drafts')}}" class="draft">{{ trans('network.drafts') }} <span>{{Auth::user()->drafts()->count()}}</span></a>
-					</div>
-					<div class="b-topic-create-modal-content__item">
-						{{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default sync-input')) }}
-							<div class="b-topic-create-modal-content-skin">
-							<input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg" class="topic-skin">
-							</div>
-							<div class="clear"></div>
-					</div>
-					<!--<div class="b-topic-create-modal-content__item">
-						{{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default sync-input')) }}
-					</div> -->
-					<div class="b-topic-create-modal-content__item">
-						<textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
-					</div>
-					<div class="b-topic-create-modal-content__item">
-						{{ Form::text('tags', null, array('class' => 'input-default add-name', 'id' => 'tags', 'placeholder' => trans("network.tags") )) }}
-					</div>
-					<div class="b-topic-create-modal-content__item image">
-					
-						  <div class="b-topic-create-modal-content__btns">
-							<input type="hidden" name="image_url" />
-							<input type="submit" value="{{ trans('network.cancel') }}" class="btn btn-cancel input-default"/>
-							<input type="button" value="{{ trans('network.preview') }}" class="btn btn-preview input-default" onclick="tinyMCE.execCommand('mcePreview');"/>
-							<input type="submit" value="{{ trans('network.publish') }}" class="btn btn-submit input-default"/>
-						  </div>
-					  <div class="clear"></div>
-					</div>
-					{{ Form::hidden('topic_id') }}
-					{{ Form::hidden('topic_type', $type) }}
-				   {{Form::close()}}
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
+
+                            if(RegExp.test(url)){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        } 
+                    </script>
+                    @endif
+                    <div class="b-topic-create-modal-content__item">
+                        {{Form::text('title', '', array('class' => 'input-default add-name sync-input', 'placeholder' =>  trans("network.choose-name")))}}
+                        <a href="{{asset('topic/drafts')}}" class="draft">{{ trans('network.drafts') }} <span>{{Auth::user()->drafts()->count()}}</span></a>
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
+                        {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default sync-input')) }}
+                    </div>
+                     <div id="dZUpload" class="dropzone">
+                          <div class="dz-default dz-message">Загрузить обложку</div>
+                    </div>
+                    <br>
+                    <!--<div class="b-topic-create-modal-content__item">
+                        {{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default sync-input')) }}
+                    </div> -->
+                    <div class="b-topic-create-modal-content__item">
+                        <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
+                        {{ Form::text('tags', null, array('class' => 'input-default add-name', 'id' => 'tags', 'placeholder' => trans("network.tags") )) }}
+                    </div>
+                    <div class="b-topic-create-modal-content__item image">
+                       <!--  <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg"> -->
+                          <div class="b-topic-create-modal-content__btns">
+                            <input type="hidden" name="image_url" />
+                            <input type="submit" value="{{ trans('network.cancel') }}" class="btn btn-cancel input-default"/>
+                            <input type="button" value="{{ trans('network.preview') }}" class="btn btn-preview input-default" onclick="tinyMCE.execCommand('mcePreview');"/>
+                            <input type="submit" value="{{ trans('network.publish') }}" class="btn btn-submit input-default"/>
+                          </div>
+                      <div class="clear"></div>
+                    </div>
+                    {{ Form::hidden('topic_id') }}
+                    {{ Form::hidden('topic_type', $type) }}
+                   {{Form::close()}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 		
 @stop
 
 
 @section('scripts')
 @include('topic.scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+<script src="{{ URL::to('js/utils/dropzone-cover.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        runDropzone("{{ URL::to('topic/addCover') }}");
+    });
+    
+</script>
 @stop
 
 <!--<div class="container" style="margin-top:100px">

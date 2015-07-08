@@ -25,13 +25,13 @@
             <div style="width: 100%; background: #fff; padding: 20px 0;">
                 <div style="margin: 0 20px;font-family: 'PT Sans Caption';">
                     @if(!$userRole || $userRole == 'reject')
-                        {{HTML::link('blog/'.$blog->id.'/read', 'Подпишитесь')}} чтобы иметь доступ к просмотру топиков
+                        {{HTML::link('blog/'.$blog->id.'/read', trans('network.subscribe-imperative'))}} {{ trans('network.to-have-topic-access') }}
                     @elseif($userRole == 'request')
-                        Вы уже отправили запрос на подписку. {{HTML::link('blog/'.$blog->id.'/reject', 'Отменить')}}
+                        {{ trans('network.you-have-already-sent-request') }} {{HTML::link('blog/'.$blog->id.'/reject', trans('network.reject'))}}
                     @elseif($userRole == 'invite')
-                        Вас пригласили в этот блог. {{HTML::link('blog/'.$blog->id.'/accept', 'Принять')}}
+                        {{ trans('network.you-were-invited-to-blog') }} {{HTML::link('blog/'.$blog->id.'/accept', trans('network.accept'))}}
                     @elseif($userRole == 'banned')
-                        Вы забанены
+                        {{ trans('network.you-are-banned') }}
                     @endif
                 </div>
             </div>

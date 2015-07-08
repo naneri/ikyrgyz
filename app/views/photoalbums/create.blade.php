@@ -19,7 +19,7 @@
                     {{Form::text('name', null, array('class' => 'form-control', 'placeholder' => trans('network.choose-name')))}}
                 </div>
                 <div class="form-group">
-                    {{Form::select('access', array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне'), null, array('class' => 'form-control'))}}
+                    {{Form::select('access', array('all' => trans('network.to-all'), 'friend' => trans('network.to-friends'), 'me' => trans('network.to-me')), null, array('class' => 'form-control'))}}
                 </div>
                 <div class="form-group">
                     <!--div id="dialog" title="Загрузить обложку">
@@ -41,10 +41,10 @@
                     <!--<input type="button" id="upload_image_dialog" style="display: none;" value="Загрузить обложку" />-->
                 </div>
                 <div class="form-group">
-                    {{Form::textarea('description', null, array('class' => 'form-control', 'placeholder' => 'Описание фотоальбома'))}}
+                    {{Form::textarea('description', null, array('class' => 'form-control', 'placeholder' => trans('network.photoalbum-desc')))}}
                 </div>
                 <div class="form-group">
-                    {{Form::submit(trans('save'))}}
+                    {{Form::submit(trans('network.save'))}}
                 </div
             {{Form::close()}}
         </div>

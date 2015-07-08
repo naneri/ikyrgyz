@@ -94,7 +94,7 @@
 						<input type="button" onclick="return vote.topic({{$topic->id}},-1);" class="btn-raiting">
 					</div>
 					<div class="b-user-wall-footer-raiting__number">
-						<span class="number-raiting" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
+						<span class="number-raiting {{$topic->rating_value()}}" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
 					</div>
 					<div class="b-user-wall-footer-raiting__arrow-up">
 						<input type="button" onclick="return vote.topic({{$topic->id}},1);" class="btn-raiting">
