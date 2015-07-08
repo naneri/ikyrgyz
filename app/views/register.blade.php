@@ -27,7 +27,9 @@
                                             </div><span class="b-header-logo-title__beta b-header-logo-title__beta_login">Beta</span>
                                             <div class="clear"></div>
                                         </div>
-                                    </div></a></div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    </a></div>
                         </div>
                         <div class="b-header__right_login">
                             {{Form::open(array('url' => 'login'))}}

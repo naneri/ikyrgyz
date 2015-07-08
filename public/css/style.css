@@ -2160,6 +2160,7 @@ input[type='checkbox'].choose-list {
 .topic-description {
 	color: #3f4242;
 	font: 15px 'pt-sans-caption', sans-serif;
+	text-align: center;
 }
 
 .b-topic-navigation__middle > ul li img:hover {
@@ -2743,6 +2744,14 @@ Form Style
 	background: url("../img/227.png") no-repeat;
 }
 
+.b-blog-create-modal-content-skin {
+	float: right;
+	height: 34px;
+	width: 134px;
+	overflow: hidden;
+	background: url("../img/231.png") no-repeat;
+}
+
 .b-topic-create-skin {
 	width: 403px;
 	height: 253px;
@@ -2877,6 +2886,10 @@ Form blog Style
 ====================================
 
 */
+.b-blog-create-modal {
+	max-width: 900px;
+}
+
 .b-blog-create-modal__title {
 	background-image: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background-image: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
@@ -2908,7 +2921,7 @@ Form blog Style
 }
 
 .b-blog-create-modal__content {
-	padding: 30px;
+	padding: 10px;
 	background: #fff;
 	margin: 0 10px;
 }
@@ -2967,7 +2980,7 @@ Form blog Style
 }
 
 .b-blog-create-modal-content__item .textarea-blog {
-	width: 857px;
+	width: 842px;
 	height: 212px;
 	padding: 5px;
 	border: 1px solid rgba(169,169,169,0.4);
@@ -3251,7 +3264,6 @@ about profile Style
 }
 
 .b-profile-about-text__image {
-	float: left;
 	width: 50%;
 	margin: 0 25px 25px 0;
 	max-width: 100%;
