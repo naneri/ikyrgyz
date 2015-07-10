@@ -75,7 +75,7 @@
 						{{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default sync-input')) }}
 					</div> -->
 					<div class="b-topic-create-modal-content__item">
-						<textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
+						<textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input "></textarea>
 					</div>
 					<div class="b-topic-create-modal-content__item">
 						{{ Form::text('tags', null, array('class' => 'input-default add-name', 'id' => 'tags', 'placeholder' => trans("network.tags") )) }}

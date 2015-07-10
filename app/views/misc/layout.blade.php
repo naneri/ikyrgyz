@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/tinymce.css') }}"/>
     @yield('styles')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('jquery/jquery-ui.js') }}">		</script>
@@ -19,6 +20,7 @@
     <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
     <script src="{{asset('js/tooltip.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script>
+    
     @include('misc.js')
     @include('scripts.convert-times')
   </head>

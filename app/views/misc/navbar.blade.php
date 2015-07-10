@@ -20,7 +20,15 @@
 				<div class="b-topic-navigation-menu__list">				
 					<dl class="dropdown-list">
 						<dt class="title"><a href="{{ URL::to('/') }}" class="soc-name">Я-Кыргыз</a></dt>
-						<dt class="user-name"><a href="{{URL::to('profile')}}"><img src="{{ asset('img/48.png') }}" alt="">Имя пользователя</a></dt>
+						<dt class="user-name"><a href="{{URL::to('profile')}}">
+						@if(isset($user_data->description->user_profile_avatar))
+						<img src="{{ asset($user_data->description->user_profile_avatar) }}" alt="">
+						@else
+
+						<img src="{{ asset('img/48.png') }}" alt="">
+						@endif
+						<span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span>
+						</a></dt>
 						<dt><a href="{{URL::to('profile')}} " class="my-profile">Мой профиль</a></dt>
 							<dd><a href="{{URL::to('topic/myTopics')}}">{{ trans('network.publications') }}
 							<span class="raiting">{{$topic_number}}</span>

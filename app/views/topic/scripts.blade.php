@@ -20,11 +20,11 @@ $(document).ready(function(){
         $('.rel-audio').click(function() {
             $('.audio-box').css('display', 'block');
         });
-        
-        tinymce.init({
-
-                    selector: "textarea",
-                    resize: "both",
+        tinyMCE.init({  
+                    mode : "exact",
+                    plugins : 'autoresize',
+                    
+                    selector: "textarea",         
                     language: 'ru',
                     menubar: false,
                     statusbar: false,
@@ -38,6 +38,7 @@ $(document).ready(function(){
                     relative_urls: false,
                     remove_script_host: true,
                     toolbar: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote pagebreak | link image youtube | code",
+                    
                     setup : function(ed){
                                     ed.on('keyup', function(e) {
                                         //console.log('the content ' + ed.getContent());
