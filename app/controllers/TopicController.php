@@ -284,9 +284,9 @@ class TopicController extends BaseController {
         if (Session::get('topicCover')) {
 
             //checking if directory exists and creating if it does not
-            $directory = 'images/' . $this->topic->blog_id . '/' . $this->topic->id;
+            $directory = "images/{$this->topic->blog_id}/{$this->topic->id}";
             if(!File::isDirectory($directory)){
-                File::makeDirectory($directory,  $mode = 0777, $recursive = false);
+                File::makeDirectory($directory,  $mode = 0777, $recursive = true);
             }
 
             // setting a new name

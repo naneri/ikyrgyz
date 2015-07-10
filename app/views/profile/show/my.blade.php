@@ -438,16 +438,30 @@
   steps: [
   {
     element: ".b-profile-top-button__button",
-    title: "Нажми кнопку!!!",
-    content: "Кнопку нажми!!!"
+    title: "Случайный профиль",
+    content: "Нажмите на кнопку 'Случайный профиль' для поиска новых друзей, интересных блогов и топиков."
   },
   {
     element: ".topic-icon",
-    title: "Топик создай",
-    content: "А ну создай топик!!!"
+    title: "Создать топик",
+    content: "Создайте свой первый топик, начните делиться своими мыслями или увлечениями со своими друзьями"
   }
 	],
-  storage: false	
+  storage: window.localStorage,
+  backdrop:true,
+   template: "<div class='popover tour'>\
+    <div class='arrow'></div>\
+    <h3 class='popover-title'></h3>\
+    <div class='popover-content'></div>\
+    <div class='popover-navigation'>\
+    	<div class='btn-group'>\
+	        <button class='btn btn-sm btn-default' data-role='prev'>« Назад</button>\
+	        <button class='btn btn-sm btn-default' data-role='next'>Дальше »</button>\
+        </div>\
+        <button class='btn btn-sm btn-default' data-role='end'>Отменить</button>\
+    </div>\
+    </nav>\
+  </div>"
 });
 
 // Initialize the tour
