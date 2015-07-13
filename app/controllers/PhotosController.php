@@ -95,8 +95,9 @@ class PhotosController extends \BaseController {
 	public function show($id)
 	{
 		$photo = Photo::with('album')->findOrFail($id);
+                $comments = $photo->commentsWithDataSortBy('old');
 
-		return View::make('photos.show', compact('photo'));
+                return View::make('photos.show', compact('photo', 'comments'));
 	}
 
 	/**

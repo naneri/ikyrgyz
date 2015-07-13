@@ -40,4 +40,15 @@ class PhotoAlbum extends \Eloquent {
             }
             return $access;
         }
+
+        public function vote($iValue) {
+            $this->rating += $iValue;
+            if ($iValue == 1) {
+                $this->increment('vote_up');
+            } elseif ($iValue == -1) {
+                $this->increment('vote_down');
+            }
+            return $iValue;
+        }
+
 }

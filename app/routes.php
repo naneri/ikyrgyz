@@ -230,6 +230,11 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
         Route::post('topic/comment/delete', 'TopicCommentsController@postDelete');
         Route::post('topic/comment/restore', 'TopicCommentsController@postRestore');
+        
+        Route::post('photo/comments/sort', 'PhotoCommentsController@sortComments');
+        Route::post('photo/comment/add', 'PhotoCommentsController@postAdd');
+        Route::post('photo/comment/delete', 'PhotoCommentsController@postDelete');
+        Route::post('photo/comment/restore', 'PhotoCommentsController@postRestore');
 
         Route::post('vote/comment', 'VoteController@postVoteComment');
         Route::post('vote/topic', 'VoteController@postVoteTopic');

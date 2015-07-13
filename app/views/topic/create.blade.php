@@ -51,8 +51,54 @@
                             }
                         });
 
-						function isValidURL(url){
-							var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+                        function isValidURL(url){
+                            var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+                            if(RegExp.test(url)){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        } 
+                    </script>
+                    @endif
+                    <div class="b-topic-create-modal-content__item">
+                        {{Form::text('title', '', array('class' => 'input-default add-name sync-input', 'placeholder' =>  trans("network.choose-name")))}}
+                        <a href="{{asset('topic/drafts')}}" class="draft">{{ trans('network.drafts') }} <span>{{Auth::user()->drafts()->count()}}</span></a>
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
+                        {{ Form::select('blog_id', $canPublishBlogs, null, array('class' => 'choose-blog input-default sync-input')) }}
+                    </div>
+                     <div id="dZUpload" class="dropzone">
+                          <div class="dz-default dz-message">Загрузить обложку</div>
+                    </div>
+                    <br>
+                    <!--<div class="b-topic-create-modal-content__item">
+                        {{ Form::select('topic_type', $type_list, null, array('class' => 'choose-blog input-default sync-input')) }}
+                    </div> -->
+                    <div class="b-topic-create-modal-content__item">
+                        <textarea name="description" cols="30" rows="10" class="input-default textarea-topic sync-input"></textarea>
+                    </div>
+                    <div class="b-topic-create-modal-content__item">
+                        {{ Form::text('tags', null, array('class' => 'input-default add-name', 'id' => 'tags', 'placeholder' => trans("network.tags") )) }}
+                    </div>
+                    <div class="b-topic-create-modal-content__item image">
+                       <!--  <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg"> -->
+                          <div class="b-topic-create-modal-content__btns">
+                            <input type="hidden" name="image_url" />
+                            <input type="submit" value="{{ trans('network.cancel') }}" class="btn btn-cancel input-default"/>
+                            <input type="button" value="{{ trans('network.preview') }}" class="btn btn-preview input-default" onclick="tinyMCE.execCommand('mcePreview');"/>
+                            <input type="submit" value="{{ trans('network.publish') }}" class="btn btn-submit input-default"/>
+                          </div>
+                      <div class="clear"></div>
+                    </div>
+                    {{ Form::hidden('topic_id') }}
+                    {{ Form::hidden('topic_type', $type) }}
+                   {{Form::close()}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 		
