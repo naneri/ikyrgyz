@@ -15,7 +15,7 @@
         {{Form::open(array('files' => true))}}
             <div class="form-group">
                 <div id="contacts-list">
-                Кому:<?php $receiver = Input::get('receiver'); ?>
+                {{ trans('network.to-who') }}:<?php $receiver = Input::get('receiver'); ?>
                     @foreach(Auth::user()->friends() as $friend)
                         @if ($receiver!='' && $receiver==$friend->first_name.' '.$friend->last_name)
                             {{Form::checkbox('receivers[]', $friend->email, true);}}{{$friend->first_name.' '.$friend->last_name}}

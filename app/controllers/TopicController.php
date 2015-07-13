@@ -17,7 +17,7 @@ class TopicController extends BaseController {
 	 */
 	public function create($type='topic')
 	{
-
+            Session::forget('topicCover');
             // Достаём список блогов в которые может постить пользователь
             $canPublishBlogs = $this->getCanPublishBlogsForView();       
             if(!$canPublishBlogs){
@@ -62,19 +62,19 @@ class TopicController extends BaseController {
 	 */
 	public function store()
 	{
-            $blogIds = Auth::user()->canPublishBlogs()->lists('id');
-            $blogIdsRegex = implode(',', $blogIds);
-            $rules = Topic::$rules;
-            $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
-            $validator = Validator::make(Input::all(), $rules);
+        $blogIds = Auth::user()->canPublishBlogs()->lists('id');
+        $blogIdsRegex = implode(',', $blogIds);
+        $rules = Topic::$rules;
+        $rules['blog_id'] = array('required', 'in:0,'.$blogIdsRegex);
+        $validator = Validator::make(Input::all(), $rules);
 
-            if($validator->fails()){
-                return Redirect::back()->withErrors($validator);
-            }
-            $this->topic = $this->getTopic();
-            $this->publishTopic(false);
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator);
+        }
+        $this->topic = $this->getTopic();
+        $this->publishTopic(false);
 
-            return Redirect::to('topic/show/'.$this->topic->id);
+        return Redirect::to('topic/show/'.$this->topic->id);
 	}
         
     private function getTopic(){
@@ -257,12 +257,16 @@ class TopicController extends BaseController {
     }
     
     private function publishTopic($isDraft){
+
+        // достаёт id блога
         $blogId = $this->getBlogId();
 
+        // если топи нельзя редактировать рендерит страничку с ошибкой
         if (!$this->topic->canEdit()) {
             return View::make('error.permission', array('error' => 'permission denied'));
         }
 
+        // присваивает значения
         $this->topic->title = Input::get('title');
         $this->topic->description = Input::get('description');
         $this->topic->blog_id = $blogId;
@@ -277,11 +281,25 @@ class TopicController extends BaseController {
         if(Input::has('link_url')){
             $this->topic->meta = Input::get('link_url');
         }
-        if (Input::hasFile('avatar')) {
-            $new_name = str_random(15) . '.' . Input::file('avatar')->getClientOriginalExtension();
-            Input::file('avatar')->move('images/' . $this->topic->blog_id . '/' . $this->topic->id, $new_name);
-            $this->topic->image_url = URL::to('/') . '/images/' . $this->topic->blog_id . '/' . $this->topic->id . '/' . $new_name;
+        if (Session::get('topicCover')) {
+
+            //checking if directory exists and creating if it does not
+            $directory = 'images/' . $this->topic->blog_id . '/' . $this->topic->id;
+            if(!File::isDirectory($directory)){
+                File::makeDirectory($directory,  $mode = 0777, $recursive = true);
+            }
+
+            // setting a new name
+            $new_name = str_random(15) . '.' . File::extension(Session::get('topicCover'));
+
+            // moving to a new folder
+            File::move(Session::get('topicCover'), $directory . '/'. $new_name);
+
+            // attaching the file name to the topic
+            $this->topic->image_url = URL::to('/') . '/' . $directory . '/' . $new_name;
         }
+
+        // сохраняет топик
         $this->topic->save();
 
         $this->syncTopicTags(Input::get('tags'));
@@ -454,5 +472,35 @@ class TopicController extends BaseController {
     
         return View::make('topic.build', compact('topics'));
 
+    }
+
+    public function addCover(){
+
+        // убирает данные об изображении
+        if(Input::get('removePhoto') == 1){
+            Session::forget('topicCover');
+            return Response::json(['status' => 'deleted']);
+        }
+
+        $input = Input::all();
+        $rules = array(
+            'file' => 'image|max:3000',
+        );
+
+        $validation = Validator::make($input, $rules);
+        if ($validation->fails())
+        {/*
+            return Response::make($validation->errors->first(), 400);*/
+            return Response::json(['error' => $validation->errors->first()]);
+        }
+       
+        $image = Input::file('file');
+        $filename  = time() . '.' . $image->getClientOriginalExtension();
+        $path = public_path('images/temp/' . $filename);
+        Image::make($image->getRealPath())->save($path);
+
+        Session::put('topicCover', $path);
+        return Response::json(['status' => 'success', 'filename' => $filename]);
+        
     }
 }

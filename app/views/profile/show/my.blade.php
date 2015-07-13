@@ -411,7 +411,7 @@
 	</div>
 </div>
 
-<ol id="outline">
+<!-- <ol id="outline">
 
   	<li data-class="b-profile-top-button__button" data-options="tipLocation:top;tipAnimation:fade" data-button="Далее:создать топик">
 	<p>Посмотрите случайные профили.</p>
@@ -421,16 +421,54 @@
 	<p>Создайте топик</p>
 	</li>
 
-</ol>
+</ol> -->
 
 <script>
- $(window).load(function(){
+/* $(window).load(function(){
 	console.log('started');
 	$("#outline").joyride({
 		'tipLocation': 'bottom',         // 'top' or 'bottom' in relation to parent
 		'nubPosition': 'auto',           // override on a per tooltip bases
 		'scrollSpeed': 300               // Page scrolling speed in ms
 	});
+ })*/
+
+ $(document).ready(function(){
+ 	var tour = new Tour({
+  steps: [
+  {
+    element: ".b-profile-top-button__button",
+    title: "Случайный профиль",
+    content: "Нажмите на кнопку 'Случайный профиль' для поиска новых друзей, интересных блогов и топиков."
+  },
+  {
+    element: ".topic-icon",
+    title: "Создать топик",
+    content: "Создайте свой первый топик, начните делиться своими мыслями или увлечениями со своими друзьями"
+  }
+	],
+  storage: window.localStorage,
+  backdrop:true,
+   template: "<div class='popover tour'>\
+    <div class='arrow'></div>\
+    <h3 class='popover-title'></h3>\
+    <div class='popover-content'></div>\
+    <div class='popover-navigation'>\
+    	<div class='btn-group'>\
+	        <button class='btn btn-sm btn-default' data-role='prev'>« Назад</button>\
+	        <button class='btn btn-sm btn-default' data-role='next'>Дальше »</button>\
+        </div>\
+        <button class='btn btn-sm btn-default' data-role='end'>Отменить</button>\
+    </div>\
+    </nav>\
+  </div>"
+});
+
+// Initialize the tour
+tour.init();
+
+// Start the tour
+tour.start();
  })
 </script>
 
@@ -493,10 +531,10 @@
 
 */?>
 @section('styles')
-	<link rel="stylesheet" href="{{ asset('css/joyride-2.1.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap-tour-standalone.css') }}">
 @stop
 
 @section('scripts')
 
-  <script src="{{ asset('js/jquery.joyride-2.1.js') }}"></script>
+  <script src="{{ asset('js/bootstrap-tour.js') }}"></script>
 @stop

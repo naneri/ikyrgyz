@@ -12,11 +12,11 @@
         <h4>Отправитель: {{$message->sender->getNames()}}</h4>
         <h5>Получатель: {{$message->receiver->getNames()}}</h5>
     <div class="panel-body">
-        <b>Тема: {{$message->title}}</b><br>
-        Сообщение: {{$message->text}}<br>
+        <b>{{ trans('network.message-topic') }}: {{$message->title}}</b><br>
+        {{ trans('network.message') }}: {{$message->text}}<br>
         @if($message->attachments->count() > 0)
             <p><br>
-                Прикрепленные файлы:<br>
+                {{ trans('network.attached-files') }}:<br>
                 @foreach($message->attachments as $attachment)
                     {{HTML::link(asset($attachment->path), $attachment->name, array('target' => '_blank'))}}<br>
                 @endforeach
@@ -24,7 +24,7 @@
         @endif
         @if($message->draft && $message->sender_id == Auth::id())
             <br>
-            Сообщение еще находится в черновиках.<br>
+            {{ trans('network.message-still-in-draft') }}.<br>
             {{HTML::link('message/send/'.$message->id, trans('network.send'))}} |
             {{HTML::link('message/edit/'.$message->id, trans('network.edit'))}} |
             {{HTML::link('message/delete/'.$message->id, trans('network.delete'))}}
@@ -37,7 +37,7 @@
     </div>
     @else
         <div class="panel-body">
-            Вы не имеете доступа к данному сообщению
+            {{ trans('network.no-message-access') }}
         </div>
     @endif
 </div>

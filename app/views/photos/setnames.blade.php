@@ -6,10 +6,10 @@
         {{Form::open(array('url' => 'photoalbum/'.$albumId.'/upload/setnames'))}}
             <div class="panel panel-default" style="height: 40px; padding:0 20px;">
                 <h4 style="float: left;">
-                    Загрузка фотографии
+                   {{ trans('network.load-photo') }}
                 </h4>
                 <span style="float: right; margin-top: 6px;">
-                    {{Form::submit('Сохранить')}}
+                    {{Form::submit(trans('network.save'))}}
                 </span>
             </div>
             <div>

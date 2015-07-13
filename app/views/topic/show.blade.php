@@ -1,7 +1,188 @@
 @extends('misc.layout')
 
 @section('content')
+<style>
+	
 
+	.mceContentBody,
+.mceContentBody td,
+.mceContentBody pre
+{
+  color: #000;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  margin: 8px;
+}
+ 
+.mceContentBody
+{
+  background: #FFF;
+}
+ 
+.mceContentBody.mceForceColors
+{
+  background: #FFF;
+  color: #000;
+}
+ 
+.mceContentBody h1
+{
+  font-size: 2em
+}
+ 
+.mceContentBody h2
+{
+  font-size: 1.5em
+}
+ 
+.mceContentBody h3
+{
+  font-size: 1.17em
+}
+ 
+.mceContentBody h4
+{
+  font-size: 1em
+}
+ 
+.mceContentBody h5
+{
+  font-size: .83em
+}
+ 
+.mceContentBody h6
+{
+  font-size: .75em
+}
+ 
+.mceContentBody .mceItemTable,
+.mceContentBody .mceItemTable td,
+.mceContentBody .mceItemTable th,
+.mceContentBody .mceItemTable caption,
+.mceContentBody .mceItemVisualAid
+{
+  border: 1px dashed #BBB;
+}
+ 
+.mceContentBody a.mceItemAnchor
+{
+  width: 12px;
+  line-height: 6px;
+  overflow: hidden;
+  padding-left: 12px;
+  background: url(img/items.gif) no-repeat bottom left;
+}
+ 
+.mceContentBody img.mceItemAnchor
+{
+  width: 12px;
+  height: 12px;
+  background: url(img/items.gif) no-repeat;
+}
+ 
+.mceContentBody img
+{
+  border: 0;
+}
+ 
+.mceContentBody table
+{
+  cursor: default
+}
+ 
+.mceContentBody table td,
+.mceContentBody table th
+{
+  cursor: text
+}
+ 
+.mceContentBody ins
+{
+  border-bottom: 1px solid green;
+  text-decoration: none;
+  color: green
+}
+ 
+.mceContentBody del
+{
+  color: red;
+  text-decoration: line-through
+}
+ 
+.mceContentBody cite
+{
+  border-bottom: 1px dashed blue
+}
+ 
+.mceContentBody acronym
+{
+  border-bottom: 1px dotted #CCC;
+  cursor: help
+}
+ 
+.mceContentBody abbr,
+.mceContentBody html\:abbr
+{
+  border-bottom: 1px dashed #CCC;
+  cursor: help
+}
+ 
+/* Manual additions to restore assumed by the TinyMCE but cleared by YUI CSS reset styles */
+ 
+.mceContentBody
+{
+  text-align: left;
+}
+ 
+.mceContentBody strong
+{
+  font-weight: bold;;
+}
+ 
+.mceContentBody li ul,
+.mceContentBody li ol
+{
+  margin: 0 1.5em;
+}
+ 
+.mceContentBody ul,
+.mceContentBody ol
+{
+  margin: 0 1.5em 1.5em 1.5em;
+}
+ 
+.mceContentBody ul,
+.mceContentBody ul li
+{
+  list-style-type: disc;
+}
+ 
+.mceContentBody ol,
+.mceContentBody ol li
+{
+  list-style-type: decimal;
+}
+ 
+.mceContentBody blockquote
+{
+  margin: 0 1.5em 1.5em 1.5em;
+}
+ 
+.mceContentBody p,
+.mceContentBody code,
+.mceContentBody pre,
+.mceContentBody kbd
+{
+  margin: 0 0 1.5em 0;
+}
+ 
+.mceContentBody em,
+.mceContentBody i,
+.mceContentBody dfn
+{
+	font-style: italic;
+}
+</style>
 	<div class="b-wrapper" id="topic_{{$topic->id}}">
 		<div class="b-page">
 			<div class="b-content">
@@ -43,11 +224,11 @@
 				</div>
 			  </div>
 			  <div class="b-profile-about__text">
-				<div class="b-profile-about-text topic-description">
+				<div class="b-profile-about-text topic-description mceContentBody">
 					@if($topic->image_url != '')
 						<img src="{{$topic->image_url}}" alt="" class="b-profile-about-text__image"/>
 					@endif
-				  <p class="b-profile-about-text__text">
+				  <p class="b-profile-about-text__text ">
 					{{$topic->description}}
 				  </p>
 				  @if($topic->type->name == 'link')
