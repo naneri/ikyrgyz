@@ -8,51 +8,34 @@ class BlogsTableSeeder extends Seeder{
 		//deletes all info
 		DB::table('blogs')->delete();
 
-                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-                $this->call('BlogTypesTableSeeder');
-                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $faker = Faker\Factory::create();
+       
+        $users = User::all();
+        foreach($users as $user){
 
-                // the data
-		$blogs = array(
-			array(
-				'id' => 1,
-				'user_id' => 1,
-				'title' => 'Novii blog',
-				'description' => 'zasdjhkqwe',
-                                'type_id' => 1
-			),
-			array(
-				'id' => 2,
-				'user_id' => 2,
-				'title' => 'Vtoroi blog',
-				'description' => 'zaasdasdjhkqwe',
-                                'type_id' => 2
-                            ),
-			array(
-				'id' => 3,
-				'user_id' => 2,
-				'title' => 'Tretii blog',
-				'description' => 'Tretii blog',
-                                'type_id' => 3
-                            ),
-			array(
-				'id' => 4,
-				'user_id' => 1,
-				'title' => '4etvertii blog',
-				'description' => 'etvertii blog',
-                                'type_id' => 1
-                            ),
-			array(
-				'id' => 5,
-				'user_id' => 2,
-				'title' => '5iatii blog',
-				'description' => '5iatii blog',
-                                'type_id' => 2
-                            ),
-		);
+           Blog::create([
+                'user_id'       => $user->id,
+                'title'         => "Blog of user: {$user->id}",
+                'description'   => $faker->paragraph(),
+                'type_id'       => 1 ,
+                'avatar'        => 'http://lorempixel.com/400/200'
+                ]);
+        }
 
-		// inserts the data
-		DB::table('blogs')->insert($blogs);
+        for ($i=0; $i < 100; $i++) { 
+
+           $user = User::orderByRaw("RAND()")->first();
+
+
+           Blog::create([
+                'user_id'       => $user->id,
+                'title'         => $faker->sentence(),
+                'description'   => $faker->paragraph(),
+                'type_id'       => array_rand(['2', '3'])  ,
+                'avatar'        => 'http://lorempixel.com/400/200'
+            ]);
+        }
+
 	}
 
 }

@@ -10,7 +10,7 @@
                 console.log(response);
             },
             removedfile: function(file,response){
-                $.post("{{URL::to('topic/addCover?removePhoto=1')}}", function(data){
+                $.post(upload_url, function(data){
                     console.log(data);
                 });
                 var _ref;
