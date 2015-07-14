@@ -19,10 +19,13 @@ class DatabaseSeeder extends Seeder {
       $this->call('UsersTableSeeder');
       $this->call('UserDescriptionTableSeeder');
       $this->call('FriendTableSeeder');
-               
-/*               $this->call('BlogTypesTableSeeder');
+      $this->call('BlogTypesTableSeeder');   
+      $this->call('RolesTableSeeder');     
+
+      $this->call('TopicTypesTableSeeder');
+/*               
                $this->call('BlogsTableSeeder');
-               $this->call('TopicTypesTableSeeder');
+               
                $this->call('TopicsTableSeeder');
                $this->call('TagsTableSeeder');
                $this->call('TopicVideoTableSeeder');

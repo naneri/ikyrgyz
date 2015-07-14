@@ -18,5 +18,6 @@ public/js/tinymce/plugins/jbimages/config.php
 node_modules/*
 
 public/images/*
+public/img/temp
 
 /public/uploads/
