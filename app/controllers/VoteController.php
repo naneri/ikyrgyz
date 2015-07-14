@@ -187,6 +187,8 @@ class VoteController extends \BaseController {
 
             $oPhoto->vote($iValue);
             $oPhoto->save();
+            
+            $oPhoto->album->vote($iValue);
 
             $this->createVote('photo', $oPhoto->id, $iValue, $oPhoto->rating);
             

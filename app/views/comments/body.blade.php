@@ -61,6 +61,7 @@
             <input type="submit" class="button-default button-small" onclick="vote.comment({{$comment->id}}, 1);"/>
         </div>
         <p class="b-profile-about-message-button__raiting" id="rating_comment_{{$comment->id}}">{{round($comment->rating,2)}}</p> -->
+        @if(isset($comment->topic_id))
         <div class="b-user-wall-footer-raiting__right">
         <div class="b-user-wall-footer-raiting__arrow-down">
             <input type="button"onclick="vote.comment({{$comment->id}}, - 1);" class="btn-raiting">
@@ -72,6 +73,7 @@
             <input type="button" onclick="vote.comment({{$comment->id}}, 1);" class="btn-raiting">
         </div>
         </div>
+        @endif
         <div class="clear"></div>
         
 

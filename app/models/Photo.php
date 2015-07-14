@@ -29,6 +29,38 @@ class Photo extends \Eloquent {
             return round($value, 2);
         }
         
+        public function comments(){
+            return $this->hasMany('PhotoComment');
+        }
+
+        public function commentsWithData() {
+            return $this->comments()
+                            ->join('user_description', 'user_description.user_id', '=', 'photo_comments.user_id')
+                            ->join('users', 'users.id', '=', 'photo_comments.user_id');
+        }
+
+        public function commentsWithDataSortBy($sort) {
+            $comments = array();
+            switch ($sort) {
+                case 'new':
+                    $comments = $this->commentsWithData()->orderBy('created_at', 'DESC');
+                    break;
+                case 'rating':
+                    $comments = $this->commentsWithData()->orderBy('rating', 'DESC');
+                    break;
+                case 'old':
+                default:
+                    $comments = $this->commentsWithData()->orderBy('created_at', 'ASC');
+                    break;
+            }
+            $commentsSelected = $comments->select('photo_comments.*', 'user_description.*', 'users.rating as author_rating')->get();
+            $bonusRating = new BonusRating();
+            foreach ($commentsSelected as &$v) {
+                $v->author_rating += $bonusRating->getUsersBonusRating($v->user_id);
+            }
+            return $commentsSelected;
+        }
+
         public function vote($iValue) {
             $this->rating += $iValue;
             if ($iValue == 1) {

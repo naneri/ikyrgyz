@@ -51,10 +51,8 @@
                             }
                         });
 
-						function isValidURL(url){
-							var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-
-
+                        function isValidURL(url){
+                            var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
                             if(RegExp.test(url)){
                                 return true;
                             }else{
@@ -101,6 +99,8 @@
             </div>
           </div>
         </div>
+
+
 		
 @stop
 

@@ -1,18 +1,26 @@
 {{HTML::script('js/tinymce/tinymce.min.js')}}
 {{HTML::script('js/moment-with-locales.js')}}
 <script>
+    @if(isset($commentType))
+        var targetType = '{{$commentType}}';
+    @else
+        var targetType = 'topic';
+    @endif
+    var targetIdText = targetType+'_id';
+    
     var comment = {
-            submit: function(commentId, topicId){
+            submit: function(commentId, targetId){
                 tinyMCE.triggerSave();
                 var $commentBody = $('#add_comment_'+commentId);
+                var data = {
+                            'text': $commentBody.find('.add_comment_text').val(),
+                            'parent_id': commentId
+                            };
+                data[targetIdText] = targetId;
                 $.ajax({
                     method: "POST",
-                    url: "{{$base_config['base_url']}}/topic/comment/add",
-                    data: {
-                        'text': $commentBody.find('.add_comment_text').val(),
-                        'parent_id': commentId,
-                        'topic_id': topicId
-                    },
+                    url: "{{$base_config['base_url']}}/"+targetType+"/comment/add",
+                    data: data,
                     success: function($result) {
                         if(!$result.error && $result.comment){
                             var $commentsContainer = $('#comments_child_' + commentId);
@@ -34,7 +42,7 @@
                 var $commentBody = $('#comment_body_' + commentId);
                 $.ajax({
                     method:"POST",
-                    url:"{{$base_config['base_url']}}/topic/comment/delete",
+                    url:"{{$base_config['base_url']}}/"+targetType+"/comment/delete",
                     data: {
                         'comment_id': commentId
                     },
@@ -50,7 +58,7 @@
                 var $commentBody = $('#comment_body_' + commentId);
                 $.ajax({
                     method: "POST",
-                    url: "{{$base_config['base_url']}}/topic/comment/restore",
+                    url: "{{$base_config['base_url']}}/"+targetType+"/comment/restore",
                     data: {
                         'comment_id': commentId
                     },
@@ -79,15 +87,17 @@
                     scrollTop: parseInt($(selector).offset().top - marginTop)
                 }, 1000);
             },
-            sort: function(topicId, sortBy){
+            sort: function(targetId, sortBy){
                 var $commentsBox = $('#comments_child_0');
+                var data = {
+                        targetIdText: targetId,
+                        'sort_by': sortBy
+                    };
+                data[targetIdText] = targetId;
                 $.ajax({
                     method: "POST",
-                    url: "{{$base_config['base_url']}}/topic/comments/sort",
-                    data: {
-                        'topic_id': topicId,
-                        'sort_by': sortBy
-                    },
+                    url: "{{$base_config['base_url']}}/"+targetType+"/comments/sort",
+                    data: data,
                     success: function($result) {
                         if (!$result['error'] && $result['comments']) {
                             $commentsBox.html($result.comments);
@@ -129,7 +139,6 @@
                 tinymce.init({
                     selector: selector,
                     language: 'ru',
-                    resize: "both",
                     menubar: false,
                     statusbar: false,
                     subfolder: "{{Auth::user()->id}}",
