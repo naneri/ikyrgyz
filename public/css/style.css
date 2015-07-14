@@ -363,15 +363,8 @@ body {
 	}
 
 	.b-topic-navigation__left {
-		padding-left: 22px;
-	}
-
-	.b-topic-navigation__right {
-		padding-right: 20px;
-	}
-
-	.b-topic-navigation-choose {
-		display: none;
+		float: none;
+		width: 100%;
 	}
 }
 
@@ -1493,9 +1486,8 @@ body {
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
 	.b-user-wall-495 {
-		width: 95%;
-		margin-left: 20px;
-		margin-right: 20px;
+		width: 98%;
+		margin: 0 1%;
 	}
 
 	.b-user-wall-495 .topic-preview-text {
@@ -1517,9 +1509,8 @@ body {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
 	.b-user-wall-495 {
-		width: 90%;
-		margin-left: 30px;
-		margin-right: 20px;
+		width: 96%;
+		margin: 0 2%;
 	}
 
 	.b-user-wall-495 .topic-preview-text {
@@ -1541,7 +1532,8 @@ body {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 	.b-user-wall-495 {
-		width: 86%;
+		width: 96%;
+		margin: 0 2%;
 	}
 
 	.b-user-wall-495 .topic-preview-text {
@@ -1996,34 +1988,29 @@ input[type='checkbox'].choose-list {
 	padding-left: 13px;
 }
 
-.b-topic-navigation__create,
 .b-topic-navigation-create-dropdown {
 	width: 165px;
 	height: 260px;
 	border-bottom: 4px solid #676767;
 }
 
-.b-topic-navigation__create a,
 .b-topic-navigation-create-dropdown a {
 	color: #676767;
 	font-family: 'PT Sans Caption';
 	font-size: 15px;
 }
 
-.b-topic-navigation__create a:hover,
 .b-topic-navigation-create-dropdown a:hover {
 	opacity: 0.5;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	filter: alpha(opacity=50);
 }
 
-.b-topic-navigation__create li,
 .b-topic-navigation-create-dropdown li {
 	padding: 5px 0 5px 15px;
 	white-space: nowrap;
 }
 
-.b-topic-navigation__create li:first-child a,
 .b-topic-navigation-create-dropdown li:first-child a {
 	margin: 20px 0 0 0;
 }
@@ -2325,6 +2312,18 @@ a.format-icon img {
 		float: none;
 		display: block;
 		width: 150px;
+	}
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 320px) {
+	.b-topic-navigation-choose {
+		float: right;
+	}
+
+	.b-topic-navigation-choose .dropdown-list {
+		left: -171px;
+		-webkit-box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.46);
+		box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.46);
 	}
 }
 /*
@@ -3163,8 +3162,7 @@ about profile Style
 
 .b-profile-about-title__right {
 	float: right;
-	display: inline-block;
-	margin: 5px 0 0 0;
+	line-height: 20px;
 }
 
 .b-profile-about-title__right .date {
@@ -3210,9 +3208,10 @@ about profile Style
 }
 
 .b-profile-about-title__title {
-	display: inline-block;
 	font: 22px 'PT Sans Caption Bold';
 	color: #676767;
+	line-height: 20px;
+	float: left;
 }
 
 .b-profile-about-tags-user__image {
@@ -3275,6 +3274,10 @@ about profile Style
 	color: #25ad85;
 	font: 10px 'PT Sans Caption Bold';
 	margin-left: 5px;
+}
+
+.b-profile-about-text {
+	text-align: center;
 }
 
 .b-profile-about-text__image {
@@ -3398,7 +3401,7 @@ p.b-profile-about-gallery__title .input-default:hover {
 }
 
 .b-profile-about__inner {
-	margin: 0 40px;
+	margin: 0 2%;
 }
 
 .b-profile-about-player-list__button {
@@ -3902,12 +3905,8 @@ p.b-profile-about-message-button__raiting {
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 760px) {
-	.b-profile-about-tags-user__right {
-		float: none;
-	}
-
 	.b-profile-about-tags-user__left {
-		float: none;
+		width: 50%;
 	}
 
 	.b-profile-about-tags-user-social {
@@ -3924,6 +3923,12 @@ p.b-profile-about-message-button__raiting {
 
 	.count-followers {
 		display: block;
+	}
+}
+
+@media only screen and (min-width: 320px) and (max-width: 390px) {
+	.b-profile-about-tags-user__image {
+		float: none;
 	}
 }
 /*

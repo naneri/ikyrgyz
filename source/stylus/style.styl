@@ -316,14 +316,14 @@ body
 		display none
 	}
 	.b-topic-navigation__left {
-		padding-left 22px
+		float none
+		width 100%
 	}
 	.b-topic-navigation__right {
-		padding-right 20px
+		
 	}
-	.b-topic-navigation-choose {
-		display none
-	}
+
+
 	
 
 }
@@ -1247,9 +1247,8 @@ body
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 	.b-user-wall-495 {
-		width 95%
-		margin-left 20px
-		margin-right 20px
+		width 98%
+		margin 0 1%
 		.topic-preview-text {
 		text-align left
 	}
@@ -1272,9 +1271,8 @@ body
 
 @media only screen and (min-device-width: 320px) and (max-device-width : 768px) {
 	.b-user-wall-495 {
-		width 90%
-		margin-left 30px
-		margin-right 20px
+		width 96%
+		margin 0 2%
 		.topic-preview-text {
 		text-align left
 		}
@@ -1298,7 +1296,8 @@ body
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px)  {
 	.b-user-wall-495 {
-		width 86%
+		width 96%
+		margin 0 2%
 		.topic-preview-text {
 		text-align left
 		} 
@@ -1360,102 +1359,7 @@ Topic
 ===========================
 */
 
-// .b-topic-navigation-create
-// 	display none
-// 	position absolute
-// 	top 100%
-// 	left 0
-// 	z-index 1000
-// 	width 100px
-// 	background #fff
-// 	overflow hidden
-// 	&__list
-// 		span 
-// 			display inline-block
-// 			vertical-align middle
-// 		a
-// 			display inline-block
-// 			width 22px
-// 			height 24px
-// 			background url(../img/13.png) no-repeat
-// 			vertical-align middle
-// 			padding-left 30px
-// 		&:nth-child(1)
-// 			a
-// 				background-position 0 0
-// 		&:nth-child(2)
-// 			a
-// 				background-position 0 -31px
-// 		&:nth-child(3)
-// 			a
-// 				background-position 0 -61px
-// 		&:nth-child(4)
-// 			a
-// 				background-position 0 -84px 
-// 		&:nth-child(5)
-// 			a
-// 				background-position 0 -121px
-// 		&:nth-child(6)
-// 			a
-// 				background-position 0 -153px
-// 		&:nth-child(7)
-// 			a
-// 				background-position 0 -184px
-// .b-topic-navigation-list
-// 	position relative
-// .b-topic-navigation__create
-// 	padding 4px
-// 	float left
-// 	height 32px
-// 	display inline-block
-// 	width 13%
-	
-	
-	
-	
-	
-	
-	
-// 	a.b-topic-navigation__item
-// 		color #676767
-// 		font-size 15px
-// 		font-family 'PT Sans Caption'
-// 		width 120px
-// 		height 32px
-// 		border 1px solid #dbdbdb
-// 		display block
-// 		text-align center
-// 		line-height 32px
-// 		border-radius 5px
-// 		position relative
-		
-		
-		
-		
-// 		&:before
-// 			display inline-block
-// 			content ''
-// 			background url(../img/31.png) no-repeat
-// 			width 12px
-// 			height 12px
-// 			vertical-align middle
-// 			margin-right 5px
-// 			position absolute
-// 			top 11px
-// 			left 10px
-			
-			
-// 		&:after
-// 			display inline-block
-// 			content ''
-// 			background url(../img/40.png) no-repeat
-// 			width 12px
-// 			height 12px
-// 			vertical-align middle
-// 			margin-right 5px
-// 			position absolute
-// 			right 0
-// 			top 14px
+
 .b-topic-navigation__inner
 	max-width 1000px
 	width 100%
@@ -1797,7 +1701,7 @@ div.choose-list
 	float left
 	padding-left 13px
 		
-.b-topic-navigation__create
+
 
 .b-topic-navigation-create-dropdown
 	width 165px
@@ -2098,16 +2002,17 @@ a.format-icon
 	
 }
 
-@media screen and (max-width: 380px) {
-	.b-topic-navigation__middle {
-		
-		//
-		
-		
-		
-		
-		
+@media only screen and (max-width: 1000px) and (min-width: 320px) {
+	.b-topic-navigation-choose {
+		float right
 	}
+	.b-topic-navigation-choose {
+		.dropdown-list {
+			left -171px
+			box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.46);
+		}
+	}
+	
 }
 /*
 ================================
@@ -2685,8 +2590,10 @@ about profile Style
 
 .b-profile-about
 	//
+		
 	&__title
 		padding-top 20px
+		
 	&__profile
 		padding-top 20px
 	&__text
@@ -2703,8 +2610,7 @@ about profile Style
 	//
 	&__right
 		float right
-		display inline-block
-		margin 5px 0 0 0    
+		line-height 20px
 		
 		.date
 			color #999
@@ -2721,7 +2627,7 @@ about profile Style
 			display inline-block
 			font 10px $baseFontFamily         
 			color $baseFontColor
-		.btn-delete         
+		.btn-delete
 			font 10px $baseFontFamily        
 			color $baseFontColor
 			margin-right 5px
@@ -2729,10 +2635,11 @@ about profile Style
 			font 11px $baseFontFamilyBold
 			color $baseFontColor
 			margin 0 5px
-	&__title
-		display inline-block
+	&__title		
 		font 22px 'PT Sans Caption Bold'
 		color #676767
+		line-height 20px
+		float left
 		
 		
 .b-profile-about-tags-user
@@ -2775,7 +2682,7 @@ about profile Style
 		margin-left 5px
 		
 .b-profile-about-text
-	//
+	text-align center
 	&__image
 		
 		width 50%
@@ -2858,7 +2765,7 @@ p.b-profile-about-gallery__title
 .b-profile-about    
 	background #fff 
 	&__inner
-		margin 0 40px
+		margin 0 2%
 		
 
 .b-profile-about-player-list
@@ -3029,68 +2936,7 @@ p.b-profile-about-topics__title
 			font 12px $baseFontFamily
 		.btn-follow, .count-topic
 			margin-right 5px
-// ul.b-profile-about-tags-user-list-dropdown  
-// 	dropdown()  
-// 	padding 10px 8px 8px 8px
-// 	z-index 1000
-// 	width 112px
-// 	height 157px
-// 	border 1px solid #dbdbdb
-// 	background-color #feffff
-	
-// 	a
-// 		color $baseFontColor
-// 		font 12px $baseFontFamily
-	
-// ul.b-profile-about-tags-user-list
-// 	display inline-block
-// 	text-align center   
-// 	button-default()
-// 	margin-right 20px
-	
-// 	li
-// 		//
-// 		a
-// 			display inline-block
-// 			background url(../img/29.png) no-repeat
-// 			background-position 50% 50%
-// 			width 32px
-// 			height 32px
-// 			vertical-align middle
-			
-	
-	
-			
-			
-			
-// 	.b-profile-about-tags-user-list-dropdown
-// 		li
-// 			padding-top 1px
-// 			a
-// 				display block
-// 				background url(../img/social.png) no-repeat
-// 				width 20px
-// 				height 20px
-// 				margin 5px 5px
-// 				padding-left 30px           
-// 				vertical-align middle           
-// 				white-space nowrap
-				
-// 		li:nth-child(1)
-// 			a
-// 				background-position 0 0
-// 		li:nth-child(2)
-// 			a
-// 				background-position 0 -26px
-// 		li:nth-child(3)
-// 			a
-// 				background-position 0 -52px 
-// 		li:nth-child(4)
-// 			a
-// 				background-position 0 -78px 
-// 		li:nth-child(5)
-// 			a
-// 				background-position 0 -104px    
+
 .b-profile-about-tags-user-social
 	//
 	&__list
@@ -3266,14 +3112,15 @@ p.b-profile-about-message-button__raiting
 	font 15px $baseFontFamilyBold
 @media only screen and (min-device-width: 320px) and (max-device-width:760px) {
 	.b-profile-about-tags-user__right {
-		float none
+		//
 		
 	}
 	.b-profile-about-tags-user__left {
-		float none
+		width 50%
 	}
 	.b-profile-about-tags-user-social {
 		padding-top 10px
+		
 	}
 	.b-user-wall-footer-raiting {
 		border none
@@ -3285,6 +3132,13 @@ p.b-profile-about-message-button__raiting
 		display block
 	}
 }
+
+@media only screen and (min-width: 320px) and (max-width: 390px) {
+	.b-profile-about-tags-user__image {
+		float none
+		
+	}
+} 
 /*
 ===========================
 ===========================

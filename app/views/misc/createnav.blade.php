@@ -112,7 +112,7 @@
 			</div>
 			<div class="b-topic-navigation-choose">
 				<div class="b-topic-navigation-choose__list">
-				<a href="" class="b-topic-navigation-choose__item"></a>
+				<a href="#" class="b-topic-navigation-choose__item"></a>
 				<ul class="dropdown-list">
 					<li class="dropdown-list__item dropdown-list__item_title">
 					{{ trans('network.sort-topics-by') }}</li>
