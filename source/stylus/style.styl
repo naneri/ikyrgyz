@@ -1840,7 +1840,7 @@ div.choose-list
 .topic-description 
 	color #3f4242
 	font 15px 'pt-sans-caption', sans-serif
-	text-align center
+	
 	
 	
 .b-topic-navigation__middle > ul li img
@@ -2680,15 +2680,25 @@ about profile Style
 		color #25ad85
 		font 10px $baseFontFamilyBold   
 		margin-left 5px
+	&__comment
+		text-align center
+		padding-bottom 20px
+		padding-top 20px
+.btn-comment
+	padding 5px
+	button-default()
+		
 		
 .b-profile-about-text
-	text-align center
+	//
 	&__image
 		
 		width 50%
 		margin 0 25px 25px 0
 		max-width 100%
 		overflow hidden
+		display block
+		margin 0 auto
 	&__text
 		color #3e4142
 		font 15px $baseFontFamily
@@ -3074,17 +3084,22 @@ p.b-profile-about-topics__title
 		font 14px $baseFontFamily
 .b-profile-about-message-button
 	padding 20px 0
+	
 	&__answer, &__delete, &__minus, &__plus, &__raiting
 		display inline-block
 		
 	&__minus
 		margin-left 150px
 	.button-submit
+		
 		button-default()
 		color $baseFontColor
 		font 12px $baseFontFamily
 		cursor pointer
 		padding 5px 10px
+		float right
+		margin-left 10px
+		
 .b-profile-about-message-button__minus
 	//
 	.button-small

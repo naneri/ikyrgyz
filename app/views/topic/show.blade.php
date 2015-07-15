@@ -117,11 +117,11 @@
 					  <div style="float:left;">Комментарии {{$topic->comments->count()}}</div>
 					  <div style="float:right;">Сортировка: {{Form::select('sort_by', array('old' => 'Старые', 'new' => 'Новые', 'rating' => 'По рейтингу'))}}</div>
 				  </div>
-				  <hr>
-				  <div style="padding: 20px 0; font-size: 18px;">
-					<a href="javascript:;" onclick="comment.postCommentForm()">Оставить комментарий</a>
+				 
+				  <div class="b-profile-about-profile__comment">
+					<a href="#post-comment" onclick="comment.postCommentForm()" class="btn-comment">Оставить комментарий</a>
 				  </div>
-				  <div class="post-comment" style="display: none;">
+				  <div class="post-comment" style="display: none;" id="post-comment">
 						<div style="height:50px;">
 							  {{HTML::image(Auth::user()->avatar(), '', array('style' => 'float:left;width:40px;height:40px;margin-right:10px;'))}}
 							  <span style="line-height: 40px;" class="b-profile-about-profile__name"> {{Auth::user()->getNames()}}</span>
@@ -130,7 +130,9 @@
 							{{Form::textarea('comment', null, array('class' => 'add_comment_text'))}}
 							<div class="b-profile-about-message-button">
 								<input type="button" value="Опубликовать" class="button-default button-submit" onclick="comment.submit(0,{{$topic->id}});">
+								<input type="button" value="Отмена" class="button-default button-submit" onclick="comment.postCommentForm()">
 							</div>
+							<div class="clear"></div>
 						</div>
 					</div>
 				  <div id="comments_child_0">
