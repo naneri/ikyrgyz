@@ -1,11 +1,10 @@
 .mejs-offscreen{
     /* Accessibility: hide screen reader texts (and prefer "top" for RTL languages). */
-    position: absolute !important;
-    top: -10000px;
-    left: -10000px;
     overflow: hidden;
-    width: 1px;
-    height: 1px;
+    background: #000;
+    display: block;
+    color: #fff;
+    text-align: center;
 }
 
 .mejs-container {

@@ -27,22 +27,14 @@
             <div class="panel-default">
                 <audio id="audio-player"></audio>
             </div>
-                {{--@if($audioAlbum->getOriginal('cover'))
-                    <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{$audioAlbum->cover}}) 50%;background-size: cover;border: 2px solid white;">
-                        <div style="height: 50px;  position: absolute;  bottom: 0;  background-color: #bbb;  width: 100%;  left: 0;  padding: 10px;  opacity: 0.8;">
-                            Обложка аудиоальбома
-                        </div>
-                    </div>
-                @endif--}}
+                <br />
                 @foreach($audioAlbum->audios as $audio)
                     <div style="margin-top: 3px;">
                         <span><a class="play-audio" href="{{$audio->url}}">{{$audio->name}}</a></span>
-                        <span class="b-user-wall-footer__btn rating" style="float: right;">
+                        <span class="b-user-wall-footer__btn rating" style="float: right; margin: 0">
                             <input type="submit" onclick="return vote.audio({{$audio->id}},-1);" class="btn btn-minus">
                             <input type="submit" onclick="return vote.audio({{$audio->id}},1);" class="btn btn-plus">
-                            {{--{{var_dump($audio)}}--}}
                             <span class="likes" style="line-height: 0; min-width: 20px; display: inline-block;" id="rating_audio_{{$audio->id}}">{{$audio->rating}}</span>
-
                         @if($audio->canEdit())
                             <a href="{{URL::to('audio/'.$audio->id.'/delete')}}">Удалить</a> |
                             <a href="{{URL::to('audio/'.$audio->id.'/edit')}}">Изменить</a>
@@ -101,13 +93,17 @@
 
                         var audio = $('#audio-player');
                         var audioPlayer;
-                        initPlayer(audio);
+                        if ($('.play-audio').length>0) {
+                            initPlayer(audio);
+                        }
+
                         $('.play-audio').on('click', function (e) {
                             e.preventDefault();
                             playSrc($(this).attr('href'), $(this).text());
                         });
 
                         function playSrc(src, title) {
+                            $('.mejs-offscreen').text(title);
                             audioPlayer.pause();
                             audioPlayer.setSrc(src);
                             audioPlayer.play();
@@ -118,11 +114,11 @@
                             element.mediaelementplayer({
                                 alwaysShowControls: true,
                                 features: ['playpause','loop', 'current','progress','duration','volume'],
-                                audioVolume: 'horizontal',
+                                audioVolume: 'vertical',
                                 audioWidth: 400,
                                 success: function(media, node, player) {
                                     audioPlayer = media;
-
+                                    $('.mejs-offscreen').css('width', '400px');
                                     media.addEventListener('ended', function() {
                                         if (!player.options.loop) {
                                             for (var index=0; index<$('.play-audio').length; index++) {
@@ -153,6 +149,7 @@
         </div>
         <div class="panel panel-default" style="width: 10%; float: right;; text-align: center">
             <b>Список альбомов</b>
+            <br/>
             @foreach($audioAlbums as $aa)
                 <a href="{{URL::to('audioalbum/'.$aa->id)}}">{{$aa->name}}</a> <br/>
             @endforeach
