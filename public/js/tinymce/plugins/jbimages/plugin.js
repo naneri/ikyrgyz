@@ -15,12 +15,12 @@ tinymce.PluginManager.add('jbimages', function(editor, url) {
 	
 	function jbBox() {
 		editor.windowManager.open({
-			title: 'Upload an image',
+			title: 'Загрузите изображение',
 			file : url + '/dialog-v4.htm',
 			width : 350,
 			height: 135,
 			buttons: [{
-				text: 'Upload',
+				text: 'Закгруз',
 				classes:'widget btn primary first abs-layout-item',
 				disabled : true,
 				onclick: 'close'

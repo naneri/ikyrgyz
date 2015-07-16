@@ -323,4 +323,8 @@ class BlogController extends BaseController {
         return Response::json($result);
     }
 
+    public function deleteBlog($id)
+    {
+        
+    }
 }

@@ -133,7 +133,11 @@ class TopicController extends BaseController {
 	{
             $topic = Topic::findOrFail($id);
             $blog = $topic->blog;
-            $isModerator = $topic->blog->isModeratorCurrentUser();
+            $isModerator = False;
+            if(Auth::check())
+            {
+                $isModerator = $topic->blog->isModeratorCurrentUser();
+            }
             $comments = $topic->commentsWithDataSortBy('old');
             $commentsSort = 'old';
             $creator = User::findOrFail($topic->user_id);
@@ -275,6 +279,9 @@ class TopicController extends BaseController {
         if(Input::has('topic_type')){
             $this->topic->type_id = TopicType::whereName(Input::get('topic_type'))->pluck('id');
         }
+        if(Input::has('image_url')){
+            $this->topic->image_url = Input::get('image_url');
+        }
         if(Input::has('link_url')){
             $this->topic->meta = Input::get('link_url');
         }
@@ -290,12 +297,8 @@ class TopicController extends BaseController {
             $new_name = str_random(15) . '.' . File::extension(Session::get('topicCover'));
 
             // moving to a new folder
-            if(file_exists(Session::get('topicCover'))){
-                File::move(Session::get('topicCover'), $directory . '/'. $new_name);
-            }
+            File::move(Session::get('topicCover'), $directory . '/'. $new_name);
 
-            Session::forget('topicCover');
-            
             // attaching the file name to the topic
             $this->topic->image_url = URL::to('/') . '/' . $directory . '/' . $new_name;
         }

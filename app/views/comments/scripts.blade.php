@@ -141,7 +141,7 @@
                     language: 'ru',
                     menubar: false,
                     statusbar: false,
-                    subfolder: "{{Auth::user()->id}}",
+                    subfolder: "{{@Auth::user()->id}}",
                     plugins: [
                         "autolink link image smileys filemanager media paste youtube"
                     ],

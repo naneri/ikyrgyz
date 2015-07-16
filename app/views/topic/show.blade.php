@@ -1,7 +1,6 @@
 @extends('misc.layout')
 
 @section('content')
-
 	<div class="b-wrapper" id="topic_{{$topic->id}}">
 		<div class="b-page">
 			<div class="b-content">
@@ -158,12 +157,13 @@ $(document).ready(function(){
 </script>
 @stop
 
+
 @section('scripts')
-<script>
-$(document).ready(function(){
-	times.init('.b-profile-about-title__right');
-	times.convert('.b-profile-about-title__right');
-});
-</script>
-@include('scripts.favourite')
+    <script>
+    $(document).ready(function(){
+    	times.init('.b-profile-about-title__right');
+    	times.convert('.b-profile-about-title__right');
+    });
+    </script>
+    @include('scripts.favourite')
 @stop

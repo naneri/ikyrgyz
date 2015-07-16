@@ -34,7 +34,7 @@
 		    @yield('content')
       </div>
     </div>
-    @include('scripts.vote')
+  @include('scripts.vote')
  	@yield('scripts')
 
   @if(isset(Config::get('social.yandex-metrika')[Config::get('app.nation_name')]))

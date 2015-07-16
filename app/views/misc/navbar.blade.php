@@ -1,4 +1,4 @@
-@if(Auth::check())
+@if(@Auth::check())
 <div id="overlay"></div>
 <div class="b-header">
 		<div class="b-header__inner">
