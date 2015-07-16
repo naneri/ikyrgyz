@@ -158,6 +158,12 @@ return array(
 	//photos
 	'load-photo'		=> 'Загрузка фотографии',
 
+    //audioalbum
+    'create-audioalbum' => 'Создание аудиоальбома',
+
+    //audio
+    'upload-audio'		=> 'Загрузка аудио',
+
 	//profile
 	'available'			=> 'Доступно',
 	'specialization' 	=> 'Специальность',

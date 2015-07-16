@@ -1,14 +1,5 @@
  
-.mceContentBody,
-.mceContentBody td,
-.mceContentBody pre
-{
-  color: #000;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  margin: 8px;
-}
- 
+
 .mceContentBody
 {
   background: #FFF;
@@ -126,7 +117,7 @@
  
 .mceContentBody
 {
-  text-align: left;
+  /* */
 }
  
 .mceContentBody strong

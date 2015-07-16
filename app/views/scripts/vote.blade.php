@@ -89,6 +89,40 @@
                     }
                 });
         },
+        audio: function(audioId, value){
+            $rating = $('#rating_audio_' + audioId);
+                $.ajax({
+                    method: "POST",
+                    url: voteUrl + "audio",
+                    data: {
+                        'audio_id': audioId,
+                        'value': value
+                    },
+                    success: function($result) {
+                        vote.notify($result);
+                        if($result.success){
+                            $rating.html($result.rating);
+                        }
+                    }
+                });
+        },
+        audioalbum: function(audioAlbumId, value){
+            $rating = $('#rating_audioalbum_' + audioAlbumId);
+                $.ajax({
+                    method: "POST",
+                    url: voteUrl + "audioalbum",
+                    data: {
+                        'audio_album_id': audioAlbumId,
+                        'value': value
+                    },
+                    success: function($result) {
+                        vote.notify($result);
+                        if($result.success){
+                            $rating.html($result.rating);
+                        }
+                    }
+                });
+        },
     }
 </script>
 @endif

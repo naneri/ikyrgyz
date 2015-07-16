@@ -102,9 +102,20 @@ class ProfileController extends BaseController {
         @$maritalStatus = $this->maritalStatuses[$user->description->marital_status];
         @$gender = $this->genders[$user->description->gender];
         
-        foreach ($videos as $video) {
-            preg_match("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+)#", $video->description, $matches);
-            $videoEmbedCodes[] = array('code' => end($matches), 'cover' => $video->image_url);
+        if($videos){
+            $i = 0;
+            foreach($videos as $videoTopic){
+                preg_match_all("#([\/|\?|&]vi?[\/|=]|youtu\.be\/|embed\/)(\w+\-?\w+)#", $videoTopic->description, $matchesVideos);
+                $matchesVideos = end($matchesVideos);
+                $uniqueVideos = array();
+                foreach ($matchesVideos as $videoEmbed) {
+                    if(!in_array($videoEmbed, $uniqueVideos) && $i < 6){
+                        $videoEmbedCodes[] = array('code' => $videoEmbed, 'cover' => '');// $videoTopic->image_url);
+                        $uniqueVideos[] = $videoEmbed;
+                        $i++;
+                    }
+                }
+            }
         }
     
         

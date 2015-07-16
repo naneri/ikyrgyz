@@ -1,107 +1,159 @@
 <?php
 
-class AudioController extends \BaseController {
+class AudioController extends \BaseController
+{
 
-	/**
-	 * Display a listing of audio
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$audio = Audio::all();
+    /**
+     * Display a listing of audio
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $audio = Audio::all();
 
-		return View::make('audio.index', compact('audio'));
-	}
+        return View::make('audio.index', compact('audio'));
+    }
 
-	/**
-	 * Show the form for creating a new audio
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('audio.create');
-	}
+    /**
+     * Show the form for creating a new audio
+     *
+     * @return Response
+     */
+    public function create($audioAlbumId)
+    {
+        $audioAlbum = AudioAlbum::findOrFail($audioAlbumId);
+        return View::make('audio.create', compact('audioAlbum'));
+    }
 
-	/**
-	 * Store a newly created audio in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		$validator = Validator::make($data = Input::all(), Audio::$rules);
+    /**
+     * Store a newly created audio in storage.
+     *
+     * @return Response
+     */
+    public function store($albumId)
+    {
+        $audios = array();
+        $audioFiles = Input::file('audio_files');
+        foreach ($audioFiles as $audioFile) {
+            $rules = array('file' => 'required|mimes:mpga'); // main extension for the audio/mpeg mime type in the Apache list is mpga, not mp3
+            $validator = Validator::make(array('file' => $audioFile), $rules);
+            if ($validator->passes()) {
+                $data['url'] = $this->saveAudioFile($audioFile);
+                $data['user_id'] = Auth::id();
+                $data['album_id'] = $albumId;
+                $data['name'] = $file_name = pathinfo($audioFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $audio = Audio::create($data);
+//              BonusRating::addBonusRating('upload_audio', $audio->id, Config::get('bonus_rating.upload_audio'));
+                $audios[] = $audio;
+            }
+        }
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+        return View::make('audio.setnames', compact('audios', 'albumId'));
+    }
 
-		Audio::create($data);
+    public function setNames($albumId)
+    {
+        $audioNames = Input::get('audio_names');
+        foreach ($audioNames as $audioId => $audioName) {
+            Audio::find($audioId)->update(array('name' => $audioName));
+        }
+        return Redirect::to('audioalbum/' . $albumId);
+    }
 
-		return Redirect::route('audio.index');
-	}
+    private function saveAudioFile($file)
+    {
+        $destinationPath = 'audio_files/user/' . Auth::id() . '/audios';
+        if (!file_exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true);
+        }
+        $extension = $file->getClientOriginalExtension();
+        $fileName = time() . rand(1, 100) . '.' . $extension;
+        $file->move($destinationPath, $fileName);
+        $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
+        return $avapath;
+    }
 
-	/**
-	 * Display the specified audio.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$audio = Audio::findOrFail($id);
+    public function saveFromUrl()
+    {
+        // Your file
+        $file = 'http://....';
 
-		return View::make('audio.show', compact('audio'));
-	}
+        // Open the file to get existing content
+        $data = file_get_contents($file);
 
-	/**
-	 * Show the form for editing the specified audio.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$audio = Audio::find($id);
+        // New file
+        $new = '/var/www/uploads/';
 
-		return View::make('audio.edit', compact('audio'));
-	}
+        // Write the contents back to a new file
+        file_put_contents($new, $data);
+    }
 
-	/**
-	 * Update the specified audio in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		$audio = Audio::findOrFail($id);
+    /**
+     * Display the specified audio.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $audio = Audio::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Audio::$rules);
+        return View::make('audio.show', compact('audio'));
+    }
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+    /**
+     * Show the form for editing the specified audio.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $audio = Audio::find($id);
 
-		$audio->update($data);
+        return View::make('audio.edit', compact('audio'));
+    }
 
-		return Redirect::route('audio.index');
-	}
+    /**
+     * Update the specified audio in storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        $audio = Audio::findOrFail($id);
 
-	/**
-	 * Remove the specified audio from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		Audio::destroy($id);
+        $rules = Audio::$rules;
+        $rules['audio_file'] = 'audio';
 
-		return Redirect::route('audio.index');
-	}
+        $validator = Validator::make($data = Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        if (Input::hasFile('audio_file')) {
+            $data['url'] = $this->saveAudioFile(Input::file('audio_file'));
+        }
+        $audio->update($data);
+
+        return Redirect::to('audio/' . $audio->id);
+    }
+
+    /**
+     * Remove the specified audio from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $album = Audio::find($id)->album;
+        Audio::destroy($id);
+
+        return Redirect::to('audioalbum/' . $album->id);
+    }
 
 }
