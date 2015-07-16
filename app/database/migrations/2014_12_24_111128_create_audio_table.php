@@ -16,7 +16,7 @@ class CreateAudioTable extends Migration {
 		{
 			$table->increments('id');
                         $table->integer('album_id')->unsigned();
-                        $table->foreign('album_id')->references('id')->on('audio_albums');
+                        $table->foreign('album_id')->references('id')->on('photo_albums');
                         $table->integer('user_id');
                         $table->string('name');
 			$table->string('url');

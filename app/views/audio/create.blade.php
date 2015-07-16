@@ -14,7 +14,7 @@
         @endforeach
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>{{ trans('network.load-audio') }}</legend>
+            <legend>{{ trans('network.upload-audio') }}</legend>
             <div class="form-group">
                 {{Form::file('audio_files[]', array('class' => 'form-control', 'multiple' => true, 'accept' => 'audio/mp3'))}}
             </div>
