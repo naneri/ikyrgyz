@@ -14,6 +14,7 @@ class UpdateForeignKeyToAudioTable extends Migration {
 	{
         Schema::table('audio', function(Blueprint $table)
         {
+            $table->dropForeign('audio_album_id_foreign');
             $table->foreign('album_id')->references('id')->on('audio_albums');
         });
 	}
