@@ -20,7 +20,7 @@
               </div>
               <div class="b-topic-create-modal__content">
                   <div class="b-topic-create-modal-content">
-                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form'))}}
+                    {{Form::open(array('url' => 'topic/store', 'files' => true, 'class' => 'sync-form', 'enctype' => "multipart/form-data"))}}
                     @if($type == 'link')
                     <div class="b-topic-create-modal-content__item">
                         {{Form::text('link', '', array('class' => 'input-default add-name', 'placeholder' => trans("network.link-placeholder")))}}

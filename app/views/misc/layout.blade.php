@@ -20,7 +20,7 @@
     <script src="{{ asset('js/jquery.easytabs.js') }}"></script>
     <script src="{{asset('js/tooltip.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script>
-    
+   
     @include('misc.js')
     @include('scripts.convert-times')
   </head>
@@ -32,7 +32,7 @@
 		    @yield('content')
       </div>
     </div>
-    @include('scripts.vote')
+  @include('scripts.vote')
  	@yield('scripts')
 
   @if(isset(Config::get('social.yandex-metrika')[Config::get('app.nation_name')]))

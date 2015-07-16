@@ -11,6 +11,8 @@ class BlogsTableSeeder extends Seeder{
         $faker = Faker\Factory::create();
        
         $users = User::all();
+
+        $array = [2,3];
         foreach($users as $user){
 
            Blog::create([
@@ -31,7 +33,7 @@ class BlogsTableSeeder extends Seeder{
                 'user_id'       => $user->id,
                 'title'         => $faker->sentence(),
                 'description'   => $faker->paragraph(),
-                'type_id'       => array_rand(['2', '3'])  ,
+                'type_id'       => $array[array_rand($array)]  ,
                 'avatar'        => 'http://lorempixel.com/400/200'
             ]);
         }

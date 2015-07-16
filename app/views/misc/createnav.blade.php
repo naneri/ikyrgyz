@@ -192,7 +192,6 @@
 			<div class="clear"></div>
 		</div>	
 		<div class="b-topic-navigation__right">
-    
 			 	<div class="cube"><a href="{{URL::to('profile/random')}} "  title="Случайный профиль">
 			 	
 			 	</a></div>

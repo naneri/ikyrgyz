@@ -38,6 +38,9 @@ Route::group(array('before' => 'un_auth'), function(){
     Route::post('register-remote', 'AuthController@postRegisterRemote');
 });
 
+
+Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show', 'as'=> 'showTopic'));
+
 Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
     Route::get('login', 'AuthController@getLogin');
@@ -60,6 +63,7 @@ Route::group(array('before' => 'notauth'), function(){
     Route::post('main/androidAjaxTopics/{sort}/{page}', 'AndroidMainController@androidAjaxTopics');
 });
 Route::group(array('before' => 'auth'),function(){
+    
     Route::get('profile/fill', 'ProfileController@getProfileFill');
     Route::post('profile/fill', 'ProfileController@postProfileFill');
     Route::get('logout', 'AuthController@logout');
@@ -163,7 +167,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('topic/ajaxMyTopics', 'TopicController@ajaxMyTopics');
     Route::get('topic/linkTopics', 'TopicController@getLinkTopics');
     Route::get('topic/ajaxLinkTopics', 'TopicController@ajaxLinkTopics');
-    Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show', 'as'=> 'showTopic'));
+    
     Route::get('topic/create', 'TopicController@create');
     Route::post('topic/addCover', 'TopicController@addCover');
     Route::get('topic/create/link', 'TopicController@createLink');

@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder {
 
       $this->call('TopicTypesTableSeeder');
       $this->call('BlogsTableSeeder');
-/*               
-               
-               
+      
+
+       /*            
                $this->call('TopicsTableSeeder');
                $this->call('TagsTableSeeder');
                $this->call('TopicVideoTableSeeder');
