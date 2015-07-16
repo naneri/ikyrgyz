@@ -2,106 +2,139 @@
 
 class AudioAlbumsController extends \BaseController {
 
-	/**
-	 * Display a listing of audioalbums
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$audioalbums = Audioalbum::all();
+    /**
+     * Display a listing of audioalbums
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $audioalbums = AudioAlbum::all();
 
-		return View::make('audioalbums.index', compact('audioalbums'));
-	}
+        return View::make('audioalbums.index', compact('audioalbums'));
+    }
 
-	/**
-	 * Show the form for creating a new audioalbum
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('audioalbums.create');
-	}
+    public function audioAlbumIndex($userId) {
+        $user = User::find($userId);
+        $audioAlbums = $user->audioAlbums;
 
-	/**
-	 * Store a newly created audioalbum in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		$validator = Validator::make($data = Input::all(), Audioalbum::$rules);
+        return View::make('audioalbums.index', compact('audioAlbums', 'user'));
+    }
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+    /**
+     * Show the form for creating a new audioalbum
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return View::make('audioalbums.create');
+    }
 
-		Audioalbum::create($data);
+    /**
+     * Store a newly created audioalbum in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $validator = Validator::make($data = Input::all(), AudioAlbum::$rules);
 
-		return Redirect::route('audioalbums.index');
-	}
+        if ($validator->fails())
+        {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
 
-	/**
-	 * Display the specified audioalbum.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$audioalbum = Audioalbum::findOrFail($id);
 
-		return View::make('audioalbums.show', compact('audioalbum'));
-	}
+        if (Input::file('image'))
+        {
+            $data['cover'] = $this->saveImage();
+        }
 
-	/**
-	 * Show the form for editing the specified audioalbum.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$audioalbum = Audioalbum::find($id);
+        $data['user_id'] = Auth::id();
 
-		return View::make('audioalbums.edit', compact('audioalbum'));
-	}
+        AudioAlbum::create($data);
 
-	/**
-	 * Update the specified audioalbum in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		$audioalbum = Audioalbum::findOrFail($id);
+        return Redirect::to('profile/' . Auth::id() . '/audios');
+    }
 
-		$validator = Validator::make($data = Input::all(), Audioalbum::$rules);
+    private function saveImage() {
+        $file = Input::file('image');
+        $destinationPath = 'images/user/' . Auth::id() . '/audioalbums';
+        if (!file_exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true);
+        }
+        $extension = Input::file('image')->getClientOriginalExtension();
+        $fileName = time() . rand(1, 100) . '.' . $extension;
+        $file->move($destinationPath, $fileName);
+        $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
+        return $avapath;
+    }
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+    /**
+     * Display the specified audioalbum.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $audioAlbum = AudioAlbum::findOrFail($id);
+        $audioAlbums = AudioAlbum::where('user_id', $audioAlbum->user_id)->get();
 
-		$audioalbum->update($data);
+        return View::make('audioalbums.show', compact('audioAlbums', 'audioAlbum'));
+    }
+    /**
+     * Show the form for editing the specified audioalbum.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $audioAlbum = AudioAlbum::find($id);
 
-		return Redirect::route('audioalbums.index');
-	}
+        return View::make('audioalbums.edit', compact('audioAlbum'));
+    }
 
-	/**
-	 * Remove the specified audioalbum from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		Audioalbum::destroy($id);
+    /**
+     * Update the specified audioalbum in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        $audioalbum = AudioAlbum::findOrFail($id);
 
-		return Redirect::route('audioalbums.index');
-	}
+        $validator = Validator::make($data = Input::all(), AudioAlbum::$rules);
+
+        if ($validator->fails())
+        {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        if (Input::file('image')) {
+            $data['cover'] = $this->saveImage();
+        }
+        $audioalbum->update($data);
+
+        return Redirect::to('audioalbum/'. $audioalbum->id);
+    }
+
+    /**
+     * Remove the specified audioalbum from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $audioAlbum = AudioAlbum::findOrFail($id);
+        $audioAlbum->audios()->delete();
+        $audioAlbum->delete();
+
+        return Redirect::to('profile/' . Auth::id() . '/audios');
+    }
 
 }

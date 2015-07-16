@@ -198,6 +198,70 @@ class VoteController extends \BaseController {
             return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oPhoto->rating, 2)));
         }
 
+    public function postVoteAudio() {
+        $oAudio = Audio::find(Input::get('audio_id'));
+        $iValue = Input::get('value');
+
+        if (!$oAudio) {
+            return Response::json(array('error' => 'Музыка не найдена'));
+        }
+        if (!in_array($iValue, array('1', '-1'))) {
+            return Response::json(array('error' => 'Ошибка значения'));
+        }
+
+        if ($oAudio->user_id == Auth::id()) {
+            return Response::json(array('error' => 'Вы не может проголосовать за свою музыку'));
+        }
+
+        $voteExists = Vote::where('target_type', 'audio')
+            ->where('user_id', Auth::id())
+            ->where('target_id', $oAudio->id)
+            ->exists();
+
+        if ($voteExists) {
+            return Response::json(array('error' => 'Вы уже голосовали за эту музыку'));
+        }
+
+        $oAudio->vote($iValue);
+        $oAudio->save();
+
+        $this->createVote('audio', $oAudio->id, $iValue, $oAudio->rating);
+
+        return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oAudio->rating, 2)));
+    }
+
+    public function postVoteAudioAlbum() {
+        $oAudioAlbum = AudioAlbum::find(Input::get('audio_album_id'));
+        $iValue = Input::get('value');
+
+        if (!$oAudioAlbum) {
+            return Response::json(array('error' => 'Аудио альбом не найден'));
+        }
+        if (!in_array($iValue, array('1', '-1'))) {
+            return Response::json(array('error' => 'Ошибка значения'));
+        }
+
+        if ($oAudioAlbum->user_id == Auth::id()) {
+            return Response::json(array('error' => 'Вы не может проголосовать за свой аудио альбом'));
+        }
+
+        $voteExists = Vote::where('target_type', 'audio_album')
+            ->where('user_id', Auth::id())
+            ->where('target_id', $oAudioAlbum->id)
+            ->exists();
+
+        if ($voteExists) {
+            return Response::json(array('error' => 'Вы уже голосовали за этот аудио альбом'));
+        }
+
+        $oAudioAlbum->vote($iValue);
+        $oAudioAlbum->save();
+
+        $this->createVote('audio_album', $oAudioAlbum->id, $iValue, $oAudioAlbum->rating);
+
+        return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oAudioAlbum->rating, 2)));
+    }
+
         private function setSkillCommentAuthor($commentAuthorId, $voteValue) {
             /**
              * Начисляем силу автору, используя логарифмическое распределение
