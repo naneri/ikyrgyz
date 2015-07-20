@@ -155,22 +155,102 @@ class PhotosController extends \BaseController {
 		return Redirect::to('photoalbum/' . $album->id);
         }
 
-        public function postAction(){
+        public function postActionCopy() {
             $result = array();
-            
-            switch(Input::get('action')){
-                case 'delete':
-                    $this->deleteImages(Input::get('photos'));
-                    break;
-                case 'copy':
-                    break;
-                case 'move':
-                    break;
-                default:
-                    break;
+
+            $photoIds = Input::get('photo');
+            $choosedAlbum = Input::get('chooseAlbum');
+
+            if ($photoIds == '' || $choosedAlbum == '') {
+                return;
             }
+
+            $result['results'] = $this->copyImages($photoIds, $choosedAlbum);
+
+            $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
+            $photos = array();
+            if ($photoAlbum->canView()) {
+                $photos = $photoAlbum->photos;
+            }
+            $canEdit = $photoAlbum->canEdit();
+            $result['render'] = View::make('photos.list', compact('photos', 'canEdit'))->render();
+
+            return Response::json($result);
         }
-        
+
+        private function copyImages($photoIds, $albumId) {
+            $results = array();
+            $albumCanEdit = PhotoAlbum::find($albumId)->canEdit();
+            foreach ($photoIds as $photoId) {
+                $photo = Photo::find($photoId);
+                if ($photo->canEdit() && $albumCanEdit) {
+                    
+                    $newPhoto               = new Photo();
+                    $newPhoto->user_id      = Auth::id();
+                    $newPhoto->album_id     = $albumId;
+                    $newPhoto->name         = $photo->name;
+                    
+                    $urlParts = explode('/', $photo->url);
+                    $photoName = end($urlParts);
+                    
+                    $fileParts = explode('.', $photoName);
+                    $photoExtension = end($fileParts);
+                    
+                    $newPhotoFileName = time() . rand(1, 100);
+                    $newPhoto->url = preg_replace("/(\/)\d+(\.)/i", "/$newPhotoFileName.", $photo->url);
+                    File::copy(public_path() . '/images/user/' . Auth::id() . '/photos/' . $photoName, public_path() . '/images/user/' . Auth::id() . '/photos/' . $newPhotoFileName . "." . $photoExtension);
+                    
+                    if ($newPhoto->save()) {
+                        $results[] = array('status' => 'success', 'message' => 'Фотография "' . $newPhoto->name . '" успешно скопирована!');
+                    } else {
+                        $results[] = array('status' => 'error', 'message' => 'Ошибка при копировании фотографии "' . $newPhoto->name . '"');
+                    }
+                }
+            }
+            return $results;
+        }
+
+        public function postActionMove(){
+            $result = array();
+
+            $photoIds = Input::get('photo');
+            $choosedAlbum = Input::get('chooseAlbum');
+
+            if ($photoIds == '' || $choosedAlbum == ''){
+                return;
+            }
+
+            $result['results'] = $this->moveImages($photoIds, $choosedAlbum);
+
+            $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
+            $photos = array();
+            if ($photoAlbum->canView()) {
+                $photos = $photoAlbum->photos;
+            }
+            $canEdit = $photoAlbum->canEdit();
+            $result['render'] = View::make('photos.list', compact('photos', 'canEdit'))->render();
+
+            return Response::json($result);
+        }
+
+        private function moveImages($photoIds, $albumId) {
+            $results = array();
+            $albumCanEdit = PhotoAlbum::find($albumId)->canEdit();
+            foreach ($photoIds as $photoId) {
+                $photo = Photo::find($photoId);
+                if ($photo->canEdit() && $albumCanEdit) {
+                    $photo->album_id = $albumId;
+                    $photoName = $photo->name;
+                    if ($photo->save()) {
+                        $results[] = array('status' => 'success', 'message' => 'Фотография "' . $photoName . '" успешно перемещена!');
+                    } else {
+                        $results[] = array('status' => 'error', 'message' => 'Ошибка при перемещении фотографии "' . $photoName . '"');
+                    }
+                }
+            }
+            return $results;
+        }
+
         public function postActionDelete(){
             $result = array();
             

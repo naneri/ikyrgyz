@@ -80,8 +80,12 @@ class PhotoAlbumsController extends \BaseController {
 	public function show($id)
 	{
 		$photoAlbum = PhotoAlbum::findOrFail($id);
-
-		return View::make('photoalbums.show', compact('photoAlbum'));
+                $albums = PhotoAlbum::where('id', '!=', $id)->where('user_id', Auth::id())->get();
+                $otherAlbums = array();
+                foreach ($albums as $album){
+                    $otherAlbums[$album->id] = $album->name;
+                }
+		return View::make('photoalbums.show', compact('photoAlbum', 'otherAlbums'));
 	}
         /**
 	 * Show the form for editing the specified photoalbum.
