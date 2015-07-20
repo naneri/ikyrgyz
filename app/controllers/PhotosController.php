@@ -155,4 +155,68 @@ class PhotosController extends \BaseController {
 		return Redirect::to('photoalbum/' . $album->id);
         }
 
+        public function postAction(){
+            $result = array();
+            
+            switch(Input::get('action')){
+                case 'delete':
+                    $this->deleteImages(Input::get('photos'));
+                    break;
+                case 'copy':
+                    break;
+                case 'move':
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        public function postActionDelete(){
+            $result = array();
+            
+            $photoIds = Input::get('photo');
+            
+            if($photoIds == ''){
+                return;
+            }
+            
+            $result['results'] = $this->deleteImages($photoIds);
+            
+            $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
+            $photos = array();
+            if($photoAlbum->canView()){
+                $photos = $photoAlbum->photos;
+            }
+            $canEdit = $photoAlbum->canEdit();
+            $result['render'] = View::make('photos.list', compact('photos', 'canEdit'))->render();
+            
+            return Response::json($result);
+        }
+        
+        private function deleteImages($photoIds){
+            $results = array();
+            foreach($photoIds as $photoId){
+                $photo = Photo::find($photoId);
+                if($photo->canEdit()){
+                    $path = str_replace(Config::get('app.base_url'), public_path(), $photo->url);
+                    $photoName = $photo->name;
+                    $error = false;
+                    if(file_exists($path)){
+                        try{
+                            unlink($path);
+                        }
+                        catch(Exception $e){
+                            $error = true;
+                        }
+                    }
+                    if(!$error){
+                        $photo->delete();
+                        $results[] = array('status' => 'success', 'message' => 'Фотография "'.$photoName.'" успешно удалена!');
+                    }else{
+                        $results[] = array('status' => 'error', 'message' => 'Ошибка при удалении фотографии "' . $photoName . '"');
+                    }
+                }
+            }
+            return $results;
+        }
 }
