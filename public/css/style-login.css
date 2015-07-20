@@ -156,6 +156,8 @@ a img {
 .b-header-logo-title__link a {
 	font: 12px 'pt sans caption';
 	color: #e16549;
+	font-weight: bold;
+	
 }
 
 .b-header__right {
@@ -177,13 +179,14 @@ a img {
 }
 .b-header-registration__top {
 	font: 16px 'pt sans caption bold';
-	padding-bottom: 30px;
+	padding-bottom: 15px;
 }
 .b-header-registration__top p {
 	text-align: center;
 }
 .b-header-registration__top p:first-child {
 	color: #fff;
+	padding-bottom:  3px;
 }
 .b-header-registration__top p:last-child {
 	color: #e16549;
@@ -208,11 +211,20 @@ a img {
 	margin: 0 auto;
 	cursor: pointer;
 }
+.button-default:hover {
+	background-image: -webkit-linear-gradient(top, #c4563c 0%, #f67658 100%);
+	background-image: -moz-linear-gradient(top, #c4563c 0%, #f67658 100%);
+	background-image: -o-linear-gradient(top, #c4563c 0%, #f67658 100%);
+	background-image: -ms-linear-gradient(top, #c4563c 0%, #f67658 100%);
+	background-image: linear-gradient(to bottom, #c4563c 0%, #f67658 100%);
+}
 .button-default:focus {
 	outline: 0;
 }
 .b-header-registration__social {
 	text-align: center;
+	width: 243px;
+	margin: 0 auto;
 }
 .b-header-registration__social img {
 	vertical-align: middle;
@@ -225,7 +237,13 @@ a img {
 	color: #e16549;
 	font: 16px 'pt sans caption bold';
 	padding-right: 15px;
+	float:left;
+	margin-top: 5px;	
 }
+.social-icon:hover {
+	opacity: 0.6;
+}
+
 .b-authorization {
 	background: url("../img/login/6.png") no-repeat;
 	-webkit-background-size: cover;
@@ -236,12 +254,13 @@ a img {
 	height: 100%;
 }
 .b-authorization-inner {
-	height: 759px;
+	height: 100%;
 }
 .b-authorization-inner-block {
 	width: 377px;
 	margin: 0 auto;
-	padding-top: 150px;
+	padding-top: 50px;
+	padding-bottom: 45px;
 }
 .b-authorization-inner-block__title {
 	background-image: -webkit-linear-gradient(top, #f67658 0%, #c4563c 100%);

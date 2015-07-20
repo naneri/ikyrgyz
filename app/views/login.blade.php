@@ -25,7 +25,7 @@
                                         <div class="b-header-logo-title"><span class="b-header-logo-title__item">Национальные</span>
                                             <div class="b-header-logo-title__title">Я <span style="text-transform: capitalize;">{{trans('nation.'.Config::get('app.nation_name'))}}</span></div><span class="b-header-logo-title__soc">микросоциальные сети</span><span class="b-header-logo-title__beta">Beta</span>
                                             <p class="b-header-logo-title__link">
-                                                Проект: <a href="">Niamiko.com</a>
+                                                Проект: <a href="http://niamiko.com/">niamiko.com</a>
                                             </p>
                                         </div>
                                     </div>
@@ -50,7 +50,13 @@
                                         <input type="button" value="Регистрация" class="b-header-registration-button__button button-default"/>
                                     </a>
                                 </div>
-                                <div class="b-header-registration__social"><span>Войти через</span><img src="img/login/5.png" alt=""/><img src="img/login/4.png" alt=""/><img src="img/login/3.png" alt=""/></div>
+                                <div class="b-header-registration__social"><span>Войти через</span>
+                                <div data-uloginbutton="vkontakte" title="VK" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -38px no-repeat;" class="social-icon"></div>
+                                <div data-uloginbutton="facebook" title="Facebook" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -143px no-repeat;"  class="social-icon"></div>
+                                <div data-uloginbutton="google" title="Google" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -213px no-repeat;"  class="social-icon"></div>
+                                <div class="clear"></div>
+
+                                </div>
                             </div>
                         </div>
                         <div class="clear"></div>
