@@ -17,7 +17,7 @@
 						<a href="#"></a>
 					</div>	
 						<div class="b-topic-navigation-menu">
-				<div class="b-topic-navigation-menu__list">				
+				<div class="b-topic-navigation-menu__list">
 					<dl class="dropdown-list">
 						<dt class="title"><a href="{{ URL::to('/') }}" class="soc-name">Я-Кыргыз</a></dt>
 						<dt class="user-name"><a href="{{URL::to('profile')}}">
@@ -92,6 +92,17 @@
                                 @endif
                            </div>
 						</div>
+						<!-- <div class="b-header-nav-reg">
+							<div class="b-header-nav-reg-image">
+								<img src="{{ asset('img/235.png') }}" alt="" class="b-header-nav-reg-image__image">
+							</div>
+							<div class="b-header-nav-reg-block">
+								<div class="b-header-nav-reg-block__title">Вы не авторизованы</div>
+								<input type="submit" class="b-header-nav-reg-block__registr" value="Регистрация">
+								<input type="submit" class="b-header-nav-reg-block__join" value="Войти">
+							</div>
+							<div class="clear"></div>
+						</div> -->
 					</li>
                     @if(@Auth::check())
 					<li class="b-header-nav__middle">
