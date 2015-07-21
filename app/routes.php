@@ -260,6 +260,10 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
         Route::post('photo/comment/add', 'PhotoCommentsController@postAdd');
         Route::post('photo/comment/delete', 'PhotoCommentsController@postDelete');
         Route::post('photo/comment/restore', 'PhotoCommentsController@postRestore');
+        
+        Route::post('photos/action/delete', 'PhotosController@postActionDelete');
+        Route::post('photos/action/move', 'PhotosController@postActionMove');
+        Route::post('photos/action/copy', 'PhotosController@postActionCopy');
 
         Route::post('vote/comment', 'VoteController@postVoteComment');
         Route::post('vote/topic', 'VoteController@postVoteTopic');

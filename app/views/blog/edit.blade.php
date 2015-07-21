@@ -1,83 +1,48 @@
 @extends('misc.layout')
 
 @section('content')
-{{HTML::style('css/bootstrap.mod.css')}}
 <div class="b-content">
-		
-			@foreach ($errors->all() as $error)
-				<div class="b-message b-message-error">
-					<a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
-					<div class="b-message-icon b-message-error-icon"></div>
-					<p class="b-message-p">
-						{{$error}}
-					</p>
-				</div>
-			@endforeach
-
-			<div class="b-blog-edit">
-				<div class="b-blog-edit-inner">
-					<div class="b-blog-edit-inner__title">{{ trans('network.edit-blog') }}</div>
-						 {{Form::open(array('url' => 'blog/edit/'.$blog->id))}}
-							<fieldset>
-								<div class="b-blog-edit-inner-form">
-									<div class="b-blog-edit-inner-form__title">
-										<p class="element-desc">Название блога</p>
-										<input type="text" value="{{$blog->title}}" name="title" class="blog-input">
-									</div>
-									<div class="b-blog-edit-inner-form__desc" >
-										<p  class="element-desc">Описание блога</p>
-										<input type="text" value="{{$blog->description}}" name="description" class="blog-input">
-									</div>
-									<?php
-										foreach (BlogType::where('name', '!=', 'personal')->get(array('id', 'name')) as $blogType) {
-											$blogTypes[$blogType->id] = $blogType->name;
-										}
-									?> 
-									<div class="b-blog-edit-inner-form__select">
-									<p  class="element-desc">Выберите доступ к блогу</p>
-										{{ Form::select('type_id', $blogTypes, $blog->type_id, array('class' => 'blog-select')) }}
-									</div>
-									<div class="b-blog-edit-inner-form__button">
-										
-										{{Form::submit('Сохранить', array('class'=> 'btn-save'))}}
-									</div>
-									
-								</div>
-							</fieldset>
-							{{Form::close()}}
-				</div>
-			</div>
-			<!-- <div class="col-md-4"></div>
-			<div class="col-md-4">
-							<div class="login-panel panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">{{ trans('network.edit-blog') }}</h3><br>
-								</div>
-								<div class="panel-body">
-									{{Form::open(array('url' => 'blog/edit/'.$blog->id))}}
-										<fieldset>
-											<div class="form-group">
-												<input class="form-control" name="title" type="text" autofocus="" value="{{$blog->title}}">
-											</div>
-											<div class="form-group">
-												<input class="form-control"name="description" type="text" value="{{$blog->description}}">
-											</div> -->
-										   <?php
-											foreach (BlogType::where('name', '!=', 'personal')->get(array('id', 'name')) as $blogType) {
-												$blogTypes[$blogType->id] = $blogType->name;
-											}
-											?> 
-										 <!--    <div class="form-group">
-												{{ Form::select('type_id', $blogTypes, $blog->type_id, array('class' => 'form-control')) }}
-											</div>
-											Change this to a button or input when using this as a form
-											{{Form::submit('Сохранить')}}
-										</fieldset>
-									{{Form::close()}}
-								</div>
-							</div>
-			</div>
-			<div class="col-md-4"></div> -->
-		
+    @foreach ($errors->all() as $error)
+    <div class="b-message b-message-error">
+        <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+        <div class="b-message-icon b-message-error-icon"></div>
+        <p class="b-message-p">
+            {{$error}}
+        </p>
+    </div>
+    @endforeach
+    <div class="b-blog-create-modal">
+        <div class="b-blog-create-modal__inner">
+            <div class="b-blog-create-modal__title">{{ trans('network.edit-blog') }}
+                <button class="btn-close"></button>
+            </div>
+            <div class="b-blog-create-modal__content">
+                <div class="b-blog-create-modal-content">
+                    {{Form::open(array('url' => 'blog/edit/'.$blog->id, 'files' => true))}}
+                    <div class="b-blog-create-modal-content__item">
+                        <input name="title" type="text" value="{{$blog->title}}" class="input-default name-blog"/>
+                    </div>
+                    <div class="b-blog-create-modal-content__item">
+                        {{ Form::select('type_id', $blogTypes, $blog->type_id, array('class' => 'input-default select-blog')) }}
+                        <div class="b-blog-create-modal-content-skin">
+                            <input type="file" name="avatar"  accept="image/x-png, image/gif, image/jpeg" class="topic-skin">
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="b-blog-create-modal-content__item">
+                        <textarea name="description" cols="30" rows="10" class="textarea-blog input-default">{{$blog->description}}</textarea>
+                    </div>
+                    <div class="b-blog-create-modal-content__item" style="height: 44px;">
+                        <!--input name="tags" type="text" placeholder="{{ trans('network.tags') }}" class="input-tag input-default" /-->
+                        <div class="button-group">
+                            <input type="button" value="Отмена" class="btn-cancel input-default"/>
+                            <input type="submit" name='okname' value="{{ trans('network.publish') }}" class="btn-submit input-default"/>
+                        </div>
+                    </div>
+                    {{Form::close()}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @stop

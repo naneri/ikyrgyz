@@ -1,6 +1,7 @@
 @extends('misc.layout')
 @section('content')
 {{HTML::style('css/bootstrap.css')}}
+{{HTML::script('js/bootstrap.js')}}
 <div class="container">
     <div class="col-md-12">
         <div class="panel panel-default" style="height: 40px; padding:0 20px;">
@@ -23,7 +24,8 @@
                     <div class="panel panel-default" style="height: 40px; padding:0 20px;">
                         <h5><b>Описание:</b> {{$photoAlbum->description}}</h5>
                     </div>
-                    @if($photoAlbum->canEdit())
+                @endif
+                @if($photoAlbum->canEdit())
                     <div class="panel panel-default" style="height: 40px; padding: 8px 20px;">
                         Выберите действие: 
                         <select id="photo_action">
@@ -36,12 +38,28 @@
                     </div>
                     <script>
                         $(function(){
+                            var action;
+                            
                             $('#submit_action').click(function(){
-                                var action = $('#photo_action').val();
+                                var checkedCount = $('input[name="photo[]"]:checked').length;
+                                if(checkedCount < 1){
+                                    alert('No photo checked!');
+                                    return;
+                                }
+                                
+                                action = $('#photo_action').val();
                                 if(action == ''){
                                     alert('Choose action!');
                                     return;
                                 }
+                                if(action == 'move' || action == 'copy'){
+                                    modalForm();
+                                }else if(action == 'delete'){
+                                    submitForm();
+                                }
+                            });
+                            
+                            function submitForm(){
                                 var data = $('form#photos').serialize();
                                 $.ajax({
                                     url: '{{URL::to("photos/action")}}/'+action,
@@ -56,10 +74,22 @@
                                         });
                                     }
                                 });
+                            }
+                            
+                            function modalForm(){
+                                if($('select[name="chooseAlbum"] option').size() < 1){
+                                    alert('You not have another albums!');
+                                    return false;
+                                }
+                                $('#chooseAlbum').modal('show');
+                            }
+                            
+                            $('#chooseAlbumBtn').click(function(){
+                                submitForm();
+                                $('#chooseAlbum').modal('hide');
                             });
                         });
                     </script>
-                    @endif
                 @endif
                 {{--@if($photoAlbum->getOriginal('cover'))
                     <div class="list-group-item" style="width:210px;height:210px;float:left;margin:5px;background:url({{$photoAlbum->cover}}) 50%;background-size: cover;border: 2px solid white;">
@@ -74,6 +104,24 @@
                             @include('photos.list', array('photos' => $photoAlbum->photos, 'canEdit' => $photoAlbum->canEdit()))
                         </div>
                         <input type='hidden' name='photoAlbumId' value='{{$photoAlbum->id}}' />
+
+                        <div id="chooseAlbum" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Выберите альбом</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{Form::select('chooseAlbum', $otherAlbums, null)}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                                        <button type="button" class="btn btn-primary" id="chooseAlbumBtn">ОК</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 @include('scripts.photobox')

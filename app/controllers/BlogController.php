@@ -55,13 +55,7 @@ class BlogController extends BaseController {
         $blog->user_id = Auth::user()->id;
         
         if(Input::hasFile('avatar')){
-            $dir = '/images/blog' . date('/Y/m/d/');
-            do {
-                $filename = str_random(30) . '.jpg';
-            } while (File::exists(public_path() . $dir . $filename));
-
-            Input::file('avatar')->move(public_path() . $dir, $filename);
-            $blog->avatar = $dir.$filename;
+            $blog->avatar = $this->saveAvatar(Input::file('avatar'));
         }
         
         if($blog->save()){
@@ -80,6 +74,16 @@ class BlogController extends BaseController {
     
         return Redirect::to('blog/all');
 	}
+        
+        private function saveAvatar($avatar){
+            $dir = '/images/blog' . date('/Y/m/d/');
+            do {
+                $filename = str_random(30) . '.jpg';
+            } while (File::exists(public_path() . $dir . $filename));
+
+            $avatar->move(public_path() . $dir, $filename);
+            return $dir . $filename;
+        }
 
     /**
      * Достаёт все блоги
@@ -159,7 +163,11 @@ class BlogController extends BaseController {
      */
     public function getEdit($id){
         $blog = Blog::findOrFail($id);
-        return View::make('blog.edit', array('blog' => $blog));
+        $blogTypes = array();
+	foreach (BlogType::where('name', '!=', 'personal')->get(array('id', 'name')) as $blogType) {
+            $blogTypes[$blogType->id] = $blogType->name;
+        }
+        return View::make('blog.edit', compact('blog', 'blogTypes'));
     }
     
     /**
@@ -175,9 +183,16 @@ class BlogController extends BaseController {
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
-
+        
         $blog = Blog::findOrFail($id);
-        $blog->update(Input::except('_token'));
+        $data = Input::except('_token');
+        if (Input::hasFile('avatar')) {
+            if($blog->avatar && file_exists(public_path().$blog->avatar)){
+                unlink(public_path().$blog->avatar);
+            }
+            $data['avatar'] = $this->saveAvatar(Input::file('avatar'));
+        }
+        $blog->update($data);
 
         return Redirect::to('blog/show/'.$blog->id);
     }
