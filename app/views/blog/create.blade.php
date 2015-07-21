@@ -40,10 +40,9 @@
                         <textarea name="description" cols="30" rows="10" class="textarea-blog input-default" placeholder="{{ trans('network.blog-description') }}"></textarea>
                     </div>
                     <div class="b-blog-create-modal-content__item">
-                      <input type="file" name="avatar">
-                      <input type="text" value="{{ trans('network.tags') }}" class="input-tag input-default"/>
+                      <!--input name="tags" type="text" placeholder="{{ trans('network.tags') }}" class="input-tag input-default"/-->
                       <div class="button-group">
-                        <input type="submit" value="Отмена" class="btn-cancel input-default"/>
+                        <input type="button" value="Отмена" class="btn-cancel input-default"/>
                         <input type="submit" name='okname' value="{{ trans('network.publish') }}" class="btn-submit input-default"/>
                       </div>
                     </div>
