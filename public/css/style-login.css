@@ -245,22 +245,22 @@ a img {
 }
 
 .b-authorization {
-	background: url("../img/login/6.png") no-repeat;
+	background: url("../img/login/6.png") no-repeat 100% 100% fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
-	background-position: center;
+
 	width: 100%;
 	height: 100%;
 }
 .b-authorization-inner {
-	height: 100%;
+	height: 759px;
 }
 .b-authorization-inner-block {
 	width: 377px;
 	margin: 0 auto;
-	padding-top: 50px;
-	padding-bottom: 45px;
+	padding-top: 150px;
+	
 }
 .b-authorization-inner-block__title {
 	background-image: -webkit-linear-gradient(top, #f67658 0%, #c4563c 100%);
@@ -307,7 +307,7 @@ a img {
 	padding-bottom: 27px;
 }
 .registration-input {
-	width: 220px;
+	width: 205px;
 	height: 30px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -315,6 +315,7 @@ a img {
 	-moz-background-clip: padding;
 	background-clip: padding-box;
 	border: 1px solid rgba(169,169,169,0.4);
+	padding-left: 15px;
 }
 .registration-input:focus {
 	outline: none;
@@ -386,7 +387,7 @@ a img {
 	padding-bottom: 10px;
 }
 .b-header-login-join__login input {
-	width: 195px;
+	width: 180px;
 	height: 26px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -394,6 +395,7 @@ a img {
 	-moz-background-clip: padding;
 	background-clip: padding-box;
 	border: 1px solid rgba(169,169,169,0.4);
+	padding-left: 15px;
 }
 .b-header-login-join__login input:focus {
 	outline: none;
