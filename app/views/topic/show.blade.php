@@ -10,7 +10,7 @@
 				<div class="b-profile-about-title">
 				  <p class="b-profile-about-title__title">{{$topic->title}}</p>
 				  <div class="b-profile-about-title__right"><span class="date moment-time"></span><span class="date moment-time-hover"></span><span class="date original-time">{{$topic->created_at}}</span>
-					@if($topic->canEdit())
+					@if(@$topic->canEdit())
 					  <a href="{{ URL::to('/topic/edit/' . $topic->id) }}"><input type="submit" value="{{ trans('network.topic-edit') }}" class="btn-edit button-default"/></a>
 					  <a href="{{ URL::to('/topic/delete/' . $topic->id) }}"><input type="submit" value="{{ trans('network.topic-delete') }}" class="btn-delete button-default"/></a>
 					@endif
@@ -28,14 +28,16 @@
 				</a>
 				  <p class="b-profile-about-profile__name">{{@$creator->description->first_name . ' '. @$creator->description->last_name}}</p>
 				  <div class="b-profile-about-profile__buttons">  
-					@if($creator->id !== $user_data->id)                                  
-					  <a href="{{ URL::to('profile/'. $creator->id)}}">
-						<input type="submit" value="{{ trans('network.profile') }}" class="input-default btn-profile"/>
-					  </a>
-					  <a href="{{ URL::to('people/friendRequest/'. $creator->id)}}">
-						  <input type="submit" value="{{ trans('network.become-friend') }}" class="input-default btn-friend"/>
-					  </a>
-					@endif
+				  	@if(isset($creator->id))
+						@if(@$creator->id !== @$user_data->id)                                  
+						  <a href="{{ URL::to('profile/'. $creator->id)}}">
+							<input type="submit" value="{{ trans('network.profile') }}" class="input-default btn-profile"/>
+						  </a>
+						  <a href="{{ URL::to('people/friendRequest/'. $creator->id)}}">
+							  <input type="submit" value="{{ trans('network.become-friend') }}" class="input-default btn-friend"/>
+						  </a>
+						@endif
+					@endif	
 					<span class="rating-text">{{ trans('network.rating') }}: <span class="rating-num">{{$creator->rating}}</span></span>
 				  </div>
 				  <div class="clear"></div>
@@ -122,8 +124,11 @@
 				  </div>
 				  <div class="post-comment" style="display: none;" id="post-comment">
 						<div style="height:50px;">
+							  @if(Auth::check())
 							  {{HTML::image(Auth::user()->avatar(), '', array('style' => 'float:left;width:40px;height:40px;margin-right:10px;'))}}
+
 							  <span style="line-height: 40px;" class="b-profile-about-profile__name"> {{Auth::user()->getNames()}}</span>
+							  @endif
 						</div>
 						<div id="add_comment_0">
 							{{Form::textarea('comment', null, array('class' => 'add_comment_text'))}}

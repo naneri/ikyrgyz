@@ -1,4 +1,4 @@
-@if(@Auth::check())
+
 <div id="overlay"></div>
 <div class="b-header">
 		<div class="b-header__inner">
@@ -72,35 +72,28 @@
 					
 					
 				</div>
+               
 				<ul class="b-header-nav-list">
 					<li class="b-header-nav__left">
 						<div class="b-header-nav-logo">
 							<div class="b-header-nav-logo__item"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}"  alt="logo"/><span class="logo beta">Beta</span></a></div>
 						</div>
 						<div class="b-header-nav-user">
-							<div class="b-header-nav-user__item">
-                                                            <a href="{{ URL::to('profile') }}">
-						@if(isset($user_data->description->user_profile_avatar))
-							<img class="header-logo__image"  src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
-						@else
-							<img class="header-logo__image" src="{{ asset('img/38.png') }}" alt="user"/>
-						@endif
-						<span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span>
-						
-
-						</a>
-						<!-- <ul class="b-header-nav-dropdown">
-							<li><a href="{{ URL::to('profile') }}">{{ trans('network.my-profile') }}</a></li>
-							<li><a href="{{ URL::to('messages/inbox/all') }}">{{ trans('network.personal-messages') }}</a></li>
-							<li><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}</a></li>
-						</ul>	 -->
-							<!--<li><a href="{{ URL::to('group/create')  }}">Группы</a></li>-->
-						
-							
-
-						</div>
+                            <div class="b-header-nav-user__item">
+                                @if(@Auth::check())
+                                    <a href="{{ URL::to('profile') }}">
+                                    @if(isset($user_data->description->user_profile_avatar))
+                                        <img class="header-logo__image"  src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
+                                    @else
+                                        <img class="header-logo__image" src="{{ asset('img/38.png') }}" alt="user"/>
+                                    @endif
+                                    <span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span>
+                                    </a>
+                                @endif
+                           </div>
 						</div>
 					</li>
+                    @if(@Auth::check())
 					<li class="b-header-nav__middle">
 						<div class="b-header-nav-button">
 							<div class="b-header-nav-button__item">
@@ -208,7 +201,8 @@
 							</div>
 						</div>
 					</li>
-
+                    @endif
+                    @if(@Auth::check())
 					<li class="b-header-nav__right">
 						<div class="b-header-nav-search">
 							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
@@ -223,47 +217,8 @@
                             </div>
                             
                         </div>
-					<!-- 	<div class="b-header-nav-search">
-							<div class="b-header-nav-search__item"><a href="{{ URL::to('search/people') }}">
-							<img src="{{ asset('img/navbar/friend_search.png') }}" alt="search"/>
-							<span class="search-friend">{{ trans('network.search-friends') }}</span>
-						</a></div>
-						</div>
-						<div class="b-header-nav-enc">
-							<div class="b-header-nav-enc__item"><a href="#">
-							<img src="{{ asset('img/navbar/encyclopedia.png') }}" alt="search"/>
-							<span class="search-friend">{{ trans('network.encyclopedia') }}</span>
-						</a>
-						<ul class="b-header-nav-dropdown">
-							<li><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></li>
-							<li><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></li>
-							<li><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></li>
-						</ul></div>
-						</div>
-						<div class="b-header-nav-setting">
-							<div class="b-header-nav-setting__item">
-								<a href="#"><img src="{{ asset('img/39.png') }}" alt="search"/></a>
-						<ul class="b-header-nav-dropdown">
-						 
-							<li><a href="#">{{ trans('network.language-choice') }}</a>
-								<ul class="b-header-sub-menu">
-									<li><a href="{{ URL::to('locale/en') }}"><img src="{{ asset('img/30.png') }}" alt=""/><span>English</span></a></li>
-									<li><a href="{{ URL::to('locale/ru') }}"><img src="{{ asset('img/30.png') }}" alt=""/><span>Русский</span></a></li>
-								</ul>
-							</li>
-						 
-							<!--
-							<li><a href="#">Помощь</a>
-								<ul class="b-header-sub-menu">
-									<li><a href="">Сообщить о проблеме</a></li>
-									<li><a href="">История действии</a></li>
-								</ul>
-							</li>
-							-->
-							<!-- <li><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a></li>
-							</div>
-						</div> --> 
 					</li>
+                    @endif
 					<div class="b-header-nav-random">
 						<div class="b-header-nav-random__item">
 							<a href="{{URL::to('profile/random')}}"></a>
@@ -279,10 +234,10 @@
 					</li>
 					<div class="clear"></div>
 				</ul>
+
 			</div>
 		</div>
 	</div>
-@endif
 
 <div class="container">
 	<div class="col-md-12">
