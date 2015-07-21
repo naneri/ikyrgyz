@@ -106,10 +106,13 @@
                                     </ul>
                                 </div>
                             </div>
+                          
                         </div>
+
                     </div>
+                   
                 </div>
-                <div class="b-footer"></div>
+               
             </div>
         </div>
     </body>
