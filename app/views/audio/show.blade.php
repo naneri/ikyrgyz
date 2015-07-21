@@ -18,9 +18,17 @@
             @endif
         </div>
         <div>
-            <a href="{{$audio->url}}">
-                {{$audio->name}}
-            </a>
+            @if((Auth::id() == $audio->user_id && $audio->is_hidden) || (Auth::id() != $audio->user_id && !$audio->is_hidden))
+                <a href="{{$audio->url}}">
+                    {{$audio->name}}
+                </a>
+            @else
+                <div class="panel panel-default" style="height: 40px; padding:0 20px;">
+                    <h5 style="">
+                        Аудио не доступно для просмотра
+                    </h5>
+                </div>
+            @endif
         </div>
     </div>
 </div>

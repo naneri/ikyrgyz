@@ -16,14 +16,24 @@
             {{Form::open(array('files' => true))}}
             <legend>{{ trans('network.upload-audio') }}</legend>
             <div class="form-group">
+                {{ trans('network.hidden') }}
+                {{Form::checkbox('is_hidden', 0, false)}}
+            </div>
+            <div class="form-group">
                 {{Form::file('audio_files[]', array('class' => 'form-control', 'multiple' => true, 'accept' => 'audio/mp3'))}}
             </div>
             <div class="form-group">
                 {{Form::hidden('audio_album_id', $audioAlbum->id)}}
+                {{Form::hidden('is_hidden', 0)}}
                 {{Form::submit(trans('network.save'))}}
             </div>
             {{Form::close()}}
         </div>
     </div>
 </div>
+<script>
+    $('form input[name="is_hidden"]').change(function(){
+        $('form input[name="is_hidden"]').val($('form input[name="is_hidden"]').is(":checked")? '1' : '0');
+    });
+</script>
 @stop

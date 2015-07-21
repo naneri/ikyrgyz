@@ -28,21 +28,41 @@
                 <audio id="audio-player"></audio>
             </div>
                 <br />
-                @foreach($audioAlbum->audios as $audio)
-                    <div style="margin-top: 3px;">
-                        <span><a class="play-audio" href="{{$audio->url}}">{{$audio->name}}</a></span>
+                @if(Auth::id() == $audioAlbum->user_id)
+                        @foreach($audioAlbum->audios as $audio)
+                            <div style="margin-top: 3px; <?php if($audio->is_hidden):?>opacity: 0.5<?php endif;?>">
+                                <span><a class="play-audio" href="{{$audio->url}}">{{$audio->name}}</a></span>
                         <span class="b-user-wall-footer__btn rating" style="float: right; margin: 0">
                             <input type="submit" onclick="return vote.audio({{$audio->id}},-1);" class="btn btn-minus">
                             <input type="submit" onclick="return vote.audio({{$audio->id}},1);" class="btn btn-plus">
                             <span class="likes" style="line-height: 0; min-width: 20px; display: inline-block;" id="rating_audio_{{$audio->id}}">{{$audio->rating}}</span>
-                        @if($audio->canEdit())
-                            <a href="{{URL::to('audio/'.$audio->id.'/delete')}}">Удалить</a> |
-                            <a href="{{URL::to('audio/'.$audio->id.'/edit')}}">Изменить</a>
-                        @endif
+                            @if($audio->canEdit())
+                                <a href="{{URL::to('audio/'.$audio->id.'/delete')}}">Удалить</a> |
+                                <a href="{{URL::to('audio/'.$audio->id.'/edit')}}">Изменить</a>
+                            @endif
                         </span>
-                    </div>
-                    <div class="clear"></div>
-                @endforeach
+                            </div>
+                            <div class="clear"></div>
+                        @endforeach
+                @else
+                        @foreach($audioAlbum->audios as $audio)
+                            @if(!$audio->is_hidden)
+                                <div style="margin-top: 3px; opacity: 0.5">
+                                    <span><a class="play-audio" href="{{$audio->url}}">{{$audio->name}}</a></span>
+                                    <span class="b-user-wall-footer__btn rating" style="float: right; margin: 0">
+                                        <input type="submit" onclick="return vote.audio({{$audio->id}},-1);" class="btn btn-minus">
+                                        <input type="submit" onclick="return vote.audio({{$audio->id}},1);" class="btn btn-plus">
+                                        <span class="likes" style="line-height: 0; min-width: 20px; display: inline-block;" id="rating_audio_{{$audio->id}}">{{$audio->rating}}</span>
+                                        @if($audio->canEdit())
+                                            <a href="{{URL::to('audio/'.$audio->id.'/delete')}}">Удалить</a> |
+                                            <a href="{{URL::to('audio/'.$audio->id.'/edit')}}">Изменить</a>
+                                        @endif
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            @endif
+                        @endforeach
+                @endif
                 <script type="text/javascript">
                     $(document).ready(function () {
                         MediaElementPlayer.prototype.buildloop = function(player, controls, layers, media){

@@ -16,6 +16,10 @@
             {{Form::open(array('files' => true))}}
             <legend>Изменение аудио</legend>
             <div class="form-group">
+                {{ trans('network.hidden') }}
+                {{Form::checkbox('is_hidden', $audio->is_hidden, $audio->is_hidden)}}
+            </div>
+            <div class="form-group">
                 {{Form::file('audio_file', null, array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
@@ -24,10 +28,16 @@
             <div class="form-group">
                 {{Form::hidden('audio_album_id', $audio->album->id)}}
                 {{Form::hidden('url', $audio->url)}}
+                {{Form::hidden('is_hidden', $audio->is_hidden)}}
                 {{Form::submit('Сохранить')}}
             </div>
             {{Form::close()}}
         </div>
     </div>
 </div>
+<script>
+    $('form input[name="is_hidden"]').change(function(){
+        $('form input[name="is_hidden"]').val($('form input[name="is_hidden"]').is(":checked")? '1' : '0');
+    });
+</script>
 @stop
