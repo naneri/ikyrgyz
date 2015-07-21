@@ -32,8 +32,8 @@
                     <div class="b-blog-create-modal-content__item">
                         <textarea name="description" cols="30" rows="10" class="textarea-blog input-default">{{$blog->description}}</textarea>
                     </div>
-                    <div class="b-blog-create-modal-content__item">
-                        <input name="tags" type="text" placeholder="{{ trans('network.tags') }}" class="input-tag input-default" />
+                    <div class="b-blog-create-modal-content__item" style="height: 44px;">
+                        <!--input name="tags" type="text" placeholder="{{ trans('network.tags') }}" class="input-tag input-default" /-->
                         <div class="button-group">
                             <input type="button" value="Отмена" class="btn-cancel input-default"/>
                             <input type="submit" name='okname' value="{{ trans('network.publish') }}" class="btn-submit input-default"/>
