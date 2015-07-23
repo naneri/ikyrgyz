@@ -36,21 +36,28 @@ class Uploader extends CI_Controller {
 		
 	public function upload ($lang='english')
 	{
-		// Set language
+                session_start();
+                $subdir = $_SESSION['topic_images_subdir'];
+                
+                // Set language
 		$this->_lang_set($lang);
 		
 		// Get configuartion data (we fill up 2 arrays - $config and $conf)
 		
-		$conf['img_path']			= $this->config->item('img_path',		'uploader_settings');
+		$conf['img_path']			= $this->config->item('img_path',		'uploader_settings').$subdir;
 		$conf['allow_resize']		= $this->config->item('allow_resize',	'uploader_settings');
 		
 		$config['allowed_types']	= $this->config->item('allowed_types',	'uploader_settings');
 		$config['max_size']			= $this->config->item('max_size',		'uploader_settings');
 		$config['encrypt_name']		= $this->config->item('encrypt_name',	'uploader_settings');
 		$config['overwrite']		= $this->config->item('overwrite',		'uploader_settings');
-		$config['upload_path']		= $this->config->item('upload_path',	'uploader_settings');
-		
-		if (!$conf['allow_resize'])
+		$config['upload_path']		= $this->config->item('upload_path',	'uploader_settings').$subdir;
+	
+                if (!is_dir($config['upload_path'])) {
+                    mkdir($config['upload_path'], 0777, true);
+                }
+                
+                if (!$conf['allow_resize'])
 		{
 			$config['max_width']	= $this->config->item('max_width',		'uploader_settings');
 			$config['max_height']	= $this->config->item('max_height',		'uploader_settings');

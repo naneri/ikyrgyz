@@ -112,8 +112,10 @@ class Topic extends Eloquent {
                 ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
                 ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
                 ->where('topics.draft', '=', '0')
-                ->whereIn('blog_types.name', array('personal', 'open'))
-                ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'))
+                ->where(function($query){
+                    $query  ->whereIn('blog_types.name', array('personal', 'open'))
+                            ->orWhereIn('blogs.id', Auth::user()->canPublishBlogs()->lists('id'));
+                })
                 ->skip( $offset * $topicLimit ) 
                 ->take($topicLimit);
     }

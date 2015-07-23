@@ -26,6 +26,9 @@ class TopicController extends BaseController {
                 'text' => 'Вам необходимо создать блог'
                 ]);
             }
+            session_start();
+            $subdir = '/topic/' . date('Y/m/d/') .  str_random(8);
+            $_SESSION['topic_images_subdir'] = $subdir;
 
             return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView(), 'type' => $type));
 	}
@@ -231,8 +234,22 @@ class TopicController extends BaseController {
 	 */
 	public function delete($id)
 	{
-		Topic::findOrFail($id)->delete();
-        return Redirect::to('/');
+            $topic = Topic::findOrFail($id);
+            
+            $subdir = $topic->images_dir;
+            if($subdir && strpos($subdir, 'images/topic') !== false){
+                $topicImagesDir = public_path() . '/' . $subdir;
+                $files = scandir($topicImagesDir);
+                foreach ($files as $file) {
+                    if(is_file($topicImagesDir . '/' . $file)){
+                        unlink($topicImagesDir . '/' . $file);
+                    }
+                }
+                rmdir($topicImagesDir);
+            }
+            
+            $topic->delete();
+            return Redirect::to('/');
 	}
 
 	public function uploadImage() {
@@ -302,6 +319,12 @@ class TopicController extends BaseController {
             // attaching the file name to the topic
             $this->topic->image_url = URL::to('/') . '/' . $directory . '/' . $new_name;
         }
+        
+        if(!$this->topic->images_dir){
+            session_start();
+            $this->topic->images_dir = 'images'.$_SESSION['topic_images_subdir'];
+        }
+        $this->deleteUnusedImages(Input::get('description'));
 
         // сохраняет топик
         $this->topic->save();
@@ -507,4 +530,21 @@ class TopicController extends BaseController {
         return Response::json(['status' => 'success', 'filename' => $filename]);
         
     }
+
+    public function deleteUnusedImages($topicDescription) {
+        $subdir = $this->topic->images_dir;
+        $regex = "/src=\"[a-z\/]+".str_replace('/', '\/', $subdir)."\/([^\"]+)\"/";
+        preg_match_all($regex, $topicDescription, $topicImages);
+
+        $topicImagesDir = public_path().'/'.$subdir;
+        if(is_dir($topicImagesDir)){
+            $files = scandir($topicImagesDir);
+            foreach ($files as $file) {
+                if(!in_array($file, end($topicImages)) && is_file($topicImagesDir . '/' . $file)){
+                    unlink($topicImagesDir.'/'.$file);
+                }
+            }
+        }
+    }
+
 }
