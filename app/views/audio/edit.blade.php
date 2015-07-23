@@ -23,10 +23,14 @@
                 {{Form::file('audio_file', null, array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
+                Название
                 {{Form::text('name', $audio->name, array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
-                {{Form::hidden('audio_album_id', $audio->album->id)}}
+                Альбом
+                {{Form::select('album_id', $audioAlbums, $audio->album->id, array('class' => 'form-control'))}}
+            </div>
+            <div class="form-group">
                 {{Form::hidden('url', $audio->url)}}
                 {{Form::hidden('is_hidden', $audio->is_hidden)}}
                 {{Form::submit('Сохранить')}}
