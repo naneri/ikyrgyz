@@ -26,12 +26,16 @@ class TopicController extends BaseController {
                 'text' => 'Вам необходимо создать блог'
                 ]);
             }
-            session_start();
-            $subdir = '/topic/' . date('Y/m/d/') .  str_random(8);
-            $_SESSION['topic_images_subdir'] = $subdir;
+            $this->sessionInitNewImagesDir();
 
             return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView(), 'type' => $type));
 	}
+        
+        private function sessionInitNewImagesDir(){
+            session_start();
+            $subdir = '/topic/' . date('Y/m/d/') . str_random(8);
+            $_SESSION['topic_images_subdir'] = $subdir;
+        }
         
         public function createLink(){
             return $this->create('link');
@@ -166,6 +170,9 @@ class TopicController extends BaseController {
         if(!$topic->canEdit()){
             return View::make('error.permission', array('error' => 'permission denied'));
         }
+        if(!$topic->images_dir){
+            $this->sessionInitNewImagesDir();
+        }
         
         return View::make('topic.edit', array('user' => Auth::user(), 'topic' => $topic,'canPublishBlogs' => $this->getCanPublishBlogsForView(), 'type_list' => $this->getTopicTypesForView()));
     }
@@ -235,6 +242,14 @@ class TopicController extends BaseController {
 	public function delete($id)
 	{
             $topic = Topic::findOrFail($id);
+            
+            $cover = $topic->image_url;
+            if($cover && preg_match("/images\/\d+\/".$topic->id."\//", $topic->image_url)){
+                $coverFile = public_path() . substr($cover, strpos($cover, '/images/'));
+                if(is_file($coverFile)){
+                    unlink($coverFile);
+                }
+            }
             
             $subdir = $topic->images_dir;
             $topicImagesDir = public_path() . '/' . $subdir;
