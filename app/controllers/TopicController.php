@@ -237,8 +237,8 @@ class TopicController extends BaseController {
             $topic = Topic::findOrFail($id);
             
             $subdir = $topic->images_dir;
-            if($subdir && strpos($subdir, 'images/topic') !== false){
-                $topicImagesDir = public_path() . '/' . $subdir;
+            $topicImagesDir = public_path() . '/' . $subdir;
+            if($subdir && is_dir($topicImagesDir) && strpos($subdir, 'images/topic') !== false){
                 $files = scandir($topicImagesDir);
                 foreach ($files as $file) {
                     if(is_file($topicImagesDir . '/' . $file)){
