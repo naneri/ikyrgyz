@@ -120,12 +120,15 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('audioalbum/{id}', 'AudioAlbumsController@show');
     Route::post('audioalbum/uploadCover', 'AudioAlbumsController@uploadCover');
 
-    Route::get('audioalbum/{id}/delete', 'AudioAlbumsController@destroy');
-    Route::get('audioalbum/{id}/edit', 'AudioAlbumsController@edit');
-    Route::post('audioalbum/{id}/edit', 'AudioAlbumsController@update');
-    Route::get('audioalbum/{id}/upload', 'AudioController@create');
-    Route::post('audioalbum/{id}/upload', 'AudioController@store');
-    Route::post('audioalbum/{id}/upload/setnames', 'AudioController@setNames');
+
+    Route::group(array('before' => 'audioalbum_edit_permission'), function(){
+        Route::get('audioalbum/{id}/delete', 'AudioAlbumsController@destroy');
+        Route::get('audioalbum/{id}/edit', 'AudioAlbumsController@edit');
+        Route::post('audioalbum/{id}/edit', 'AudioAlbumsController@update');
+        Route::get('audioalbum/{id}/upload', 'AudioController@create');
+        Route::post('audioalbum/{id}/upload', 'AudioController@store');
+        Route::post('audioalbum/{id}/upload/setnames', 'AudioController@setNames');
+    });
 
     Route::get('audio/{id}',  array('before' => 'can_view_audio', 'uses' => 'AudioController@show'));
     Route::group(array('before' => 'audio_edit_permission'), function(){
@@ -253,7 +256,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::post('search/ajax-people', 'SearchController@postSearchPeopleAjax');
     Route::post('search/ajax-content', 'SearchController@postSearchContentAjax');
 	
-    
+
     if(Request::ajax()){
         Route::post('topic/comments/sort', 'TopicCommentsController@sortComments');
         Route::post('topic/comment/add', 'TopicCommentsController@postAdd');
@@ -279,6 +282,11 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
 
         Route::post('favourite/topic', 'TopicController@postFavourite');
         Route::post('favourite/blog', 'BlogController@postFavourite');
+
+        Route::get('audio/copyToAlbum/{id}',  array('before' => 'can_view_audio', 'uses' => 'AudioController@getCopyToAlbum'));
+        Route::post('audio/copyToAlbum/{id}/{a_id}',  array('before' => 'move_copy_to_audioalbum_permission', 'uses' => 'AudioController@postCopyToAlbum'));
+        Route::get('audio/moveToAlbum/{id}',  array('before' => 'can_view_audio', 'uses' => 'AudioController@getMoveToAlbum'));
+        Route::post('audio/moveToAlbum/{id}/{a_id}',  array('before' => 'move_copy_to_audioalbum_permission', 'uses' => 'AudioController@postMoveToAlbum'));
     }
 
     Route::get('notifications/all', 'NotificationController@getAll');
@@ -310,6 +318,16 @@ Route::filter('message_edit_permission', function($route) {
 
 Route::filter('audioalbum_edit_permission', function($route) {
     $audioAlbum = AudioAlbum::findOrFail($route->parameter('id'));
+    if (!$audioAlbum->canEdit()) {
+        return Redirect::back()->with('message', [
+            'type' => 'error',
+            'text' => "You don't have enough permissions to do that."
+        ]);
+    }
+});
+
+Route::filter('move_copy_to_audioalbum_permission', function($route) {
+    $audioAlbum = AudioAlbum::findOrFail($route->parameter('a_id'));
     if (!$audioAlbum->canEdit()) {
         return Redirect::back()->with('message', [
             'type' => 'error',

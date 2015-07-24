@@ -26,9 +26,16 @@ class TopicController extends BaseController {
                 'text' => 'Вам необходимо создать блог'
                 ]);
             }
+            $this->sessionInitNewImagesDir();
 
             return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView(), 'type' => $type));
 	}
+        
+        private function sessionInitNewImagesDir(){
+            session_start();
+            $subdir = '/topic/' . date('Y/m/d/') . str_random(8);
+            $_SESSION['topic_images_subdir'] = $subdir;
+        }
         
         public function createLink(){
             return $this->create('link');
@@ -163,6 +170,9 @@ class TopicController extends BaseController {
         if(!$topic->canEdit()){
             return View::make('error.permission', array('error' => 'permission denied'));
         }
+        if(!$topic->images_dir){
+            $this->sessionInitNewImagesDir();
+        }
         
         return View::make('topic.edit', array('user' => Auth::user(), 'topic' => $topic,'canPublishBlogs' => $this->getCanPublishBlogsForView(), 'type_list' => $this->getTopicTypesForView()));
     }
@@ -231,8 +241,30 @@ class TopicController extends BaseController {
 	 */
 	public function delete($id)
 	{
-		Topic::findOrFail($id)->delete();
-        return Redirect::to('/');
+            $topic = Topic::findOrFail($id);
+            
+            $cover = $topic->image_url;
+            if($cover && preg_match("/images\/\d+\/".$topic->id."\//", $topic->image_url)){
+                $coverFile = public_path() . substr($cover, strpos($cover, '/images/'));
+                if(is_file($coverFile)){
+                    unlink($coverFile);
+                }
+            }
+            
+            $subdir = $topic->images_dir;
+            $topicImagesDir = public_path() . '/' . $subdir;
+            if($subdir && is_dir($topicImagesDir) && strpos($subdir, 'images/topic') !== false){
+                $files = scandir($topicImagesDir);
+                foreach ($files as $file) {
+                    if(is_file($topicImagesDir . '/' . $file)){
+                        unlink($topicImagesDir . '/' . $file);
+                    }
+                }
+                rmdir($topicImagesDir);
+            }
+            
+            $topic->delete();
+            return Redirect::to('/');
 	}
 
 	public function uploadImage() {
@@ -302,6 +334,12 @@ class TopicController extends BaseController {
             // attaching the file name to the topic
             $this->topic->image_url = URL::to('/') . '/' . $directory . '/' . $new_name;
         }
+        
+        if(!$this->topic->images_dir){
+            session_start();
+            $this->topic->images_dir = 'images'.$_SESSION['topic_images_subdir'];
+        }
+        $this->deleteUnusedImages(Input::get('description'));
 
         // сохраняет топик
         $this->topic->save();
@@ -507,4 +545,21 @@ class TopicController extends BaseController {
         return Response::json(['status' => 'success', 'filename' => $filename]);
         
     }
+
+    public function deleteUnusedImages($topicDescription) {
+        $subdir = $this->topic->images_dir;
+        $regex = "/src=\"[a-z\/]+".str_replace('/', '\/', $subdir)."\/([^\"]+)\"/";
+        preg_match_all($regex, $topicDescription, $topicImages);
+
+        $topicImagesDir = public_path().'/'.$subdir;
+        if(is_dir($topicImagesDir)){
+            $files = scandir($topicImagesDir);
+            foreach ($files as $file) {
+                if(!in_array($file, end($topicImages)) && is_file($topicImagesDir . '/' . $file)){
+                    unlink($topicImagesDir.'/'.$file);
+                }
+            }
+        }
+    }
+
 }

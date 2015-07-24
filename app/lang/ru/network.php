@@ -163,6 +163,7 @@ return array(
 
     //audio
     'upload-audio'		=> 'Загрузка аудио',
+    'hidden'		    => 'Скрыт',
 
 	//profile
 	'available'			=> 'Доступно',

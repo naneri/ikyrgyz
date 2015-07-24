@@ -9,7 +9,7 @@ class Audio extends \Eloquent {
     ];
 
     // Don't forget to fill this array
-    protected $fillable = ['name', 'url', 'user_id', 'album_id'];
+    protected $fillable = ['name', 'url', 'user_id', 'album_id', 'is_hidden'];
 
     public function album(){
         return $this->belongsTo('AudioAlbum', 'album_id');

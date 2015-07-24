@@ -22,23 +22,7 @@
                     {{Form::select('access', array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне'), null, array('class' => 'form-control'))}}
                 </div>
                 <div class="form-group">
-                    <!--div id="dialog" title="Загрузить обложку">
-                        <p>
-                            <div class="form-group">
-                                <label for="">с компьютера</label>
-                                {{Form::file('from_pc',array('class' => 'form-control'))}}
-                            </div>
-                            <div class="form-group">
-                                <label for="">из интернета</label>
-                                {{Form::text('from_url', null, array('class' => 'form-control'))}}
-                            </div>
-                            <div class="form-group">
-                                {{Form::button('OK', array('id' => 'upload_image_btn'))}}
-                            </div>
-                        </p>
-                    </div-->
                     {{Form::file('image', array('class' => 'form-control'))}}
-                    <!--<input type="button" id="upload_image_dialog" style="display: none;" value="Загрузить обложку" />-->
                 </div>
                 <div class="form-group">
                     {{Form::textarea('description', null, array('class' => 'form-control', 'placeholder' => 'Описание аудиоальбома'))}}
@@ -51,29 +35,4 @@
     </div>
 </div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script>
-  $(function() {
-    /*$( "#dialog" ).dialog({
-        autoOpen: false
-    });
-    $('#upload_image_dialog').click(function(){
-        $( "#dialog" ).dialog( "open" );
-    });
-    $('#upload_image_btn').click(function(){
-        var data = { 
-            'from_pc': $('input[name="from_pc"').val(),
-            'from_url': $('input[name="from_url"').val()
-        };
-        $.ajax({
-            url: '{{URL::to("audioalbum/uploadCover")}}',
-            data: data,
-            method: 'POST',
-            success: function($result){
-                
-            }
-        })
-        $( "#dialog" ).dialog( "close" );
-    });*/
-  });
-</script>
 @stop

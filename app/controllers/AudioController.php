@@ -42,6 +42,7 @@ class AudioController extends \BaseController
                 $data['url'] = $this->saveAudioFile($audioFile);
                 $data['user_id'] = Auth::id();
                 $data['album_id'] = $albumId;
+                $data['is_hidden'] = Input::get('is_hidden');
                 $data['name'] = $file_name = pathinfo($audioFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $audio = Audio::create($data);
 //              BonusRating::addBonusRating('upload_audio', $audio->id, Config::get('bonus_rating.upload_audio'));
@@ -89,6 +90,80 @@ class AudioController extends \BaseController
         file_put_contents($new, $data);
     }
 
+    public function getCopyToAlbum($id)
+    {
+        $audio = Audio::findOrFail($id);
+
+        $tmpAudioAlbums = AudioAlbum::where('user_id', Auth::id())->where('id', '<>', $audio->album_id)->get();
+
+        $audioAlbums = array();
+        foreach ($tmpAudioAlbums as $a) {
+            $audioAlbums[$a->id] = $a->name;
+        }
+
+        if (!$audio)
+            return Response::json(array('error' => 'Аудио не найдено'));
+
+        if (!count($audioAlbums))
+            return Response::json(array('error' => 'У вас нет аудио альбомов для копирования аудио'));
+
+        return Response::json(array('html' => View::make('audio.copy-modal-audio-albums', compact('audioAlbums'))->render()));
+    }
+
+    public function getMoveToAlbum($id)
+    {
+        $audio = Audio::findOrFail($id);
+        $tmpAudioAlbums = AudioAlbum::where('user_id', Auth::id())->where('id', '<>', $audio->album_id)->get();
+
+        $audioAlbums = array();
+        foreach ($tmpAudioAlbums as $a) {
+            $audioAlbums[$a->id] = $a->name;
+        }
+
+        if (!$audio)
+            return Response::json(array('error' => 'Аудио не найдено'));
+
+        if (!count($audioAlbums))
+            return Response::json(array('error' => 'У вас нет аудио альбомов для перемещения аудио'));
+
+        return Response::json(array('html' => View::make('audio.move-modal-audio-albums', compact('audioAlbums'))->render()));
+    }
+
+    public function postCopyToAlbum($audioId, $albumId)
+    {
+        $audio = Audio::findOrFail($audioId);
+        $audioAlbum = AudioAlbum::findOrFail($albumId);
+
+        if (!$audio)
+            return Response::json(array('error' => 'Аудио не найдено'));
+
+        if (!$audioAlbum->canEdit())
+            return Response::json(array('error' => 'Вы не можете копировать в данный альбом'));
+
+        $new_audio = $audio->replicate();
+        $new_audio->album_id = $albumId;
+        $new_audio->user_id = Auth::id();
+        $new_audio->push();
+
+        return Response::json(array('success' => 'Аудио успешно скопировано'));
+    }
+
+    public function postMoveToAlbum($audioId, $albumId)
+    {
+        $audio = Audio::findOrFail($audioId);
+        $audioAlbum = AudioAlbum::findOrFail($albumId);
+
+        if (!$audio)
+            return Response::json(array('error' => 'Аудио не найдено'));
+
+        if (!$audioAlbum->canEdit())
+            return Response::json(array('error' => 'Вы не можете переместить в данный альбом'));
+
+        $audio->album_id = $albumId;
+        $audio->save();
+        return Response::json(array('success' => 'Аудио успешно перемещено'));
+    }
+
     /**
      * Display the specified audio.
      *
@@ -111,8 +186,15 @@ class AudioController extends \BaseController
     public function edit($id)
     {
         $audio = Audio::find($id);
+        $audioAlbum = AudioAlbum::findOrFail($audio->album_id);
+        $tmpAudioAlbums = AudioAlbum::where('user_id', $audioAlbum->user_id)->get();
 
-        return View::make('audio.edit', compact('audio'));
+        $audioAlbums = array();
+        foreach ($tmpAudioAlbums as $a) {
+            $audioAlbums[$a->id] = $a->name;
+        }
+
+        return View::make('audio.edit', compact('audio', 'audioAlbums'));
     }
 
     /**

@@ -80,7 +80,7 @@ class AudioAlbumsController extends \BaseController {
     public function show($id)
     {
         $audioAlbum = AudioAlbum::findOrFail($id);
-        $audioAlbums = AudioAlbum::where('user_id', $audioAlbum->user_id)->get();
+        $audioAlbums = AudioAlbum::where('user_id', $audioAlbum->user_id)->get(); // для показа списка альбомов(справа)
 
         return View::make('audioalbums.show', compact('audioAlbums', 'audioAlbum'));
     }

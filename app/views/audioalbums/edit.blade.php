@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 {{Form::submit('Сохранить')}}
-            </div
+            </div>
             {{Form::close()}}
         </div>
     </div>
