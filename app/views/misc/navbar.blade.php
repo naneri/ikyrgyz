@@ -78,9 +78,10 @@
 						<div class="b-header-nav-logo">
 							<div class="b-header-nav-logo__item"><a href="{{ URL::to('/') }}"><img src="{{ asset('img/2.png') }}"  alt="logo"/><span class="logo beta">Beta</span></a></div>
 						</div>
+                        @if(@Auth::check())
 						<div class="b-header-nav-user">
                             <div class="b-header-nav-user__item">
-                                @if(@Auth::check())
+                                
                                     <a href="{{ URL::to('profile') }}">
                                     @if(isset($user_data->description->user_profile_avatar))
                                         <img class="header-logo__image"  src="{{ asset($user_data->description->user_profile_avatar) }}" alt="user"/>
@@ -89,20 +90,22 @@
                                     @endif
                                     <span class="user-name">{{@$user_data['description']->first_name.' '.@$user_data['description']->last_name}}</span>
                                     </a>
-                                @endif
+                               
                            </div>
 						</div>
-						<!-- <div class="b-header-nav-reg">
+                        @else
+						 <div class="b-header-nav-reg">
 							<div class="b-header-nav-reg-image">
 								<img src="{{ asset('img/235.png') }}" alt="" class="b-header-nav-reg-image__image">
 							</div>
 							<div class="b-header-nav-reg-block">
 								<div class="b-header-nav-reg-block__title">Вы не авторизованы</div>
-								<input type="submit" class="b-header-nav-reg-block__registr" value="Регистрация">
-								<input type="submit" class="b-header-nav-reg-block__join" value="Войти">
+								<a href="{{ URL::to('/register#bottom') }}"><input type="submit" class="b-header-nav-reg-block__registr" value="Регистрация"></a>
+								<a href="{{ URL::to('/') }}"><input type="submit" class="b-header-nav-reg-block__join" value="Войти"></a>
 							</div>
 							<div class="clear"></div>
-						</div> -->
+						</div> 
+                         @endif
 					</li>
                     @if(@Auth::check())
 					<li class="b-header-nav__middle">

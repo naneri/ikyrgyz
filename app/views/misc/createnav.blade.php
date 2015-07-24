@@ -24,6 +24,7 @@
 	<div class="b-topic-navigation__inner ">
 		<div class="b-topic-navigation__left">
 			<div class="b-topic-navigation-menu">
+				@if(Auth::check())
 				<div class="b-topic-navigation-menu__list">
 					<a style="text-transform: uppercase;" href="#" class="arrow">Я-{{trans('nation.'.Config::get('app.nation_name'))}}</a>
 					<dl class="dropdown-list">
@@ -66,6 +67,7 @@
 					</dl>
 
 				</div>
+				@endif
 			</div>
 			<div class="b-topic-navigation-sort">
 				<ul>

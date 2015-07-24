@@ -40,6 +40,16 @@ Route::group(array('before' => 'un_auth'), function(){
 
 
 Route::get('topic/show/{id}', array('before' => 'topic.canview', 'uses' => 'TopicController@show', 'as'=> 'showTopic'));
+Route::get('main/index','MainController@index');
+Route::get('main/index/{order}', 'MainController@index');
+Route::get('main/ajaxTopics','MainController@ajaxTopics');
+Route::get('topic/videos', 'TopicController@getTopicVideos');
+Route::get('topic/ajaxVideos', 'TopicController@getAjaxVideos');
+Route::get('topic/linkTopics', 'TopicController@getLinkTopics');
+Route::get('topic/ajaxLinkTopics', 'TopicController@ajaxLinkTopics');
+Route::get('custom/history', 'CustomController@showHistory');
+Route::get('custom/customs', 'CustomController@showCustoms');
+Route::get('custom/culture', 'CustomController@showCulture');
 
 Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
@@ -69,41 +79,39 @@ Route::group(array('before' => 'auth'),function(){
     Route::get('logout', 'AuthController@logout');
 });
 Route::group(array('before' => 'auth|activated|no-description'),function(){
-    Route::get('main/index','MainController@index');
-    Route::get('main/index/{order}', 'MainController@index');
-    Route::get('main/ajaxTopics','MainController@ajaxTopics');
+    
 
     Route::get('country/{id}', function($id){ return Response::json(City::getCitiesByCountryId($id)); });
 
-        Route::get('blog/create', 'BlogController@create');
+    Route::get('blog/create', 'BlogController@create');
 	Route::post('blog/store', 'BlogController@store');
 	Route::get('blog/all','BlogController@getAll');
-        Route::get('blog/show/{id}', 'BlogController@show');
-        Route::get('blog/showAjax/{id}', 'BlogController@showAjax');
-        Route::group(array('before' => 'blog_edit_permission'), function(){
-            Route::get('blog/edit/{id}', 'BlogController@getEdit');
-            Route::post('blog/edit/{id}', 'BlogController@postEdit');
-            Route::get('blog/edit/{id}/users', 'BlogController@getEditUsers');
-            Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
-        });
-        Route::get('blog/{id}/read', 'BlogController@readBlog');
-        Route::get('blog/user/{id}/read', 'BlogController@readPersonalBlog');
-        Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
-        Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
-        Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
-        Route::get('blog/ajaxBlogs', 'BlogController@ajaxBlogs');
+    Route::get('blog/show/{id}', 'BlogController@show');
+    Route::get('blog/showAjax/{id}', 'BlogController@showAjax');
+    Route::group(array('before' => 'blog_edit_permission'), function(){
+        Route::get('blog/edit/{id}', 'BlogController@getEdit');
+        Route::post('blog/edit/{id}', 'BlogController@postEdit');
+        Route::get('blog/edit/{id}/users', 'BlogController@getEditUsers');
+        Route::post('blog/edit/{id}/users', 'BlogController@postEditUsers');
+    });
+    Route::get('blog/{id}/read', 'BlogController@readBlog');
+    Route::get('blog/user/{id}/read', 'BlogController@readPersonalBlog');
+    Route::get('blog/{id}/reject', 'BlogController@rejectBlog');
+    Route::get('blog/{id}/accept', 'BlogController@acceptInviteBlog');
+    Route::get('blog/{id}/refollow', 'BlogController@refollowBlog');
+    Route::get('blog/ajaxBlogs', 'BlogController@ajaxBlogs');
 
-        Route::get('group', 'GroupController@index');
-        Route::get('group/show/{id}', 'GroupController@show');
-        Route::get('group/create', 'GroupController@getCreate');
-        Route::post('group/create', 'GroupController@postCreate');
-        //Route::group(array('before' => 'group_edit_permission'), function(){
-            //Route::get('group/edit/{id}', 'GroupController@getEdit');
-          //  Route::post('group/edit/{id}', 'GroupController@postEdit');
-        //});
-        //Route::post('group/update', 'GroupController@update');
+    Route::get('group', 'GroupController@index');
+    Route::get('group/show/{id}', 'GroupController@show');
+    Route::get('group/create', 'GroupController@getCreate');
+    Route::post('group/create', 'GroupController@postCreate');
+    //Route::group(array('before' => 'group_edit_permission'), function(){
+        //Route::get('group/edit/{id}', 'GroupController@getEdit');
+      //  Route::post('group/edit/{id}', 'GroupController@postEdit');
+    //});
+    //Route::post('group/update', 'GroupController@update');
 
-        Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
+    Route::get('profile/{email}/created/topics', 'BlogController@showPersonal');
 
     // audio albums
     Route::get('profile/{id}/audios', 'AudioAlbumsController@audioAlbumIndex');
@@ -182,12 +190,10 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
 
     Route::get('topic/favorites', 'TopicController@getFavorites');
     Route::get('topic/ajaxFavorites', 'TopicController@ajaxFavorites');
-    Route::get('topic/videos', 'TopicController@getTopicVideos');
-    Route::get('topic/ajaxVideos', 'TopicController@getAjaxVideos');
+    
     Route::get('topic/myTopics', 'TopicController@getMyTopics');
     Route::get('topic/ajaxMyTopics', 'TopicController@ajaxMyTopics');
-    Route::get('topic/linkTopics', 'TopicController@getLinkTopics');
-    Route::get('topic/ajaxLinkTopics', 'TopicController@ajaxLinkTopics');
+    
     
     Route::get('topic/create', 'TopicController@create');
     Route::post('topic/addCover', 'TopicController@addCover');
@@ -196,10 +202,10 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
     Route::get('topic/create/fetch_content', 'TopicController@fetchContent');
 
     Route::group(array('before' => 'topic_edit_permission'), function(){
-            Route::get('topic/edit/{id}', 'TopicController@getEdit');
-            Route::post('topic/edit/{id}', 'TopicController@postEdit');
-            Route::get('topic/delete/{id}', 'TopicController@delete');
-        });
+        Route::get('topic/edit/{id}', 'TopicController@getEdit');
+        Route::post('topic/edit/{id}', 'TopicController@postEdit');
+        Route::get('topic/delete/{id}', 'TopicController@delete');
+    });
     Route::post('topic/update', 'TopicController@update');
     Route::post('topic/store', 'TopicController@store');
     Route::get('topic/drafts', 'TopicController@drafts');
@@ -230,9 +236,7 @@ Route::group(array('before' => 'auth|activated|no-description'),function(){
             Route::get('message/delete/{id}', 'MessageController@deleteMessage');
         });
 
-        Route::get('custom/history', 'CustomController@showHistory');
-        Route::get('custom/customs', 'CustomController@showCustoms');
-        Route::get('custom/culture', 'CustomController@showCulture');
+        
         Route::get('custom/help', 'CustomController@showHelp');
         Route::get('custom/problem', 'CustomController@showProblem');
         Route::get('custom/action_history', 'CustomController@showActionHistory');
