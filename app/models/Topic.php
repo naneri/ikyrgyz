@@ -71,6 +71,14 @@ class Topic extends Eloquent {
         return $this->belongsToMany('Audio');
     }    
 
+    /**
+     * Запросы вытаскивает топики для главной страницы
+     * 
+     * @param  [type]  $rating [description]
+     * @param  string  $sort   [description]
+     * @param  integer $offset [description]
+     * @return [type]          [description]
+     */
     static function getMainTopics($rating = null, $sort = 'id', $offset = 0) {
         $orderBy = 'topics.' . self::$orderType[$sort];
 		return 	Topic::mainTopicQuery($offset)
@@ -115,7 +123,7 @@ class Topic extends Eloquent {
                 ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
                 ->join('blog_types', 'blog_types.id', '=', 'blogs.type_id')
                 ->where('topics.draft', '=', '0')
-                ->where(function($query){
+                ->where(function($query) use ($logged_id){
                     $query  ->whereIn('blog_types.name', array('personal', 'open'))
                             ->orWhereIn('blogs.id', $logged_id);
                 })
