@@ -702,6 +702,8 @@ $(document).ready(function(){
 })
 
 
+
+
 $(function() {
 	$('.b-profile-middle-title__button .btn').click(function(event){
 		event.preventDefault();

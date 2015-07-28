@@ -388,7 +388,7 @@
 							<li class="b-user-navigation-list__list" data-tab="tab-3"><a href="{{URL::to('profile/friends')}}">Друзья</a><span>{{$user->friends()->count()}}</span></li>
 							<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/subscriptions')}}">Подписано</a><span>{{$user->subscriptions()->count()}}</span></li>
 								<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/favourites')}}">Избранное</a><span>{{$user->favourites()->count()}}</span></li>
-				<li class="b-user-navigation-list__list"><a href="{{URL::to('profile/edit/main')}}">Настройки</a></li>
+				<li class="b-user-navigation-list__list" data-tab="tab-5"><a href="{{URL::to('profile/settings')}}">Настройки</a></li>
 				<div class="clear"></div>
 			</ul>
 		</div>
