@@ -1226,10 +1226,10 @@ body
 	
 
 
-.number-raiting_red
+.negative
 	color #e8534f
 	
-.number-raiting_gray
+.neutral
 	color $baseFontColorLight
 	
 			
@@ -3191,6 +3191,143 @@ p.b-profile-about-message-button__raiting
 		
 	}
 } 
+/*
+===========================
+===========================
+Settings
+===========================
+===========================
+*/
+
+.b-settings
+	background $lightGradient
+	height 500px
+	&__left
+		width 211px
+		float left
+		border-right $baseBorder
+		height 100%
+		
+	&__right
+		width 788px
+		float left
+		height 100%
+		
+	
+.b-settings-top
+	border-bottom $baseBorder
+	border-tom $baseBorder
+	height 30px
+	line-height 30px
+	padding-left 20px
+	background $lightGradient
+	
+	&__image
+		vertical-align middle
+	&__name
+		font 14px $baseFontFamily
+		color $baseFontColorLight
+		padding-left 10px
+.b-settings-list
+	//
+	a:link, a:visited
+		color $baseFontColorLight
+		font 13px $baseFontFamily
+	&__list
+		padding-left 20px
+		padding-bottom 15px
+	&__list_first
+		padding-top 10px
+.b-settings-inner
+	border-bottom $baseBorder
+	border-tom $baseBorder
+	height 30px
+	line-height 30px
+	
+	background $lightGradient
+	&__name
+		font 14px $baseFontFamily
+		color $baseFontColorLight
+		padding-left 10px
+.b-settings-inner-list
+	//
+	&__list
+		padding-bottom 20px
+		padding-top 20px
+		
+.b-settings-inner-list-login
+	padding-left 20px
+	
+	
+		
+		
+	
+		
+			
+.setting-name
+	font 13px $baseFontFamily
+	color $baseFontColorLight		
+.setting-input
+	width 245px
+	height 30px
+	border $baseBorder
+	font 13px $baseFontFamily
+	color $baseFontColorLight
+	padding-left 5px
+
+.b-settings-inner-list-button
+	display block
+	line-height 20px
+	background $lightGradient
+	border $baseBorder
+	
+	a:link, a:visited
+		color $orangeFontColor
+		font 13px $baseFontFamily
+		padding-left 20px
+		
+.b-settings-inner-list-password
+	padding-left 20px
+
+.b-settings-inner-list-notification
+	width 341px
+	font 13px $baseFontFamily
+	color $baseFontColorLight
+	padding-left 20px
+.b-settings-inner-button
+	width 202px
+	margin 0 auto
+	&__cancel
+		button-default()
+		width 73px
+		height 32px
+		line-height 32px
+		&:hover
+			background $orangeGradient
+			color #fff
+	&__submit
+		button-default()
+		width 94px
+		height 32px
+		line-height 32px
+		&:hover
+			background $orangeGradient
+			color #fff
+			
+.b-settings-inner-list-name
+	display inline-block
+	padding-left 20px
+	
+	&__text
+		font 13px $baseFontFamily
+		color $baseFontColorLight
+.b-settings-inner-list-surname
+	padding-left 20px
+	display inline-block
+	&__text
+		font 13px $baseFontFamily
+		color $baseFontColorLight
+
 /*
 ===========================
 ===========================

@@ -14,6 +14,7 @@
 @elseif($page == 'friends' || $page == 'mutualFriends')
         @include('scripts.friends')
         @include('profile.show.build.friends', compact('user', 'items'))
+
 @elseif($page == 'subscribers')
 	@include('scripts.script-topic')
 	<div class="masonry">
@@ -37,6 +38,8 @@
 	</div>
 @elseif($page == 'messages')
         @include('profile.show.build.messages', compact('user', 'items'))
+@elseif($page == 'settings')
+	@include('profile.show.build.settings')
 @endif
 
 @if($page == 'newsline' || $page == 'publications')
