@@ -110,10 +110,17 @@
                         </div>
 
                     </div>
-                   
+                    
                 </div>
-               
+                  <div class="b-push"></div>
+
+           
             </div>
+               <div class="b-footer">
+                <div class="b-footer-inner"> <p> Copyright. Все права защищены. LLC "Continent-Group" 2014-2015</p>
+                 </div>
+                  
+               </div> 
         </div>
     </body>
 </html>
