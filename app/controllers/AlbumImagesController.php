@@ -11,7 +11,7 @@ class AlbumImagesController extends \BaseController {
 	{
 		$albumimages = Albumimage::all();
 
-		return View::make('albumimages.index', compact('albumimages'));
+		return $this->makeView('albumimages.index', compact('albumimages'));
 	}
 
 	/**
@@ -21,7 +21,7 @@ class AlbumImagesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('albumimages.create');
+		return $this->makeView('albumimages.create');
 	}
 
 	/**
@@ -53,7 +53,7 @@ class AlbumImagesController extends \BaseController {
 	{
 		$albumimage = Albumimage::findOrFail($id);
 
-		return View::make('albumimages.show', compact('albumimage'));
+		return $this->makeView('albumimages.show', compact('albumimage'));
 	}
 
 	/**
@@ -66,7 +66,7 @@ class AlbumImagesController extends \BaseController {
 	{
 		$albumimage = Albumimage::find($id);
 
-		return View::make('albumimages.edit', compact('albumimage'));
+		return $this->makeView('albumimages.edit', compact('albumimage'));
 	}
 
 	/**

@@ -24,7 +24,7 @@ class PhotoCommentsController extends \BaseController {
             $bonusRating = new BonusRating();
             $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
             
-            $result['comment']      = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => null, 'with_child' => false))->render();
+            $result['comment']      = $this->makeView('comments.item', array('comment' => $commentWithUserData, 'parent' => null, 'with_child' => false))->render();
             $result['comment_id']   = $comment->id;
             $result['message']      = "Комментарий успешно добавлен";
             $result['status']       = "success";
@@ -66,7 +66,7 @@ class PhotoCommentsController extends \BaseController {
             $commentWithUserData = $comment->withUserData();
             $bonusRating = new BonusRating();
             $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
-            $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+            $result['comment'] = $this->makeView('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
             $result['message'] = "Комментарий удален";
             $result['status'] = "success";
         } else {
@@ -91,7 +91,7 @@ class PhotoCommentsController extends \BaseController {
                 $commentWithUserData = $comment->withUserData();
                 $bonusRating = new BonusRating();
                 $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
-                $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                $result['comment'] = $this->makeView('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий восстановлен";
                 $result['status'] = "success";
@@ -113,7 +113,7 @@ class PhotoCommentsController extends \BaseController {
         $comments = $photo->commentsWithDataSortBy(Input::get('sort_by'));
         $result = array();
         if($comments->count() > 0){
-            $result['comments'] = View::make('comments.build', array('comments' => $comments, 'parent' => null, 'sort' => Input::get('sort_by')))->render();
+            $result['comments'] = $this->makeView('comments.build', array('comments' => $comments, 'parent' => null, 'sort' => Input::get('sort_by')))->render();
             $result['message'] = "Комментарии отсортированы";
             $result['status'] = 'success';
         }else{

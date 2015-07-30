@@ -6,7 +6,7 @@ class NotificationController extends BaseController{
 
         $notes = NotificationRepository::getAllNotifications(Auth::id());
 
-        return View::make('notification.list', compact('notes'));
+        return $this->makeView('notification.list', compact('notes'));
         
     }
 
