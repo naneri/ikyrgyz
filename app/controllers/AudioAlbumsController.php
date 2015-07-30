@@ -11,14 +11,14 @@ class AudioAlbumsController extends \BaseController {
     {
         $audioalbums = AudioAlbum::all();
 
-        return View::make('audioalbums.index', compact('audioalbums'));
+        return $this->makeView('audioalbums.index', compact('audioalbums'));
     }
 
     public function audioAlbumIndex($userId) {
         $user = User::find($userId);
         $audioAlbums = $user->audioAlbums;
 
-        return View::make('audioalbums.index', compact('audioAlbums', 'user'));
+        return $this->makeView('audioalbums.index', compact('audioAlbums', 'user'));
     }
 
     /**
@@ -28,7 +28,7 @@ class AudioAlbumsController extends \BaseController {
      */
     public function create()
     {
-        return View::make('audioalbums.create');
+        return $this->makeView('audioalbums.create');
     }
 
     /**
@@ -82,7 +82,7 @@ class AudioAlbumsController extends \BaseController {
         $audioAlbum = AudioAlbum::findOrFail($id);
         $audioAlbums = AudioAlbum::where('user_id', $audioAlbum->user_id)->get(); // для показа списка альбомов(справа)
 
-        return View::make('audioalbums.show', compact('audioAlbums', 'audioAlbum'));
+        return $this->makeView('audioalbums.show', compact('audioAlbums', 'audioAlbum'));
     }
     /**
      * Show the form for editing the specified audioalbum.
@@ -94,7 +94,7 @@ class AudioAlbumsController extends \BaseController {
     {
         $audioAlbum = AudioAlbum::find($id);
 
-        return View::make('audioalbums.edit', compact('audioAlbum'));
+        return $this->makeView('audioalbums.edit', compact('audioAlbum'));
     }
 
     /**

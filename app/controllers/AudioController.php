@@ -12,7 +12,7 @@ class AudioController extends \BaseController
     {
         $audio = Audio::all();
 
-        return View::make('audio.index', compact('audio'));
+        return $this->makeView('audio.index', compact('audio'));
     }
 
     /**
@@ -23,7 +23,7 @@ class AudioController extends \BaseController
     public function create($audioAlbumId)
     {
         $audioAlbum = AudioAlbum::findOrFail($audioAlbumId);
-        return View::make('audio.create', compact('audioAlbum'));
+        return $this->makeView('audio.create', compact('audioAlbum'));
     }
 
     /**
@@ -50,7 +50,7 @@ class AudioController extends \BaseController
             }
         }
 
-        return View::make('audio.setnames', compact('audios', 'albumId'));
+        return $this->makeView('audio.setnames', compact('audios', 'albumId'));
     }
 
     public function setNames($albumId)
@@ -107,7 +107,7 @@ class AudioController extends \BaseController
         if (!count($audioAlbums))
             return Response::json(array('error' => 'У вас нет аудио альбомов для копирования аудио'));
 
-        return Response::json(array('html' => View::make('audio.copy-modal-audio-albums', compact('audioAlbums'))->render()));
+        return Response::json(array('html' => $this->makeView('audio.copy-modal-audio-albums', compact('audioAlbums'))->render()));
     }
 
     public function getMoveToAlbum($id)
@@ -126,7 +126,7 @@ class AudioController extends \BaseController
         if (!count($audioAlbums))
             return Response::json(array('error' => 'У вас нет аудио альбомов для перемещения аудио'));
 
-        return Response::json(array('html' => View::make('audio.move-modal-audio-albums', compact('audioAlbums'))->render()));
+        return Response::json(array('html' => $this->makeView('audio.move-modal-audio-albums', compact('audioAlbums'))->render()));
     }
 
     public function postCopyToAlbum($audioId, $albumId)
@@ -174,7 +174,7 @@ class AudioController extends \BaseController
     {
         $audio = Audio::findOrFail($id);
 
-        return View::make('audio.show', compact('audio'));
+        return $this->makeView('audio.show', compact('audio'));
     }
 
     /**
@@ -194,7 +194,7 @@ class AudioController extends \BaseController
             $audioAlbums[$a->id] = $a->name;
         }
 
-        return View::make('audio.edit', compact('audio', 'audioAlbums'));
+        return $this->makeView('audio.edit', compact('audio', 'audioAlbums'));
     }
 
     /**

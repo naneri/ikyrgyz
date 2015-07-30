@@ -127,7 +127,7 @@ class ProfileController extends BaseController {
         JavaScript::put($masonrySettings);
 
         if($user->id == Auth::id()){
-            return View::make('profile.show.my',
+            return $this->makeView('profile.show.my',
                     compact(
                             'user', 
                             'items', 
@@ -147,7 +147,7 @@ class ProfileController extends BaseController {
                     );
         }else{
             $mutualFriends = $user->mutualFriends();
-            return View::make('profile.show.user', 
+            return $this->makeView('profile.show.user', 
                     compact(
                             'user', 
                             'friend_status', 
@@ -201,7 +201,7 @@ class ProfileController extends BaseController {
             $user = Auth::user();
             $friendCategories = array_unique(array_merge($this->friendStableCategories, Auth::user()->getFriendCategories()->lists('category')));
             $items = Auth::user()->friends();
-            $result['content'] = View::make('profile.show.build.friends', compact('friendCategories', 'items', 'user'))->render();
+            $result['content'] = $this->makeView('profile.show.build.friends', compact('friendCategories', 'items', 'user'))->render();
         }else{
             $result['status'] = 'error';
             $result['message'] = 'Ошибка!';
@@ -212,7 +212,7 @@ class ProfileController extends BaseController {
     public function getAjaxsubscriptionBlogs($userId, $pageNum){
         $user = User::findOrFail($userId);
         $blogs = $user->subscriptions($pageNum);
-        return View::make('blog.build', compact('blogs'));
+        return $this->makeView('blog.build', compact('blogs'));
     }
 
     public function ajaxTopics($userId, $pageName, $pageNumber = 0) {
@@ -232,7 +232,7 @@ class ProfileController extends BaseController {
                 $topics = $user->publications($topicsLimit, $pageNumber);
                 break;
         }
-        return View::make('topic.build', array('topics' => $topics));
+        return $this->makeView('topic.build', array('topics' => $topics));
     }
 
     public function showMyProfile($page = 'newsline'){
@@ -254,7 +254,7 @@ class ProfileController extends BaseController {
 
         $user = User::with('description')->find(Auth::id());
 
-        return View::make('profile.fill', array('user' => $user, 'access' => $this->access, 'month' => $this->month, 'genders' =>  $this->genders));
+        return $this->makeView('profile.fill', array('user' => $user, 'access' => $this->access, 'month' => $this->month, 'genders' =>  $this->genders));
     }
 
     public function postProfileFill() {
@@ -298,7 +298,7 @@ class ProfileController extends BaseController {
 
 		$user = User::with('description')->find(Auth::id());
 
-		return View::make('profile.edit', array('user' => $user));
+		return $this->makeView('profile.edit', array('user' => $user));
 
 	}
 
@@ -326,7 +326,7 @@ class ProfileController extends BaseController {
 	 */
 	public function friends(){
 		$friends = Friend::friendsList(Auth::id());
-		return View::make('profile.friends', array('friends' => $friends));
+		return $this->makeView('profile.friends', array('friends' => $friends));
 	}
 
     private function getProfileItem($profileItemType, $profileItemSubType, $profileItemId) {
@@ -349,7 +349,7 @@ class ProfileController extends BaseController {
 
     public function getEditAccount() {
         $user = User::with('description')->find(Auth::id());
-        return View::make('profile.edit.account', array('user' => $user, 'access' => $this->access));
+        return $this->makeView('profile.edit.account', array('user' => $user, 'access' => $this->access));
     }
 
     public function postEditAccount() {
@@ -396,7 +396,7 @@ class ProfileController extends BaseController {
             $years[$year] = $year;
         }; 
         
-        return View::make('profile.edit.main', array('user' => $user, 'access' => $this->access, 'month' => $this->month, 'birthday' => $birthday, 'days' => $days, 'years' => $years));
+        return $this->makeView('profile.edit.main', array('user' => $user, 'access' => $this->access, 'month' => $this->month, 'birthday' => $birthday, 'days' => $days, 'years' => $years));
     }
     
     public function postEditMain(){
@@ -424,7 +424,7 @@ class ProfileController extends BaseController {
     }
     
     public function getEditStudy(){
-        return View::make('profile.edit.study', array('access' => $this->access));
+        return $this->makeView('profile.edit.study', array('access' => $this->access));
     }
     
     public function postStudySchool(){
@@ -445,7 +445,7 @@ class ProfileController extends BaseController {
         $school->access = $this->validateAccess(Input::get('school_access'));
         $school->save();
         
-        $result = View::make('profile.edit.build.schools', array('schools' => Auth::user()->schools, 'access' => $this->access))->render();
+        $result = $this->makeView('profile.edit.build.schools', array('schools' => Auth::user()->schools, 'access' => $this->access))->render();
         return Response::json($result);
     }
 
@@ -470,12 +470,12 @@ class ProfileController extends BaseController {
         $university->access = $this->validateAccess(Input::get('university_access'));
         $university->save();
 
-        $result = View::make('profile.edit.build.universities', array('universities' => Auth::user()->universities, 'access' => $this->access))->render();
+        $result = $this->makeView('profile.edit.build.universities', array('universities' => Auth::user()->universities, 'access' => $this->access))->render();
         return Response::json($result);
     }
 
     public function getEditJob() {
-        return View::make('profile.edit.job', array('access' => $this->access));
+        return $this->makeView('profile.edit.job', array('access' => $this->access));
     }
 
     public function postJob() {
@@ -499,12 +499,12 @@ class ProfileController extends BaseController {
         $job->access = $this->validateAccess(Input::get('job_access'));
         $job->save();
 
-        $result = View::make('profile.edit.build.jobs', array('jobs' => Auth::user()->jobs, 'access' => $this->access))->render();
+        $result = $this->makeView('profile.edit.build.jobs', array('jobs' => Auth::user()->jobs, 'access' => $this->access))->render();
         return Response::json($result);
     }
 
     public function getEditContact() {
-        return View::make('profile.edit.contact', array('access' => $this->access));
+        return $this->makeView('profile.edit.contact', array('access' => $this->access));
     }
 
     public function postContact() {
@@ -524,7 +524,7 @@ class ProfileController extends BaseController {
         $contact->access = $this->validateAccess(Input::get('contact_access'));
         $contact->save();
         
-        $result = View::make('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('subtype', Input::get('contact_type'))->get(), 'access' => $this->access))->render();
+        $result = $this->makeView('profile.edit.build.contacts', array('contacts' => Auth::user()->contacts()->where('subtype', Input::get('contact_type'))->get(), 'access' => $this->access))->render();
         return Response::json($result);
     }
 
@@ -532,7 +532,7 @@ class ProfileController extends BaseController {
 
         $user = User::with('description')->find(Auth::id());
         
-        return View::make('profile.edit.family', array('access' => $this->access, 'relatives' => $this->familyMemberRelatives, 'maritalStatuses' => $this->maritalStatuses, 'user' => $user));
+        return $this->makeView('profile.edit.family', array('access' => $this->access, 'relatives' => $this->familyMemberRelatives, 'maritalStatuses' => $this->maritalStatuses, 'user' => $user));
     }
 
     public function postFamilyMembers() {
@@ -552,7 +552,7 @@ class ProfileController extends BaseController {
         $member->access = $this->validateAccess(Input::get('family_member_access'));
         $member->save();
 
-        $result = View::make('profile.edit.build.family', array('members' => Auth::user()->familyMembers, 'access' => $this->access, 'relatives' => $this->familyMemberRelatives))->render();
+        $result = $this->makeView('profile.edit.build.family', array('members' => Auth::user()->familyMembers, 'access' => $this->access, 'relatives' => $this->familyMemberRelatives))->render();
         return Response::json($result);
     }
 
@@ -570,7 +570,7 @@ class ProfileController extends BaseController {
 
     public function getEditAdditional() {
         $user = User::with('description')->find(Auth::id());
-        return View::make('profile.edit.additional', array('access' => $this->access, 'user' => $user));
+        return $this->makeView('profile.edit.additional', array('access' => $this->access, 'user' => $user));
     }
 
     public function postAboutMe() {
@@ -598,13 +598,13 @@ class ProfileController extends BaseController {
         $additional->access = $this->validateAccess(Input::get('additional_access'));
         $additional->save();
 
-        $result = View::make('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('subtype', Input::get('additional_type'))->get(), 'access' => $this->access))->render();
+        $result = $this->makeView('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('subtype', Input::get('additional_type'))->get(), 'access' => $this->access))->render();
         return Response::json($result);
     }
     
     public function getEditAccess() {
         $user = User::with('description')->find(Auth::id());
-        return View::make('profile.edit.access', array('access' => $this->access, 'user' => $user));
+        return $this->makeView('profile.edit.access', array('access' => $this->access, 'user' => $user));
     }
 
     public function postAccess() {

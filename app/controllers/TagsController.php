@@ -14,7 +14,7 @@ class TagsController extends BaseController {
                 return $tags;
             }
 
-            return View::make('tags.index', compact('tags'));
+            return $this->makeView('tags.index', compact('tags'));
         }
 
         /**
@@ -24,7 +24,7 @@ class TagsController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('tags.create');
+		return $this->makeView('tags.create');
 	}
 
 	/**
@@ -56,7 +56,7 @@ class TagsController extends BaseController {
 	{
 		$tag = Tag::findOrFail($id);
 
-		return View::make('tags.show', compact('tag'));
+		return $this->makeView('tags.show', compact('tag'));
 	}
 
 	/**
@@ -69,7 +69,7 @@ class TagsController extends BaseController {
 	{
 		$tag = Tag::find($id);
 
-		return View::make('tags.edit', compact('tag'));
+		return $this->makeView('tags.edit', compact('tag'));
 	}
 
 	/**

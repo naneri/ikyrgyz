@@ -33,7 +33,7 @@ class MainController extends BaseController {
             'ajaxPage'  => URL::to('main/ajaxTopics'),
             ]);
         
-        return View::make('main.index', compact('topics'));
+        return $this->makeView('main.index', compact('topics'));
 	}
 
 	public function ajaxTopics(){
@@ -42,12 +42,12 @@ class MainController extends BaseController {
 
         $topics = Topic::getMainTopics($rating, Input::get('sort'), Input::get('page'));
 
-        return View::make('topic.build', array('topics' => $topics));
+        return $this->makeView('topic.build', array('topics' => $topics));
 
 	}
 
     public function getEmailTemplate(){
-        return View::make('emails.layout');
+        return $this->makeView('emails.layout');
     }
 
 }

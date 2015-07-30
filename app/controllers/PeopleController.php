@@ -23,7 +23,7 @@ class PeopleController extends BaseController{
 			$users = User::paginate(15);
 		}
 		
-		return View::make('people.index', array('users' => $users));
+		return $this->makeView('people.index', array('users' => $users));
 	}
 
 	/**

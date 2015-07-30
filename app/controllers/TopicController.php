@@ -28,7 +28,7 @@ class TopicController extends BaseController {
             }
             $this->sessionInitNewImagesDir();
 
-            return View::make('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView(), 'type' => $type));
+            return $this->makeView('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView(), 'type' => $type));
 	}
         
         private function sessionInitNewImagesDir(){
@@ -153,7 +153,7 @@ class TopicController extends BaseController {
             $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
             $topic->increment('count_read');
 
-            return View::make('topic.show', compact('topic', 'creator', 'blog', 'isModerator', 'comments', 'commentsSort'));
+            return $this->makeView('topic.show', compact('topic', 'creator', 'blog', 'isModerator', 'comments', 'commentsSort'));
 	}
 
 
@@ -168,13 +168,13 @@ class TopicController extends BaseController {
         $topic = Topic::findOrFail($id);
         
         if(!$topic->canEdit()){
-            return View::make('error.permission', array('error' => 'permission denied'));
+            return $this->makeView('error.permission', array('error' => 'permission denied'));
         }
         if(!$topic->images_dir){
             $this->sessionInitNewImagesDir();
         }
         
-        return View::make('topic.edit', array('user' => Auth::user(), 'topic' => $topic,'canPublishBlogs' => $this->getCanPublishBlogsForView(), 'type_list' => $this->getTopicTypesForView()));
+        return $this->makeView('topic.edit', array('user' => Auth::user(), 'topic' => $topic,'canPublishBlogs' => $this->getCanPublishBlogsForView(), 'type_list' => $this->getTopicTypesForView()));
     }
 
     /**
@@ -289,7 +289,7 @@ class TopicController extends BaseController {
 
     public function drafts(){
         $topics = Auth::user()->drafts();
-        return View::make('topic.drafts', array('topics' => $topics));
+        return $this->makeView('topic.drafts', array('topics' => $topics));
     }
     
     private function publishTopic($isDraft){
@@ -299,7 +299,7 @@ class TopicController extends BaseController {
 
         // если топи нельзя редактировать рендерит страничку с ошибкой
         if (!$this->topic->canEdit()) {
-            return View::make('error.permission', array('error' => 'permission denied'));
+            return $this->makeView('error.permission', array('error' => 'permission denied'));
         }
 
         // присваивает значения
@@ -447,14 +447,14 @@ class TopicController extends BaseController {
             'ajaxPage'  => URL::to('topic/ajaxFavorites'),
             ]);
 
-        return View::make('main.index', compact('topics'));
+        return $this->makeView('main.index', compact('topics'));
     }
 
     public function ajaxFavorites(){
 
         $topics = Topic::favoriteTopics(Auth::user()->id, Input::get('page'));
 
-        return View::make('topic.build', array('topics' => $topics));
+        return $this->makeView('topic.build', array('topics' => $topics));
     }
 
     public function getTopicVideos(){
@@ -466,7 +466,7 @@ class TopicController extends BaseController {
             'ajaxPage'  => URL::to('topic/ajaxVideos'),
             ]);
     
-        return View::make('main.index', compact('topics'));
+        return $this->makeView('main.index', compact('topics'));
 
     }
 
@@ -474,7 +474,7 @@ class TopicController extends BaseController {
 
         $topics = Topic::videoTopics(Auth::user()->id, Input::get('page'));
     
-        return View::make('topic.build', compact('topics'));
+        return $this->makeView('topic.build', compact('topics'));
 
     }
 
@@ -486,14 +486,14 @@ class TopicController extends BaseController {
             'ajaxPage'  => URL::to('topic/ajaxMyTopics'),
             ]);
     
-        return View::make('main.index', compact('topics'));
+        return $this->makeView('main.index', compact('topics'));
     }
 
     public function ajaxMyTopics(){
 
         $topics = Topic::userTopics(Auth::user()->id, Input::get('page'));
     
-        return View::make('topic.build', compact('topics'));
+        return $this->makeView('topic.build', compact('topics'));
 
     }
 
@@ -505,14 +505,14 @@ class TopicController extends BaseController {
             'ajaxPage'  => URL::to('topic/ajaxLinkTopics'),
             ]);
     
-        return View::make('main.index', compact('topics'));
+        return $this->makeView('main.index', compact('topics'));
     }
 
     public function ajaxLinkTopics(){
 
         $topics = Topic::userTopics(Input::get('page'));
     
-        return View::make('topic.build', compact('topics'));
+        return $this->makeView('topic.build', compact('topics'));
 
     }
 
