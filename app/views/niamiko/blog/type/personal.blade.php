@@ -15,4 +15,4 @@
 @endif
 <br>
 <br><br>
-@include('topic.build', array('topics' => $blog->topics, 'blogInfo' => false))
+@include("{$template}topic.build", array('topics' => $blog->topics, 'blogInfo' => false))

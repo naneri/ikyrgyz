@@ -30,7 +30,7 @@
     <div class="b-wrapper">
       <div class="b-page">
        
-      	@include('misc.navbar')
+      	@include("{$template}misc.navbar")
 		    @yield('content')
       </div>
     </div>

@@ -1,4 +1,5 @@
-@extends('misc.layout')
+
+@extends("{$template}misc.layout")
 @section('content')
 {{HTML::style('css/bootstrap.css')}}
 <div class="container">
@@ -14,34 +15,26 @@
         @endforeach
         <div class="panel" style="padding:10px;">
             {{Form::open(array('files' => true))}}
-            <legend>Изменение аудио</legend>
+            <legend>Изменить аудиоальбом</legend>
             <div class="form-group">
-                {{ trans('network.hidden') }}
-                {{Form::checkbox('is_hidden', $audio->is_hidden, $audio->is_hidden)}}
+                {{Form::text('name', $audioAlbum->name, array('class' => 'form-control', 'placeholder' => 'введите название'))}}
             </div>
             <div class="form-group">
-                {{Form::file('audio_file', null, array('class' => 'form-control'))}}
+                {{Form::select('access', array('all' => 'Всем', 'friend' => 'Друзьям', 'me' => 'Только мне'), $audioAlbum->access, array('class' => 'form-control'))}}
             </div>
             <div class="form-group">
-                Название
-                {{Form::text('name', $audio->name, array('class' => 'form-control'))}}
+                {{Form::file('image', array('class' => 'form-control'))}}
+                <br>
+                {{HTML::image($audioAlbum->cover)}}
             </div>
             <div class="form-group">
-                Альбом
-                {{Form::select('album_id', $audioAlbums, $audio->album->id, array('class' => 'form-control'))}}
+                {{Form::textarea('description', $audioAlbum->description, array('class' => 'form-control', 'placeholder' => 'Описание аудиоальбома'))}}
             </div>
             <div class="form-group">
-                {{Form::hidden('url', $audio->url)}}
-                {{Form::hidden('is_hidden', $audio->is_hidden)}}
                 {{Form::submit('Сохранить')}}
             </div>
             {{Form::close()}}
         </div>
     </div>
 </div>
-<script>
-    $('form input[name="is_hidden"]').change(function(){
-        $('form input[name="is_hidden"]').val($('form input[name="is_hidden"]').is(":checked")? '1' : '0');
-    });
-</script>
 @stop

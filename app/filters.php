@@ -65,6 +65,8 @@ App::before(function($request)
     {
        $_COOKIE['ColumnN']='2';
     }
+
+    View::share('template', Config::get('app.template') . '.');
 });
 
 

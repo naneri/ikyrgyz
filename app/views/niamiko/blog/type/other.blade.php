@@ -60,7 +60,7 @@ type - {{$blog->type->name}}
 </div>
 <br><br>
 @if(($blog->type->name == 'close' && $blog->getUserRole() == 'reader') || $blog->type->name == 'open')
-    @include('topic.build', array('topics' => $blog->topics, 'blogInfo' => false))
+    @include("{$template}topic.build", array('topics' => $blog->topics, 'blogInfo' => false))
 @else
     This is closed blog [{{HTML::link('/blog/'.$blog->id.'/read', 'send request')}}].
 @endif

@@ -14,7 +14,7 @@ return array(
 	*/
 
 	'debug' => false,
-	'template'	=> '',
+	'template'	=> 'niamiko',
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL

@@ -1,4 +1,4 @@
-@extends('misc.layout')
+@extends("{$template}misc.layout")
 @section('content')
     {{HTML::style('css/bootstrap.css')}}
     {{HTML::script('js/bootstrap.js')}}
