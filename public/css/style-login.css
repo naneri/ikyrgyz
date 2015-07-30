@@ -66,10 +66,21 @@ td {
 	vertical-align: baseline;
 }
 body {
-	line-height: 1;
-	color: #000;
-	background: #fff;
+	background: url("../img/login/6.png") no-repeat 100% 100% fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	margin-bottom: 10px;
+	
+	
+	
 }
+html {
+	position: relative;	
+	min-height: 100%;
+}
+
 ol,
 ul {
 	list-style: none;
@@ -244,9 +255,10 @@ a img {
 	opacity: 0.6;
 }
 
-.b-authorization {
-	
-}
+
+
+
+
 .b-authorization-inner {
 	height: 100%;
 }
@@ -257,6 +269,7 @@ a img {
 	
 	
 }
+
 .b-authorization-inner-block__title {
 	background-image: -webkit-linear-gradient(top, #f67658 0%, #c4563c 100%);
 	background-image: -moz-linear-gradient(top, #f67658 0%, #c4563c 100%);
@@ -678,12 +691,54 @@ a img {
 
 
 
-body {
-	background: url("../img/login/6.png") no-repeat 100% 100% fixed;
+
+
+.b-page {
+	
+	
+}
+
+.b-footer {
+	background: url("../img/login/2.png") no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
-	
+	background-position: center;
 	width: 100%;
-	height: 100%;
+	
+	position: absolute;
+	bottom: 0;
+	height: 40px;
+	
+ 	
+ 	
+ 
+
+	
+}
+
+.b-footer-inner {
+	width: 960px;
+	margin: 0 auto;
+	
+
+
+}
+
+.b-footer-inner p {
+	font: 12px 'pt-sans-caption', sans-serif;
+ 	color: #999999;
+ 	padding: 15px 15px 10px 0;
+ 	text-align: right;
+ 	
+
+}
+
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 959px) {
+	.b-footer-inner {
+		width: 100%;
+	}
+	
 }

@@ -80,6 +80,8 @@ class Uploader extends CI_Controller {
 		{
 			// General result data
 			$result = $this->upload->data();
+                        
+                        $refreshImg = '';
 			
 			// Shall we resize an image?
 			if ($conf['allow_resize'] and $conf['max_width'] > 0 and $conf['max_height'] > 0 and (($result['image_width'] > $conf['max_width']) or ($result['image_height'] > $conf['max_height'])))
@@ -98,12 +100,14 @@ class Uploader extends CI_Controller {
 				
 				// Do resize
 				$this->image_lib->resize();
-			}
+                                
+                                $refreshImg = '?' . rand(0, 100);
+                        }
 			
 			// Add our stuff
 			$result['result']		= "file_uploaded";
 			$result['resultcode']	= 'ok';
-			$result['file_name']	= $conf['img_path'] . '/' . $result['file_name'];
+			$result['file_name']	= $conf['img_path'] . '/' . $result['file_name'] . $refreshImg;
 			
 			// Output to user
 			$this->load->view('ajax_upload_result', $result);
