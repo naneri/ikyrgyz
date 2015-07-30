@@ -67,7 +67,9 @@
 					</dl>
 
 				</div>
-				@endif
+				@else
+				
+				@endif	
 			</div>
 			<div class="b-topic-navigation-sort">
 				<ul>

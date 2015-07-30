@@ -12,20 +12,20 @@ class BlogController extends BaseController {
      * @return [type] [description]
      */
 	public function create(){
-            $blog_types = BlogType::all();
-            $type_list = array();
-            foreach($blog_types as $Type){
-                switch($Type->name){
-                    case 'open':
-                        $type_list[$Type->id] = 'Открытый';
-                        break;
-                    case 'close':
-                        $type_list[$Type->id] = 'Закрытый';
-                        break;
-                }
+        $blog_types = BlogType::all();
+        $type_list = array();
+        foreach($blog_types as $Type){
+            switch($Type->name){
+                case 'open':
+                    $type_list[$Type->id] = 'Открытый';
+                    break;
+                case 'close':
+                    $type_list[$Type->id] = 'Закрытый';
+                    break;
             }
-        
-            return View::make('blog.create', array('type_list' => $type_list));
+        }
+    
+        return $this->makeView('blog.create', array('type_list' => $type_list));
 	}
 
     /**
