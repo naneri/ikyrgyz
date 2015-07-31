@@ -1,9 +1,9 @@
-@extends('misc.layout')
+@extends("{$template}misc.layout")
 
 @section('content')
 
    	<div class="b-content">
-    	@include('misc.createnav')
+    	@include("{$template}misc.createnav")
         
         <div style="width: 100%; background: #fff; padding: 20px 0;margin-bottom: 14px;">
             <div style="margin: 0 20px;font-family: 'PT Sans Caption';">
@@ -37,7 +37,7 @@
             </div>
         @endif
                 
-    	@include('topic.build', array('topics' => $topics))
+    	@include("{$template}topic.build", array('topics' => $topics))
 
 	</div>
 

@@ -1,5 +1,5 @@
-@extends('misc.layout')
-@extends('message.layout')
+@extends("{$template}misc.layout")
+@extends("{$template}message.layout")
 @section('form')
 <div class="panel panel-default">
     <div class="panel-heading">

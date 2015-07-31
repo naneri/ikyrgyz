@@ -1,5 +1,5 @@
-@extends('misc.layout')
-@extends('profile.edit.layout')
+@extends("{$template}misc.layout")
+@extends("{$template}profile.edit.layout")
 @section('form')
     <div class="login-panel panel panel-default">
         <div class="panel-heading">
@@ -10,7 +10,7 @@
                     Увлечения:
                     <div class="form-group" id="passion">
                         <div class="items">
-                            @include('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('subtype', 'passion')->get()))
+                            @include("{$template}profile.edit.build.additional", array('additionals' => Auth::user()->additionals()->where('subtype', 'passion')->get()))
                         </div>
                         <div class="form" style="display: none;">
                             {{Form::open(array('url' => 'profile/edit/additional'))}}
@@ -38,7 +38,7 @@
                     Другие имена, прозвища:
                     <div class="form-group" id="nickname">
                         <div class="items">
-                            @include('profile.edit.build.additional', array('additionals' => Auth::user()->additionals()->where('subtype', 'nickname')->get()))
+                            @include("{$template}profile.edit.build.additional", array('additionals' => Auth::user()->additionals()->where('subtype', 'nickname')->get()))
                         </div>
                         <div class="form" style="display: none;">
                             {{Form::open(array('url' => 'profile/edit/additional'))}}

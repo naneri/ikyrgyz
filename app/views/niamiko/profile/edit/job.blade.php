@@ -1,5 +1,5 @@
-@extends('misc.layout')
-@extends('profile.edit.layout')
+@extends("{$template}misc.layout")
+@extends("{$template}profile.edit.layout")
 @section('form')
     <div class="login-panel panel panel-default">
         <div class="panel-heading">
@@ -11,7 +11,7 @@
                     Места работы:
                     <div class="form-group" id="job">
                         <div id="job_items" class="items">
-                            @include('profile.edit.build.jobs', array('jobs' => Auth::user()->jobs))
+                            @include("{$template}profile.edit.build.jobs", array('jobs' => Auth::user()->jobs))
                         </div>
                         <div class="form" style="display: none;">
                             {{Form::open(array('url' => 'profile/edit/job'))}}

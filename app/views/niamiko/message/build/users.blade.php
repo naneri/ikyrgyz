@@ -19,7 +19,7 @@
         </div>
         <div id="collapse{{$user->id}}" class="panel-collapse collapse">
             <div class="panel-body">
-                @include('message.build.messages', array('messages' => Auth::user()->messagesOf($user->id)->get()))
+                @include("{$template}message.build.messages", array('messages' => Auth::user()->messagesOf($user->id)->get()))
             </div>
         </div>
     </div>

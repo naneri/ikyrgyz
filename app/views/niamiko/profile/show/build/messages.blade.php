@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="b-message-ls__right" id="messages">
-            @include('message.'.$subpage, array('messages' => $items))
+            @include("{$template}message.".$subpage, array('messages' => $items))
         </div>
         <div class="clear"></div>
         {{Form::close()}}

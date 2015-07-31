@@ -1,4 +1,4 @@
-@extends('misc.layout')
+@extends("{$template}misc.layout")
 
 @section('content')
 	<div class="b-wrapper" id="topic_{{$topic->id}}">
@@ -140,9 +140,9 @@
 						</div>
 					</div>
 				  <div id="comments_child_0">
-					@include('comments.build', array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => null, 'sort' => $commentsSort))
+					@include("{$template}comments.build", array('comments' => $comments, 'isModerator' => $isModerator, 'parent' => null, 'sort' => $commentsSort))
 				  </div>
-				@include('comments.scripts')
+				@include("{$template}comments.scripts")
 			  </div>
 			  </div>
 			 

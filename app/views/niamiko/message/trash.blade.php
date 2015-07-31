@@ -36,7 +36,7 @@
             </td>
 
         </tr>
-        @include('message.build.messages', array('messages' => $messages))
+        @include("{$template}message.build.messages", array('messages' => $messages))
     </table>
     {{Form::close()}}
 </div>

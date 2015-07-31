@@ -12,9 +12,9 @@
 @foreach($items as $item)
     <?php $target = $item->target; ?>
     @if(is_a($target, 'Topic'))
-        @include('topic.build', array('topics' => array($target)))
+        @include("{$template}topic.build", array('topics' => array($target)))
     @elseif(is_a($target, 'Blog'))
-        @include('blog.build', array('blogs' => array($target)))
+        @include("{$template}blog.build", array('blogs' => array($target)))
     @endif
 @endforeach
 </div>

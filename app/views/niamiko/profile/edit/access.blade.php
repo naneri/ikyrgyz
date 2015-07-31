@@ -1,5 +1,5 @@
-@extends('misc.layout')
-@extends('profile.edit.layout')
+@extends("{$template}misc.layout")
+@extends("{$template}profile.edit.layout")
 @section('form')
     <div class="login-panel panel panel-default">
         <div class="panel-heading">

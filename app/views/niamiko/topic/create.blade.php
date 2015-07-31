@@ -1,4 +1,4 @@
-@extends('misc.layout')
+@extends("{$template}misc.layout")
 
 @section('content')
 
@@ -106,7 +106,7 @@
 
 
 @section('scripts')
-@include('topic.scripts')
+@include("{$template}topic.scripts")
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
 <script src="{{ URL::to('js/utils/dropzone-cover.js') }}"></script>
 <script>

@@ -1,5 +1,5 @@
-@extends('misc.layout')
-@extends('profile.edit.layout')
+@extends("{$template}misc.layout")
+@extends("{$template}profile.edit.layout")
 @section('form')
     <div class="login-panel panel panel-default">
         <div class="panel-heading">
@@ -11,7 +11,7 @@
                     Члены моей семьи:
                     <div class="form-group" id="family">
                         <div id="family_items" class="items">
-                            @include('profile.edit.build.family', array('members' => Auth::user()->familyMembers))
+                            @include("{$template}profile.edit.build.family", array('members' => Auth::user()->familyMembers))
                         </div>
                         <div class="form" style="display: none;">
                             {{Form::open(array('url' => 'profile/edit/family/members'))}}

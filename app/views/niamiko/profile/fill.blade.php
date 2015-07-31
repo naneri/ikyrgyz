@@ -48,7 +48,7 @@
                                                 <div class="b-user-info-block__left">
                                                     <div class="b-user-info-block-photo">
                                                         <div class="b-user-info-block-photo__image">
-                                                            @include('profile.edit.set-avatar')
+                                                            @include("{$template}profile.edit.set-avatar")
                                                                     <!--a href=""><img src="{{ asset('img/106.png') }}" alt=""></a-->
                                                         </div>
 

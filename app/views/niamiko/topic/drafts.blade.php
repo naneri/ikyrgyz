@@ -1,9 +1,9 @@
-@extends('misc.layout')
+@extends("{$template}misc.layout")
 
 
 @section('content')
             <div class="b-content">
-            	@include('misc.createnav')
-                @include('topic.build', array('topics' => $topics, 'blogInfo' => true))
+            	@include("{$template}misc.createnav")
+                @include("{$template}topic.build", array('topics' => $topics, 'blogInfo' => true))
             </div>    
 @stop

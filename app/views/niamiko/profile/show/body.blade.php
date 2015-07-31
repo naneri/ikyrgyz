@@ -2,18 +2,18 @@
 
 @if($page == 'newsline')
 	@include('scripts.script-topic')
-	@include('topic.build', array('topics' => $items, 'showCreatePanel' => $user->id == Auth::id()))
+	@include("{$template}topic.build", array('topics' => $items, 'showCreatePanel' => $user->id == Auth::id()))
 @elseif($page == 'publications' || $page == 'videos')
 	@include('scripts.script-topic')
-	@include('topic.build', array('topics' => $items))
+	@include("{$template}topic.build", array('topics' => $items))
 @elseif($page == 'favourites')
-	@include('profile.show.build.favourite', compact('items'))
+	@include("{$template}profile.show.build.favourite", compact('items'))
 @elseif($page == 'subscriptions')
         @include('scripts.script-topic')
-	@include('blog.build', array('blogs' => $items))
+	@include("{$template}blog.build", array('blogs' => $items))
 @elseif($page == 'friends' || $page == 'mutualFriends')
         @include('scripts.friends')
-        @include('profile.show.build.friends', compact('user', 'items'))
+        @include("{$template}profile.show.build.friends", compact('user', 'items'))
 
 @elseif($page == 'subscribers')
 	@include('scripts.script-topic')
@@ -37,9 +37,9 @@
 		@endforeach
 	</div>
 @elseif($page == 'messages')
-        @include('profile.show.build.messages', compact('user', 'items'))
+        @include("{$template}profile.show.build.messages", compact('user', 'items'))
 @elseif($page == 'settings')
-	@include('profile.show.build.settings')
+	@include("{$template}profile.show.build.settings")
 @endif
 
 @if($page == 'newsline' || $page == 'publications')

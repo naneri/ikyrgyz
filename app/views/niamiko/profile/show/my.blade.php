@@ -1,4 +1,4 @@
-@extends('misc.layout')
+@extends("{$template}misc.layout")
 
 @section('content')
 <div class="b-content">
@@ -6,7 +6,7 @@
 		<div class="b-profile__left">
 			<div class="b-profile-photo">
 								<div class="b-profile-photo__image">
-									@include('profile.edit.set-avatar', array('reloadConfirm' => true))
+									@include("{$template}profile.edit.set-avatar", array('reloadConfirm' => true))
 				</div>
 							<a href="" class="b-profile-photo__button" onclick="javascript: $('div.avatar-view.user-image').click(); return false;">Загрузить фото</a>
 
@@ -394,7 +394,7 @@
 		</div>
 	</div>
 
-	@include('profile.show.body', compact('user', 'items', 'page'))
+	@include("{$template}profile.show.body", compact('user', 'items', 'page'))
 	<div class="b-publication tab-content">
 		<div class="b-publication-sort b-user-wall">
 			<ul>

@@ -1,5 +1,5 @@
-@extends('misc.layout')
-@extends('profile.edit.layout')
+@extends("{$template}misc.layout")
+@extends("{$template}profile.edit.layout")
 @section('form')
 {{HTML::style('css/bootstrap-select.css')}}
 <div class="login-panel panel panel-default">
@@ -42,7 +42,7 @@
             </fieldset>
             {{Form::close()}}
             
-            @include('profile.edit.set-avatar')
+            @include("{$template}profile.edit.set-avatar")
     </div>
 </div>
 @include('scripts.countries-cities')

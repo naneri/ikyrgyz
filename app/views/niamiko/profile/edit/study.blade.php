@@ -11,7 +11,7 @@
                     Средняя школа
                     <div class="form-group" id="school">
                         <div id="school_items" class="items">
-                            @include('profile.edit.build.schools', array('schools' => Auth::user()->schools))
+                            @include("{$template}profile.edit.build.schools", array('schools' => Auth::user()->schools))
                         </div>
                         <div class="form" style="display: none;">
                             {{Form::open(array('url' => 'profile/edit/study/school', 'id' => 'add_school'))}}
@@ -32,7 +32,7 @@
                     ВУЗ:
                     <div class="form-group" id="university">
                         <div id="university_items" class="items">
-                            @include('profile.edit.build.universities', array('universities' => Auth::user()->universities))
+                            @include("{$template}profile.edit.build.universities", array('universities' => Auth::user()->universities))
                         </div>
                         <div class="form" style="display: none;">
                             {{Form::open(array('url' => 'profile/edit/study/university', 'id' => 'add_university'))}}

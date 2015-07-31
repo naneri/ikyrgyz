@@ -1,4 +1,4 @@
-@extends('misc.layout')
+@extends("{$template}misc.layout")
 
 @section('content')
     {{HTML::style('css/bootstrap.css')}}
@@ -95,5 +95,5 @@
 @stop
 
 @section('scripts')
-    @include('search.scripts')
+    @include("{$template}search.scripts")
 @stop
