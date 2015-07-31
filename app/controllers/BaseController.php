@@ -89,7 +89,7 @@ echo "<pre>"; print_r($notes); echo "</pre>";exit;*/
     }
 
 
-    public function makeView($name, $params){
+    public function makeView($name, $params = array()){
         $path = Config::get('app.template') . '.' . $name;
 
         return View::make($path, $params);
