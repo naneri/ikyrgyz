@@ -12,20 +12,20 @@ class BlogController extends BaseController {
      * @return [type] [description]
      */
 	public function create(){
-            $blog_types = BlogType::all();
-            $type_list = array();
-            foreach($blog_types as $Type){
-                switch($Type->name){
-                    case 'open':
-                        $type_list[$Type->id] = 'Открытый';
-                        break;
-                    case 'close':
-                        $type_list[$Type->id] = 'Закрытый';
-                        break;
-                }
+        $blog_types = BlogType::all();
+        $type_list = array();
+        foreach($blog_types as $Type){
+            switch($Type->name){
+                case 'open':
+                    $type_list[$Type->id] = 'Открытый';
+                    break;
+                case 'close':
+                    $type_list[$Type->id] = 'Закрытый';
+                    break;
             }
-        
-            return View::make('blog.create', array('type_list' => $type_list));
+        }
+    
+        return $this->makeView('blog.create', array('type_list' => $type_list));
 	}
 
     /**
@@ -98,7 +98,7 @@ class BlogController extends BaseController {
             'ajaxPage'  => URL::to('blog/ajaxBlogs'),
             ]);
 
-		return View::make('blog.all',array('blogs' => $blogs));
+		return $this->makeView('blog.all',array('blogs' => $blogs));
 	}
 
     /**
@@ -110,7 +110,7 @@ class BlogController extends BaseController {
 
         $blogs = Blog::getMainBlogs(Input::get('page'));
 
-        return View::make('blog.build', array('blogs' => $blogs));
+        return $this->makeView('blog.build', array('blogs' => $blogs));
 
     }
     /**
@@ -134,7 +134,7 @@ class BlogController extends BaseController {
                 'ajaxPage' => URL::to("blog/showAjax/$id"),
             ]);
 
-            return View::make('blog.show', compact('blog', 'topics', 'userRole'));
+            return $this->makeView('blog.show', compact('blog', 'topics', 'userRole'));
 	}
     
     /**
@@ -146,13 +146,13 @@ class BlogController extends BaseController {
     public function showAjax($id){
         $page = Input::get('page');
         $topics = Blog::getTopics($id, $page);
-        return View::make('topic.build', compact('topics'));
+        return $this->makeView('topic.build', compact('topics'));
     }
 
     public function showPersonal($email) {
         $user = User::whereEmail($email)->get();
         $blog = $user->getPersonalBlog();
-        return View::make('blog.show', array('blog' => $blog));
+        return $this->makeView('blog.show', array('blog' => $blog));
     }
 
     /**
@@ -167,7 +167,7 @@ class BlogController extends BaseController {
 	foreach (BlogType::where('name', '!=', 'personal')->get(array('id', 'name')) as $blogType) {
             $blogTypes[$blogType->id] = $blogType->name;
         }
-        return View::make('blog.edit', compact('blog', 'blogTypes'));
+        return $this->makeView('blog.edit', compact('blog', 'blogTypes'));
     }
     
     /**
@@ -200,7 +200,7 @@ class BlogController extends BaseController {
     public function getEditUsers($id){
         $blog = Blog::findOrFail($id);
         $blogUsers = $blog->getBlogUsers();
-        return View::make('blog.edit_users', compact('blog', 'blogUsers'));
+        return $this->makeView('blog.edit_users', compact('blog', 'blogUsers'));
     }
     
     public function postEditUsers($id){

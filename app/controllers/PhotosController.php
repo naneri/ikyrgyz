@@ -11,7 +11,7 @@ class PhotosController extends \BaseController {
 	{
 		$photos = Photo::all();
 
-		return View::make('photos.index', compact('photos'));
+		return $this->makeView('photos.index', compact('photos'));
 	}
 
 	/**
@@ -22,7 +22,7 @@ class PhotosController extends \BaseController {
 	public function create($photoAlbumId)
 	{
             $photoAlbum = PhotoAlbum::findOrFail($photoAlbumId);
-            return View::make('photos.create', compact('photoAlbum'));
+            return $this->makeView('photos.create', compact('photoAlbum'));
 	}
 
 	/**
@@ -49,7 +49,7 @@ class PhotosController extends \BaseController {
                     }
                 }
                 
-                return View::make('photos.setnames', compact('photos', 'albumId'));
+                return $this->makeView('photos.setnames', compact('photos', 'albumId'));
 	}
 
         public function setNames($albumId) {
@@ -97,7 +97,7 @@ class PhotosController extends \BaseController {
 		$photo = Photo::with('album')->findOrFail($id);
                 $comments = $photo->commentsWithDataSortBy('old');
 
-                return View::make('photos.show', compact('photo', 'comments'));
+                return $this->makeView('photos.show', compact('photo', 'comments'));
 	}
 
 	/**
@@ -110,7 +110,7 @@ class PhotosController extends \BaseController {
 	{
 		$photo = Photo::find($id);
 
-		return View::make('photos.edit', compact('photo'));
+		return $this->makeView('photos.edit', compact('photo'));
 	}
 
 	/**
@@ -173,7 +173,7 @@ class PhotosController extends \BaseController {
                 $photos = $photoAlbum->photos;
             }
             $canEdit = $photoAlbum->canEdit();
-            $result['render'] = View::make('photos.list', compact('photos', 'canEdit'))->render();
+            $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
 
             return Response::json($result);
         }
@@ -228,7 +228,7 @@ class PhotosController extends \BaseController {
                 $photos = $photoAlbum->photos;
             }
             $canEdit = $photoAlbum->canEdit();
-            $result['render'] = View::make('photos.list', compact('photos', 'canEdit'))->render();
+            $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
 
             return Response::json($result);
         }
@@ -268,7 +268,7 @@ class PhotosController extends \BaseController {
                 $photos = $photoAlbum->photos;
             }
             $canEdit = $photoAlbum->canEdit();
-            $result['render'] = View::make('photos.list', compact('photos', 'canEdit'))->render();
+            $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
             
             return Response::json($result);
         }

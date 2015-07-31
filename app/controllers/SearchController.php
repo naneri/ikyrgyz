@@ -11,7 +11,7 @@ class SearchController extends \BaseController {
 	public function index()
 	{
         $search_text = Input::has('search-text')? Input::get('search-text') : "";
-        return View::make('search.all', array('search_text' => $search_text))->render();
+        return $this->makeView('search.all', array('search_text' => $search_text))->render();
 	}
         
         public function searchPeople(){
@@ -23,12 +23,12 @@ class SearchController extends \BaseController {
                 $ageTo[$i] = $i;
             }
             $search_text = Input::has('search-text')? Input::get('search-text') : "";
-            return View::make('search.people', array_merge(array('search_text' => $search_text), compact('users', 'ageFrom', 'ageTo')));
+            return $this->makeView('search.people', array_merge(array('search_text' => $search_text), compact('users', 'ageFrom', 'ageTo')));
         }
         
         public function postSearchPeople(){
             $users = $this->getUsers();
-            $result['entries'] = View::make('search.build.users', array('users' => $users))->render();
+            $result['entries'] = $this->makeView('search.build.users', array('users' => $users))->render();
             return $result;
         }
         
@@ -111,14 +111,14 @@ class SearchController extends \BaseController {
         public function searchContent(){
             $content = $this->getContent();
             $search_text = Input::has('search-text')? Input::get('search-text') : "";
-            return View::make('search.content', array('content' => $content, 'search_text' => $search_text));
+            return $this->makeView('search.content', array('content' => $content, 'search_text' => $search_text));
         }
         
         public function postSearchContent(){
             $search = Input::get('search-text');
             $stemmer = new SimpleStemmer();
             $content = $this->getContent();
-            $result['entries'] = View::make('search.build.content', array('content' => $content))->render();//$stemmer->getArrayStemmedWords($search);
+            $result['entries'] = $this->makeView('search.build.content', array('content' => $content))->render();//$stemmer->getArrayStemmedWords($search);
             return $result;
         }
 
@@ -234,7 +234,7 @@ class SearchController extends \BaseController {
             return strtotime($a->created_at) - strtotime($b->created_at);
         });
         if (count($content)==0) return "";
-        return View::make('search.build.ajax-content', array('content' => array_reverse($content)))->render();
+        return $this->makeView('search.build.ajax-content', array('content' => array_reverse($content)))->render();
     }
 
     public function postSearchPeopleAjax(){
@@ -261,7 +261,7 @@ class SearchController extends \BaseController {
                 . $where);
 
         if (count($users)==0) return "";
-        return View::make('search.build.ajax-users', array('users' => $users))->render();
+        return $this->makeView('search.build.ajax-users', array('users' => $users))->render();
     }
 
 }

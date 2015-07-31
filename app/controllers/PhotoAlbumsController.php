@@ -11,14 +11,14 @@ class PhotoAlbumsController extends \BaseController {
 	{
 		$photoalbums = PhotoAlbum::all();
 
-		return View::make('photoalbums.index', compact('photoalbums'));
+		return $this->makeView('photoalbums.index', compact('photoalbums'));
 	}
 
         public function photoAlbumIndex($userId) {
             $user = User::find($userId);
             $photoAlbums = $user->photoAlbums;
 
-            return View::make('photoalbums.index', compact('photoAlbums', 'user'));
+            return $this->makeView('photoalbums.index', compact('photoAlbums', 'user'));
         }
 
         /**
@@ -28,7 +28,7 @@ class PhotoAlbumsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('photoalbums.create');
+		return $this->makeView('photoalbums.create');
 	}
 
 	/**
@@ -85,7 +85,7 @@ class PhotoAlbumsController extends \BaseController {
                 foreach ($albums as $album){
                     $otherAlbums[$album->id] = $album->name;
                 }
-		return View::make('photoalbums.show', compact('photoAlbum', 'otherAlbums'));
+		return $this->makeView('photoalbums.show', compact('photoAlbum', 'otherAlbums'));
 	}
         /**
 	 * Show the form for editing the specified photoalbum.
@@ -97,7 +97,7 @@ class PhotoAlbumsController extends \BaseController {
 	{
 		$photoAlbum = PhotoAlbum::find($id);
 
-		return View::make('photoalbums.edit', compact('photoAlbum'));
+		return $this->makeView('photoalbums.edit', compact('photoAlbum'));
 	}
 
 	/**

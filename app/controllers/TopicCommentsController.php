@@ -11,7 +11,7 @@ class TopicCommentsController extends \BaseController {
 	{
 		$topiccomments = Topiccomment::all();
 
-		return View::make('topiccomments.index', compact('topiccomments'));
+		return $this->makeView('topiccomments.index', compact('topiccomments'));
 	}
 
 	/**
@@ -34,7 +34,7 @@ class TopicCommentsController extends \BaseController {
                 $commentWithUserData = $comment->withUserData();
                 $bonusRating = new BonusRating();
                 $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
-                $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => null, 'with_child' => false))->render();
+                $result['comment'] = $this->makeView('comments.item', array('comment' => $commentWithUserData, 'parent' => null, 'with_child' => false))->render();
                 $result['comment_id'] = $comment->id;
                 $result['message'] = "Комментарий успешно добавлен";
                 $result['status'] = "success";
@@ -87,7 +87,7 @@ class TopicCommentsController extends \BaseController {
 	{
             $topiccomment = Topiccomment::findOrFail($id);
 
-            return View::make('topiccomments.show', compact('topiccomment'));
+            return $this->makeView('topiccomments.show', compact('topiccomment'));
         }
 
         /**
@@ -100,7 +100,7 @@ class TopicCommentsController extends \BaseController {
 	{
 		$topiccomment = Topiccomment::find($id);
 
-		return View::make('topiccomments.edit', compact('topiccomment'));
+		return $this->makeView('topiccomments.edit', compact('topiccomment'));
 	}
 
 	/**
@@ -141,7 +141,7 @@ class TopicCommentsController extends \BaseController {
                     $commentWithUserData = $comment->withUserData();
                     $bonusRating = new BonusRating();
                     $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
-                    $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                    $result['comment'] = $this->makeView('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['message'] = "Комментарий удален";
                     $result['status'] = "success";
                 } else {
@@ -166,7 +166,7 @@ class TopicCommentsController extends \BaseController {
                     $commentWithUserData = $comment->withUserData();
                     $bonusRating = new BonusRating();
                     $commentWithUserData->author_rating += $bonusRating->getUsersBonusRating($comment->user_id);
-                    $result['comment'] = View::make('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
+                    $result['comment'] = $this->makeView('comments.item', array('comment' => $commentWithUserData, 'parent' => $comment->parentWithUserData(), 'with_child' => false))->render();
                     $result['comment_id'] = $comment->id;
                     $result['message'] = "Комментарий восстановлен";
                     $result['status'] = "success";
@@ -189,7 +189,7 @@ class TopicCommentsController extends \BaseController {
             $comments = $topic->commentsWithDataSortBy(Input::get('sort_by'));
             $result = array();
             if($comments->count() > 0){
-                $result['comments'] = View::make('comments.build', array('comments' => $comments, 'parent' => null, 'isModerator' => $isModerator, 'sort' => Input::get('sort_by')))->render();
+                $result['comments'] = $this->makeView('comments.build', array('comments' => $comments, 'parent' => null, 'isModerator' => $isModerator, 'sort' => Input::get('sort_by')))->render();
                 $result['message'] = "Комментарии отсортированы";
                 $result['status'] = 'success';
             }else{

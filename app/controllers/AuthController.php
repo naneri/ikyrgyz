@@ -13,7 +13,7 @@ class AuthController extends BaseController {
      * Renders the 'Login' page
      */
 	public function getLogin(){
-        return View::make('login');
+        return $this->makeView('login');
     }
 
     /**
@@ -125,7 +125,7 @@ class AuthController extends BaseController {
      * @return [type] [description]
      */
     public function getRegister(){
-        return View::make('register');
+        return $this->makeView('register');
     }
     
     public function postRegisterRemote(){
@@ -161,7 +161,7 @@ class AuthController extends BaseController {
 
         // проводим валидацию
         if ($validator->fails()) {
-            return View::make('register');
+            return $this->makeView('register');
         }
 
         // создаём нового юзера и сохраняем данные

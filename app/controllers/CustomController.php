@@ -13,27 +13,27 @@ class CustomController extends BaseController{
     }
 
     public function showHistory(){
-        return View::make('custom.'.Config::get('app.nation_name').'.history', array());
+        return $this->makeView('custom.'.Config::get('app.nation_name').'.history', array());
     }
 
     public function showCustoms(){
-        return View::make('custom.'.Config::get('app.nation_name').'.customs', array());
+        return $this->makeView('custom.'.Config::get('app.nation_name').'.customs', array());
     }
 
     public function showCulture(){
-        return View::make('custom.'.Config::get('app.nation_name').'.culture', array());
+        return $this->makeView('custom.'.Config::get('app.nation_name').'.culture', array());
     }
 
     public function showHelp(){
-        return View::make('custom.help', array());
+        return $this->makeView('custom.help', array());
     }
 
     public function showProblem(){
-        return View::make('custom.problem', array());
+        return $this->makeView('custom.problem', array());
     }
 
     public function showActionHistory(){
-        return View::make('custom.action_history', array());
+        return $this->makeView('custom.action_history', array());
     }
 
 }
