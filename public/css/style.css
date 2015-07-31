@@ -4108,7 +4108,7 @@ Settings
 	background: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
 	background: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
-	height: 500px;
+	height: 1000px;
 }
 
 .b-settings__left {
@@ -4181,8 +4181,8 @@ Settings
 }
 
 .b-settings-inner-list__list {
-	padding-bottom: 20px;
-	padding-top: 20px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
 
 .b-settings-inner-list-login {
@@ -4290,23 +4290,38 @@ Settings
 }
 
 .b-settings-inner-list-name {
-	display: inline-block;
 	padding-left: 20px;
 }
 
-.b-settings-inner-list-name__text {
-	font: 13px 'PT Sans Caption', sans-serif;
-	color: #676767;
-}
-
-.b-settings-inner-list-surname {
+.b-settings-inner-list-birth {
 	padding-left: 20px;
-	display: inline-block;
+	padding-top: 10px;
 }
 
-.b-settings-inner-list-surname__text {
+.b-settings-inner-list-gender {
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+.b-settings-inner-list-live {
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+.b-settings-inner-list-home {
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+.b-settings-inner-list-title {
+	background: -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background: linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+	color: #e16549;
 	font: 13px 'PT Sans Caption', sans-serif;
-	color: #676767;
+	border: 1px solid #d5d5d5;
 }
 /*
 ===========================
