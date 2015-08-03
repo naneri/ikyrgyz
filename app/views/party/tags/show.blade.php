@@ -1,0 +1,1 @@
+C:\xampp2\htdocs\newkyrgyz\app/views/tags/show.blade.php
