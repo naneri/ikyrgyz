@@ -26,12 +26,16 @@
                     <div class="b-topic-create-modal-content__item">
                         {{ Form::select('blog_id', $canPublishBlogs, $topic->blog_id, array('class' => 'choose-blog input-default sync-input')) }}
                     </div>
-                     @if($topic->image_url)
+                      @if($topic->image_url)
                         <div id="cover-image">
                           <br><br>{{HTML::image(asset($topic->image_url))}}<br><br>
                           <button class="delete-cover">Delete</button>
                         </div>
-                    @endif
+                      @else
+                        <div id="dZUpload" class="dropzone">
+                            <div class="dz-default dz-message">Загрузить обложку</div>
+                        </div><br>
+                      @endif
                    <!-- <div class="b-topic-create-modal-content__item">
                         {{ Form::select('topic_type', $type_list, $topic->type_id, array('class' => 'choose-blog input-default sync-input')) }}
                     </div> -->
@@ -67,14 +71,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
 <script src="{{ URL::to('js/utils/dropzone-cover.js') }}"></script>
 <script>
-  
-  $('.delete-cover').click(function(event){
-    event.preventDefault();
-    $('#cover-image').after('<div id="dZUpload" class="dropzone"><div class="dz-default dz-message">Загрузить обложку</div></div>');
+  $(document).ready(function(){
     runDropzone("{{ URL::to('topic/addCover') }}");
-    $('#cover-image').remove();
-
+    $('.delete-cover').click(function(event){
+      event.preventDefault();
+      $('#cover-image').after('<div id="dZUpload" class="dropzone"><div class="dz-default dz-message">Загрузить обложку</div></div>');
+      runDropzone("{{ URL::to('topic/addCover') }}");
+      $('#cover-image').remove();
+    })
   })
+  
 </script>
 @stop
 

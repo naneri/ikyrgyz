@@ -117,7 +117,7 @@ class Topic extends Eloquent {
         $topicLimit = Config::get('topic.topics_per_page');
 
         // проверяет если пользователь залогинен, а если нет, то присваивает null, требуется для поиска топиков в закрытых блогах на которые подписан пользователь.
-        $logged_id = Auth::id() ? Auth::user()->canPublishBlogs()->lists('id') : null;
+        $logged_id = Auth::id() ? Auth::user()->canPublishBlogs()->lists('id') : 0;
 
         return Topic::with('blog', 'user', 'user.description', 'comments', 'blog.topics')
                 ->join('blogs', 'blogs.id', '=', 'topics.blog_id')
@@ -125,7 +125,7 @@ class Topic extends Eloquent {
                 ->where('topics.draft', '=', '0')
                 ->where(function($query) use ($logged_id){
                     $query  ->whereIn('blog_types.name', array('personal', 'open'))
-                            ->orWhereIn('blogs.id', $logged_id);
+                            ->orWhereIn('blogs.id', [$logged_id]);
                 })
                 ->skip( $offset * $topicLimit ) 
                 ->take($topicLimit);

@@ -91,13 +91,13 @@
 					</div>	
 					<div class="b-user-wall-footer-raiting__right">
 					<div class="b-user-wall-footer-raiting__arrow-down">
-						<input type="button" onclick="return vote.topic({{$topic->id}},-1);" class="btn-raiting">
+						<input type="button" onclick="return vote.topic({{$topic->id}},-1, niamiko.logged);" class="btn-raiting">
 					</div>
 					<div class="b-user-wall-footer-raiting__number">
 						<span class="number-raiting {{$topic->rating_value()}}" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
 					</div>
 					<div class="b-user-wall-footer-raiting__arrow-up">
-						<input type="button" onclick="return vote.topic({{$topic->id}},1);" class="btn-raiting">
+						<input type="button" onclick="return vote.topic({{$topic->id}},1, niamiko.logged);" class="btn-raiting">
 					</div>
 					</div>
 					<div class="clear"></div>

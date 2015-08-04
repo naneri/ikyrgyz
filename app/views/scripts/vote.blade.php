@@ -11,8 +11,11 @@
                 $.notify($result.error, 'error');
             }            
         },
-        topic: function(topicId, value) {
-
+        topic: function(topicId, value, logged) {
+            if(!logged){
+                not_logged(logged);
+                return;
+            }
             $rating = $('#rating_topic_' + topicId);
             $.ajax({
                 method: "POST",
@@ -23,7 +26,6 @@
                
                 },
                 success: function($result) {
-                    
                     vote.notify($result);
                 }
             });

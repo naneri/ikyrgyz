@@ -67,6 +67,7 @@ App::before(function($request)
     }
 
     View::share('template', Config::get('app.template') . '.');
+    JavaScript::put(['logged' => Auth::check()]);
 });
 
 

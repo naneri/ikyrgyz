@@ -32,7 +32,8 @@ class MainController extends BaseController {
             'column'    => $_COOKIE['ColumnN'] ?: Config::get('social.main_column_count'),
             'ajaxPage'  => URL::to('main/ajaxTopics'),
             ]);
-        
+
+
         return $this->makeView('main.index', compact('topics'));
 	}
 
