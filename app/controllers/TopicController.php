@@ -31,15 +31,15 @@ class TopicController extends BaseController {
             return $this->makeView('topic.create', array('canPublishBlogs' => $canPublishBlogs,'type_list' => $this->getTopicTypesForView(), 'type' => $type));
 	}
         
-        private function sessionInitNewImagesDir(){
-            session_start();
-            $subdir = '/topic/' . date('Y/m/d/') . str_random(8);
-            $_SESSION['topic_images_subdir'] = $subdir;
-        }
-        
-        public function createLink(){
-            return $this->create('link');
-        }
+    private function sessionInitNewImagesDir(){
+        session_start();
+        $subdir = '/topic/' . date('Y/m/d/') . str_random(8);
+        $_SESSION['topic_images_subdir'] = $subdir;
+    }
+    
+    public function createLink(){
+        return $this->create('link');
+    }
         
     private function getCanPublishBlogsForView(){
         $canPublishBlogs = null;

@@ -440,7 +440,7 @@
 	</div>
 </div>
 
-@include('profile.show.body', compact('items', 'page'))
+@include("{$template}profile.show.body", compact('items', 'page'))
 
 </div>
 @stop
