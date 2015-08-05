@@ -15,7 +15,8 @@
     @yield('styles')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('jquery/jquery-ui.js') }}">		</script>
-    <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
     <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('js/jquery.formstyler.js') }}"></script>
@@ -42,5 +43,6 @@
     {{Config::get('social.yandex-metrika')[Config::get('app.nation_name')]}}
     
   @endif  
+  <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
   </body>
 </html>

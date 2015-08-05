@@ -5,5 +5,5 @@ return array(
 		'base_url' => 'http://i-chechen.com',
 		'nation_name' => 'chechen',
 		'network_name' => 'I-Chechen',
-		'template'	=> 'niamiko'
+		'template'	=> 'party'
 	);

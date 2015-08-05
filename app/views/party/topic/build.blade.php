@@ -1,45 +1,29 @@
 <input type="hidden" id="ColumnN"/>
 <div class="masonry topic" style="display: none">
-        @if(isset($showCreatePanel) && $showCreatePanel)
-            <div class="b-widget b-user-wall">
-                    <div class="b-widget__inner">
-                            <div class="b-widget-list">
-                                    <ul>
-                                            <li class="b-widget-list__list topic-icon"><a href="{{URL::to('topic/create')}}">Топик</a></li>
-                                           <li style="display:none" class="b-widget-list__list"><a href="">Видео</a></li>
-                                           <li style="display:none" class="b-widget-list__list"><a href="">Фото</a></li>
-                                           <li style="display:none" class="b-widget-list__list"><a href="">Музыка</a></li>
-                                            <li class="b-widget-list__list"><a href="{{URL::to('topic/create/link')}}">Ссылка</a></li>
-                                            <li class="b-widget-list__list"><a href="{{ URL::to('blog/create') }}">Блог</a></li>
-                                           <li style="display:none" class="b-widget-list__list"><a href="">Событие</a></li>
-                                            <div class="clear"></div>
-                                    </ul>
-                            </div>
-                    </div>
-            </div>
-        @endif
-	@foreach($topics as $topic)
+		@if(isset($showCreatePanel) && $showCreatePanel)
+		<!--  <div class="b-widget b-user-wall">
+				<div class="b-widget__inner">
+						<div class="b-widget-list">
+								<ul>
+										<li class="b-widget-list__list topic-icon"><a href="{{URL::to('topic/create')}}">Топик</a></li>
+									   <li style="display:none" class="b-widget-list__list"><a href="">Видео</a></li>
+									   <li style="display:none" class="b-widget-list__list"><a href="">Фото</a></li>
+									   <li style="display:none" class="b-widget-list__list"><a href="">Музыка</a></li>
+										<li class="b-widget-list__list"><a href="{{URL::to('topic/create/link')}}">Ссылка</a></li>
+										<li class="b-widget-list__list"><a href="{{ URL::to('blog/create') }}">Блог</a></li>
+									   <li style="display:none" class="b-widget-list__list"><a href="">Событие</a></li>
+										<div class="clear"></div>
+								</ul>
+						</div>
+				</div>
+		</div> -->
+	 @endif
+		@foreach($topics as $topic)
 
 	<div class="b-user-wall item">
 		
 		<div class="b-user-wall__inner">
-			<div class="b-user-wall-header">
-				<div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
-				<div class="b-user-wall-header__text">
-				<p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}  </a></p>
-				<p class="b-user-wall-header__date">
-                                    <span class="moment-time"></span>
-                                    <span class="moment-time-hover"></span>
-                                    <span class="original-time">{{$topic->created_at}}</span>
-					<div class="clear"></div>
-				</p>
-				</div>
-				<p class="b-user-wall-header__vision">
-					<img src="{{ asset('img/22.png') }}" alt=""/><span>{{$topic->count_read}}</span>
-					<img src="{{ asset('img/23.png') }}" alt=""/><span>{{$topic->comments->count()}}</span>
-				</p>
-			</div>
-			<div class="clear"></div>
+			
 			
 			<div class="b-user-wall-image">
 				@if($topic->image_url)
@@ -51,19 +35,43 @@
 					</a>
 				</div>
 			</div>
+			<div class="b-user-wall-header">
+				<div class="b-user-wall-header__image"><a href="{{URL::to('profile/'.$topic->user->id)}}"><img src="{{ $topic->user->avatar()}}" alt=""/></a></div>
+				<div class="b-user-wall-header__text">
+				<p class="b-user-wall-header__title"><a href="{{ URL::to('topic/show/'. $topic->id) }}">{{$topic->title}}  </a></p>
+				<p class="b-user-wall-header__date">
+									<span class="moment-time"></span>
+									<span class="moment-time-hover"></span>
+									<span class="original-time">{{$topic->created_at}}</span>
+					<div class="clear"></div>
+				</p>
+				</div>
+				<div class="b-user-wall-header__vision">
+					<p><img src="{{ asset('img/22.png') }}" alt=""/><span>{{$topic->count_read}}</span></p>
+					<p><img src="{{ asset('img/23.png') }}" alt=""/><span>{{$topic->comments->count()}}</span></p>
+				</div>
+				<div class="b-user-wall-header__fav">
+					<a href=""></a>
+				</div>
+
+
+			</div>
+			<div class="clear"></div>
 			
 			<div class="b-user-wall-footer">
-				<div class="b-user-wall-footer-header">
+				<div class="b-user-wall-footer-header">	
+				<div class="b-user-wall-footer-header__left">			
 				<div class="b-user-wall-footer__image b-user-wall-header__image"><img src="{{ asset(($topic->blog->avatar)?$topic->blog->avatar:'img/48.png') }}" class="blog-avatar" alt=""/></div>
-				<div class="b-user-wall-footer-social-list">
-					<ul>
-						<li class="b-user-wall-footer-social-list__list"><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href="https://plus.google.com/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href="https://twitter.com/home?status={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href="http://connect.mail.ru/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
-						<li class="b-user-wall-footer-social-list__list"><a href="http://vkontakte.ru/share.php?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
-					</ul>
-				</div>
+			<!-- 	<div class="b-user-wall-footer-social-list">
+				<ul>
+					<li class="b-user-wall-footer-social-list__list"><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+					<li class="b-user-wall-footer-social-list__list"><a href="https://plus.google.com/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+					<li class="b-user-wall-footer-social-list__list"><a href="https://twitter.com/home?status={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+					<li class="b-user-wall-footer-social-list__list"><a href="http://connect.mail.ru/share?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+					<li class="b-user-wall-footer-social-list__list"><a href="http://vkontakte.ru/share.php?url={{ URL::to('topic/show/'. $topic->id) }}"></a></li>
+				</ul>
+			</div> -->
+				<div class="b-user-wall-footer-wrapper">
 				<p class="b-user-wall-footer__title">{{HTML::link('blog/show/'.$topic->blog->id, $topic->blog->title, array('class' => 'b-user-wall-footer__title'))}}</p>
 
 				<?php $blogTopicsCount = $topic->blog->topics->count(); ?>
@@ -76,33 +84,55 @@
 						топиков
 					@endif
 
-					<div class="clear"></div>
+					
 				</p>
 				</div>
-				<div class="b-user-wall-footer-raiting">
+				</div>
+				<div class="b-user-wall-footer-header__right">
+				<div class="b-user-wall-footer-raiting__right">
+					<div class="b-user-wall-footer-raiting-share">
+					<ul>
+						<li><a href="" class="share-button"></a>
+							<ul class="dropdown-list">						
+								<li><a href="">1</a></li>
+								<li><a href="">2</a></li>
+								<li><a href="">3</a></li>
+								<li><a href="">4</a></li>
+								<li><a href="">5</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+					</div>
+					
+					<div class="b-user-wall-footer-raiting__arrow-down">
+						<input type="button" onclick="return vote.topic({{$topic->id}},-1);" class="btn-raiting">
+					</div>
+					
+					<div class="b-user-wall-footer-raiting__arrow-up">
+						<input type="button" onclick="return vote.topic({{$topic->id}},1);" class="btn-raiting">
+					</div>
+					<div class="b-user-wall-footer-raiting__number">
+						<span class="number-raiting {{$topic->rating_value()}}" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
+					</div>
+					</div>
+				</div>
+					<div class="clear"></div>
+				</div>
+				<!-- <div class="b-user-wall-footer-raiting">
 					<div class="b-user-wall-footer-raiting__left">
-                                            @if($topic->tags->count()>0)
+											@if($topic->tags->count()>0)
 						<p class="b-user-wall-footer-raiting__tag">
 							@foreach($topic->tags as $tag)
 								<span>#{{$tag->name}}</span>
 							@endforeach
 						</p>
-                                            @endif
+											@endif
 					</div>	
-					<div class="b-user-wall-footer-raiting__right">
-					<div class="b-user-wall-footer-raiting__arrow-down">
-						<input type="button" onclick="return vote.topic({{$topic->id}},-1);" class="btn-raiting">
-					</div>
-					<div class="b-user-wall-footer-raiting__number">
-						<span class="number-raiting {{$topic->rating_value()}}" id="rating_topic_{{$topic->id}}">{{$topic->rating}}</span>
-					</div>
-					<div class="b-user-wall-footer-raiting__arrow-up">
-						<input type="button" onclick="return vote.topic({{$topic->id}},1);" class="btn-raiting">
-					</div>
-					</div>
+					
 					<div class="clear"></div>
-
-				</div>
+				
+				</div> -->
 				<!-- <div class="b-user-wall-footer__btn">
 				<div class="b-user-wall-footer-btn">
 				<div class="b-user-wall-footer-btn__about">

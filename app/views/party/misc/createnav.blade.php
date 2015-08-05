@@ -26,8 +26,8 @@
 			<div class="b-topic-navigation-menu">
 				@if(Auth::check())
 				<div class="b-topic-navigation-menu__list">
-					<a style="text-transform: uppercase;" href="#" class="arrow">Я-{{trans('nation.'.Config::get('app.nation_name'))}}</a>
-					<dl class="dropdown-list">
+					<a style="text-transform: uppercase;" href="#" class="arrow">Создать<!-- Я-{{trans('nation.'.Config::get('app.nation_name'))}} --></a>
+					<!-- <dl class="dropdown-list">
 						<dt><a href="{{URL::to('profile')}}" class="my-profile">{{ trans('network.my-profile') }}</a></dt>
 							<dd><a href="{{URL::to('topic/myTopics')}}">{{ trans('network.publications') }}
 							<span class="raiting">{{$topic_number}}</span>
@@ -38,7 +38,7 @@
 							<dd><a href="{{ URL::to('profile/friends') }}">{{ trans('network.friends') }}
 							<span class="raiting">{{$friend_number}}</span>
 							</a></dd>
-							<!-- <dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd> -->
+							<dd><a href="{{URL::to('profile/subscriptions')}}">Подписки</a><span class="raiting">143</span></dd>
 							<dd><a href="{{URL::to('topic/favorites')}}">{{ trans('network.favorite') }}
 							<span class="raiting">{{$favorites}}</span>
 							</a></dd>
@@ -46,9 +46,9 @@
 							<dd><a href="{{ URL::to('custom/history') }}">{{ trans('network.history') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/customs') }}">{{ trans('network.customs') }}</a></dd>
 							<dd><a href="{{ URL::to('custom/culture') }}">{{ trans('network.culture') }} </a></dd>
-						<!-- <dt>Помощь</dt>
-							<dd><a href="">Сообщить о проблеме</a></dd> -->
-						<!-- 	<dd><a href="">Истоиря действии</a></dd>	 -->
+						<dt>Помощь</dt>
+							<dd><a href="">Сообщить о проблеме</a></dd>
+						<dd><a href="">Истоиря действии</a></dd>
 						<dt>{{ trans('network.settings') }}</dt>
 							<dd>
 							<span class="lang-text">{{ trans('network.choose-lang-imperative') }}</span>
@@ -60,18 +60,18 @@
 							</a>
 							<div class="clear"></div>
 							</dd>
-
+					
 						<dt><a href="{{ URL::to('logout') }}">{{ trans('network.exit') }}</a>
 						</dt>	
-
-					</dl>
+					
+					</dl> -->
 
 				</div>
 				@else
 				
 				@endif	
 			</div>
-			<div class="b-topic-navigation-sort">
+			<!-- <div class="b-topic-navigation-sort">
 				<ul>
 					<li class="b-topic-navigation-sort__item">
 						<a href="{{URL::to('main/index')}}" title="Новые топики"></a>
@@ -89,8 +89,8 @@
 				<a href="#"></a>
 				<a href="#"></a>
 				<div class="clear"></div>
-			</div>
-			<div class="b-topic-navigation-category">
+			</div> -->
+			<!-- <div class="b-topic-navigation-category">
 				<ul>
 					<li class="b-topic-navigation-category__item item1">
 						<a href="{{URL::to('topic/videos')}}" title="Видео"></a>
@@ -113,8 +113,8 @@
 				</ul>
 				
 				<div class="clear"></div>
-			</div>
-			<div class="b-topic-navigation-choose">
+			</div> -->
+			<!-- <div class="b-topic-navigation-choose">
 				<div class="b-topic-navigation-choose__list">
 				<a href="#" class="b-topic-navigation-choose__item"></a>
 				<ul class="dropdown-list">
@@ -123,25 +123,25 @@
 					<li class="dropdown-list__item">
 					
 						<div class="choose-list">
-    					
-    					<img src="{{ asset('img/87.png') }}" alt="">
-    					<span>{{ trans('network.video') }}</span>
-       					 <input type="checkbox" class="bigcheck bigcheck1 " name="cheese" value="{{ trans('network.yes') }}" checked="checked"/>
-        				<span class="choose-list-target"></span>
-    					
+			    					
+			    					<img src="{{ asset('img/87.png') }}" alt="">
+			    					<span>{{ trans('network.video') }}</span>
+			       					 <input type="checkbox" class="bigcheck bigcheck1 " name="cheese" value="{{ trans('network.yes') }}" checked="checked"/>
+			        				<span class="choose-list-target"></span>
+			    					
 						</div>
 					</li>
 					<li class="dropdown-list__item">
 						<div class="choose-list">
-    					
-    					<img src="{{ asset('img/88.png') }}" alt="">
-    					<span>Фото</span>
-       					 <input type="checkbox" class="bigcheck bigcheck2" name="cheese" value="{{ trans('network.yes') }}" checked="checked"/>
-        				<span class="choose-list-target"></span>
-    					
+			    					
+			    					<img src="{{ asset('img/88.png') }}" alt="">
+			    					<span>Фото</span>
+			       					 <input type="checkbox" class="bigcheck bigcheck2" name="cheese" value="{{ trans('network.yes') }}" checked="checked"/>
+			        				<span class="choose-list-target"></span>
+			    					
 						</div>
 					</li>
-					<!-- <li class="dropdown-list__item">
+					<li class="dropdown-list__item">
 						<div class="choose-list">
 						
 					    					<label class="choose-list">
@@ -152,20 +152,20 @@
 					        				<span class="choose-list-target"></span>
 					    					</label>
 						</div>
-					</li> -->
+					</li>
 					<li class="dropdown-list__item">
 						<div class="choose-list">
 						
-    					
-    					<img src="{{ asset('img/90.png') }}" alt="">
-    					<a href="{{URL::to('topic/linkTopics')}}"><span>Ссылка</span></a>
+			    					
+			    					<img src="{{ asset('img/90.png') }}" alt="">
+			    					<a href="{{URL::to('topic/linkTopics')}}"><span>Ссылка</span></a>
 						
-       					 <input type="checkbox" class="bigcheck bigcheck4" name="cheese" value="{{ trans('network.yes') }}"/ checked="checked">
-        				<span class="choose-list-target"></span>
-    					
+			       					 <input type="checkbox" class="bigcheck bigcheck4" name="cheese" value="{{ trans('network.yes') }}"/ checked="checked">
+			        				<span class="choose-list-target"></span>
+			    					
 						</div>
 					</li>
-					<!-- <li class="dropdown-list__item">
+					<li class="dropdown-list__item">
 						<div class="choose-list">
 						
 					    					<label class="choose-list">
@@ -176,8 +176,8 @@
 					        				<span class="choose-list-target"></span>
 					    					</label>
 						</div>
-					</li> -->
-					<!-- <li class="dropdown-list__item">
+					</li>
+					<li class="dropdown-list__item">
 						<div class="choose-list">
 						
 					    					<label class="choose-list">
@@ -188,20 +188,39 @@
 					        				<span class="choose-list-target"></span>
 					    					</label>
 						</div>
-					</li> -->
+					</li>
 					
 				</ul>
 			</div>
-			</div>
+			</div> -->
 			<div class="clear"></div>
-		</div>	
+		</div>
+		<div class="b-topic-navigation__middle">
+			<div class="b-topic-navigation-middle">
+				<ul class="dropdown">
+					<li class="b-topic-navigation-middle__list"><a href="">Новые</a></li>
+					<li class="b-topic-navigation-middle__list"><a href="">Лучшие</a></li>
+					<li class="b-topic-navigation-middle__list"><a href="">Избранные</a></li>
+					<li class="b-topic-navigation-middle__list"><a href="" class="dropdown-arrow">Еще</a>
+					<ul class="dropdown-list">
+						<li><a href="">Видео</a></li>
+						<li><a href="">Фотоальбомы</a></li>
+						<li><a href="">Музыка</a></li>
+						<li><a href="">Ссылки</a></li>
+						<li><a href="">Опросы</a></li>
+						<li><a href="">События</a></li>
+					</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<div class="b-topic-navigation__right">
-			 	<div class="cube"><a href="{{URL::to('profile/random')}} "  title="Случайный профиль">
+			 	<!-- <div class="cube"><a href="{{URL::to('profile/random')}} "  title="Случайный профиль">
 			 	
-			 	</a></div>
+			 	</a></div> -->
 
 			 
-				<!-- <div class="b-topic-navigation-line">
+				<div class="b-topic-navigation-line">
 				
 					<a href="#" class="b-topic-navigation-line__item"></a>
 					<ul class="dropdown-list">
@@ -215,7 +234,7 @@
 						<li><a href=""><img src="{{ asset('img/93.png') }}" alt=""><span>Имя Фамилия Отчество</span></a></li>
 						<li><a href=""><img src="{{ asset('img/93.png') }}" alt=""><span>Имя Фамилия Отчество</span></a></li>
 					</ul>
-				</div> -->
+				</div>
 				<div class="b-topic-navigation-format">
 					<a href="#" class="b-topic-navigation-format__item "  title="вид ленты"></a>
 					<ul class="dropdown-list">

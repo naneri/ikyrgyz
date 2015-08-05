@@ -99,14 +99,22 @@ $(function() {
 
 
 
-$(function() {
-	$('.b-topic-navigation__middle li  ').hover(function(){
-		$(this).children('ul').stop(false, true ).fadeIn(300);
-	}, function() {
-		$(this).children('ul').stop(false, true).fadeOut(300);
+// $(function() {
+// 	$('.b-topic-navigation-middle__list  ').hover(function(){
+// 		$(this).children('ul').stop(false, true ).fadeIn(300);
+// 	}, function() {
+// 		$(this).children('ul').stop(false, true).fadeOut(300);
 
-	});
-});
+// 	});
+// });
+// $(function() {
+// 	$('.b-topic-navigation__middle li ').hover(function(){
+// 		$(this).children('ul').stop(false, true ).fadeIn(300);
+// 	}, function() {
+// 		$(this).children('ul').stop(false, true).fadeOut(300);
+
+// 	});
+// });
 
 
 $(function() {
@@ -735,3 +743,49 @@ $('span.filter-option').each(function(){
     $(this).html($(this).html().replace(/&nbsp;/gi,''));
 });
 });
+
+/*!
+ * jQuery dropdown plugin
+ *
+ * Copyright (c) 2014 Yespeace *
+ *
+ * @version 1.0.0
+ *
+ */
+
+(function($) {
+
+	$.fn.dropDown = function(){
+		
+		$(this).hover(function(){
+			 
+			$(this).children('ul').stop(false, true).fadeIn(300);
+		}, function() {
+			$(this).children('ul').stop(false, true).fadeOut(300);
+		
+		});
+	    return this;
+	};
+})(jQuery);
+
+
+$('.b-topic-navigation-middle li').dropDown();
+
+$('.b-user-wall-footer-raiting-share li').dropDown();
+
+
+
+
+
+
+
+
+$(function() {
+	$('.b-header-nav-enc__item').hover(function(){
+		$(this).children('ul').stop(false, true ).fadeIn(300);
+	}, function() {
+		$(this).children('ul').stop(false, true).fadeOut(300);
+
+	});
+});
+
