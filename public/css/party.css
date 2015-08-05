@@ -1,0 +1,242 @@
+.b-header-nav-text {
+	display: inline-block;
+	color: #fff;
+	font: 18px 'PT Sans Caption', sans-serif;
+	vertical-align: middle;
+}
+
+.b-header-nav-user {
+	position: relative;
+	background-image: -webkit-linear-gradient(bottom, #ed7d29 0%, #ff8f3d 99.49%, #ff8f3d 100%);
+	background-image: -moz-linear-gradient(bottom, #ed7d29 0%, #ff8f3d 99.49%, #ff8f3d 100%);
+	background-image: -o-linear-gradient(bottom, #ed7d29 0%, #ff8f3d 99.49%, #ff8f3d 100%);
+	background-image: -ms-linear-gradient(bottom, #ed7d29 0%, #ff8f3d 99.49%, #ff8f3d 100%);
+	background-image: linear-gradient(to top, #ed7d29 0%, #ff8f3d 99.49%, #ff8f3d 100%);
+}
+
+.b-header-nav-user__item {
+	display: inline-block;
+	line-height: 80px;
+	padding-right: 25px;
+	border-right: 1px solid #f9ab71;
+	width: 235px;
+	padding-left: 15px;
+}
+
+.b-header-nav-user__counter {
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 10px;
+	width: 60px;
+}
+
+.b-header-nav-user-button__list a {
+	display: block;
+	height: 25px;
+}
+
+.b-header-nav__right {
+	width: 35%;
+}
+
+.b-header {
+	background: #01508a;
+}
+
+.arrow-down {
+	display: inline-block;
+	background-image: url("../img/party/5.png");
+	background-repeat: no-repeat;
+	width: 8px;
+	height: 4px;
+	position: absolute;
+	left: 32px;
+	bottom: 5px;
+}
+
+.b-header-nav-user {
+	position: relative;
+}
+
+.dropdown-list {
+	background: #fff;
+	border-bottom: 4px solid #ed7d29;
+}
+
+.dropdown-list dd a {
+	line-height: 30px;
+}
+
+.raiting {
+	display: block;
+	float: right;
+}
+
+.b-topic-navigation-menu__list .dropdown-list {
+	left: 0;
+}
+
+.b-topic-navigation__middle {
+	float: left;
+	width: 40%;
+	padding-left: 150px;
+}
+
+.b-topic-navigation-middle .dropdown-list {
+	width: 135px;
+	-webkit-box-shadow: 0 1px 1px rgba(127,127,127,0.3);
+	box-shadow: 0 1px 1px rgba(127,127,127,0.3);
+	border-bottom;
+}
+
+.b-topic-navigation-middle__list {
+	float: left;
+	position: relative;
+}
+
+.b-topic-navigation-middle__list a.dropdown-arrow {
+	border-right: 1px solid #d5d5d5;
+	background: url("../img/party/6.png") no-repeat;
+	background-position: 45px center;
+}
+
+.b-topic-navigation-middle__list a {
+	border-left: 1px solid #d5d5d5;
+	padding: 10px 15px;
+	display: block;
+	font: 14px 'PT Sans Caption', sans-serif;
+}
+
+.b-topic-navigation-middle__list a:hover {
+	background-color: #f1f1f1;
+}
+
+.b-topic-navigation-middle a:link,
+.b-topic-navigation-middle a:visited {
+	color: #899599;
+}
+/*
+Topic style
+*/
+.b-user-wall-header__vision {
+	float: left;
+	padding-left: 15px;
+}
+
+.b-user-wall-header__vision p:first-child {
+	padding: 10px 0;
+}
+
+.b-user-wall-header__fav {
+	float: right;
+	padding-top: 15px;
+}
+
+.b-user-wall-header__fav a {
+	display: block;
+	background-image: url("../img/party/7.png");
+	background-repeat: no-repeat;
+	width: 23px;
+	height: 22px;
+}
+
+.b-user-wall-footer-wrapper {
+	float: left;
+	width: 200px;
+}
+
+.b-user-wall-footer-raiting-share {
+	float: left;
+	padding-right: 10px;
+}
+
+.b-user-wall-footer-raiting-share li {
+	position: relative;
+}
+
+.b-user-wall-footer-raiting-share .share-button {
+	display: inline-block;
+	width: 32px;
+	height: 30px;
+	background-image: url("../img/party/9.png"), -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/9.png"), -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/9.png"), -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/9.png"), -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/9.png"), linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	cursor: pointer;
+	border: 1px solid #d5d5d5;
+}
+
+.b-user-wall-footer-raiting-share .share-button:hover {
+	background-image: url("../img/party/10.png"), -webkit-linear-gradient(top, #f9a566 0%, #ed7e2a 100%);
+	background-image: url("../img/party/10.png"), -moz-linear-gradient(top, #f9a566 0%, #ed7e2a 100%);
+	background-image: url("../img/party/10.png"), -o-linear-gradient(top, #f9a566 0%, #ed7e2a 100%);
+	background-image: url("../img/party/10.png"), -ms-linear-gradient(top, #f9a566 0%, #ed7e2a 100%);
+	background-image: url("../img/party/10.png"), linear-gradient(to bottom, #f9a566 0%, #ed7e2a 100%);
+	background-repeat: no-repeat;
+	border: 1px solid #ed7e2a;
+}
+
+.b-user-wall-footer-header {
+	border-top: 1px solid #d5d5d5;
+	padding: 0;
+}
+
+.b-user-wall-footer-header__left {
+	background: #f3f3f3;
+	float: left;
+	width: 340px;
+}
+
+.b-user-wall-footer-header__right {
+	float: right;
+}
+
+.b-user-wall-footer__image {
+	padding-left: 10px;
+}
+
+.b-user-wall-footer-raiting__right {
+	padding-top: 10px;
+	padding-right: 5px;
+}
+
+.b-user-wall-footer-raiting__arrow-down input.btn-raiting {
+	background-image: url("../img/party/11.png"), -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/11.png"), -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/11.png"), -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/11.png"), -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/11.png"), linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+}
+
+.b-user-wall-footer-raiting__arrow-down input.btn-raiting:hover {
+	background-image: url("../img/party/11_hover.png"), -webkit-linear-gradient(top, #f77572 0%, #e7534f 100%);
+	background-image: url("../img/party/11_hover.png"), -moz-linear-gradient(top, #f77572 0%, #e7534f 100%);
+	background-image: url("../img/party/11_hover.png"), -o-linear-gradient(top, #f77572 0%, #e7534f 100%);
+	background-image: url("../img/party/11_hover.png"), -ms-linear-gradient(top, #f77572 0%, #e7534f 100%);
+	background-image: url("../img/party/11_hover.png"), linear-gradient(to bottom, #f77572 0%, #e7534f 100%);
+	border: 1px solid #e7534f;
+}
+
+.b-user-wall-footer-raiting__arrow-up input.btn-raiting {
+	background-image: url("../img/party/12.png"), -webkit-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/12.png"), -moz-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/12.png"), -o-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/12.png"), -ms-linear-gradient(top, #fff 0%, #f2f1f1 100%);
+	background-image: url("../img/party/12.png"), linear-gradient(to bottom, #fff 0%, #f2f1f1 100%);
+}
+
+.b-user-wall-footer-raiting__arrow-up input.btn-raiting:hover {
+	background-image: url("../img/party/12_hover.png"), -webkit-linear-gradient(top, #32a1f0 0%, #0f85d9 100%);
+	background-image: url("../img/party/12_hover.png"), -moz-linear-gradient(top, #32a1f0 0%, #0f85d9 100%);
+	background-image: url("../img/party/12_hover.png"), -o-linear-gradient(top, #32a1f0 0%, #0f85d9 100%);
+	background-image: url("../img/party/12_hover.png"), -ms-linear-gradient(top, #32a1f0 0%, #0f85d9 100%);
+	background-image: url("../img/party/12_hover.png"), linear-gradient(to bottom, #32a1f0 0%, #0f85d9 100%);
+	border: 1px solid #0f85d9;
+}
+
+.b-user-wall-image {
+	margin-top: 0;
+}
