@@ -39,10 +39,11 @@ class PhotosController extends \BaseController {
                     $rules = array('file' => 'required|image'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
                     $validator = Validator::make(array('file' => $image), $rules);
                     if ($validator->passes()) {
-                        $data['url'] = $this->saveImage($image);
-                        $data['user_id'] = Auth::id();
-                        $data['album_id'] = $albumId;
-                        $data['name'] = $file_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                        $data['url']        = $this->saveImage($image);
+                        $data['user_id']    = Auth::id();
+                        $data['album_id']   = $albumId;
+                        $data['name']       = $file_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                        
                         $photo = Photo::create($data);
                         BonusRating::addBonusRating('upload_photo', $photo->id, Config::get('bonus_rating.upload_photo'));
                         $photos[] = $photo;
@@ -52,39 +53,39 @@ class PhotosController extends \BaseController {
                 return $this->makeView('photos.setnames', compact('photos', 'albumId'));
 	}
 
-        public function setNames($albumId) {
-            $photoNames = Input::get('photo_names');
-            foreach ($photoNames as $photoId => $photoName) {
-                Photo::find($photoId)->update(array('name' => $photoName));
-            }
-            return Redirect::to('photoalbum/' . $albumId);
+    public function setNames($albumId) {
+        $photoNames = Input::get('photo_names');
+        foreach ($photoNames as $photoId => $photoName) {
+            Photo::find($photoId)->update(array('name' => $photoName));
         }
+        return Redirect::to('photoalbum/' . $albumId);
+    }
 
-        private function saveImage($file) {
-            $destinationPath = 'images/user/' . Auth::id() . '/photos';
-            if (!file_exists($destinationPath)) {
-                File::makeDirectory($destinationPath);
-            }
-            $extension = $file->getClientOriginalExtension();
-            $fileName = time() . rand(1, 100) . '.' . $extension;
-            $file->move($destinationPath, $fileName);
-            $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
-            return $avapath;
+    private function saveImage($file) {
+        $destinationPath = 'images/user/' . Auth::id() . '/photos';
+        if (!file_exists($destinationPath)) {
+            File::makeDirectory($destinationPath);
         }
-        
-        public function saveFromUrl(){
-            // Your file
-            $file = 'http://....';
+        $extension = $file->getClientOriginalExtension();
+        $fileName = time() . rand(1, 100) . '.' . $extension;
+        $file->move($destinationPath, $fileName);
+        $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
+        return $avapath;
+    }
+    
+    public function saveFromUrl(){
+        // Your file
+        $file = 'http://....';
 
-            // Open the file to get existing content
-            $data = file_get_contents($file);
+        // Open the file to get existing content
+        $data = file_get_contents($file);
 
-            // New file
-            $new = '/var/www/uploads/';
+        // New file
+        $new = '/var/www/uploads/';
 
-            // Write the contents back to a new file
-            file_put_contents($new, $data);
-        }
+        // Write the contents back to a new file
+        file_put_contents($new, $data);
+    }
 
         /**
 	 * Display the specified photo.
@@ -149,154 +150,154 @@ class PhotosController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-                $album = Photo::find($id)->album;
+        $album = Photo::find($id)->album;
 		Photo::destroy($id);
 
 		return Redirect::to('photoalbum/' . $album->id);
+    }
+
+    public function postActionCopy() {
+        $result = array();
+
+        $photoIds = Input::get('photo');
+        $choosedAlbum = Input::get('chooseAlbum');
+
+        if ($photoIds == '' || $choosedAlbum == '') {
+            return;
         }
 
-        public function postActionCopy() {
-            $result = array();
+        $result['results'] = $this->copyImages($photoIds, $choosedAlbum);
 
-            $photoIds = Input::get('photo');
-            $choosedAlbum = Input::get('chooseAlbum');
-
-            if ($photoIds == '' || $choosedAlbum == '') {
-                return;
-            }
-
-            $result['results'] = $this->copyImages($photoIds, $choosedAlbum);
-
-            $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
-            $photos = array();
-            if ($photoAlbum->canView()) {
-                $photos = $photoAlbum->photos;
-            }
-            $canEdit = $photoAlbum->canEdit();
-            $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
-
-            return Response::json($result);
+        $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
+        $photos = array();
+        if ($photoAlbum->canView()) {
+            $photos = $photoAlbum->photos;
         }
+        $canEdit = $photoAlbum->canEdit();
+        $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
 
-        private function copyImages($photoIds, $albumId) {
-            $results = array();
-            $albumCanEdit = PhotoAlbum::find($albumId)->canEdit();
-            foreach ($photoIds as $photoId) {
-                $photo = Photo::find($photoId);
-                if ($photo->canEdit() && $albumCanEdit) {
-                    
-                    $newPhoto               = new Photo();
-                    $newPhoto->user_id      = Auth::id();
-                    $newPhoto->album_id     = $albumId;
-                    $newPhoto->name         = $photo->name;
-                    
-                    $urlParts = explode('/', $photo->url);
-                    $photoName = end($urlParts);
-                    
-                    $fileParts = explode('.', $photoName);
-                    $photoExtension = end($fileParts);
-                    
-                    $newPhotoFileName = time() . rand(1, 100);
-                    $newPhoto->url = preg_replace("/(\/)\d+(\.)/i", "/$newPhotoFileName.", $photo->url);
-                    File::copy(public_path() . '/images/user/' . Auth::id() . '/photos/' . $photoName, public_path() . '/images/user/' . Auth::id() . '/photos/' . $newPhotoFileName . "." . $photoExtension);
-                    
-                    if ($newPhoto->save()) {
-                        $results[] = array('status' => 'success', 'message' => 'Фотография "' . $newPhoto->name . '" успешно скопирована!');
-                    } else {
-                        $results[] = array('status' => 'error', 'message' => 'Ошибка при копировании фотографии "' . $newPhoto->name . '"');
-                    }
+        return Response::json($result);
+    }
+
+    private function copyImages($photoIds, $albumId) {
+        $results = array();
+        $albumCanEdit = PhotoAlbum::find($albumId)->canEdit();
+        foreach ($photoIds as $photoId) {
+            $photo = Photo::find($photoId);
+            if ($photo->canEdit() && $albumCanEdit) {
+                
+                $newPhoto               = new Photo();
+                $newPhoto->user_id      = Auth::id();
+                $newPhoto->album_id     = $albumId;
+                $newPhoto->name         = $photo->name;
+                
+                $urlParts = explode('/', $photo->url);
+                $photoName = end($urlParts);
+                
+                $fileParts = explode('.', $photoName);
+                $photoExtension = end($fileParts);
+                
+                $newPhotoFileName = time() . rand(1, 100);
+                $newPhoto->url = preg_replace("/(\/)\d+(\.)/i", "/$newPhotoFileName.", $photo->url);
+                File::copy(public_path() . '/images/user/' . Auth::id() . '/photos/' . $photoName, public_path() . '/images/user/' . Auth::id() . '/photos/' . $newPhotoFileName . "." . $photoExtension);
+                
+                if ($newPhoto->save()) {
+                    $results[] = array('status' => 'success', 'message' => 'Фотография "' . $newPhoto->name . '" успешно скопирована!');
+                } else {
+                    $results[] = array('status' => 'error', 'message' => 'Ошибка при копировании фотографии "' . $newPhoto->name . '"');
                 }
             }
-            return $results;
+        }
+        return $results;
+    }
+
+    public function postActionMove(){
+        $result = array();
+
+        $photoIds = Input::get('photo');
+        $choosedAlbum = Input::get('chooseAlbum');
+
+        if ($photoIds == '' || $choosedAlbum == ''){
+            return;
         }
 
-        public function postActionMove(){
-            $result = array();
+        $result['results'] = $this->moveImages($photoIds, $choosedAlbum);
 
-            $photoIds = Input::get('photo');
-            $choosedAlbum = Input::get('chooseAlbum');
-
-            if ($photoIds == '' || $choosedAlbum == ''){
-                return;
-            }
-
-            $result['results'] = $this->moveImages($photoIds, $choosedAlbum);
-
-            $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
-            $photos = array();
-            if ($photoAlbum->canView()) {
-                $photos = $photoAlbum->photos;
-            }
-            $canEdit = $photoAlbum->canEdit();
-            $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
-
-            return Response::json($result);
+        $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
+        $photos = array();
+        if ($photoAlbum->canView()) {
+            $photos = $photoAlbum->photos;
         }
+        $canEdit = $photoAlbum->canEdit();
+        $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
 
-        private function moveImages($photoIds, $albumId) {
-            $results = array();
-            $albumCanEdit = PhotoAlbum::find($albumId)->canEdit();
-            foreach ($photoIds as $photoId) {
-                $photo = Photo::find($photoId);
-                if ($photo->canEdit() && $albumCanEdit) {
-                    $photo->album_id = $albumId;
-                    $photoName = $photo->name;
-                    if ($photo->save()) {
-                        $results[] = array('status' => 'success', 'message' => 'Фотография "' . $photoName . '" успешно перемещена!');
-                    } else {
-                        $results[] = array('status' => 'error', 'message' => 'Ошибка при перемещении фотографии "' . $photoName . '"');
-                    }
+        return Response::json($result);
+    }
+
+    private function moveImages($photoIds, $albumId) {
+        $results = array();
+        $albumCanEdit = PhotoAlbum::find($albumId)->canEdit();
+        foreach ($photoIds as $photoId) {
+            $photo = Photo::find($photoId);
+            if ($photo->canEdit() && $albumCanEdit) {
+                $photo->album_id = $albumId;
+                $photoName = $photo->name;
+                if ($photo->save()) {
+                    $results[] = array('status' => 'success', 'message' => 'Фотография "' . $photoName . '" успешно перемещена!');
+                } else {
+                    $results[] = array('status' => 'error', 'message' => 'Ошибка при перемещении фотографии "' . $photoName . '"');
                 }
             }
-            return $results;
         }
+        return $results;
+    }
 
-        public function postActionDelete(){
-            $result = array();
-            
-            $photoIds = Input::get('photo');
-            
-            if($photoIds == ''){
-                return;
-            }
-            
-            $result['results'] = $this->deleteImages($photoIds);
-            
-            $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
-            $photos = array();
-            if($photoAlbum->canView()){
-                $photos = $photoAlbum->photos;
-            }
-            $canEdit = $photoAlbum->canEdit();
-            $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
-            
-            return Response::json($result);
+    public function postActionDelete(){
+        $result = array();
+        
+        $photoIds = Input::get('photo');
+        
+        if($photoIds == ''){
+            return;
         }
         
-        private function deleteImages($photoIds){
-            $results = array();
-            foreach($photoIds as $photoId){
-                $photo = Photo::find($photoId);
-                if($photo->canEdit()){
-                    $path = str_replace(Config::get('app.base_url'), public_path(), $photo->url);
-                    $photoName = $photo->name;
-                    $error = false;
-                    if(file_exists($path)){
-                        try{
-                            unlink($path);
-                        }
-                        catch(Exception $e){
-                            $error = true;
-                        }
+        $result['results'] = $this->deleteImages($photoIds);
+        
+        $photoAlbum = PhotoAlbum::find(Input::get('photoAlbumId'));
+        $photos = array();
+        if($photoAlbum->canView()){
+            $photos = $photoAlbum->photos;
+        }
+        $canEdit = $photoAlbum->canEdit();
+        $result['render'] = $this->makeView('photos.list', compact('photos', 'canEdit'))->render();
+        
+        return Response::json($result);
+    }
+    
+    private function deleteImages($photoIds){
+        $results = array();
+        foreach($photoIds as $photoId){
+            $photo = Photo::find($photoId);
+            if($photo->canEdit()){
+                $path = str_replace(Config::get('app.base_url'), public_path(), $photo->url);
+                $photoName = $photo->name;
+                $error = false;
+                if(file_exists($path)){
+                    try{
+                        unlink($path);
                     }
-                    if(!$error){
-                        $photo->delete();
-                        $results[] = array('status' => 'success', 'message' => 'Фотография "'.$photoName.'" успешно удалена!');
-                    }else{
-                        $results[] = array('status' => 'error', 'message' => 'Ошибка при удалении фотографии "' . $photoName . '"');
+                    catch(Exception $e){
+                        $error = true;
                     }
                 }
+                if(!$error){
+                    $photo->delete();
+                    $results[] = array('status' => 'success', 'message' => 'Фотография "'.$photoName.'" успешно удалена!');
+                }else{
+                    $results[] = array('status' => 'error', 'message' => 'Ошибка при удалении фотографии "' . $photoName . '"');
+                }
             }
-            return $results;
         }
+        return $results;
+    }
 }

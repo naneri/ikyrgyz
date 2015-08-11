@@ -73,6 +73,11 @@ echo "<pre>"; print_r($notes); echo "</pre>";exit;*/
 
 	}
 
+    /**
+     * Смена языка пользователя
+     * 
+     * @param [string] $locale [язык]
+     */
 	public function setLocale($locale = Null)
     {
     	if(!$locale){
@@ -89,6 +94,14 @@ echo "<pre>"; print_r($notes); echo "</pre>";exit;*/
     }
 
 
+    /**
+     * Выбирает тему для шаблонов
+     * 
+     * @param  [string] $name   [Название темы]
+     * @param  array    $params [Переменные для шаблона]
+     * 
+     * @return                  [Рендеринг шаблона]
+     */
     public function makeView($name, $params = array()){
         $path = Config::get('app.template') . '.' . $name;
 

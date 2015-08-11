@@ -138,22 +138,22 @@ class TopicController extends BaseController {
 	 */
 	public function show($id)
 	{
-            $topic = Topic::findOrFail($id);
-            $blog = $topic->blog;
-            $isModerator = False;
-            if(Auth::check())
-            {
-                $isModerator = $topic->blog->isModeratorCurrentUser();
-            }
-            $comments = $topic->commentsWithDataSortBy('old');
-            $commentsSort = 'old';
-            $creator = User::findOrFail($topic->user_id);
-            $bonusRating = new BonusRating();
-            $creator->rating += $bonusRating->getUsersBonusRating($creator->id);
-            $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
-            $topic->increment('count_read');
+        $topic = Topic::findOrFail($id);
+        $blog = $topic->blog;
+        $isModerator = False;
+        if(Auth::check())
+        {
+            $isModerator = $topic->blog->isModeratorCurrentUser();
+        }
+        $comments = $topic->commentsWithDataSortBy('old');
+        $commentsSort = 'old';
+        $creator = User::findOrFail($topic->user_id);
+        $bonusRating = new BonusRating();
+        $creator->rating += $bonusRating->getUsersBonusRating($creator->id);
+        $creator->description = User_Description::where('user_id', '=' ,$creator->id)->get()[0];
+        $topic->increment('count_read');
 
-            return $this->makeView('topic.show', compact('topic', 'creator', 'blog', 'isModerator', 'comments', 'commentsSort'));
+        return $this->makeView('topic.show', compact('topic', 'creator', 'blog', 'isModerator', 'comments', 'commentsSort'));
 	}
 
 
@@ -170,6 +170,7 @@ class TopicController extends BaseController {
         if(!$topic->canEdit()){
             return $this->makeView('error.permission', array('error' => 'permission denied'));
         }
+        
         if(!$topic->images_dir){
             $this->sessionInitNewImagesDir();
         }

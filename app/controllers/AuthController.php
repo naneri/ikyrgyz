@@ -42,13 +42,8 @@ class AuthController extends BaseController {
             ));
         }
 
-        $todayVisitExists = BonusRating::where('target_type', "everyday_visit")
-            ->where('target_id', Auth::user()->id)
-            ->where('created_at', '>', date('Y-m-d 00:00:00'))
-            ->exists();
-        if (!$todayVisitExists) {
-            BonusRating::addBonusRating('everyday_visit', Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
-        }
+        BonsuRatingRepository::addDailyRating(Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
+        
         // направляем пользователя по первоначальному маршруту, либо на главную
         return Redirect::intended('/');
     }

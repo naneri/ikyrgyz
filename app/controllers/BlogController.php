@@ -75,15 +75,15 @@ class BlogController extends BaseController {
         return Redirect::to('blog/all');
 	}
         
-        private function saveAvatar($avatar){
-            $dir = '/images/blog' . date('/Y/m/d/');
-            do {
-                $filename = str_random(30) . '.jpg';
-            } while (File::exists(public_path() . $dir . $filename));
+    private function saveAvatar($avatar){
+        $dir = '/images/blog' . date('/Y/m/d/');
+        do {
+            $filename = str_random(30) . '.jpg';
+        } while (File::exists(public_path() . $dir . $filename));
 
-            $avatar->move(public_path() . $dir, $filename);
-            return $dir . $filename;
-        }
+        $avatar->move(public_path() . $dir, $filename);
+        return $dir . $filename;
+    }
 
     /**
      * Достаёт все блоги
@@ -144,15 +144,23 @@ class BlogController extends BaseController {
      * @return [type]       [description]
      */
     public function showAjax($id){
+        
         $page = Input::get('page');
+
         $topics = Blog::getTopics($id, $page);
+
         return $this->makeView('topic.build', compact('topics'));
+
     }
 
     public function showPersonal($email) {
+
         $user = User::whereEmail($email)->get();
+
         $blog = $user->getPersonalBlog();
+
         return $this->makeView('blog.show', array('blog' => $blog));
+
     }
 
     /**
@@ -162,11 +170,16 @@ class BlogController extends BaseController {
      * @return [type]     [description]
      */
     public function getEdit($id){
+
         $blog = Blog::findOrFail($id);
+
         $blogTypes = array();
-	foreach (BlogType::where('name', '!=', 'personal')->get(array('id', 'name')) as $blogType) {
+
+	    foreach (BlogType::where('name', '!=', 'personal')->get(array('id', 'name')) as $blogType) 
+        {
             $blogTypes[$blogType->id] = $blogType->name;
         }
+
         return $this->makeView('blog.edit', compact('blog', 'blogTypes'));
     }
     
@@ -198,9 +211,13 @@ class BlogController extends BaseController {
     }
     
     public function getEditUsers($id){
+
         $blog = Blog::findOrFail($id);
+
         $blogUsers = $blog->getBlogUsers();
+
         return $this->makeView('blog.edit_users', compact('blog', 'blogUsers'));
+        
     }
     
     public function postEditUsers($id){
@@ -243,6 +260,7 @@ class BlogController extends BaseController {
     }
 
     public function rejectBlog($id){
+
         $blog = Blog::findOrFail($id);
 
         if (!$blog->isUserHaveRole()) {
@@ -252,6 +270,7 @@ class BlogController extends BaseController {
         $roleId = Role::whereName('reject')->pluck('id');
 
         $blogRole = BlogRole::where('user_id', Auth::user()->id)->where('blog_id', $blog->id)->first();
+        
         $blogRole->update(array('role_id' => $roleId));
 
         return Redirect::back();

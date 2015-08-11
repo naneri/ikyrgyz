@@ -72,6 +72,8 @@ return array(
     'you-have-already-sent-request'	=> 'Вы уже отправили запрос на подписку.',
     'you-were-invited-to-blog'		=> 'Вас пригласили в этот блог.',
     'you-are-banned'		=> 'Вы забанены',
+    'blog-type-open'	=> 'Открытый',
+    'blog-type-close'	=> 'Закрытый',
 
 	// edit blog users
 	'user' 				=> 'пользователь',

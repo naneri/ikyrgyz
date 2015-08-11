@@ -439,10 +439,11 @@ class ProfileController extends BaseController {
         }
         
         $school = $this->getProfileItem('study', 'school', Input::get('school_id'));
-        $school->value = Input::get('school_name');
-        $school->date_begin = Input::get('year_begin').'-00-00';
-        $school->date_end = Input::get('year_end').'-00-00';
-        $school->access = $this->validateAccess(Input::get('school_access'));
+        
+        $school->value      =   Input::get('school_name');
+        $school->date_begin =   Input::get('year_begin').'-00-00';
+        $school->date_end   =   Input::get('year_end').'-00-00';
+        $school->access     =   $this->validateAccess(Input::get('school_access'));
         $school->save();
         
         $result = $this->makeView('profile.edit.build.schools', array('schools' => Auth::user()->schools, 'access' => $this->access))->render();

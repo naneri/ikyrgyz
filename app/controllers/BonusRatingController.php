@@ -1,17 +1,15 @@
 <?php
 
 class BonusRatingController extends \BaseController {
-    public function index()
-    {}
 
     private function createBonusRating($targetType, $targetId, $value, $rating){
-        $bonusRating = new BonusRating();
-        $bonusRating->target_id = $targetId;
-        $bonusRating->target_type = $targetType;
-        $bonusRating->user_id = Auth::user()->id;
-        $bonusRating->value = $value;
-        $bonusRating->rating = $rating;
-        $bonusRating->save();
+        BonusRating::create([
+            'target_id'     => $targetId,
+            'target_type'   => $targetType,
+            'user_id'       => Auth::user()->id,
+            'value'         => $value,
+            'rating'        => $rating,
+            ]);
     }
 
     public function postBonusRatingComment(){
@@ -35,9 +33,8 @@ class BonusRatingController extends \BaseController {
             ->where('user_id', Auth::user()->id)
             ->exists();
 
-        if (!$anyBonusRatingExists) {
-
-        } else {
+        if ($anyBonusRatingExists) 
+        {
             $bonusRatingExists = BonusRating::where('target_type', 'comment')
                 ->where('user_id', Auth::user()->id)
                 ->where('target_id', $oComment->id)
@@ -51,7 +48,6 @@ class BonusRatingController extends \BaseController {
 
             $this->createBonusRating('comment', $oComment->id, $iValue, $oComment->rating);
             $this->setSkillCommentAuthor($oComment->user_id, $iValue);
-
         }
 
 

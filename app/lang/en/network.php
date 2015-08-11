@@ -36,5 +36,10 @@ return array(
 	'blog'				=> 'Blog',
 	'drafts'			=> 'Drafts',
 	'link'				=> 'Link',
-        'photoalbum'                    => 'Photo album'
+    'photoalbum'		=> 'Photo album',
+
+    //blog
+    'blog-type-personal'=> 'Personal',
+    'blog-type-open'	=> 'Open',
+    'blog-type-close'	=> 'Close',    
 	);

@@ -22,8 +22,11 @@ class AudioController extends \BaseController
      */
     public function create($audioAlbumId)
     {
+
         $audioAlbum = AudioAlbum::findOrFail($audioAlbumId);
+
         return $this->makeView('audio.create', compact('audioAlbum'));
+
     }
 
     /**
@@ -35,16 +38,17 @@ class AudioController extends \BaseController
     {
         $audios = array();
         $audioFiles = Input::file('audio_files');
+
         foreach ($audioFiles as $audioFile) {
             $rules = array('file' => 'required|mimes:mpga'); // main extension for the audio/mpeg mime type in the Apache list is mpga, not mp3
             $validator = Validator::make(array('file' => $audioFile), $rules);
             if ($validator->passes()) {
-                $data['url'] = $this->saveAudioFile($audioFile);
-                $data['user_id'] = Auth::id();
-                $data['album_id'] = $albumId;
-                $data['is_hidden'] = Input::get('is_hidden');
-                $data['name'] = $file_name = pathinfo($audioFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $audio = Audio::create($data);
+                $data['url']        = AudioSaver::saveAudioFile($audioFile);
+                $data['user_id']    = Auth::id();
+                $data['album_id']   = $albumId;
+                $data['is_hidden']  = Input::get('is_hidden');
+                $data['name']       = $file_name = pathinfo($audioFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $audio              = Audio::create($data);
 //              BonusRating::addBonusRating('upload_audio', $audio->id, Config::get('bonus_rating.upload_audio'));
                 $audios[] = $audio;
             }
@@ -62,18 +66,7 @@ class AudioController extends \BaseController
         return Redirect::to('audioalbum/' . $albumId);
     }
 
-    private function saveAudioFile($file)
-    {
-        $destinationPath = 'audio_files/user/' . Auth::id() . '/audios';
-        if (!file_exists($destinationPath)) {
-            File::makeDirectory($destinationPath, 0777, true);
-        }
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . rand(1, 100) . '.' . $extension;
-        $file->move($destinationPath, $fileName);
-        $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
-        return $avapath;
-    }
+    
 
     public function saveFromUrl()
     {
@@ -217,7 +210,7 @@ class AudioController extends \BaseController
         }
 
         if (Input::hasFile('audio_file')) {
-            $data['url'] = $this->saveAudioFile(Input::file('audio_file'));
+            $data['url'] = AudioSaver::saveAudioFile(Input::file('audio_file'));
         }
         $audio->update($data);
 
@@ -233,6 +226,7 @@ class AudioController extends \BaseController
     public function destroy($id)
     {
         $album = Audio::find($id)->album;
+
         Audio::destroy($id);
 
         return Redirect::to('audioalbum/' . $album->id);

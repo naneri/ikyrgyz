@@ -13,6 +13,8 @@
         },
         topic: function(topicId, value, logged) {
             if(!logged){
+
+                // выбрасывает алёрт если пользовтель не залогинен
                 not_logged(logged);
                 return;
             }

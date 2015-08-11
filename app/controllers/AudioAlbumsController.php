@@ -48,7 +48,7 @@ class AudioAlbumsController extends \BaseController {
 
         if (Input::file('image'))
         {
-            $data['cover'] = $this->saveImage();
+            $data['cover'] = AudioAlbumImageSaver::saveImage(Input::file('image'));
         }
 
         $data['user_id'] = Auth::id();
@@ -56,19 +56,6 @@ class AudioAlbumsController extends \BaseController {
         AudioAlbum::create($data);
 
         return Redirect::to('profile/' . Auth::id() . '/audios');
-    }
-
-    private function saveImage() {
-        $file = Input::file('image');
-        $destinationPath = 'images/user/' . Auth::id() . '/audioalbums';
-        if (!file_exists($destinationPath)) {
-            File::makeDirectory($destinationPath, 0777, true);
-        }
-        $extension = Input::file('image')->getClientOriginalExtension();
-        $fileName = time() . rand(1, 100) . '.' . $extension;
-        $file->move($destinationPath, $fileName);
-        $avapath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
-        return $avapath;
     }
 
     /**
@@ -115,7 +102,7 @@ class AudioAlbumsController extends \BaseController {
         }
 
         if (Input::file('image')) {
-            $data['cover'] = $this->saveImage();
+            $data['cover'] = AudioAlbumImageSaver::saveImage(Input::file('image'));
         }
         $audioalbum->update($data);
 
@@ -131,7 +118,9 @@ class AudioAlbumsController extends \BaseController {
     public function destroy($id)
     {
         $audioAlbum = AudioAlbum::findOrFail($id);
+
         $audioAlbum->audios()->delete();
+        
         $audioAlbum->delete();
 
         return Redirect::to('profile/' . Auth::id() . '/audios');

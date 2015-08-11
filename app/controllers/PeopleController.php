@@ -17,9 +17,8 @@ class PeopleController extends BaseController{
 	public function index(){
 
 		//поиск по имейлу
-		if(Input::get('email')){
-			User::where('email', 'like', Input::get('email'));
-		}else{
+		if(!Input::get('email'))
+		{
 			$users = User::paginate(15);
 		}
 		
