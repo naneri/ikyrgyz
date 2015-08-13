@@ -36,37 +36,28 @@ class BlogController extends BaseController {
 
         // проводит валидацию данных
 		$rules = Blog::$rules;
+
 		$validator = Validator::make(Input::all(), $rules);
 
         // если валидация не проходит, то отправляет обратно на страницу создания блога
 		if($validator->fails()){
             return Redirect::to('blog/create')->withErrors($validator);
         }
-        
-        $blogType = BlogType::find(Input::get('type_id'));
-        if (!$blogType && $blogType->name == 'personal') {
-            $blogType = BlogType::whereName('open')->first();
-        }
 
         $blog = new Blog;
-        $blog->title = Input::get('title');
-        $blog->description = Input::get('description');
-        $blog->type_id = $blogType->id;
-        $blog->user_id = Auth::user()->id;
+        $blog->title        = Input::get('title');
+        $blog->description  = Input::get('description');
+        $blog->type_id      = Input::get('type_id');
+        $blog->user_id      = Auth::user()->id;
         
         if(Input::hasFile('avatar')){
-            $blog->avatar = $this->saveAvatar(Input::file('avatar'));
+            $blog->avatar = BlogRepository::saveAvatar(Input::file('avatar'));
         }
         
         if($blog->save()){
-            $anyBlogCreated = BonusRating::where('target_type', "blog_create")
-                            ->where('user_id', Auth::user()->id)
-                            ->exists();
-            if ($anyBlogCreated) {
-                BonusRating::addBonusRating('blog_create', $blog->id, Config::get('bonus_rating.blog_create'));
-            } else {
-                BonusRating::addBonusRating('blog_create', $blog->id, Config::get('bonus_rating.first_blog_create'));
-            }
+
+            BonsuRatingRepository::blogBonusRating(Auth::user()->id, $blog->id);
+            
             BlogRole::createOwner($blog->id, Auth::id());
             
         }
@@ -75,16 +66,6 @@ class BlogController extends BaseController {
         return Redirect::to('blog/all');
 	}
         
-    private function saveAvatar($avatar){
-        $dir = '/images/blog' . date('/Y/m/d/');
-        do {
-            $filename = str_random(30) . '.jpg';
-        } while (File::exists(public_path() . $dir . $filename));
-
-        $avatar->move(public_path() . $dir, $filename);
-        return $dir . $filename;
-    }
-
     /**
      * Достаёт все блоги
      * @return [type] [description]
@@ -113,6 +94,7 @@ class BlogController extends BaseController {
         return $this->makeView('blog.build', array('blogs' => $blogs));
 
     }
+
     /**
      * Показывает страницу с описанием блога
      * 
@@ -120,21 +102,24 @@ class BlogController extends BaseController {
      * @return [type]     [description]
      */
 	public function show($id){
-            $blog = Blog::findOrFail($id);
-            $topics = array();
-            if($blog->canView()){
-                $topics = Blog::getTopics($id);
-            }
-            $userRole = $blog->getUserRole();
-            
-            
-            JavaScript::put([
-                'sort' => null,
-                'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
-                'ajaxPage' => URL::to("blog/showAjax/$id"),
-            ]);
 
-            return $this->makeView('blog.show', compact('blog', 'topics', 'userRole'));
+        $blog = Blog::findOrFail($id);
+
+        $topics = array();
+
+        if($blog->canView()){
+            $topics = Blog::getTopics($id);
+        }
+
+        $userRole = $blog->getUserRole();
+        
+        JavaScript::put([
+            'sort' => null,
+            'column' => $_COOKIE['ColumnN'] ? : Config::get('social.main_column_count'),
+            'ajaxPage' => URL::to("blog/showAjax/$id"),
+        ]);
+
+        return $this->makeView('blog.show', compact('blog', 'topics', 'userRole'));
 	}
     
     /**
@@ -153,6 +138,11 @@ class BlogController extends BaseController {
 
     }
 
+    /**
+     * [showPersonal description]
+     * @param  [type] $email [description]
+     * @return [type]        [description]
+     */
     public function showPersonal($email) {
 
         $user = User::whereEmail($email)->get();
@@ -190,7 +180,9 @@ class BlogController extends BaseController {
      * @return [type]     [description]
      */
     public function postEdit($id){
+
         $rules = Blog::$rules;
+
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
@@ -198,18 +190,28 @@ class BlogController extends BaseController {
         }
         
         $blog = Blog::findOrFail($id);
+
         $data = Input::except('_token');
+
         if (Input::hasFile('avatar')) {
+
             if($blog->avatar && file_exists(public_path().$blog->avatar)){
                 unlink(public_path().$blog->avatar);
             }
-            $data['avatar'] = $this->saveAvatar(Input::file('avatar'));
+
+            $data['avatar'] = BonsuRatingRepository::saveAvatar(Input::file('avatar'));
         }
+
         $blog->update($data);
 
         return Redirect::to('blog/show/'.$blog->id);
     }
     
+    /**
+     * [getEditUsers description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function getEditUsers($id){
 
         $blog = Blog::findOrFail($id);
@@ -220,20 +222,33 @@ class BlogController extends BaseController {
         
     }
     
+    /**
+     * [postEditUsers description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function postEditUsers($id){
+
         $blog = Blog::findOrFail($id);
+
         $users = Input::except('_token');
         
-        foreach($users as $userId=>$role){
-            $roleId = Role::whereName($role)->first()->id;
-            $blogRole = BlogRole::where('blog_id', $blog->id)
-                    ->where('user_id', $userId);
+        foreach($users as $userId => $role){
+            $roleId     = Role::whereName($role)->first()->id;
+            $blogRole   = BlogRole::where('blog_id', $blog->id)
+                                  ->where('user_id', $userId)
+                                  ->get();
             $blogRole->update(array('role_id' => $roleId));
         }
         
         return Redirect::to('blog/edit/'.$blog->id.'/users');
     }
     
+    /**
+     * [readBlog description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function readBlog($id){
         $blog = Blog::findOrFail($id);
         
@@ -253,12 +268,26 @@ class BlogController extends BaseController {
         return Redirect::back();
     }
 
+    /**
+     * [readPersonalBlog description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function readPersonalBlog($id) {
+
         $user = User::findOrFail($id);
+
         $blogId = $user->getPersonalBlog()->id;
+
         $this->readBlog($blogId);
+
     }
 
+    /**
+     * [rejectBlog description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function rejectBlog($id){
 
         $blog = Blog::findOrFail($id);
@@ -276,7 +305,11 @@ class BlogController extends BaseController {
         return Redirect::back();
     }
     
-    
+    /**
+     * [acceptInviteBlog description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function acceptInviteBlog($id) {
         $blog = Blog::findOrFail($id);
 
@@ -292,6 +325,11 @@ class BlogController extends BaseController {
         return Redirect::back();
     }
 
+    /**
+     * [refollowBlog description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function refollowBlog($id){
         $blog = Blog::findOrFail($id);
 
@@ -311,6 +349,10 @@ class BlogController extends BaseController {
         return Redirect::back();
     }
 
+    /**
+     * [postFavourite description]
+     * @return [type] [description]
+     */
     public function postFavourite() {
         $result = array();
 
@@ -356,6 +398,7 @@ class BlogController extends BaseController {
 
         return Response::json($result);
     }
+
 
     public function deleteBlog($id)
     {

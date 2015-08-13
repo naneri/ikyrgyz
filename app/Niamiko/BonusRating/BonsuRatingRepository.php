@@ -14,4 +14,17 @@ class BonsuRatingRepository{
             BonusRating::addBonusRating('everyday_visit', $user_id, $rating_value);
         }
     }  
+
+    public static function blogBonusRating($user_id, $blog_id){
+        $anyBlogCreated = BonusRating::where('target_type', "blog_create")
+                            ->where('user_id', $user_id)
+                            ->exists();
+        if ($anyBlogCreated) {
+            BonusRating::addBonusRating('blog_create', $blog_id, Config::get('bonus_rating.blog_create'));
+        } else {
+            BonusRating::addBonusRating('blog_create', $blog_id, Config::get('bonus_rating.first_blog_create'));
+        }
+    }
+
+    
 }

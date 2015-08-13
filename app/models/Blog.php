@@ -5,7 +5,7 @@ Class Blog extends Eloquent{
         public static $rules = array(
             'title' => 'required', 
             'description' => 'required',
-            'type_id' => 'required'
+            'type_id' => 'required|exists:blog_types,id',
         );
         
         protected $fillable = ['title', 'description', 'type_id', 'user_id', 'avatar'];

@@ -41,17 +41,14 @@ class MessageController extends BaseController{
      */
     public function inbox($filter = 'all'){
         $messages = array();
-        switch($filter){
-            case 'friend':
-                $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
-                break;
-            case 'group':
-                break;
-            case 'event':
-                break;
-            case 'all':
-            default:
-                $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
+
+        if($filter == 'friend')
+        {
+            $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
+        }
+        elseif(!in_array($filter, ['group', 'group', 'all']))
+        {
+            $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
         }
 
         return $this->makeView('message.inbox', array('messages' => $messages));
@@ -107,12 +104,12 @@ class MessageController extends BaseController{
                     $message = new Message;
                 }
 
-                $message->sender_id = Auth::id();
-                $message->receiver_id = $receiver->id;
-                $message->title = Input::get('title');
-                $message->text = Input::get('text');
-                $message->from = 'friend';
-                $message->draft = Input::get('is_draft');
+                $message->sender_id     = Auth::id();
+                $message->receiver_id   = $receiver->id;
+                $message->title         = Input::get('title');
+                $message->text          = Input::get('text');
+                $message->from          = 'friend';
+                $message->draft         = Input::get('is_draft');
                 $message->save();
 
                 if(Input::hasFile('attachments')){
@@ -132,7 +129,13 @@ class MessageController extends BaseController{
         ]);
     }
 
+    /**
+     * [sendMessageDraft description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function sendMessageDraft($id) {
+        
         $message = Message::find($id);
         
         if($message->draft != 1 || $message->sender_id != Auth::id()){
@@ -148,29 +151,63 @@ class MessageController extends BaseController{
             ]);
     }
 
+    /**
+     * [outbox description]
+     * @return [type] [description]
+     */
     public function outbox(){
+
         $messages = Auth::user()->messagesOutbox()->orderBy('id', 'DESC')->paginate(20);
+
         return $this->makeView('message.outbox', compact('messages'));
+
     }
 
+    /**
+     * [trash description]
+     * @return [type] [description]
+     */
     public function trash(){
+
         $messages = Auth::user()->messagesTrashed()->orderBy('id', 'DESC')->paginate(20);
+
         return $this->makeView('message.trash', compact('messages'));
+
     }
 
+    /**
+     * [contacts description]
+     * @return [type] [description]
+     */
     public function contacts() {
+
         return $this->makeView('message.contacts');
+
     }
 
+    /**
+     * [draft description]
+     * @return [type] [description]
+     */
     public function draft() {
+
         return $this->makeView('message.draft');
+
     }
 
+    /**
+     * [blacklist description]
+     * @return [type] [description]
+     */
     public function blacklist() {
         $bannedUsers = Auth::user()->bannedUsers();
         return $this->makeView('message.blacklist', compact('bannedUsers'));
     }
     
+    /**
+     * [postBlacklist description]
+     * @return [type] [description]
+     */
     public function postBlacklist() {
         $result = array();
         $rules = array(
@@ -199,6 +236,11 @@ class MessageController extends BaseController{
         return Response::json($result);
     }
 
+    /**
+     * [saveMessageAttachments description]
+     * @param  [type] $messageId [description]
+     * @return [type]            [description]
+     */
     private function saveMessageAttachments($messageId) {
         $files = Input::file('attachments');
         $destinationPath = 'uploads/user/' . Auth::id();
@@ -211,15 +253,19 @@ class MessageController extends BaseController{
             $file->move($destinationPath, $fileName);
             $filePath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
             
-            $messageAttachment = new MessageAttachment();
-            $messageAttachment->message_id = $messageId;
-            $messageAttachment->path = $filePath;
-            $messageAttachment->name = $file->getClientOriginalName();
+            $messageAttachment              = new MessageAttachment();
+            $messageAttachment->message_id  = $messageId;
+            $messageAttachment->path        = $filePath;
+            $messageAttachment->name        = $file->getClientOriginalName();
             //$messageAttachment->type = $file->getMimeType();
             $messageAttachment->save();
         }
     }
     
+    /**
+     * [postAction description]
+     * @return [type] [description]
+     */
     public function postAction(){
         if(!in_array(Input::get('action'), array('set_watch', 'set_notwatch', 'blacklist', 'delete', 'restore', 'force_delete', 'unblack'))){
             $result['message'] = 'Ошибка действия';
@@ -278,14 +324,31 @@ class MessageController extends BaseController{
         return Response::json($result);
     }
     
+    /**
+     * [deleteMessage description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function deleteMessage($id){
+
         $message = Message::find($id);
+
         $message->delete();
+
         return Redirect::to('messages/trash');
+
     }
 
+    /**
+     * [editMessage description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function editMessage($id) {
+
         $message = Message::find($id);
+
         return $this->makeView('message.edit', array('message' => $message));
+
     }
 }

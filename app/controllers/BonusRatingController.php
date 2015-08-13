@@ -50,7 +50,6 @@ class BonusRatingController extends \BaseController {
             $this->setSkillCommentAuthor($oComment->user_id, $iValue);
         }
 
-
         return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oComment->rating,2)));
     }
 
@@ -187,34 +186,18 @@ class BonusRatingController extends \BaseController {
         return Response::json(array('success' => 'Ваш голос учтен', 'rating' => round($oPhoto->rating, 2)));
     }
 
-    private function setSkillCommentAuthor($commentAuthorId, $bonusRatingValue) {
+    private function setSkillCommentAuthor($commentAuthorId, $voteValue) {
         /**
          * Начисляем силу автору, используя логарифмическое распределение
          */
-        $skill = Auth::user()->skill;
-        $iMinSize = 0.004;
-        $iMaxSize = 0.5;
-        $iSizeRange = $iMaxSize - $iMinSize;
-        $iMinCount = log(0 + 1);
-        $iMaxCount = log(500 + 1);
-        $iCountRange = $iMaxCount - $iMinCount;
-        if ($iCountRange == 0) {
-            $iCountRange = 1;
-        }
-        if ($skill > 50 and $skill < 200) {
-            $skill_new = $skill / 70;
-        } elseif ($skill >= 200) {
-            $skill_new = $skill / 10;
-        } else {
-            $skill_new = $skill / 130;
-        }
-        $iDelta = $iMinSize + (log($skill_new + 1) - $iMinCount) * ($iSizeRange / $iCountRange);
+        $iDelta = SkillService::countDeltaComment(Auth::user()->skill);
+
         /**
          * Сохраняем силу
          */
         $oUserComment = User::find($commentAuthorId);
         if($oUserComment){
-            $iSkillNew = $oUserComment->skill + $bonusRatingValue * $iDelta;
+            $iSkillNew = $oUserComment->skill + $voteValue * $iDelta;
             $iSkillNew = ($iSkillNew < 0) ? 0 : $iSkillNew;
             $oUserComment->skill = $iSkillNew;
             $oUserComment->save();
@@ -222,27 +205,12 @@ class BonusRatingController extends \BaseController {
     }
 
     public function setSkillTopicAuthor($topicAuthorId, $iValue) {
-        $skill = Auth::user()->skill;
+        
         /**
          * Начисляем силу и рейтинг автору топика, используя логарифмическое распределение
          */
-        $iMinSize = 0.1;
-        $iMaxSize = 8;
-        $iSizeRange = $iMaxSize - $iMinSize;
-        $iMinCount = log(0 + 1);
-        $iMaxCount = log(500 + 1);
-        $iCountRange = $iMaxCount - $iMinCount;
-        if ($iCountRange == 0) {
-            $iCountRange = 1;
-        }
-        if ($skill > 50 and $skill < 200) {
-            $skill_new = $skill / 70;
-        } elseif ($skill >= 200) {
-            $skill_new = $skill / 10;
-        } else {
-            $skill_new = $skill / 100;
-        }
-        $iDelta = $iMinSize + (log($skill_new + 1) - $iMinCount) * ($iSizeRange / $iCountRange);
+        $iDelta = SkillService::countDeltaTopic(Auth::user()->skill);
+
         /**
          * Сохраняем силу и рейтинг
          */
