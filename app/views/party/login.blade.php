@@ -5,18 +5,21 @@
         <meta charset="UTF-8"/>
         <title>{{Config::get('app.network_name')}}</title>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"/>
+       
         <link rel="stylesheet" href="css/style-login.css"/>
+         <link rel="stylesheet" href="css/party-login.css"/>
         <link rel="stylesheet" href="css/fonts-login.css"/>
-        <link rel="stylesheet" href="css/rangeslider.css"/>
+       <!--  <link rel="stylesheet" href="css/rangeslider.css"/> -->
         <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/rangeslider.js"></script>
+        
         <script type="text/javascript" src="js/script.js"></script>
+       
     </head>
     <body>
         <div class="b-wrapper">
             <div class="b-page">
            
-                <div class="b-header">
+                <!-- <div class="b-header">
                     <div class="b-header__inner">
                         <div class="b-header__left">
                             <div class="b-header-logo">
@@ -36,7 +39,7 @@
                             </div>
                             <div class="b-header-tags">
                                 Создай свой блог. Делись с друзьями фото, видео, музыкой 
-                                Узнай больше о традициях и обычаях твоего народа		
+                                Узнай больше о традициях и обычаях твоего народа        
                             </div>
                         </div>
                         <div class="b-header__right">
@@ -51,18 +54,16 @@
                                     </a>
                                 </div>
                                 <div class="b-header-registration__social"><span>Войти через</span>
-                                <div data-uloginbutton="vkontakte" title="VK" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -38px no-repeat;" class="social-icon"></div>
-                                <div data-uloginbutton="facebook" title="Facebook" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -143px no-repeat;"  class="social-icon"></div>
-                                <div data-uloginbutton="google" title="Google" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -213px no-repeat;"  class="social-icon"></div>
-                                <div class="clear"></div>
-
+                               
+                
                                 </div>
                             </div>
                         </div>
                         <div class="clear"></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="b-content">
+                    
                     <div class="b-authorization">
                       @foreach ($errors->all() as $error)
                 <div class="b-message b-message-error">
@@ -75,9 +76,21 @@
             @endforeach
 
                         <div class="b-authorization-inner">
+                        <div class="b-logo">
+                        <img src="img/party/logo.png" alt="" class="b-logo__image">
+                    </div>
+                    
                             <div class="b-authorization-inner-block">
-                                <div class="b-authorization-inner-block__title">Авторизация</div>
-                                <div class="b-authorization-inner-block-list">
+
+                               
+                                 <ul class="tab b-authorization-inner-block-title">
+                                     <li class="currents" data-tab="tab-1"><a href="#" class="b-authorization-inner-block-title__login">Авторизация</a></li>
+                                     <li data-tab="tab-2"> <a href="#" class="b-authorization-inner-block-title__registration ">Регистрация</a></li>
+                                     <div class="clear"></div>
+                                 </ul>                                 
+                                
+                                <div class="tab1 tab-contents currents" id="tab-1">
+                                <div class="b-authorization-inner-block-list" >
                                     <ul>
                                         {{Form::open(array('url' => 'login'))}}
                                             <li class="b-authorization-inner-block-list__list">
@@ -94,17 +107,74 @@
                                             </li>
                                             <li class="b-authorization-inner-block-list__list third-child">
                                                 <div class="b-authorization-inner-block-list-remember-me">
-                                                    <input type="checkbox" name="remember"/><span class="remember-me">Запомнить меня</span>
+                                                    <input type="checkbox" name="remember"/><span class="remember-me">Запомнить </span>
+                                                    <a href="" class="forget-pass">Забыли пароль?</a>
                                                 </div>
                                             </li>
                                             <li class="b-authorization-inner-block-list__list">
                                                 <div class="b-authorization-inner-block-list-forget-pass">
-                                                    <input type="submit" value="Войти" class="join-button button-default"/><a href="" class="forget-pass">Забыли пароль?</a>
+                                                    <input type="submit" value="Войти" class="join-button button-default"/>
                                                 </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">
+                                               <div class="b-authorization-inner-block-list-social">
+                                                    <div data-uloginbutton="vkontakte" title="VK" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -38px no-repeat;" class="social-icon"></div>
+                                                    <div data-uloginbutton="facebook" title="Facebook" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -143px no-repeat;"  class="social-icon"></div>
+                                                    <div data-uloginbutton="google" title="Google" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -213px no-repeat;"  class="social-icon"></div>
+                                                    <div class="clear"></div>
+                                               </div>
                                             </li>
                                         {{Form::close()}}
                                     </ul>
                                 </div>
+                                </div>
+                                 <div class=" tab2 tab-contents " id="tab-2" >
+                                     <div class="b-authorization-inner-block-list">
+                                    <ul>
+                                        {{Form::open(array('url' => 'register'))}}
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-country">
+                                                    <select name="" class="select-country">
+                                                        <option value="">{{trans('nation.'.Config::get('app.nation_name'))}}</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-login">
+                                                    <p>Введите ваш email</p>
+                                                    <input name="email" type="text" class="login registration-input"/>
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-pass">
+                                                    <p>Ваш пароль</p>
+                                                    <input name="password" type="password" class="pass registration-input"/>
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-repeat">
+                                                    <p>Повторите пароль</p>
+                                                    <input name="password_confirmation" type="password" class="pass registration-input"/>
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">
+                                                <div class="b-authorization-inner-block-list-captcha">
+                                                    {{Form::captcha(array('theme' => 'red'))}}
+                                                </div>
+                                            </li>
+                                            <li class="b-authorization-inner-block-list__list">                                         
+                                                <div class="b-authorization-inner-block-list-btn">                                              
+                                                    <input type="submit" value="Зарегистрироваться" class="join-button button-default"/>
+                                                </div>
+                                            </li>
+                                        {{Form::close()}}
+                                    </ul>
+
+                                </div>
+                                 </div>
+                               
+                               
+                               
                             </div>
                           
                         </div>
@@ -112,16 +182,17 @@
                     </div>
                     
                 </div>
-                  <div class="b-push"></div>
+                <!--   <div class="b-push"></div> -->
 
            
             </div>
-               <div class="b-footer">
+               <!-- <div class="b-footer">
                 <div class="b-footer-inner"> <p> Copyright. Все права защищены. LLC "Continent-Group" 2014-2015</p>
                  </div>
                   
-               </div> 
+               </div>  -->
         </div>
+         
     </body>
 </html>
 
