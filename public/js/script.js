@@ -531,7 +531,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$('.b-header-nav-icon-search').click(function(){
-		$('.b-search').toggle();
+		$('.b-header-nav__right').toggle().appendTo('.b-search ul');
+		$('.b-search').css('display', 'block');
+
+
 	})
 
 

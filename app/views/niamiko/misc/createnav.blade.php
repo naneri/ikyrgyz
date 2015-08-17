@@ -1,23 +1,14 @@
+
 <div class="b-search">
-	<div class="b-search__item">
-		<div class="b-header-nav-search">
-							<input type="text" class="b-header-nav-search__item" id="nav-bar-search-field" placeholder="{{ trans('network.search') }}">
-						</div>
-                        <div class="b-header-nav-search-results" >
-                        	<button id="show-all-results">{{ trans('network.show-all-results') }}</button>
-                            <div class="b-header-nav-search-results-people">
-                                <div></div>
-                            </div>
-                            <div class="b-header-nav-search-results-content">
-                                <div></div>
-                            </div>
-                            
-                        </div>
-		
-		
-	</div>
+	<ul>
+	  
+	</ul>
 	
 </div>
+ 
+
+
+
   
 
 <div class="b-topic-navigation menu">

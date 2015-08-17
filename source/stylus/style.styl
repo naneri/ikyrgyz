@@ -280,6 +280,12 @@ body
 	display none
 	width 100%
 	margin 0 20px 20px
+	position relative
+	.b-header-nav-search
+		line-height 40px
+	.b-header-nav-search-results
+		left 11px
+		top 36px
 	&__item
 		border 1px solid #899599
 		box-shadow $baseBoxShadow
@@ -358,6 +364,9 @@ body
 	.b-topic-navigation__right {
 		
 	}
+	.b-search {
+		display block
+	}
 
 
 	
@@ -380,7 +389,14 @@ body
 	
 }
 
-
+.b-search .b-header-nav__right
+	display block
+	float none
+	width 90%
+	
+.b-search  .b-header-nav-search__item
+	max-width 90%
+	
 	
 .header-logo__image
 	max-width 45px !important
