@@ -1,10 +1,4 @@
 
-<div class="b-search">
-	<ul>
-	  
-	</ul>
-	
-</div>
  
 
 

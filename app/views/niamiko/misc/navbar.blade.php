@@ -252,6 +252,13 @@
 			</div>
 		</div>
 	</div>
+	
+<div class="b-search">
+	<ul>
+	  
+	</ul>
+	
+</div>
 
 <div class="container">
 	<div class="col-md-12">
