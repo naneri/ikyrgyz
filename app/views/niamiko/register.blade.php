@@ -34,7 +34,7 @@
                         <div class="b-header__right_login">
                             {{Form::open(array('url' => 'login'))}}
                             <div class="b-header-login">
-                                <div class="b-header-login__top">Я уже зарегестрирован</div>
+                                <div class="b-header-login__top">Я уже зарегистрирован</div>
                                 <div class="b-header-login__middle">
                                     <div class="b-header-login-join">
                                         <div class="b-header-login-join__text">Логин(email адрес)</div>
