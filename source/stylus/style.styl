@@ -3716,6 +3716,27 @@ interface
 				color #fff
 				border-bottom 2px solid #b43c1f
 	
+@media only screen and (min-device-width : 320px) and (max-device-width : 900px) { 
+	.b-user-interface-content {
+		&__right {
+			max-width 100%
+			float none
+		}
+		&__left {
+			float none
+			max-width 100%
+		}
+	}
+	.b-user-interface-content-search .input-default {
+		width 60%
+	}
+	.b-user-interface-content-search .button-default {
+		width 6%
+	}
+	.b-user-interface-content-search__search {
+		width 100%
+	}
+}
 
 /*
 ==============================
@@ -4382,7 +4403,11 @@ music player style
 .b-friends-common-wrapper__inner
 	padding-bottom 10px
 	
-
+@media only screen and (min-device-width: 320px) and (max-device-width: 999px) {
+	.b-friends-inner__right {
+		display none
+	}
+}
 .button-all
 	border $baseBorder
 	background $lightGradient

@@ -532,13 +532,20 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$('.b-header-nav-icon-search').click(function(){
 		$('.b-header-nav__right').toggle().appendTo('.b-search ul');
-		$('.b-search').css('display', 'block');
+		
 
 
 	})
 
 
 });
+$(document).ready(function(){
+	var pathname = window.location.pathname;
+	if (pathname != '/newkyrgyz/public/main/index')  {
+		$('.b-header-nav-icon-search').css('display', 'none');
+	}
+})
+
 
 // $(document).ready(function(){
 

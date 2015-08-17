@@ -51,10 +51,8 @@
                                     </a>
                                 </div>
                                 <div class="b-header-registration__social"><span>Войти через</span>
-                                <div data-uloginbutton="vkontakte" title="VK" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -38px no-repeat;" class="social-icon"></div>
-                                <div data-uloginbutton="facebook" title="Facebook" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -143px no-repeat;"  class="social-icon"></div>
-                                <div data-uloginbutton="google" title="Google" style="margin: 0px 10px 0px 0px; padding: 0px; outline: none; border: none; border-radius: 0px; cursor: pointer; float: left; position: relative; display: inherit; width: 32px; height: 32px; left: 0px; top: 0px; box-sizing: content-box; background: url(https://ulogin.ru/img/panel.png?version=1.5.00) 0px -213px no-repeat;"  class="social-icon"></div>
-                                <div class="clear"></div>
+                               <script src="//ulogin.ru/js/ulogin.js"></script>
+              <div id="uLogin_44a3c23e" data-uloginid="44a3c23e"></div>
 
                                 </div>
                             </div>
