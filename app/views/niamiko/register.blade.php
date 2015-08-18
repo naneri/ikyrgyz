@@ -73,7 +73,12 @@
                         <div class="b-header-bottom__right">
                              <div class="b-header-bottom-social"><span>Войти через</span><!--img src="img/5.png" alt=""/><img src="img/4.png" alt=""/><img src="img/3.png" alt=""/-->
 
-                              <script src="//ulogin.ru/js/ulogin.js"></script>
+                                <script src="//ulogin.ru/js/ulogin.js"></script>
+                                <script>
+                                     function uloginAuthorization(token){
+                                         window.location.href = '/login/social?token='+token;
+                                     } 
+                                </script>
                               <div id="uLogin_44a3c23e" data-uloginid="44a3c23e"></div>
                                </div>
                         </div>

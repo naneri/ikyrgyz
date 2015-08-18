@@ -52,7 +52,12 @@
                                 </div>
                                 <div class="b-header-registration__social"><span>Войти через</span>
                                <script src="//ulogin.ru/js/ulogin.js"></script>
-              <div id="uLogin_44a3c23e" data-uloginid="44a3c23e"></div>
+                               <script>
+                                    function uloginAuthorization(token){
+                                        window.location.href = '/login/social?token='+token;
+                                    } 
+                                </script>
+                                <div id="uLogin_44a3c23e" data-uloginid="44a3c23e"></div>
 
                                 </div>
                             </div>
