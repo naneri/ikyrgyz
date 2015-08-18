@@ -46,7 +46,7 @@ class MessageController extends BaseController{
         {
             $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
         }
-        elseif(!in_array($filter, ['group', 'group', 'all']))
+        elseif(in_array($filter, ['group', 'group', 'all']))
         {
             $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
         }

@@ -44,6 +44,8 @@ class AuthController extends BaseController {
 
         BonsuRatingRepository::addDailyRating(Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
         
+        
+        
         // направляем пользователя по первоначальному маршруту, либо на главную
         return Redirect::intended('/');
     }
@@ -78,29 +80,12 @@ class AuthController extends BaseController {
         $email = $result['email'];
 
         $user = User::whereEmail($email)->first();
-
         if (!$user) {
-            // создаём нового юзера и сохраняем данные
-            $user = new User;
-            $user->email = $result['email'];
-            $user->password = Hash::make(str_random(60));
-            $user->activated = true;
-            $user->domain = Config::get('app.base_url');
-
-            // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
-            if ($user->save()) {
-                $description = new User_Description;
-                $description->user_id = $user->id;
-                $description->first_name = $result['first_name'];
-                $description->last_name = $result['last_name'];
-                $description->save();
-
-                // создаём персональный блог пользователя
-                $user->createPersonalBlog();
-            }
+            $user = $this->user->saveSocialUser($result['email'], $result['first_name'], $result['last_name'], $result['gender']);
         }
+        
         Auth::login($user);
-        return Redirect::to('main/index');
+        return Redirect::to('profile/fill');
     }
 
     /**
