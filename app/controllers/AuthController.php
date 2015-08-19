@@ -44,7 +44,9 @@ class AuthController extends BaseController {
 
         BonsuRatingRepository::addDailyRating(Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
         
-        
+        if (!Auth::user()->profileFilled()) {
+            return Redirect::to('profile/fill');
+        }
         
         // направляем пользователя по первоначальному маршруту, либо на главную
         return Redirect::intended('/');
@@ -83,9 +85,13 @@ class AuthController extends BaseController {
         if (!$user) {
             $user = $this->user->saveSocialUser($result['email'], $result['first_name'], $result['last_name'], $result['gender']);
         }
-        
         Auth::login($user);
-        return Redirect::to('profile/fill');
+        
+        if(!Auth::user()->profileFilled()){
+            return Redirect::to('profile/fill');
+        }
+        
+        return Redirect::intended('/');
     }
 
     /**

@@ -512,5 +512,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
                         ->where('category', $categoryName)
                         ->get();
     }
+    
+    public function profileFilled(){
+        $filled = false;
+        if($this->description->first_name 
+                && in_array($this->description->gender, ['male', 'female']) 
+                && $this->description->liveplace_country_id 
+                && $this->description->liveplace_city_id){
+            $filled = true;
+        }
+        return $filled;
+    }
 
 }
