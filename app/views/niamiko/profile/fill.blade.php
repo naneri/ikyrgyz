@@ -39,9 +39,9 @@
 		<div class="b-wrapper">
 			<div class="b-page">
                             <div class="b-content">
-                                <div>
+                                <div style="position: absolute; width: 400px; right: 18px;">
                                 @foreach ($errors->all() as $error)
-                                <div class="b-message b-message-error">
+                                <div class="b-message b-message-error" style="position: initial; margin: 20px 20px 0 0; width: 100%; height: 80px;">
                                     <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
                                     <div class="b-message-icon b-message-error-icon"></div>
                                     <p class="b-message-p">

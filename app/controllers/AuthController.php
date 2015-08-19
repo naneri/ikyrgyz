@@ -41,9 +41,12 @@ class AuthController extends BaseController {
                 'Неправильные данные доступа'
             ));
         }
-
-        BonsuRatingRepository::addDailyRating(Auth::id(), Config::get('bonus_rating.everyday_visit'));
-             
+        
+        BonsuRatingRepository::addDailyRating(Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
+        
+        if (!Auth::user()->profileFilled()) {
+            return Redirect::to('profile/fill');
+        }
         // направляем пользователя по первоначальному маршруту, либо на главную
         return Redirect::intended('/');
     }
@@ -87,10 +90,13 @@ class AuthController extends BaseController {
 
             $user = $this->user->saveSocialUser($result['email'], $first_name, $last_name, $result['gender']);
         }
-
         Auth::login($user);
-
-        return Redirect::to('profile/fill');
+        
+        if(!Auth::user()->profileFilled()){
+            return Redirect::to('profile/fill');
+        }
+        
+        return Redirect::intended('/');
     }
 
     /**
