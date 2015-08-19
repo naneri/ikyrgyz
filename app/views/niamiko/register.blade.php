@@ -34,7 +34,7 @@
                         <div class="b-header__right_login">
                             {{Form::open(array('url' => 'login'))}}
                             <div class="b-header-login">
-                                <div class="b-header-login__top">Я уже зарегестрирован</div>
+                                <div class="b-header-login__top">Я уже зарегистрирован</div>
                                 <div class="b-header-login__middle">
                                     <div class="b-header-login-join">
                                         <div class="b-header-login-join__text">Логин(email адрес)</div>
@@ -71,7 +71,16 @@
                             </div>
                         </div>
                         <div class="b-header-bottom__right">
-                            <div class="b-header-bottom-social"><span>Войти через</span><img src="img/login/5.png" alt=""/><img src="img/login/4.png" alt=""/><img src="img/login/3.png" alt=""/></div>
+                             <div class="b-header-bottom-social"><span>Войти через</span><!--img src="img/5.png" alt=""/><img src="img/4.png" alt=""/><img src="img/3.png" alt=""/-->
+
+                                <script src="//ulogin.ru/js/ulogin.js"></script>
+                                <script>
+                                     function uloginAuthorization(token){
+                                         window.location.href = '/login/social?token='+token;
+                                     } 
+                                </script>
+                              <div id="uLogin_44a3c23e" data-uloginid="44a3c23e"></div>
+                               </div>
                         </div>
                         <div class="clear"></div>
                     </div>

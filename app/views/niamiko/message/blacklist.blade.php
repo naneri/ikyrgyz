@@ -37,7 +37,7 @@
 
         </tr>
         @foreach($bannedUsers as $bannedUser)
-            @include('message.build.messages', array('messages' => Auth::user()->messagesOf($bannedUser->id)->paginate(20)))
+            @include("{$template}message.build.messages", array('messages' => Auth::user()->messagesOf($bannedUser->id)->paginate(20)))
         @endforeach
     </table>
     {{Form::close()}}

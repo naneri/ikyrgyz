@@ -19,7 +19,7 @@
 						<div class="b-topic-navigation-menu">
 				<div class="b-topic-navigation-menu__list">
 					<dl class="dropdown-list">
-						<dt class="title"><a href="{{ URL::to('/') }}" class="soc-name">Я-Кыргыз</a></dt>
+						<dt class="title"><a href="{{ URL::to('/') }}" class="soc-name">Я-{{trans('nation.'.Config::get('app.nation_name'))}}</a></dt>
 						<dt class="user-name"><a href="{{URL::to('profile')}}">
 						@if(isset($user_data->description->user_profile_avatar))
 						<img src="{{ asset($user_data->description->user_profile_avatar) }}" alt="">
@@ -252,6 +252,13 @@
 			</div>
 		</div>
 	</div>
+	
+<div class="b-search">
+	<ul>
+	  
+	</ul>
+	
+</div>
 
 <div class="container">
 	<div class="col-md-12">

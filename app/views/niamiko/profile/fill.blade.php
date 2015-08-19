@@ -38,7 +38,18 @@
 	<body>
 		<div class="b-wrapper">
 			<div class="b-page">
-				<div class="b-content">
+                            <div class="b-content">
+                                <div>
+                                @foreach ($errors->all() as $error)
+                                <div class="b-message b-message-error">
+                                    <a href="javascript: $('.b-message').remove()" class="b-message-close"></a>
+                                    <div class="b-message-icon b-message-error-icon"></div>
+                                    <p class="b-message-p">
+                                        {{$error}}
+                                    </p>
+                                </div>
+                                @endforeach
+                                </div>
 					{{Form::open(['url' => 'profile/fill'])}}
 					<div class="b-user-info">
 						<div class="b-user-info-title">

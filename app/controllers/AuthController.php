@@ -4,7 +4,7 @@
 class AuthController extends BaseController {
 
 
-    public function __construct(/*UserRepository $user*/){
+    public function __construct(UserRepository $user){
         parent::__construct();
         $this->user = $user;
     }
@@ -42,8 +42,8 @@ class AuthController extends BaseController {
             ));
         }
 
-        BonsuRatingRepository::addDailyRating(Auth::user()->id, Config::get('bonus_rating.everyday_visit'));
-        
+        BonsuRatingRepository::addDailyRating(Auth::id(), Config::get('bonus_rating.everyday_visit'));
+             
         // направляем пользователя по первоначальному маршруту, либо на главную
         return Redirect::intended('/');
     }
@@ -78,21 +78,19 @@ class AuthController extends BaseController {
         $email = $result['email'];
 
         $user = User::whereEmail($email)->first();
-
         if (!$user) {
             
             // создаём нового юзера и сохраняем данные
             $first_name = $result['first_name'] ? $result['first_name'] : $result['given_name'];
 
-            $first_name = $result['last_name']  ? $result['last_name'] : $result['family_name'];
+            $last_name = $result['last_name']  ? $result['last_name'] : $result['family_name'];
 
-            $user = $this->user->saveSocialUser($result['email'], $result['first_name'], $result['last_name'], $result['gender']);
+            $user = $this->user->saveSocialUser($result['email'], $first_name, $last_name, $result['gender']);
         }
 
         Auth::login($user);
 
-        return Redirect::to('main/index');
-
+        return Redirect::to('profile/fill');
     }
 
     /**
@@ -130,11 +128,6 @@ class AuthController extends BaseController {
         
         if($remote){
             $rules['g-recaptcha-response'] = 'required|gRecaptchaVerify';
-            Validator::extend('gRecaptchaVerify', function ($attribute, $captchaValue, $parameters) {
-                $secretKey = Config::get('social.google-recaptcha-secret-key');
-                $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&response=" . $captchaValue . "&remoteip=" . $_SERVER['REMOTE_ADDR']), true);
-                return $response['success'] == true;
-            });
         } else {
             $rules['recaptcha_response_field'] = 'required|recaptcha';
         }
@@ -153,6 +146,7 @@ class AuthController extends BaseController {
 
         // создаём нового юзера и сохраняем данные
         $user = User::newUser(Input::get('email'), Input::get('password'));
+
         $user->domain = Config::get('app.base_url');
 
         // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
@@ -163,14 +157,16 @@ class AuthController extends BaseController {
             $user->createPersonalBlog();
 
             // отправляем пользователю почту с активацией
-            Mail::send('emails.activate', array('user' => $user), function($message) {
+            /*Mail::send('emails.activate', array('user' => $user), function($message) {
                 $message->from('noreply@niamiko.com');
                 $message->to(Input::get('email'))->subject('Welcome!');
-            });
+            });*/
         }
 
-        // логиним пользователя и отправляем на заполнение профиля
+        // логиним пользователя
         Auth::login($user);
+
+        // отправляем на заполнение профиля
         return Redirect::to('profile/fill');
     }
 
@@ -181,9 +177,11 @@ class AuthController extends BaseController {
      * @return [type]       [description]
      */
     public function getActivate($code){
+        
         if(User::activate($code)){
             return Redirect::to('/login');
         }
+        
         return Redirect::route('404');
     }
 

@@ -280,6 +280,12 @@ body
 	display none
 	width 100%
 	margin 0 20px 20px
+	position relative
+	.b-header-nav-search
+		line-height 40px
+	.b-header-nav-search-results
+		left 11px
+		top 36px
 	&__item
 		border 1px solid #899599
 		box-shadow $baseBoxShadow
@@ -358,6 +364,9 @@ body
 	.b-topic-navigation__right {
 		
 	}
+	.b-search {
+		display block
+	}
 
 
 	
@@ -377,10 +386,20 @@ body
 	.b-header-nav__middle .b-header-nav-button__item {
 		padding 0
 	}
+	.b-header-nav-search-results {
+		max-width 80%
+	}
 	
 }
 
-
+.b-search .b-header-nav__right
+	display block
+	float none
+	width 90%
+	
+.b-search  .b-header-nav-search__item
+	max-width 90%
+	
 	
 .header-logo__image
 	max-width 45px !important
@@ -3697,6 +3716,27 @@ interface
 				color #fff
 				border-bottom 2px solid #b43c1f
 	
+@media only screen and (min-device-width : 320px) and (max-device-width : 900px) { 
+	.b-user-interface-content {
+		&__right {
+			max-width 100%
+			float none
+		}
+		&__left {
+			float none
+			max-width 100%
+		}
+	}
+	.b-user-interface-content-search .input-default {
+		width 60%
+	}
+	.b-user-interface-content-search .button-default {
+		width 6%
+	}
+	.b-user-interface-content-search__search {
+		width 100%
+	}
+}
 
 /*
 ==============================
@@ -4363,7 +4403,11 @@ music player style
 .b-friends-common-wrapper__inner
 	padding-bottom 10px
 	
-
+@media only screen and (min-device-width: 320px) and (max-device-width: 999px) {
+	.b-friends-inner__right {
+		display none
+	}
+}
 .button-all
 	border $baseBorder
 	background $lightGradient

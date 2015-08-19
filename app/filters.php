@@ -159,3 +159,10 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+// Extending Validation
+Validator::extend('gRecaptchaVerify', function ($attribute, $captchaValue, $parameters) {
+    $secretKey = Config::get('social.google-recaptcha-secret-key');
+    $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&response=" . $captchaValue . "&remoteip=" . $_SERVER['REMOTE_ADDR']), true);
+    return $response['success'] == true;
+});

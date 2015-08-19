@@ -87,12 +87,13 @@ class PhotoAlbumsController extends \BaseController {
                 }
 		return $this->makeView('photoalbums.show', compact('photoAlbum', 'otherAlbums'));
 	}
-        /**
-	 * Show the form for editing the specified photoalbum.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+     
+    /**
+    * Show the form for editing the specified photoalbum.
+    *
+    * @param  int  $id
+    * @return Response
+    */
 	public function edit($id)
 	{
 		$photoAlbum = PhotoAlbum::find($id);

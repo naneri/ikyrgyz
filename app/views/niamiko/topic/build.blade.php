@@ -1,4 +1,5 @@
 <input type="hidden" id="ColumnN"/>
+
 <div class="masonry topic" style="display: none">
         @if(isset($showCreatePanel) && $showCreatePanel)
             <div class="b-widget b-user-wall">

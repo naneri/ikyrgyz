@@ -46,7 +46,7 @@ class MessageController extends BaseController{
         {
             $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
         }
-        elseif(!in_array($filter, ['group', 'group', 'all']))
+        elseif(in_array($filter, ['group', 'group', 'all']))
         {
             $messages = Auth::user()->messagesInbox()->orderBy('id', 'DESC')->paginate(20);
         }
@@ -119,9 +119,6 @@ class MessageController extends BaseController{
         } else {
             return Redirect::back()->withInput()->withErrors(array('receiver' => 'Укажите как минимум одного получателя'));
         }
-
-
-
 
         return Redirect::to('profile/messages?page=outbox')->with('message', [
             'type' => 'success',
@@ -242,16 +239,18 @@ class MessageController extends BaseController{
      * @return [type]            [description]
      */
     private function saveMessageAttachments($messageId) {
+
         $files = Input::file('attachments');
+
         $destinationPath = 'uploads/user/' . Auth::id();
+
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath);
         }
+
         foreach($files as $file){
-            $extension = $file->getClientOriginalExtension();
-            $fileName = time() . rand(1, 100) . '.' . $extension;
-            $file->move($destinationPath, $fileName);
-            $filePath = URL::to('/') . '/' . $destinationPath . '/' . $fileName;
+
+            $filePath = MessageFileService::saveFile($file);
             
             $messageAttachment              = new MessageAttachment();
             $messageAttachment->message_id  = $messageId;

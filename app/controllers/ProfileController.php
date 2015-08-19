@@ -260,12 +260,12 @@ class ProfileController extends BaseController {
     public function postProfileFill() {
 
         $rules = array(
-            'first_name' => 'required',
-            'gender' => 'required',
-            'live_country' => 'required',
-            'live_city' => 'required',
-            'birth_country' => 'required',
-            'birth_city' => 'required'
+            'first_name' => 'required|min:3',
+            'gender' => 'required|in:male,female',
+            'live_country' => 'required|integer|not_in:0',
+            'live_city' => 'required|integer|not_in:0',
+            'birth_country' => '',
+            'birth_city' => ''
         );
 
         $validator = Validator::make(Input::all(), $rules);

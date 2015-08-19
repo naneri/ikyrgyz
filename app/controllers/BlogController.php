@@ -48,7 +48,7 @@ class BlogController extends BaseController {
         $blog->title        = Input::get('title');
         $blog->description  = Input::get('description');
         $blog->type_id      = Input::get('type_id');
-        $blog->user_id      = Auth::user()->id;
+        $blog->user_id      = Auth::id();
         
         if(Input::hasFile('avatar')){
             $blog->avatar = BlogRepository::saveAvatar(Input::file('avatar'));
@@ -181,9 +181,7 @@ class BlogController extends BaseController {
      */
     public function postEdit($id){
 
-        $rules = Blog::$rules;
-
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), Blog::$rules);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
@@ -199,7 +197,7 @@ class BlogController extends BaseController {
                 unlink(public_path().$blog->avatar);
             }
 
-            $data['avatar'] = BonsuRatingRepository::saveAvatar(Input::file('avatar'));
+            $data['avatar'] = BlogRepository::saveAvatar(Input::file('avatar'));
         }
 
         $blog->update($data);

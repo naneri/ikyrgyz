@@ -1,0 +1,89 @@
+body {
+	background: url(../img/party/bg.jpg) no-repeat 100% 100% fixed;
+	background-size: cover;
+}	
+.b-authorization-inner {
+	height: 632px;
+	position: absolute;
+	top: 50%;
+	left: 50%; 	
+	margin-left: -188.5px;
+	margin-top: -316px;
+	width: 299px;
+}	
+.b-authorization {
+	position: relative;
+	height: 1000px;
+
+}
+
+.b-authorization-inner-block-title {
+	background-image: -moz-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: -o-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: -webkit-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* */
+	border: 1px solid #fda564; 
+
+}
+.b-authorization-inner-block-title__login {
+	float: left;
+	width: 149px;
+	text-align: center;
+	text-decoration: none;
+	color: #fff;
+	font: 16px 'pt sans caption', sans-serif;
+	height: 43px;
+	line-height: 43px;
+	
+}
+.b-authorization-inner-block-title__registration {
+	float: left;
+	width: 149px;
+	text-align: center;
+	text-decoration: none;
+	color: #fff;
+	font: 16px 'pt sans caption', sans-serif;
+	height: 43px;
+	line-height: 43px;
+}
+
+.b-authorization-inner-block {
+	width: 300px;
+	background: #023961;
+	border: 1px solid #037ad1;
+	padding: 0;
+}
+
+.button-default {
+	background-image: -moz-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: -o-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: -webkit-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* */	
+}
+.button-default:hover {
+	background-image: -moz-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: -o-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: -webkit-linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* gradient overlay */
+	background-image: linear-gradient(top, #ed7d2b 0%, #b05817 100%); /* */	
+}
+.forget-pass {
+	display: inline-block;
+	padding-left: 20px;
+}
+
+.b-authorization-inner-block-list-social {
+	width: 127px;
+	margin: 0 auto;
+	padding-bottom: 10px
+}
+
+.tab-contents.currents {
+	display: inherit;
+}
+
+.tab-contents {
+	display: none;
+}
+#recaptcha_table {
+	transform: scale(0.8); 
+}
