@@ -6,7 +6,7 @@ class AuthController extends BaseController {
 
     public function __construct(/*UserRepository $user*/){
         parent::__construct();
-       /* $this->user = $user;*/
+        $this->user = $user;
     }
 
     /**
@@ -80,27 +80,19 @@ class AuthController extends BaseController {
         $user = User::whereEmail($email)->first();
 
         if (!$user) {
+            
             // создаём нового юзера и сохраняем данные
-            $user = new User;
-            $user->email = $result['email'];
-            $user->password = Hash::make(str_random(60));
-            $user->activated = true;
-            $user->domain = Config::get('app.base_url');
+            $first_name = $result['first_name'] ? $result['first_name'] : $result['given_name'];
 
-            // если юзер создан успешно, то создаём пустую запись с его дополнительными полями
-            if ($user->save()) {
-                $description = new User_Description;
-                $description->user_id = $user->id;
-                $description->first_name = $result['first_name'];
-                $description->last_name = $result['last_name'];
-                $description->save();
+            $first_name = $result['last_name']  ? $result['last_name'] : $result['family_name'];
 
-                // создаём персональный блог пользователя
-                $user->createPersonalBlog();
-            }
+            $user = $this->user->saveSocialUser($result['email'], $result['first_name'], $result['last_name'], $result['gender']);
         }
+
         Auth::login($user);
+
         return Redirect::to('main/index');
+
     }
 
     /**
