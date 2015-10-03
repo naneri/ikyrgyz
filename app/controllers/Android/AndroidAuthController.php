@@ -26,7 +26,7 @@ class AndroidAuthController extends BaseController{
             exit;
         }
 
-        echo json_encode(array('logged_in' => '1'));
+        echo json_encode(array('logged_in' => '1', 'error' => ''));
         // Auth::user()->remember_token;
     }
 

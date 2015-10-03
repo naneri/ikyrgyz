@@ -55,7 +55,6 @@ Route::group(array('before' => 'notauth'),function(){
     Route::get('/', 'AuthController@getLogin');
     Route::get('login', 'AuthController@getLogin');
     Route::post('login', 'AuthController@postLogin');
-    Route::post('login/android', 'AndroidAuthController@postAndroidLogin');
     Route::get('login/fb', 'AuthController@loginWithFacebook');
     Route::get('login/vk', 'AuthController@loginWithVK');
     Route::get('login/google', 'AuthController@loginWithGoogle');
@@ -63,7 +62,10 @@ Route::group(array('before' => 'notauth'),function(){
     Route::post('register', 'AuthController@postRegister');
     Route::get('activate/{code}', 'AuthController@getActivate');
 });
-Route::group(array('before' => 'notauth'), function(){
+
+Route::post('login/android', 'AndroidAuthController@postAndroidLogin');
+
+Route::group(array('before' => 'auth'), function(){
     Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');
     Route::post('android/androidCreateNewTopic', 'AndroidMainController@androidCreateNewTopic');
     Route::post('android/androidCreateNewBlog', 'AndroidMainController@androidCreateNewBlog');
