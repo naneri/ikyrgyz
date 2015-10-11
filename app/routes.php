@@ -69,6 +69,18 @@ Route::group(array('before' => 'auth'), function(){
     Route::post('android/myBlogIds', 'AndroidMainController@myBlogIds');
     Route::post('android/androidCreateNewTopic', 'AndroidMainController@androidCreateNewTopic');
     Route::post('android/androidCreateNewBlog', 'AndroidMainController@androidCreateNewBlog');
+
+    Route::post('vote/topic', 'VoteController@postVoteTopic');Route::post('vote/comment', 'VoteController@postVoteComment');
+    Route::post('vote/topic', 'VoteController@postVoteTopic');
+    Route::post('vote/blog', 'VoteController@postVoteBlog');
+    Route::post('vote/user', 'VoteController@postVoteUser');
+    Route::post('vote/photo', 'VoteController@postVotePhoto');
+    Route::post('vote/audio', 'VoteController@postVoteAudio');
+    Route::post('vote/audioalbum', 'VoteController@postVoteAudioAlbum');
+
+    Route::post('favourite/topic', 'TopicController@postFavourite');
+    Route::post('favourite/blog', 'BlogController@postFavourite');
+
     Route::post('main/androidIndex', 'AndroidMainController@androidIndex');
     Route::post('main/index/androidNew', 'AndroidMainController@androidNewTopics');
     Route::post('main/index/androidTop', 'AndroidMainController@androidTopTopics');
